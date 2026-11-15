@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { siteFor } from '../extension/src/extract.js';
+import { siteFor, largerPhoto } from '../extension/src/extract.js';
+
+test('search-page thumbnails: eBay photos are asked for at 500 px, other hosts left alone', () => {
+  assert.equal(largerPhoto('https://i.ebayimg.com/images/g/okwAAeSwI8Nq-gCd/s-l140.webp'), 'https://i.ebayimg.com/images/g/okwAAeSwI8Nq-gCd/s-l500.webp');
+  assert.equal(largerPhoto('https://i.ebayimg.com/images/g/c6EAAeSwLOpq8J3~/s-l225.jpg'), 'https://i.ebayimg.com/images/g/c6EAAeSwLOpq8J3~/s-l500.jpg');
+  const cl = 'https://images.craigslist.org/d/7937778010/00H0H_2GkwE0jPleY_0t20CI_600x450.jpg';
+  assert.equal(largerPhoto(cl), cl);
+});
 
 test('listing links: each marketplace, including Craigslist old and 2026 formats', () => {
   const id = (host, url) => (siteFor(host).item.exec(url) || [])[1] || null;

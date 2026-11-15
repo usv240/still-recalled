@@ -1,0 +1,408 @@
+{
+  "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+  "labelled_at": "2026-11-15T22:35:14Z",
+  "labels": {
+    "9iiUa6cDZFFnK6FabQCtwx": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Dream On Me portable 2-in-1 bassinet & cradle on a rocking base in the photo; no Dream On Me recall in cards.json and bassinets are not a risky type.",
+      "confidence": "high",
+      "outside_db": "Dream On Me 2-in-1 Bassinet to Cradle, models 439-A/B/G/P/W (CPSC recall 15-088, March 2015; side wire supports can disconnect) - same product family, check the model number."
+    },
+    "7qJDtxqVNA599GvrzN9sAa": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Same Dream On Me 2-in-1 bassinet & cradle (identical photo); no Dream On Me recall in cards.json.",
+      "confidence": "high",
+      "outside_db": "Dream On Me 2-in-1 Bassinet to Cradle, models 439-A/B/G/P/W (CPSC recall 15-088, March 2015; side wire supports can disconnect) - same product family, check the model number."
+    },
+    "upTYnx8vqnFUqdbVYj5Pdc": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Same Dream On Me 2-in-1 bassinet & cradle (identical photo); no Dream On Me recall in cards.json.",
+      "confidence": "high",
+      "outside_db": "Dream On Me 2-in-1 Bassinet to Cradle, models 439-A/B/G/P/W (CPSC recall 15-088, March 2015; side wire supports can disconnect) - same product family, check the model number."
+    },
+    "iFQvcEmHKPKerMkDXJD58E": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Photo shows an unbranded soft-sided gray portable bassinet with canopy and toy arch sitting on the floor with no stand, so it may be an in-bed/nest-style sleeper rather than a compliant bassinet; it does not match the recalled ZHORANGE (25315) or Beberoad (24324) stand-less bassinets.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "uBnaYXbUqFuPWeG87jLfM6": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Maxi-Cosi infant swing (Maxi-Cosi booklet in the seat); swings are not a risky type and no Maxi-Cosi swing recall is in cards.json; the other bundle items are not shown.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "pJw5y6o4WSRxr4oeiApiko": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "MiClassic rocking bassinet on legs (logo visible on rail); no MiClassic recall and a bassinet is not a risky type.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "pReCHkjcc95wSoVaPfLgqd": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "HALO swivel bassinet (HALO logo on mesh side); the HALO recalls in cards.json are sleepsuits and unrelated items, not bassinets.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "cAEkKkTjPE14UPnAUArcjC": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Dream On Me Lacy 2-in-1 bassinet & cradle on a rocking base with basket; no Dream On Me recall in cards.json.",
+      "confidence": "high",
+      "outside_db": "Dream On Me 2-in-1 Bassinet to Cradle, models 439-A/B/G/P/W (CPSC recall 15-088, March 2015; side wire supports can disconnect) - same product family, check the model number."
+    },
+    "mUAr55Yz7FRaxXR9wBwcrb": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Dream On Me Lacy 2-in-1 bassinet & cradle (brand printed on the bassinet in the photo); no Dream On Me recall in cards.json.",
+      "confidence": "high",
+      "outside_db": "Dream On Me 2-in-1 Bassinet to Cradle, models 439-A/B/G/P/W (CPSC recall 15-088, March 2015; side wire supports can disconnect) - same product family, check the model number."
+    },
+    "nwxgNThJXHm5ijpMeKj9dM": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "UPPAbaby stroller bassinet (stock photo); the only UPPAbaby recall in cards.json is the RIDGE jogging stroller (22215), a different product.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "oJH3H12FamDaf9xzEFdumH": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Title only says 'Used Crib' at $25 and there is no photo, so a drop-side rail cannot be ruled out.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "3fb6gMoNcs7Fohbngyy66o": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only a new 'Perfect Balance' organic crib mattress in plastic; no matching crib mattress recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "p7sUeruEutRtxa8axKMGrv": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only a new 'Perfect Balance' organic crib mattress in plastic; no matching crib mattress recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "uCu4PtUUJSzFQi2UWvdqCj": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Gray Sorelle convertible crib in the photo has a fixed front rail; no Sorelle recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "jNY7SgqiYoMegAv25vrhJZ": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows an unbranded white convertible crib set up as a toddler bed with a guard rail, so the sides are fixed, not drop-side.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "1SA89f6YexajtscoW2EDom": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Oeuf Classic crib shown converted to a toddler bed; no Oeuf recall in cards.json (the 2014 Oeuf recall covered only Sparrow cribs).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "iREHL3y4rSNYsnbeKMaMXh": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Modern white crib with a gray upholstered end panel and fixed slatted sides; no brand shown, no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "7BaFFhVJLdK6MuZf5aYVY2": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco crib with under-drawer shown converted to a daybed, so the sides are fixed; no Graco recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "9xBXsyJNTuAvbwrWYzz7F6": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Baby Cache Oxford lifetime convertible sleigh crib (stock photo) with fixed sides; no Baby Cache recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "24zFjFPHBXSrmUrmGtSox2": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Oeuf crib with white slats, walnut base and metal feet (Classic style, not the splayed-leg Sparrow) and fixed sides; no Oeuf recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "d1GS49KqHDMASkJyq4H4BE": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Newton bedside bassinet with mesh sides on a wooden stand; no Newton recall and bedside sleepers are not a risky type.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "aThmQd5LBMKYBkQRYRKdyC": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Red Bumbleride Queen B pram with carrycot bassinet in the photo; no Bumbleride recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "a7G4Uq9Po9cuLCv9sQNaoB": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Stock photo of a Graco Pack 'n Play play yard with flat bassinet insert and canopy; play yards are not a risky type and no Graco recall is in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "va7GArQZeHmBjrnf8drYM4": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only an unbranded oval quilted bassinet mattress; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "xmR3ELhNHeAwQTmYu7psmr": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "No photo and no brand: a powered swing plus a bassinet/bouncer, neither a risky type nor matchable to a branded recall.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "hVCGpQzYHm3xsLXzKjHUUb": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Happiest Baby SNOO smart bassinet (photo matches); no SNOO recall in cards.json and a bassinet is not a risky type.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "rYv3GsLYAAZXC5GWfBJ6ZB": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded flat hooded bassinet on a stand with a gray dotted skirt; no brand to match a recall and not a risky type.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "k46ovNjS1zkGLBSu1E7mtS": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Chicco LullaGo portable bassinet on legs (Chicco logo visible); no Chicco recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "uDakNfrTcP9v3kBytKf7Fb": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "4moms breeze plus play yard frame in the photo; the only 4moms recall in cards.json is the MamaRoo/RockaRoo swing (22200), a different product.",
+      "confidence": "high",
+      "outside_db": "4moms breeze cotton jersey play yard sheets (CPSC recall 13-115, Feb 2013) - accessory sheets only, not the play yard itself."
+    },
+    "7QSs8Ei8Tfvm2EoUGov5uv": {
+      "item": "product",
+      "recall_ids": [
+        "23042"
+      ],
+      "recall_match": "yes",
+      "type": null,
+      "should_warn": "yes",
+      "note": "Title and photo show a Mockingbird stroller with a second seat, the recalled Single-to-Double line (frame can crack); the recall covers lot numbers 20091-22602, so check the lot label.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "7xhCPR4H3W6p7aqP7cMft3": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "IKEA GULDVAVARE 3-piece crib bedlinen set (screenshot shows quilt cover, pillowcase, sheet); no padded bumper and no IKEA bedding recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "ojczKoDxt6B7CUy63nQUUm": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco Teddi 5-in-1 convertible crib with drawer (stock photo), a current fixed-side model; no Graco recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "s1EWBtPad2osTdRbtzUngW": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "New Soho Baby Ellison 4-in-1 convertible crib (stock photo) with fixed sides; no Soho Baby recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "6LjCjREYjw9AhaiuJKwyeL": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only a new crib mattress in plastic (label looks like Serta); no crib mattress recall matches (Serta 22722 is adult Perfect Sleeper mattresses).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "8Z6HVK35NkBZUkjAGtQqqL": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Same photo as the other listing: only a new crib mattress in plastic (label looks like Serta); no crib mattress recall matches.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "iR1ziNZREJowFAAFyULYoW": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Older honey-oak mission-style crib shown disassembled against a wall with a metal spring support; the photo does not show whether a side rail drops.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "57NuochMR53hChaLF1xXWL": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Kolcraft Pediatric 800 crib & toddler mattress (package image); no Kolcraft recall in cards.json.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "kUfZEshHwjUDvamAVWUEGk": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Espresso sleigh convertible crib with a bolted, fixed front rail and a conversion kit; no brand, not drop-side.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "riYiJtXs8j8J6RS5ULjh2f": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Same espresso sleigh convertible crib with a fixed front rail and conversion kit; no brand, not drop-side.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "cxbwywtWfXb19gdsGKwhpj": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Screenshot shows the Chris Loves Julia Turned Wood Convertible Crib, a current fixed-side crib not covered by the Crate & Barrel Hampshire/Thornhill crib recalls.",
+      "confidence": "high",
+      "outside_db": null
+    }
+  }
+}

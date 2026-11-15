@@ -94,9 +94,17 @@
 .risk-name { font-weight: 600; }
 .risk-text { font-size: 13px; line-height: 20px; text-wrap: pretty; }
 
-.check { display: grid; gap: 10px; justify-items: start; }
-.check h3 { margin: 0; font: 600 13px/20px var(--font); }
-.check > p { text-wrap: pretty; }
+.check, .report { display: grid; gap: 10px; justify-items: start; }
+.check h3, .report h3 { margin: 0; font: 600 13px/20px var(--font); }
+.check > p, .report > p { text-wrap: pretty; }
+.report { padding-top: 14px; border-top: 1px solid var(--rule); }
+.hint { margin-top: -4px; font-size: 12px; line-height: 16px; color: var(--muted); }
+.report-text { justify-self: stretch; font-size: 12px; line-height: 18px; }
+.report-text summary { cursor: pointer; color: var(--muted); }
+.report-text pre {
+  margin: 8px 0 0; padding: 10px 12px; border-radius: var(--radius-control); background: var(--ground);
+  font: 12px/18px var(--font); white-space: pre-wrap; overflow-wrap: anywhere; user-select: text;
+}
 .question {
   margin: 0; padding: 10px 12px; border-radius: var(--radius-control);
   background: var(--ground); font-size: 13px; line-height: 20px; color: var(--text);

@@ -1,0 +1,235 @@
+{
+ "set": "fresh",
+ "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+ "listings": 125,
+ "mustFlag": 4,
+ "mustNotFlag": 117,
+ "unclear": 4,
+ "systems": {
+  "words only": {
+   "caught": 1,
+   "missed": [
+    {
+     "id": "318866483780",
+     "title": "Disney Classic Pooh Piglet Crib Headboard Cover Ruffle Floral Vintage Style v",
+     "why": "Quilted, padded Pooh headboard panel with ruffle and ties to fasten inside the crib, i.e. a padded headboard bumper piece."
+    },
+    {
+     "id": "227610258481",
+     "title": "Snuggle Me Organic Cotton Infant Lounger Pillow Plush Pink, Fits Bassinet",
+     "why": "Snuggle Me Organic infant lounger shown in photo; an infant lounger; no Snuggle Me recall in the CPSC data."
+    },
+    {
+     "id": "147681812682",
+     "title": "White Contoured Foam Crib Wedge Triangular Support Pillow",
+     "why": "Quilted foam crib wedge to incline and position a sleeping baby, a padded sleep positioner (also an inclined surface)."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "880035667726",
+     "title": "HALO BassiNest Swivel Sleeper 3.0 Model 4792 Disassembled Bassinet Parts",
+     "level": "possible",
+     "why": "Title says disassembled parts and photo shows the HALO sleeper basket, arms and legs; no HALO bassinet recall."
+    },
+    {
+     "id": "188957402106",
+     "title": "The Heart Family Rock'n Play Musical Nursery 1987 Playset Mattel #4674 with box",
+     "level": "possible",
+     "why": "1987 Mattel Heart Family doll nursery playset; 'Rock'n Play' is the toy's name, not the Fisher-Price sleeper."
+    },
+    {
+     "id": "860135301212",
+     "title": "Disney Vampirina Rock n Jam Touring Van Bus RV Vehicle Car Just Play Toy",
+     "level": "possible",
+     "why": "Disney Vampirina toy van; unrelated to baby sleep products."
+    },
+    {
+     "id": "206578468935",
+     "title": "Heart Family Rock'n Play Musical Nursery Playset Play Center Box Only Mattel Lot",
+     "level": "possible",
+     "why": "Empty boxes for Mattel Heart Family doll playsets; not the Fisher-Price sleeper."
+    },
+    {
+     "id": "237179701821",
+     "title": "Vtg 1987 Mattel Heart Family Rock'n Play Nursery 4674 Parts or Repair Lot",
+     "level": "possible",
+     "why": "Doll-size Heart Family Rock'n Play nursery crib and chair parts; toy, not the Fisher-Price sleeper."
+    },
+    {
+     "id": "920076205965",
+     "title": "2004 Fisher Price Flutterbye Dreams Lullaby Birdies Soother Crib Toy WORKS! EXC",
+     "level": "possible",
+     "why": "Fisher-Price Flutterbye Dreams crib soother; Fisher-Price recalls in the data cover other products."
+    },
+    {
+     "id": "366797743790",
+     "title": "Newborn Baby Nest Change Extra Cover (Suit for All Dockatot Deluxe Docks)",
+     "level": "possible",
+     "why": "Title says extra cover only ($10) for a DockATot Deluxe, though the photo shows a full baby nest; a cover is not the sleeper itself."
+    },
+    {
+     "id": "117523425949",
+     "title": "Vtg 2007 Fisher Price Sea Life Crib Fish Aquarium Baby Soother Light & Sound",
+     "level": "possible",
+     "why": "Fisher-Price Sea Life aquarium crib soother; no matching recall."
+    },
+    {
+     "id": "366812315964",
+     "title": "Fisher-Price Lullaby Birdies Soother Crib Toy Night Light Birds G2623",
+     "level": "possible",
+     "why": "Fisher-Price Lullaby Birdies crib soother; no matching recall."
+    },
+    {
+     "id": "940065835667",
+     "title": "GB Pockit Air All Terrain Ultra Compact Folding Single Seat Stroller Black",
+     "level": "possible",
+     "why": "GB Pockit Air compact stroller; no GB recall in the CPSC data."
+    },
+    {
+     "id": "206695109739",
+     "title": "UPPAbaby VISTA Single Stroller, Gray/Black, Folding w/ Canopy & 5-Point",
+     "level": "possible",
+     "why": "UPPAbaby VISTA stroller; the UPPAbaby recall in the data is the RIDGE jogging stroller (22215), a different model."
+    },
+    {
+     "id": "1SA89f6YexajtscoW2EDom",
+     "title": "Oeuf Classic Crib with Conversion Kit with 5 monkey mattress 1",
+     "level": "possible",
+     "why": "Oeuf Classic crib shown converted to a toddler bed; no Oeuf recall in cards.json (the 2014 Oeuf recall covered only Sparrow cribs)."
+    },
+    {
+     "id": "24zFjFPHBXSrmUrmGtSox2",
+     "title": "Modern Baby Crib White and Walnut Oeuf with bed conversion kit 1",
+     "level": "possible",
+     "why": "Oeuf crib with white slats, walnut base and metal feet (Classic style, not the splayed-leg Sparrow) and fixed sides; no Oeuf recall in cards.json."
+    },
+    {
+     "id": "hVCGpQzYHm3xsLXzKjHUUb",
+     "title": "Happiest Baby SNOO Smart Sleeper bassinet + medium sleep sack 1",
+     "level": "possible",
+     "why": "Happiest Baby SNOO smart bassinet (photo matches); no SNOO recall in cards.json and a bassinet is not a risky type."
+    },
+    {
+     "id": "kUfZEshHwjUDvamAVWUEGk",
+     "title": "Used crib, two sided mattress & conversion kit 1",
+     "level": "possible",
+     "why": "Espresso sleigh convertible crib with a bolted, fixed front rail and a conversion kit; no brand, not drop-side."
+    },
+    {
+     "id": "riYiJtXs8j8J6RS5ULjh2f",
+     "title": "Used crib, two sided mattress & conversion kit 1",
+     "level": "possible",
+     "why": "Same espresso sleigh convertible crib with a fixed front rail and conversion kit; no brand, not drop-side."
+    }
+   ],
+   "flagged": 17,
+   "unclearFlagged": 0,
+   "recallRate": 0.25,
+   "precision": 0.059
+  },
+  "on-device only": {
+   "caught": 2,
+   "missed": [
+    {
+     "id": "227610258481",
+     "title": "Snuggle Me Organic Cotton Infant Lounger Pillow Plush Pink, Fits Bassinet",
+     "why": "Snuggle Me Organic infant lounger shown in photo; an infant lounger; no Snuggle Me recall in the CPSC data."
+    },
+    {
+     "id": "147681812682",
+     "title": "White Contoured Foam Crib Wedge Triangular Support Pillow",
+     "why": "Quilted foam crib wedge to incline and position a sleeping baby, a padded sleep positioner (also an inclined surface)."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "188957402106",
+     "title": "The Heart Family Rock'n Play Musical Nursery 1987 Playset Mattel #4674 with box",
+     "level": "possible",
+     "why": "1987 Mattel Heart Family doll nursery playset; 'Rock'n Play' is the toy's name, not the Fisher-Price sleeper."
+    },
+    {
+     "id": "206578468935",
+     "title": "Heart Family Rock'n Play Musical Nursery Playset Play Center Box Only Mattel Lot",
+     "level": "possible",
+     "why": "Empty boxes for Mattel Heart Family doll playsets; not the Fisher-Price sleeper."
+    },
+    {
+     "id": "206695109739",
+     "title": "UPPAbaby VISTA Single Stroller, Gray/Black, Folding w/ Canopy & 5-Point",
+     "level": "possible",
+     "why": "UPPAbaby VISTA stroller; the UPPAbaby recall in the data is the RIDGE jogging stroller (22215), a different model."
+    },
+    {
+     "id": "7BaFFhVJLdK6MuZf5aYVY2",
+     "title": "Graco crib/toddler bed with mattress 1",
+     "level": "possible",
+     "why": "Graco crib with under-drawer shown converted to a daybed, so the sides are fixed; no Graco recall in cards.json."
+    },
+    {
+     "id": "24zFjFPHBXSrmUrmGtSox2",
+     "title": "Modern Baby Crib White and Walnut Oeuf with bed conversion kit 1",
+     "level": "possible",
+     "why": "Oeuf crib with white slats, walnut base and metal feet (Classic style, not the splayed-leg Sparrow) and fixed sides; no Oeuf recall in cards.json."
+    },
+    {
+     "id": "riYiJtXs8j8J6RS5ULjh2f",
+     "title": "Used crib, two sided mattress & conversion kit 1",
+     "level": "possible",
+     "why": "Same espresso sleigh convertible crib with a fixed front rail and conversion kit; no brand, not drop-side."
+    }
+   ],
+   "flagged": 8,
+   "unclearFlagged": 0,
+   "recallRate": 0.5,
+   "precision": 0.25
+  },
+  "hybrid": {
+   "caught": 2,
+   "missed": [
+    {
+     "id": "227610258481",
+     "title": "Snuggle Me Organic Cotton Infant Lounger Pillow Plush Pink, Fits Bassinet",
+     "why": "Snuggle Me Organic infant lounger shown in photo; an infant lounger; no Snuggle Me recall in the CPSC data."
+    },
+    {
+     "id": "147681812682",
+     "title": "White Contoured Foam Crib Wedge Triangular Support Pillow",
+     "why": "Quilted foam crib wedge to incline and position a sleeping baby, a padded sleep positioner (also an inclined surface)."
+    }
+   ],
+   "falseAlarms": [],
+   "flagged": 2,
+   "unclearFlagged": 0,
+   "recallRate": 0.5,
+   "precision": 1
+  }
+ },
+ "askingPrices": {
+  "mustFlag": 437.99,
+  "words only": 350,
+  "on-device only": 375.99,
+  "hybrid": 375.99
+ },
+ "bySite": {
+  "ebay": {
+   "listings": 85,
+   "mustFlag": 3
+  },
+  "craigslist": {
+   "listings": 40,
+   "mustFlag": 1
+  }
+ },
+ "cost": {
+  "listings": 125,
+  "checkedByWordsOnly": 22,
+  "lookedAtOnDevice": 103,
+  "sentToCloud": 10,
+  "cloudErrors": 0,
+  "shareSentToCloud": 0.08,
+  "medianMs": 10376,
+  "totalMinutes": 32.2
+ }
+}

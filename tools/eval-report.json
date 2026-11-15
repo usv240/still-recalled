@@ -1,4 +1,5 @@
 {
+ "set": "eval",
  "labeller": "blind AI review (Claude), title + one photo + CPSC data",
  "listings": 136,
  "mustFlag": 14,
@@ -336,6 +337,18 @@
    "unclearFlagged": 1,
    "recallRate": 0.714,
    "precision": 0.714
+  }
+ },
+ "askingPrices": {
+  "mustFlag": 908.03,
+  "words only": 381.56,
+  "on-device only": 456.66,
+  "hybrid": 755.66
+ },
+ "bySite": {
+  "ebay": {
+   "listings": 136,
+   "mustFlag": 14
   }
  },
  "cost": {

@@ -1,0 +1,368 @@
+{
+ "scope": "crib bedding set",
+ "results": {
+  "366812057413": {
+   "id": "366812057413",
+   "listing": {
+    "title": "Vintage Quiltex Precious Moments Crib Bedding Set Bless This Baby",
+    "price": "$40.00",
+    "image": "https://i.ebayimg.com/images/g/PEYAAeSwjllq-cwT/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/366812057413"
+   },
+   "level": "possible",
+   "kind": "banned",
+   "why": "the photo appears to include a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing photo shows a Precious Moments crib bedding set that includes a thick padded crib bumper with ties in the upper left.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "deviceLevel": "ask",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "Selling a padded crib bumper has been against federal law since November 2022. CPSC lists bumpers among the soft items that can suffocate a baby; its advice is nothing but a fitted sheet in a crib.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T22:57:01.629Z",
+   "badge": "Possible crib bumper",
+   "verdict": "This may be or include a padded crib bumper.",
+   "question": "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
+   "messageUrl": "https://www.ebay.com/itm/366812057413?m2mOpen=1",
+   "report": "",
+   "order": 0
+  },
+  "267843698279": {
+   "id": "267843698279",
+   "listing": {
+    "title": "Vintage 1986 Red Calliope Teddy Bear Baby Crib Bedding Set Blue Pastel USA",
+    "price": "$42.99",
+    "image": "https://i.ebayimg.com/images/g/nPoAAeSw98Jq-LyC/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/267843698279"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing title describes a baby crib bedding set and the photo shows a thick padded crib bumper panel with ties.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "deviceLevel": "possible",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "Selling a padded crib bumper has been against federal law since November 2022. CPSC lists bumpers among the soft items that can suffocate a baby; its advice is nothing but a fitted sheet in a crib.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T22:57:01.631Z",
+   "badge": "Padded crib bumper",
+   "verdict": "This looks like a padded crib bumper.",
+   "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
+   "messageUrl": "https://www.ebay.com/itm/267843698279?m2mOpen=1",
+   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/267843698279\nTitle: Vintage 1986 Red Calliope Teddy Bear Baby Crib Bedding Set Blue Pastel USA\nAsking price: $42.99\nSeen on: November 15, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The listing title describes a baby crib bedding set and the photo shows a thick padded crib bumper panel with ties.",
+   "order": 1
+  },
+  "960167294786": {
+   "id": "960167294786",
+   "listing": {
+    "title": "Pottery Barn Kids & Levtex Crib Bedding Bundle – 2 Sheets + Pink Crib Skirt",
+    "price": "$45.00",
+    "image": "https://i.ebayimg.com/images/g/2wYAAeSwvr1q72ea/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/960167294786"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": true,
+    "deviceLevel": "possible",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "order": 2
+  },
+  "336898849272": {
+   "id": "336898849272",
+   "listing": {
+    "title": "Crib Bedding Set Cotton White Blue Pink Teddy Bear w/ Quilt Blanket & Mobile Arm",
+    "price": "$100.00",
+    "image": "https://i.ebayimg.com/images/g/go4AAeSwUY5q-b6F/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/336898849272"
+   },
+   "level": "possible",
+   "kind": "banned",
+   "why": "the photo appears to include a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing photo of the crib bedding set shows a thick padded crib bumper surrounding the quilt.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "deviceLevel": "ask",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "Selling a padded crib bumper has been against federal law since November 2022. CPSC lists bumpers among the soft items that can suffocate a baby; its advice is nothing but a fitted sheet in a crib.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "badge": "Possible crib bumper",
+   "verdict": "This may be or include a padded crib bumper.",
+   "question": "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
+   "messageUrl": "https://www.ebay.com/itm/336898849272?m2mOpen=1",
+   "report": "",
+   "order": 3
+  },
+  "168855967039": {
+   "id": "168855967039",
+   "listing": {
+    "title": "Vintage Lambs & Ivy Sleepytime Baby Snoopy 7 Piece Nursery Bedding & Decor Set",
+    "price": "$159.00",
+    "image": "https://i.ebayimg.com/images/g/6IkAAeSwKkpq8N40/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/168855967039"
+   },
+   "level": "possible",
+   "kind": "banned",
+   "why": "the photo appears to include a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing is for a 7-piece nursery bedding set whose packaging photo clearly shows a thick padded crib bumper lining the inside rails of the crib.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "deviceLevel": "ask",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "Selling a padded crib bumper has been against federal law since November 2022. CPSC lists bumpers among the soft items that can suffocate a baby; its advice is nothing but a fitted sheet in a crib.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "badge": "Possible crib bumper",
+   "verdict": "This may be or include a padded crib bumper.",
+   "question": "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
+   "messageUrl": "https://www.ebay.com/itm/168855967039?m2mOpen=1",
+   "report": "",
+   "order": 4
+  },
+  "168863317694": {
+   "id": "168863317694",
+   "listing": {
+    "title": "Vintage Patch Kraft Designs 5-Piece Toddler Crib Bedding Set Wall Swan",
+    "price": "$355.00",
+    "image": "https://i.ebayimg.com/images/g/TS0AAeSwq0Jq-Qm3/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/168863317694"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": true,
+    "deviceLevel": "possible",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "order": 5
+  },
+  "287707048490": {
+   "id": "287707048490",
+   "listing": {
+    "title": "Disney baby Winnie the Pooh You Are So Loved Crib Bedding Set Comforter & Sheet",
+    "price": "$34.84",
+    "image": "https://i.ebayimg.com/images/g/pGwAAeSw3P5q7JHr/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/287707048490"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": true,
+    "deviceLevel": "possible",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "order": 6
+  },
+  "147631281873": {
+   "id": "147631281873",
+   "listing": {
+    "title": "Elephant Crib Bedding Set Unisex Baby Nursery Gray Blue White Bedding Set",
+    "price": "$75.00",
+    "image": "https://i.ebayimg.com/images/g/lSwAAeSw42Zqy-o6/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/147631281873"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The crib bedding set photo shows thick padded panels with ties folded on the lower right side.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "deviceLevel": "possible",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "Selling a padded crib bumper has been against federal law since November 2022. CPSC lists bumpers among the soft items that can suffocate a baby; its advice is nothing but a fitted sheet in a crib.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "badge": "Padded crib bumper",
+   "verdict": "This looks like a padded crib bumper.",
+   "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
+   "messageUrl": "https://www.ebay.com/itm/147631281873?m2mOpen=1",
+   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/147631281873\nTitle: Elephant Crib Bedding Set Unisex Baby Nursery Gray Blue White Bedding Set\nAsking price: $75.00\nSeen on: November 15, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The crib bedding set photo shows thick padded panels with ties folded on the lower right side.",
+   "order": 7
+  },
+  "960150054374": {
+   "id": "960150054374",
+   "listing": {
+    "title": "Circo Floral Flower Baby Crib Bedding 4 PC SET Comforter, Sheet, Skirt, Diaper",
+    "price": "$59.99",
+    "image": "https://i.ebayimg.com/images/g/kegAAeSwg3Np0C2~/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/960150054374"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": true,
+    "deviceLevel": "ask",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T22:57:01.680Z",
+   "order": 8
+  },
+  "940069271637": {
+   "id": "940069271637",
+   "listing": {
+    "title": "Vintage Health-tex Baby Crib Bedding Set Quilt/Comforter, Skirt & Sheet",
+    "price": "$49.99",
+    "image": "https://i.ebayimg.com/images/g/en0AAeSwjllq7TMD/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/940069271637"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": true,
+    "deviceLevel": "ask",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T22:57:01.680Z",
+   "order": 9
+  },
+  "880089415306": {
+   "id": "880089415306",
+   "listing": {
+    "title": "Care Bears Baby Crib Bedding Set Green Yellow Stars 2 Piece Baby Hugs Rare",
+    "price": "$100.00",
+    "image": "https://i.ebayimg.com/images/g/KZ0AAeSwMqBq7fC7/s-l500.jpg",
+    "url": "https://www.ebay.com/itm/880089415306"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing photo shows thick padded Care Bears fabric panels with ties as part of a two-piece crib bedding set.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "deviceLevel": "possible",
+    "judgedInCloud": false,
+    "deviceError": "",
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "Selling a padded crib bumper has been against federal law since November 2022. CPSC lists bumpers among the soft items that can suffocate a baby; its advice is nothing but a fitted sheet in a crib.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T22:57:01.680Z",
+   "badge": "Padded crib bumper",
+   "verdict": "This looks like a padded crib bumper.",
+   "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
+   "messageUrl": "https://www.ebay.com/itm/880089415306?m2mOpen=1",
+   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/880089415306\nTitle: Care Bears Baby Crib Bedding Set Green Yellow Stars 2 Piece Baby Hugs Rare\nAsking price: $100.00\nSeen on: November 15, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The listing photo shows thick padded Care Bears fabric panels with ties as part of a two-piece crib bedding set.",
+   "order": 10
+  }
+ }
+}

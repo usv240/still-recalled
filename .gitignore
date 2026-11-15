@@ -16,3 +16,6 @@ web/icon-32.png
 dist/
 tools/e2e-out/
 .firebase/
+docs/gallery/src/
+docs/gallery/3-*.png
+docs/gallery/4-*.png

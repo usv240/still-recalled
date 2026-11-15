@@ -54,7 +54,9 @@ export const BANNED_TYPES = [
 // Doll furniture and toy versions use the same words ("crib bumper for doll bed") and are not infant products.
 // Sewing patterns ("Simplicity 3795 Nursery Quilt Canopy Bumper Pad Pattern") sell paper, not the product.
 // Added after the 2026-11-15 accuracy test, where three sewing patterns were flagged as crib bumpers.
-const FOR_DOLLS = /\b(dolls?|doll\s*house|dollhouse|american\s+girl|bitty\s+baby|reborn|barbie|plush|stuffed|(sewing|quilt|craft)\s+patterns?|patterns?\s+(cut|uncut)|(simplicity|butterick|mccall'?s?|vogue)\s+(patterns?|house|\d{3,4}))\b/i;
+// "Plush" alone is a fabric ("Lounger Pillow Plush Pink"); only a plush toy, animal or doll is a toy. The second test
+// found a lounger dropped as a toy because of that word.
+const FOR_DOLLS = /\b(dolls?|doll\s*house|dollhouse|american\s+girl|bitty\s+baby|reborn|barbie|plush\s+(toys?|animals?|dolls?)|stuffed|(sewing|quilt|craft)\s+patterns?|patterns?\s+(cut|uncut)|(simplicity|butterick|mccall'?s?|vogue)\s+(patterns?|house|\d{3,4}))\b/i;
 
 // Listings for a piece of a product, not the product. A recalled swing's power adapter is not a recalled swing.
 // "Cup holder" alone is not enough: "Stroller w/ Canopy & Cup Holder" sells the stroller.

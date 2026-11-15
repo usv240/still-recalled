@@ -57,3 +57,32 @@ test('verdict uses "an" before a vowel sound', async () => {
   const b = present({ id: '2', title: 'Bumper' }, { level: 'possible', kind: 'banned', banned: { key: 'crib_bumper' } });
   assert.equal(b.verdict, 'This may be or include a padded crib bumper.');
 });
+
+test('report to CPSC: only likely flags whose sale is ruled out, with a clean listing link and no verdict', async () => {
+  const { cpscReport, reportable, CPSC_REPORT_URL } = await import('../shared/present.mjs');
+  const ebay = { ...listing, id: '960198699912', url: 'https://www.ebay.com/itm/960198699912?itmprp=enc%3AAQAL&itmmeta=xyz' };
+  const recall = present(ebay, { level: 'likely', kind: 'recall', card });
+  assert.ok(reportable(recall));
+  assert.match(recall.report, /^A recalled product listed for sale online\./);
+  assert.match(recall.report, /Listing: https:\/\/www\.ebay\.com\/itm\/960198699912\n/);   // no search-page tracking
+  assert.match(recall.report, /CPSC recall 24719/);
+  assert.match(recall.report, /appears to be/);
+  assert.doesNotMatch(recall.report, /illegal|itmprp/i);
+  assert.equal(CPSC_REPORT_URL, 'https://www.saferproducts.gov/IncidentReporting');
+
+  const bumper = BANNED_TYPES.find(t => t.key === 'crib_bumper');
+  assert.match(present(ebay, { level: 'likely', kind: 'banned', banned: bumper }).report, /16 CFR 1309.*November 12, 2022/);
+  // A possible flag asks the seller first; loungers made before 2025 are not under a sales ban, so no report.
+  assert.equal(present(ebay, { level: 'possible', kind: 'recall', card }).report, '');
+  assert.equal(present(ebay, { level: 'likely', kind: 'banned', banned: lounger }).report, '');
+  // A screenshot on the web page has no link: the report points at the screenshot the shopper attaches.
+  assert.match(cpscReport(present({ ...listing, url: '' }, { level: 'likely', kind: 'recall', card })), /Listing: see the attached screenshot/);
+});
+
+test('ask the seller: eBay opens its message box; other sites open the listing; a screenshot opens nothing', () => {
+  const ebay = present({ ...listing, id: '960198699912', url: 'https://www.ebay.com/itm/960198699912?itmprp=x' }, { level: 'possible', kind: 'recall', card });
+  assert.equal(ebay.messageUrl, 'https://www.ebay.com/itm/960198699912?m2mOpen=1');
+  const cl = present({ ...listing, id: 'upTYnx8vqnFUqdbVYj5Pdc', url: 'https://www.craigslist.org/view/d/gardena-bassinet/upTYnx8vqnFUqdbVYj5Pdc?x=1' }, { level: 'possible', kind: 'recall', card });
+  assert.equal(cl.messageUrl, 'https://www.craigslist.org/view/d/gardena-bassinet/upTYnx8vqnFUqdbVYj5Pdc');
+  assert.equal(present({ ...listing, url: '' }, { level: 'possible', kind: 'recall', card }).messageUrl, '');
+});

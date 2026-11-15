@@ -1,0 +1,858 @@
+{
+  "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+  "labelled_at": "2026-11-15T22:47:41Z",
+  "labels": {
+    "960200642239": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded white wicker bassinet on a rocking stand; bassinets are not a risky type and there is no brand to match a recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "377618944482": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded gray mesh bassinet with striped pad; does not resemble the recalled AirClub, Papablic, ZHORANGE or Beberoad bassinets.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "206673754992": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Maydolly automatic rocking smart bassinet; no Maydolly recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "920038195360": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Summer Infant oval bassinet; no Summer Infant bassinet recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "257845447676": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Jenny Lind-style wooden swinging cradle (box photo); cradles are not a risky type and no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "960200603961": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded white wicker bassinet on a rocking stand (doll used as prop); not a risky type, no brand to match a recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "920144774020": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded beige mesh bedside bassinet without quilted padding; does not look like the recalled AirClub QX-831 or Papablic models.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "157393698561": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Boxed HALO BassiNest Swivel Sleeper 3.0; the only HALO recall in the data is the Magic Sleepsuit, a different product.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "880035667726": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Title says disassembled parts and photo shows the HALO sleeper basket, arms and legs; no HALO bassinet recall.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "168856527618": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Ixdregan 3-in-1 bedside bassinet stock photo; no Ixdregan recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147564731955": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Boxed HALO BassiNest Swivel Sleeper 4.0; no HALO bassinet recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "168811251006": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Angelbliss 5-in-1 bedside bassinet shown as boxed parts; no Angelbliss recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "388627711907": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Folded gray mesh luvkixen bassinet; no luvkixen recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366812246764": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Boxed SNOO leg lifter accessory; no Happiest Baby recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "860027155400": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Replacement mattress pad and mesh walls for a Baby Delight Beside Me Dreamer; no Baby Delight recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "206701345774": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded woven seagrass Moses basket with leather handles; a bassinet-type item, not a risky type, no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "277757355366": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Printed short-sleeve bodysuit, not a sleep product; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "277760197287": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Printed short-sleeve bodysuit, not a sleep product; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "277757318559": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Printed short-sleeve bodysuit, not a sleep product; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "277760410565": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Printed short-sleeve bodysuit, not a sleep product; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "277760410556": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Printed short-sleeve bodysuit, not a sleep product; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366810369290": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Two unbranded footed sleepers worn as clothing; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "168861196484": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Carter's preemie zip sleepers (plaid, red, dinosaur, stripes); none is the recalled yellow fleece pig-print sleeper (23048).",
+      "confidence": "high",
+      "outside_db": "Carter's-made zip footed sleepers, CPSC 13-167 (2013, zipper choking), incl. a Child of Mine blue-striped 'Little Brother' style; sizes NB-9M only, so this preemie lot is unlikely."
+    },
+    "377635400740": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Five Carter's girl zip sleepers in pink, floral and sage; none is the recalled yellow fleece pig-print sleeper (23048).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "407317447355": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Carter's cotton zip sleepers with truck and dog prints; recall 23048 is a yellow fleece pig-print sleeper, not these.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "307278350969": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Single unbranded striped footed sleeper; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "287731786519": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Wonder Nation pink footed zip sleeper; no Wonder Nation recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "860144812482": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Lot of assorted footed sleepers (stripes, 'Little Brother'); no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366808010277": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Carter's pink polka-dot sleeper with heart patch; not the recalled yellow fleece pig-print sleeper (23048).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "960197365269": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Mixed-brand fleece footed sleepers with animal prints; photo shows no yellow pig-print sleeper like Carter's recall 23048.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "820351445592": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Little Me red velour reindeer sleeper; no Little Me recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "840132389266": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Tulip-print zip sleeper; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "188957402106": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "1987 Mattel Heart Family doll nursery playset; 'Rock'n Play' is the toy's name, not the Fisher-Price sleeper.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "336091850014": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Toddler 4T tie-dye two-piece lounge pajamas; the name only echoes Rock 'n Play.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "860135301212": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Disney Vampirina toy van; unrelated to baby sleep products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "336636425677": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Punk vinyl record; unrelated.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "206578468935": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Empty boxes for Mattel Heart Family doll playsets; not the Fisher-Price sleeper.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "237179701821": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Doll-size Heart Family Rock'n Play nursery crib and chair parts; toy, not the Fisher-Price sleeper.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147642420926": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Toy electric guitar replacement piece; unrelated.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "197576578980": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Barbie toy radio playset; unrelated.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "307142236357": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Rock 'n' roll vinyl LP; unrelated.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "227615522061": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Punk 7-inch vinyl record; unrelated.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "377604346326": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Tyco Rock N Roll Elmo plush toy; unrelated.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "146789243816": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Doll-size Heart Family nursery crib, rocker and accessories; toy, not the Fisher-Price sleeper.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "318866483780": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Quilted, padded Pooh headboard panel with ruffle and ties to fasten inside the crib, i.e. a padded headboard bumper piece.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "800637867133": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "McCall's sewing pattern for nursery decor (includes a bumper design); a pattern, not a product.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "307103272027": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Thin breathable mesh crib-rail liner, not a padded bumper.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "227610258481": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Snuggle Me Organic infant lounger shown in photo; an infant lounger; no Snuggle Me recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "186967261919": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Google Nest smart thermostat, unrelated to baby products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "184315042284": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Google Nest smart thermostat, unrelated to baby products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "186985661433": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Google Nest smart thermostat, unrelated to baby products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "185818193171": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Google Nest smart thermostat, unrelated to baby products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "185818179150": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Google Nest smart thermostat, unrelated to baby products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "800122949302": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Google Nest smart thermostat, unrelated to baby products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "920076205965": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Fisher-Price Flutterbye Dreams crib soother; Fisher-Price recalls in the data cover other products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366797743790": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Title says extra cover only ($10) for a DockATot Deluxe, though the photo shows a full baby nest; a cover is not the sleeper itself.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "860145234508": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "IKEA VIMSIG hanging space mobile (nursery decor); no IKEA mobile recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "377371520009": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Babyletto Hudson fixed-side convertible crib, not drop-side; the Babyletto recall in the data is a glider.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147681812682": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Quilted foam crib wedge to incline and position a sleeping baby, a padded sleep positioner (also an inclined surface).",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "900089472119": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Yo Gabba Gabba toddler comforter and sheets laid out in photo; no bumper shown or listed.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "117523425949": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Fisher-Price Sea Life aquarium crib soother; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "287731935663": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Baby Boom sherpa baby blanket; the baby blanket recall in the data is a different brand (TJX/Mittal).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "257854152927": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Vintage Quiltex baby blanket; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366812315964": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Fisher-Price Lullaby Birdies crib soother; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "227610219902": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded white mesh bedside bassinet; does not look like the recalled AirClub or Papablic models.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "158167390378": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Arm's Reach Clear-Vue Co-Sleeper bedside bassinet; no Arm's Reach recall in the CPSC data (2011 recall covered only Original/Universal styles).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147451817769": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Arm's Reach Mini Co-Sleeper bedside bassinet; no Arm's Reach recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "317206104012": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Arm's Reach Versatile Co-Sleeper mattress and fitted sheet only; no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "397887712712": {
+      "item": "product",
+      "recall_ids": [
+        "24324"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Folded gray half-moon travel bassinet with star-print rim and no brand shown; resembles the recalled Beberoad Love 'New Moon' (check tag for TB999-1).",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "377498728680": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Dream Big Little Co bamboo zip sleeper; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "267842856495": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "American Girl Bitty Baby doll sleeper, bib and cup; doll clothing.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "236864625011": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Arm's Reach Mini Co-Sleeper mattress pad and sheets only; no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147533505044": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Boxed Arm's Reach Co-Sleeper leg extension kit; no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "167397933092": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a full Arm's Reach Original Co-Sleeper (model 9111-N) with pad; no Arm's Reach recall in the CPSC data.",
+      "confidence": "low",
+      "outside_db": "Arm's Reach Original/Universal Co-Sleepers made Sep 1997-Dec 2001, models starting 8108/8133/8111/8112/8199/8311 (CPSC 11-187, 2011); listed model 9111-N is not among them."
+    },
+    "158194841587": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Pleasant Company 'Our New Baby' doll sleeper; doll clothing.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "960022649882": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Mamazing Ultra Air stroller; no Mamazing recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "960069258925": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Mamazing Ultra Air X stroller; no Mamazing recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "940065835667": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "GB Pockit Air compact stroller; no GB recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "237129411991": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Stroller ('coche') with no brand visible; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "287730258333": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Doona car seat stroller; no Doona recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "137914334356": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Vintage Graco 470-series pram stroller; no Graco recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": "Graco strollers made before June 1989 with uncovered recline brackets (Travel-Mate, Stroll-A-Bed, Elite, Brougham, Regency, Premier), CPSC 90-157; check if this 470 model is one."
+    },
+    "860142866597": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Rovique double stroller wagon; the wagon recall in the data is Olympia's Pack-N-Stroll, a different brand.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "940092180541": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Vintage Peg Perego umbrella stroller; Peg Perego recalls in the data are YPSI/Z4 inclined bassinets and Tatamia chairs.",
+      "confidence": "high",
+      "outside_db": "Peg Perego Venezia and Pliko-P3 strollers made 2004-2007 with a one-cup child tray (CPSC 12-232, 2012); this looks like an older umbrella model with no tray."
+    },
+    "267841735251": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Mamazing Ultra Air stroller; no Mamazing recall in the CPSC data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "206695109739": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "UPPAbaby VISTA stroller; the UPPAbaby recall in the data is the RIDGE jogging stroller (22215), a different model.",
+      "confidence": "high",
+      "outside_db": "2015 UPPAbaby VISTA and CRUZ strollers, foam bumper bar choking hazard (CPSC 15-196); 2015 model year only."
+    }
+  }
+}

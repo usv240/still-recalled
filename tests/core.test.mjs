@@ -68,3 +68,11 @@ test('fixes from the 2026-11-15 tests: sewing patterns, hospital cribs, everyday
   assert.equal(shortlist(idx, 'Portable Baby Bassinet / Bedside Sleeper').length, 0);
   assert.equal(shortlist(idx, 'Papablic bedside sleeper')[0].strength, 'line');
 });
+
+test('fix from the second test: "plush" is a fabric word unless it names a plush toy', async () => {
+  const { notTheProduct } = await import('../shared/banned.mjs');
+  // Missed in the second test: the word rules dropped this lounger as a toy before any model looked at it.
+  assert.equal(notTheProduct('Snuggle Me Organic Cotton Infant Lounger Pillow Plush Pink, Fits Bassinet'), false);
+  assert.equal(notTheProduct('Plush toy crib for teddy bears'), true);
+  assert.equal(notTheProduct('Lot of 3 plush animals baby nursery'), true);
+});

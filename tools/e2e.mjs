@@ -88,6 +88,10 @@ try {
     await page.mouse.click(hostBox.x + 12, hostBox.y + 12);
     await new Promise(r => setTimeout(r, 800));
     step('badge click stays on the page', page.url() === before, page.url() === before ? '' : `navigated to ${page.url()}`);
+    // The card's closed shadow root is still in the accessibility tree, which is how a screen reader finds it too.
+    const ask = await page.$('::-p-aria([name="Ask the seller"][role="button"])');
+    const report = await page.$('::-p-aria([name="Report to CPSC"][role="button"])');
+    step('card offers the next step', !!ask, `Ask the seller: ${ask ? 'yes' : 'no'}; Report to CPSC: ${report ? 'yes' : 'no (only on likely flags the law rules out)'}`);
     await page.screenshot({ path: path.join(out, 'popover.png') });
     log('screenshot', path.join(out, 'popover.png'));
   }

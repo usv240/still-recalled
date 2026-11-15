@@ -14,10 +14,19 @@ export function siteFor(hostname) {
 }
 
 // eBay appends screen-reader text to link names; it is not part of the title.
+// It also labels the photo carousel inside the title link ("… Image 1 of 4").
 const SITE_NOISE = /\s*Opens in a new window or tab\s*$/i;
-const clean = s => String(s || '').replace(/\s+/g, ' ').replace(SITE_NOISE, '').replace(/^New Listing/i, '').trim();
+const PHOTO_COUNTER = /\s*Image \d+ of \d+\s*$/i;
+const clean = s => String(s || '').replace(/\s+/g, ' ').replace(SITE_NOISE, '').replace(PHOTO_COUNTER, '').replace(SITE_NOISE, '').replace(/^New Listing/i, '').trim();
 // Some cards put the price and a discount inside the title link ("21% Snuggle me Lounger$42.00"); a title never needs them.
 const cleanTitle = s => clean(s).replace(/\$\s?[\d,]+(?:\.\d{2})?/g, ' ').replace(/^\d{1,2}%\s*(off\s*)?/i, '').replace(/\s+/g, ' ').trim();
+
+// Search pages load small thumbnails (eBay: 140 px). The models need to see a bumper or an incline, so ask the
+// photo host for a larger copy of the same picture where its address says how.
+export function largerPhoto(src) {
+  if (/(^|\.)ebayimg\.com\//.test(src.replace(/^https?:\/\//, ''))) return src.replace(/\/s-l\d+\.(jpg|jpeg|png|webp)\b/i, '/s-l500.$1');
+  return src;
+}
 
 function bestImage(root) {
   let best = null, bestArea = 0;
@@ -27,7 +36,20 @@ function bestImage(root) {
     const area = (img.naturalWidth || img.width || 0) * (img.naturalHeight || img.height || 0);
     if (area >= bestArea) { best = src; bestArea = area; }
   }
-  return best;
+  return best && largerPhoto(best);
+}
+
+const PRICE = /\$\s?[\d,]+(?:\.\d{2})?/;
+/** The price nearest the listing: climb from its card until a price shows, but never into a neighbour's card. */
+function priceFor(card, site, id) {
+  let el = card;
+  for (let i = 0; i < 6 && el; i++, el = el.parentElement) {
+    const neighbour = [...el.querySelectorAll('a[href]')].some(a => { const m = site.item.exec(a.href); return m && m[1] !== id; });
+    if (neighbour) return '';
+    const m = clean(el.textContent).match(PRICE);
+    if (m) return m[0].replace(/\s/g, '');
+  }
+  return '';
 }
 
 /** Climb from a listing link to the smallest ancestor that also holds its photo. */
@@ -41,6 +63,10 @@ function cardFor(link) {
 }
 
 function titleFor(link, card) {
+  // Craigslist puts the clean title on the result's own element; its link text adds a photo counter ("… Cradle 1").
+  const named = link.closest('[title]');
+  const own = named && cleanTitle(named.getAttribute('title'));
+  if (own && own.length > 3 && cleanTitle(link.textContent).startsWith(own)) return own;
   const heading = card.querySelector('h1, h2, h3, [role=heading]');
   const candidates = [
     link.getAttribute('aria-label'), heading && heading.textContent, link.textContent,
@@ -61,10 +87,12 @@ export function listingsOnPage(doc = document, loc = location) {
     const id = m[1];
     const card = cardFor(link);
     const title = titleFor(link, card);
+    // A listing usually has two links (photo and title). Keep the one with the longer title, and take the price or
+    // photo from the other when it has them.
+    const found = { id, site: site.site, url: link.href.split('#')[0], title, price: priceFor(card, site, id), image: bestImage(card), el: card };
     const prior = byId.get(id);
-    if (prior && prior.title.length >= title.length) continue;
-    const price = (clean(card.textContent).match(/\$\s?[\d,]+(?:\.\d{2})?/) || [''])[0];
-    byId.set(id, { id, site: site.site, url: link.href.split('#')[0], title, price, image: bestImage(card), el: card });
+    const [keep, other] = prior && prior.title.length >= title.length ? [prior, found] : [found, prior];
+    byId.set(id, other ? { ...keep, price: keep.price || other.price, image: keep.image || other.image } : keep);
   }
   return { site: site.site, listings: [...byId.values()].filter(l => l.title) };
 }

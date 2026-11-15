@@ -1,9 +1,19 @@
 # Still Recalled
 
-**Still Recalled flags secondhand listings that look like a recalled product, or like a baby sleep product that can
-kill an infant.** It works on eBay, Mercari and Craigslist search pages, and on any listing you screenshot. It runs as
-a Chrome extension and as a web page for phones. Chrome's built-in model looks at every listing on your own computer,
-and only the few it flags go to Gemini in the cloud, through Firebase AI Logic hybrid inference.
+A parent scrolling eBay sees a used elephant crib bedding set for $75. In the photo, folded among the sheets, are
+padded bumper panels with ties. Selling those has been against federal law since 2022, because bumpers can suffocate
+a baby. The title never says "bumper", so no keyword filter catches it, and nothing on the page warns the parent.
+
+**Still Recalled puts the warning on the listing.** It is a Chrome extension for eBay, Mercari and Craigslist search
+pages, plus a web page that checks a screenshot of any listing on a phone. Chrome's built-in model (Gemini Nano) looks
+at every baby product on your own computer, and only the few it flags go to Gemini in the cloud, through Firebase AI
+Logic hybrid inference.
+
+**What it found on real listings.** Of 136 used baby-gear listings from 18 eBay searches, 6 were crib sets with padded
+bumpers and 8 were infant loungers or in-bed sleepers, asking $908 in total. Still Recalled flagged all 6 bumper sets
+($517) and 4 of the 8 loungers, with 4 false alarms among the 115 listings that were fine. 85% of the listings never
+left the computer. A second test after fixes, on 125 new listings from eBay
+and Craigslist, raised no false alarms at all and again flagged every padded bumper and recall match.
 
 ## The problem
 
@@ -31,7 +41,11 @@ Every figure is sourced in [docs/research/sources.md](docs/research/sources.md).
 Clicking the badge opens a card that shows:
 - the seller's photo beside the photo from the government recall notice;
 - what to check before buying;
-- a question to copy and send to the seller.
+- **Ask the seller**: copies a question that asks for the one fact that settles it, usually the model number and
+  date on the label, and opens eBay's message box for that seller (on other sites, the listing);
+- **Report to CPSC**, on likely flags where a recall or the law rules the sale out: copies a ready report with the
+  listing's link and opens the SaferProducts.gov form. CPSC asks shoppers who find a recalled product for sale online
+  to report it there, and its e-commerce team has such listings taken down.
 
 The side panel lists every flag on the page. The toolbar icon shows how many there are.
 
@@ -74,19 +88,25 @@ the extension, judges included, gets the cloud check with App Check still enforc
 
 ## How well it works
 
-The test used 136 eBay listings collected after the rules were written, labelled blind. Full method, misses and
-limits are in [docs/accuracy.md](docs/accuracy.md).
+Two tests, each on listings collected after the rules they test were written, labelled blind by a separate reviewer
+from what a shopper sees: the title, the price and one photo. Method, every miss and the limits are in
+[docs/accuracy.md](docs/accuracy.md).
 
-| | Caught (of 14) | False alarms (of 115) |
-|---|---|---|
-| Words only | 6 | 22 |
-| On-device model only | 7 | 8 |
-| **Hybrid** | **10** | **4** |
+| Same engine, run as | First test: caught (of 14) | False alarms (of 115) | Second test: caught (of 4) | False alarms (of 117) |
+|---|---|---|---|---|
+| Words only | 6 | 22 | 1 | 16 |
+| Built-in model only | 7 | 8 | 2 | 6 |
+| **Hybrid** | **10** | **4** | **2** | **0** |
 
-The cloud saw 15% of the listings.
+- First test: 136 used listings from 18 eBay searches. Second test, after the fixes the first one led to: 125 new
+  listings from 10 eBay searches and Craigslist in Los Angeles and Chicago.
+- The cloud saw 15% of the listings in the first test and 8% in the second.
+- Across both, it flagged every padded bumper and every recall match (8 of 8). Loungers and positioners are the hard
+  case (4 of 10): the six it missed were listed as a cover, a pillow or a portable sleeper.
 
-An end-to-end test loads the real extension into Chrome and runs it on live eBay and Craigslist searches. It checks
-that the badges, the toolbar count and the popover all work: 8 of 8 steps pass on each site.
+An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
+badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. The release
+build passes 10 of 10 on eBay; an earlier build, before the last step was added, passed all 8 on Craigslist.
 
 ## Try it
 
@@ -143,7 +163,8 @@ What protects the project's model quota:
   November 2021. Still Recalled is not affiliated with CPSC.
 - **Example photo:** `web/example/recall-26591.jpg` is from CPSC recall notice 26591 (VEVOR baby loungers).
 - **Font:** Geist, SIL Open Font License, © Vercel ([extension/fonts/Geist-LICENSE.txt](extension/fonts/Geist-LICENSE.txt)).
-- **Origins:** Still Recalled builds on our earlier project, [SafeState](https://safestate.vercel.app). SafeState gives
+- **Origins:** Still Recalled was built during the #BuildHybridAI submission period, from November 14, 2026, and
+  reuses no code. The idea comes from my earlier project, [SafeState](https://safestate.vercel.app). SafeState gives
   marketplaces a gate that blocks recalled units at the moment of resale, but only once a marketplace adopts it.
   Still Recalled works from the buyer's side, today, on listings no one has screened. It adds the infant sleep
   products that are dangerous even when no recall names them.

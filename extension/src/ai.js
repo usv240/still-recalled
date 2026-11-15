@@ -186,7 +186,10 @@ export async function deviceStatus() {
 
 /** Fetch a listing photo and return it as a JPEG part the on-device model accepts (it takes JPEG and PNG only). */
 export async function imagePart(url, maxSide = 512) {
-  const blob = await (await fetch(url)).blob();
+  // A photo host that stops answering must not hold up the page: give up on the photo after 15 s.
+  const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+  if (!res.ok) throw new Error(`photo: HTTP ${res.status}`);
+  const blob = await res.blob();
   const bitmap = await createImageBitmap(blob);
   const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
   const canvas = new OffscreenCanvas(Math.round(bitmap.width * scale), Math.round(bitmap.height * scale));

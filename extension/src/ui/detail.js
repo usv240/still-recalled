@@ -2,6 +2,7 @@
 // Its signature is the photo pair: the seller's photo beside the photo from the government recall notice.
 import { h, copyWithFeedback, safeUrl } from './dom.js';
 import { icon } from './icons.js';
+import { CPSC_REPORT_URL } from '../../../shared/present.mjs';
 
 const DEFAULT_CHECK = {
   recall: 'Ask for a photo of the label. The model number and manufacture date decide whether this unit is one of the recalled ones.',
@@ -75,16 +76,45 @@ export function detailView(r, { compact = false, onOpenPanel = null } = {}) {
     ));
   }
 
-  const label = h('span', {}, 'Copy question for seller');
-  const copyBtn = h('button', { class: 'btn btn-primary', type: 'button' }, icon('copy'), label);
-  copyBtn.addEventListener('click', () => copyWithFeedback(copyBtn, r.question, label));
+  // Ask the seller: copy the question first (the page must still have focus to write the clipboard), then open the
+  // seller's message box on eBay, or the listing elsewhere, where the message button is.
+  const askUrl = safeUrl(r.messageUrl);
+  const label = h('span', {}, askUrl ? 'Ask the seller' : 'Copy question for seller');
+  const askBtn = h('button', { class: 'btn btn-primary', type: 'button' }, icon(askUrl ? 'message' : 'copy'), label);
+  askBtn.addEventListener('click', async () => {
+    await copyWithFeedback(askBtn, r.question, label);
+    if (askUrl) window.open(askUrl, '_blank', 'noopener');
+  });
   root.append(h('section', { class: 'check' },
     h('h3', {}, 'Before you buy'),
     // The cloud's own line names the notice's models and label; without it, the type's advice or a plain default.
     h('p', {}, r.check || (r.banned && r.banned.advice) || DEFAULT_CHECK[r.kind] || ''),
     h('blockquote', { class: 'question' }, r.question),
-    copyBtn,
+    askBtn,
+    askUrl ? h('p', { class: 'hint' }, /m2mOpen/.test(askUrl)
+      ? 'Copies the question and opens eBay\'s message box for this seller.'
+      : 'Copies the question and opens the listing, where the seller\'s message button is.') : null,
   ));
+
+  // The last step: a report to CPSC, which asks shoppers to report recalled products for sale online at
+  // SaferProducts.gov with the listing's link. Offered only for likely flags whose sale the law rules out.
+  if (r.report) {
+    const repLabel = h('span', {}, 'Report to CPSC');
+    const repBtn = h('button', { class: 'btn btn-secondary', type: 'button' }, icon('flag'), repLabel);
+    repBtn.addEventListener('click', async () => {
+      await copyWithFeedback(repBtn, r.report, repLabel);
+      window.open(CPSC_REPORT_URL, '_blank', 'noopener');
+    });
+    root.append(h('section', { class: 'report' },
+      h('h3', {}, 'Report the listing'),
+      h('p', {}, r.kind === 'recall'
+        ? 'CPSC asks shoppers who find a recalled product for sale online to report it at SaferProducts.gov, with the listing\'s link and a screenshot. Its e-commerce team has such listings taken down.'
+        : 'CPSC\'s e-commerce team looks for recalled and banned products listed for sale and has the listings taken down. You can report this one at SaferProducts.gov, with its link and a screenshot.'),
+      compact ? null : h('details', { class: 'report-text' }, h('summary', {}, 'The report text'), h('pre', {}, r.report)),
+      repBtn,
+      h('p', { class: 'hint' }, 'Copies the report, with the listing link, and opens the CPSC form. Paste it into the description.'),
+    ));
+  }
 
   if (!compact && r.kind === 'recall' && r.recall) {
     root.append(h('dl', { class: 'facts' },

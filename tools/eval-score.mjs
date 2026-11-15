@@ -2,7 +2,12 @@
 // (tools/eval-results-words.json, tools/eval-results-hybrid.json) and writes tools/eval-report.json plus a table.
 // Nothing here changes the rules: it only counts.
 //
-// Three ways of running the same engine on the same 136 held-out eBay listings:
+// Usage: node tools/eval-score.mjs [--set=eval|fresh]
+//   eval   the first test: 136 eBay listings, collected after the rules were written
+//   fresh  the second test: 125 eBay and Craigslist listings, collected after the fixes the first test led to
+// Where a person has reviewed a label (tools/label-review.html -> tools/<set>-review.json), their answer is used.
+//
+// Three ways of running the same engine on the same held-out listings:
 //   words only      no model at all (what a computer without Chrome's built-in model gets with the cloud off)
 //   on-device only  words, then Chrome's built-in model on the listings that need a look; nothing leaves the computer
 //   hybrid          the same, then the cloud double-checks only what the on-device model flagged
@@ -11,9 +16,25 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const read = f => JSON.parse(readFileSync(new URL(f, import.meta.url), 'utf8'));
-const { labels, labeller } = read('./eval-labels.json');
-const words = read('./eval-results-words.json').rows;
-const hybrid = existsSync(new URL('./eval-results-hybrid.json', import.meta.url)) ? read('./eval-results-hybrid.json') : null;
+const has = f => existsSync(new URL(f, import.meta.url));
+const set = (process.argv.find(a => a.startsWith('--set=')) || '--set=eval').slice(6);
+const labelFiles = set === 'eval' ? ['./eval-labels.json'] : ['./fresh-labels-ebay.json', './fresh-labels-craigslist.json'].filter(has);
+const labelSets = labelFiles.map(read);
+const labels = Object.assign({}, ...labelSets.map(x => x.labels));
+let labeller = labelSets[0].labeller;
+// A person's answer overrides the AI label: "agree" keeps it; yes / no / maybe replace should_warn.
+if (has(`./${set}-review.json`)) {
+  const { answers } = read(`./${set}-review.json`);
+  let changed = 0;
+  for (const [id, a] of Object.entries(answers)) {
+    if (!labels[id] || a === 'agree') continue;
+    if (labels[id].should_warn !== a) changed++;
+    labels[id] = { ...labels[id], should_warn: a, note: `${labels[id].note} [person: ${a}]` };
+  }
+  labeller += `; ${Object.keys(answers).length} labels checked by a person, ${changed} changed`;
+}
+const words = read(`./${set}-results-words.json`).rows;
+const hybrid = has(`./${set}-results-hybrid.json`) ? read(`./${set}-results-hybrid.json`) : null;
 if (hybrid && hybrid.partial) console.log('NOTE: hybrid results are partial');
 
 const flagged = level => level === 'possible' || level === 'likely';
@@ -32,7 +53,7 @@ const neg = ids.filter(id => labels[id].should_warn === 'no');
 const maybe = ids.filter(id => labels[id].should_warn === 'maybe');
 const title = id => (words.find(r => r.id === id) || {}).title || id;
 
-const report = { labeller, listings: ids.length, mustFlag: pos.length, mustNotFlag: neg.length, unclear: maybe.length, systems: {} };
+const report = { set, labeller, listings: ids.length, mustFlag: pos.length, mustNotFlag: neg.length, unclear: maybe.length, systems: {} };
 for (const [name, answers] of Object.entries(systems)) {
   const hit = id => flagged(answers.get(id).level);
   const caught = pos.filter(hit), missed = pos.filter(id => !hit(id));
@@ -45,6 +66,18 @@ for (const [name, answers] of Object.entries(systems)) {
     recallRate: pos.length ? +(caught.length / pos.length).toFixed(3) : null,
     precision: (caught.length + falseAlarms.length) ? +(caught.length / (caught.length + falseAlarms.length)).toFixed(3) : null,
   };
+}
+// The same results in a shopper's units: asking prices of the listings that should be flagged, and of those caught.
+const listingById = new Map(Object.values(read(`./${set}-listings.json`)).flat().map(l => [l.id, l]));
+const dollars = list => +list.reduce((t, id) => t + (parseFloat(String((listingById.get(id) || {}).price || '').replace(/[$,]/g, '')) || 0), 0).toFixed(2);
+report.askingPrices = { mustFlag: dollars(pos) };
+for (const [name, answers] of Object.entries(systems)) report.askingPrices[name] = dollars(pos.filter(id => flagged(answers.get(id).level)));
+report.bySite = {};
+for (const id of ids) {
+  const site = (listingById.get(id) || {}).site || 'ebay';
+  const b = report.bySite[site] ||= { listings: 0, mustFlag: 0 };
+  b.listings++;
+  if (labels[id].should_warn === 'yes') b.mustFlag++;
 }
 if (hybrid) {
   const rows = hybrid.rows;
@@ -59,10 +92,11 @@ if (hybrid) {
     medianMs: ms[Math.floor(ms.length / 2)], totalMinutes: +((hybrid.totalMs || 0) / 60000).toFixed(1),
   };
 }
-writeFileSync(new URL('./eval-report.json', import.meta.url), JSON.stringify(report, null, 1));
+writeFileSync(new URL(`./${set}-report.json`, import.meta.url), JSON.stringify(report, null, 1));
 
 console.log(`${ids.length} listings: ${pos.length} must be flagged, ${neg.length} must not, ${maybe.length} unclear from the listing alone`);
 console.log('| | caught | missed | false alarms | precision |');
 console.log('|---|---|---|---|---|');
 for (const [name, s] of Object.entries(report.systems)) console.log(`| ${name} | ${s.caught}/${pos.length} | ${s.missed.length} | ${s.falseAlarms.length}/${neg.length} | ${s.precision ?? '-'} |`);
 if (report.cost) console.log('cost:', JSON.stringify(report.cost));
+console.log('asking prices:', JSON.stringify(report.askingPrices), 'by site:', JSON.stringify(report.bySite));

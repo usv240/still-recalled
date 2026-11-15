@@ -81,6 +81,62 @@ export function sellerQuestion(r) {
   return '';
 }
 
+// CPSC's advice to shoppers who find a recalled product for sale online: "report the sale through saferproducts.gov",
+// with a screenshot and a link to the listing (cpsc.gov, FAQs for Buying and Selling Products Online, read
+// 2026-11-15). Its e-commerce team asks sites to take recalled and banned products down.
+export const CPSC_REPORT_URL = 'https://www.saferproducts.gov/IncidentReporting';
+
+// The rule a CPSC reader needs, per type: only the types whose sale the law itself rules out. Loungers and nests are
+// not offered a report unless a recall names them, since older ones are not covered by a sales ban.
+const SALE_RULE = {
+  inclined_sleeper: 'Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1310, inclined sleepers for infants may not be sold after November 12, 2022.',
+  crib_bumper: 'Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.',
+  drop_side_crib: 'Full-size cribs sold since June 28, 2011 must meet the federal crib standard (16 CFR 1219), which drop-side designs do not meet.',
+};
+
+/** Whether the card offers a report to CPSC: only a likely flag, and only where the sale itself is ruled out. */
+export function reportable(r) {
+  if (r.level !== 'likely') return false;
+  if (r.kind === 'recall') return !!r.recall;
+  return r.kind === 'banned' && !!SALE_RULE[r.banned && r.banned.key];
+}
+
+/**
+ * The text a shopper pastes into the SaferProducts.gov form. Factual and hedged ("appears to be"): it reports what the
+ * listing shows, with the link CPSC asks for, and never states a verdict the tool can't make.
+ */
+export function cpscReport(r, seen = new Date()) {
+  if (!reportable(r)) return '';
+  const day = seen.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const what = r.kind === 'recall'
+    ? `It appears to be the ${productName(r.recall.product)}, recalled ${monthYear(r.recall.date)} (CPSC recall ${r.recall.id}). The listing does not say the recall remedy has been applied.`
+    : `It appears to be ${/^[aeiou]/i.test(r.banned.name) ? 'an' : 'a'} ${r.banned.name.toLowerCase()}. ${SALE_RULE[r.banned.key]}`;
+  const head = r.kind === 'recall' ? 'A recalled product listed for sale online.' : 'An infant sleep product listed for sale online.';
+  const facts = [
+    listingLink(r) ? `Listing: ${listingLink(r)}` : 'Listing: see the attached screenshot.',
+    `Title: ${r.listing.title}`,
+    r.listing.price ? `Asking price: ${r.listing.price}` : '',
+    `Seen on: ${day}`,
+  ].filter(Boolean).join('\n');
+  const why = [what, r.confirmed && r.evidence ? `What the listing shows: ${r.evidence}` : ''].filter(Boolean).join('\n');
+  return [head, facts, why].join('\n\n');
+}
+
+/** The listing's own address without search-page tracking: what a report or a message should point at. */
+export function listingLink(r) {
+  let u;
+  try { u = new URL(r.listing.url); } catch { return ''; }
+  if (u.protocol !== 'https:') return '';
+  if (/(^|\.)ebay\.com$/.test(u.hostname) && /^\d{9,}$/.test(String(r.id))) return `https://www.ebay.com/itm/${r.id}`;
+  return `${u.origin}${u.pathname}`;
+}
+
+/** Where "Ask the seller" goes: eBay opens its own message box on the listing; other sites keep it on the listing. */
+export function sellerMessageUrl(r) {
+  const link = listingLink(r);
+  return link && /^https:\/\/www\.ebay\.com\/itm\//.test(link) ? `${link}?m2mOpen=1` : link;
+}
+
 function monthYear(isoDate) {
   const [y, m] = String(isoDate || '').split('-').map(Number);
   if (!y || !m) return 'by CPSC';
@@ -126,6 +182,8 @@ export function present(listing, decision, how = {}) {
     base.badge = badgeText(base);
     base.verdict = verdictLine(base);
     base.question = sellerQuestion(base);
+    base.messageUrl = sellerMessageUrl(base);
+    base.report = cpscReport(base);
   }
   return base;
 }
