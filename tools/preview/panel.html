@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Still Recalled (panel preview)</title>
+<!-- Development only: extension/panel.html with a stand-in for the extension APIs. -->
+<link rel="stylesheet" href="/extension/src/ui/fonts.css">
+<link rel="stylesheet" href="/extension/src/ui/ui.css">
+<link rel="stylesheet" href="/extension/src/ui/panel.css">
+<script src="/tools/preview/shim.js"></script>
+<body>
+  <header class="bar">
+    <span class="brand"><span id="mark"></span>Still Recalled</span>
+    <button id="settings" class="icon-btn" type="button" aria-label="Settings"></button>
+  </header>
+  <main id="view" aria-live="polite"></main>
+  <script type="module" src="/extension/build/panel.js"></script>
+</body>
+</html>

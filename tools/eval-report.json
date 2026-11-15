@@ -1,0 +1,351 @@
+{
+ "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+ "listings": 136,
+ "mustFlag": 14,
+ "mustNotFlag": 115,
+ "unclear": 7,
+ "systems": {
+  "words only": {
+   "caught": 6,
+   "missed": [
+    {
+     "id": "920145376108",
+     "title": "Baby Delight Snuggle Nest Adventure Portable Infant Sleeper – Foldable",
+     "why": "Box shows a Baby Delight Snuggle Nest Adventure portable infant sleeper (low-sided in-bed/travel sleeper with no stand); no Baby Delight recall in cards."
+    },
+    {
+     "id": "366812057413",
+     "title": "Vintage Quiltex Precious Moments Crib Bedding Set Bless This Baby",
+     "why": "Photo shows a rolled, padded crib bumper with ties next to the quilt and sheets."
+    },
+    {
+     "id": "267843698279",
+     "title": "Vintage 1986 Red Calliope Teddy Bear Baby Crib Bedding Set Blue Pastel USA",
+     "why": "Photo shows a padded, ruffled crib bumper panel with ties."
+    },
+    {
+     "id": "336898849272",
+     "title": "Crib Bedding Set Cotton White Blue Pink Teddy Bear w/ Quilt Blanket & Mobile Arm",
+     "why": "A ruffled padded bumper is visible laid out around the quilt."
+    },
+    {
+     "id": "168855967039",
+     "title": "Vintage Lambs & Ivy Sleepytime Baby Snoopy 7 Piece Nursery Bedding & Decor Set",
+     "why": "Package photo shows the padded bumper fitted around the crib; it is part of the 7-piece set."
+    },
+    {
+     "id": "880089415306",
+     "title": "Care Bears Baby Crib Bedding Set Green Yellow Stars 2 Piece Baby Hugs Rare",
+     "why": "Photo shows a padded headboard bumper and side bumper pieces."
+    },
+    {
+     "id": "287664123446",
+     "title": "Snuggle Me Infant Organic Lounger Portable for Infants Birch Color",
+     "why": "Snuggle Me infant lounger in its zip bag; infant lounger type."
+    },
+    {
+     "id": "307252104507",
+     "title": "Snuggle Me Organic Infant Sensory Lounger Sage Green Cover with Storage Bag",
+     "why": "Photo shows the filled Snuggle Me lounger in a sage cover on its storage bag; infant lounger type."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "960167294786",
+     "title": "Pottery Barn Kids & Levtex Crib Bedding Bundle – 2 Sheets + Pink Crib Skirt",
+     "level": "possible",
+     "why": "Only two crib sheets and a crib skirt are listed and shown; no bumper."
+    },
+    {
+     "id": "257810399135",
+     "title": "Newton Bassinet & Bedside Sleeper",
+     "level": "possible",
+     "why": "Newton bassinet on wooden stand; no Newton recall in cards."
+    },
+    {
+     "id": "407357205746",
+     "title": "ezebaby Convertible Bedside Sleeper Bassinet, Breathable Mesh Side, Gray/White",
+     "level": "possible",
+     "why": "ezebaby bedside sleeper (logo visible); no ezebaby recall in cards."
+    },
+    {
+     "id": "920121943430",
+     "title": "Fisher Price On The Go Baby Dome Portable Infant Bassinet Play Space Playpen",
+     "level": "possible",
+     "why": "Fisher-Price On the Go Baby Dome play space; no recall in cards."
+    },
+    {
+     "id": "206681045132",
+     "title": "Fisher Price Little People Nursery Furniture Set Bassinet Changing Table 2007",
+     "level": "possible",
+     "why": "Little People dollhouse nursery furniture (toy bassinet and changing table)."
+    },
+    {
+     "id": "198536001187",
+     "title": "Fisher-Price Bassinet Bedside Sleeper Breathable Mesh Side White/Gray",
+     "level": "possible",
+     "why": "Fisher-Price mesh bassinet with control panel; no Fisher-Price bassinet recall in cards."
+    },
+    {
+     "id": "336086930867",
+     "title": "VINTAGE (1982) Simplicity House 125 10 Baby Basics Coverlet Bumper Pads Crib Toy",
+     "level": "possible",
+     "why": "Simplicity sewing pattern envelope, not a product."
+    },
+    {
+     "id": "860065660250",
+     "title": "Simplicity 3795 Shirley Botsford Nursery Quilt Canopy Bumper Pad Pattern Cut Com",
+     "level": "possible",
+     "why": "Simplicity 3795 nursery sewing pattern."
+    },
+    {
+     "id": "374968808335",
+     "title": "VINTAGE (1982) Simplicity House 125 10 Baby Basics Coverlet Bumper Pads Crib Toy",
+     "level": "possible",
+     "why": "Simplicity House 125 sewing pattern."
+    },
+    {
+     "id": "236460677683",
+     "title": "Mobile Toy Bar Plastic Arm 4moms mamaRoo Swing Replacement OEM Swing Parts",
+     "level": "possible",
+     "why": "Replacement mamaRoo toy-bar mobile only; the 4moms recall concerned the seat straps, not this part."
+    },
+    {
+     "id": "820248576023",
+     "title": "Baby Trend Sit N' Sway Portable Infant Swing w/ Remote, Toy Bar, Dash Gray",
+     "level": "possible",
+     "why": "Baby Trend Sit N' Sway swing; no Baby Trend swing recall in cards."
+    },
+    {
+     "id": "377187474054",
+     "title": "NK Medical Products Inc. 9687 Pediatrics Medical Crib with Drop Side Rails",
+     "level": "possible",
+     "why": "Hospital/medical pediatric crib with drop-side rails, excluded from drop_side_crib; no recall in cards."
+    },
+    {
+     "id": "117419092647",
+     "title": "Baby Trend Ally 35 Travel System Infant Seat Cover Padding Footmuff Beige Gray",
+     "level": "possible",
+     "why": "Replacement seat cover and footmuff only."
+    },
+    {
+     "id": "147355782408",
+     "title": "Dark Brown Solid Wood 10-Drawer Bedroom Dresser w/ Metal Pull Handles",
+     "level": "likely",
+     "why": "Traditional solid-wood chest-on-chest; no matching dresser recall."
+    },
+    {
+     "id": "327414773150",
+     "title": "Slightly Used･ Pelonis 1500W 3-Speed Electric Fan-Forced Space Heater, Black",
+     "level": "possible",
+     "why": "Pelonis fan-forced heater; no Pelonis recall in cards."
+    },
+    {
+     "id": "128099117793",
+     "title": "Dayton 3VU31A Portable Electric Convection Fan-Forced Garage Heater 1500W",
+     "level": "possible",
+     "why": "Dayton 3VU31A utility heater; no recall in cards."
+    },
+    {
+     "id": "137928509296",
+     "title": "Living Zone 1500W Black Electric Quartz Infrared Space Heater with Thermostat",
+     "level": "possible",
+     "why": "Living Zone quartz heater; no recall in cards."
+    },
+    {
+     "id": "128193451769",
+     "title": "Vintage Fisher-Price bundle 12-18M Cotton One-Piece Sleepers Floral Snap Button",
+     "level": "possible",
+     "why": "Two one-piece sleeper pajamas (garments)."
+    },
+    {
+     "id": "227440606415",
+     "title": "Vintage Fisher Price Pajamas Size 4T Kidswear Toys Print Sleeper Footie Footed",
+     "level": "possible",
+     "why": "Footed sleeper pajamas (garment)."
+    },
+    {
+     "id": "227552102253",
+     "title": "Vintage Fisher Price Little People One Piece Footie Sleeper Pajamas 4T 1993 USA",
+     "level": "possible",
+     "why": "Footed sleeper pajamas (garment)."
+    },
+    {
+     "id": "176889159836",
+     "title": "Fisher Price Vintage 12 Months Train Footed Outfit Terry Cloth Sleeper",
+     "level": "possible",
+     "why": "Footed terry sleeper outfit (garment)."
+    },
+    {
+     "id": "227596474742",
+     "title": "Vintage Fisher Price Loving Family Baby Girl Infant In Orange Sleeper",
+     "level": "possible",
+     "why": "Small dollhouse baby figure (about 2 in)."
+    }
+   ],
+   "flagged": 31,
+   "unclearFlagged": 3,
+   "recallRate": 0.429,
+   "precision": 0.214
+  },
+  "on-device only": {
+   "caught": 7,
+   "missed": [
+    {
+     "id": "920145376108",
+     "title": "Baby Delight Snuggle Nest Adventure Portable Infant Sleeper – Foldable",
+     "why": "Box shows a Baby Delight Snuggle Nest Adventure portable infant sleeper (low-sided in-bed/travel sleeper with no stand); no Baby Delight recall in cards."
+    },
+    {
+     "id": "307117103153",
+     "title": "Abreeze Portable Bedside Baby Sleeper, Gray/White, Carry Bag",
+     "why": "Despite the 'bedside sleeper' title, the photo shows a padded baby nest/lounger in an Abreeze bag; no Abreeze recall in cards."
+    },
+    {
+     "id": "366812057413",
+     "title": "Vintage Quiltex Precious Moments Crib Bedding Set Bless This Baby",
+     "why": "Photo shows a rolled, padded crib bumper with ties next to the quilt and sheets."
+    },
+    {
+     "id": "336898849272",
+     "title": "Crib Bedding Set Cotton White Blue Pink Teddy Bear w/ Quilt Blanket & Mobile Arm",
+     "why": "A ruffled padded bumper is visible laid out around the quilt."
+    },
+    {
+     "id": "168855967039",
+     "title": "Vintage Lambs & Ivy Sleepytime Baby Snoopy 7 Piece Nursery Bedding & Decor Set",
+     "why": "Package photo shows the padded bumper fitted around the crib; it is part of the 7-piece set."
+    },
+    {
+     "id": "820357887587",
+     "title": "Sleepyhead DockATot Deluxe+ Baby Infant Lounger Cover",
+     "why": "Title says 'cover' but the photo shows a filled DockATot Deluxe+ dock; in-bed lounger type."
+    },
+    {
+     "id": "307252104507",
+     "title": "Snuggle Me Organic Infant Sensory Lounger Sage Green Cover with Storage Bag",
+     "why": "Photo shows the filled Snuggle Me lounger in a sage cover on its storage bag; infant lounger type."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "960167294786",
+     "title": "Pottery Barn Kids & Levtex Crib Bedding Bundle – 2 Sheets + Pink Crib Skirt",
+     "level": "possible",
+     "why": "Only two crib sheets and a crib skirt are listed and shown; no bumper."
+    },
+    {
+     "id": "168863317694",
+     "title": "Vintage Patch Kraft Designs 5-Piece Toddler Crib Bedding Set Wall Swan",
+     "level": "possible",
+     "why": "Photo shows the 5-piece toddler set on a canopy bed (canopy, spread, skirt, sham, swan hanging) with no bumper visible."
+    },
+    {
+     "id": "287707048490",
+     "title": "Disney baby Winnie the Pooh You Are So Loved Crib Bedding Set Comforter & Sheet",
+     "level": "possible",
+     "why": "Title and photo show only a comforter and a fitted sheet."
+    },
+    {
+     "id": "257810399135",
+     "title": "Newton Bassinet & Bedside Sleeper",
+     "level": "possible",
+     "why": "Newton bassinet on wooden stand; no Newton recall in cards."
+    },
+    {
+     "id": "336086930867",
+     "title": "VINTAGE (1982) Simplicity House 125 10 Baby Basics Coverlet Bumper Pads Crib Toy",
+     "level": "likely",
+     "why": "Simplicity sewing pattern envelope, not a product."
+    },
+    {
+     "id": "860065660250",
+     "title": "Simplicity 3795 Shirley Botsford Nursery Quilt Canopy Bumper Pad Pattern Cut Com",
+     "level": "likely",
+     "why": "Simplicity 3795 nursery sewing pattern."
+    },
+    {
+     "id": "374968808335",
+     "title": "VINTAGE (1982) Simplicity House 125 10 Baby Basics Coverlet Bumper Pads Crib Toy",
+     "level": "likely",
+     "why": "Simplicity House 125 sewing pattern."
+    },
+    {
+     "id": "377187474054",
+     "title": "NK Medical Products Inc. 9687 Pediatrics Medical Crib with Drop Side Rails",
+     "level": "likely",
+     "why": "Hospital/medical pediatric crib with drop-side rails, excluded from drop_side_crib; no recall in cards."
+    }
+   ],
+   "flagged": 16,
+   "unclearFlagged": 1,
+   "recallRate": 0.5,
+   "precision": 0.467
+  },
+  "hybrid": {
+   "caught": 10,
+   "missed": [
+    {
+     "id": "920145376108",
+     "title": "Baby Delight Snuggle Nest Adventure Portable Infant Sleeper – Foldable",
+     "why": "Box shows a Baby Delight Snuggle Nest Adventure portable infant sleeper (low-sided in-bed/travel sleeper with no stand); no Baby Delight recall in cards."
+    },
+    {
+     "id": "307117103153",
+     "title": "Abreeze Portable Bedside Baby Sleeper, Gray/White, Carry Bag",
+     "why": "Despite the 'bedside sleeper' title, the photo shows a padded baby nest/lounger in an Abreeze bag; no Abreeze recall in cards."
+    },
+    {
+     "id": "820357887587",
+     "title": "Sleepyhead DockATot Deluxe+ Baby Infant Lounger Cover",
+     "why": "Title says 'cover' but the photo shows a filled DockATot Deluxe+ dock; in-bed lounger type."
+    },
+    {
+     "id": "307252104507",
+     "title": "Snuggle Me Organic Infant Sensory Lounger Sage Green Cover with Storage Bag",
+     "why": "Photo shows the filled Snuggle Me lounger in a sage cover on its storage bag; infant lounger type."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "336086930867",
+     "title": "VINTAGE (1982) Simplicity House 125 10 Baby Basics Coverlet Bumper Pads Crib Toy",
+     "level": "possible",
+     "why": "Simplicity sewing pattern envelope, not a product."
+    },
+    {
+     "id": "860065660250",
+     "title": "Simplicity 3795 Shirley Botsford Nursery Quilt Canopy Bumper Pad Pattern Cut Com",
+     "level": "possible",
+     "why": "Simplicity 3795 nursery sewing pattern."
+    },
+    {
+     "id": "374968808335",
+     "title": "VINTAGE (1982) Simplicity House 125 10 Baby Basics Coverlet Bumper Pads Crib Toy",
+     "level": "possible",
+     "why": "Simplicity House 125 sewing pattern."
+    },
+    {
+     "id": "377187474054",
+     "title": "NK Medical Products Inc. 9687 Pediatrics Medical Crib with Drop Side Rails",
+     "level": "likely",
+     "why": "Hospital/medical pediatric crib with drop-side rails, excluded from drop_side_crib; no recall in cards."
+    }
+   ],
+   "flagged": 15,
+   "unclearFlagged": 1,
+   "recallRate": 0.714,
+   "precision": 0.714
+  }
+ },
+ "cost": {
+  "listings": 136,
+  "checkedByWordsOnly": 38,
+  "lookedAtOnDevice": 98,
+  "sentToCloud": 21,
+  "cloudErrors": 0,
+  "shareSentToCloud": 0.154,
+  "medianMs": 7986,
+  "totalMinutes": 8.2
+ }
+}

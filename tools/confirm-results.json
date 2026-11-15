@@ -1,0 +1,1142 @@
+{
+ "when": "2026-11-15T04:44:09.701Z",
+ "summary": {
+  "none -> none": 26,
+  "possible -> possible": 3,
+  "possible -> none": 9,
+  "none -> possible": 1,
+  "likely -> likely": 2,
+  "possible -> likely": 7
+ },
+ "rows": [
+  {
+   "search": "snuga swing",
+   "title": "New In Box Fisher Price Open- Top Rainforest Cradle Swing VHTF 2007",
+   "price": "$349.99",
+   "url": "https://www.ebay.com/itm/820300223652",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "snuga swing",
+   "title": "Fisher-Price Portable Infant Baby Swing Beige/Gray/White w/ Toy Bar",
+   "price": "$20.00",
+   "url": "https://www.ebay.com/itm/336848070609",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "snuga swing",
+   "title": "Fisher-Price Baby Swing Seat with Adjustable Recline and Safety Harness",
+   "price": "$25.00",
+   "url": "https://www.ebay.com/itm/326803224670",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "same brand and kind of product; the listing does not state the model",
+    "askCloud": false,
+    "card": "25009",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "cannot_tell",
+     "banned_type": "none",
+     "evidence": "The listing is for a Fisher-Price swing, but the model number and manufacture date are not visible to confirm if it is a recalled Snuga Swing.",
+     "check_before_buying": "Ask the seller to check the model number printed on the underside of the swing motor housing and verify if it matches the recalled Snuga Swing models."
+    },
+    "ms": 4308,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "same brand and kind as a recalled product; the listing does not show which model",
+    "check": "Ask the seller to check the model number printed on the underside of the swing motor housing and verify if it matches the recalled Snuga Swing models.",
+    "evidence": "The listing is for a Fisher-Price swing, but the model number and manufacture date are not visible to confirm if it is a recalled Snuga Swing."
+   }
+  },
+  {
+   "search": "snuga swing",
+   "title": "Fisher-Price Infant Baby Swing Gray/Beige w/ Canopy Model Z1537 MPN Z1537",
+   "price": "$55.00",
+   "url": "https://www.ebay.com/itm/168590366688",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "same brand and kind of product; the listing does not state the model",
+    "askCloud": false,
+    "card": "25009",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no",
+     "banned_type": "none",
+     "evidence": "The listing photo clearly shows the brand Joolbaby, which is different from Fisher-Price.",
+     "check_before_buying": ""
+    },
+    "ms": 2466,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the cloud check did not confirm the flag",
+    "check": "",
+    "evidence": "The listing photo clearly shows the brand Joolbaby, which is different from Fisher-Price."
+   }
+  },
+  {
+   "search": "snuga swing",
+   "title": "Fisher Price Puppy Snug Swing Mobile Plush Toys Lot Of 3",
+   "price": "$17.99",
+   "url": "https://www.ebay.com/itm/406713650009",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "snuga swing",
+   "title": "REPLACEMENT LEG PIN FOR FISHER PRICE SNUG BABY SWING Sugar plum bunny Puppy",
+   "price": "$18.00",
+   "url": "https://www.ebay.com/itm/297425393686",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "snuga swing",
+   "title": "Fisher Price Puppy Snug Swing Mobile Plush Toys Lot Of 3",
+   "price": "$24.95",
+   "url": "https://www.ebay.com/itm/406713650009",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "snuga swing",
+   "title": "Fisher Price Snug Puppy Dreams Baby Swing Seat Support L Arm - Replacement Part",
+   "price": "$10.99",
+   "url": "https://www.ebay.com/itm/297502504960",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "crib bumper used",
+   "title": "Breathable Mesh Crib Liner Safer Bumper Twinkle Stars Cot Bed Padding White Grey",
+   "price": "$17.99",
+   "url": "https://www.ebay.com/itm/206692844694",
+   "device": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the photo looks like a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "crib_bumper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "none",
+     "evidence": "The listing offers a mesh crib liner which is sold on its own.",
+     "check_before_buying": ""
+    },
+    "ms": 2251,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the cloud check did not confirm the flag",
+    "check": "",
+    "evidence": "The listing offers a mesh crib liner which is sold on its own."
+   }
+  },
+  {
+   "search": "crib bumper used",
+   "title": "Vintage kids Line Two by Two Noah's Ark Nursery &crib set. Cottagecure 90’s",
+   "price": "$125.00",
+   "url": "https://www.ebay.com/itm/840105394290",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": true,
+    "card": null,
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "crib_bumper",
+     "evidence": "The listing photo shows a padded crib bumper with ties attached to a crib bedding set.",
+     "check_before_buying": "Check whether the set includes a padded bumper."
+    },
+    "ms": 1935,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the photo appears to include a product type that may no longer be sold",
+    "check": "Check whether the set includes a padded bumper.",
+    "evidence": "The listing photo shows a padded crib bumper with ties attached to a crib bedding set."
+   }
+  },
+  {
+   "search": "crib bumper used",
+   "title": "Front Bumper Base V6 Without Pony Package Fits 05-09 MUSTANG 5157051",
+   "price": "$585.00",
+   "url": "https://www.ebay.com/itm/237157678916",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "crib bumper used",
+   "title": "Breathable Baby Bumper For Slatted Cribs Soft, Comfortable, Safe, Reliable, Gray",
+   "price": "$35.99",
+   "url": "https://www.ebay.com/itm/286739743761",
+   "device": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "the wording and the photo both point to a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "crib_bumper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "crib_bumper",
+     "evidence": "The listing title and photo show a breathable baby bumper for slatted cribs.",
+     "check_before_buying": ""
+    },
+    "ms": 1963,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "",
+    "evidence": "The listing title and photo show a breathable baby bumper for slatted cribs."
+   }
+  },
+  {
+   "search": "crib bumper used",
+   "title": "American Girl Pleasant Company Bitty Baby Crib Bumper Pad For Doll Bed Teal",
+   "price": "$25.00",
+   "url": "https://www.ebay.com/itm/960080826099",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "crib bumper used",
+   "title": "American Girl Bitty Baby Doll Blue/Cherry Crib Bumper Pad, Pleasant Company",
+   "price": "$9.99",
+   "url": "https://www.ebay.com/itm/336878150968",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "crib bumper used",
+   "title": "Vintage Winnie The Pooh Crib Padding 1994 Disney Cartoon Nursery Baby Bear",
+   "price": "$68.00",
+   "url": "https://www.ebay.com/itm/840106182680",
+   "device": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the photo looks like a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "crib_bumper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "crib_bumper",
+     "evidence": "The listing title and photo show vintage Winnie The Pooh crib padding designed to line the inside rails.",
+     "check_before_buying": ""
+    },
+    "ms": 2614,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "",
+    "evidence": "The listing title and photo show vintage Winnie The Pooh crib padding designed to line the inside rails."
+   }
+  },
+  {
+   "search": "crib bumper used",
+   "title": "Nojo nautical Blue baby Crib 4PC Set",
+   "price": "$50.00",
+   "url": "https://www.ebay.com/itm/147662590928",
+   "device": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the photo looks like a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "crib_bumper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "crib_bumper",
+     "evidence": "The listing includes padded pieces designed to line the inside rails of a crib.",
+     "check_before_buying": "Check whether the set includes padded crib bumper pieces."
+    },
+    "ms": 1326,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "Check whether the set includes padded crib bumper pieces.",
+    "evidence": "The listing includes padded pieces designed to line the inside rails of a crib."
+   }
+  },
+  {
+   "search": "baby lounger nest",
+   "title": "Portable Baby Lounger Nest Newborn Infant Cushion Breathable Cotton White",
+   "price": "$49.99",
+   "url": "https://www.ebay.com/itm/127992496143",
+   "device": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "the wording and the photo both point to a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "in_bed_sleeper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "in_bed_sleeper",
+     "evidence": "The listing offers a portable baby lounger nest with a raised padded rim.",
+     "check_before_buying": ""
+    },
+    "ms": 2264,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "",
+    "evidence": "The listing offers a portable baby lounger nest with a raised padded rim."
+   }
+  },
+  {
+   "search": "baby lounger nest",
+   "title": "Baby Nest Lounger With Activity Arch For Infant",
+   "price": "$30.00",
+   "url": "https://www.ebay.com/itm/840010792659",
+   "device": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the wording points to a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "in_bed_sleeper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "in_bed_sleeper",
+     "evidence": "The listing offers a baby nest lounger with a raised padded rim.",
+     "check_before_buying": ""
+    },
+    "ms": 1503,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "",
+    "evidence": "The listing offers a baby nest lounger with a raised padded rim."
+   }
+  },
+  {
+   "search": "baby lounger nest",
+   "title": "VaVaSoo Rocking Bassinet, Automatic Bedside Bassinet, Electric Baby Cradle",
+   "price": "$179.00",
+   "url": "https://www.ebay.com/itm/298642577391",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "baby lounger nest",
+   "title": "5 in 1 Portable Baby Nursery Center w/ Detachable Bassinet, Wheels & Carry Bag",
+   "price": "$81.99",
+   "url": "https://www.ebay.com/itm/168612345070",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "baby lounger nest",
+   "title": "Baby Lounger Pillow Sage Green Padded Nest With Ties Removable Pad Used",
+   "price": "$27.99",
+   "url": "https://www.ebay.com/itm/407363105542",
+   "device": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the wording points to a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "in_bed_sleeper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "in_bed_sleeper",
+     "evidence": "The listing offers a sage green baby lounger nest with raised padded rims all the way around a flat pad.",
+     "check_before_buying": ""
+    },
+    "ms": 1624,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "",
+    "evidence": "The listing offers a sage green baby lounger nest with raised padded rims all the way around a flat pad."
+   }
+  },
+  {
+   "search": "baby lounger nest",
+   "title": "Baby Lounger for 0-12 Months",
+   "price": "$17.00",
+   "url": "https://www.ebay.com/itm/206669507013",
+   "device": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the wording points to a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "in_bed_sleeper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "in_bed_sleeper",
+     "evidence": "The listing is for a soft cushion with a raised padded rim all the way around a flat pad for infants.",
+     "check_before_buying": ""
+    },
+    "ms": 1144,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "",
+    "evidence": "The listing is for a soft cushion with a raised padded rim all the way around a flat pad for infants."
+   }
+  },
+  {
+   "search": "baby lounger nest",
+   "title": "Pink Baby Lounger / Infant Nest with Carrying Case",
+   "price": "$24.99",
+   "url": "https://www.ebay.com/itm/800652948676",
+   "device": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the wording points to a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "in_bed_sleeper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "in_bed_sleeper",
+     "evidence": "The listing is for a soft cushion with a raised padded rim all the way around a flat pad.",
+     "check_before_buying": ""
+    },
+    "ms": 1361,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "",
+    "evidence": "The listing is for a soft cushion with a raised padded rim all the way around a flat pad."
+   }
+  },
+  {
+   "search": "baby lounger nest",
+   "title": "White Padded Baby Lounger / Infant Support Nest with Carrying Case",
+   "price": "$24.99",
+   "url": "https://www.ebay.com/itm/800652944033",
+   "device": {
+    "level": "possible",
+    "kind": "banned",
+    "why": "the wording points to a banned type",
+    "askCloud": false,
+    "card": null,
+    "banned": "in_bed_sleeper"
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no_recall_given",
+     "banned_type": "in_bed_sleeper",
+     "evidence": "The listing offers a white infant support nest with a raised padded rim.",
+     "check_before_buying": ""
+    },
+    "ms": 1237,
+    "photos": [
+     true,
+     false
+    ]
+   },
+   "final": {
+    "level": "likely",
+    "kind": "banned",
+    "why": "both models see a product type that may no longer be sold",
+    "check": "",
+    "evidence": "The listing offers a white infant support nest with a raised padded rim."
+   }
+  },
+  {
+   "search": "cosori air fryer",
+   "title": "COSMO 5.8 Quart Electric Air Fryer, Timer, Non-Stick Basket, Stainless Steel",
+   "price": "$74.99",
+   "url": "https://www.ebay.com/itm/115446427324",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "cosori air fryer",
+   "title": "Cosori 9-in-1 TurboBlaze 6-Quart Air Fryer //Cream",
+   "price": "$107.99",
+   "url": "https://www.ebay.com/itm/267811619309",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "23130",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-4-hydrogen",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no",
+     "banned_type": "none",
+     "evidence": "The listing is for a 6-quart Cosori TurboBlaze air fryer in cream, whereas the recall covers 3.7 and 5.8-quart models such as the CP158 series in black, gray, white, blue, or red.",
+     "check_before_buying": ""
+    },
+    "ms": 6373,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the cloud check did not confirm the flag",
+    "check": "",
+    "evidence": "The listing is for a 6-quart Cosori TurboBlaze air fryer in cream, whereas the recall covers 3.7 and 5.8-quart models such as the CP158 series in black, gray, white, blue, or red."
+   }
+  },
+  {
+   "search": "cosori air fryer",
+   "title": "Cosori Iconic 6.5 Qt Smart Air Fryer – Stainless Steel, PFAS-Free, 450°F",
+   "price": "$246.00",
+   "url": "https://www.ebay.com/itm/336635272673",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "23130",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no",
+     "banned_type": "none",
+     "evidence": "The listing is for a 6.5 qt air fryer, whereas the recall is limited to 3.7 and 5.8 qt units.",
+     "check_before_buying": ""
+    },
+    "ms": 3240,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the cloud check did not confirm the flag",
+    "check": "",
+    "evidence": "The listing is for a 6.5 qt air fryer, whereas the recall is limited to 3.7 and 5.8 qt units."
+   }
+  },
+  {
+   "search": "cosori air fryer",
+   "title": "Cosori 9-In-1 Turboblaze Air Fryer 6 Qt, Premium Ceramic Coating, 90°–450°F, Pre",
+   "price": "$89.00",
+   "url": "https://www.ebay.com/itm/158205871262",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "23130",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no",
+     "banned_type": "none",
+     "evidence": "The listing is for a Turboblaze model air fryer, which is a different model series than those listed in the recall notice.",
+     "check_before_buying": ""
+    },
+    "ms": 3573,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the cloud check did not confirm the flag",
+    "check": "",
+    "evidence": "The listing is for a Turboblaze model air fryer, which is a different model series than those listed in the recall notice."
+   }
+  },
+  {
+   "search": "cosori air fryer",
+   "title": "Cosori 9-in-1 Air Fryer 6 Qt – Premium Ceramic Coating – 90°–450°F - CAF-DC601",
+   "price": "$99.99",
+   "url": "https://www.ebay.com/itm/397846757414",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "23130",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-4-hydrogen",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no",
+     "banned_type": "none",
+     "evidence": "The listing specifies model CAF-DC601 and a 6 Qt size, whereas the recall notice only covers 3.7 and 5.8 qt units with different listed model numbers.",
+     "check_before_buying": ""
+    },
+    "ms": 4564,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the cloud check did not confirm the flag",
+    "check": "",
+    "evidence": "The listing specifies model CAF-DC601 and a 6 Qt size, whereas the recall notice only covers 3.7 and 5.8 qt units with different listed model numbers."
+   }
+  },
+  {
+   "search": "cosori air fryer",
+   "title": "Cosori 32 Quart Smart Air Fryer Toaster Oven, Rotisserie, Stainless, Ceramic NEW",
+   "price": "$176.64",
+   "url": "https://www.ebay.com/itm/167934517064",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "23130",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no",
+     "banned_type": "none",
+     "evidence": "The listing is for an air fryer toaster oven, whereas the recall is for specific basket-style air fryers.",
+     "check_before_buying": ""
+    },
+    "ms": 2573,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the cloud check did not confirm the flag",
+    "check": "",
+    "evidence": "The listing is for an air fryer toaster oven, whereas the recall is for specific basket-style air fryers."
+   }
+  },
+  {
+   "search": "cosori air fryer",
+   "title": "COSORI Air Fryer 5.8QT Oil-Free XL Electric Hot Air Fryers Oven, Programmable",
+   "price": "$74.99",
+   "url": "https://www.ebay.com/itm/117082217913",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "23130",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "cannot_tell",
+     "banned_type": "none",
+     "evidence": "The listing offers a COSORI 5.8QT Air Fryer but does not show the specific model number required to determine if it is part of the recalled units.",
+     "check_before_buying": "Check the model number on the bottom label of the unit to see if it matches any of the recalled model numbers listed in the notice."
+    },
+    "ms": 2627,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "same brand and kind as a recalled product; the listing does not show which model",
+    "check": "Check the model number on the bottom label of the unit to see if it matches any of the recalled model numbers listed in the notice.",
+    "evidence": "The listing offers a COSORI 5.8QT Air Fryer but does not show the specific model number required to determine if it is part of the recalled units."
+   }
+  },
+  {
+   "search": "cosori air fryer",
+   "title": "COSORI Pro Gen 2 Air Fryer 5.8QT, Upgraded Version with Stable Performance &",
+   "price": "$79.99",
+   "url": "https://www.ebay.com/itm/116429570107",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "23130",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "unclear",
+     "matches_recall": "cannot_tell",
+     "banned_type": "none",
+     "evidence": "The listing is for a Cosori air fryer, but the specific model number is not visible in the title or photo.",
+     "check_before_buying": "Check the model number printed on the bottom label of the unit against the recalled model numbers listed in the notice."
+    },
+    "ms": 2837,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "same brand and kind as a recalled product; the listing does not show which model",
+    "check": "Check the model number printed on the bottom label of the unit against the recalled model numbers listed in the notice.",
+    "evidence": "The listing is for a Cosori air fryer, but the specific model number is not visible in the title or photo."
+   }
+  },
+  {
+   "search": "graco stroller",
+   "title": "Chicco Activ3 Jogging Stroller - Eclipse Brand New with box",
+   "price": "$295.00",
+   "url": "https://www.ebay.com/itm/366770169920",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "graco stroller",
+   "title": "Graco Single Folding Stroller w/ Canopy Hood & Cup Holder, Black/Gray",
+   "price": "$35.00",
+   "url": "https://www.ebay.com/itm/198795185259",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "graco stroller",
+   "title": "Graco Modes Nest2Grow DLX Travel System Riordan Fashion NEW! SnugRide SnugFit",
+   "price": "$521.99",
+   "url": "https://www.ebay.com/itm/188005835808",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "graco stroller",
+   "title": "Graco Modes Pramette Travel System",
+   "price": "$299.50",
+   "url": "https://www.ebay.com/itm/168852418845",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "graco stroller",
+   "title": "Graco Outpace LX All-Terrain 3-Wheel Baby Stroller One-Hand Quick Fold Single",
+   "price": "$110.00",
+   "url": "https://www.ebay.com/itm/128189432621",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "graco stroller",
+   "title": "Graco Single Traditional Stroller, Brown/Gray, Folding w/ Canopy & Cup Holder",
+   "price": "$50.00",
+   "url": "https://www.ebay.com/itm/206678212210",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "graco stroller",
+   "title": "Graco Outpace LX All-Terrain Travel System SnugRide Lite Seat & Stroller Briggs",
+   "price": "$240.00",
+   "url": "https://www.ebay.com/itm/860119593058",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "graco stroller",
+   "title": "Vintage Century Graco Stroller Blue Watercolor Pastel 1990 Retro Hard To Find",
+   "price": "$180.00",
+   "url": "https://www.ebay.com/itm/820309355604",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "rock n play sleeper",
+   "title": "AC/DC Adapter for Fisher-Price Newborn Auto Rock 'n Play Sleeper CHNO8 CHN08",
+   "price": "$17.99",
+   "url": "https://www.ebay.com/itm/147408647527",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "rock n play sleeper",
+   "title": "Global 6 Volts AC Adapter For Fisher Price 6V SWING 6VDC DC Power Supply Charger",
+   "price": "$9.89",
+   "url": "https://www.ebay.com/itm/372244414709",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "rock n play sleeper",
+   "title": "Fisher Price Teddy Beddy Bear Smile N Play Mirror Activity Baby Toy Vintage 1987",
+   "price": "$39.96",
+   "url": "https://www.ebay.com/itm/287628122475",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "rock n play sleeper",
+   "title": "Vintage 1985 Fisher Price Play Pen Pack N Play Travel Bassinet",
+   "price": "$52.50",
+   "url": "https://www.ebay.com/itm/307164369081",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  },
+  {
+   "search": "rock n play sleeper",
+   "title": "AC DC Adapter For Fisher-Price Newborn Auto Rock Play Sleeper CHNO8 CHN08 Power",
+   "price": "$9.99",
+   "url": "https://www.ebay.com/itm/404446073815",
+   "device": {
+    "level": "none",
+    "why": "part or toy (word rule)",
+    "askCloud": false
+   }
+  },
+  {
+   "search": "rock n play sleeper",
+   "title": "fisher-price Rattle 'n Rock Maracas 3M+ Yellow & Green Infant Baby Toy BLT33",
+   "price": "$11.50",
+   "url": "https://www.ebay.com/itm/157713392237",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "24049",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "the_product",
+     "matches_recall": "no",
+     "banned_type": "none",
+     "evidence": "The listing is for a Fisher-Price toy, whereas the recall notice involves Primark baby rattles.",
+     "check_before_buying": ""
+    },
+    "ms": 2419,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the cloud check did not confirm the flag",
+    "check": "",
+    "evidence": "The listing is for a Fisher-Price toy, whereas the recall notice involves Primark baby rattles."
+   }
+  },
+  {
+   "search": "rock n play sleeper",
+   "title": "2009 Fisher Price Take-N-Play Thomas Train Diesel 10! NEW!",
+   "price": "$40.00",
+   "url": "https://www.ebay.com/itm/820352005366",
+   "device": {
+    "level": "possible",
+    "kind": "recall",
+    "why": "the listing names this recalled product line",
+    "askCloud": false,
+    "card": "24010",
+    "banned": null
+   },
+   "cloud": {
+    "model": "gemini-3.5-flash-lite",
+    "answer": {
+     "what_is_for_sale": "toy_or_doll_version",
+     "matches_recall": "no",
+     "banned_type": "none",
+     "evidence": "The listing offers a Fisher-Price Take-N-Play Thomas Train Diesel 10 toy, whereas the recall is for wooden railway Troublesome Trucks.",
+     "check_before_buying": ""
+    },
+    "ms": 2736,
+    "photos": [
+     true,
+     true
+    ]
+   },
+   "final": {
+    "level": "none",
+    "kind": null,
+    "why": "the listing is a part or a toy version, not the product",
+    "check": "",
+    "evidence": "The listing offers a Fisher-Price Take-N-Play Thomas Train Diesel 10 toy, whereas the recall is for wooden railway Troublesome Trucks."
+   }
+  },
+  {
+   "search": "rock n play sleeper",
+   "title": "Fisher Price Thomas & Friends Die-Cast Take N Play Diamond Anniversary Thomas",
+   "price": "$12.99",
+   "url": "https://www.ebay.com/itm/126151465013",
+   "device": {
+    "level": "none",
+    "kind": null,
+    "why": "",
+    "askCloud": false,
+    "card": null,
+    "banned": null
+   }
+  }
+ ]
+}

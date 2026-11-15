@@ -1,0 +1,258 @@
+{
+ "pageKey": "ebay:preview:baby lounger nest",
+ "url": "https://www.ebay.com/sch/i.html?_nkw=baby%20lounger%20nest",
+ "site": "ebay",
+ "scope": "baby lounger nest",
+ "kind": "search",
+ "total": 8,
+ "order": 8,
+ "results": {
+  "127992496143": {
+   "id": "127992496143",
+   "listing": {
+    "title": "Portable Baby Lounger Nest Newborn Infant Cushion Breathable Cotton White",
+    "price": "$49.99",
+    "image": "https://i.ebayimg.com/images/g/PksAAeSw~gZqY7Da/s-l500.webp",
+    "url": "https://www.ebay.com/itm/127992496143"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing offers a portable baby lounger nest with a raised padded rim.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 0
+  },
+  "840010792659": {
+   "id": "840010792659",
+   "listing": {
+    "title": "Baby Nest Lounger With Activity Arch For Infant",
+    "price": "$30.00",
+    "image": "https://i.ebayimg.com/images/g/cxEAAeSwVdhqy7hE/s-l500.webp",
+    "url": "https://www.ebay.com/itm/840010792659"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing offers a baby nest lounger with a raised padded rim.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 1
+  },
+  "298642577391": {
+   "id": "298642577391",
+   "listing": {
+    "title": "VaVaSoo Rocking Bassinet, Automatic Bedside Bassinet, Electric Baby Cradle",
+    "price": "$179.00",
+    "image": "https://i.ebayimg.com/images/g/HJcAAeSwlDZqZteX/s-l140.webp",
+    "url": "https://www.ebay.com/itm/298642577391"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 2
+  },
+  "168612345070": {
+   "id": "168612345070",
+   "listing": {
+    "title": "5 in 1 Portable Baby Nursery Center w/ Detachable Bassinet, Wheels & Carry Bag",
+    "price": "$81.99",
+    "image": "https://i.ebayimg.com/images/g/37QAAeSw3T9qfozG/s-l140.webp",
+    "url": "https://www.ebay.com/itm/168612345070"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 3
+  },
+  "407363105542": {
+   "id": "407363105542",
+   "listing": {
+    "title": "Baby Lounger Pillow Sage Green Padded Nest With Ties Removable Pad Used",
+    "price": "$27.99",
+    "image": "https://i.ebayimg.com/images/g/MWYAAeSwuQNq-LC5/s-l140.webp",
+    "url": "https://www.ebay.com/itm/407363105542"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing offers a sage green baby lounger nest with raised padded rims all the way around a flat pad.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 4
+  },
+  "206669507013": {
+   "id": "206669507013",
+   "listing": {
+    "title": "Baby Lounger for 0-12 Months",
+    "price": "$17.00",
+    "image": "https://i.ebayimg.com/images/g/G5cAAeSw0XFq5Qqi/s-l140.webp",
+    "url": "https://www.ebay.com/itm/206669507013"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing is for a soft cushion with a raised padded rim all the way around a flat pad for infants.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 5
+  },
+  "800652948676": {
+   "id": "800652948676",
+   "listing": {
+    "title": "Pink Baby Lounger / Infant Nest with Carrying Case",
+    "price": "$24.99",
+    "image": "https://i.ebayimg.com/images/g/sboAAeSwl9hqpgf4/s-l140.webp",
+    "url": "https://www.ebay.com/itm/800652948676"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing is for a soft cushion with a raised padded rim all the way around a flat pad.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 6
+  },
+  "800652944033": {
+   "id": "800652944033",
+   "listing": {
+    "title": "White Padded Baby Lounger / Infant Support Nest with Carrying Case",
+    "price": "$24.99",
+    "image": "https://i.ebayimg.com/images/g/LSsAAeSwfuZqpgbd/s-l140.webp",
+    "url": "https://www.ebay.com/itm/800652944033"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing offers a white infant support nest with a raised padded rim.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 7
+  }
+ },
+ "pending": {}
+}

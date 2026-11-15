@@ -1,0 +1,1378 @@
+{
+ "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+ "labelled_at": "2026-11-15T18:18:56Z",
+ "labels": {
+  "920145376108": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Box shows a Baby Delight Snuggle Nest Adventure portable infant sleeper (low-sided in-bed/travel sleeper with no stand); no Baby Delight recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "147538034617": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows a toddler one-piece sleep suit; 'Nest Designs' is the clothing brand, not a nest product.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "267827534400": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows a toddler sleep suit (garment) on a hanger.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "237126688828": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows a footed toddler sleep bag/romper worn as clothing.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "257842016919": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Wearable Nested Bean swaddle/sleep sack garment; no Nested Bean recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "287608810788": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows a toddler sleep suit (garment).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "860012773156": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows a footless toddler sleep romper (garment).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "287634244761": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Two zip footie pajamas (Nested Bean weighted sleepers); clothing, no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "298070168990": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "maybe",
+   "note": "Quilted zip-up baby sleeping bag with a built-in padded pillow; a padded infant sleep product, but not clearly a lounger/nest.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "307117103153": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Despite the 'bedside sleeper' title, the photo shows a padded baby nest/lounger in an Abreeze bag; no Abreeze recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "317206092466": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Bassinet basket only, without the frame, from an Arm's Reach Versatile co-sleeper; no Arm's Reach recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "406348586717": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows zip footie pajamas (garment).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800871634305": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy soft baby carrier; not a sleep product and no Boppy carrier recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "307010819862": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy ComfyFit wrap-style carrier worn by an adult; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "860124938132": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy hybrid baby carrier; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "407360995490": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Snuggle Me Organic infant lounger shown in its zip bag; infant lounger type (no Snuggle Me recall in cards).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "137928717578": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Three nursing-pillow slipcovers only; nursing pillows are not the recalled Boppy Newborn Lounger.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800916924186": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy C-shaped nursing pillow with cover, not a lounger; no Boppy nursing-pillow recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "398355327116": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy ComfyFit baby carrier; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "307172055471": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy nursing pillow plus spare cover; not a lounger, no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "188345518807": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy Original nursing pillow; not a lounger, no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "198519791442": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy soft chest carrier; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "377596978849": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Boppy wrap carrier; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "366812057413": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "crib_bumper",
+   "should_warn": "yes",
+   "note": "Photo shows a rolled, padded crib bumper with ties next to the quilt and sheets.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "267843698279": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "crib_bumper",
+   "should_warn": "yes",
+   "note": "Photo shows a padded, ruffled crib bumper panel with ties.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "960167294786": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Only two crib sheets and a crib skirt are listed and shown; no bumper.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "336898849272": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "crib_bumper",
+   "should_warn": "yes",
+   "note": "A ruffled padded bumper is visible laid out around the quilt.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "168855967039": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "crib_bumper",
+   "should_warn": "yes",
+   "note": "Package photo shows the padded bumper fitted around the crib; it is part of the 7-piece set.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "168863317694": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows the 5-piece toddler set on a canopy bed (canopy, spread, skirt, sham, swan hanging) with no bumper visible.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "287707048490": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Title and photo show only a comforter and a fitted sheet.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "147631281873": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "crib_bumper",
+   "should_warn": "yes",
+   "note": "Photo shows padded bumper sections with ties among the set pieces.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "960150054374": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Comforter, sheet, skirt and diaper stacker shown; no bumper.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "940069271637": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Quilt, skirt and sheet shown; no bumper.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "880089415306": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "crib_bumper",
+   "should_warn": "yes",
+   "note": "Photo shows a padded headboard bumper and side bumper pieces.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "287601074532": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Unbranded bedside bassinet with mesh sides and wood-look legs; does not look like the recalled AirClub or Papablic bedside sleepers.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "287644823564": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Quilted oval hanging cradle on a tripod with motor; a cradle/hammock, not one of the four types, and unlike the recalled CaTeam hammock swing.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "257810399135": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Newton bassinet on wooden stand; no Newton recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "407363517630": {
+   "item": "product",
+   "recall_ids": [
+    "24324"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "Pop-up oval travel bassinet with zip mesh canopy and front clip closely resembles the recalled Beberoad Love 'New Moon' travel bassinet (no stand); brand not shown.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "407357205746": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "ezebaby bedside sleeper (logo visible); no ezebaby recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "227608440411": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Newton bassinet with wooden stand; no Newton recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "820164499361": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Unbranded pink bedside bassinet; no matching recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "366714136823": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows a play-yard bassinet insert with a polka-dot pad; nothing ties it to a recall.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "158243172945": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Black Arm's Reach co-sleeper; no Arm's Reach recall in cards (the older 2011 recall covers only 1997-2001 units).",
+   "confidence": "high",
+   "outside_db": "Arm's Reach Original and Universal co-sleepers made Sept 1997-Dec 2001 (CPSC 11-187, 2011)"
+  },
+  "126913887540": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Fisher-Price Zen Collection bassinet; no Fisher-Price bassinet recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "920121943430": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Fisher-Price On the Go Baby Dome play space; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "206681045132": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Little People dollhouse nursery furniture (toy bassinet and changing table).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "137926439526": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Little Mommy doll-size rocking cradle.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "366767212406": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Fisher-Price Soothing View bassinet on a folding stand; no Fisher-Price bassinet recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "137932497361": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Loving Family dollhouse bassinet toy.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "198536001187": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Fisher-Price mesh bassinet with control panel; no Fisher-Price bassinet recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "940076712242": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Loving Family dollhouse nursery lot with dolls.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "137926431741": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Little Mommy doll accessory; the photo actually shows a doll high chair.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "168846883544": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "American Girl Bitty Baby doll crib; the 'bumper pad' is doll-size.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "336086930867": {
+   "item": "other",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Simplicity sewing pattern envelope, not a product.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "198733769296": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "American Girl Bitty Baby doll crib set with doll bedding.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "860065660250": {
+   "item": "other",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Simplicity 3795 nursery sewing pattern.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "327425084198": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Doll-size Bitty Baby bumper pad and blanket.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "374968808335": {
+   "item": "other",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Simplicity House 125 sewing pattern.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "920054245999": {
+   "item": "product",
+   "recall_ids": [
+    "25009"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "Unbranded title, but the photo shows a Fisher-Price-style cradle swing with a plush body-support insert; Snuga/Cradle 'n Swing models are recalled, so check the model under the motor housing.",
+   "confidence": "low",
+   "outside_db": "Fisher-Price Cradle 'n Swings CHM84, CMR40, CMR43 (CPSC 16-143, 2016, fall hazard)"
+  },
+  "920143177033": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Graco compact folding swing; no Graco swing recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "198795326216": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Maxi-Cosi powered swing; no Maxi-Cosi recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "900081228237": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Bright Starts portable swing; no Kids2/Bright Starts swing recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "236460677683": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Replacement mamaRoo toy-bar mobile only; the 4moms recall concerned the seat straps, not this part.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "820248576023": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Baby Trend Sit N' Sway swing; no Baby Trend swing recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "860023300721": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Graco electric swing (Graco logo on motor); no Graco swing recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "158080492386": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Vintage Graco Quiet Ride Swyngomatic wind-up swing with tray; no Graco swing recall in cards.",
+   "confidence": "high",
+   "outside_db": "Graco infant swings made before Nov 1997 with waist belt/tray restraint, restraint retrofit (CPSC 00-098, 2000)"
+  },
+  "137846633668": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows only the swing seat pad/cover.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "366797359441": {
+   "item": "product",
+   "recall_ids": [
+    "25312",
+    "25290"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "Unbranded gray electric swing with head pillow and a white front controller, the same design family as the recalled ZRWD/Nezmdi S0008 swings (marketed for sleep at >10 deg); brand not shown.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "128178036606": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Doll-size wooden drop-side crib.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "287525814867": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Doll crib, 22 in long.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "377187474054": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Hospital/medical pediatric crib with drop-side rails, excluded from drop_side_crib; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "336715669985": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Vintage doll crib with decals.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "940082137792": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Doll crib, 22 x 13 in.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "227612787040": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "WAYB Pico travel car seat; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "960101631870": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Car seat base only.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "206594651878": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Car seat cover/cocoon accessory.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "117419092647": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Replacement seat cover and footmuff only.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "366731902590": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Pink polka-dot infant car seat with base; no match in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "257852547703": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "WAYB Pico travel car seat; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800428987395": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Baby Jogger City Bistro high chair; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "336817471911": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Tavo wooden high chair; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "373618358410": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Sweety Fox folding high chair; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "920051671878": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Maxi-Cosi folding high chair; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "168853056351": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Toogel hook-on chair (logo visible); recalled hook-on chairs in cards are other brands/designs.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "206703042830": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Vintage Oak Hill wooden high chair; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "960198699912": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Snuggle Me Organic infant lounger with cover; infant lounger type.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "188913914459": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "maybe",
+   "note": "Titled a baby lounger, but the photo shows a plush elephant sit-up seat with headrest; unclear whether it is a lounger-type product.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "257844718972": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "DockATot Deluxe infant dock (logo visible); in-bed lounger type.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "820357887587": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Title says 'cover' but the photo shows a filled DockATot Deluxe+ dock; in-bed lounger type.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "287664123446": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Snuggle Me infant lounger in its zip bag; infant lounger type.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "227601930110": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Title says spare cover only, for the toddler-size DockATot Grand.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "307252104507": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Photo shows the filled Snuggle Me lounger in a sage cover on its storage bag; infant lounger type.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "366795336632": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Ingenuity bouncer seat; no Kids2/Ingenuity bouncer recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "920143148630": {
+   "item": "product",
+   "recall_ids": [
+    "22200"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "Although titled a bouncer, the photo shows a 4moms mamaRoo swing (logo on base); mamaRoo 1.0-4.0 were recalled for strap entanglement, version not shown.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "920143137702": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "BabyBjorn bouncer; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "128004689648": {
+   "item": "product",
+   "recall_ids": [
+    "25290",
+    "25312"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "Pink electric rocker/swing seat with white insert, head pad and snap crotch pad closely resembles the recalled pink Nezmdi S0008 swing; brand not shown.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "227578925995": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Ingenuity bouncer/rocker with toy bar; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800917550637": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "BabyBjorn Bouncer Bliss mesh; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "158250833019": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Summer-style bath seat with suction bar; none of the recalled bath seats in cards match.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800877383054": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Summer bath seat with suction bar (logo visible); no Summer recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "336882292900": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Angelcare-style mesh bath support; no matching recall.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "318504903544": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Inflatable bear-print bath seat; none of the bath-seat recalls in cards is inflatable or looks like it.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "407145266834": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Summer My Bath Seat with suction bar; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "206693767163": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Summer fabric bath sling/insert; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "267842713983": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "2006 Graco Pooh Pack 'n Play with bassinet and changer; no Graco play yard recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "137925377799": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Clip-on bassinet insert and poles only.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "820320860883": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Graco Pooh Pack 'n Play with raised changer, bassinet and mobile; no recall in cards.",
+   "confidence": "high",
+   "outside_db": "Graco Pack 'n Play play yards with raised changing tables, models 2016/35235/9531x/9533x (CPSC 03-189, 2003)"
+  },
+  "940063396382": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Clip-on bassinet insert, poles and Graco bag only.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "407358567068": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Vintage Graco Pooh Pack 'n Play; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "117488566157": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Clip-on bassinet insert only (screenshot photo).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "188321428425": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Generic white 4-drawer chest with bar handles; the recalled Segmart (gold handles) and Seeday (knobs) 4-drawer dressers look different.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "147355782408": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Traditional solid-wood chest-on-chest; no matching dresser recall.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "147355683486": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Traditional solid-wood 9-drawer dresser; no matching recall.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800849362259": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Oak Child Craft dresser with changing top; no Child Craft dresser recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "318926965819": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Wood-grain 6-drawer double dresser with mirror; none of the recalled 6-drawer dressers in cards look like it.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "336853228988": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Same generic white 4-drawer chest as 188321428425; does not look like the recalled Segmart/Seeday 4-drawers.",
+   "confidence": "low",
+   "outside_db": null
+  },
+  "820356425643": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Orange Door 24 qt pressure canner (box); no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "840130232398": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Kuhn Rikon Duromatic stovetop pressure cooker; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "327426290722": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Power Cooker XL electric pressure cooker WAL3; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800902212017": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Vintage Wear-Ever aluminum pressure cooker; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "377644057747": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Kuhn Rikon Duromatic 5 L; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "257840867124": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Presto 23 qt canner 01781; no Presto canner recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "327414773150": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Pelonis fan-forced heater; no Pelonis recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "287730269929": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Pelonis Disc Furnace heater (name on front); no recall in cards.",
+   "confidence": "high",
+   "outside_db": "Pelonis Disc Furnace portable heaters, plug fire-hazard repair program (CPSC 89-024, 1989)"
+  },
+  "128099117793": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Dayton 3VU31A utility heater; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800905297936": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Zokop space heater; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "137928509296": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Living Zone quartz heater; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "920118340219": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Comfort Zone CZ442E ceramic heater; no recall in cards.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "128193451769": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Two one-piece sleeper pajamas (garments).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "227440606415": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Footed sleeper pajamas (garment).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "227552102253": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Footed sleeper pajamas (garment).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "176889159836": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Footed terry sleeper outfit (garment).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "800709536700": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Loving Family dollhouse baby figure in a sleeper.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "168430558301": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Loving Family dollhouse baby doll figure.",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "227596474742": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Small dollhouse baby figure (about 2 in).",
+   "confidence": "high",
+   "outside_db": null
+  },
+  "287709765158": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Little Mommy doll clothes (sleeper outfit for a doll).",
+   "confidence": "high",
+   "outside_db": null
+  }
+ }
+}

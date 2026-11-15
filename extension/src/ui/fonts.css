@@ -1,0 +1,4 @@
+/* Geist (SIL Open Font License, see fonts/Geist-LICENSE.txt), bundled so no font request leaves the browser. */
+@font-face { font-family: "Geist"; src: url("../../fonts/Geist-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Geist"; src: url("../../fonts/Geist-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Geist"; src: url("../../fonts/Geist-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }

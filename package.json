@@ -1,0 +1,25 @@
+{
+  "name": "still-recalled",
+  "version": "1.0.0",
+  "description": "Flags secondhand listings that look like a recalled product or a risky infant sleep product. Chrome extension and web page, with Firebase AI Logic hybrid inference.",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "e2e": "node tools/e2e.mjs --headful",
+    "eval:score": "node tools/eval-score.mjs",
+    "icons": "node scripts/make-icons.mjs",
+    "cards": "node scripts/build-cards.mjs"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": {
+    "esbuild": "^0.28.2",
+    "firebase": "^13.3.0"
+  },
+  "devDependencies": {
+    "geist": "^1.9.2",
+    "puppeteer-core": "^24.43.1"
+  },
+  "private": true
+}

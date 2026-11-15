@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Still Recalled: receive listings</title>
+<!-- Development helper. A marketplace page hands over the listings it read by navigating here with them in the URL
+     fragment; this page saves them through the collector. Listings are public page content, not personal data. -->
+<pre id="out">waiting…</pre>
+<script>
+(async () => {
+  const out = document.getElementById('out');
+  try {
+    const [q, data] = decodeURIComponent(location.hash.slice(1)).split('\n', 2);
+    const listings = JSON.parse(data);
+    const r = await fetch('/listings?q=' + encodeURIComponent(q), { method: 'POST', body: JSON.stringify(listings) });
+    out.textContent = `saved "${q}": ${listings.length} listings (${await r.text()})`;
+    document.title = 'saved ' + q;
+  } catch (e) {
+    out.textContent = 'failed: ' + e;
+    document.title = 'failed';
+  }
+})();
+</script>

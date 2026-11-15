@@ -1,0 +1,228 @@
+// Still Recalled on the web: one screenshot in, the extension's own check out.
+//   1. read the screenshot   hybrid inference: Chrome's built-in model when this device has it, Gemini otherwise
+//   2. words                 the extension's shortlist of 1,885 CPSC recall notices and its risky-type rules, here
+//   3. look and confirm      the extension's judge (hybrid) and its cloud double-check against the full notice
+import { useCards, triageListing, checkListing } from '../../extension/src/engine.js';
+import { hybridJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
+import { SYSTEM, SCHEMA } from '../../shared/judge.mjs';
+import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
+import { productName } from '../../shared/present.mjs';
+import { detailView } from '../../extension/src/ui/detail.js';
+import { h, safeUrl } from '../../extension/src/ui/dom.js';
+import { icon, mark } from '../../extension/src/ui/icons.js';
+
+useCards('data/cards.json');
+const $ = id => document.getElementById(id);
+const INFANT = /\b(bab(y|ies)|infants?|newborns?|toddlers?|cribs?|bassinets?|cradles?|nursery|high\s*chairs?|strollers?|car\s*seats?|loungers?|bedside\s*sleepers?|play\s*yards?|pacifiers?|teethers?)\b/i;
+let meta = { count: 1885, since: '2021-11-14', built: '' };
+let model = 'absent';
+let judge = null;
+let running = false;
+
+const monthYear = d => new Date(`${d}T12:00:00`).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+const longDate = d => new Date(`${d}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+// ---- Input ---------------------------------------------------------------------------------------------------------
+function inputView() {
+  const file = h('input', { type: 'file', accept: 'image/*', id: 'file', class: 'visually-hidden' });
+  file.addEventListener('change', () => { if (file.files[0]) run({ file: file.files[0] }); file.value = ''; });
+
+  const drop = h('label', { class: 'drop', for: 'file' },
+    icon('image', { size: 24 }),
+    h('span', { class: 'btn btn-primary drop-btn' }, 'Add a screenshot'),
+    h('span', { class: 'drop-hint' }, 'or drop or paste an image here'),
+  );
+  for (const type of ['dragenter', 'dragover']) drop.addEventListener(type, e => { e.preventDefault(); drop.dataset.over = ''; });
+  for (const type of ['dragleave', 'drop']) drop.addEventListener(type, () => delete drop.dataset.over);
+  drop.addEventListener('drop', e => {
+    e.preventDefault();
+    const f = [...e.dataTransfer.files].find(x => x.type.startsWith('image/'));
+    if (f) run({ file: f });
+  });
+
+  const text = h('input', { type: 'text', id: 'text', class: 'field', autocomplete: 'off', enterkeyhint: 'search',
+    placeholder: 'Brand, product and model number' });
+  const form = h('form', { class: 'type-form' },
+    h('label', { for: 'text', class: 'field-label' }, 'Or type what it is'),
+    h('div', { class: 'field-row' }, text, h('button', { class: 'btn btn-secondary', type: 'submit' }, 'Check')),
+  );
+  form.addEventListener('submit', e => { e.preventDefault(); if (text.value.trim()) run({ text: text.value }); });
+
+  const example = h('button', { class: 'link', type: 'button' }, 'Try it with an example photo');
+  example.addEventListener('click', runExample);
+
+  return h('div', { class: 'input' }, file, drop, form, h('p', { class: 'example' }, example, h('span', { class: 'muted' }, ' (from a CPSC recall notice)')));
+}
+
+addEventListener('paste', e => {
+  if (running) return;
+  const item = [...(e.clipboardData || {}).items || []].find(i => i.type.startsWith('image/'));
+  if (item) { e.preventDefault(); run({ file: item.getAsFile() }); }
+});
+
+// The example is the photo from a CPSC recall notice (26591, VEVOR baby loungers, July 2026), kept with the page
+// because cpsc.gov images can't be read from another site. It shows what a match looks like without a real listing.
+async function runExample() {
+  const blob = await fetch('example/recall-26591.jpg').then(r => (r.ok ? r.blob() : null), () => null);
+  if (!blob) { showError('The example photo could not be loaded. Add your own screenshot instead.'); return; }
+  run({ file: new File([blob], 'example.jpg', { type: 'image/jpeg' }), example: true });
+}
+
+// ---- The check -----------------------------------------------------------------------------------------------------
+const STEPS = [
+  { key: 'read', label: 'Reading the screenshot' },
+  { key: 'words', label: `Searching recall notices` },
+  { key: 'look', label: 'Looking closer' },
+];
+
+function stepsView(imageUrl, title) {
+  const list = h('ol', { class: 'steps' }, STEPS.map(s =>
+    h('li', { class: 'step', 'data-step': s.key, 'data-state': 'waiting' },
+      h('span', { class: 'step-mark' }),
+      h('span', { class: 'step-text' }, h('span', { class: 'step-label' }, s.label), h('span', { class: 'step-detail' })),
+    )));
+  return h('div', { class: 'working' },
+    imageUrl ? h('img', { class: 'shot', src: imageUrl, alt: 'Your screenshot' }) : h('p', { class: 'typed' }, `“${title}”`),
+    list);
+}
+
+function setStep(key, state, detail = '') {
+  const li = document.querySelector(`.step[data-step="${key}"]`);
+  if (!li) return;
+  li.dataset.state = state;
+  li.querySelector('.step-mark').replaceChildren(state === 'done' ? icon('check', { size: 14 }) : state === 'skipped' ? icon('dash', { size: 14 }) : '');
+  li.querySelector('.step-detail').textContent = detail;
+}
+
+async function run({ file, text, example = null }) {
+  if (running) return;
+  running = true;
+  const imageUrl = file ? URL.createObjectURL(file) : '';
+  const side = $('side');
+  side.replaceChildren(h('div', { class: 'card' }, stepsView(imageUrl, text)));
+  side.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  try {
+    let listing, readSource = '';
+    if (file) {
+      setStep('read', 'active', model === 'available' ? 'On this device' : 'In the cloud: this browser has no built-in model');
+      const photo = await imagePart(imageUrl, 1024);
+      const { answer, source } = await hybridJson({ system: READ_SYSTEM, schema: READ_SCHEMA, parts: ['Read this image.', photo] });
+      readSource = source;
+      if (answer.found === 'nothing') { showError('No product in this image. Try a screenshot that shows the listing\'s title and photo, or type what it is.'); return; }
+      listing = listingFromRead(answer, imageUrl);
+      setStep('read', 'done', `${source === 'on_device' ? 'Read on this device' : 'Read in the cloud'}: “${listing.title}”`);
+    } else {
+      listing = listingFromText(text);
+      setStep('read', 'skipped', 'Typed, nothing to read');
+    }
+
+    setStep('words', 'active', `${meta.count.toLocaleString('en-US')} notices since ${monthYear(meta.since)}`);
+    const t = await triageListing(listing);
+    setStep('words', 'done', t.partOrToy ? 'Looks like a part or a toy version'
+      : t.candidate ? `Possible match: ${productName(t.candidate.card.product)}`
+      : t.hints.length ? `Wording points to a ${t.hints[0].label || 'risky sleep product'}`
+      : 'No recall names this brand and product');
+
+    setStep('look', 'active', model === 'available' ? 'On this device, then in the cloud if anything matches' : 'In the cloud');
+    const r = await checkListing(listing, { modelReady: true, cloud: true, secondOpinion: true, judge: judge ||= hybridModel({ system: SYSTEM, schema: SCHEMA }) });
+    if (r.level === 'error') throw new Error(r.error);
+    setStep('look', 'done', r.how.cloudModel ? 'Compared with the full recall notice' : r.how.device ? 'Looked at on this device' : r.how.judgedInCloud ? 'Looked at in the cloud' : 'Checked by its words');
+    showResult(r, listing, { readSource, example });
+  } catch (e) {
+    console.error(e);
+    showError(/app ?check|attestation|403|permission/i.test(String(e))
+      ? 'The cloud check is not available on this page right now, so this listing could not be checked.'
+      : 'Something went wrong while checking. Try again in a moment.');
+  } finally {
+    running = false;
+  }
+}
+
+function showResult(r, listing, { example }) {
+  const again = h('button', { class: 'btn btn-secondary', type: 'button' }, 'Check another');
+  again.addEventListener('click', reset);
+  const head = h('div', { class: 'result-head' },
+    listing.image ? h('img', { class: 'thumb', src: listing.image, alt: '' }) : null,
+    h('div', { class: 'result-title' },
+      h('p', { class: 'muted small' }, example ? 'Example photo' : 'You checked'),
+      h('p', { class: 'strong clamp2' }, listing.title)),
+  );
+  let body;
+  if (r.level === 'possible' || r.level === 'likely') {
+    body = detailView(r, { compact: false });
+  } else {
+    body = h('div', { class: 'detail' },
+      h('div', { class: 'verdict' },
+        h('span', { class: 'pill is-none' }, 'No match found'),
+        h('p', { class: 'verdict-line' }, r.why === 'part or toy' || /part or a toy/.test(r.why)
+          ? 'This looks like a part or a toy version, not the product itself.'
+          : `None of the ${meta.count.toLocaleString('en-US')} recall notices since ${monthYear(meta.since)} matched this, and it doesn't look like a risky sleep product.`)),
+      h('section', { class: 'check' },
+        h('h3', {}, 'Before you buy'),
+        h('p', {}, 'No match isn\'t the same as safe. Older recalls aren\'t in this list, and a listing rarely shows the model number. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.'),
+        INFANT.test(listing.title) ? h('p', {}, 'For anything a baby sleeps in: a firm, flat surface with nothing else in it.') : null),
+      h('div', { class: 'links' },
+        h('a', { class: 'link', href: 'https://www.saferproducts.gov/', target: '_blank', rel: 'noopener' }, 'Search SaferProducts.gov', icon('external', { size: 14 })),
+        h('a', { class: 'link', href: 'https://www.cpsc.gov/SafeSleep', target: '_blank', rel: 'noopener' }, 'CPSC safe sleep guidance', icon('external', { size: 14 }))),
+    );
+  }
+  $('side').replaceChildren(h('div', { class: 'card result' }, head, body, h('div', { class: 'result-foot' }, again)));
+}
+
+function showError(message) {
+  running = false;
+  const again = h('button', { class: 'btn btn-secondary', type: 'button' }, 'Try again');
+  again.addEventListener('click', reset);
+  $('side').replaceChildren(h('div', { class: 'card' }, h('div', { class: 'error' }, icon('alert', { size: 18 }), h('p', {}, message)), again));
+}
+
+function reset() {
+  recentView().then(v => $('side').replaceChildren(v));
+  $('text') && ($('text').value = '');
+  $('title').scrollIntoView({ block: 'start' });
+}
+
+// ---- The side column before a check: real recent recalls of baby products ----------------------------------------
+let recentCache = null;
+async function recentView() {
+  if (!recentCache) {
+    const { cards } = await (await fetch('data/cards.json')).json();
+    recentCache = cards.filter(c => INFANT.test(`${c.product} ${c.title}`) && safeUrl(c.image)).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
+  }
+  return h('div', { class: 'recent' },
+    h('h2', {}, 'Recently recalled baby products'),
+    h('ul', { class: 'rows' }, recentCache.map(c => h('li', {},
+      h('a', { class: 'row', href: safeUrl(c.url), target: '_blank', rel: 'noopener' },
+        h('img', { class: 'thumb', src: c.image, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' }),
+        h('span', { class: 'row-text' },
+          h('span', { class: 'row-title' }, productName(c.product)),
+          h('span', { class: 'row-line2' }, `Recalled ${longDate(c.date)}`)))))),
+    h('p', { class: 'muted small' }, 'From the U.S. Consumer Product Safety Commission. Selling a recalled product is against federal law, yet many stay in homes and get resold.'),
+  );
+}
+
+// ---- Start ---------------------------------------------------------------------------------------------------------
+function howList() {
+  const row = (ic, text) => h('li', {}, icon(ic, { size: 16 }), h('span', {}, text));
+  return [
+    row('device', model === 'available'
+      ? 'Your screenshot is read on this device by Chrome\'s built-in model.'
+      : 'Your screenshot is read on your device when the browser has a built-in model (Chrome on a computer). On this browser, it\'s read by Gemini in the cloud.'),
+    row('search', `It's compared with ${meta.count.toLocaleString('en-US')} recall notices in this page. Nothing is sent for this step.`),
+    row('cloud', 'Only a possible match goes to Gemini in the cloud, with the full recall notice and its photo, for a closer look.'),
+  ];
+}
+
+async function start() {
+  $('mark').replaceWith(mark(20));
+  $('input').replaceChildren(inputView());
+  recentView().then(v => { if (!running && !$('side').firstChild) $('side').replaceChildren(v); });
+  $('how').replaceChildren(...howList());
+  meta = await fetch('data/meta.json').then(r => r.json()).catch(() => meta);
+  // Some browsers take a while to answer, or never do; the page doesn't wait on it.
+  model = await Promise.race([deviceStatus(), new Promise(r => setTimeout(() => r('unknown'), 2500))]);
+  $('how').replaceChildren(...howList());
+  $('data-line').textContent = `Recall data: U.S. Consumer Product Safety Commission, ${meta.count.toLocaleString('en-US')} notices since ${monthYear(meta.since)}${meta.built ? `, updated ${longDate(meta.built.slice(0, 10))}` : ''}.`;
+  if (!hasCloudAccess) $('lede').after(h('p', { class: 'notice' }, 'This copy of the page has no cloud access, so it can only check what it can read on this device.'));
+}
+start();

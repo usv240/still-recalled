@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Badge preview</title>
+<!-- Development only: real listings from a live eBay search laid out as a plain results grid, with the real
+     badges and popovers attached from a fixture. This is not eBay's design; it stands in for any marketplace grid. -->
+<style>
+  body { margin: 0; padding: 24px 32px; background: #fff; font: 14px/1.4 Arial, sans-serif; color: #191919; }
+  h1 { font-size: 20px; margin: 0 0 16px; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px 16px; }
+  a { color: inherit; text-decoration: none; display: grid; gap: 8px; }
+  .img { aspect-ratio: 1; background: #f7f7f7; border-radius: 12px; overflow: hidden; }
+  .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .t { font-size: 14px; line-height: 20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .p { font-size: 18px; font-weight: 700; }
+</style>
+<body>
+<h1 id="h">Results</h1>
+<ul id="grid"></ul>
+<script type="module" src="/tools/preview/badges.bundle.js"></script>
+</body>
+</html>

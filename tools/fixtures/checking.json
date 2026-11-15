@@ -1,0 +1,244 @@
+{
+ "pageKey": "ebay:preview:crib bumper",
+ "url": "https://www.ebay.com/sch/i.html?_nkw=crib%20bumper",
+ "site": "ebay",
+ "scope": "crib bumper",
+ "kind": "search",
+ "total": 16,
+ "order": 16,
+ "results": {
+  "206692844694": {
+   "id": "206692844694",
+   "listing": {
+    "title": "Breathable Mesh Crib Liner Safer Bumper Twinkle Stars Cot Bed Padding White Grey",
+    "price": "$17.99",
+    "image": "https://i.ebayimg.com/images/g/s~UAAeSwvH1q9L9v/s-l500.webp",
+    "url": "https://www.ebay.com/itm/206692844694"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing offers a mesh crib liner which is sold on its own.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 0
+  },
+  "840105394290": {
+   "id": "840105394290",
+   "listing": {
+    "title": "Vintage kids Line Two by Two Noah's Ark Nursery &crib set. Cottagecure 90’s",
+    "price": "$125.00",
+    "image": "https://i.ebayimg.com/images/g/H4QAAeSwu91q77Op/s-l500.webp",
+    "url": "https://www.ebay.com/itm/840105394290"
+   },
+   "level": "possible",
+   "kind": "banned",
+   "why": "the photo appears to include a product type that may no longer be sold",
+   "check": "Check whether the set includes a padded bumper.",
+   "evidence": "The listing photo shows a padded crib bumper with ties attached to a crib bedding set.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "CPSC lists bumpers among the soft items that can suffocate a baby. Its advice for a crib is nothing but a fitted sheet.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Possible crib bumper",
+   "verdict": "This may be or include a padded crib bumper.",
+   "question": "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
+   "order": 1
+  },
+  "237157678916": {
+   "id": "237157678916",
+   "listing": {
+    "title": "Front Bumper Base V6 Without Pony Package Fits 05-09 MUSTANG 5157051",
+    "price": "$585.00",
+    "image": "https://i.ebayimg.com/images/g/bbgAAeSwfOBq6Kzf/s-l500.webp",
+    "url": "https://www.ebay.com/itm/237157678916"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 2
+  },
+  "286739743761": {
+   "id": "286739743761",
+   "listing": {
+    "title": "Breathable Baby Bumper For Slatted Cribs Soft, Comfortable, Safe, Reliable, Gray",
+    "price": "$35.99",
+    "image": "https://i.ebayimg.com/images/g/FLIAAeSwYtxoiwSA/s-l500.webp",
+    "url": "https://www.ebay.com/itm/286739743761"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing title and photo show a breathable baby bumper for slatted cribs.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "CPSC lists bumpers among the soft items that can suffocate a baby. Its advice for a crib is nothing but a fitted sheet.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Padded crib bumper",
+   "verdict": "This looks like a padded crib bumper.",
+   "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
+   "order": 3
+  },
+  "960080826099": {
+   "id": "960080826099",
+   "listing": {
+    "title": "American Girl Pleasant Company Bitty Baby Crib Bumper Pad For Doll Bed Teal",
+    "price": "$25.00",
+    "image": "https://i.ebayimg.com/images/g/hAUAAeSwtKBq0~6o/s-l500.webp",
+    "url": "https://www.ebay.com/itm/960080826099"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 4
+  },
+  "336878150968": {
+   "id": "336878150968",
+   "listing": {
+    "title": "American Girl Bitty Baby Doll Blue/Cherry Crib Bumper Pad, Pleasant Company",
+    "price": "$9.99",
+    "image": "https://i.ebayimg.com/images/g/bqcAAeSwnxtq6nz1/s-l500.webp",
+    "url": "https://www.ebay.com/itm/336878150968"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 5
+  },
+  "840106182680": {
+   "id": "840106182680",
+   "listing": {
+    "title": "Vintage Winnie The Pooh Crib Padding 1994 Disney Cartoon Nursery Baby Bear",
+    "price": "$68.00",
+    "image": "https://i.ebayimg.com/images/g/3DUAAeSwNTdq8Ai9/s-l500.webp",
+    "url": "https://www.ebay.com/itm/840106182680"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing title and photo show vintage Winnie The Pooh crib padding designed to line the inside rails.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "CPSC lists bumpers among the soft items that can suffocate a baby. Its advice for a crib is nothing but a fitted sheet.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Padded crib bumper",
+   "verdict": "This looks like a padded crib bumper.",
+   "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
+   "order": 6
+  }
+ },
+ "pending": {
+  "147662590928": {
+   "title": "Nojo nautical Blue baby Crib 4PC Set",
+   "order": 7
+  },
+  "127992496143": {
+   "title": "Portable Baby Lounger Nest Newborn Infant Cushion Breathable Cotton White",
+   "order": 8
+  },
+  "840010792659": {
+   "title": "Baby Nest Lounger With Activity Arch For Infant",
+   "order": 9
+  },
+  "298642577391": {
+   "title": "VaVaSoo Rocking Bassinet, Automatic Bedside Bassinet, Electric Baby Cradle",
+   "order": 10
+  },
+  "168612345070": {
+   "title": "5 in 1 Portable Baby Nursery Center w/ Detachable Bassinet, Wheels & Carry Bag",
+   "order": 11
+  },
+  "407363105542": {
+   "title": "Baby Lounger Pillow Sage Green Padded Nest With Ties Removable Pad Used",
+   "order": 12
+  },
+  "206669507013": {
+   "title": "Baby Lounger for 0-12 Months",
+   "order": 13
+  },
+  "800652948676": {
+   "title": "Pink Baby Lounger / Infant Nest with Carrying Case",
+   "order": 14
+  },
+  "800652944033": {
+   "title": "White Padded Baby Lounger / Infant Support Nest with Carrying Case",
+   "order": 15
+  }
+ }
+}

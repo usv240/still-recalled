@@ -1,0 +1,1266 @@
+{
+ "pageKey": "ebay:preview:baby gear",
+ "url": "https://www.ebay.com/sch/i.html?_nkw=baby%20gear",
+ "site": "ebay",
+ "scope": "baby gear",
+ "kind": "search",
+ "total": 48,
+ "order": 48,
+ "results": {
+  "820300223652": {
+   "id": "820300223652",
+   "listing": {
+    "title": "New In Box Fisher Price Open- Top Rainforest Cradle Swing VHTF 2007",
+    "price": "$349.99",
+    "image": "https://i.ebayimg.com/images/g/AAUAAeSwR35q5hHX/s-l500.webp",
+    "url": "https://www.ebay.com/itm/820300223652"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.247Z",
+   "order": 0
+  },
+  "336848070609": {
+   "id": "336848070609",
+   "listing": {
+    "title": "Fisher-Price Portable Infant Baby Swing Beige/Gray/White w/ Toy Bar",
+    "price": "$20.00",
+    "image": "https://i.ebayimg.com/images/g/UZAAAeSw1J5q0sLU/s-l500.webp",
+    "url": "https://www.ebay.com/itm/336848070609"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.247Z",
+   "order": 1
+  },
+  "326803224670": {
+   "id": "326803224670",
+   "listing": {
+    "title": "Fisher-Price Baby Swing Seat with Adjustable Recline and Safety Harness",
+    "price": "$25.00",
+    "image": "https://i.ebayimg.com/images/g/R-IAAeSwIY9o4ZFA/s-l500.webp",
+    "url": "https://www.ebay.com/itm/326803224670"
+   },
+   "level": "possible",
+   "kind": "recall",
+   "why": "same brand and kind as a recalled product; the listing does not show which model",
+   "check": "Ask the seller to check the model number printed on the underside of the swing motor housing and verify if it matches the recalled Snuga Swing models.",
+   "evidence": "The listing is for a Fisher-Price swing, but the model number and manufacture date are not visible to confirm if it is a recalled Snuga Swing.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": {
+    "id": "25009",
+    "date": "2024-10-10",
+    "product": "All Models of Fisher-Price Snuga Swings",
+    "title": "Fisher-Price Recalls More than 2 Million Snuga Infant Swings Due to Suffocation Hazard After 5 Deaths Reported",
+    "hazard": "The swing should never be used for sleep and bedding materials should never be added to it. If the product is used for sleep or bedding material is added, the headrest and body support insert on the seat pad can increas…",
+    "remedy": "Consumers should immediately remove both the headrest (by cutting the tether) and the body support insert from the seat pad before continuing to use the swing.…",
+    "url": "https://www.cpsc.gov/Recalls/2025/Fisher-Price-Recalls-More-than-2-Million-Snuga-Infant-Swings-Due-to-Suffocation-Hazard-After-5-Deaths-Reported",
+    "image": "https://www.cpsc.gov/s3fs-public/Snuga-1.png"
+   },
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.247Z",
+   "badge": "Possible recall",
+   "verdict": "Same brand and kind as the Fisher-Price Snuga Swings, recalled October 2024. The listing doesn't show which model.",
+   "question": "Hi, before I buy: could you send a photo of the label showing the model number and manufacture date? I'd like to check it against a CPSC recall (25009, Fisher-Price Snuga Swings).",
+   "order": 2
+  },
+  "168590366688": {
+   "id": "168590366688",
+   "listing": {
+    "title": "Fisher-Price Infant Baby Swing Gray/Beige w/ Canopy Model Z1537 MPN Z1537",
+    "price": "$55.00",
+    "image": "https://i.ebayimg.com/images/g/FPgAAeSwPAZqcvkl/s-l500.webp",
+    "url": "https://www.ebay.com/itm/168590366688"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing photo clearly shows the brand Joolbaby, which is different from Fisher-Price.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 3
+  },
+  "406713650009": {
+   "id": "406713650009",
+   "listing": {
+    "title": "Fisher Price Puppy Snug Swing Mobile Plush Toys Lot Of 3",
+    "price": "$24.95",
+    "image": "https://i.ebayimg.com/images/g/JJkAAeSwwsBpmmdV/s-l500.webp",
+    "url": "https://www.ebay.com/itm/406713650009"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 6
+  },
+  "297425393686": {
+   "id": "297425393686",
+   "listing": {
+    "title": "REPLACEMENT LEG PIN FOR FISHER PRICE SNUG BABY SWING Sugar plum bunny Puppy",
+    "price": "$18.00",
+    "image": "https://i.ebayimg.com/images/g/96cAAOSwh-FkjQSB/s-l500.webp",
+    "url": "https://www.ebay.com/itm/297425393686"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 5
+  },
+  "297502504960": {
+   "id": "297502504960",
+   "listing": {
+    "title": "Fisher Price Snug Puppy Dreams Baby Swing Seat Support L Arm - Replacement Part",
+    "price": "$10.99",
+    "image": "https://i.ebayimg.com/images/g/ZAYAAeSwh6Foh~jy/s-l500.webp",
+    "url": "https://www.ebay.com/itm/297502504960"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 7
+  },
+  "206692844694": {
+   "id": "206692844694",
+   "listing": {
+    "title": "Breathable Mesh Crib Liner Safer Bumper Twinkle Stars Cot Bed Padding White Grey",
+    "price": "$17.99",
+    "image": "https://i.ebayimg.com/images/g/s~UAAeSwvH1q9L9v/s-l500.webp",
+    "url": "https://www.ebay.com/itm/206692844694"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing offers a mesh crib liner which is sold on its own.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 8
+  },
+  "840105394290": {
+   "id": "840105394290",
+   "listing": {
+    "title": "Vintage kids Line Two by Two Noah's Ark Nursery &crib set. Cottagecure 90’s",
+    "price": "$125.00",
+    "image": "https://i.ebayimg.com/images/g/H4QAAeSwu91q77Op/s-l500.webp",
+    "url": "https://www.ebay.com/itm/840105394290"
+   },
+   "level": "possible",
+   "kind": "banned",
+   "why": "the photo appears to include a product type that may no longer be sold",
+   "check": "Check whether the set includes a padded bumper.",
+   "evidence": "The listing photo shows a padded crib bumper with ties attached to a crib bedding set.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "CPSC lists bumpers among the soft items that can suffocate a baby. Its advice for a crib is nothing but a fitted sheet.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Possible crib bumper",
+   "verdict": "This may be or include a padded crib bumper.",
+   "question": "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
+   "order": 9
+  },
+  "237157678916": {
+   "id": "237157678916",
+   "listing": {
+    "title": "Front Bumper Base V6 Without Pony Package Fits 05-09 MUSTANG 5157051",
+    "price": "$585.00",
+    "image": "https://i.ebayimg.com/images/g/bbgAAeSwfOBq6Kzf/s-l500.webp",
+    "url": "https://www.ebay.com/itm/237157678916"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 10
+  },
+  "286739743761": {
+   "id": "286739743761",
+   "listing": {
+    "title": "Breathable Baby Bumper For Slatted Cribs Soft, Comfortable, Safe, Reliable, Gray",
+    "price": "$35.99",
+    "image": "https://i.ebayimg.com/images/g/FLIAAeSwYtxoiwSA/s-l500.webp",
+    "url": "https://www.ebay.com/itm/286739743761"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing title and photo show a breathable baby bumper for slatted cribs.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "CPSC lists bumpers among the soft items that can suffocate a baby. Its advice for a crib is nothing but a fitted sheet.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Padded crib bumper",
+   "verdict": "This looks like a padded crib bumper.",
+   "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
+   "order": 11
+  },
+  "960080826099": {
+   "id": "960080826099",
+   "listing": {
+    "title": "American Girl Pleasant Company Bitty Baby Crib Bumper Pad For Doll Bed Teal",
+    "price": "$25.00",
+    "image": "https://i.ebayimg.com/images/g/hAUAAeSwtKBq0~6o/s-l500.webp",
+    "url": "https://www.ebay.com/itm/960080826099"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 12
+  },
+  "336878150968": {
+   "id": "336878150968",
+   "listing": {
+    "title": "American Girl Bitty Baby Doll Blue/Cherry Crib Bumper Pad, Pleasant Company",
+    "price": "$9.99",
+    "image": "https://i.ebayimg.com/images/g/bqcAAeSwnxtq6nz1/s-l500.webp",
+    "url": "https://www.ebay.com/itm/336878150968"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 13
+  },
+  "840106182680": {
+   "id": "840106182680",
+   "listing": {
+    "title": "Vintage Winnie The Pooh Crib Padding 1994 Disney Cartoon Nursery Baby Bear",
+    "price": "$68.00",
+    "image": "https://i.ebayimg.com/images/g/3DUAAeSwNTdq8Ai9/s-l500.webp",
+    "url": "https://www.ebay.com/itm/840106182680"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing title and photo show vintage Winnie The Pooh crib padding designed to line the inside rails.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "CPSC lists bumpers among the soft items that can suffocate a baby. Its advice for a crib is nothing but a fitted sheet.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Padded crib bumper",
+   "verdict": "This looks like a padded crib bumper.",
+   "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
+   "order": 14
+  },
+  "147662590928": {
+   "id": "147662590928",
+   "listing": {
+    "title": "Nojo nautical Blue baby Crib 4PC Set",
+    "price": "$50.00",
+    "image": "https://i.ebayimg.com/images/g/59kAAeSw7FNq6OMX/s-l500.webp",
+    "url": "https://www.ebay.com/itm/147662590928"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "Check whether the set includes padded crib bumper pieces.",
+   "evidence": "The listing includes padded pieces designed to line the inside rails of a crib.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "crib_bumper",
+    "name": "Padded crib bumper",
+    "risk": "CPSC lists bumpers among the soft items that can suffocate a baby. Its advice for a crib is nothing but a fitted sheet.",
+    "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Padded crib bumper",
+   "verdict": "This looks like a padded crib bumper.",
+   "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
+   "order": 15
+  },
+  "127992496143": {
+   "id": "127992496143",
+   "listing": {
+    "title": "Portable Baby Lounger Nest Newborn Infant Cushion Breathable Cotton White",
+    "price": "$49.99",
+    "image": "https://i.ebayimg.com/images/g/PksAAeSw~gZqY7Da/s-l500.webp",
+    "url": "https://www.ebay.com/itm/127992496143"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing offers a portable baby lounger nest with a raised padded rim.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 16
+  },
+  "840010792659": {
+   "id": "840010792659",
+   "listing": {
+    "title": "Baby Nest Lounger With Activity Arch For Infant",
+    "price": "$30.00",
+    "image": "https://i.ebayimg.com/images/g/cxEAAeSwVdhqy7hE/s-l500.webp",
+    "url": "https://www.ebay.com/itm/840010792659"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing offers a baby nest lounger with a raised padded rim.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 17
+  },
+  "298642577391": {
+   "id": "298642577391",
+   "listing": {
+    "title": "VaVaSoo Rocking Bassinet, Automatic Bedside Bassinet, Electric Baby Cradle",
+    "price": "$179.00",
+    "image": "https://i.ebayimg.com/images/g/HJcAAeSwlDZqZteX/s-l140.webp",
+    "url": "https://www.ebay.com/itm/298642577391"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 18
+  },
+  "168612345070": {
+   "id": "168612345070",
+   "listing": {
+    "title": "5 in 1 Portable Baby Nursery Center w/ Detachable Bassinet, Wheels & Carry Bag",
+    "price": "$81.99",
+    "image": "https://i.ebayimg.com/images/g/37QAAeSw3T9qfozG/s-l140.webp",
+    "url": "https://www.ebay.com/itm/168612345070"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 19
+  },
+  "407363105542": {
+   "id": "407363105542",
+   "listing": {
+    "title": "Baby Lounger Pillow Sage Green Padded Nest With Ties Removable Pad Used",
+    "price": "$27.99",
+    "image": "https://i.ebayimg.com/images/g/MWYAAeSwuQNq-LC5/s-l140.webp",
+    "url": "https://www.ebay.com/itm/407363105542"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing offers a sage green baby lounger nest with raised padded rims all the way around a flat pad.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 20
+  },
+  "206669507013": {
+   "id": "206669507013",
+   "listing": {
+    "title": "Baby Lounger for 0-12 Months",
+    "price": "$17.00",
+    "image": "https://i.ebayimg.com/images/g/G5cAAeSw0XFq5Qqi/s-l140.webp",
+    "url": "https://www.ebay.com/itm/206669507013"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing is for a soft cushion with a raised padded rim all the way around a flat pad for infants.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 21
+  },
+  "800652948676": {
+   "id": "800652948676",
+   "listing": {
+    "title": "Pink Baby Lounger / Infant Nest with Carrying Case",
+    "price": "$24.99",
+    "image": "https://i.ebayimg.com/images/g/sboAAeSwl9hqpgf4/s-l140.webp",
+    "url": "https://www.ebay.com/itm/800652948676"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing is for a soft cushion with a raised padded rim all the way around a flat pad.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 22
+  },
+  "800652944033": {
+   "id": "800652944033",
+   "listing": {
+    "title": "White Padded Baby Lounger / Infant Support Nest with Carrying Case",
+    "price": "$24.99",
+    "image": "https://i.ebayimg.com/images/g/LSsAAeSwfuZqpgbd/s-l140.webp",
+    "url": "https://www.ebay.com/itm/800652944033"
+   },
+   "level": "likely",
+   "kind": "banned",
+   "why": "both models see a product type that may no longer be sold",
+   "check": "",
+   "evidence": "The listing offers a white infant support nest with a raised padded rim.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": {
+    "key": "in_bed_sleeper",
+    "name": "Infant lounger or nest",
+    "risk": "Young babies can't always lift their heads away from soft padding, which makes it a suffocation risk. CPSC advises a firm, flat, bare sleep space.",
+    "advice": "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+    "source": "https://www.cpsc.gov/SafeSleep"
+   },
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Infant lounger or nest",
+   "verdict": "This looks like a infant lounger or nest.",
+   "question": "Hi, before I buy: what brand and model is this? Could you send a photo of the label?",
+   "order": 23
+  },
+  "115446427324": {
+   "id": "115446427324",
+   "listing": {
+    "title": "COSMO 5.8 Quart Electric Air Fryer, Timer, Non-Stick Basket, Stainless Steel",
+    "price": "$74.99",
+    "image": "https://i.ebayimg.com/images/g/z6wAAOSw3tRiu21c/s-l500.webp",
+    "url": "https://www.ebay.com/itm/115446427324"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 24
+  },
+  "267811619309": {
+   "id": "267811619309",
+   "listing": {
+    "title": "Cosori 9-in-1 TurboBlaze 6-Quart Air Fryer //Cream",
+    "price": "$107.99",
+    "image": "https://i.ebayimg.com/images/g/EvoAAeSwp0BqzPm-/s-l500.webp",
+    "url": "https://www.ebay.com/itm/267811619309"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for a 6-quart Cosori TurboBlaze air fryer in cream, whereas the recall covers 3.7 and 5.8-quart models such as the CP158 series in black, gray, white, blue, or red.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 25
+  },
+  "336635272673": {
+   "id": "336635272673",
+   "listing": {
+    "title": "Cosori Iconic 6.5 Qt Smart Air Fryer – Stainless Steel, PFAS-Free, 450°F",
+    "price": "$246.00",
+    "image": "https://i.ebayimg.com/images/g/D-4AAeSwaHRqK6Np/s-l500.webp",
+    "url": "https://www.ebay.com/itm/336635272673"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for a 6.5 qt air fryer, whereas the recall is limited to 3.7 and 5.8 qt units.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 26
+  },
+  "158205871262": {
+   "id": "158205871262",
+   "listing": {
+    "title": "Cosori 9-In-1 Turboblaze Air Fryer 6 Qt, Premium Ceramic Coating, 90°–450°F, Pre",
+    "price": "$89.00",
+    "image": "https://i.ebayimg.com/images/g/5GkAAeSwR7pqhcg~/s-l500.webp",
+    "url": "https://www.ebay.com/itm/158205871262"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for a Turboblaze model air fryer, which is a different model series than those listed in the recall notice.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 27
+  },
+  "397846757414": {
+   "id": "397846757414",
+   "listing": {
+    "title": "Cosori 9-in-1 Air Fryer 6 Qt – Premium Ceramic Coating – 90°–450°F - CAF-DC601",
+    "price": "$99.99",
+    "image": "https://i.ebayimg.com/images/g/LsUAAeSw~F1p4OTY/s-l140.webp",
+    "url": "https://www.ebay.com/itm/397846757414"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing specifies model CAF-DC601 and a 6 Qt size, whereas the recall notice only covers 3.7 and 5.8 qt units with different listed model numbers.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 28
+  },
+  "167934517064": {
+   "id": "167934517064",
+   "listing": {
+    "title": "Cosori 32 Quart Smart Air Fryer Toaster Oven, Rotisserie, Stainless, Ceramic NEW",
+    "price": "$176.64",
+    "image": "https://i.ebayimg.com/images/g/VlAAAeSweSJpGk-f/s-l140.webp",
+    "url": "https://www.ebay.com/itm/167934517064"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for an air fryer toaster oven, whereas the recall is for specific basket-style air fryers.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 29
+  },
+  "117082217913": {
+   "id": "117082217913",
+   "listing": {
+    "title": "COSORI Air Fryer 5.8QT Oil-Free XL Electric Hot Air Fryers Oven, Programmable",
+    "price": "$74.99",
+    "image": "https://i.ebayimg.com/images/g/WW4AAeSwtZdpseGs/s-l140.webp",
+    "url": "https://www.ebay.com/itm/117082217913"
+   },
+   "level": "possible",
+   "kind": "recall",
+   "why": "same brand and kind as a recalled product; the listing does not show which model",
+   "check": "Check the model number on the bottom label of the unit to see if it matches any of the recalled model numbers listed in the notice.",
+   "evidence": "The listing offers a COSORI 5.8QT Air Fryer but does not show the specific model number required to determine if it is part of the recalled units.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": {
+    "id": "23130",
+    "date": "2023-02-23",
+    "product": "Cosori Air Fryers",
+    "title": "Two Million COSORI® Air Fryers Recalled by Atekcity Due to Fire and Burn Hazards",
+    "hazard": "A wire connection in the air fryers can overheat, posing fire and burn hazards.",
+    "remedy": "Consumers should immediately stop using the recalled air fryers and contact Cosori to receive their choice of a free replacement air fryer or another Cosori pr…",
+    "url": "https://www.cpsc.gov/Recalls/2023/Two-Million-COSORI-Air-Fryers-Recalled-by-Atekcity-Due-to-Fire-and-Burn-Hazards",
+    "image": "https://www.cpsc.gov/s3fs-public/RecalledCosoriairfryerModelsCP158AFCS158AFCAFP581AUSRandCAFP581SAUSRLightGray_0.JPG"
+   },
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Possible recall",
+   "verdict": "Same brand and kind as the Cosori Air Fryers, recalled February 2023. The listing doesn't show which model.",
+   "question": "Hi, before I buy: could you send a photo of the label showing the model number and manufacture date? I'd like to check it against a CPSC recall (23130, Cosori Air Fryers).",
+   "order": 30
+  },
+  "116429570107": {
+   "id": "116429570107",
+   "listing": {
+    "title": "COSORI Pro Gen 2 Air Fryer 5.8QT, Upgraded Version with Stable Performance &",
+    "price": "$79.99",
+    "image": "https://i.ebayimg.com/images/g/sN8AAOSwl2tnbd-z/s-l140.webp",
+    "url": "https://www.ebay.com/itm/116429570107"
+   },
+   "level": "possible",
+   "kind": "recall",
+   "why": "same brand and kind as a recalled product; the listing does not show which model",
+   "check": "Check the model number printed on the bottom label of the unit against the recalled model numbers listed in the notice.",
+   "evidence": "The listing is for a Cosori air fryer, but the specific model number is not visible in the title or photo.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": {
+    "id": "23130",
+    "date": "2023-02-23",
+    "product": "Cosori Air Fryers",
+    "title": "Two Million COSORI® Air Fryers Recalled by Atekcity Due to Fire and Burn Hazards",
+    "hazard": "A wire connection in the air fryers can overheat, posing fire and burn hazards.",
+    "remedy": "Consumers should immediately stop using the recalled air fryers and contact Cosori to receive their choice of a free replacement air fryer or another Cosori pr…",
+    "url": "https://www.cpsc.gov/Recalls/2023/Two-Million-COSORI-Air-Fryers-Recalled-by-Atekcity-Due-to-Fire-and-Burn-Hazards",
+    "image": "https://www.cpsc.gov/s3fs-public/RecalledCosoriairfryerModelsCP158AFCS158AFCAFP581AUSRandCAFP581SAUSRLightGray_0.JPG"
+   },
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "badge": "Possible recall",
+   "verdict": "Same brand and kind as the Cosori Air Fryers, recalled February 2023. The listing doesn't show which model.",
+   "question": "Hi, before I buy: could you send a photo of the label showing the model number and manufacture date? I'd like to check it against a CPSC recall (23130, Cosori Air Fryers).",
+   "order": 31
+  },
+  "366770169920": {
+   "id": "366770169920",
+   "listing": {
+    "title": "Chicco Activ3 Jogging Stroller - Eclipse Brand New with box",
+    "price": "$295.00",
+    "image": "https://i.ebayimg.com/images/g/E68AAeSwToFq4-3p/s-l500.webp",
+    "url": "https://www.ebay.com/itm/366770169920"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 32
+  },
+  "198795185259": {
+   "id": "198795185259",
+   "listing": {
+    "title": "Graco Single Folding Stroller w/ Canopy Hood & Cup Holder, Black/Gray",
+    "price": "$35.00",
+    "image": "https://i.ebayimg.com/images/g/GY0AAeSwiAJq-K96/s-l500.webp",
+    "url": "https://www.ebay.com/itm/198795185259"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 33
+  },
+  "188005835808": {
+   "id": "188005835808",
+   "listing": {
+    "title": "Graco Modes Nest2Grow DLX Travel System Riordan Fashion NEW! SnugRide SnugFit",
+    "price": "$521.99",
+    "image": "https://i.ebayimg.com/images/g/EyQAAeSwalhpe4Nb/s-l500.webp",
+    "url": "https://www.ebay.com/itm/188005835808"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 34
+  },
+  "168852418845": {
+   "id": "168852418845",
+   "listing": {
+    "title": "Graco Modes Pramette Travel System",
+    "price": "$299.50",
+    "image": "https://i.ebayimg.com/images/g/zY0AAeSwLDBq8xac/s-l500.webp",
+    "url": "https://www.ebay.com/itm/168852418845"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 35
+  },
+  "128189432621": {
+   "id": "128189432621",
+   "listing": {
+    "title": "Graco Outpace LX All-Terrain 3-Wheel Baby Stroller One-Hand Quick Fold Single",
+    "price": "$110.00",
+    "image": "https://i.ebayimg.com/images/g/dXUAAeSwfVdq9ORp/s-l500.webp",
+    "url": "https://www.ebay.com/itm/128189432621"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 36
+  },
+  "206678212210": {
+   "id": "206678212210",
+   "listing": {
+    "title": "Graco Single Traditional Stroller, Brown/Gray, Folding w/ Canopy & Cup Holder",
+    "price": "$50.00",
+    "image": "https://i.ebayimg.com/images/g/k4gAAeSwFClq7N93/s-l500.webp",
+    "url": "https://www.ebay.com/itm/206678212210"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 37
+  },
+  "860119593058": {
+   "id": "860119593058",
+   "listing": {
+    "title": "Graco Outpace LX All-Terrain Travel System SnugRide Lite Seat & Stroller Briggs",
+    "price": "$240.00",
+    "image": "https://i.ebayimg.com/images/g/u9QAAeSwvvRq7hqz/s-l500.webp",
+    "url": "https://www.ebay.com/itm/860119593058"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 38
+  },
+  "820309355604": {
+   "id": "820309355604",
+   "listing": {
+    "title": "Vintage Century Graco Stroller Blue Watercolor Pastel 1990 Retro Hard To Find",
+    "price": "$180.00",
+    "image": "https://i.ebayimg.com/images/g/uCMAAeSw~Fpq6WWG/s-l500.webp",
+    "url": "https://www.ebay.com/itm/820309355604"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 39
+  },
+  "147408647527": {
+   "id": "147408647527",
+   "listing": {
+    "title": "AC/DC Adapter for Fisher-Price Newborn Auto Rock 'n Play Sleeper CHNO8 CHN08",
+    "price": "$17.99",
+    "image": "https://i.ebayimg.com/images/g/eAYAAeSwqhxqRMcN/s-l500.webp",
+    "url": "https://www.ebay.com/itm/147408647527"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 40
+  },
+  "372244414709": {
+   "id": "372244414709",
+   "listing": {
+    "title": "Global 6 Volts AC Adapter For Fisher Price 6V SWING 6VDC DC Power Supply Charger",
+    "price": "$9.89",
+    "image": "https://i.ebayimg.com/images/g/yjAAAOSw7GRZAvtV/s-l500.webp",
+    "url": "https://www.ebay.com/itm/372244414709"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 41
+  },
+  "287628122475": {
+   "id": "287628122475",
+   "listing": {
+    "title": "Fisher Price Teddy Beddy Bear Smile N Play Mirror Activity Baby Toy Vintage 1987",
+    "price": "$39.96",
+    "image": "https://i.ebayimg.com/images/g/2msAAeSwXVRn5aDh/s-l140.webp",
+    "url": "https://www.ebay.com/itm/287628122475"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 42
+  },
+  "307164369081": {
+   "id": "307164369081",
+   "listing": {
+    "title": "Vintage 1985 Fisher Price Play Pen Pack N Play Travel Bassinet",
+    "price": "$52.50",
+    "image": "https://i.ebayimg.com/images/g/Ua4AAeSw5eVqnBAT/s-l140.webp",
+    "url": "https://www.ebay.com/itm/307164369081"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 43
+  },
+  "404446073815": {
+   "id": "404446073815",
+   "listing": {
+    "title": "AC DC Adapter For Fisher-Price Newborn Auto Rock Play Sleeper CHNO8 CHN08 Power",
+    "price": "$9.99",
+    "image": "https://i.ebayimg.com/images/g/6X0AAOSw8X9jEJ4e/s-l140.webp",
+    "url": "https://www.ebay.com/itm/404446073815"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "part or toy (word rule)",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.249Z",
+   "order": 44
+  },
+  "157713392237": {
+   "id": "157713392237",
+   "listing": {
+    "title": "fisher-price Rattle 'n Rock Maracas 3M+ Yellow & Green Infant Baby Toy BLT33",
+    "price": "$11.50",
+    "image": "https://i.ebayimg.com/images/g/hOsAAeSwS2dpoexJ/s-l140.webp",
+    "url": "https://www.ebay.com/itm/157713392237"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for a Fisher-Price toy, whereas the recall notice involves Primark baby rattles.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 45
+  },
+  "820352005366": {
+   "id": "820352005366",
+   "listing": {
+    "title": "2009 Fisher Price Take-N-Play Thomas Train Diesel 10! NEW!",
+    "price": "$40.00",
+    "image": "https://i.ebayimg.com/images/g/CKkAAeSw~cNq932c/s-l140.webp",
+    "url": "https://www.ebay.com/itm/820352005366"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the listing is a part or a toy version, not the product",
+   "check": "",
+   "evidence": "The listing offers a Fisher-Price Take-N-Play Thomas Train Diesel 10 toy, whereas the recall is for wooden railway Troublesome Trucks.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 46
+  },
+  "126151465013": {
+   "id": "126151465013",
+   "listing": {
+    "title": "Fisher Price Thomas & Friends Die-Cast Take N Play Diamond Anniversary Thomas",
+    "price": "$12.99",
+    "image": "https://i.ebayimg.com/images/g/ODYAAOSwD4hlNvKC/s-l140.webp",
+    "url": "https://www.ebay.com/itm/126151465013"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 47
+  }
+ },
+ "pending": {}
+}

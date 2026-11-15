@@ -1,0 +1,112 @@
+/* The side panel. Chrome gives it about 320-500px, so it is laid out like a phone screen: one region at a time,
+   16px margins, the list pushing to a detail and back. */
+html { background: var(--ground); color: var(--text); font: 400 14px/20px var(--font); -webkit-font-smoothing: antialiased; }
+body { margin: 0; min-height: 100vh; }
+::selection { background: #dbe6f7; color: var(--text); }
+* { scrollbar-width: thin; scrollbar-color: var(--control) transparent; }
+h1, h2, h3, p { margin: 0; }
+
+.bar {
+  position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+  height: 48px; padding: 0 8px 0 16px; background: var(--ground);
+}
+.brand { display: inline-flex; align-items: center; gap: 8px; font: 600 14px/1 var(--font); --mark-hole: var(--ground); }
+.brand .mark { color: var(--likely); display: block; }
+
+#view { padding: 4px 16px 32px; max-width: 640px; }
+.view { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.view.enter { animation: view-in 200ms var(--ease-out); }
+.view.enter-back { animation: view-back 200ms var(--ease-out); }
+@keyframes view-in { from { opacity: 0; transform: translateX(12px); } }
+@keyframes view-back { from { opacity: 0; transform: translateX(-12px); } }
+
+/* Title block: the finding is the heading; the page it is about sits under it. */
+.head { display: grid; gap: 4px; }
+.head h1 { font: 600 20px/26px var(--font); letter-spacing: -0.01em; text-wrap: balance; font-variant-numeric: tabular-nums; }
+.head .where { font-size: 13px; line-height: 20px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.head .where q { color: var(--text); quotes: "“" "”"; }
+
+/* Progress at its true ratio, both ends labelled. */
+.progress { display: grid; gap: 6px; }
+.progress-track { height: 4px; border-radius: 2px; background: var(--raised); overflow: hidden; }
+.progress-fill { height: 100%; background: var(--text); border-radius: 2px; transform-origin: left; transition: transform 300ms var(--ease-out); }
+.progress-label { display: flex; justify-content: space-between; font-size: 12px; line-height: 16px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Flagged listings, grouped by level. */
+.group { display: grid; gap: 4px; }
+.group-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 0 6px; font: 600 13px/20px var(--font); }
+.group-head .num { font-weight: 400; color: var(--muted); }
+.group { min-width: 0; }
+.rows { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; margin: 0 -8px; padding: 0; list-style: none; }
+.rows li { min-width: 0; }
+.row {
+  display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; align-items: center; width: 100%;
+  min-height: 72px; padding: 12px 8px; border: 0; border-radius: var(--radius-card); background: none;
+  font: inherit; color: inherit; text-align: left; cursor: pointer;
+  transition: background-color 150ms ease, transform 160ms var(--ease-out);
+}
+.row:active { transform: scale(0.99); }
+@media (hover: hover) and (pointer: fine) { .row:hover { background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); } }
+.row-new { animation: row-in 180ms var(--ease-out); }
+@keyframes row-in { from { opacity: 0; } }
+.thumb { width: 48px; height: 48px; border-radius: var(--radius-control); object-fit: cover; background: var(--raised); display: block; }
+.row-text { display: grid; grid-template-columns: minmax(0, 1fr); gap: 3px; min-width: 0; }
+.row-line1 { display: flex; gap: 12px; justify-content: space-between; align-items: baseline; }
+.row-title { font-weight: 500; min-width: 0; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.row-price { flex: none; font-variant-numeric: tabular-nums; }
+.row-line2 { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); min-width: 0; }
+.row-line2 span:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.note { font-size: 13px; line-height: 20px; color: var(--muted); text-wrap: pretty; }
+.note strong { color: var(--text); font-weight: 500; }
+
+.notice {
+  display: grid; gap: 10px; justify-items: start; padding: 12px; border-radius: var(--radius-card);
+  background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); font-size: 13px; line-height: 20px;
+}
+.notice .btn { height: 32px; font-size: 13px; }
+
+/* Loading: the final layout with grey bars at the real size, no shimmer. */
+.skel { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: center; padding: 12px 0; }
+.skel-box { width: 48px; height: 48px; border-radius: var(--radius-control); background: var(--raised); }
+.skel-lines { display: grid; gap: 8px; }
+.skel-line { height: 12px; border-radius: 3px; background: var(--raised); }
+
+/* Empty state for pages Still Recalled does not read. */
+.empty { display: grid; gap: 12px; padding-top: 8px; }
+.empty h1 { font: 600 20px/26px var(--font); letter-spacing: -0.01em; text-wrap: balance; }
+.sites { display: grid; gap: 0; margin: 4px 0 0; padding: 0; list-style: none; }
+.sites li { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid var(--border); font-size: 14px; }
+.sites li:last-child { border-bottom: 1px solid var(--border); }
+.sites span:last-child { color: var(--muted); font-size: 13px; }
+
+/* Detail header. */
+.back { display: inline-flex; align-items: center; gap: 4px; margin-left: -6px; height: 32px; padding: 0 8px 0 4px; border: 0; border-radius: var(--radius-control); background: none; font: 500 13px/1 var(--font); color: var(--muted); cursor: pointer; justify-self: start; transition: transform 160ms var(--ease-out); }
+.back:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .back:hover { background: var(--raised); color: var(--text); } }
+.listing-head { display: grid; gap: 6px; }
+.listing-head h1 { font: 600 17px/24px var(--font); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-wrap: pretty; }
+.listing-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-size: 13px; color: var(--muted); }
+.listing-meta .price { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+.detail-card { padding: 16px; border-radius: var(--radius-card); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+
+/* Settings. */
+.setting { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: start; padding: 14px 0; border-top: 1px solid var(--border); }
+.setting:last-of-type { border-bottom: 1px solid var(--border); }
+.setting-title { font-weight: 500; }
+.setting-desc { grid-column: 1; font-size: 13px; line-height: 20px; color: var(--muted); text-wrap: pretty; }
+.switch { grid-row: 1; grid-column: 2; appearance: none; margin: 2px 0 0; width: 32px; height: 18px; border-radius: 9px; background: var(--control); position: relative; cursor: pointer; transition: background-color 150ms ease; }
+.switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); transition: transform 180ms var(--ease-out); }
+.switch:checked { background: var(--primary); }
+.switch:checked::after { transform: translateX(14px); }
+.switch:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.kv { display: grid; gap: 0; margin: 0; }
+.kv > div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-top: 1px solid var(--rule); font-size: 13px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  .view.enter, .view.enter-back { animation: fade 150ms ease; }
+  @keyframes fade { from { opacity: 0; } }
+  .row, .back, .btn, .switch::after, .progress-fill { transition: none; }
+}

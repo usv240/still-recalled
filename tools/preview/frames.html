@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Still Recalled (panel states)</title>
+<!-- Development only: several panel states side by side at side-panel width. -->
+<style>
+  body { margin: 0; padding: 16px; background: #d9d9d9; font: 12px system-ui; display: flex; gap: 16px; align-items: start; }
+  figure { margin: 0; display: grid; gap: 6px; }
+  iframe { width: var(--w, 380px); height: 860px; border: 0; background: #fff; }
+</style>
+<body>
+<script>
+  const q = new URLSearchParams(location.search);
+  const sets = (q.get('show') || 'mixed,mixed&detail=recall,mixed&detail=banned').split(',');
+  for (const s of sets) {
+    const f = document.createElement('figure');
+    const i = document.createElement('iframe');
+    i.src = `/tools/preview/panel.html?fixture=${s}`;
+    if (q.get('w')) i.style.setProperty('--w', q.get('w') + 'px');
+    const c = document.createElement('figcaption'); c.textContent = s;
+    f.append(c, i); document.body.append(f);
+  }
+</script>
+</body>

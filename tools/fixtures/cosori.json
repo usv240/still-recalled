@@ -1,0 +1,228 @@
+{
+ "pageKey": "ebay:preview:cosori air fryer",
+ "url": "https://www.ebay.com/sch/i.html?_nkw=cosori%20air%20fryer",
+ "site": "ebay",
+ "scope": "cosori air fryer",
+ "kind": "search",
+ "total": 8,
+ "order": 8,
+ "results": {
+  "115446427324": {
+   "id": "115446427324",
+   "listing": {
+    "title": "COSMO 5.8 Quart Electric Air Fryer, Timer, Non-Stick Basket, Stainless Steel",
+    "price": "$74.99",
+    "image": "https://i.ebayimg.com/images/g/z6wAAOSw3tRiu21c/s-l500.webp",
+    "url": "https://www.ebay.com/itm/115446427324"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "",
+   "check": "",
+   "evidence": "",
+   "confirmed": false,
+   "how": {
+    "device": false,
+    "cloudModel": "",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 0
+  },
+  "267811619309": {
+   "id": "267811619309",
+   "listing": {
+    "title": "Cosori 9-in-1 TurboBlaze 6-Quart Air Fryer //Cream",
+    "price": "$107.99",
+    "image": "https://i.ebayimg.com/images/g/EvoAAeSwp0BqzPm-/s-l500.webp",
+    "url": "https://www.ebay.com/itm/267811619309"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for a 6-quart Cosori TurboBlaze air fryer in cream, whereas the recall covers 3.7 and 5.8-quart models such as the CP158 series in black, gray, white, blue, or red.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 1
+  },
+  "336635272673": {
+   "id": "336635272673",
+   "listing": {
+    "title": "Cosori Iconic 6.5 Qt Smart Air Fryer – Stainless Steel, PFAS-Free, 450°F",
+    "price": "$246.00",
+    "image": "https://i.ebayimg.com/images/g/D-4AAeSwaHRqK6Np/s-l500.webp",
+    "url": "https://www.ebay.com/itm/336635272673"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for a 6.5 qt air fryer, whereas the recall is limited to 3.7 and 5.8 qt units.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 2
+  },
+  "158205871262": {
+   "id": "158205871262",
+   "listing": {
+    "title": "Cosori 9-In-1 Turboblaze Air Fryer 6 Qt, Premium Ceramic Coating, 90°–450°F, Pre",
+    "price": "$89.00",
+    "image": "https://i.ebayimg.com/images/g/5GkAAeSwR7pqhcg~/s-l500.webp",
+    "url": "https://www.ebay.com/itm/158205871262"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for a Turboblaze model air fryer, which is a different model series than those listed in the recall notice.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 3
+  },
+  "397846757414": {
+   "id": "397846757414",
+   "listing": {
+    "title": "Cosori 9-in-1 Air Fryer 6 Qt – Premium Ceramic Coating – 90°–450°F - CAF-DC601",
+    "price": "$99.99",
+    "image": "https://i.ebayimg.com/images/g/LsUAAeSw~F1p4OTY/s-l140.webp",
+    "url": "https://www.ebay.com/itm/397846757414"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing specifies model CAF-DC601 and a 6 Qt size, whereas the recall notice only covers 3.7 and 5.8 qt units with different listed model numbers.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-4-hydrogen",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 4
+  },
+  "167934517064": {
+   "id": "167934517064",
+   "listing": {
+    "title": "Cosori 32 Quart Smart Air Fryer Toaster Oven, Rotisserie, Stainless, Ceramic NEW",
+    "price": "$176.64",
+    "image": "https://i.ebayimg.com/images/g/VlAAAeSweSJpGk-f/s-l140.webp",
+    "url": "https://www.ebay.com/itm/167934517064"
+   },
+   "level": "none",
+   "kind": null,
+   "why": "the cloud check did not confirm the flag",
+   "check": "",
+   "evidence": "The listing is for an air fryer toaster oven, whereas the recall is for specific basket-style air fryers.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": null,
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "order": 5
+  },
+  "117082217913": {
+   "id": "117082217913",
+   "listing": {
+    "title": "COSORI Air Fryer 5.8QT Oil-Free XL Electric Hot Air Fryers Oven, Programmable",
+    "price": "$74.99",
+    "image": "https://i.ebayimg.com/images/g/WW4AAeSwtZdpseGs/s-l140.webp",
+    "url": "https://www.ebay.com/itm/117082217913"
+   },
+   "level": "possible",
+   "kind": "recall",
+   "why": "same brand and kind as a recalled product; the listing does not show which model",
+   "check": "Check the model number on the bottom label of the unit to see if it matches any of the recalled model numbers listed in the notice.",
+   "evidence": "The listing offers a COSORI 5.8QT Air Fryer but does not show the specific model number required to determine if it is part of the recalled units.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": {
+    "id": "23130",
+    "date": "2023-02-23",
+    "product": "Cosori Air Fryers",
+    "title": "Two Million COSORI® Air Fryers Recalled by Atekcity Due to Fire and Burn Hazards",
+    "hazard": "A wire connection in the air fryers can overheat, posing fire and burn hazards.",
+    "remedy": "Consumers should immediately stop using the recalled air fryers and contact Cosori to receive their choice of a free replacement air fryer or another Cosori pr…",
+    "url": "https://www.cpsc.gov/Recalls/2023/Two-Million-COSORI-Air-Fryers-Recalled-by-Atekcity-Due-to-Fire-and-Burn-Hazards",
+    "image": "https://www.cpsc.gov/s3fs-public/RecalledCosoriairfryerModelsCP158AFCS158AFCAFP581AUSRandCAFP581SAUSRLightGray_0.JPG"
+   },
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Possible recall",
+   "verdict": "Same brand and kind as the Cosori Air Fryers, recalled February 2023. The listing doesn't show which model.",
+   "question": "Hi, before I buy: could you send a photo of the label showing the model number and manufacture date? I'd like to check it against a CPSC recall (23130, Cosori Air Fryers).",
+   "order": 6
+  },
+  "116429570107": {
+   "id": "116429570107",
+   "listing": {
+    "title": "COSORI Pro Gen 2 Air Fryer 5.8QT, Upgraded Version with Stable Performance &",
+    "price": "$79.99",
+    "image": "https://i.ebayimg.com/images/g/sN8AAOSwl2tnbd-z/s-l140.webp",
+    "url": "https://www.ebay.com/itm/116429570107"
+   },
+   "level": "possible",
+   "kind": "recall",
+   "why": "same brand and kind as a recalled product; the listing does not show which model",
+   "check": "Check the model number printed on the bottom label of the unit against the recalled model numbers listed in the notice.",
+   "evidence": "The listing is for a Cosori air fryer, but the specific model number is not visible in the title or photo.",
+   "confirmed": true,
+   "how": {
+    "device": true,
+    "cloudModel": "gemini-3.5-flash-lite",
+    "cloudError": ""
+   },
+   "recall": {
+    "id": "23130",
+    "date": "2023-02-23",
+    "product": "Cosori Air Fryers",
+    "title": "Two Million COSORI® Air Fryers Recalled by Atekcity Due to Fire and Burn Hazards",
+    "hazard": "A wire connection in the air fryers can overheat, posing fire and burn hazards.",
+    "remedy": "Consumers should immediately stop using the recalled air fryers and contact Cosori to receive their choice of a free replacement air fryer or another Cosori pr…",
+    "url": "https://www.cpsc.gov/Recalls/2023/Two-Million-COSORI-Air-Fryers-Recalled-by-Atekcity-Due-to-Fire-and-Burn-Hazards",
+    "image": "https://www.cpsc.gov/s3fs-public/RecalledCosoriairfryerModelsCP158AFCS158AFCAFP581AUSRandCAFP581SAUSRLightGray_0.JPG"
+   },
+   "banned": null,
+   "checkedAt": "2026-11-15T05:09:35.250Z",
+   "badge": "Possible recall",
+   "verdict": "Same brand and kind as the Cosori Air Fryers, recalled February 2023. The listing doesn't show which model.",
+   "question": "Hi, before I buy: could you send a photo of the label showing the model number and manufacture date? I'd like to check it against a CPSC recall (23130, Cosori Air Fryers).",
+   "order": 7
+  }
+ },
+ "pending": {}
+}
