@@ -115,6 +115,21 @@ node scripts/pack-extension.mjs    # release package in dist/ (no debug token, n
 with App Check enforced, put a debug token in `extension/src/appcheck-debug.local.js`; that file is gitignored and
 the release build refuses to include it.
 
+## Security
+
+`extension/src/firebase-config.js` contains the project's Firebase web API key. GitHub's secret scanner flags it, but
+it is not a secret. Every Firebase web app ships this key to its users, as Firebase documents in
+[Learn about using and managing API keys for Firebase](https://firebase.google.com/docs/projects/api-keys). It
+identifies the project; it doesn't grant access.
+
+What protects the project's model quota:
+- **The key is restricted to Firebase APIs only.** Called directly against the Gemini API, it gets 403 Permission
+  denied.
+- **App Check is enforced on Firebase AI Logic.** A call with the key but without a valid App Check token gets 401
+  "Firebase App Check token is invalid" (tested 2026-11-15).
+- **The App Check debug token used in development is gitignored.** The release build checks that it appears in no
+  shipped file.
+
 ## Privacy
 
 - Listings that the word rules and the built-in model clear stay on the computer.
