@@ -107,17 +107,31 @@ export function cloudModel({ system, schema, model = CLOUD_MODEL }) {
 
 const RETRYABLE = /\b(429|500|503|504)\b|high demand|overloaded|RESOURCE_EXHAUSTED|UNAVAILABLE|timed? ?out|abort/i;
 
-/** One JSON answer from the cloud, falling back through CLOUD_MODELS when a model is busy. Returns { answer, model }. */
-export async function cloudJson({ system, schema, parts, models = CLOUD_MODELS }) {
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+// "Please retry in 12.3s" in a 429 answer; otherwise a growing wait.
+const retryDelay = (e, attempt) => {
+  const m = String(e).match(/retry in ([\d.]+)\s*s/i);
+  return Math.min(30000, m ? Math.ceil(parseFloat(m[1]) * 1000) + 250 : 4000 * 2 ** attempt);
+};
+
+/**
+ * One JSON answer from the cloud. Falls back through CLOUD_MODELS when a model is busy, and when every model is over
+ * its per-minute quota, waits and tries again (twice). Returns { answer, model }.
+ */
+export async function cloudJson({ system, schema, parts, models = CLOUD_MODELS, retries = 2 }) {
   let last;
-  for (const model of models) {
-    try {
-      const r = await cloudModel({ system, schema, model }).generateContent(parts);
-      return { answer: JSON.parse(r.response.text()), model };
-    } catch (e) {
-      last = e;
-      if (!RETRYABLE.test(String(e))) throw e;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    for (const model of models) {
+      try {
+        const r = await cloudModel({ system, schema, model }).generateContent(parts);
+        return { answer: JSON.parse(r.response.text()), model };
+      } catch (e) {
+        last = e;
+        if (!RETRYABLE.test(String(e))) throw e;
+      }
     }
+    if (attempt < retries && /\b429\b|RESOURCE_EXHAUSTED|quota/i.test(String(last))) await sleep(retryDelay(last, attempt));
+    else break;
   }
   throw last;
 }

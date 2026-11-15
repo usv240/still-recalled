@@ -42,12 +42,20 @@ export function triage(idx, listing) {
 }
 
 /** The whole pipeline for one listing. Returns a presented result (plain data). */
-// `judge` replaces the on-device-only model: the web page passes a hybrid one, which runs on the device when it can.
-// `secondOpinion` (web page only): every baby product goes to the cloud, which may raise a soft flag on its own.
-export async function checkListing(listing, { modelReady, cloud, imageUrl = u => u, judge: judgeOverride = null, secondOpinion = false }) {
+export async function checkListing(listing, opts) {
+  return confirmInCloud(await lookOnDevice(listing, opts), opts);
+}
+
+/**
+ * Steps 1 and 2. Returns a stage: either finished (`stage.result`) or waiting for the cloud. Split from step 3 so the
+ * queue can run the built-in model on the next listing while cloud checks are still out.
+ * `judge` replaces the on-device-only model: the web page passes a hybrid one, which runs on the device when it can.
+ * `secondOpinion` (web page only): every baby product goes to the cloud, which may raise a soft flag on its own.
+ */
+export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u => u, judge: judgeOverride = null, secondOpinion = false }) {
   const idx = await index();
   const t = triage(idx, listing);
-  if (!t.needsEyes) return present(listing, { level: 'none', why: t.partOrToy ? 'part or toy' : 'no recall or risky type in the words' }, { words: true });
+  if (!t.needsEyes) return { result: present(listing, { level: 'none', why: t.partOrToy ? 'part or toy' : 'no recall or risky type in the words' }, { words: true }) };
 
   let device, photo = null, usedDevice = false, deviceError = '';
   if (modelReady) {
@@ -72,18 +80,27 @@ export async function checkListing(listing, { modelReady, cloud, imageUrl = u =>
 
   if (secondOpinion && !/part or a toy/.test(device.why || '')) device = { ...device, secondOpinion: true };
   const deviceLevel = device.level === 'none' && device.askCloud ? 'ask' : device.level;
+  const how = { device: usedDevice, deviceLevel, judgedInCloud: modelReady && !usedDevice && !deviceError, deviceError };
+  const stage = { listing, hints: t.hints, device, photo, how, result: null };
   if ((device.level === 'none' && !device.askCloud && !device.secondOpinion) || !cloud || !hasCloudAccess) {
-    return present(listing, device.level === 'none' ? device : decideFinal(device, null, t.hints), { device: usedDevice, deviceLevel, judgedInCloud: modelReady && !usedDevice && !deviceError, deviceError });
+    stage.result = present(listing, device.level === 'none' ? device : decideFinal(device, null, t.hints), how);
   }
+  return stage;
+}
+
+/** Step 3, for a stage lookOnDevice left open: the cloud reads the full recall notice and both photos. */
+export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
+  if (stage.result) return stage.result;
+  const { listing, device, hints, how } = stage;
   try {
-    if (!photo && listing.image) photo = await imagePart(imageUrl(listing.image)).catch(() => null);
+    const photo = stage.photo || (listing.image ? await imagePart(imageUrl(listing.image)).catch(() => null) : null);
     const notice = device.kind === 'recall' && device.card ? await fetchNotice(device.card.id) : null;
     const recallPhoto = notice && notice.images[0] ? await imagePart(imageUrl(notice.images[0])).catch(() => null) : null;
     const { answer, model } = await cloudJson({ system: CONFIRM_SYSTEM, schema: CONFIRM_SCHEMA, parts: confirmParts({ listing, notice, listingPhoto: photo, recallPhoto }) });
-    return present(listing, decideFinal(device, answer, t.hints), { device: usedDevice, deviceLevel, judgedInCloud: modelReady && !usedDevice && !deviceError, deviceError, cloud: { model, answer } });
+    return present(listing, decideFinal(device, answer, hints), { ...how, cloud: { model, answer } });
   } catch (e) {
     // The on-device flag stands, marked unconfirmed.
-    return present(listing, device.level === 'none' ? device : decideFinal(device, null, t.hints), { device: usedDevice, deviceLevel, judgedInCloud: modelReady && !usedDevice && !deviceError, deviceError, cloudError: String(e).slice(0, 160) });
+    return present(listing, device.level === 'none' ? device : decideFinal(device, null, hints), { ...how, cloudError: String(e).slice(0, 160) });
   }
 }
 
@@ -92,6 +109,11 @@ export async function checkListing(listing, { modelReady, cloud, imageUrl = u =>
 // in page order. Jobs for a page the tab has left are dropped.
 const queue = [];
 let running = false;
+const CLOUD_AT_ONCE = 2;   // the no-cost Gemini tier allows only a few requests a minute
+let cloudBusy = 0;
+const cloudWaiting = [];
+const cloudSlot = () => (cloudBusy < CLOUD_AT_ONCE ? (cloudBusy++, Promise.resolve()) : new Promise(r => cloudWaiting.push(r)));
+const releaseCloudSlot = () => { const next = cloudWaiting.shift(); if (next) next(); else cloudBusy--; };
 const livePage = new Map();   // tabId -> pageKey
 
 // Offscreen pages cannot read chrome.storage, so the background sends the shopper's settings with each batch.
@@ -112,14 +134,23 @@ async function pump() {
       const job = queue.shift();
       if (livePage.get(job.tabId) !== job.pageKey) continue;
       const status = await deviceStatus();
-      let result;
+      const send = result => {
+        result.order = job.order;
+        chrome.runtime.sendMessage({ type: 'sr:engine-result', tabId: job.tabId, pageKey: job.pageKey, result }).catch(() => {});
+      };
+      const failed = e => send({ id: job.listing.id, listing: job.listing, level: 'error', kind: null, error: String(e).slice(0, 160) });
+      let stage;
       try {
-        result = await checkListing(job.listing, { modelReady: status === 'available', cloud: job.cloud });
+        stage = await lookOnDevice(job.listing, { modelReady: status === 'available', cloud: job.cloud });
       } catch (e) {
-        result = { id: job.listing.id, listing: job.listing, level: 'error', kind: null, error: String(e).slice(0, 160) };
+        failed(e);
+        continue;
       }
-      result.order = job.order;
-      chrome.runtime.sendMessage({ type: 'sr:engine-result', tabId: job.tabId, pageKey: job.pageKey, result }).catch(() => {});
+      if (stage.result) { send(stage.result); continue; }
+      // The built-in model is one session, so it works through listings one at a time; cloud checks run alongside it,
+      // up to CLOUD_AT_ONCE. When all cloud slots are busy, the queue waits for one.
+      await cloudSlot();
+      confirmInCloud(stage).then(send, failed).finally(releaseCloudSlot);
     }
   } finally {
     running = false;
