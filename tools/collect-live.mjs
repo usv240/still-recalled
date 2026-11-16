@@ -3,6 +3,7 @@
 // the extension's own page reader (extension/src/extract.js), and keeps the first N in page order: what a shopper
 // sees first. Listings that appear in any earlier set (development or first test) are dropped, so the set is held out.
 // Usage: node tools/collect-live.mjs [--out=tools/fresh-listings.json] [--per=16]
+//          [--ebay="bassinet,crib"] [--craigslist="houston:bassinet,seattle:crib"]   (override the default searches)
 import puppeteer from 'puppeteer-core';
 import { build } from 'esbuild';
 import { mkdtempSync, rmSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -16,15 +17,16 @@ const outFile = path.resolve(opt('out', 'tools/fresh-listings.json'));
 const per = Number(opt('per', 16));
 
 // Searches a parent shopping for baby sleep gear would run, plus one ordinary control (stroller).
-const EBAY = ['bassinet', 'baby sleeper', 'rock n play', 'crib bumper', 'baby lounger', 'baby nest', 'crib', 'baby swing', 'co sleeper', 'stroller'];
-const CRAIGSLIST = [['losangeles', 'bassinet'], ['losangeles', 'crib'], ['chicago', 'bassinet'], ['chicago', 'crib']];
+const list = (name, dflt) => { const v = args.find(a => a.startsWith(`--${name}=`)); return v ? v.slice(name.length + 3).split(',').map(x => x.trim()).filter(Boolean) : dflt; };
+const EBAY = list('ebay', ['bassinet', 'baby sleeper', 'rock n play', 'crib bumper', 'baby lounger', 'baby nest', 'crib', 'baby swing', 'co sleeper', 'stroller']);
+const CRAIGSLIST = list('craigslist', ['losangeles:bassinet', 'losangeles:crib', 'chicago:bassinet', 'chicago:crib']).map(x => x.split(':'));
 const searches = [
   ...EBAY.map(q => ({ name: `ebay: ${q}`, url: `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(q)}&LH_ItemCondition=3000`, take: per })),
   ...CRAIGSLIST.map(([city, q]) => ({ name: `craigslist ${city}: ${q}`, url: `https://${city}.craigslist.org/search/sss?query=${encodeURIComponent(q)}`, take: 10 })),
 ];
 
 const seen = new Set();
-for (const f of ['tools/eval-listings.json', 'tools/live-listings.json']) {
+for (const f of ['tools/eval-listings.json', 'tools/live-listings.json', 'tools/fresh-listings.json', 'tools/third-listings.json'].filter(f => path.resolve(f) !== outFile)) {
   if (!existsSync(f)) continue;
   for (const list of Object.values(JSON.parse(readFileSync(f, 'utf8')))) for (const l of list) seen.add(l.id);
 }

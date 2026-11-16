@@ -1,0 +1,588 @@
+{
+  "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+  "labelled_at": "2026-11-16T14:55:00.188Z",
+  "labels": {
+    "257853024247": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only a gray/white vibration and music control box; title says replacement unit, no Ingenuity recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147682349321": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Summer Infant Rocker Duo bouncer/rocker shown; no Summer Infant bouncer or rocker recall in the data, and bouncers are not a sleep type.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366802831224": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "4moms seat, but the photo shows an open white oval ring frame with no powered control base, so it is the bounceRoo-style bouncer rather than the recalled MamaRoo swing or RockaRoo rocker (22200).",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "287731763565": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Baby Delight fold-flat fabric bouncer on a plastic frame; no Baby Delight recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "307280068610": {
+      "item": "product",
+      "recall_ids": [
+        "22200"
+      ],
+      "recall_match": "yes",
+      "type": null,
+      "should_warn": "yes",
+      "note": "Photo shows an older 4moms MamaRoo (black shell, plush squares fabric, white base with display panel, 3-point harness), which is the recalled MamaRoo 1.0-4.0 line in 22200.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "377624426547": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Generic Susomx fabric bouncer; no Susomx recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "900089825360": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Ingenuity vibrating bouncer seat on wire frame; Kids2's recall (23089) covers rocking sleepers, not bouncers.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "335327156483": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only a vibration motor box (replacement part for a Bright Starts bouncer); no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "407364869466": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Brown/gray BabyBjörn fabric bouncer; no BabyBjörn recall in the data.",
+      "confidence": "high",
+      "outside_db": "BabyBjörn Babysitter Balance / Balance Air bouncers, CPSC recall 09-287 (July 2009; sharp metal objects in padding; colors incl. Brown/Beige model 009069US, sold Sept 2008-July 2009) - possible if it is a 2008-09 unit"
+    },
+    "920140470598": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Ingenuity bouncer seat with toy bar on wire frame; no Ingenuity bouncer recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "137197169559": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Despite the Snuggle Nest name, the photo shows the underside of a small folding bassinet with a white leg frame, and the title says bassinet, so it is a bassinet, not an in-bed sleeper; no Baby Delight recall in the data.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "267597017115": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "maybe",
+      "note": "Owl 7-piece crib set: photo shows comforter, sheet, skirt and diaper stacker plus a striped owl panel that could be a bumper or a curtain, so it is unclear whether a padded bumper is included.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "398231853914": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a small woven straw basket that is a doll's nest/cradle.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "327454398517": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "maybe",
+      "note": "Soft-sided oval portable sleeper shown resting directly on an adult bed with no visible legs or stand; it could be a bassinet but looks like an in-bed sleeper.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "365409491872": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows the 3 pieces: sheet, reversible quilt and striped skirt; no padded bumper.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "237152187418": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a zip-up wearable sleep bag with sleeves.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "398121336576": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a gray zip romper on a hanger.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "206557928188": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a padded, tube-rimmed baby lounger/nest (title: Lounge and Nest), which is an infant lounger; Lulyboo has no recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "298724952667": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a knitted zip-up bunting/footmuff bag with hood, not a baby nest bed.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "227598457650": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Dream On Me 2-in-1 rocking bassinet with canopy on metal frame and wheels; bassinets are not a type and no Dream On Me recall is in the data.",
+      "confidence": "high",
+      "outside_db": "Dream On Me 2-in-1 Bassinet to Cradle, CPSC recall 15-088 (March 2015; fall and suffocation; models 439-A/B/G/P/W in pink/blue/green/white, sold May 2012-Oct 2014) - same kind of product, check model number"
+    },
+    "366483408915": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Twin bassinet/bedside sleeper on legs with a center divider; no matching brand or design in the recall data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "188184870083": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Gray fabric bedside bassinet on X legs with wheels; Venowu is not in the recall data and it does not look like the recalled Papablic or AirClub sleepers.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "407167987325": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "4moms mamaRoo sleep bassinet on stand; the 4moms recall (22200) covers MamaRoo swings and RockaRoo rockers, not the sleep bassinet.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366591166635": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Hooba Baby white bedside bassinet with gold rail and basket; not in the recall data and does not match recalled designs.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "257817237040": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Nuna Mixx stroller bassinet on its stand; no Nuna recall in the data (the stroller-bassinet recall 24719 is Peg Perego).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "336578698471": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "4moms mamaRoo sleep bassinet; not covered by the MamaRoo swing recall (22200).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "206647112620": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Delta Children rectangular mesh bassinet; no Delta Children bassinet recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "377637936383": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Gray/white oval bassinet with canopy on a stand; no HALO bassinet recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "137863150103": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Stock photo of a Simmons Kids rocking bassinet with mobile; no matching recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "327458632040": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Happiest Baby SNOO smart bassinet on hairpin legs; no SNOO recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "407230133822": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Chicco LullaGo portable bassinet on legs; no Chicco recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "800877418037": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Maxi-Cosi Iora bedside bassinet stock photo; no Maxi-Cosi bassinet recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "158288223413": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Vintage wooden spindle rocking cradle on a stand; cradles/bassinets are not a type and Nelson has no recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "358805977942": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded beige mesh bassinet with wood-look X legs, wheels and basket; does not match the recalled AirClub, Papablic or ZHORANGE designs.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147577606137": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Baby Delight Beside Me Dreamer bedside bassinet on legs; no Baby Delight recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "178565672600": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Milliard bedside sleeper on legs; no Milliard recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "287664386307": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only two caster wheels (replacement parts).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147679294032": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded pink bedside bassinet on a center-column stand; not quilted like the recalled AirClub and not the gray Papablic.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "168696071151": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a red lips lamp; 'bedside sleeper' is not a baby product here.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "377371886640": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "HALO BassiNest Swivel Sleeper bedside bassinet; no HALO bassinet recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "236973921156": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Ingenuity mesh bassinet on wheeled frame; no Ingenuity bassinet recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "227609832125": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows an elevated pet bed (Furmates), not a baby product.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "377313738667": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Mika Micky gray bedside sleeper stock photo; not in the recall data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366809974121": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Ingenuity convertible bedside sleeper on a curved frame; no Ingenuity recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366102597934": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Simmons twin bedside bassinet with center divider; no matching recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "860086060669": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded skirted oval bassinet with canopy on a stand; no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "137759217447": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows the mini crib dressed with toile sheet, a quilt over the rail and pillows, with no padded bumper along the slats.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "206690454998": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Classic Pooh 4-piece set; besides the quilt and sheet the photo shows a padded, ruffled Pooh and Piglet piece that looks like the bumper.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "820347403303": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Photo shows the Baby Looney Tunes padded bumper tied around the crib, and the title lists 'Pad' and 'Tie-On'.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "920083172872": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo and title show only a sheet, skirt and blanket; no bumper.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "257852153216": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "5-piece set: besides the quilt, pillow and sheet the photo shows a folded padded blue piece with STOP-sign appliques and piped panel edges that looks like the bumper.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "880096391547": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Photo shows a rolled, ruffled padded bumper and a ruffled padded headboard piece with ties, alongside the clown diaper stacker.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "287709174422": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "maybe",
+      "note": "Waverly 7-piece set: photo shows pillows, quilt, diaper stacker and blanket, but it cannot show whether a padded bumper is among the pieces.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "800891130630": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo and title show only a fitted sheet and crib skirt.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "227567509869": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "maybe",
+      "note": "Full Disney Babies set with quilt, sheet and wall decor; a quilted, piped padded piece could be the bumper but the photo does not make it clear.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "366769666059": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "The package label in the photo lists 'Bumper' among the 13 pieces.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "800802235601": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Photo shows padded Lion King panels with brown ribbon ties (a bumper) in the lot.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "356094790302": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Crib bedding lot: photo shows a thick, tufted and piped padded panel that looks like a crib bumper section.",
+      "confidence": "low",
+      "outside_db": null
+    }
+  }
+}

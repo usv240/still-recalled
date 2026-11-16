@@ -1,6 +1,6 @@
 // Draws the Devpost gallery images (docs/gallery/*.png) from the test reports, so every number in them is measured:
 //   1-hybrid.png    where each step runs and how many listings reached it (tools/eval-report.json)
-//   2-results.png   caught and false alarms, three ways of running the same engine (both test reports)
+//   2-results.png   caught and false alarms, three ways of running the same engine (every test report)
 //   3-search-page.png  the real "crib bedding set" listings from the first test with the engine's real decisions
 //   4-card.png         the full card for one of them, in the side panel
 //                      (3 and 4 need tools/collector.mjs running, and tools/make-gallery-fixture.mjs run first)
@@ -17,6 +17,8 @@ mkdirSync(src, { recursive: true });
 const read = f => JSON.parse(readFileSync(f, 'utf8'));
 const first = read('tools/eval-report.json');
 const second = existsSync('tools/fresh-report.json') ? read('tools/fresh-report.json') : null;
+const third = existsSync('tools/third-report.json') ? read('tools/third-report.json') : null;
+const tests = [[first, 'First test', 'eBay'], [second, 'Second test', 'eBay, Craigslist'], [third, 'Third test', 'eBay, Mercari, Craigslist']].filter(t => t[0]);
 const font = f => pathToFileURL(path.resolve('extension/fonts', f)).href;
 
 const base = `
@@ -36,7 +38,10 @@ h1 { font-size: 52px; line-height: 1.08; font-weight: 600; letter-spacing: -0.02
 `;
 
 // 1. The hybrid: three steps, split by where they run, with the counts from one real run.
-const c = first.cost;
+// Counts summed over every test run, so the diagram shows how much reached each step in practice.
+const runs = [first, second, third].filter(Boolean);
+const c = ['listings', 'lookedAtOnDevice', 'sentToCloud'].reduce((o, k) => ({ ...o, [k]: runs.reduce((n, r) => n + r.cost[k], 0) }), {});
+c.shareSentToCloud = c.sentToCloud / c.listings;
 const hybrid = `<!doctype html><meta charset="utf-8"><style>${base}
 .zones { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 56px; }
 .zone { border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 20px; }
@@ -72,39 +77,43 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
   <div><b>What goes to the cloud</b>A flagged listing's title, description and photo, with the recall notice it might match.</div>
   <div><b>What never leaves the laptop</b>The other listings, your searches and your browsing. No account, no tracking.</div>
 </div>
-<div class="foot"><span>One real run: ${c.listings} used baby-gear listings from 18 eBay searches, November 15, 2026. ${Math.round(c.shareSentToCloud * 100)}% went to the cloud.</span><span class="brand"><i></i>Still Recalled</span></div>
+<div class="foot"><span>${['', 'One test run', 'Two test runs', 'Three test runs'][runs.length]}, November 15 and 16, 2026: ${c.listings} real listings from eBay${third ? ', Mercari' : ''} and Craigslist. ${Math.round(c.shareSentToCloud * 100)}% went to the cloud.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
 
-// 2. Results: two small bar charts per test (different scales, so never one axis), hybrid in ink, the rest quiet.
-const SYSTEMS = [['words only', 'Words only'], ['on-device only', 'Built-in model only'], ['hybrid', 'Hybrid']];
-const bars = (report, key, of, title) => {
-  const rows = SYSTEMS.map(([k, label]) => {
-    const v = key === 'caught' ? report.systems[k].caught : report.systems[k].falseAlarms.length;
-    const w = of && v ? Math.max(1, Math.round((v / of) * 88)) : 0;   // room after the longest bar for its number
-    return `<div class="row"><span class="lab">${label}</span><span class="track"><span class="bar ${k === 'hybrid' ? 'is-hybrid' : ''}" style="width:${w}%"></span><span class="val">${v}</span></span></div>`;
-  }).join('');
-  return `<div class="chart"><h3>${title}</h3>${rows}</div>`;
-};
-const testBlock = (report, name) => `<section class="test"><h2>${name}</h2><p class="sub">${report.listings} listings: ${report.mustFlag} should be flagged, ${report.mustNotFlag} should not</p>
-  ${bars(report, 'caught', report.mustFlag, `Caught, of ${report.mustFlag}`)}
-  ${bars(report, 'falseAlarms', report.mustNotFlag, `False alarms, of ${report.mustNotFlag}`)}</section>`;
+// 2. Results: totals across every test, as two bar charts (different scales, so never one axis), hybrid in ink and
+// the rest quiet; then each test on its own line, so no test hides inside the totals.
+const SYSTEMS = [['words only', 'Word rules only'], ['on-device only', 'Built-in model only'], ['hybrid', 'Hybrid']];
+const total = f => tests.reduce((s, [r]) => s + f(r), 0);
+const caughtOf = k => total(r => r.systems[k].caught);
+const alarmsOf = k => total(r => r.systems[k].falseAlarms.length);
+const allFlag = total(r => r.mustFlag), allFine = total(r => r.mustNotFlag), allListings = total(r => r.listings);
+// Bars start at zero; `of` is the full-width value: the total for "caught", the largest count for false alarms.
+const bars = (title, of, val) => `<div class="chart"><h3>${title}</h3>${SYSTEMS.map(([k, label]) => {
+  const v = val(k);
+  const w = of && v ? Math.max(1, Math.round((v / of) * 86)) : 0;   // room after the longest bar for its number
+  return `<div class="row"><span class="lab">${label}</span><span class="track"><span class="bar ${k === 'hybrid' ? 'is-hybrid' : ''}" style="width:${w}%"></span><span class="val">${v}</span></span></div>`;
+}).join('')}</div>`;
+const perTest = `<table class="per"><thead><tr><th></th><th>Listings</th><th>Hybrid caught</th><th>Hybrid false alarms</th><th>Word rules only: false alarms</th></tr></thead><tbody>${
+  tests.map(([r, name, sites]) => `<tr><td><b>${name}</b> <span>${sites}</span></td><td>${r.listings}</td><td>${r.systems.hybrid.caught} of ${r.mustFlag}</td><td>${r.systems.hybrid.falseAlarms.length} of ${r.mustNotFlag}</td><td>${r.systems['words only'].falseAlarms.length}</td></tr>`).join('')}</tbody></table>`;
 const results = `<!doctype html><meta charset="utf-8"><style>${base}
-.tests { display: grid; grid-template-columns: ${second ? '1fr 1fr' : '1fr'}; gap: 56px; margin-top: 48px; }
-.test h2 { margin: 0; font-size: 24px; font-weight: 600; }
-.sub { margin: 6px 0 24px; font-size: 18px; color: var(--muted); }
-.chart { margin-bottom: 28px; }
-.chart h3 { margin: 0 0 12px; font-size: 18px; font-weight: 500; color: var(--muted); }
-.row { display: grid; grid-template-columns: 210px 1fr; align-items: center; gap: 14px; height: 40px; }
-.lab { font-size: 19px; }
-.track { height: 20px; display: flex; align-items: center; gap: 12px; }
-.bar { display: block; height: 20px; border-radius: 0 4px 4px 0; background: var(--quiet); }
+.charts { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 44px; }
+.chart h3 { margin: 0 0 14px; font-size: 20px; font-weight: 500; color: var(--muted); }
+.row { display: grid; grid-template-columns: 220px 1fr; align-items: center; gap: 14px; height: 46px; }
+.lab { font-size: 21px; }
+.track { height: 22px; display: flex; align-items: center; gap: 12px; }
+.bar { display: block; height: 22px; border-radius: 0 4px 4px 0; background: var(--quiet); }
 .bar.is-hybrid { background: var(--primary); }
-.val { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.val { font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.per { margin-top: 40px; border-collapse: collapse; width: 100%; font-size: 19px; font-variant-numeric: tabular-nums; }
+.per th { text-align: left; font-weight: 500; color: var(--muted); font-size: 16px; padding: 0 0 10px; border-bottom: 1px solid var(--rule); }
+.per td { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.per td span { color: var(--muted); }
 </style><div class="slide">
 <h1>The built-in model removes false alarms. The cloud catches what words miss.</h1>
-<p class="lede">The same engine run three ways on listings the rules had never seen, labelled blind from the title and photo.</p>
-<div class="tests">${testBlock(first, 'First test: eBay')}${second ? testBlock(second, 'Second test, after fixes: eBay and Craigslist') : ''}</div>
-<div class="foot"><span>Method, labels and every miss: docs/accuracy.md in the repository.</span><span class="brand"><i></i>Still Recalled</span></div>
+<p class="lede">The same engine run three ways in ${['', 'one', 'two', 'three'][tests.length] || tests.length} blind tests: ${allListings} real listings the rules had never seen, each test collected after the fixes the one before led to.</p>
+<div class="charts">${bars(`False alarms, among ${allFine} listings that were fine`, Math.max(...SYSTEMS.map(([k]) => alarmsOf(k))), alarmsOf)}${bars(`Caught, of ${allFlag} that should be flagged`, allFlag, caughtOf)}</div>
+${perTest}
+<div class="foot"><span>Labels by blind reviewers from the title and one photo. Method and every miss: docs/accuracy.md.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, pipe: true, args: ['--allow-file-access-from-files'] });

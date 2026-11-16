@@ -1,14 +1,15 @@
 // All model calls go through Firebase AI Logic. This file is the only place the SDK is touched.
 import { initializeApp } from 'firebase/app';
 import { initializeAppCheck, CustomProvider, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
-import { getAI, getGenerativeModel, GoogleAIBackend, InferenceMode } from 'firebase/ai';
+import { getAI, getGenerativeModel, AgentPlatformBackend, InferenceMode } from 'firebase/ai';
 import { firebaseConfig, recaptchaSiteKey, appCheckBridgeUrl } from './firebase-config.js';
 
-// No-cost cloud models used to confirm or clear what the on-device model flagged, in order of preference.
+// Cloud models used to confirm or clear what the on-device model flagged, in order of preference.
 // The next one is tried when a model is overloaded or out of quota.
 export const CLOUD_MODELS = ['gemini-4-hydrogen', 'gemini-3.5-flash-lite'];
 export const CLOUD_MODEL = CLOUD_MODELS[0];
-const CLOUD_TIMEOUT_MS = 25000;
+// One cloud check in 58 timed out at 25 s in the third test, on both models; a check runs in the background.
+const CLOUD_TIMEOUT_MS = 40000;
 
 const app = initializeApp(firebaseConfig);
 
@@ -22,15 +23,19 @@ const hasDocument = typeof document !== 'undefined';
 const inExtension = typeof location !== 'undefined' && location.protocol === 'chrome-extension:';
 if (debugToken) self.FIREBASE_APPCHECK_DEBUG_TOKEN = debugToken;
 const noProvider = new CustomProvider({ getToken: () => Promise.reject(new Error('No App Check attestation in this context')) });
+// Auto-refresh is off. Every refresh is another reCAPTCHA score, and one refused score (403) makes the SDK stop asking
+// for a day. Tokens last an hour and are renewed when a call needs one.
 initializeAppCheck(app, {
   provider: debugToken ? noProvider
     : inExtension && hasDocument ? new CustomProvider({ getToken: bridgeToken })
     : hasDocument ? new ReCaptchaEnterpriseProvider(recaptchaSiteKey)
     : noProvider,
-  isTokenAutoRefreshEnabled: true,
+  isTokenAutoRefreshEnabled: false,
 });
 
-const ai = getAI(app, { backend: new GoogleAIBackend() });
+// The Agent Platform Gemini API (formerly Vertex AI), billed per call on the project's Cloud Billing account. Its
+// quota answered 20 calls at once (tested 2026-11-16); the Gemini Developer API's free tier ran out at 3.
+const ai = getAI(app, { backend: new AgentPlatformBackend('global') });
 export const hasCloudAccess = !!debugToken || hasDocument;
 
 /**
@@ -39,20 +44,41 @@ export const hasCloudAccess = !!debugToken || hasDocument;
  * the first cloud call and kept for the life of the (offscreen) page.
  */
 let bridge = null;
+let bridgeFrame = null;
 const waiting = new Map();
 let nextId = 0;
-function bridgeToken() {
+
+// When reCAPTCHA refuses a token (403), the App Check SDK in the bridge stops asking for a day. The bridge frame lives
+// as long as the offscreen page, so one low score would turn the cloud check off for a day. Instead, a refused token
+// replaces the frame, which starts with no back-off and gets a fresh reCAPTCHA score, and asks once more.
+async function bridgeToken() {
+  try {
+    return await bridgeTokenOnce();
+  } catch {
+    resetBridge();
+    return bridgeTokenOnce();
+  }
+}
+
+function resetBridge() {
+  if (bridgeFrame) bridgeFrame.remove();
+  bridgeFrame = null;
+  bridge = null;
+}
+
+function bridgeTokenOnce() {
   const origin = new URL(appCheckBridgeUrl).origin;
   if (!bridge) {
     bridge = new Promise((resolve, reject) => {
       const frame = document.createElement('iframe');
+      bridgeFrame = frame;
       frame.src = appCheckBridgeUrl;
       frame.title = 'App Check';
       frame.style.display = 'none';
       const timer = setTimeout(() => { bridge = null; frame.remove(); reject(new Error('App Check bridge did not load')); }, 20000);
       addEventListener('message', e => {
         if (e.origin !== origin || !e.data) return;
-        if (e.data.type === 'sr-appcheck-ready') { clearTimeout(timer); resolve(frame); }
+        if (e.data.type === 'sr-appcheck-ready' && e.source === frame.contentWindow) { clearTimeout(timer); resolve(frame); }
         if (e.data.type === 'sr-appcheck-token' && waiting.has(e.data.id)) {
           const w = waiting.get(e.data.id);
           waiting.delete(e.data.id);

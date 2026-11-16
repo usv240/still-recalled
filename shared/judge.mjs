@@ -55,7 +55,10 @@ export function decide(answer, candidate, hints, maybe = []) {
   // the shopper sees nothing yet, but the listing goes to the cloud for a look at the photo.
   const none = { level: 'none', kind: null, card: null, banned: null, why: '', askCloud: maybe.length > 0, maybe: maybe[0] || null };
   if (answer.what_is_for_sale === 'part_or_accessory' || answer.what_is_for_sale === 'toy_or_doll_version') {
-    return { ...none, askCloud: false, why: 'the listing is a part or a toy version, not the product' };
+    // The words name a risky type but the built-in model calls the listing a part or a toy: the two disagree, so the
+    // cloud looks at the photo to settle it. ("DockATot Deluxe+ Lounger Cover" whose photo shows the whole lounger was
+    // cleared as a part in the first test.) Parts and toys the words already recognise never reach this point.
+    return { ...none, askCloud: hints.length > 0, maybe: hints[0] || none.maybe, why: 'the listing is a part or a toy version, not the product' };
   }
 
   if (candidate && answer.same_kind_as_recalled) {

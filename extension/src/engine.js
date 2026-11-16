@@ -100,7 +100,7 @@ export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
     return present(listing, decideFinal(device, answer, hints), { ...how, cloud: { model, answer } });
   } catch (e) {
     // The on-device flag stands, marked unconfirmed.
-    return present(listing, device.level === 'none' ? device : decideFinal(device, null, hints), { ...how, cloudError: String(e).slice(0, 160) });
+    return present(listing, device.level === 'none' ? device : decideFinal(device, null, hints), { ...how, cloudError: String(e).slice(0, 400) });
   }
 }
 
@@ -109,7 +109,7 @@ export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
 // in page order. Jobs for a page the tab has left are dropped.
 const queue = [];
 let running = false;
-const CLOUD_AT_ONCE = 2;   // the no-cost Gemini tier allows only a few requests a minute
+const CLOUD_AT_ONCE = 4;   // cloud confirmations in flight at once, while the on-device model works through the queue
 let cloudBusy = 0;
 const cloudWaiting = [];
 const cloudSlot = () => (cloudBusy < CLOUD_AT_ONCE ? (cloudBusy++, Promise.resolve()) : new Promise(r => cloudWaiting.push(r)));

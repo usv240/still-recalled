@@ -94,13 +94,19 @@ function setStep(key, state, detail = '') {
   li.querySelector('.step-detail').textContent = detail;
 }
 
+const withArticle = name => `${/^[aeiou]/i.test(name) ? 'an' : 'a'} ${name}`;
+
 async function run({ file, text, example = null }) {
   if (running) return;
   running = true;
   const imageUrl = file ? URL.createObjectURL(file) : '';
   const side = $('side');
   side.replaceChildren(h('div', { class: 'card' }, stepsView(imageUrl, text)));
-  side.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  // On a phone the progress card sits below the form: bring its top into view so the steps can be watched. On a wide
+  // screen it sits beside the form and nothing moves.
+  if (side.getBoundingClientRect().top > innerHeight * 0.4) {
+    side.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
   try {
     let listing, readSource = '';
     if (file) {
@@ -120,7 +126,7 @@ async function run({ file, text, example = null }) {
     const t = await triageListing(listing);
     setStep('words', 'done', t.partOrToy ? 'Looks like a part or a toy version'
       : t.candidate ? `Possible match: ${productName(t.candidate.card.product)}`
-      : t.hints.length ? `Wording points to a ${t.hints[0].label || 'risky sleep product'}`
+      : t.hints.length ? `Wording points to ${withArticle((t.hints[0].label || 'risky sleep product').toLowerCase())}`
       : 'No recall names this brand and product');
 
     setStep('look', 'active', model === 'available' ? 'On this device, then in the cloud if anything matches' : 'In the cloud');
@@ -130,9 +136,9 @@ async function run({ file, text, example = null }) {
     showResult(r, listing, { readSource, example });
   } catch (e) {
     console.error(e);
-    showError(/app ?check|attestation|403|permission/i.test(String(e))
-      ? 'The cloud check is not available on this page right now, so this listing could not be checked.'
-      : 'Something went wrong while checking. Try again in a moment.');
+    // A refused App Check token holds off further tries until the page reloads, so offer a reload, not a retry.
+    if (/app ?check|attestation|40[13]|permission/i.test(String(e))) showError('The cloud check could not verify this browser, so this listing could not be checked. Reload the page and try again.', { reload: true });
+    else showError('Something went wrong while checking. Try again in a moment.');
   } finally {
     running = false;
   }
@@ -169,10 +175,10 @@ function showResult(r, listing, { example }) {
   $('side').replaceChildren(h('div', { class: 'card result' }, head, body, h('div', { class: 'result-foot' }, again)));
 }
 
-function showError(message) {
+function showError(message, { reload = false } = {}) {
   running = false;
-  const again = h('button', { class: 'btn btn-secondary', type: 'button' }, 'Try again');
-  again.addEventListener('click', reset);
+  const again = h('button', { class: 'btn btn-secondary', type: 'button' }, reload ? 'Reload the page' : 'Try again');
+  again.addEventListener('click', reload ? () => location.reload() : reset);
   $('side').replaceChildren(h('div', { class: 'card' }, h('div', { class: 'error' }, icon('alert', { size: 18 }), h('p', {}, message)), again));
 }
 

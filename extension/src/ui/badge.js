@@ -5,8 +5,11 @@ import { icon, mark } from './icons.js';
 import uiCss from './ui.css';
 import contentCss from './content.css';
 
-/** Place a badge on a card: over the photo's top-left corner, or above the title on an item page. */
-export function attachBadge(host, card) {
+/**
+ * Place a badge on a card: over the photo's top-left corner, or above the title on an item page. Craigslist prints the
+ * price in the photo's top-left corner, so there the badge takes the top-right one.
+ */
+export function attachBadge(host, card, { corner = 'left' } = {}) {
   if (card.inline) {
     host.style.cssText = 'display:block;margin:0 0 10px;';
     card.el.before(host);
@@ -18,7 +21,9 @@ export function attachBadge(host, card) {
   const link = anchor.closest('a');
   if (link && link.parentElement && link.parentElement !== document.body) anchor = link.parentElement;
   if (getComputedStyle(anchor).position === 'static') anchor.style.position = 'relative';
-  host.style.cssText = 'position:absolute;top:8px;left:8px;z-index:2147483000;';
+  // Just above the listing's photo, and below the site's own header: Craigslist scrolls its results under a fixed
+  // header, and a top z-index drew the badges over it. The card opens in the top layer (a popover), so it needs none.
+  host.style.cssText = `position:absolute;top:8px;${corner === 'right' ? 'right' : 'left'}:8px;z-index:2;`;
   anchor.prepend(host);
 }
 

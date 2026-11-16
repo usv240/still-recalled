@@ -19,10 +19,10 @@ I built Still Recalled to put that warning on the listing itself, while the pare
 listing it reads **Padded crib bumper**: Chrome's built-in model saw the panels on the laptop, and Gemini in the cloud
 confirmed them.
 
-**What it found on real listings.** On November 15, 2026, I ran it on 136 used baby-gear listings from 18 eBay
-searches. 6 were crib sets with padded bumpers and 8 were infant loungers or in-bed sleepers, asking $908 in total.
-Still Recalled flagged all 6 bumper sets ($517) and 4 of the 8 loungers, with 4 false alarms among the 115 listings
-that were fine. 85% of the listings never left the laptop. In a second test after fixes, on 125 new listings from eBay and from Craigslist in Los Angeles and Chicago, it raised no false alarms at all and again flagged every padded bumper and recall match.
+**What it found on real listings.** I tested it three times, on November 15 and 16, 2026, on 437 used baby-gear
+listings from eBay, Mercari and Craigslist that it had never seen. 52 of them were recalled products, padded crib
+bumpers or infant loungers, asking $3,211 in total. Still Recalled flagged 40 of them ($2,689), with 10 false alarms
+among the 365 listings that were fine. 80% of the listings never left the laptop.
 
 ### What it does
 - **On eBay, Mercari and Craigslist search pages**, a badge appears on each listing that needs a look: red for a
@@ -50,22 +50,21 @@ and only what it flags goes to Gemini in the cloud, with the full recall notice.
 | 2. Gemini Nano, `ONLY_ON_DEVICE` | On the laptop | Baby products: title and photo | Private and free, so it can look at a whole page. It answers: is this the product, a part or a toy? Does the photo look like a lounger, a padded bumper or an inclined sleeper? |
 | 3. Gemini, in the cloud | Google's servers | Only flagged listings: title, photo, the full recall notice and its photo | The notice is long and the call is close: is this the recalled model, a look-alike, or can't tell? It writes the one thing to check. |
 
-**Measured, three ways, on listings the rules had never seen**, labelled blind:
+**Measured, three ways, in three blind tests,** each on listings collected after the fixes the test before it led to:
 
-| Same engine, run as | First test: caught (of 14) | False alarms (of 115) | Second test: caught (of 4) | False alarms (of 117) |
-|---|---|---|---|---|
-| Words only | 6 | 22 | 1 | 16 |
-| Built-in model only | 7 | 8 | 2 | 6 |
-| **Hybrid** | **10** | **4** | **2** | **0** |
+| Same engine, run as | Caught (of 52) | False alarms (of 365) |
+|---|---|---|
+| Words only | 31 | 62 |
+| Built-in model only | 35 | 30 |
+| **Hybrid** | **40** | **10** |
 
-The built-in model removes most of the word rules' false alarms by looking at the photo: pajamas named "sleeper", a
-dollhouse "bassinet". The cloud, which saw 15% of the listings in the first test and 8% in the second, catches what
-neither can, such as a crib set whose padded bumper shows only in the photo, and clears what the built-in model gets wrong: in the second test
-it cleared all six of its false alarms.
+The built-in model halves the word rules' false alarms by looking at the photo: pajamas named "sleeper", a dollhouse
+"bassinet". The cloud, which saw 20% of the listings, catches what neither can, such as a crib set whose padded bumper
+shows only in the photo, and clears what the built-in model gets wrong.
 
-Across both tests it flagged every padded bumper and every recall match, 8 of 8. Loungers and positioners are the hard
-case, 4 of 10: the six it missed were listed as a cover, a pillow or a portable sleeper. A miss costs more than a false
-alarm here, so a flag the cloud can't settle stays on the page as "possible" rather than being cleared.
+Each test changed the product. After the first two, loungers were the weak spot: 4 of 10 caught. The fixes that followed
+raised that to 23 of 25 in the third test, on listings collected after the fixes. A miss costs more than a false alarm
+here, so a flag the cloud can't settle stays on the page as "possible" rather than being cleared.
 
 **Without Chrome's built-in model**, the extension uses the word rules and the cloud checks only what they flag. On the
 web page the same call falls back to Gemini in the cloud, so it works on phones.
@@ -81,6 +80,10 @@ web page the same call falls back to Gemini in the cloud, so it works on phones.
 - **App Check on a Chrome extension.** Extensions have no attestation provider of their own. The extension's hidden page
   frames a small bridge page on the site, which runs reCAPTCHA Enterprise and hands App Check tokens only to this
   extension's ID. So anyone who installs it, judges included, gets the cloud check with App Check enforced.
+- **Built to be judged.** The cloud side uses the Vertex AI Gemini API backend, which answered 20 calls at once in a
+  load test, with a budget alert on the project. An end-to-end test runs the installed extension in a Chrome test
+  profile that has the built-in model: Gemini Nano looked at 59 of 60 live eBay listings inside the extension, and the
+  cloud confirmed 41 with no errors.
 
 ### Built during the submission period
 I built all of Still Recalled during the submission period, starting November 14, 2026. It reuses no code. The idea
@@ -92,14 +95,18 @@ once a marketplace adopts it. Still Recalled works from the buyer's side, today.
   words (brand, model number), the model only reads and looks, and the cloud confirms.
 - **Clicks inside marketplace links.** eBay follows the link around a button, and Craigslist routes clicks itself. The
   badge now sits beside the link, and the end-to-end test clicks it on live pages.
+- **Photos that arrive late.** On Craigslist, the extension first read the page before its photos loaded, so most
+  listings were judged by their title alone. I found it while recording the demo: the card said "the title lists" where
+  it should have said "the photo shows". A listing now waits for its photo, and the rest are checked as you scroll.
 - **The law differs by product type.** Inclined sleepers and padded bumpers can't be sold at any age; loungers made
   before 2025 can, though CPSC warns against them and eBay and Facebook prohibit them. Each warning states its own
   type's rule, checked against the Federal Register and CPSC, and only the first kind gets a Report to CPSC button.
 
 ### What's next
 - Facebook Marketplace inside the extension.
-- Recalls from before November 2021: the second test found five Craigslist bassinets from a product family CPSC recalled
-  in 2015.
+- Recalls from before November 2021: the reviewers found bassinets, bouncers and stroller adapters from recalls in 2009,
+  2015 and 2021 that the data doesn't have yet.
+- The Chrome Web Store, so installing it takes one click.
 - Offering the engine to resale platforms, the side SafeState covers.
 
 ### Built with
@@ -123,18 +130,19 @@ document, side panel), CPSC Recall API, esbuild, Puppeteer.
 
 ---
 
-# Video script (under 3:00)
+# Video (1:55)
+
+A complete draft is built by `scripts/make-video.mjs` from real footage (`scripts/record-demo.mjs`: the extension with
+the built-in model on a live Craigslist search; `scripts/record-phone.mjs`: the web page at phone size), slides drawn
+from the test reports, a neural voice and burned-in captions. To narrate it yourself, record over the same words; the
+captions are in `still-recalled-demo.srt`.
 
 | Time | Picture | Words |
 |---|---|---|
-| 0:00 | eBay search "crib bedding set", Used. A real listing: a used elephant crib bedding set, $75. Slow zoom to the bumper in the photo. | "I'm shopping for a used crib set. This one is $75. Look at the photo: a padded bumper. Selling one has been against federal law since 2022, because bumpers can suffocate a baby. Nothing on the page says so." |
-| 0:15 | The badge appears on that listing: **Padded crib bumper**. | "Still Recalled says so, right on the listing." |
-| 0:20 | Click the badge. The card: seller's photo, the rule, Ask the seller, Report to CPSC. | "It shows why, what to ask the seller, and a ready report to CPSC, which takes these listings down." |
-| 0:35 | Click Report to CPSC: SaferProducts.gov opens; paste the report. | "One click copies the report with the listing's link." |
-| 0:45 | Scroll the page: badges appear one by one; the toolbar count climbs; open the side panel. | "It checks every listing on eBay, Mercari and Craigslist as I scroll." |
-| 0:55 | Diagram: laptop chip, then cloud. Counters from the first test: 136 listings, 98 looked at on the laptop, 21 sent to the cloud. | "Here's the hybrid, all through Firebase AI Logic. Chrome's built-in Gemini Nano looks at every baby product on my laptop: title and photo, nothing leaves. Only what it flags goes to Gemini in the cloud, with the full recall notice." |
-| 1:25 | The results chart (gallery image 2), rows lighting up. | "I tested it on 136 eBay listings it had never seen. Words alone raised 22 false alarms; the hybrid, 4. It caught all six crib sets with padded bumpers. After fixes, a second test on 125 new listings from eBay and Craigslist: no false alarms at all." |
-| 1:50 | A recall match: seller photo beside the CPSC notice photo. | "For recalls, it puts the seller's photo beside the government's, and asks the seller for the model number that settles it." |
-| 2:05 | Phone: the web page. A Facebook Marketplace screenshot; steps tick: "Read in the cloud". Same on the laptop: "Read on this device". | "On a phone, take a screenshot of any listing, even Facebook Marketplace. The same code reads it on the device when it can, and in the cloud when it can't." |
-| 2:30 | "Never says safe." CPSC sources. | "It never says 'safe'. Every warning cites CPSC." |
-| 2:40 | Logo, URL, "Free. Open source." | "Still Recalled. Check before you buy." |
+| 0:00 | Craigslist Los Angeles, "baby lounger", the extension running | "A parent shopping Craigslist for a used baby lounger sees listings like these. Infant loungers are never safe for sleep: young babies can't lift their heads away from the soft padding, and many have been recalled. Nothing on the page says so." |
+| 0:14 | Badges appear as listings are checked (3x speed) | "Still Recalled is a Chrome extension that checks every listing on the page. Chrome's built-in model, Gemini Nano, looks at each title and photo right on this laptop. Only the listings it flags go to Gemini in the cloud, through Firebase AI Logic, with the full recall notice and both photos." |
+| 0:32 | A flagged lounger; the card opens | "This one is flagged as an infant lounger or nest: the built-in model saw it in the photo, and the cloud confirmed it. The card says why, and gives the shopper the one question that settles it. For products the law bans outright, like padded crib bumpers, it also copies a ready report for CPSC." |
+| 0:51 | Slide: where each step runs | "Why hybrid? A search page has sixty listings, and a parent scrolls through hundreds. Screening them all in the cloud would send their browsing to a server and cost money for every look. So screening runs only on the device, and the cloud only confirms. Across three tests, 80% of listings never left the laptop." |
+| 1:11 | Slide: results of the three tests | "It was tested three times, on 437 real listings it had never seen, labelled blind. Word rules alone raised 62 false alarms. The built-in model cut that to 30 by looking at the photos, and the cloud check cut it to 10, while catching 40 of the 52 listings that should be flagged." |
+| 1:31 | The web page on a phone, checking the example photo in the cloud | "A phone has no built-in model, so the web page asks Firebase AI Logic to prefer the device, and the same call runs on Gemini in the cloud instead. Take a screenshot of any listing, even on Facebook Marketplace, and get the same check." |
+| 1:46 | Logo, links | "It never says a product is safe: no match only means no recall was found. Still Recalled. Free, and open source." |

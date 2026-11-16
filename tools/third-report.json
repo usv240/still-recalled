@@ -1,0 +1,469 @@
+{
+ "set": "third",
+ "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+ "listings": 176,
+ "mustFlag": 34,
+ "mustNotFlag": 133,
+ "unclear": 9,
+ "systems": {
+  "words only": {
+   "caught": 24,
+   "missed": [
+    {
+     "id": "206557928188",
+     "title": "Lulyboo Indoor Outdoor Bubble Cuddle and Play Lounge and Nest Gray",
+     "why": "Photo shows a padded, tube-rimmed baby lounger/nest (title: Lounge and Nest), which is an infant lounger; Lulyboo has no recall in the data."
+    },
+    {
+     "id": "206690454998",
+     "title": "Early 2000s Disney Winnie the Pooh Classic Crib Bedding Set 4 Piece Set",
+     "why": "Classic Pooh 4-piece set; besides the quilt and sheet the photo shows a padded, ruffled Pooh and Piglet piece that looks like the bumper."
+    },
+    {
+     "id": "820347403303",
+     "title": "Early 2000s Looney Tunes Crib Bedding Set Quilt Pad Sheet Tie-On",
+     "why": "Photo shows the Baby Looney Tunes padded bumper tied around the crib, and the title lists 'Pad' and 'Tie-On'."
+    },
+    {
+     "id": "257852153216",
+     "title": "Lambs & Ivy USA 2004 Y2K Precious Cargo Trucks Police Fire Crib Bedding 5 Pc",
+     "why": "5-piece set: besides the quilt, pillow and sheet the photo shows a folded padded blue piece with STOP-sign appliques and piped panel edges that looks like the bumper."
+    },
+    {
+     "id": "880096391547",
+     "title": "Vintage Clown Baby Bedding Clowncore Judi -S 80s Heirloom Collection 5 Pc Set",
+     "why": "Photo shows a rolled, ruffled padded bumper and a ruffled padded headboard piece with ties, alongside the clown diaper stacker."
+    },
+    {
+     "id": "366769666059",
+     "title": "Vintage 90s y2k 13 Piece Pink Jungle Animal Crib Set Cotton Outer Poly Filled",
+     "why": "The package label in the photo lists 'Bumper' among the 13 pieces."
+    },
+    {
+     "id": "800802235601",
+     "title": "Disney Lot Of Lion King Baby Simba Bedding Nursery Set Lamps,Crib Sheet Mobile",
+     "why": "Photo shows padded Lion King panels with brown ribbon ties (a bumper) in the lot."
+    },
+    {
+     "id": "356094790302",
+     "title": "Lot of 9 Graham Kracker Sport football baseball Crib Baby bed Bedding room USA",
+     "why": "Crib bedding lot: photo shows a thick, tufted and piped padded panel that looks like a crib bumper section."
+    },
+    {
+     "id": "287171391840",
+     "title": "Macari Baby Portable Infant Bed for Co-sleeping and Travel",
+     "why": "Title says portable infant bed for co-sleeping and the photo shows a padded in-bed sleeper with a pad and low padded sides."
+    },
+    {
+     "id": "267718557219",
+     "title": "LulyBoo Baby Lounge To-Go Fold Up Backpack Easy Portable Comfy Nap Changing Used",
+     "why": "Photo shows a LulyBoo Baby Lounge To-Go, a soft-sided legless baby lounger/bed with canopy for use on beds or floors."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "366802831224",
+     "title": "4moms Infant Baby Bouncer Seat Chair, Gray",
+     "level": "possible",
+     "why": "4moms seat, but the photo shows an open white oval ring frame with no powered control base, so it is the bounceRoo-style bouncer rather than the recalled MamaRoo swing or RockaRoo rocker (22200)."
+    },
+    {
+     "id": "137197169559",
+     "title": "Baby Delight Snuggle Nest Bassinet ; Portable Infant Bed 0-5 months Organic",
+     "level": "possible",
+     "why": "Despite the Snuggle Nest name, the photo shows the underside of a small folding bassinet with a white leg frame, and the title says bassinet, so it is a bassinet, not an in-bed sleeper; no Baby Delight recall in the data."
+    },
+    {
+     "id": "298724952667",
+     "title": "Joolz Essentials Honeycomb Nest Pink Baby girl zip up bunting organic cotton",
+     "level": "possible",
+     "why": "Photo shows a knitted zip-up bunting/footmuff bag with hood, not a baby nest bed."
+    },
+    {
+     "id": "407167987325",
+     "title": "4moms mamaRoo sleep Bassinet White/Gray Oval w/ Stand, Basket, Sound/2 sheets",
+     "level": "possible",
+     "why": "4moms mamaRoo sleep bassinet on stand; the 4moms recall (22200) covers MamaRoo swings and RockaRoo rockers, not the sleep bassinet."
+    },
+    {
+     "id": "336578698471",
+     "title": "4moms Mamaroo Sleep Bassinet Calms and Soothes - White awesome condition",
+     "level": "possible",
+     "why": "4moms mamaRoo sleep bassinet; not covered by the MamaRoo swing recall (22200)."
+    },
+    {
+     "id": "800837030016",
+     "title": "Snuggle Me Baby Lounger Replacement Storage Carry Bag Ivory Zip Clear Window",
+     "level": "possible",
+     "why": "Photo shows only the empty Snuggle Me zip storage bag, not the lounger."
+    },
+    {
+     "id": "188830066652",
+     "title": "Baby Delight Snuggle Nest Dream Portable Infant Lounger Cover",
+     "level": "possible",
+     "why": "Title and photo show only the fabric cover for a Baby Delight Snuggle Nest Dream, not the sleeper itself."
+    },
+    {
+     "id": "307238082410",
+     "title": "SnuggleMe Organic Snuggle Me Baby Lounger Cover Only Gumdrop Dusty Rose Pink",
+     "level": "possible",
+     "why": "Title says cover only and the photo shows a flat Snuggle Me cover with no lounger."
+    },
+    {
+     "id": "137935196951",
+     "title": "Magic Sleepsuit Merlin Blue Fleece Zip Wearable Blanket Sleeper 3-6M",
+     "level": "possible",
+     "why": "Photo shows a blue fleece Baby Merlin's Magic Sleepsuit; recall 26315 covers only cotton suits printed 'HALO Magic Sleepsuit' sold Sept 2025-Feb 2026, so this older Merlin-branded fleece suit is not it."
+    },
+    {
+     "id": "335579675615",
+     "title": "Brolex Newborn Infant Lounger Removable Pillow Cover",
+     "level": "possible",
+     "why": "Title and photo show only an owl-print lounger cover, no lounger."
+    },
+    {
+     "id": "147525150524",
+     "title": "2 Brolex Newborn Infant Lounger Removable Pillow Covers BABY GIRL",
+     "level": "possible",
+     "why": "Title and photo show two flat lounger covers only."
+    },
+    {
+     "id": "267815490133",
+     "title": "Infant Baby Bath Support Seat Recliner Fold Out Leg Green White Newborn Lounger",
+     "level": "possible",
+     "why": "Photo shows a plastic infant bath support/bather, not a sleep product, brand unknown."
+    },
+    {
+     "id": "m60943355994",
+     "title": "Women’s Take Off Lounge Pants XS - Kyte BABY",
+     "level": "possible",
+     "why": "Women's Kyte Baby lounge pants (airplane print). Matched the search only on 'lounge'."
+    },
+    {
+     "id": "m12707912894",
+     "title": "Bundle crib bumper - BreathableBaby",
+     "level": "possible",
+     "why": "BreathableBaby liner with a printed jungle pattern. The photo shows perforated mesh fabric lying flat, so it's a thin mesh liner, not a padded bumper."
+    },
+    {
+     "id": "m87185533362",
+     "title": "crib bumper - BreathableBaby",
+     "level": "possible",
+     "why": "Folded gray BreathableBaby liners; open mesh is visible, so it's a thin mesh liner, not a padded bumper."
+    },
+    {
+     "id": "m97782196823",
+     "title": "Crib bumper - BreathableBaby",
+     "level": "possible",
+     "why": "Sealed BreathableBaby Classic mesh liner (star print, see-through mesh). Not a padded bumper."
+    },
+    {
+     "id": "6YdDms1uXX9GQZEBQejeKY",
+     "title": "Baby Trend Quick-Fold 2-in-1 Rocking Bassinet, Shadow Stone Gray 1",
+     "level": "possible",
+     "why": "Two Baby Trend Quick-Fold rocking bassinets (flat mesh bassinets). The only Baby Trend recall in the data is the Cityscape jogger stroller."
+    },
+    {
+     "id": "ses67H2rXWuuVrFyNgomCv",
+     "title": "Pottery Barn Kids Sloan Acrylic Crib + Toddler Bed Kit & Mattress 1",
+     "level": "possible",
+     "why": "Modern Pottery Barn Kids Sloan acrylic-sided crib with fixed sides. PBK's recall in the data is the Penny crib, a different model."
+    },
+    {
+     "id": "4SFHaGbF7zc2dtx7mYCt85",
+     "title": "Uppababy Cruz V2 Stroller with Car Seat and Bassinet Grey 1",
+     "level": "possible",
+     "why": "UPPAbaby Cruz V2 stroller with carrycot and Mesa car seat. The only UPPAbaby recall in the data is the RIDGE jogger, a different model."
+    },
+    {
+     "id": "5p3x27HcZQMvXdfYrcdsVe",
+     "title": "Uppababy Cruz V2 Stroller With Car Seat Dusty Pink and bassinet 1",
+     "level": "possible",
+     "why": "UPPAbaby Cruz V2 stroller (pink) with carrycot and car seat. Not the recalled RIDGE jogger."
+    },
+    {
+     "id": "qfTnmKtHgCD9wzMSWGMmbm",
+     "title": "Uppababy Vista V2 Stroller with Bassinet Pink 1",
+     "level": "possible",
+     "why": "UPPAbaby Vista V2 stroller with carrycot. Not the recalled RIDGE jogger."
+    },
+    {
+     "id": "tUpsU2ZVph4eCWT5SWn7YE",
+     "title": "Uppababy Stroller with Bassinet and Car Seat white 1",
+     "level": "possible",
+     "why": "The title gives no model, but the photo shows a Cruz/Vista-style city stroller with small wheels plus carrycot and car seat. It is clearly not the all-terrain RIDGE jogger that was recalled."
+    },
+    {
+     "id": "xvnv4ETiWvmc46r7dMHqmM",
+     "title": "Uppababy Cruz V2 Stroller with Bassinet and Piggyback Board 1",
+     "level": "possible",
+     "why": "UPPAbaby Cruz V2 with carrycot and PiggyBack board. Not the recalled RIDGE jogger."
+    },
+    {
+     "id": "5wxTMj1KqDvrxFF5gnFrtS",
+     "title": "Uppababy Vista V2 Double Stroller with Bassinet and car seat Jordan 1",
+     "level": "possible",
+     "why": "UPPAbaby Vista V2 with a RumbleSeat fitted, plus carrycot and car seat. Not the RIDGE jogger, which is the only UPPAbaby recall in the data."
+    }
+   ],
+   "flagged": 48,
+   "unclearFlagged": 0,
+   "recallRate": 0.706,
+   "precision": 0.5
+  },
+  "on-device only": {
+   "caught": 26,
+   "missed": [
+    {
+     "id": "206557928188",
+     "title": "Lulyboo Indoor Outdoor Bubble Cuddle and Play Lounge and Nest Gray",
+     "why": "Photo shows a padded, tube-rimmed baby lounger/nest (title: Lounge and Nest), which is an infant lounger; Lulyboo has no recall in the data."
+    },
+    {
+     "id": "257852153216",
+     "title": "Lambs & Ivy USA 2004 Y2K Precious Cargo Trucks Police Fire Crib Bedding 5 Pc",
+     "why": "5-piece set: besides the quilt, pillow and sheet the photo shows a folded padded blue piece with STOP-sign appliques and piped panel edges that looks like the bumper."
+    },
+    {
+     "id": "880096391547",
+     "title": "Vintage Clown Baby Bedding Clowncore Judi -S 80s Heirloom Collection 5 Pc Set",
+     "why": "Photo shows a rolled, ruffled padded bumper and a ruffled padded headboard piece with ties, alongside the clown diaper stacker."
+    },
+    {
+     "id": "366769666059",
+     "title": "Vintage 90s y2k 13 Piece Pink Jungle Animal Crib Set Cotton Outer Poly Filled",
+     "why": "The package label in the photo lists 'Bumper' among the 13 pieces."
+    },
+    {
+     "id": "800802235601",
+     "title": "Disney Lot Of Lion King Baby Simba Bedding Nursery Set Lamps,Crib Sheet Mobile",
+     "why": "Photo shows padded Lion King panels with brown ribbon ties (a bumper) in the lot."
+    },
+    {
+     "id": "356094790302",
+     "title": "Lot of 9 Graham Kracker Sport football baseball Crib Baby bed Bedding room USA",
+     "why": "Crib bedding lot: photo shows a thick, tufted and piped padded panel that looks like a crib bumper section."
+    },
+    {
+     "id": "287171391840",
+     "title": "Macari Baby Portable Infant Bed for Co-sleeping and Travel",
+     "why": "Title says portable infant bed for co-sleeping and the photo shows a padded in-bed sleeper with a pad and low padded sides."
+    },
+    {
+     "id": "267718557219",
+     "title": "LulyBoo Baby Lounge To-Go Fold Up Backpack Easy Portable Comfy Nap Changing Used",
+     "why": "Photo shows a LulyBoo Baby Lounge To-Go, a soft-sided legless baby lounger/bed with canopy for use on beds or floors."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "137197169559",
+     "title": "Baby Delight Snuggle Nest Bassinet ; Portable Infant Bed 0-5 months Organic",
+     "level": "possible",
+     "why": "Despite the Snuggle Nest name, the photo shows the underside of a small folding bassinet with a white leg frame, and the title says bassinet, so it is a bassinet, not an in-bed sleeper; no Baby Delight recall in the data."
+    },
+    {
+     "id": "407167987325",
+     "title": "4moms mamaRoo sleep Bassinet White/Gray Oval w/ Stand, Basket, Sound/2 sheets",
+     "level": "possible",
+     "why": "4moms mamaRoo sleep bassinet on stand; the 4moms recall (22200) covers MamaRoo swings and RockaRoo rockers, not the sleep bassinet."
+    },
+    {
+     "id": "336578698471",
+     "title": "4moms Mamaroo Sleep Bassinet Calms and Soothes - White awesome condition",
+     "level": "possible",
+     "why": "4moms mamaRoo sleep bassinet; not covered by the MamaRoo swing recall (22200)."
+    },
+    {
+     "id": "137759217447",
+     "title": "MINI Crib Bedding - “Liz and Roo Nursery Rhyme Toile” bedding for Mini Crib",
+     "level": "possible",
+     "why": "Photo shows the mini crib dressed with toile sheet, a quilt over the rail and pillows, with no padded bumper along the slats."
+    },
+    {
+     "id": "137935196951",
+     "title": "Magic Sleepsuit Merlin Blue Fleece Zip Wearable Blanket Sleeper 3-6M",
+     "level": "possible",
+     "why": "Photo shows a blue fleece Baby Merlin's Magic Sleepsuit; recall 26315 covers only cotton suits printed 'HALO Magic Sleepsuit' sold Sept 2025-Feb 2026, so this older Merlin-branded fleece suit is not it."
+    },
+    {
+     "id": "147525150524",
+     "title": "2 Brolex Newborn Infant Lounger Removable Pillow Covers BABY GIRL",
+     "level": "possible",
+     "why": "Title and photo show two flat lounger covers only."
+    },
+    {
+     "id": "267815490133",
+     "title": "Infant Baby Bath Support Seat Recliner Fold Out Leg Green White Newborn Lounger",
+     "level": "possible",
+     "why": "Photo shows a plastic infant bath support/bather, not a sleep product, brand unknown."
+    },
+    {
+     "id": "m12707912894",
+     "title": "Bundle crib bumper - BreathableBaby",
+     "level": "likely",
+     "why": "BreathableBaby liner with a printed jungle pattern. The photo shows perforated mesh fabric lying flat, so it's a thin mesh liner, not a padded bumper."
+    },
+    {
+     "id": "m71375442085",
+     "title": "**New** Vintage lAnimal Crackers Wall Hanging Crib Toys Bumper Fabric Panel",
+     "level": "possible",
+     "why": "Uncut 'Animal Crackers Wall Hanging' craft fabric panel, not a padded crib bumper."
+    },
+    {
+     "id": "m16805457141",
+     "title": "Mesh Crib Bumper - BreathableBaby",
+     "level": "possible",
+     "why": "Sealed BreathableBaby 'Breathable Mesh Crib Bumper': a thin mesh liner (it says 'safer than a bumper'), not a padded bumper."
+    },
+    {
+     "id": "m87185533362",
+     "title": "crib bumper - BreathableBaby",
+     "level": "likely",
+     "why": "Folded gray BreathableBaby liners; open mesh is visible, so it's a thin mesh liner, not a padded bumper."
+    },
+    {
+     "id": "m97782196823",
+     "title": "Crib bumper - BreathableBaby",
+     "level": "likely",
+     "why": "Sealed BreathableBaby Classic mesh liner (star print, see-through mesh). Not a padded bumper."
+    },
+    {
+     "id": "m47622167779",
+     "title": "Brand New Hiccapop Sleep Bumpers – Toddler Bed Rails - Boppy",
+     "level": "possible",
+     "why": "Hiccapop 'Sleep Bumpers' box: foam bed rails for toddler beds (ages 2-6), not crib bumpers. The 'Boppy' in the title is a mis-tagged brand."
+    },
+    {
+     "id": "ses67H2rXWuuVrFyNgomCv",
+     "title": "Pottery Barn Kids Sloan Acrylic Crib + Toddler Bed Kit & Mattress 1",
+     "level": "possible",
+     "why": "Modern Pottery Barn Kids Sloan acrylic-sided crib with fixed sides. PBK's recall in the data is the Penny crib, a different model."
+    },
+    {
+     "id": "qfTnmKtHgCD9wzMSWGMmbm",
+     "title": "Uppababy Vista V2 Stroller with Bassinet Pink 1",
+     "level": "possible",
+     "why": "UPPAbaby Vista V2 stroller with carrycot. Not the recalled RIDGE jogger."
+    },
+    {
+     "id": "tUpsU2ZVph4eCWT5SWn7YE",
+     "title": "Uppababy Stroller with Bassinet and Car Seat white 1",
+     "level": "possible",
+     "why": "The title gives no model, but the photo shows a Cruz/Vista-style city stroller with small wheels plus carrycot and car seat. It is clearly not the all-terrain RIDGE jogger that was recalled."
+    }
+   ],
+   "flagged": 43,
+   "unclearFlagged": 1,
+   "recallRate": 0.765,
+   "precision": 0.619
+  },
+  "hybrid": {
+   "caught": 28,
+   "missed": [
+    {
+     "id": "206557928188",
+     "title": "Lulyboo Indoor Outdoor Bubble Cuddle and Play Lounge and Nest Gray",
+     "why": "Photo shows a padded, tube-rimmed baby lounger/nest (title: Lounge and Nest), which is an infant lounger; Lulyboo has no recall in the data."
+    },
+    {
+     "id": "206690454998",
+     "title": "Early 2000s Disney Winnie the Pooh Classic Crib Bedding Set 4 Piece Set",
+     "why": "Classic Pooh 4-piece set; besides the quilt and sheet the photo shows a padded, ruffled Pooh and Piglet piece that looks like the bumper."
+    },
+    {
+     "id": "257852153216",
+     "title": "Lambs & Ivy USA 2004 Y2K Precious Cargo Trucks Police Fire Crib Bedding 5 Pc",
+     "why": "5-piece set: besides the quilt, pillow and sheet the photo shows a folded padded blue piece with STOP-sign appliques and piped panel edges that looks like the bumper."
+    },
+    {
+     "id": "880096391547",
+     "title": "Vintage Clown Baby Bedding Clowncore Judi -S 80s Heirloom Collection 5 Pc Set",
+     "why": "Photo shows a rolled, ruffled padded bumper and a ruffled padded headboard piece with ties, alongside the clown diaper stacker."
+    },
+    {
+     "id": "356094790302",
+     "title": "Lot of 9 Graham Kracker Sport football baseball Crib Baby bed Bedding room USA",
+     "why": "Crib bedding lot: photo shows a thick, tufted and piped padded panel that looks like a crib bumper section."
+    },
+    {
+     "id": "267718557219",
+     "title": "LulyBoo Baby Lounge To-Go Fold Up Backpack Easy Portable Comfy Nap Changing Used",
+     "why": "Photo shows a LulyBoo Baby Lounge To-Go, a soft-sided legless baby lounger/bed with canopy for use on beds or floors."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "137197169559",
+     "title": "Baby Delight Snuggle Nest Bassinet ; Portable Infant Bed 0-5 months Organic",
+     "level": "possible",
+     "why": "Despite the Snuggle Nest name, the photo shows the underside of a small folding bassinet with a white leg frame, and the title says bassinet, so it is a bassinet, not an in-bed sleeper; no Baby Delight recall in the data."
+    },
+    {
+     "id": "137935196951",
+     "title": "Magic Sleepsuit Merlin Blue Fleece Zip Wearable Blanket Sleeper 3-6M",
+     "level": "possible",
+     "why": "Photo shows a blue fleece Baby Merlin's Magic Sleepsuit; recall 26315 covers only cotton suits printed 'HALO Magic Sleepsuit' sold Sept 2025-Feb 2026, so this older Merlin-branded fleece suit is not it."
+    },
+    {
+     "id": "267815490133",
+     "title": "Infant Baby Bath Support Seat Recliner Fold Out Leg Green White Newborn Lounger",
+     "level": "possible",
+     "why": "Photo shows a plastic infant bath support/bather, not a sleep product, brand unknown."
+    },
+    {
+     "id": "m12707912894",
+     "title": "Bundle crib bumper - BreathableBaby",
+     "level": "possible",
+     "why": "BreathableBaby liner with a printed jungle pattern. The photo shows perforated mesh fabric lying flat, so it's a thin mesh liner, not a padded bumper."
+    },
+    {
+     "id": "m87185533362",
+     "title": "crib bumper - BreathableBaby",
+     "level": "possible",
+     "why": "Folded gray BreathableBaby liners; open mesh is visible, so it's a thin mesh liner, not a padded bumper."
+    },
+    {
+     "id": "m97782196823",
+     "title": "Crib bumper - BreathableBaby",
+     "level": "possible",
+     "why": "Sealed BreathableBaby Classic mesh liner (star print, see-through mesh). Not a padded bumper."
+    }
+   ],
+   "flagged": 34,
+   "unclearFlagged": 0,
+   "recallRate": 0.824,
+   "precision": 0.824
+  }
+ },
+ "askingPrices": {
+  "mustFlag": 1864.71,
+  "words only": 1292.64,
+  "on-device only": 1412.64,
+  "hybrid": 1557.13
+ },
+ "bySite": {
+  "ebay": {
+   "listings": 116,
+   "mustFlag": 27
+  },
+  "mercari": {
+   "listings": 20,
+   "mustFlag": 7
+  },
+  "craigslist": {
+   "listings": 40,
+   "mustFlag": 0
+  }
+ },
+ "cost": {
+  "listings": 176,
+  "checkedByWordsOnly": 7,
+  "lookedAtOnDevice": 169,
+  "sentToCloud": 58,
+  "cloudErrors": 1,
+  "shareSentToCloud": 0.33,
+  "medianMs": 6616,
+  "totalMinutes": 26.9
+ }
+}

@@ -1,0 +1,593 @@
+{
+  "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+  "labelled_at": "2026-11-16T14:57:47.864Z",
+  "labels": {
+    "267793491223": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a complete DockATot Deluxe+ dock, a padded infant lounger/in-bed sleeper; DockATot has no CPSC recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "117523592076": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows the full leopard DockATot Deluxe+ lounger with arch toy bar and spare covers, so the whole lounger is included.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "800837030016": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only the empty Snuggle Me zip storage bag, not the lounger.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "197560677831": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows the folded LulyBoo elephant plush baby lounger (a padded portable lounger/pod); no LulyBoo recall found.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "377568327669": {
+      "item": "product",
+      "recall_ids": [
+        "24340"
+      ],
+      "recall_match": "yes",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Title names a Mamibaby baby nest lounger and the photo shows a full leaf-print nest with bumper; recall 24340 covers Mamibaby baby loungers in many prints including leaf prints.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "257830153005": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a complete palm-leaf DockATot Deluxe+ lounger; DockATot has no CPSC recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "900078422416": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows the Ingenuity InReach wheeled bouncer seat with harness and canopy, a bouncer rather than a sleep product; no Ingenuity recall found.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "188830066652": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Title and photo show only the fabric cover for a Baby Delight Snuggle Nest Dream, not the sleeper itself.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "297985245081": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo is a Wendiway infant support pillow/lounger with padded side panels holding a baby; Wendiway is not in the recall data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "307238082410": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Title says cover only and the photo shows a flat Snuggle Me cover with no lounger.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "127541222693": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a complete Snuggle Me infant lounger on a sofa; Snuggle Me has no CPSC recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "198795066490": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a DockATot Deluxe Plus dock in its retail bag, the whole lounger.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "880113349082": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows eight footed zip pajama sleepers (clothing); no matching recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "880059770382": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a vintage Seahawks footed pajama sleeper (clothing).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "137935201305": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Burt's Bees ribbed zip pajama one-piece (clothing); no Burt's Bees recall found.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "206704031349": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a blue frog-print Carter's footed sleeper; Carter's recall 23048 is only yellow fleece heart/animal pajamas in 12-24M.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366808920630": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a solid blue Carter's footless zip sleeper; not the yellow fleece pajamas in Carter's recall 23048.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "117523993965": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows five 3-6M fleece footed sleepers (leopard, fawn, pears, flowers, bow), none of them the yellow heart/animal style in Carter's recall 23048.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "307278342803": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a newborn dinosaur-print snap sleeper (clothing).",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "206704019735": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a white cars-print Carter's footed sleeper; not the recalled yellow fleece style.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "137935196951": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a blue fleece Baby Merlin's Magic Sleepsuit; recall 26315 covers only cotton suits printed 'HALO Magic Sleepsuit' sold Sept 2025-Feb 2026, so this older Merlin-branded fleece suit is not it.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "237152775723": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a whale-print transition sleep suit (wearable clothing, not weighted), not a sleep product.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "960183977524": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Magnetic Me bear-print footed sleeper (clothing); no Magnetic Me recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "920144157846": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows four zip footie pajamas in 0-3M; Kyte recall 25031 is Slumber Suits in M/L/XL, not zip footies.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "407321578569": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a complete beige padded baby nest/lounger with a separate pad, unbranded.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "335579675615": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Title and photo show only an owl-print lounger cover, no lounger.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147525150524": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Title and photo show two flat lounger covers only.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "178244049790": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Title says Snuggle Me lounger with extra covers and the photo shows the lounger packed in its Snuggle Me bag.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "307231637077": {
+      "item": "product",
+      "recall_ids": [
+        "24340"
+      ],
+      "recall_match": "possible",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Bundle photo includes a full baby nest lounger whose blue elk-silhouette print and separate pad closely resemble the recalled Mamibaby/Cosy Nation 'Elk' lounger (24340), but no brand is shown.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "840110990897": {
+      "item": "product",
+      "recall_ids": [
+        "25456",
+        "25473"
+      ],
+      "recall_match": "possible",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Packaged baby lounger pod whose assembly photos show a bumper, foam pad and gray-feather print cover resembling the recalled URMYWO and LXDHSTRA gray-feather loungers, brand not shown.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "287483709943": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a DockATot Deluxe Plus dock in its retail bag (Mrs. Mighetto print), the whole lounger.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "395414153448": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Title says 'cover', but the photo shows a complete stuffed floral baby nest lounger with bumper and pad.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "267819774385": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo banner says 'COVER ONLY' for a DockATot-size replacement cover.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "800782433997": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a complete braided-bumper baby nest lounger with pad and pillow.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "318593445945": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a full Snuggle Me lounger next to a spare cover.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "267815490133": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a plastic infant bath support/bather, not a sleep product, brand unknown.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "198771804639": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco Pack 'n Play play yard (photo shows its 2013 owner's manual); play yards are not a risky type and no Graco recall is in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "860053015396": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a 1990s primary-color Graco Pack 'n Play Sport play yard; the 1990s Graco playpen recalls covered traditional drop-side playpens, not this model.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "147676395652": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only a Graco carry bag.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "860095964660": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a folded purple floral Graco play yard with pad and carry bag; play yard, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366801681038": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Title says mattress pad only (OEM Graco On the Go pad and manual); not one of the recalled aftermarket play yard mattresses.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "900057407000": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows an open Graco play yard; play yard, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "860128996259": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows only the gray Graco carry bag, but the title sells the whole play yard; play yard, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "920143193770": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows an Ingenuity play yard in its carry bag; play yard, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "307024489353": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Graco Pack 'n Play On The Go in its bag; play yard, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "168654444409": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "inclined_sleeper",
+      "should_warn": "maybe",
+      "note": "Stock photo shows a Graco play yard with a removable 'portable napper' that has a canopy and harness; the photo doesn't show whether the napper is flat or inclined over 10 degrees, and it is not one of the four models in Graco's 2020 inclined-accessory recall.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "960084293915": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "maybe",
+      "note": "Eddie Bauer fold-out infant travel bed (photo shows only the closed messenger bag); a legless fold-out travel bed works like an in-bed sleeper, but the photo doesn't show it.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "840132718873": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a boxed Happiest Baby SNOO bassinet; bassinets are not a type and SNOO has no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "257524550254": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Baby Delight Go With Me Bungalow toddler cot with canopy, not an infant sleep type, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "158254958174": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Guava Family travel crib bag; Guava's recall 25032 is for Roam strollers, not the Lotus crib.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "287171391840": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Title says portable infant bed for co-sleeping and the photo shows a padded in-bed sleeper with a pad and low padded sides.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "800210565920": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Chicco LullaGo portable bassinet on legs; bassinet, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "366795010182": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Koola Baby bedside bassinet with mesh window and storage; bassinet, no recall in the data.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "168489587260": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Maxi-Cosi Iora bedside bassinet; bassinet, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "820190358791": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a HALO BassiNest swivel bassinet; HALO recalls in the data are Magic Sleepsuits and unrelated products.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "287499133500": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a Regalo folding portable bassinet on legs with mesh sides; bassinet, no recall.",
+      "confidence": "high",
+      "outside_db": null
+    },
+    "134578112458": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "maybe",
+      "note": "Photo shows a soft quilted gray fabric baby bed with no frame, hung on a hanger; it could be a soft travel/in-bed sleeper or just the soft goods of a portable bassinet.",
+      "confidence": "low",
+      "outside_db": null
+    },
+    "267718557219": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a LulyBoo Baby Lounge To-Go, a soft-sided legless baby lounger/bed with canopy for use on beds or floors.",
+      "confidence": "high",
+      "outside_db": null
+    }
+  }
+}

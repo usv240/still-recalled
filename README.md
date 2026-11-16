@@ -9,11 +9,10 @@ pages, plus a web page that checks a screenshot of any listing on a phone. Chrom
 at every baby product on your own computer, and only the few it flags go to Gemini in the cloud, through Firebase AI
 Logic hybrid inference.
 
-**What it found on real listings.** Of 136 used baby-gear listings from 18 eBay searches, 6 were crib sets with padded
-bumpers and 8 were infant loungers or in-bed sleepers, asking $908 in total. Still Recalled flagged all 6 bumper sets
-($517) and 4 of the 8 loungers, with 4 false alarms among the 115 listings that were fine. 85% of the listings never
-left the computer. A second test after fixes, on 125 new listings from eBay
-and Craigslist, raised no false alarms at all and again flagged every padded bumper and recall match.
+**What it found on real listings.** In three blind tests on 437 used baby-gear listings from eBay, Mercari and
+Craigslist, 52 were recalled products, padded crib bumpers or infant loungers, asking $3,211 in total. Still Recalled
+flagged 40 of them ($2,689), with 10 false alarms among the 365 listings that were fine. Word rules alone raised 62.
+80% of the listings never left the computer.
 
 ## The problem
 
@@ -76,7 +75,9 @@ flags only ────── 3. Gemini in the cloud, via Firebase AI Logic ─�
   the on-device and cloud answers can be compared field by field.
 
 Where Firebase AI Logic is called:
-- [extension/src/ai.js](extension/src/ai.js): `deviceModel`, `cloudJson`, `hybridModel` and `hybridJson`.
+- [extension/src/ai.js](extension/src/ai.js): `deviceModel`, `cloudJson`, `hybridModel` and `hybridJson`. The cloud side
+  uses the `AgentPlatformBackend` (the Vertex AI Gemini API), billed per call, which answered 20 calls at once in a
+  load test; the Gemini Developer API's free tier ran out at 3.
 - [extension/src/engine.js](extension/src/engine.js): the pipeline above, shared by the extension and the web page.
 - [web/src/app.js](web/src/app.js): reads a screenshot, then runs the engine.
 
@@ -88,25 +89,32 @@ the extension, judges included, gets the cloud check with App Check still enforc
 
 ## How well it works
 
-Two tests, each on listings collected after the rules they test were written, labelled blind by a separate reviewer
-from what a shopper sees: the title, the price and one photo. Method, every miss and the limits are in
+Three tests, each on listings collected after the fixes the test before it led to, labelled blind by separate
+reviewers from what a shopper sees: the title, the price and one photo. Method, every miss and the limits are in
 [docs/accuracy.md](docs/accuracy.md).
 
-| Same engine, run as | First test: caught (of 14) | False alarms (of 115) | Second test: caught (of 4) | False alarms (of 117) |
-|---|---|---|---|---|
-| Words only | 6 | 22 | 1 | 16 |
-| Built-in model only | 7 | 8 | 2 | 6 |
-| **Hybrid** | **10** | **4** | **2** | **0** |
+| Same engine, run as | Caught (of 52) | False alarms (of 365) |
+|---|---|---|
+| Words only | 31 | 62 |
+| Built-in model only | 35 | 30 |
+| **Hybrid** | **40** | **10** |
 
-- First test: 136 used listings from 18 eBay searches. Second test, after the fixes the first one led to: 125 new
-  listings from 10 eBay searches and Craigslist in Los Angeles and Chicago.
-- The cloud saw 15% of the listings in the first test and 8% in the second.
-- Across both, it flagged every padded bumper and every recall match (8 of 8). Loungers and positioners are the hard
-  case (4 of 10): the six it missed were listed as a cover, a pillow or a portable sleeper.
+| Test | Listings | Hybrid caught | Hybrid false alarms |
+|---|---|---|---|
+| First: eBay | 136 | 10 of 14 | 4 of 115 |
+| Second, after fixes: eBay and Craigslist | 125 | 2 of 4 | 0 of 117 |
+| Third, after fixes: eBay, Mercari and Craigslist | 176 | 28 of 34 | 6 of 133 |
+
+- By kind: recall matches 3 of 3, infant loungers and nests 27 of 35, padded crib bumpers 10 of 14.
+- Loungers were the weak spot after two tests (4 of 10). The changes that followed raised that to 23 of 25 in the
+  third test, on listings collected after the changes.
+- The cloud saw 20% of the listings across the three tests.
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
-badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. The release
-build passes 10 of 10 on eBay; an earlier build, before the last step was added, passed all 8 on Craigslist.
+badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. In a Chrome
+profile that has the built-in model, the release build passes all 11 steps on eBay: Gemini Nano looked at 59 of the
+60 listings inside the installed extension, and the cloud confirmed 41 with no errors. Without the model it passes all
+10 on eBay and on Craigslist.
 
 ## Try it
 
@@ -129,6 +137,10 @@ npm run build        # extension/build, web/build
 npm test             # unit tests
 npm run e2e          # the real extension in a separate Chrome profile, on a live eBay search
 node scripts/pack-extension.mjs    # release package in dist/ (no debug token, no developer pages)
+node tools/nano-profile.mjs        # a separate Chrome test profile with the built-in model (Chrome downloads it, ~4 GB)
+npm run e2e -- --profile=C:/tmp/sr-nano-profile    # the end-to-end test with the on-device step
+node tools/eval-run.mjs --set=third --mode=hybrid  # an accuracy test run in that profile
+node scripts/make-video.mjs        # the demo video, from footage recorded by scripts/record-demo.mjs and record-phone.mjs
 ```
 
 `extension/src/firebase-config.js` holds the Firebase web config, which is public by design. For local development
@@ -146,7 +158,9 @@ What protects the project's model quota:
 - **The key is restricted to Firebase APIs only.** Called directly against the Gemini API, it gets 403 Permission
   denied.
 - **App Check is enforced on Firebase AI Logic.** A call with the key but without a valid App Check token gets 401
-  "Firebase App Check token is invalid" (tested 2026-11-15).
+  "Firebase App Check token is invalid" (tested 2026-11-15, and again on 2026-11-16 after the move to the
+  Vertex AI Gemini API backend).
+- **A budget alert** watches the project's cloud spend.
 - **The App Check debug token used in development is gitignored.** The release build checks that it appears in no
   shipped file.
 
@@ -156,6 +170,7 @@ What protects the project's model quota:
 - A flagged listing's title, description and photo are sent to Gemini through Firebase AI Logic, with the recall
   notice, for the double check. You can turn the cloud check off in the side panel's settings.
 - No accounts and no tracking. Results are kept in the browser for 7 days.
+- The full policy: [still-recalled.web.app/privacy.html](https://still-recalled.web.app/privacy.html).
 
 ## Data and credits
 

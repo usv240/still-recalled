@@ -21,9 +21,28 @@ function scopeOf() {
 
 function resetPage() {
   pageUrl = urlNow();
-  sent.clear(); cards.clear(); results.clear();
+  sent.clear(); cards.clear(); results.clear(); waitingSince.clear();
   for (const host of hosts.values()) host.remove();
   hosts.clear();
+}
+
+// A listing is reported once, so it must not go before its photo: the models look at the photo. Craigslist draws its
+// photos after the listings, and loads them lazily as they near the screen; reading the page at once sent 14 of 15
+// listings without one (2026-11-16). A listing without a photo waits until it has one, or until it has been near the
+// screen for PHOTO_WAIT_MS without one (some listings have no photo at all).
+const PHOTO_WAIT_MS = 2500;
+const waitingSince = new Map();   // id -> when it was first seen near the screen without a photo
+let recheck = 0;
+function readyToSend(l) {
+  if (l.image) return true;
+  const r = l.el.getBoundingClientRect();
+  if (r.top > innerHeight * 1.5 || r.bottom < -innerHeight * 0.5) return false;
+  if (!waitingSince.has(l.id)) waitingSince.set(l.id, Date.now());
+  const left = PHOTO_WAIT_MS - (Date.now() - waitingSince.get(l.id));
+  if (left <= 0) return true;
+  clearTimeout(recheck);
+  recheck = setTimeout(scan, left + 50);
+  return false;
 }
 
 /** Report listings not reported yet. Called on load, on DOM changes, and when the URL changes in place. */
@@ -40,7 +59,7 @@ function scan() {
   for (const l of listingsOnPage().listings) {
     if (detail && l.id === detail.id) continue;
     cards.set(l.id, { el: l.el, inline: false });
-    if (!sent.has(l.id)) {
+    if (!sent.has(l.id) && readyToSend(l)) {
       sent.add(l.id);
       const { el, ...plain } = l;
       fresh.push(plain);
@@ -65,7 +84,7 @@ function ensureBadge(id) {
   addFonts(p => chrome.runtime.getURL(p));
   const host = buildBadge(r, { onOpenPanel: () => chrome.runtime.sendMessage({ type: 'sr:open-panel', id: r.id }).catch(() => {}) });
   hosts.set(id, host);
-  attachBadge(host, card);
+  attachBadge(host, card, { corner: site.site === 'craigslist' ? 'right' : 'left' });
 }
 
 function applyResults(list) {
@@ -105,7 +124,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 if (site) {
   let timer = 0;
   const later = () => { clearTimeout(timer); timer = setTimeout(scan, 600); };
-  new MutationObserver(later).observe(document.documentElement, { childList: true, subtree: true });
+  // A lazy photo arriving changes an attribute, not the tree; scrolling brings waiting listings near the screen.
+  new MutationObserver(later).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['src', 'srcset'] });
+  addEventListener('scroll', later, { passive: true, capture: true });
   addEventListener('popstate', later);
   scan();
 }

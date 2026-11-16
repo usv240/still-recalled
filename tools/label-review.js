@@ -18,7 +18,11 @@ const CHOICES = [
 const proxied = u => (u ? `/img?u=${encodeURIComponent(u)}` : '');
 
 async function load(set) {
-  const labelFiles = set === 'eval' ? ['eval-labels.json'] : ['fresh-labels-ebay.json', 'fresh-labels-craigslist.json'];
+  const labelFiles = {
+    eval: ['eval-labels.json'],
+    fresh: ['fresh-labels-ebay.json', 'fresh-labels-craigslist.json'],
+    third: ['third-labels-a.json', 'third-labels-b.json', 'third-labels-c.json'],
+  }[set];
   const [listings, ...labelSets] = await Promise.all([
     fetch(`/tools/${set}-listings.json`).then(r => r.json()),
     ...labelFiles.map(f => fetch(`/tools/${f}`).then(r => r.json()).catch(() => ({ labels: {} }))),

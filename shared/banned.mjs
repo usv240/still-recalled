@@ -19,7 +19,8 @@ export const BANNED_TYPES = [
     label: 'Padded crib bumper',
     pattern: /\b(crib\s+bumpers?|bumper\s+pads?|braided\s+bumpers?|cot\s+bumpers?|bumpers?\s+for\s+(slatted\s+)?cribs?|baby\s+bumpers?)\b/i,
     // Thin mesh liners are a different product from padded bumpers; do not flag them (exemption to verify).
-    exclude: /\bmesh\b/i,
+    // BreathableBaby makes only mesh liners; three were titled "crib bumper" in the third test.
+    exclude: /\b(mesh|breathable\s*baby)\b/i,
     looksLike: 'thick padded panels with ties, or a long braided fabric rope, made to line the inside rails of a crib (thin see-through mesh liners do not count)',
     // Banned regardless of manufacture date from Nov 12, 2022; covers vinyl bumper guards and vertical slat covers;
     // excludes non-padded mesh crib liners (§3(b)(3)).
@@ -41,7 +42,9 @@ export const BANNED_TYPES = [
   {
     key: 'in_bed_sleeper',
     label: 'In-bed infant sleeper or lounger',
-    pattern: /\b(in[\s-]*bed\s+sleeper|baby\s+nest|infant\s+nest|newborn\s+nest|baby\s+lounger|infant\s+lounger|newborn\s+lounger|co[\s-]*sleep(er|ing)\s+(nest|pod|bed))\b/i,
+    // Also product lines sellers name instead of the type ("Snuggle Me Organic", "DockATot Deluxe+"), and a word or two
+    // between "infant" and "lounger" ("Infant Sensory Lounger"). Added after the second test, where these were missed.
+    pattern: /\b(in[\s-]*bed\s+sleeper|(baby|infant|newborn)\s+nest|snuggle\s*nest|(baby|infant|newborn)\s+(\w+\s+){0,2}loungers?|co[\s-]*sleep(er|ing)\s+(nest|pod|bed)|dock\s*-?\s*a\s*-?\s*tot|snuggle\s*me\s+organic|boppy\s+(newborn\s+)?lounger|sleepyhead\s+(deluxe|grand))\b/i,
     looksLike: 'one soft cushion that lies flat, with a raised padded rim all the way around a flat pad where the baby lies',
     // Not banned as a class: 16 CFR 1236 (in-bed sleepers, nests; made from June 23, 2022) and 16 CFR 1243 (loungers;
     // made after May 5, 2025) apply by manufacture date. CPSC warns against them for sleep; eBay and Facebook
@@ -64,8 +67,13 @@ const PART_ONLY = /\b(replacement\s+(part|parts|seat|pad|cover|leg|arm|piece|str
 
 // Listings that often contain a banned item without naming it: multi-piece crib bedding sets usually include a bumper.
 // These are not flagged on their words; they are sent to the cloud so it can look at the photo.
+// Portable sleepers and travel beds are often a padded nest under another name ("Portable Bedside Baby Sleeper" whose
+// photo is a lounger), so the photo decides. Added after the second test.
+// After the third test: "Baby Bedding ... 5 Pc Set" and "Crib Baby bed Bedding" were bedding sets with a padded bumper
+// in the photo that never reached a photo check; LulyBoo sells loungers as a "Lounge". Not yet measured.
 const MAY_CONTAIN = [
-  { key: 'crib_bumper', pattern: /\b((crib|nursery|cot|baby)\s+(bedding\s+)?set|crib\s+bedding|\d+\s*-?\s*(pc|pcs|piece)\s+(crib|nursery|baby|bedding)|(crib|nursery|baby)\s+\d+\s*-?\s*(pc|pcs|piece))\b/i },
+  { key: 'crib_bumper', pattern: /\b((crib|nursery|cot|baby)\s+(bedding\s+)?set|(crib|nursery|cot|baby)\s+(\w+\s+){0,2}bedding|\d+\s*-?\s*(pc|pcs|piece)\s+(crib|nursery|baby|bedding)|(crib|nursery|baby)\s+\d+\s*-?\s*(pc|pcs|piece))\b/i },
+  { key: 'in_bed_sleeper', pattern: /\b(portable\s+(infant|baby|newborn|bedside)\s+(baby\s+)?(sleeper|bed)|travel\s+(baby\s+|infant\s+)?(bed|sleeper)|baby\s+bed\s+for\s+(the\s+)?bed|(baby|infant|newborn)\s+(sleep\s+)?pod|luly\s*boo|(baby|infant|newborn)\s+lounge)\b/i },
 ];
 
 /** Banned types a listing may contain without naming them; worth a cloud look at the photo. Doll items never count. */

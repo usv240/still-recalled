@@ -2,9 +2,10 @@
 // (tools/eval-results-words.json, tools/eval-results-hybrid.json) and writes tools/eval-report.json plus a table.
 // Nothing here changes the rules: it only counts.
 //
-// Usage: node tools/eval-score.mjs [--set=eval|fresh]
+// Usage: node tools/eval-score.mjs [--set=eval|fresh|third]
 //   eval   the first test: 136 eBay listings, collected after the rules were written
 //   fresh  the second test: 125 eBay and Craigslist listings, collected after the fixes the first test led to
+//   third  the third test: 176 eBay, Mercari and Craigslist listings, collected after the fixes the second test led to
 // Where a person has reviewed a label (tools/label-review.html -> tools/<set>-review.json), their answer is used.
 //
 // Three ways of running the same engine on the same held-out listings:
@@ -18,7 +19,11 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 const read = f => JSON.parse(readFileSync(new URL(f, import.meta.url), 'utf8'));
 const has = f => existsSync(new URL(f, import.meta.url));
 const set = (process.argv.find(a => a.startsWith('--set=')) || '--set=eval').slice(6);
-const labelFiles = set === 'eval' ? ['./eval-labels.json'] : ['./fresh-labels-ebay.json', './fresh-labels-craigslist.json'].filter(has);
+const labelFiles = {
+  eval: ['./eval-labels.json'],
+  fresh: ['./fresh-labels-ebay.json', './fresh-labels-craigslist.json'],
+  third: ['./third-labels-a.json', './third-labels-b.json', './third-labels-c.json'],
+}[set].filter(has);
 const labelSets = labelFiles.map(read);
 const labels = Object.assign({}, ...labelSets.map(x => x.labels));
 let labeller = labelSets[0].labeller;

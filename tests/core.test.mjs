@@ -76,3 +76,39 @@ test('fix from the second test: "plush" is a fabric word unless it names a plush
   assert.equal(notTheProduct('Plush toy crib for teddy bears'), true);
   assert.equal(notTheProduct('Lot of 3 plush animals baby nursery'), true);
 });
+
+test('lounger fixes from the second test: product lines, words between, portable sleepers, and a disagreement', async () => {
+  const { mayContain } = await import('../shared/banned.mjs');
+  const { decide } = await import('../shared/judge.mjs');
+  const type = t => bannedHints(t).map(x => x.key);
+  // Missed in the first two tests.
+  assert.deepEqual(type('Snuggle Me Organic Infant Sensory Lounger Sage Green Cover with Storage Bag'), ['in_bed_sleeper']);
+  assert.deepEqual(type('Baby Delight Snuggle Nest Adventure Portable Infant Sleeper – Foldable'), ['in_bed_sleeper']);
+  assert.deepEqual(type('Sleepyhead DockATot Deluxe+ Baby Infant Lounger Cover'), ['in_bed_sleeper']);
+  // A portable sleeper is not flagged on its words; the photo decides.
+  assert.deepEqual(type('Abreeze Portable Bedside Baby Sleeper, Gray/White, Carry Bag'), []);
+  assert.deepEqual(mayContain('Abreeze Portable Bedside Baby Sleeper, Gray/White, Carry Bag').map(x => x.key), ['in_bed_sleeper']);
+  // Look-alikes stay clear.
+  for (const t of ['Pool chaise lounger, white', 'Large dog lounger bed', 'Baby Bjorn Travel Crib Light', 'Graco travel system stroller and car seat']) {
+    assert.deepEqual(type(t), [], t);
+    assert.deepEqual(mayContain(t), [], t);
+  }
+  // Words name a lounger, the built-in model calls it a part: the cloud looks at the photo instead of the listing being cleared.
+  const hints = bannedHints('Sleepyhead DockATot Deluxe+ Baby Infant Lounger Cover');
+  const d = decide({ what_is_for_sale: 'part_or_accessory', product_kind: 'cover', same_kind_as_recalled: false, banned_type: 'none' }, null, hints);
+  assert.equal(d.level, 'none');
+  assert.equal(d.askCloud, true);
+  // With no risky-type words, a part stays cleared without a cloud call.
+  assert.equal(decide({ what_is_for_sale: 'part_or_accessory', product_kind: 'adapter', same_kind_as_recalled: false, banned_type: 'none' }, null, []).askCloud, false);
+});
+
+test('fixes from the third test: mesh liner brand, bedding titles that never reached a photo check, LulyBoo', async () => {
+  const { mayContain } = await import('../shared/banned.mjs');
+  const may = t => mayContain(t).map(x => x.key);
+  assert.deepEqual(bannedHints('Crib bumper - BreathableBaby').map(x => x.key), []);
+  assert.deepEqual(may('Vintage Clown Baby Bedding Clowncore Judi -S 80s Heirloom Collection 5 Pc Set'), ['crib_bumper']);
+  assert.deepEqual(may('Lot of 9 Graham Kracker Sport football baseball Crib Baby bed Bedding room USA'), ['crib_bumper']);
+  assert.deepEqual(may('Lulyboo Indoor Outdoor Bubble Cuddle and Play Lounge and Nest Gray'), ['in_bed_sleeper']);
+  // Still not a bedding set or a lounger.
+  for (const t of ['Baby bath tub with sling', 'Crib mattress protector waterproof', 'Pool lounge chair']) assert.deepEqual(may(t), [], t);
+});

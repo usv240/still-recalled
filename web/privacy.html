@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Still Recalled: privacy</title>
+<meta name="description" content="What the Still Recalled Chrome extension and web page do with your data.">
+<meta name="theme-color" content="#f8f8f8">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="stylesheet" href="build/style.css">
+<style>
+  .policy { max-width: 1120px; margin: 0 auto; padding: 24px 16px 56px; box-sizing: border-box; }
+  .policy > * { max-width: 66ch; }
+  .policy h1 { font: 600 28px/34px var(--font); letter-spacing: -0.02em; margin-bottom: 8px; }
+  .policy h2 { font: 600 17px/24px var(--font); margin: 32px 0 8px; }
+  .policy p, .policy li { text-wrap: pretty; }
+  .policy p + p { margin-top: 10px; }
+  .policy ul { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 6px; }
+</style>
+</head>
+<body>
+<header class="bar"><a class="brand" href="./">Still Recalled</a></header>
+<main class="policy">
+<h1>Privacy</h1>
+<p class="muted">Updated November 16, 2026. This covers the Still Recalled Chrome extension and the web page at still-recalled.web.app.</p>
+
+<h2>What stays on your computer</h2>
+<p>The extension reads the listings on eBay, Mercari and Craigslist search pages you open. Every listing is first
+checked by word rules and, when your computer has it, by Chrome's built-in model (Gemini Nano), both on your computer.
+Listings these steps clear never leave it. Your searches and the rest of your browsing are not sent anywhere.</p>
+
+<h2>What is sent to the cloud, and why</h2>
+<p>When a listing is flagged on your computer, its title, description and photo are sent, with the CPSC recall notice it
+might match, to Gemini through Google's Firebase AI Logic, so a larger model can confirm or clear the flag. On the web
+page, the screenshot or text you add is read and checked the same way: on your device when your browser has a built-in
+model, otherwise by Gemini in the cloud.</p>
+<p>You can turn the cloud check off in the extension's side panel settings. Google processes these requests under
+<a class="link" href="https://firebase.google.com/terms/data-processing-terms" target="_blank" rel="noopener">Firebase's data processing terms</a>.</p>
+
+<h2>What is not collected</h2>
+<ul>
+  <li>No account and no sign-in.</li>
+  <li>No analytics, advertising or tracking, and no data sold or shared.</li>
+  <li>No personal information: names, addresses, payment details or messages.</li>
+</ul>
+
+<h2>What is stored</h2>
+<p>The extension keeps its results for each page in your browser for 7 days, so a page you return to isn't checked
+again, and keeps your settings. Nothing is stored on a server. Removing the extension removes them.</p>
+
+<h2>Verification</h2>
+<p>To protect the project's model quota, Google's reCAPTCHA Enterprise and Firebase App Check confirm that requests come
+from this app. reCAPTCHA runs on still-recalled.web.app, including the small page the extension uses for this; Google's
+<a class="link" href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a> applies to it.</p>
+
+<h2>Questions</h2>
+<p>Still Recalled is open source:
+<a class="link" href="https://github.com/usv240/still-recalled" target="_blank" rel="noopener">github.com/usv240/still-recalled</a>.
+Open an issue there with any question about this policy.</p>
+</main>
+</body>
+</html>

@@ -2,10 +2,13 @@
 // Loads extension/ unpacked, opens a live eBay search, and checks every hand-off:
 //   content script -> service worker -> offscreen engine -> results back -> badges on the page -> toolbar count
 //   -> clicking a badge opens its popover without leaving the page.
-// A fresh profile has no built-in model, so this run covers the words + cloud path; the on-device path is covered by
-// tools/eval-test.html in a Chrome that has the model.
-// Usage: node build.mjs && node tools/e2e.mjs [search words] [--headful]
+// A fresh profile has no built-in model, so by default this covers the words + cloud path. With --profile=<dir> made by
+// tools/nano-profile.mjs, the profile has Chrome's built-in model and the test also checks that the extension's
+// on-device step ran.
+// reCAPTCHA scores headless Chrome as a bot, so the release build's cloud check needs --headful.
+// Usage: node build.mjs && node tools/e2e.mjs [search words] [--headful] [--url=<search page>] [--ext=<dir>] [--profile=<dir>]
 import puppeteer from 'puppeteer-core';
+import { builtInModelArgs } from './chrome-args.mjs';
 import { mkdtempSync, rmSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -18,14 +21,17 @@ const urlArg = (args.find(a => a.startsWith('--url=')) || '').slice(6);
 const extDir = (args.find(a => a.startsWith('--ext=')) || '--ext=extension').slice(6);
 const out = process.env.E2E_OUT || path.resolve('tools/e2e-out');
 mkdirSync(out, { recursive: true });
-const profile = mkdtempSync(path.join(tmpdir(), 'sr-e2e-'));
+const keptProfile = (args.find(a => a.startsWith('--profile=')) || '').slice(10);
+const profile = keptProfile || mkdtempSync(path.join(tmpdir(), 'sr-e2e-'));
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 const results = { query, steps: [] };
 const step = (name, ok, detail = '') => { results.steps.push({ name, ok, detail }); log(ok ? 'PASS' : 'FAIL', name, detail); };
 
 const browser = await puppeteer.launch({
   executablePath: CHROME, headless: !headful, pipe: true, enableExtensions: true, userDataDir: profile,
-  defaultViewport: { width: 1366, height: 900 }, args: ['--window-size=1366,1000', '--no-first-run', '--no-default-browser-check'],
+  defaultViewport: { width: 1366, height: 900 },
+  ...(keptProfile ? { ignoreDefaultArgs: true } : {}),
+  args: [...(keptProfile ? builtInModelArgs({ headless: !headful, userDataDir: profile }) : []), '--window-size=1366,1000', '--no-first-run', '--no-default-browser-check'],
 });
 try {
   const id = await browser.installExtension(path.resolve(extDir));
@@ -58,7 +64,7 @@ try {
   for (;;) {
     state = await tabState();
     const done = state && state.total && Object.keys(state.results || {}).length >= state.total;
-    if (done || Date.now() - t0 > 240000) break;
+    if (done || Date.now() - t0 > (keptProfile ? 1500000 : 240000)) break;   // the on-device step takes about 10 s a listing
     await new Promise(r => setTimeout(r, 3000));
   }
   const checked = state ? Object.keys(state.results || {}).length : 0;
@@ -69,6 +75,10 @@ try {
   results.cloudChecked = state ? Object.values(state.results).filter(r => r.how && r.how.cloudModel).length : 0;
   results.cloudErrors = state ? Object.values(state.results).filter(r => r.how && r.how.cloudError).map(r => r.how.cloudError) : [];
   step('cloud double-check runs', results.cloudChecked > 0 && results.cloudErrors.length === 0, `${results.cloudChecked} confirmed in the cloud, ${results.cloudErrors.length} cloud errors ${results.cloudErrors.slice(0, 1).join('')}`);
+  if (keptProfile) {
+    const onDevice = state ? Object.values(state.results).filter(r => r.how && r.how.device).length : 0;
+    step('built-in model runs in the extension', onDevice > 0, `${onDevice} listings looked at on this device`);
+  }
   results.flagged = flagged.map(r => ({ level: r.level, badge: r.badge, title: r.listing.title, cloud: r.how.cloudModel, device: r.how.device }));
   log(`flagged ${flagged.length}:`, flagged.slice(0, 8).map(r => `${r.level}/${r.badge}: ${r.listing.title.slice(0, 50)}`).join('\n  '));
 
@@ -100,7 +110,7 @@ try {
   step('run', false, String(e).slice(0, 300));
 } finally {
   await browser.close().catch(() => {});
-  try { rmSync(profile, { recursive: true, force: true }); } catch {}
+  if (!keptProfile) try { rmSync(profile, { recursive: true, force: true }); } catch {}
 }
 const failed = results.steps.filter(s => !s.ok).length;
 console.log(JSON.stringify({ passed: results.steps.length - failed, failed }, null, 0));
