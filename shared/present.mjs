@@ -158,9 +158,15 @@ export function present(listing, decision, how = {}) {
     check: decision.check || '',
     evidence: decision.evidence || '',
     confirmed: !!decision.confirmed,
+    // Where in the listing photo the cloud check saw it: { x, y, w, h } as fractions of the photo, or null.
+    where: (decision.level !== 'none' && decision.where) || null,
     how: {
       device: !!how.device,
       deviceLevel: how.deviceLevel || (how.words ? 'words' : ''),
+      // The built-in model's reading of "which units", and the cloud's answer on the recall, for comparing the two.
+      candidate: how.candidate || '',     // the recall the word rules proposed, and how strongly
+      deviceUnit: how.deviceUnit || '',
+      cloudMatch: (how.cloud && how.cloud.answer && how.cloud.answer.matches_recall) || '',
       judgedInCloud: !!how.judgedInCloud,
       deviceError: how.deviceError || "",
       cloudModel: (how.cloud && how.cloud.model) || '',
@@ -172,7 +178,9 @@ export function present(listing, decision, how = {}) {
   };
   if (base.kind === 'recall' && decision.card) {
     const c = decision.card;
-    base.recall = { id: c.id, date: c.date, product: c.product, title: c.title, hazard: c.hazard, remedy: c.remedy, url: c.url, image: c.image };
+    base.recall = { id: c.id, date: c.date, product: c.product, title: c.title, hazard: c.hazard, remedy: c.remedy, url: c.url, image: c.image,
+      // For the card's "which units" line and the label check.
+      tell: c.tell || '', codes: (c.codes || []).slice(0, 14), from: c.from || 0, to: c.to || 0, all: !!c.all };
   }
   if (base.kind === 'banned' && decision.banned) {
     const t = TYPE_COPY[decision.banned.key] || {};

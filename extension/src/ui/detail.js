@@ -3,6 +3,7 @@
 import { h, copyWithFeedback, safeUrl } from './dom.js';
 import { icon } from './icons.js';
 import { CPSC_REPORT_URL } from '../../../shared/present.mjs';
+import { judgeLabel, labelCopy } from '../../../shared/label.mjs';
 
 const DEFAULT_CHECK = {
   recall: 'Ask for a photo of the label. The model number and manufacture date decide whether this unit is one of the recalled ones.',
@@ -22,22 +23,105 @@ export function statusPill(r) {
 // the path (s-l140 ... s-l1600).
 const larger = src => String(src || '').replace(/(\/\/i\.ebayimg\.com\/.+\/s-l)\d+(\.\w+)$/, '$1500$2');
 
-function photo(src, caption, fallbackHref) {
-  const box = h('div', { class: 'ph' });
+/**
+ * Put the outline where the cloud check saw the thing. The photo is shown whole (object-fit: contain) in a frame of
+ * known shape, so the place is worked out from the photo's own shape, in percent: it holds at any size, and while the
+ * card is still hidden and has no size to measure.
+ */
+function placeOutline(img, mark, where, frameShape) {
+  if (!img.naturalWidth || !img.naturalHeight) return;
+  const shape = img.naturalWidth / img.naturalHeight;
+  const w = shape > frameShape ? 1 : shape / frameShape;      // the photo's share of the frame's width
+  const h = shape > frameShape ? frameShape / shape : 1;      // and of its height
+  const left = (1 - w) / 2, top = (1 - h) / 2;
+  mark.style.left = `${(left + where.x * w) * 100}%`;
+  mark.style.top = `${(top + where.y * h) * 100}%`;
+  mark.style.width = `${where.w * w * 100}%`;
+  mark.style.height = `${where.h * h * 100}%`;
+  mark.classList.add('is-placed');
+}
+
+/** One photo with its caption. `where` ({ x, y, w, h }, fractions of the photo) outlines a part of it. */
+function photo(src, caption, fallbackHref, { where = null, wide = false } = {}) {
+  const box = h('div', { class: `ph${where ? ' has-outline' : ''}${wide ? ' is-wide' : ''}` });
   // blob: URLs are the shopper's own screenshot on the web page.
   const url = safeUrl(larger(src)) || (/^blob:/.test(String(src || '')) ? src : null);
   if (url) {
     const img = h('img', { src: url, alt: caption, loading: 'lazy', decoding: 'async', referrerpolicy: 'no-referrer' });
+    const frame = h('div', { class: 'ph-frame' }, img);
     // Some marketplaces block outside images; fall back to a link to the source.
     img.addEventListener('error', () => {
-      img.replaceWith(h('a', { class: 'ph-missing', href: safeUrl(fallbackHref) || url, target: '_blank', rel: 'noopener' }, 'Photo on the notice'));
+      frame.replaceWith(h('a', { class: 'ph-missing', href: safeUrl(fallbackHref) || url, target: '_blank', rel: 'noopener' }, 'Photo on the notice'));
     }, { once: true });
-    box.append(img);
+    if (where) {
+      const mark = h('span', { class: 'ph-outline', 'aria-hidden': 'true' });
+      frame.append(mark);
+      const place = () => {
+        if (!img.naturalWidth) return;
+        // A wide frame takes the photo's own shape, within limits, so a tall photo isn't flanked by empty bars.
+        const shape = wide ? Math.min(1.6, Math.max(0.8, img.naturalWidth / img.naturalHeight)) : 1;
+        if (wide) img.style.aspectRatio = String(shape);
+        placeOutline(img, mark, where, shape);
+      };
+      img.addEventListener('load', place, { once: true });
+      if (img.complete) place();
+    }
+    box.append(frame);
   } else {
     box.append(h('span', { class: 'ph-missing' }, 'No photo'));
   }
   box.append(h('span', { class: 'ph-cap' }, caption));
   return box;
+}
+
+/** A label photo as a JPEG data URL, at most 1280 px on its long side: small enough to pass between extension pages. */
+async function labelPhoto(file) {
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, 1280 / Math.max(bitmap.width, bitmap.height));
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(bitmap.width * scale);
+  canvas.height = Math.round(bitmap.height * scale);
+  canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  return canvas.toDataURL('image/jpeg', 0.88);
+}
+
+/**
+ * "Settle it with the label": the shopper adds a photo of the product's label; `onLabel(dataUrl, recall)` has a model
+ * read it and compare it with the notice in plain code (label.mjs), and resolves to { reading, source, verdict }.
+ */
+function labelSection(r, onLabel) {
+  const input = h('input', { type: 'file', accept: 'image/*', class: 'visually-hidden', tabindex: '-1', 'aria-hidden': 'true' });
+  const text = h('span', {}, 'Add a label photo');
+  const button = h('button', { class: 'btn btn-secondary', type: 'button' }, icon('tag'), text);
+  const out = h('div', { class: 'label-out', 'aria-live': 'polite' });
+  button.addEventListener('click', () => input.click());
+  input.addEventListener('change', async () => {
+    const file = input.files && input.files[0];
+    input.value = '';
+    if (!file) return;
+    button.disabled = true;
+    text.textContent = 'Reading the label…';
+    try {
+      const recall = { codes: r.recall.codes || [], from: r.recall.from || 0, to: r.recall.to || 0 };
+      const { reading, source, verdict } = await onLabel(await labelPhoto(file), recall);
+      const copy = labelCopy(verdict || judgeLabel(reading, recall));
+      const read = [reading.brand, ...(reading.model_numbers || []).slice(0, 3), reading.manufacture_date].filter(Boolean).join(' · ');
+      out.replaceChildren(h('div', { class: `label-result is-${copy.tone}` },
+        h('p', { class: 'label-title' }, copy.title),
+        h('p', {}, copy.text),
+        h('p', { class: 'hint' }, `${{ on_device: 'Read on this device; the photo did not leave it.', device_then_cloud: 'Read on this device, then read again in the cloud before ruling it out.' }[source] || 'Read in the cloud.'}${read ? ` On the label: ${read}.` : ''}`)));
+      text.textContent = 'Try another photo';
+    } catch {
+      out.replaceChildren(h('p', { class: 'hint' }, 'The label could not be read right now. Try again in a moment.'));
+      text.textContent = 'Add a label photo';
+    } finally {
+      button.disabled = false;
+    }
+  });
+  return h('section', { class: 'check label-check' },
+    h('h3', {}, 'Settle it with the label'),
+    h('p', {}, 'Have a photo of the label, from the seller or of the item itself? Its model number and date are read and compared with the notice.'),
+    input, button, out);
 }
 
 function howLine(r) {
@@ -54,8 +138,9 @@ function howLine(r) {
 /**
  * Build the detail. `compact` drops the recall facts table (the popover links out to the panel for those).
  * `onOpenPanel` adds a "More in the side panel" action when given.
+ * `onLabel(dataUrl, recall)` reads a label photo and resolves to { reading, source, verdict }; it adds "Settle it with the label".
  */
-export function detailView(r, { compact = false, onOpenPanel = null } = {}) {
+export function detailView(r, { compact = false, onOpenPanel = null, onLabel = null } = {}) {
   const root = h('div', { class: `detail ${compact ? 'is-compact' : ''}` });
 
   root.append(h('div', { class: 'verdict' },
@@ -64,10 +149,20 @@ export function detailView(r, { compact = false, onOpenPanel = null } = {}) {
     r.confirmed && r.evidence ? h('p', { class: 'evidence' }, r.evidence) : null,
   ));
 
+  // The cloud check's outline of what it saw in the seller's photo. Only when the photo was there to look at.
+  const where = r.where && r.listing.image ? r.where : null;
   if (r.kind === 'recall' && r.recall) {
     root.append(h('div', { class: 'pair' },
-      photo(r.listing.image, 'This listing', r.listing.url),
+      photo(r.listing.image, where ? 'This listing. Outlined: what the cloud check matched.' : 'This listing', r.listing.url, { where }),
       photo(r.recall.image, 'Recall notice', r.recall.url),
+    ));
+    // Which units the notice recalls, in one sentence written from the notice.
+    if (r.recall.tell && r.recall.tell !== r.check) root.append(h('p', { class: 'tell' }, h('b', {}, 'Which units: '), r.recall.tell));
+  } else if (r.kind === 'banned' && r.banned && where) {
+    // The photo large, with the part that matters outlined: a bumper among the bedding is easy to miss.
+    root.append(h('div', { class: 'spot' },
+      photo(r.listing.image, `Outlined by the cloud check: what it saw as ${/^[aeiou]/i.test(r.banned.name) ? 'an' : 'a'} ${r.banned.name.toLowerCase()}.`, r.listing.url, { where, wide: true }),
+      h('div', { class: 'risk' }, h('p', { class: 'risk-text' }, r.banned.risk)),
     ));
   } else if (r.kind === 'banned' && r.banned) {
     root.append(h('div', { class: 'pair is-single' },
@@ -95,6 +190,12 @@ export function detailView(r, { compact = false, onOpenPanel = null } = {}) {
       ? 'Copies the question and opens eBay\'s message box for this seller.'
       : 'Copies the question and opens the listing, where the seller\'s message button is.') : null,
   ));
+
+  // Settle it with the label: the one fact a "possible recall" is missing. Not offered when the notice recalls every
+  // unit (no model number would change the answer) or lists no models and no years to compare with.
+  if (onLabel && r.kind === 'recall' && r.recall && !r.recall.all && ((r.recall.codes || []).length || r.recall.from)) {
+    root.append(labelSection(r, onLabel));
+  }
 
   // The last step: a report to CPSC, which asks shoppers to report recalled products for sale online at
   // SaferProducts.gov with the listing's link. Offered only for likely flags whose sale the law rules out.

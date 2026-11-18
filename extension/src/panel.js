@@ -163,7 +163,7 @@ function detailPage(r) {
         r.listing.price ? h('span', { class: 'price' }, r.listing.price) : null,
         site ? h('span', {}, site) : null,
         h('button', { class: 'link', type: 'button', onclick: () => tab && chrome.tabs.sendMessage(tab.id, { type: 'sr:reveal', id: r.id }).catch(() => {}) }, 'Show on page'))),
-    h('div', { class: 'detail-card' }, detailView(r)));
+    h('div', { class: 'detail-card' }, detailView(r, { onLabel: (dataUrl, recall) => chrome.runtime.sendMessage({ type: 'sr:read-label', dataUrl, recall }).then(r => { if (!r || r.error) throw new Error((r && r.error) || 'no answer'); return r; }) })));
 }
 
 function skeletonRows(n) {

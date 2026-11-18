@@ -2,7 +2,7 @@
 //   1. read the screenshot   hybrid inference: Chrome's built-in model when this device has it, Gemini otherwise
 //   2. words                 the extension's shortlist of 1,885 CPSC recall notices and its risky-type rules, here
 //   3. look and confirm      the extension's judge (hybrid) and its cloud double-check against the full notice
-import { useCards, triageListing, checkListing } from '../../extension/src/engine.js';
+import { useCards, triageListing, checkListing, readLabel } from '../../extension/src/engine.js';
 import { hybridJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
 import { SYSTEM, SCHEMA } from '../../shared/judge.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
@@ -155,7 +155,7 @@ function showResult(r, listing, { example }) {
   );
   let body;
   if (r.level === 'possible' || r.level === 'likely') {
-    body = detailView(r, { compact: false });
+    body = detailView(r, { compact: false, onLabel: readLabel });
   } else {
     body = h('div', { class: 'detail' },
       h('div', { class: 'verdict' },

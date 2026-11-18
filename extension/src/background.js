@@ -120,6 +120,10 @@ chrome.runtime.onMessage.addListener((msg, sender, reply) => {
         chrome.storage.session.set({ [`focus:${tabId}`]: { id: msg.id, at: Date.now() } }).catch(() => {});
       }
       return true;
+    case 'sr:read-label':
+      // From a card on the page or in the panel: have the hidden page's model read a label photo.
+      ensureOffscreen().then(() => chrome.runtime.sendMessage({ type: 'sr:engine-label', dataUrl: msg.dataUrl, recall: msg.recall })).then(reply, e => reply({ error: String(e) }));
+      return true;
     case 'sr:engine-status':
       ensureOffscreen().then(() => chrome.runtime.sendMessage({ type: 'sr:engine-status' })).then(reply, e => reply({ error: String(e) }));
       return true;

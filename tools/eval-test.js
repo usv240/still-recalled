@@ -45,6 +45,7 @@ window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '',
     const row = {
       id: listing.id, search: listing.search, title: listing.title, price: listing.price || '', photoOk,
       final: r.level, kind: r.kind || null, device: r.how && r.how.deviceLevel, usedDevice: !!(r.how && r.how.device),
+      deviceUnit: (r.how && r.how.deviceUnit) || '', cloudMatch: (r.how && r.how.cloudMatch) || '', candidate: (r.how && r.how.candidate) || '',
       cloud: (r.how && r.how.cloudModel) || '', cloudError: (r.how && r.how.cloudError) || '', deviceError: (r.how && r.how.deviceError) || '',
       recall: r.recall ? r.recall.id : null, banned: r.banned ? r.banned.key : null,
       why: r.why || '', evidence: r.evidence || '', ms: Math.round(performance.now() - start), error: r.error || '',

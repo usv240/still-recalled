@@ -15,6 +15,12 @@
    "check": "",
    "evidence": "The listing photo shows a Precious Moments crib bedding set that includes a thick padded crib bumper with ties in the upper left.",
    "confirmed": true,
+   "where": {
+    "x": 0.117,
+    "y": 0.094,
+    "w": 0.393,
+    "h": 0.399
+   },
    "how": {
     "device": true,
     "deviceLevel": "ask",
@@ -31,7 +37,7 @@
     "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
     "source": "https://www.cpsc.gov/SafeSleep"
    },
-   "checkedAt": "2026-11-15T22:57:01.629Z",
+   "checkedAt": "2026-11-18T21:36:32.162Z",
    "badge": "Possible crib bumper",
    "verdict": "This may be or include a padded crib bumper.",
    "question": "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
@@ -53,6 +59,7 @@
    "check": "",
    "evidence": "The listing title describes a baby crib bedding set and the photo shows a thick padded crib bumper panel with ties.",
    "confirmed": true,
+   "where": null,
    "how": {
     "device": true,
     "deviceLevel": "possible",
@@ -69,12 +76,12 @@
     "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
     "source": "https://www.cpsc.gov/SafeSleep"
    },
-   "checkedAt": "2026-11-15T22:57:01.631Z",
+   "checkedAt": "2026-11-18T21:36:39.454Z",
    "badge": "Padded crib bumper",
    "verdict": "This looks like a padded crib bumper.",
    "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
    "messageUrl": "https://www.ebay.com/itm/267843698279?m2mOpen=1",
-   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/267843698279\nTitle: Vintage 1986 Red Calliope Teddy Bear Baby Crib Bedding Set Blue Pastel USA\nAsking price: $42.99\nSeen on: November 15, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The listing title describes a baby crib bedding set and the photo shows a thick padded crib bumper panel with ties.",
+   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/267843698279\nTitle: Vintage 1986 Red Calliope Teddy Bear Baby Crib Bedding Set Blue Pastel USA\nAsking price: $42.99\nSeen on: November 18, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The listing title describes a baby crib bedding set and the photo shows a thick padded crib bumper panel with ties.",
    "order": 1
   },
   "960167294786": {
@@ -91,6 +98,7 @@
    "check": "",
    "evidence": "",
    "confirmed": false,
+   "where": null,
    "how": {
     "device": true,
     "deviceLevel": "possible",
@@ -101,7 +109,7 @@
    },
    "recall": null,
    "banned": null,
-   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "checkedAt": "2026-11-18T21:36:39.473Z",
    "order": 2
   },
   "336898849272": {
@@ -118,6 +126,7 @@
    "check": "",
    "evidence": "The listing photo of the crib bedding set shows a thick padded crib bumper surrounding the quilt.",
    "confirmed": true,
+   "where": null,
    "how": {
     "device": true,
     "deviceLevel": "ask",
@@ -134,7 +143,7 @@
     "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
     "source": "https://www.cpsc.gov/SafeSleep"
    },
-   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "checkedAt": "2026-11-18T21:36:54.658Z",
    "badge": "Possible crib bumper",
    "verdict": "This may be or include a padded crib bumper.",
    "question": "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
@@ -156,6 +165,12 @@
    "check": "",
    "evidence": "The listing is for a 7-piece nursery bedding set whose packaging photo clearly shows a thick padded crib bumper lining the inside rails of the crib.",
    "confirmed": true,
+   "where": {
+    "x": 0.267,
+    "y": 0.313,
+    "w": 0.728,
+    "h": 0.212
+   },
    "how": {
     "device": true,
     "deviceLevel": "ask",
@@ -172,7 +187,7 @@
     "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
     "source": "https://www.cpsc.gov/SafeSleep"
    },
-   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "checkedAt": "2026-11-18T21:37:00.678Z",
    "badge": "Possible crib bumper",
    "verdict": "This may be or include a padded crib bumper.",
    "question": "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
@@ -194,6 +209,7 @@
    "check": "",
    "evidence": "",
    "confirmed": false,
+   "where": null,
    "how": {
     "device": true,
     "deviceLevel": "possible",
@@ -204,7 +220,7 @@
    },
    "recall": null,
    "banned": null,
-   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "checkedAt": "2026-11-18T21:37:00.678Z",
    "order": 5
   },
   "287707048490": {
@@ -221,6 +237,7 @@
    "check": "",
    "evidence": "",
    "confirmed": false,
+   "where": null,
    "how": {
     "device": true,
     "deviceLevel": "possible",
@@ -231,7 +248,7 @@
    },
    "recall": null,
    "banned": null,
-   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "checkedAt": "2026-11-18T21:37:00.678Z",
    "order": 6
   },
   "147631281873": {
@@ -248,6 +265,12 @@
    "check": "",
    "evidence": "The crib bedding set photo shows thick padded panels with ties folded on the lower right side.",
    "confirmed": true,
+   "where": {
+    "x": 0.72,
+    "y": 0.396,
+    "w": 0.28,
+    "h": 0.532
+   },
    "how": {
     "device": true,
     "deviceLevel": "possible",
@@ -264,12 +287,12 @@
     "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
     "source": "https://www.cpsc.gov/SafeSleep"
    },
-   "checkedAt": "2026-11-15T22:57:01.679Z",
+   "checkedAt": "2026-11-18T21:37:13.026Z",
    "badge": "Padded crib bumper",
    "verdict": "This looks like a padded crib bumper.",
    "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
    "messageUrl": "https://www.ebay.com/itm/147631281873?m2mOpen=1",
-   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/147631281873\nTitle: Elephant Crib Bedding Set Unisex Baby Nursery Gray Blue White Bedding Set\nAsking price: $75.00\nSeen on: November 15, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The crib bedding set photo shows thick padded panels with ties folded on the lower right side.",
+   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/147631281873\nTitle: Elephant Crib Bedding Set Unisex Baby Nursery Gray Blue White Bedding Set\nAsking price: $75.00\nSeen on: November 18, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The crib bedding set photo shows thick padded panels with ties folded on the lower right side.",
    "order": 7
   },
   "960150054374": {
@@ -286,6 +309,7 @@
    "check": "",
    "evidence": "",
    "confirmed": false,
+   "where": null,
    "how": {
     "device": true,
     "deviceLevel": "ask",
@@ -296,7 +320,7 @@
    },
    "recall": null,
    "banned": null,
-   "checkedAt": "2026-11-15T22:57:01.680Z",
+   "checkedAt": "2026-11-18T21:37:13.027Z",
    "order": 8
   },
   "940069271637": {
@@ -313,6 +337,7 @@
    "check": "",
    "evidence": "",
    "confirmed": false,
+   "where": null,
    "how": {
     "device": true,
     "deviceLevel": "ask",
@@ -323,7 +348,7 @@
    },
    "recall": null,
    "banned": null,
-   "checkedAt": "2026-11-15T22:57:01.680Z",
+   "checkedAt": "2026-11-18T21:37:13.027Z",
    "order": 9
   },
   "880089415306": {
@@ -340,6 +365,7 @@
    "check": "",
    "evidence": "The listing photo shows thick padded Care Bears fabric panels with ties as part of a two-piece crib bedding set.",
    "confirmed": true,
+   "where": null,
    "how": {
     "device": true,
     "deviceLevel": "possible",
@@ -356,12 +382,12 @@
     "advice": "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
     "source": "https://www.cpsc.gov/SafeSleep"
    },
-   "checkedAt": "2026-11-15T22:57:01.680Z",
+   "checkedAt": "2026-11-18T21:37:17.453Z",
    "badge": "Padded crib bumper",
    "verdict": "This looks like a padded crib bumper.",
    "question": "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?",
    "messageUrl": "https://www.ebay.com/itm/880089415306?m2mOpen=1",
-   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/880089415306\nTitle: Care Bears Baby Crib Bedding Set Green Yellow Stars 2 Piece Baby Hugs Rare\nAsking price: $100.00\nSeen on: November 15, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The listing photo shows thick padded Care Bears fabric panels with ties as part of a two-piece crib bedding set.",
+   "report": "An infant sleep product listed for sale online.\n\nListing: https://www.ebay.com/itm/880089415306\nTitle: Care Bears Baby Crib Bedding Set Green Yellow Stars 2 Piece Baby Hugs Rare\nAsking price: $100.00\nSeen on: November 18, 2026\n\nIt appears to be a padded crib bumper. Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1309, padded crib bumpers may not be sold after November 12, 2022.\nWhat the listing shows: The listing photo shows thick padded Care Bears fabric panels with ties as part of a two-piece crib bedding set.",
    "order": 10
   }
  }

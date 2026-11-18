@@ -13,7 +13,8 @@ const singular = w => (w.length > 3 && /[a-z]s$/.test(w) && !/(ss|us|is)$/.test(
 /** Lowercase tokens of 2+ characters. Codes with digits also get a joined form, so "RGV3-304" matches "RGV3304". */
 export function tokenize(text) {
   const out = [];
-  const raw = String(text || '').toLowerCase().replace(/[’']/g, '');
+  // "2-1", "2 in 1" and "2-in-1" are the same thing in listings: all become "2in1".
+  const raw = String(text || '').toLowerCase().replace(/[’']/g, '').replace(/\b(\d)\s*(?:-\s*in\s*-|\s+in\s+|-)\s*(\d)\b/g, '$1in$2');
   for (const chunk of raw.split(/[^a-z0-9-]+/)) {
     if (!chunk) continue;
     const parts = chunk.split('-').filter(Boolean);

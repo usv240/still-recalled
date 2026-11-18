@@ -44,6 +44,7 @@ await build({ ...common, outdir: 'tools', format: 'esm', entryPoints: {
   'confirm-test.bundle': 'tools/confirm-test.js',
   'live-test.bundle': 'tools/live-test.js',
   'eval-test.bundle': 'tools/eval-test.js',
+  'label-test.bundle': 'tools/label-test.js',
   'preview/badges.bundle': 'tools/preview/badges.js',
 } });
 

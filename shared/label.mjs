@@ -1,0 +1,90 @@
+// Settle it with the label. A "possible recall" flag ends at one fact the listing doesn't show: the model number and
+// date on the product's label. When the shopper has a photo of the label (from the seller, or of the item in front of
+// them), a model reads the label and plain code compares it with the recall card.
+//
+// The model only reads (the built-in model when the device has it, so the photo stays on the device). Whether the
+// numbers match is decided here, in code, for the same reason the brand check is in code: the model is not trusted to
+// compare. The answer never says "safe": a model the notice doesn't list is "not among the listed models".
+
+export const LABEL_SYSTEM = [
+  'You read the label, tag or sticker in a photo of a product. Copy what is printed; do not guess.',
+  'model_numbers: every model, item, style or product number printed on the label, exactly as printed. An empty list if none can be read.',
+  'manufacture_date: the date of manufacture or date code as printed (for example "03/2019", "2019-03-14", "DOM 14MAR19"). Empty if none.',
+  'year: the four-digit year of manufacture when the label shows one, otherwise 0.',
+  'brand: the brand or maker printed on the label. Empty if none.',
+  'readable: false when the photo shows no label or the print cannot be read.',
+].join('\n');
+
+export const LABEL_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['readable', 'model_numbers', 'manufacture_date', 'year', 'brand'],
+  properties: {
+    readable: { type: 'boolean' },
+    model_numbers: { type: 'array', items: { type: 'string' } },
+    manufacture_date: { type: 'string' },
+    year: { type: 'integer' },
+    brand: { type: 'string' },
+  },
+};
+
+const bare = code => String(code || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+/** Do two codes name the same model? Equal, or one continues the other ("CHM84" on the notice, "CHM84-9993" on the label). */
+function sameModel(a, b) {
+  const x = bare(a), y = bare(b);
+  if (x.length < 3 || y.length < 3) return false;
+  if (x === y) return true;
+  const [short, long] = x.length <= y.length ? [x, y] : [y, x];
+  // A label adds prefixes and suffixes: "PO: 10361800", "SUNNY CS EH1-0090".
+  return (short.length >= 4 && long.startsWith(short)) || (short.length >= 5 && long.includes(short));
+}
+
+/**
+ * Compare a label reading with a recall card. Returns { state, model, listed, year }:
+ *   "recalled"    a model number on the label is one the notice lists (and the year, if read, is not outside the years sold)
+ *   "not_listed"  the label shows a model number, and it is not among those the notice lists
+ *   "year_out"    no model to compare, but the label's year is outside the years the recalled units were sold
+ *   "no_models"   the label was read, but the notice gives no model numbers to compare with
+ *   "unreadable"  nothing useful could be read
+ */
+export function judgeLabel(reading, card) {
+  const read = (reading && reading.readable !== false && Array.isArray(reading.model_numbers) ? reading.model_numbers : [])
+    .map(m => String(m).trim()).filter(m => bare(m).length >= 3).slice(0, 8);
+  const listed = (card.codes || []).slice(0, 14);
+  const year = reading && Number.isInteger(reading.year) && reading.year >= 1960 && reading.year <= 2035 ? reading.year : 0;
+  // Made up to a year before the first sale; not made after the last.
+  const yearOut = !!(year && card.from && card.to && (year < card.from - 1 || year > card.to));
+  const base = { model: '', listed, year, yearOut, from: card.from || 0, to: card.to || 0 };
+
+  if (!read.length && !year) return { ...base, state: 'unreadable' };
+  const hit = read.find(m => listed.some(c => sameModel(m, c)));
+  if (hit) return { ...base, state: 'recalled', model: hit };
+  if (read.length && listed.length) return { ...base, state: 'not_listed', model: read[0] };
+  if (yearOut) return { ...base, state: 'year_out', model: read[0] || '' };
+  return { ...base, state: read.length ? 'no_models' : 'unreadable', model: read[0] || '' };
+}
+
+const years = v => (v.from && v.to ? (v.from === v.to ? `in ${v.from}` : `from ${v.from} to ${v.to}`) : '');
+const some = list => (list.length > 6 ? `${list.slice(0, 6).join(', ')} and ${list.length - 6} more` : list.join(', '));
+
+/** What the shopper reads: { tone: "likely" | "possible" | "plain", title, text }. Never "safe". */
+export function labelCopy(v) {
+  switch (v.state) {
+    case 'recalled':
+      return { tone: 'likely', title: 'The label matches the recall',
+        text: `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ''}. Don't buy it unless the seller shows the recall's fix was done.` };
+    case 'not_listed':
+      return { tone: 'plain', title: 'Not among the listed models',
+        text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too: check the notice before you rely on this.` };
+    case 'year_out':
+      return { tone: 'plain', title: 'Dated outside the recalled years',
+        text: `The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.` };
+    case 'no_models':
+      return { tone: 'possible', title: 'The notice lists no model numbers',
+        text: `The label reads ${v.model}${v.year ? `, dated ${v.year}` : ''}, but this notice doesn't recall by model number. Read "which units" in the notice.` };
+    default:
+      return { tone: 'possible', title: 'Couldn\'t read the label',
+        text: 'No model number or date could be read. Try a closer, sharper photo of the label or tag.' };
+  }
+}

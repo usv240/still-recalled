@@ -88,6 +88,33 @@
   border-radius: var(--radius-control); background: var(--raised);
 }
 .ph-missing { font: 500 12px/16px var(--font); color: var(--muted); text-align: center; padding: 8px; box-sizing: border-box; }
+/* The outline: where the cloud check saw the thing. The photo is shown whole so the outline lands where it should;
+   the rest of the photo dims a little so the eye goes to the outlined part. */
+.ph-frame { position: relative; overflow: hidden; border-radius: var(--radius-control); background: var(--raised); line-height: 0; }
+.ph-frame img { border-radius: 0; }
+.ph.has-outline .ph-frame img { object-fit: contain; }
+.ph.is-wide .ph-frame img { aspect-ratio: 4 / 3; }
+.ph-outline {
+  position: absolute; box-sizing: border-box; border: 2px solid var(--likely); border-radius: 6px;
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.92), 0 0 0 999px rgba(10, 10, 10, 0.22);
+  opacity: 0; transform: scale(1.05);
+  transition: opacity 240ms var(--ease-out), transform 240ms var(--ease-out);
+}
+.ph-outline.is-placed { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .ph-outline { transition: none; transform: none; } }
+.spot { display: grid; gap: 12px; }
+.tell { font-size: 13px; line-height: 20px; text-wrap: pretty; }
+.tell b { font-weight: 600; }
+/* Settle it with the label. */
+.label-check { padding-top: 14px; border-top: 1px solid var(--rule); }
+.label-out { justify-self: stretch; }
+.label-out:empty { display: none; }
+.label-result { display: grid; gap: 4px; padding: 10px 12px; border-radius: var(--radius-control); background: var(--ground); font-size: 13px; line-height: 20px; }
+.label-result.is-likely { background: var(--likely-bg); }
+.label-result.is-likely .label-title { color: var(--likely-ink); }
+.label-title { font-weight: 600; }
+.label-result .hint { margin-top: 2px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .ph-cap { font-size: 12px; line-height: 16px; color: var(--muted); }
 .pair.is-single { grid-template-columns: 104px 1fr; gap: 12px; align-items: start; }
 .risk { display: grid; gap: 6px; }

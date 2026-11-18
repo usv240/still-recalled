@@ -1,0 +1,226 @@
+{
+ "when": "2026-11-18T22:25:33.213Z",
+ "rows": [
+  {
+   "id": "21158",
+   "otherId": "20164",
+   "source": "on_device",
+   "ms": 39008,
+   "read": [
+    "0252"
+   ],
+   "year": 0,
+   "own": "recalled",
+   "other": "not_listed",
+   "listed": [
+    "0252",
+    "0917",
+    "0918"
+   ],
+   "error": ""
+  },
+  {
+   "id": "21706",
+   "otherId": "10212",
+   "source": "on_device",
+   "ms": 5122,
+   "read": [
+    "PO: 10361800"
+   ],
+   "year": 2019,
+   "own": "recalled",
+   "other": "not_listed",
+   "listed": [
+    "CRIB10-NC1",
+    "10320091",
+    "10327234",
+    "10361800",
+    "10365097"
+   ],
+   "error": ""
+  },
+  {
+   "id": "20164",
+   "otherId": "20052",
+   "source": "device_then_cloud",
+   "ms": 7033,
+   "read": [],
+   "year": 0,
+   "own": "unreadable",
+   "other": "unreadable",
+   "listed": [
+    "11000001-5",
+    "11000017",
+    "11000330",
+    "11000337-342",
+    "QC2020",
+    "091021978485"
+   ],
+   "error": ""
+  },
+  {
+   "id": "20121",
+   "otherId": "17096",
+   "source": "on_device",
+   "ms": 4382,
+   "read": [
+    "KIVI SWING - SSW-0005"
+   ],
+   "year": 0,
+   "own": "recalled",
+   "other": "not_listed",
+   "listed": [
+    "SSW-0005"
+   ],
+   "error": ""
+  },
+  {
+   "id": "20052",
+   "otherId": "20164",
+   "source": "on_device",
+   "ms": 5082,
+   "read": [
+    "ST31D11A"
+   ],
+   "year": 2019,
+   "own": "recalled",
+   "other": "not_listed",
+   "listed": [
+    "ST31D09A",
+    "ST31D10A",
+    "ST31D11A",
+    "ST31D03A"
+   ],
+   "error": ""
+  },
+  {
+   "id": "18088",
+   "otherId": "89024",
+   "source": "on_device",
+   "ms": 4833,
+   "read": [
+    "SUNNY CS EH1-0090"
+   ],
+   "year": 2017,
+   "own": "recalled",
+   "other": "not_listed",
+   "listed": [
+    "EH1-0090",
+    "SUNNY CS EH1-0090",
+    "XXX17-XXXXXX"
+   ],
+   "error": ""
+  },
+  {
+   "id": "18058",
+   "otherId": "08296",
+   "source": "device_then_cloud",
+   "ms": 7756,
+   "read": [
+    "87"
+   ],
+   "year": 0,
+   "own": "unreadable",
+   "other": "unreadable",
+   "listed": [
+    "849",
+    "850",
+    "150V_1",
+    "150C",
+    "6E6WL",
+    "5B5"
+   ],
+   "error": ""
+  },
+  {
+   "id": "17231",
+   "otherId": "20121",
+   "source": "device_then_cloud",
+   "ms": 8353,
+   "read": [],
+   "year": 0,
+   "own": "unreadable",
+   "other": "unreadable",
+   "listed": [
+    "11988-835",
+    "11988-340",
+    "11988-436",
+    "11988-656",
+    "11988-838",
+    "11988-0261"
+   ],
+   "error": ""
+  },
+  {
+   "id": "17146",
+   "otherId": "20052",
+   "source": "on_device",
+   "ms": 4900,
+   "read": [
+    "6100100"
+   ],
+   "year": 2015,
+   "own": "recalled",
+   "other": "not_listed",
+   "listed": [
+    "6100027",
+    "6100100"
+   ],
+   "error": ""
+  },
+  {
+   "id": "17096",
+   "otherId": "16143",
+   "source": "device_then_cloud",
+   "ms": 9300,
+   "read": [
+    "615573"
+   ],
+   "year": 0,
+   "own": "recalled",
+   "other": "not_listed",
+   "listed": [
+    "615573"
+   ],
+   "error": ""
+  },
+  {
+   "id": "16226",
+   "otherId": "16226",
+   "source": "on_device",
+   "ms": 5069,
+   "read": [
+    "702.390.98",
+    "10204"
+   ],
+   "year": 1999,
+   "own": "recalled",
+   "other": "",
+   "listed": [
+    "702.390.98",
+    "602.651.44",
+    "700.377.26",
+    "702.265.19",
+    "300.375.68",
+    "700.989.51"
+   ],
+   "error": ""
+  },
+  {
+   "id": "21747",
+   "otherId": "21125",
+   "source": "device_then_cloud",
+   "ms": 8270,
+   "read": [],
+   "year": 0,
+   "own": "unreadable",
+   "other": "unreadable",
+   "listed": [
+    "2019-O",
+    "2020-T",
+    "2020-O"
+   ],
+   "error": ""
+  }
+ ]
+}

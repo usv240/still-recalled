@@ -64,7 +64,8 @@ test('fixes from the 2026-11-15 tests: sewing patterns, hospital cribs, everyday
   assert.equal(notTheProduct('VINTAGE (1982) Simplicity House 125 Baby Basics Coverlet Bumper Pads'), true);
   assert.deepEqual(bannedHints('NK Medical Products 9687 Pediatrics Medical Crib with Drop Side Rails'), []);
   assert.equal(bannedHints('Vintage wooden drop side crib')[0].key, 'drop_side_crib');
-  const idx = buildIndex([{ id: '1', date: '2026-10-15', product: 'Papablic Bedside Sleepers', brand: ['papablic'], line: ['bedside'], productTokens: ['papablic', 'bedside', 'sleeper'], codes: [], tokens: ['papablic', 'bedside', 'sleeper'] }]);
+  // An everyday line name ("Bedside Sleepers") counts only together with the brand.
+  const idx = buildIndex([{ id: '1', date: '2026-10-15', product: 'Papablic Bedside Sleepers', brands: [['papablic']], lines: [], linesWithBrand: [['bedside', 'sleeper']], kinds: [['bassinet'], ['bedside', 'sleeper']], productTokens: [], codes: [] }]);
   assert.equal(shortlist(idx, 'Portable Baby Bassinet / Bedside Sleeper').length, 0);
   assert.equal(shortlist(idx, 'Papablic bedside sleeper')[0].strength, 'line');
 });

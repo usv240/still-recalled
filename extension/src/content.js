@@ -82,7 +82,10 @@ function ensureBadge(id) {
   const existing = hosts.get(id);
   if (existing && existing.isConnected) return;
   addFonts(p => chrome.runtime.getURL(p));
-  const host = buildBadge(r, { onOpenPanel: () => chrome.runtime.sendMessage({ type: 'sr:open-panel', id: r.id }).catch(() => {}) });
+  const host = buildBadge(r, {
+    onOpenPanel: () => chrome.runtime.sendMessage({ type: 'sr:open-panel', id: r.id }).catch(() => {}),
+    onLabel: (dataUrl, recall) => chrome.runtime.sendMessage({ type: 'sr:read-label', dataUrl, recall }).then(r => { if (!r || r.error) throw new Error((r && r.error) || 'no answer'); return r; }),
+  });
   hosts.set(id, host);
   attachBadge(host, card, { corner: site.site === 'craigslist' ? 'right' : 'left' });
 }

@@ -5,7 +5,8 @@
 //   2. on-device model (photo + title)  only listings that could matter: a recall candidate, banned-type words, a
 //                                       bedding set, or any infant product. Nothing leaves the device here.
 //   3. cloud model                      only listings step 2 flagged, with the full recall notice and both photos
-import { deviceStatus, deviceModel, imagePart, cloudJson, hasCloudAccess } from './ai.js';
+import { deviceStatus, deviceModel, imagePart, cloudJson, hybridJson, hasCloudAccess } from './ai.js';
+import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel } from '../../shared/label.mjs';
 import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { bannedHints, notTheProduct, mayContain } from '../../shared/banned.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
@@ -57,7 +58,7 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
   const t = triage(idx, listing);
   if (!t.needsEyes) return { result: present(listing, { level: 'none', why: t.partOrToy ? 'part or toy' : 'no recall or risky type in the words' }, { words: true }) };
 
-  let device, photo = null, usedDevice = false, deviceError = '';
+  let device, photo = null, usedDevice = false, deviceError = '', deviceUnit = '';
   if (modelReady) {
     photo = listing.image ? await imagePart(imageUrl(listing.image)).catch(() => null) : null;
     const parts = [promptText(listing, t.candidate, t.hints)];
@@ -66,7 +67,10 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
       // A stuck model session must not stall the whole page: give up on this listing's look and start a fresh
       // session for the next one.
       const r = await withTimeout((judgeOverride || judgeModel()).generateContent(parts), DEVICE_TIMEOUT_MS, 'the built-in model');
-      device = decide(JSON.parse(r.response.text()), t.candidate, t.hints, t.maybe);
+      const answer = JSON.parse(r.response.text());
+      device = decide(answer, t.candidate, t.hints, t.maybe);
+      // What the built-in model made of the card's "which units" line; recorded beside the cloud's answer.
+      if (t.candidate && device.kind === 'recall') deviceUnit = answer.recalled_unit || '';
       usedDevice = (r.response.inferenceSource || 'on_device') === 'on_device';
     } catch (e) {
       if (!judgeOverride) judge = null;
@@ -80,12 +84,43 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
 
   if (secondOpinion && !/part or a toy/.test(device.why || '')) device = { ...device, secondOpinion: true };
   const deviceLevel = device.level === 'none' && device.askCloud ? 'ask' : device.level;
-  const how = { device: usedDevice, deviceLevel, judgedInCloud: modelReady && !usedDevice && !deviceError, deviceError };
+  const how = { device: usedDevice, deviceLevel, deviceUnit, candidate: t.candidate ? `${t.candidate.card.id} ${t.candidate.strength}` : '', judgedInCloud: modelReady && !usedDevice && !deviceError, deviceError };
   const stage = { listing, hints: t.hints, device, photo, how, result: null };
   if ((device.level === 'none' && !device.askCloud && !device.secondOpinion) || !cloud || !hasCloudAccess) {
     stage.result = present(listing, device.level === 'none' ? device : decideFinal(device, null, t.hints), how);
   }
   return stage;
+}
+
+/**
+ * Settle a possible recall with a photo of the product's label (a JPEG data URL). `recall` is the result's recall
+ * ({ codes, from, to }). Firebase AI Logic hybrid inference reads the label: the built-in model when this device has
+ * it, so the photo stays on the device.
+ *
+ * The device can raise the alarm on its own, but not clear it. A "recalled" reading stands. Any other reading, which
+ * would reassure the shopper, is read again by Gemini in the cloud first, and the cloud's reading decides. On 12 real
+ * label photos from CPSC notices (2026-11-18), the built-in model misread one recalled model number (615573 as
+ * S16578), which alone would have said "not among the listed models"; the cloud read it correctly.
+ * Resolves to { reading, source: 'on_device' | 'in_cloud' | 'device_then_cloud', verdict }.
+ */
+export async function readLabel(dataUrl, recall) {
+  const m = /^data:(image\/(?:jpeg|png));base64,(.+)$/.exec(String(dataUrl || ''));
+  if (!m) throw new Error('not a photo');
+  const parts = ['Read the label in this photo.', { inlineData: { mimeType: m[1], data: m[2] } }];
+  const inCloud = async () => (await cloudJson({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA, parts })).answer;
+  let reading, source;
+  try {
+    ({ answer: reading, source } = await hybridJson({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA, parts }));
+  } catch (e) {
+    // The built-in model can fail on a photo it can't take; the cloud reads it instead, and the card says so.
+    if (!hasCloudAccess) throw e;
+    return { reading: await inCloud(), source: 'in_cloud', verdict: null };
+  }
+  const verdict = recall ? judgeLabel(reading, recall) : null;
+  if (source !== 'on_device' || !recall || verdict.state === 'recalled' || !hasCloudAccess) return { reading, source, verdict };
+  const second = await inCloud().catch(() => null);
+  if (!second) return { reading, source, verdict };
+  return { reading: second, source: 'device_then_cloud', verdict: judgeLabel(second, recall) };
 }
 
 /** Step 3, for a stage lookOnDevice left open: the cloud reads the full recall notice and both photos. */
@@ -179,6 +214,10 @@ if (globalThis.chrome && chrome.runtime && chrome.runtime.onMessage) chrome.runt
   }
   if (msg.type === 'sr:engine-status') {
     deviceStatus().then(model => reply({ model, cloudAccess: hasCloudAccess, queued: queue.length, running }));
+    return true;
+  }
+  if (msg.type === 'sr:engine-label') {
+    readLabel(msg.dataUrl, msg.recall).then(reply, e => reply({ error: String(e).slice(0, 200) }));
     return true;
   }
   return false;

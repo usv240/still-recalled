@@ -23,21 +23,35 @@ export const CONFIRM_SYSTEM = [
   'banned_type: one of the listed types only when the listing clearly is that kind of product, otherwise "none".',
   'evidence: one short sentence naming what in the listing decided your answer.',
   'check_before_buying: one short sentence telling a buyer what to look at or ask the seller to settle it, in the notice\'s own terms (which models or dates are recalled, where the label is, whether a set includes a padded bumper). Empty when matches_recall is "no" and banned_type is "none".',
+  'where: a box around the one thing in the listing photo that decided your answer (the padded bumper among the bedding, the lounger, the recalled product), as [ymin, xmin, ymax, xmax] with each number from 0 to 1000. An empty list when you are flagging nothing, when there is no listing photo, or when the thing is not visible in it.',
   'Do not state legal conclusions or give orders: never write "banned", "illegal", "prohibited" or "do not buy". The app adds its own wording about the rules.',
 ].join('\n');
 
 export const CONFIRM_SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['what_is_for_sale', 'matches_recall', 'banned_type', 'evidence', 'check_before_buying'],
+  required: ['what_is_for_sale', 'matches_recall', 'banned_type', 'evidence', 'check_before_buying', 'where'],
   properties: {
     what_is_for_sale: { type: 'string', enum: ['the_product', 'part_or_accessory', 'toy_or_doll_version', 'unclear'] },
     matches_recall: { type: 'string', enum: ['yes', 'no', 'cannot_tell', 'no_recall_given'] },
     banned_type: { type: 'string', enum: ['none', ...BANNED_KEYS] },
     evidence: { type: 'string' },
     check_before_buying: { type: 'string' },
+    where: { type: 'array', items: { type: 'integer' } },
   },
 };
+
+/**
+ * The cloud's box as fractions of the photo, { x, y, w, h }, or null. Dropped when malformed, tiny, or nearly the
+ * whole photo: an outline around everything shows the shopper nothing.
+ */
+export function boxFrom(where) {
+  if (!Array.isArray(where) || where.length !== 4 || where.some(n => !Number.isFinite(n))) return null;
+  const [y0, x0, y1, x1] = where.map(n => Math.min(1000, Math.max(0, n)) / 1000);
+  const w = x1 - x0, h = y1 - y0;
+  if (w < 0.04 || h < 0.04 || w * h > 0.7) return null;
+  return { x: +x0.toFixed(3), y: +y0.toFixed(3), w: +w.toFixed(3), h: +h.toFixed(3) };
+}
 
 /**
  * Prompt parts for the cloud model: text, the listing photo, then the notice and the recall photo.
@@ -69,7 +83,7 @@ export function confirmParts({ listing, notice, listingPhoto, recallPhoto }) {
  */
 export function decideFinal(device, cloud, hints) {
   if (!cloud) return { ...device, confirmed: false };
-  const base = { kind: null, card: null, banned: null, confirmed: true, evidence: cloud.evidence || '', check: cloud.check_before_buying || '' };
+  const base = { kind: null, card: null, banned: null, confirmed: true, evidence: cloud.evidence || '', check: cloud.check_before_buying || '', where: boxFrom(cloud.where) };
 
   // A toy is never the product. "Part or accessory" clears a listing only when the cloud also sees no banned type:
   // a crib bumper is an "accessory" to a crib in everyday speech, but it is the product the rule is about.

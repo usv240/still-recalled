@@ -13,6 +13,7 @@ export const SYSTEM = [
   'what_is_for_sale: "the_product" when the listing sells a whole product; "part_or_accessory" when it sells a spare part, adapter, cover, manual or add-on for a product; "toy_or_doll_version" when it is a toy, doll furniture or a miniature; "unclear" otherwise.',
   'product_kind: the kind of product for sale in at most five words, for example "infant swing" or "air fryer".',
   'same_kind_as_recalled: true only when the product for sale is the same kind of product as the RECALLED PRODUCT given. If none is given, answer false.',
+  'recalled_unit: read "Which units" under RECALLED PRODUCT. "no" only when the listing itself names a model, version or year that those lines leave out. "yes" when it names one they include. Otherwise, or if none is given, "cannot_tell".',
   'banned_type: choose a type only when the listing clearly is that kind of product. Otherwise "none".',
 ].join('\n');
 
@@ -20,11 +21,14 @@ export const SYSTEM = [
 export const SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['what_is_for_sale', 'product_kind', 'same_kind_as_recalled', 'banned_type'],
+  required: ['what_is_for_sale', 'product_kind', 'same_kind_as_recalled', 'recalled_unit', 'banned_type'],
   properties: {
     what_is_for_sale: { type: 'string', enum: ['the_product', 'part_or_accessory', 'toy_or_doll_version', 'unclear'] },
     product_kind: { type: 'string' },
     same_kind_as_recalled: { type: 'boolean' },
+    // The built-in model's reading of the card's "which units" line, written by the cloud at build time. Recorded
+    // next to the cloud's own answer and not yet acted on: see docs/accuracy.md, "The cloud teaches the device".
+    recalled_unit: { type: 'string', enum: ['yes', 'no', 'cannot_tell'] },
     banned_type: { type: 'string', enum: ['none', ...BANNED_TYPES.map(t => t.key)] },
   },
 };
