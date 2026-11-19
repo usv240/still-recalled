@@ -1,6 +1,8 @@
 // Draws the Devpost gallery images (docs/gallery/*.png) from the test reports, so every number in them is measured:
 //   1-extension.png    the real extension on the practice listings, with one card open (scripts/shoot-try.mjs first)
 //   2-label-check.png  the label check on the practice stroller, read on the device (scripts/shoot-try.mjs first)
+//   2-android.png      the Android app (docs/gallery/src/android-*.png from the emulator, android-run.json from
+//                      tools/android-e2e.mjs)
 //   3-new-recalls.png  live recalls and the recall watch (docs/gallery/src/live-run.json and watch-panel.png, from
 //                      the release end-to-end run and tools/shoot-watch.mjs)
 //   4-hybrid.png       where each step runs and how many listings reached it (every test report)
@@ -192,11 +194,38 @@ const liveSlide = liveRun && existsSync(path.join(src, 'watch-panel.png')) && `<
 </div><div class="phone"><img src="${pathToFileURL(path.join(src, 'watch-panel.png')).href}"></div></div>
 <div class="foot"><span>Release 0.8.0, ${day(liveRun.date)}: all ${liveRun.steps} end-to-end steps passed on the live practice listings.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
-const slides = [['1-extension', hero], ['2-label-check', labelSlide], ['3-new-recalls', liveSlide], ['4-hybrid', hybrid], ['5-results', results]].filter(([, html]) => html);
+// The Android app: the same rules engine and prompts on a phone, through Firebase AI Logic on Android.
+const androidRun = existsSync(path.join(src, 'android-run.json')) ? read(path.join(src, 'android-run.json')) : null;
+const shotA = f => pathToFileURL(path.join(src, f)).href;
+const androidSlide = androidRun && existsSync(path.join(src, 'android-result.png')) && `<!doctype html><meta charset="utf-8"><style>${base}
+.cols { display: grid; grid-template-columns: 1fr 300px 300px; gap: 40px; margin-top: 40px; align-items: start; }
+.phone { width: 300px; height: 620px; border-radius: 30px; overflow: hidden; background: #f8f8f8; box-shadow: 0 0 0 8px #141414, 0 18px 50px rgba(0,0,0,.18); }
+.phone img { display: block; width: 300px; }
+.phone.top img { margin-top: -38px; }
+.cap { margin-top: 18px; font-size: 17px; color: var(--muted); width: 300px; }
+.facts { display: grid; gap: 22px; }
+.fact { border-top: 2px solid var(--text); padding-top: 12px; }
+.fact b { display: block; font-size: 16px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+.fact p { margin: 0; font-size: 20px; line-height: 1.42; }
+code { font-family: Geist, monospace; font-size: 16px; background: #eee; padding: 1px 6px; border-radius: 4px; }
+</style><div class="slide">
+<h1>On Android too. Share any listing from any app.</h1>
+<div class="cols"><div class="facts">
+  <div class="fact"><b>Share a screenshot or a link</b><p>From Facebook Marketplace, OfferUp or eBay. Gemini Nano reads it on phones that have it; elsewhere Firebase AI Logic runs the same call in the cloud.</p></div>
+  <div class="fact"><b>The same rules, not a rewrite</b><p>The extension's rules engine runs on the phone in Jetpack's JavaScript sandbox: all ${'10,089'} recalls, matched on the phone.</p></div>
+  <div class="fact"><b>A watch that outlives the purchase</b><p>New CPSC recalls twice a day, in the background. A match raises a notification.</p></div>
+  <div class="fact"><b>App Check without Google Play</b><p>A sideloaded app gets tokens from the site's reCAPTCHA Enterprise bridge. No debug token ships.</p></div>
+</div>
+<div><div class="phone top"><img src="${shotA('android-result.png')}"></div><p class="cap">A shared Rock 'n Play listing, matched to its recall and confirmed in the cloud.</p></div>
+<div><div class="phone top"><img src="${shotA('android-watch.png')}"></div><p class="cap">A watched bouncer, matched to a recall published the day after the build.</p></div>
+</div>
+<div class="foot"><span>Android 16 emulator, November 19, 2026 (tools/android-e2e.mjs): the release APK passed all 8 checks; a debug build replaying a recall's arrival passed all 12.</span><span class="brand"><i></i>Still Recalled</span></div>
+</div>`;
+const slides = [['1-extension', hero], ['2-android', androidSlide], ['3-label-check', labelSlide], ['4-new-recalls', liveSlide], ['5-hybrid', hybrid], ['6-results', results]].filter(([, html]) => html);
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, pipe: true, args: ['--allow-file-access-from-files'] });
 try {
-  for (const old of ['1-hybrid.png', '2-results.png', '3-search-page.png', '3-listing.png', '4-card.png', '3-hybrid.png', '4-results.png']) rmSync(path.join(out, old), { force: true });
+  for (const old of ['1-hybrid.png', '2-results.png', '3-search-page.png', '3-listing.png', '4-card.png', '3-hybrid.png', '4-results.png', '2-label-check.png', '3-new-recalls.png', '4-hybrid.png', '5-results.png']) rmSync(path.join(out, old), { force: true });
   const page = await browser.newPage();
   await page.setViewport({ width: 1500, height: 1000, deviceScaleFactor: 1 });
   for (const [name, html] of slides) {

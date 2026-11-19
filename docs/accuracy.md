@@ -461,6 +461,45 @@ exchange and the token's claims.
 **A bug found on the way.** Remote Config's `cloud_models` value was checked against `/^gemini-[w.-]+$/` (a lost
 backslash), which rejected every model name, so the built-in list was always used. Fixed to `[\w.-]`.
 
+## 14. Android, release 0.9.0 (2026-11-19)
+
+**What it is.** A native Android app (`android/`, Kotlin and Jetpack Compose) with the extension's pipeline: Firebase
+AI Logic for Android reads a shared screenshot or listing and looks at it (`PREFER_ON_DEVICE`: Gemini Nano through AICore
+where the phone has it), the extension's own rules engine matches it against every recall (bundled from `shared/` and
+run in Jetpack's JavaScript sandbox), and Gemini confirms flags against the full notice (`ONLY_IN_CLOUD`). Live recalls
+and the recall watch run in the background with WorkManager. App Check tokens come from the site's reCAPTCHA Enterprise
+bridge, since Play Integrity needs an install from Google Play.
+
+**Results** (Android 16 emulator with Google Play services, `node tools/android-e2e.mjs`):
+
+| Check | Release APK | Debug build, with the watch replay |
+|---|---|---|
+| App Check token from the bridge | yes, 48 s after a first launch | yes, 35 s |
+| Background catch-up with CPSC | yes | yes |
+| Example photo (infant lounger) | flagged, 12.7 s | flagged, 13.9 s |
+| Shared text: Rock 'n Play | recall 23088 matched, confirmed in the cloud, 13.8 s | 11.2 s |
+| Shared text: Graco swing | possible recall, 9.5 s | 18.8 s |
+| Shared text: wooden blocks | no match, 0.3 s, no model call | 0.5 s |
+| Shared text: Kidsview bouncer (recalled that morning) | possible recall, 46.2 s (the larger model timed out and the lighter one answered) | 10.4 s |
+| The watch: bouncer before its recall, watched, refreshed | | no match, then a notification 20 s after the refresh |
+| All checks | 8 of 8 | 12 of 12 |
+
+**Speed.** With the larger cloud model for every step (the emulator has no Gemini Nano), a check took 34 to 48 s. The
+steps meant for Gemini Nano (read, look, label) now fall back to the cloud's lightest model, `gemini-3.5-flash-lite`
+(1 to 3 s each); the confirmation keeps `gemini-4-hydrogen` (5 to 16 s; one outlier of 37 s while the test machine was
+short of memory). The label's cloud re-read, the reading that can clear a listing, keeps the larger model.
+
+**Two findings.**
+- **The first App Check token must be ready before the first call.** The AI SDK waits about 10 s for a token and then
+  sends a placeholder, which the backend refuses (401); reCAPTCHA in the bridge took longer than that on a cold start.
+  The app now loads the bridge and asks for a token at launch.
+- **On-device output on Android ignores response schemas.** The on-device path takes structured output only through
+  generated Kotlin classes, so the JSON Schema also goes into the instructions and answers are parsed leniently; the
+  cloud stays bound to the schema.
+
+**Not tested:** Gemini Nano on Android (the emulator has none; the SDK's on-device inference is experimental, and needs a phone
+whose AICore offers Gemini Nano).
+
 ## Reproduce
 
 ```

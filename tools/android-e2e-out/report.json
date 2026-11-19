@@ -1,0 +1,198 @@
+{
+  "at": "2026-11-19T18:18:30.867Z",
+  "apk": "android/app/build/outputs/apk/debug/app-debug.apk",
+  "steps": [
+    {
+      "name": "device connected",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "App Check token from the reCAPTCHA bridge",
+      "ok": true,
+      "detail": "35 s after launch"
+    },
+    {
+      "name": "recall list catches up with CPSC (background worker)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "example photo: infant lounger",
+      "ok": true,
+      "detail": "likely / Infant lounger or nest in 13.9 s (gemini-3.5-flash-lite 2074 ms, gemini-3.5-flash-lite 2709 ms, gemini-4-hydrogen 5837 ms)"
+    },
+    {
+      "name": "shared text: Rock n Play",
+      "ok": true,
+      "detail": "likely / Recalled product in 11.2 s (gemini-3.5-flash-lite 1464 ms, gemini-4-hydrogen 6452 ms)"
+    },
+    {
+      "name": "shared text: Graco swing",
+      "ok": true,
+      "detail": "possible / Possible recall in 18.8 s (gemini-3.5-flash-lite 1234 ms, gemini-4-hydrogen 15738 ms)"
+    },
+    {
+      "name": "shared text: wooden blocks",
+      "ok": true,
+      "detail": "none / no match in 0.5 s (no model call)"
+    },
+    {
+      "name": "shared text: recall published after the build (Kidsview, 2026-11-19)",
+      "ok": true,
+      "detail": "possible / Possible recall in 10.4 s (gemini-3.5-flash-lite 1127 ms, gemini-4-hydrogen 6096 ms)"
+    },
+    {
+      "name": "watch: the bouncer before its recall arrives",
+      "ok": true,
+      "detail": "none / no match in 7.2 s (gemini-3.5-flash-lite 1159 ms, gemini-4-hydrogen 4813 ms)"
+    },
+    {
+      "name": "watch: Watch for recalls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "watch: Check for new recalls now",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "watch: a new recall raises a notification",
+      "ok": true,
+      "detail": "20 s: \"Something you're watching may be recalled\""
+    }
+  ],
+  "checks": [
+    {
+      "name": "example photo: infant lounger",
+      "ms": 13872,
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "readOnDevice": "false",
+      "how": {
+        "device": false,
+        "deviceLevel": "likely",
+        "candidate": "",
+        "deviceUnit": "",
+        "cloudMatch": "no_recall_given",
+        "judgedInCloud": true,
+        "deviceError": "",
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudError": ""
+      },
+      "calls": [
+        "gemini-3.5-flash-lite 2074 ms",
+        "gemini-3.5-flash-lite 2709 ms",
+        "gemini-4-hydrogen 5837 ms"
+      ]
+    },
+    {
+      "name": "shared text: Rock n Play",
+      "ms": 11247,
+      "level": "likely",
+      "badge": "Recalled product",
+      "readOnDevice": "null",
+      "how": {
+        "device": false,
+        "deviceLevel": "possible",
+        "candidate": "23088 line",
+        "deviceUnit": "",
+        "cloudMatch": "yes",
+        "judgedInCloud": true,
+        "deviceError": "",
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudError": ""
+      },
+      "calls": [
+        "gemini-3.5-flash-lite 1464 ms",
+        "gemini-4-hydrogen 6452 ms"
+      ]
+    },
+    {
+      "name": "shared text: Graco swing",
+      "ms": 18788,
+      "level": "possible",
+      "badge": "Possible recall",
+      "readOnDevice": "null",
+      "how": {
+        "device": false,
+        "deviceLevel": "possible",
+        "candidate": "00098 brand",
+        "deviceUnit": "",
+        "cloudMatch": "cannot_tell",
+        "judgedInCloud": true,
+        "deviceError": "",
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudError": ""
+      },
+      "calls": [
+        "gemini-3.5-flash-lite 1234 ms",
+        "gemini-4-hydrogen 15738 ms"
+      ]
+    },
+    {
+      "name": "shared text: wooden blocks",
+      "ms": 513,
+      "level": "none",
+      "badge": "",
+      "readOnDevice": "null",
+      "how": {
+        "device": false,
+        "deviceLevel": "words",
+        "candidate": "",
+        "deviceUnit": "",
+        "cloudMatch": "",
+        "judgedInCloud": false,
+        "deviceError": "",
+        "cloudModel": "",
+        "cloudError": ""
+      },
+      "calls": []
+    },
+    {
+      "name": "shared text: recall published after the build (Kidsview, 2026-11-19)",
+      "ms": 10401,
+      "level": "possible",
+      "badge": "Possible recall",
+      "readOnDevice": "null",
+      "how": {
+        "device": false,
+        "deviceLevel": "possible",
+        "candidate": "27092 brand",
+        "deviceUnit": "",
+        "cloudMatch": "cannot_tell",
+        "judgedInCloud": true,
+        "deviceError": "",
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudError": ""
+      },
+      "calls": [
+        "gemini-3.5-flash-lite 1127 ms",
+        "gemini-4-hydrogen 6096 ms"
+      ]
+    },
+    {
+      "name": "watch: the bouncer before its recall arrives",
+      "ms": 7229,
+      "level": "none",
+      "badge": "",
+      "readOnDevice": "null",
+      "how": {
+        "device": false,
+        "deviceLevel": "none",
+        "candidate": "",
+        "deviceUnit": "",
+        "cloudMatch": "no_recall_given",
+        "judgedInCloud": true,
+        "deviceError": "",
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudError": ""
+      },
+      "calls": [
+        "gemini-3.5-flash-lite 1159 ms",
+        "gemini-4-hydrogen 4813 ms"
+      ]
+    }
+  ]
+}

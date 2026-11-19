@@ -75,5 +75,5 @@ Certify: not sold to third parties; not used for unrelated purposes; not used fo
 ## Images
 
 - Icon: `extension/icons/icon-128.png`.
-- Screenshots (1280 x 800): `docs/gallery/1-extension.png`, `2-label-check.png`, `3-new-recalls.png`,
-  `4-hybrid.png` and `5-results.png`, resized. They show the practice listings, whose photos are CPSC notice photos or public domain.
+- Screenshots (1280 x 800): `docs/gallery/1-extension.png`, `3-label-check.png`, `4-new-recalls.png`,
+  `5-hybrid.png` and `6-results.png`, resized. They show the practice listings, whose photos are CPSC notice photos or public domain.

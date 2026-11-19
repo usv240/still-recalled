@@ -4,8 +4,8 @@
 Still Recalled
 
 ## Tagline (elevator pitch)
-Flags recalled and banned baby gear on secondhand listings as you scroll, and keeps watching what you bought for
-recalls announced later. Gemini Nano checks every listing on your laptop; Gemini in the cloud sees only the few it flags.
+Flags recalled and banned baby gear on secondhand listings, in Chrome and on Android, and keeps watching what you
+bought for recalls announced later. Gemini Nano checks on your device; Gemini in the cloud sees only what it flags.
 
 ---
 
@@ -16,6 +16,9 @@ CPSC has recalled. Install the extension (steps on that page) and watch the eigh
 infant bouncer, was recalled on November 19, 2026, the day after this version's recall list was built: the extension
 fetched the notice from CPSC itself, Gemini wrote its field-guide entry, and the laptop matched the listing. No
 marketplace account, no hunting for a risky listing.
+
+**On Android:** install the APK (https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk), then share any listing or screenshot to Still Recalled from Facebook
+Marketplace, OfferUp or eBay, or tap "Try it with an example photo".
 
 A parent scrolling eBay sees a used crib bedding set for $75. In the photo, folded among the sheets, are padded bumper
 panels. Selling those has been against federal law since 2022, because bumpers can suffocate a baby. The title never
@@ -54,12 +57,18 @@ alarms. **77% of the listings never left the laptop.**
   listing, Chrome shows a notification and the panel's watch list says which recall, what the hazard is and which units
   are affected. The watch list never leaves the laptop.
 - **The side panel** lists every flag on the page.
-- **On a phone**, the web page checks a screenshot of any listing, including Facebook Marketplace and OfferUp.
+- **On Android**, a native app (Kotlin, Jetpack Compose). Share a listing, a link or a screenshot to it from any app,
+  Facebook Marketplace and OfferUp included, the marketplaces where most local baby gear changes hands and no extension
+  can reach. It runs the same check: Gemini Nano through Firebase AI Logic on phones that have it, Gemini in the cloud on
+  the rest. **Watch for recalls** works there too, in the background, with a notification.
+- **On any phone or computer**, the web page checks a screenshot.
 
 It never says "safe". No match means no recall was found.
 
 ### How I used Firebase AI Logic
-Each of the SDK's inference modes is used where it fits, on purpose:
+**One hybrid design on two platforms: the web (Chrome extension and web page) and Android**, each through its own Firebase
+AI Logic SDK, with the same prompts and JSON schemas. Each of the SDK's inference modes is used where it fits, on
+purpose:
 
 | Step | Mode | What it sees | Why there |
 |---|---|---|---|
@@ -67,6 +76,7 @@ Each of the SDK's inference modes is used where it fits, on purpose:
 | 2. Gemini Nano | `ONLY_ON_DEVICE` | Baby products: title and photo | Private and free, so it can look at a whole page. Is this the product, a part or a toy? Does it look like a lounger, a padded bumper or an inclined sleeper? |
 | 3. Gemini | `ONLY_IN_CLOUD` | Only what step 2 flagged: title, photo, the full recall notice and its photo | The notice is long and the call is close. Confirms, clears, or names the one thing to check, and returns a box around what decided it |
 | Label photo, web page | `PREFER_ON_DEVICE` | A label photo, or a listing screenshot | Read on the laptop when it can; on a phone the identical call runs in the cloud. The page reads `inferenceSource` and says which ran |
+| Android: read, look, label | `PREFER_ON_DEVICE` (`ONLY_ON_DEVICE` when the user turns the cloud off) | A shared screenshot or listing, a label photo | Gemini Nano through AICore on phones that have it. Elsewhere, the cloud's lightest model (`gemini-3.5-flash-lite`), since these steps ask what a small model can answer: a check took 34 to 48 s on the larger model, 6 to 14 s this way. The response's `inferenceSource` is shown on the result |
 | New recall notices | `ONLY_IN_CLOUD` | Each notice CPSC publishes after the build, once | Writes the notice's field-guide entry, so from then on the laptop matches listings and watched items against it on its own |
 
 - **The same prompt and JSON schema on both models** (`responseConstraint` on the device, `responseJsonSchema` in the
@@ -92,6 +102,14 @@ Each of the SDK's inference modes is used where it fits, on purpose:
   cloud step off (flags then stand, marked unconfirmed), and one that stops the cloud writing field-guide entries for
   new recalls. A preview model can be retired during judging; the fix reaches
   every installed copy within the hour, with no new build.
+- **The same rules on Android, not a rewrite.** The rules engine (matching 10,089 recalls, the label safety rules, the
+  wording of every warning) is the extension's own code, bundled into the app and run in Jetpack's JavaScript sandbox,
+  an isolated process with no network. Only the model calls are Kotlin. Unit tests run the app's bundle the way the
+  app does.
+- **App Check on Android without Google Play.** Play Integrity needs an app installed from Google Play; judges install
+  the APK from GitHub. So the app gets tokens the way the extension does: a WebView the user never sees loads the site's
+  App Check bridge (reCAPTCHA Enterprise), which talks to the app only through a WebMessageListener restricted to the
+  site's origin. No debug token is in any release, on either platform.
 - **App Check on a Chrome extension.** Extensions have no attestation provider. The extension's hidden page frames a
   bridge page on the site that runs reCAPTCHA Enterprise and hands App Check tokens only to this extension's ID, so
   anyone who installs it, judges included, gets the cloud check with App Check enforced.
@@ -122,6 +140,13 @@ fixes the test before it led to, so every set was new to the rules it measured.
   with the five recalls CPSC published that morning (field-guide entries written in 12 s) and flagged the practice
   page's Kidsview bouncer. Made to forget the recalls from November 12 on, it fetched all twelve back, and a watched
   listing for one of them (a Huffy e-trike) raised an alert, confirmed in the cloud.
+- **Android, end to end (November 19, 2026, Android 16 emulator, `tools/android-e2e.mjs`):** the release APK got its App
+  Check token from the bridge, caught up with CPSC in the background, flagged the example lounger, the Rock 'n Play
+  (matched to its recall and confirmed in the cloud), the Graco swing and the Kidsview bouncer recalled that morning,
+  and left wooden blocks alone: 8 of 8 checks, 6 to 14 s each (0.3 s when no model is needed). A debug build replaying a
+  recall's arrival (a watched bouncer, then the recall) raised the notification 20 s after the refresh: 12 of 12. The
+  emulator has no Gemini Nano, so this run measured the cloud path; on-device inference on Android is the SDK's
+  experimental path and is untested here.
 - **Labels:** blind AI reviewers (Claude) labelled every listing from the title, price and one photo, without seeing
   the rules, prompts or answers. Method, every label and every miss: `docs/accuracy.md`.
 
@@ -147,23 +172,25 @@ once a marketplace adopts it. Still Recalled works from the buyer's side, today.
 
 ### What's next
 - The Chrome Web Store, so installing takes one click.
-- Facebook Marketplace inside the extension.
+- Testing the Android app's on-device path on a phone with Gemini Nano.
 - Offering the engine to resale platforms, the side SafeState covers.
 
 ### Built with
-Firebase AI Logic (hybrid inference: `ONLY_ON_DEVICE`, `PREFER_ON_DEVICE`, `ONLY_IN_CLOUD`), Gemini, Gemini Nano
-(Chrome built-in AI), Firebase Remote Config, Firebase App Check with reCAPTCHA Enterprise, Firebase Hosting, Chrome
-Extensions MV3 (offscreen document, side panel, alarms, notifications), CPSC Recall API, esbuild, Puppeteer.
+Firebase AI Logic on the web and on Android (hybrid inference: `ONLY_ON_DEVICE`, `PREFER_ON_DEVICE`, `ONLY_IN_CLOUD`),
+Gemini, Gemini Nano (Chrome built-in AI; AICore on Android), Firebase Remote Config, Firebase App Check with reCAPTCHA
+Enterprise, Firebase Hosting, Chrome Extensions MV3 (offscreen document, side panel, alarms, notifications), Kotlin,
+Jetpack Compose, Jetpack JavaScriptEngine, WorkManager, CPSC Recall API, esbuild, Puppeteer.
 
 ---
 
 ## Gallery (in this order)
 1. `docs/gallery/1-extension.png`: the extension on the practice listings, one card open.
-2. `docs/gallery/2-label-check.png`: the label check, read on the laptop.
-3. `docs/gallery/3-new-recalls.png`: a recall published the morning after the build, matched that day, and the watch list.
-4. `docs/gallery/4-hybrid.png`: where each step runs.
-5. `docs/gallery/5-results.png`: the four tests.
-6. `docs/gallery/6-web-page.jpg`: the web page on a phone.
+2. `docs/gallery/2-android.png`: the Android app: a shared listing matched, and a watched one matched to a new recall.
+3. `docs/gallery/3-label-check.png`: the label check, read on the laptop.
+4. `docs/gallery/4-new-recalls.png`: a recall published the morning after the build, matched that day, and the watch list.
+5. `docs/gallery/5-hybrid.png`: where each step runs.
+6. `docs/gallery/6-results.png`: the four tests.
+7. `docs/gallery/7-web-page.jpg`: the web page on a phone.
 
 ---
 
@@ -173,6 +200,9 @@ Extensions MV3 (offscreen document, side panel, alarms, notifications), CPSC Rec
   install). Open the Baby Trend stroller's listing, save the seller's label photo, and add it to the card's label check.
 - **Watch for recalls:** open any practice listing's own page, open the side panel, and choose **Watch for recalls**.
   The bell at the top of the panel shows the watch list and when the recall list was last checked with CPSC.
+- **Android:** download https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk on an Android 8.0+ phone (or an emulator), allow installs from your browser, and open
+  it. Tap "Try it with an example photo", or share a listing or screenshot to Still Recalled from any app. On a listing's
+  result, "Watch for recalls" adds it to the watch list (the bell tab).
 - **Extension:** download `still-recalled-extension.zip` from
   https://github.com/usv240/still-recalled/releases/latest and unzip it. Open `chrome://extensions`, turn on
   Developer mode, click "Load unpacked" and choose the folder. It also works on eBay, Mercari and Craigslist: search for

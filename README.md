@@ -5,7 +5,8 @@ padded bumper panels with ties. Selling those has been against federal law since
 a baby. The title never says "bumper", so no keyword filter catches it, and nothing on the page warns the parent.
 
 **Still Recalled puts the warning on the listing.** It is a Chrome extension for eBay, Mercari and Craigslist search
-pages, plus a web page that checks a screenshot of any listing on a phone. Chrome's built-in model (Gemini Nano) looks
+pages, an Android app that checks any listing shared to it (Facebook Marketplace and OfferUp included), and a web page
+that checks a screenshot. Chrome's built-in model (Gemini Nano) looks
 at every baby product on your own computer, and only the few it flags go to Gemini in the cloud, through Firebase AI
 Logic hybrid inference.
 
@@ -162,6 +163,10 @@ the flags, and the settings came from Firebase Remote Config), and all checks wi
 seventeen get a badge. The Baby Trend stroller's listing has the seller's label photo; add it to the card's label check.
 Open any listing's own page and choose **Watch for recalls** in the side panel.
 
+**Android app:** download [still-recalled-android.apk](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk) (Android 8.0 or later), allow installs from your
+browser, and open it. Tap "Try it with an example photo", or share a listing or a screenshot to Still Recalled from any
+app. "Watch for recalls" on a result adds it to the watch list.
+
 **Web page:** https://still-recalled.web.app. On a phone or computer, add a screenshot, or use "Try it with an example photo".
 
 **Chrome extension**
@@ -172,6 +177,25 @@ Open any listing's own page and choose **Watch for recalls** in the side panel.
 
 The on-device step needs Chrome 139 or later on a computer that can run Chrome's built-in model. Without it, the
 extension uses the word rules and the cloud check.
+
+## Android
+
+`android/` is a native app (Kotlin, Jetpack Compose) with the same pipeline as the extension:
+
+- **Firebase AI Logic for Android** (`firebase-ai` and `firebase-ai-ondevice`): `PREFER_ON_DEVICE` reads a shared
+  screenshot and looks at the listing (Gemini Nano through AICore where the phone has it); `ONLY_IN_CLOUD` confirms
+  against the full recall notice and writes field-guide entries for new recalls. All in `android/app/src/main/java/app/web/stillrecalled/ai/Ai.kt`.
+- **The extension's rules, unchanged.** `android/engine/bridge.js` exposes the shared modules; `build.mjs` bundles them
+  into the app's assets with the recall cards, and the app runs them in Jetpack's JavaScript sandbox (`engine/Rules.kt`).
+- **App Check without Google Play** (`appcheck/BridgeAppCheck.kt`): tokens from the site's reCAPTCHA Enterprise
+  bridge, loaded in a WebView the user never sees, through a WebMessageListener restricted to the site's origin.
+- **Watch for recalls** in the background (`work/RecallWorker.kt`, WorkManager, twice a day) with notifications.
+- **Firebase Remote Config** with the extension's template.
+
+Build: `node build.mjs` (writes the engine and cards into `android/app/src/main/assets`), then in `android/`:
+`./gradlew assembleRelease` (JDK 17+, Android SDK with platform 37.2). `android/local.properties` (gitignored) holds the
+SDK path, the release signing key and, for development builds only, an App Check debug token. Test on an emulator or
+phone with `node tools/android-e2e.mjs` (add `--watch` with a debug build to replay a recall arriving after a purchase).
 
 ## Build
 

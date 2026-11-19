@@ -8,16 +8,13 @@
 import { deviceStatus, deviceModel, imagePart, cloudJson, hybridJson, hasCloudAccess, liveSettings } from './ai.js';
 import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings } from '../../shared/label.mjs';
 import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
-import { bannedHints, notTheProduct, mayContain } from '../../shared/banned.mjs';
+import { triage, wordsOnlyAnswer } from '../../shared/triage.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
 import { fetchNotice } from '../../shared/notice.mjs';
 import { CONFIRM_SYSTEM, CONFIRM_SCHEMA, confirmParts, decideFinal } from '../../shared/confirm.mjs';
 import { present } from '../../shared/present.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
-
-// Infant products get a photo check even without a recall candidate: a lounger listed as "baby bed" has no telling words.
-const INFANT = /\b(babys?|babies|infants?|newborns?|toddlers?|cribs?|cots?|bassinets?|cradles?|sleepers?|nests?|loungers?|swings?|bouncers?|rockers?|bumpers?|play\s*yards?|playards?|pack\s*'?n\s*'?play|nursery|co-?sleep\w*)\b/i;
 
 let indexPromise = null, basePromise = null;
 let cardsUrl = () => chrome.runtime.getURL('data/cards.json');
@@ -106,16 +103,7 @@ const DEVICE_TIMEOUT_MS = 45000;
 const withTimeout = (promise, ms, what) => Promise.race([promise,
   new Promise((_, reject) => setTimeout(() => reject(new Error(`${what} did not answer within ${ms / 1000} s`)), ms))]);
 
-/** Step 1, for one listing. `needsEyes` says whether the on-device model should look at it. */
-export function triage(idx, listing) {
-  const text = `${listing.title} ${listing.description || ''}`;
-  const partOrToy = notTheProduct(listing.title);
-  const candidate = partOrToy ? null : shortlist(idx, text)[0] || null;
-  const hints = partOrToy ? [] : bannedHints(text);
-  const maybe = partOrToy ? [] : mayContain(listing.title);
-  const needsEyes = !partOrToy && (!!candidate || hints.length > 0 || maybe.length > 0 || INFANT.test(listing.title));
-  return { partOrToy, candidate, hints, maybe, needsEyes };
-}
+export { triage };
 
 /** The whole pipeline for one listing. Returns a presented result (plain data). */
 export async function checkListing(listing, opts) {
@@ -150,11 +138,11 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
     } catch (e) {
       if (!judgeOverride) judge = null;
       deviceError = String(e).slice(0, 160);
-      device = decide({ what_is_for_sale: 'the_product', product_kind: '', same_kind_as_recalled: !!t.candidate, banned_type: 'none' }, t.candidate, t.hints, t.maybe);
+      device = decide(wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe);
     }
   } else {
     // No built-in model on this computer: the words alone decide what the cloud should look at.
-    device = decide({ what_is_for_sale: 'the_product', product_kind: '', same_kind_as_recalled: !!t.candidate, banned_type: 'none' }, t.candidate, t.hints, t.maybe);
+    device = decide(wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe);
   }
 
   if (secondOpinion && !/part or a toy/.test(device.why || '')) device = { ...device, secondOpinion: true };

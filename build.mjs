@@ -57,3 +57,17 @@ await mkdir('web/data', { recursive: true });
 await cp('extension/data/cards.json', 'web/data/cards.json');
 await cp('extension/data/meta.json', 'web/data/meta.json');
 await cp('extension/icons/icon-32.png', 'web/icon-32.png');
+
+// The Android app's assets: the rules engine (android/engine/bridge.js and the shared modules it imports, one script
+// for Jetpack's JavaScript sandbox), the recall cards in chunks (the sandbox caps the size of one evaluation), the data
+// stamp and the example photo.
+const assets = 'android/app/src/main/assets';
+await build({ entryPoints: ['android/engine/bridge.js'], outfile: `${assets}/engine.js`, bundle: true, format: 'iife', target: 'es2020', logLevel: 'info' });
+const { rm: rmDir, writeFile: write } = await import('node:fs/promises');
+await rmDir(`${assets}/cards`, { recursive: true, force: true });
+await mkdir(`${assets}/cards`, { recursive: true });
+const { cards } = JSON.parse(await readFile('extension/data/cards.json', 'utf8'));
+const CHUNK = 200;
+for (let i = 0; i * CHUNK < cards.length; i++) await write(`${assets}/cards/${String(i).padStart(3, '0')}.json`, JSON.stringify(cards.slice(i * CHUNK, (i + 1) * CHUNK)));
+await cp('extension/data/meta.json', `${assets}/meta.json`);
+await cp('web/example/recall-26591.jpg', `${assets}/example.jpg`);
