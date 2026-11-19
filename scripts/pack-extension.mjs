@@ -33,7 +33,8 @@ await writeFile(path.join(out, 'manifest.json'), JSON.stringify(manifest, null, 
 const copy = (rel, opts) => cp(path.join(src, rel), path.join(out, rel), { recursive: true, ...opts });
 await copy('panel.html');
 await copy('offscreen.html');
-for (const f of ['background.js', 'panel.js', 'offscreen.js', 'content.js']) await copy(`build/${f}`);
+await copy('welcome.html');
+for (const f of ['background.js', 'panel.js', 'offscreen.js', 'content.js', 'welcome.js']) await copy(`build/${f}`);
 await copy('src/ui', { filter: s => !/\.js$/.test(s) || (s.endsWith('ui') && !s.endsWith('.js')) });
 await copy('fonts');
 await copy('icons');

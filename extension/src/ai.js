@@ -42,23 +42,26 @@ export const hasCloudAccess = !!debugToken || hasDocument;
 /**
  * Settings that can change without a new build, from Firebase Remote Config: which cloud models to use and in what
  * order, how many cloud checks run at once, and a switch that turns the cloud step off (the on-device flags then stand,
- * marked unconfirmed, and nothing leaves the computer). A preview model can be retired, or a quota run out, while the
+ * marked unconfirmed, and nothing leaves the computer), and whether the cloud writes field-guide entries for recalls
+ * published after the build. A preview model can be retired, or a quota run out, while the
  * extension is already installed; this is how the fix reaches every copy within the hour. The values in this file are
  * the fallback when Remote Config cannot be reached.
- * Resolves to { models, cloudCheck, cloudAtOnce, from: 'remote' | 'cached' | 'defaults' }.
+ * Resolves to { models, cloudCheck, cloudAtOnce, liveRecalls, from: 'remote' | 'cached' | 'defaults' }.
  */
-const DEFAULTS = { cloud_models: CLOUD_MODELS.join(','), cloud_check: true, cloud_at_once: 8 };
+const DEFAULTS = { cloud_models: CLOUD_MODELS.join(','), cloud_check: true, cloud_at_once: 8, live_recalls: true };
 let live = null;
 export function liveSettings() {
   return live ||= (async () => {
     const read = (rc, from) => {
       const models = (rc ? getValue(rc, 'cloud_models').asString() : DEFAULTS.cloud_models)
-        .split(',').map(m => m.trim()).filter(m => /^gemini-[w.-]+$/.test(m));
+        .split(',').map(m => m.trim()).filter(m => /^gemini-[\w.-]+$/.test(m));
       const atOnce = rc ? getValue(rc, 'cloud_at_once').asNumber() : DEFAULTS.cloud_at_once;
       return {
         models: models.length ? models : CLOUD_MODELS,
         cloudCheck: rc ? getValue(rc, 'cloud_check').asBoolean() : true,
         cloudAtOnce: Math.max(1, Math.min(20, Math.round(atOnce) || DEFAULTS.cloud_at_once)),
+        // Off: new recalls still arrive from CPSC, but the cloud does not write their field-guide entries.
+        liveRecalls: rc ? getValue(rc, 'live_recalls').asBoolean() : true,
         from,
       };
     };

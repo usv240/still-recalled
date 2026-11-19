@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome to Still Recalled</title>
+<link rel="icon" href="icons/icon-32.png">
+<link rel="stylesheet" href="src/ui/fonts.css">
+<link rel="stylesheet" href="src/ui/ui.css">
+<link rel="stylesheet" href="src/ui/welcome.css">
+<body>
+  <main class="page">
+    <header class="top"><span class="brand"><span id="mark"></span>Still Recalled</span></header>
+
+    <section class="hero">
+      <h1>Recalled baby gear is still for sale. Now the listing says so.</h1>
+      <p class="lede">Still Recalled checks secondhand listings on eBay, Mercari and Craigslist against every U.S. CPSC recall since 1973, and flags infant sleep products linked to deaths. It needs nothing from you: open a search and badges appear.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://still-recalled.web.app/try/" target="_blank" rel="noreferrer">Try it on practice listings</a>
+        <span class="hint">Then pin it: the puzzle piece in Chrome’s toolbar, then the pin beside Still Recalled.</span>
+      </div>
+    </section>
+
+    <section class="model" id="model" aria-live="polite"></section>
+
+    <section>
+      <h2>What it does</h2>
+      <ol class="how-steps">
+        <li><span class="n">1</span><div><h3>Badges on the search page</h3><p>Every listing is checked as you scroll. A red badge means it likely matches a recall or a banned product; amber means worth checking.</p></div></li>
+        <li><span class="n">2</span><div><h3>A card that says why</h3><p>Click a badge for the recall, the hazard, which units are affected and the one question to ask the seller. Add a photo of the label and the model number is checked on this computer.</p></div></li>
+        <li><span class="n">3</span><div><h3>A watch on what you buy</h3><p>Recall notices go to the first owner. Watch a listing and Still Recalled checks it against each new CPSC recall, twice a day, and notifies you if one matches.</p></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Where the checking happens</h2>
+      <div class="split">
+        <div class="where-card"><h3>On this computer</h3><p>Every listing, by Chrome’s built-in model, Gemini Nano. Titles and photos are read here and go nowhere else. Your watch list stays here too.</p></div>
+        <div class="where-card"><h3>In the cloud</h3><p>Only listings the built-in model flags, with the recall notice, so Gemini can confirm or clear them through Firebase AI Logic. You can turn this off in the panel’s settings.</p></div>
+      </div>
+      <p class="fine">No match does not mean safe: it means no recall was found. Whether a unit is recalled usually depends on the model number on its label. <a href="https://still-recalled.web.app/privacy.html" target="_blank" rel="noreferrer">Privacy</a> · <a href="https://github.com/usv240/still-recalled" target="_blank" rel="noreferrer">Source code</a></p>
+    </section>
+  </main>
+  <script type="module" src="build/welcome.js"></script>
+</body>
+</html>

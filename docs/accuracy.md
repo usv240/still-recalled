@@ -419,6 +419,48 @@ each launch (`freshServiceWorkers` in `tools/chrome-args.mjs`).
 **Firebase Remote Config.** `cloud_models`, `cloud_check` (an off switch for the cloud step) and `cloud_at_once` are
 read by `liveSettings()` in `extension/src/ai.js`, with the values in the code as the fallback.
 
+## 13. Live recalls and the recall watch, release 0.8.0 (2026-11-19)
+
+**Why.** The recall list ships inside the extension, so before 0.8.0 a recall announced after a build never reached an
+installed copy. And recall notices reach the first owner, who registered the product, not the person who bought it
+secondhand: Kids In Danger found that only 22% of the children's products recalled in 2022 that it could analyze were
+returned, replaced or repaired (2024 report; see `docs/research/sources.md`).
+
+**How.** Twice a day (and at install) the extension asks the CPSC recall API for notices published since the newest
+one it knows, with a week of overlap. Gemini, through Firebase AI Logic (`ONLY_IN_CLOUD`, `gemini-3.5-flash-lite`
+first, the model the build used), writes each new notice's field-guide entry with the build's own prompt
+(`shared/spotter.mjs`). The cards are made with the build's code (`liveCardsFromCpsc` in `shared/cards.mjs`), with one
+difference: a handful of notices is too few to tell a distinctive product line from an everyday word, so every line
+counts only together with the brand. Pages already open are checked again. Listings the shopper chose to watch are
+checked against the new recalls: the word rules first, then Gemini Nano on the photo, then the cloud only for what the
+device flags. A match raises a Chrome notification.
+
+**Results (2026-11-19).**
+
+| Run | Result |
+|---|---|
+| Catch-up at install, Chrome profile with Gemini Nano (development build) | 5 recalls CPSC published that morning (27090, 27092, 27094, 27096, 27098), field-guide entries written for all 5 in 12 s |
+| Practice listings after the catch-up | The Kidsview infant bouncer (recall 27092, published that morning) flagged "possible recall"; 8 of 8 recalled flagged, 0 of 9 ordinary, 17 listings in 93 s |
+| Recall watch: the 12 recalls from 2026-11-12 on hidden from the build, a Huffy e-trike listing watched | All 12 fetched back, 12 field-guide entries in 36 s; the watched listing flagged "likely" against recall 27086, confirmed in the cloud |
+| Release build, new profile without the built-in model, live practice page | Caught up with 6 recalls published that morning in 8 s (field-guide entries for all 6); Kidsview bouncer flagged; 8 of 8 recalled, 0 of 9 ordinary, 8 confirmed in the cloud; the watch test fetched 13 back (13 entries in 44 s) and raised the alert, confirmed in the cloud; all 15 steps passed |
+| Unit tests (`tests/live.test.mjs`, the real CPSC answer for 2026-11-12) | A field-guide entry makes a new recall matchable by model number; a line alone does not match; without the cloud a notice still gets a card from plain code |
+
+**Two findings.**
+- **The CPSC API answers a URL it has seen with its earlier answer.** The same query returned 31 notices, and 35 with
+  an extra parameter; the four missing were that morning's. Each request now carries an end date and a unique
+  parameter.
+- **A field-guide entry took 18 s on `gemini-4-hydrogen`** (7 notices in 128 s, four at a time). The build's model,
+  `gemini-3.5-flash-lite`, is now tried first: 5 notices in 12 s.
+
+**A test-profile limit.** In the heavily automated Nano test profile, reCAPTCHA Enterprise refused App Check tokens to
+the release build's bridge after the first one (403 at the exchange; the SDK then sends a placeholder token, refused
+with 401), so the release build's cloud step was checked in a new profile, and the Nano profile used the development
+build's App Check debug token. Flags stood, marked unconfirmed, as designed. `tools/appcheck-nano-probe.mjs` shows each
+exchange and the token's claims.
+
+**A bug found on the way.** Remote Config's `cloud_models` value was checked against `/^gemini-[w.-]+$/` (a lost
+backslash), which rejected every model name, so the built-in list was always used. Fixed to `[\w.-]`.
+
 ## Reproduce
 
 ```

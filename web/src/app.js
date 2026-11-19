@@ -2,7 +2,7 @@
 //   1. read the screenshot   hybrid inference: Chrome's built-in model when this device has it, Gemini otherwise
 //   2. words                 the extension's shortlist of every CPSC recall since 1973 and its risky-type rules, here
 //   3. look and confirm      the extension's judge (hybrid) and its cloud double-check against the full notice
-import { useCards, triageListing, checkListing, readLabel } from '../../extension/src/engine.js';
+import { useCards, triageListing, checkListing, readLabel, refreshRecalls, setLiveCards } from '../../extension/src/engine.js';
 import { hybridJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
 import { SYSTEM, SCHEMA } from '../../shared/judge.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
@@ -15,6 +15,20 @@ useCards('data/cards.json');
 const $ = id => document.getElementById(id);
 const INFANT = /\b(bab(y|ies)|infants?|newborns?|toddlers?|cribs?|bassinets?|cradles?|nursery|high\s*chairs?|strollers?|car\s*seats?|loungers?|bedside\s*sleepers?|play\s*yards?|pacifiers?|teethers?)\b/i;
 let meta = { count: 10089, since: '1973-01-01', built: '' };
+// Recalls CPSC published after this page's data was built: fetched from CPSC in the visitor's browser (the field-guide
+// entry for each written by Gemini through Firebase AI Logic), kept for six hours.
+let liveCards = [];
+const noticeCount = () => meta.count + liveCards.length;
+async function catchUp() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('sr-live') || 'null');
+    if (saved && Date.now() - saved.at < 6 * 3600e3 && saved.built === meta.built) { liveCards = saved.cards; setLiveCards(liveCards); return; }
+  } catch { /* no storage: fetch again */ }
+  try {
+    liveCards = (await refreshRecalls({ cloud: true })).cards;
+    try { localStorage.setItem('sr-live', JSON.stringify({ at: Date.now(), built: meta.built, cards: liveCards })); } catch { /* fine */ }
+  } catch { /* CPSC unreachable: the built data stands */ }
+}
 let model = 'absent';
 let judge = null;
 let running = false;
@@ -122,7 +136,7 @@ async function run({ file, text, example = null }) {
       setStep('read', 'skipped', 'Typed, nothing to read');
     }
 
-    setStep('words', 'active', `${meta.count.toLocaleString('en-US')} notices since ${monthYear(meta.since)}`);
+    setStep('words', 'active', `${noticeCount().toLocaleString('en-US')} notices since ${monthYear(meta.since)}`);
     const t = await triageListing(listing);
     setStep('words', 'done', t.partOrToy ? 'Looks like a part or a toy version'
       : t.candidate ? `Possible match: ${productName(t.candidate.card.product)}`
@@ -162,7 +176,7 @@ function showResult(r, listing, { example }) {
         h('span', { class: 'pill is-none' }, 'No match found'),
         h('p', { class: 'verdict-line' }, r.why === 'part or toy' || /part or a toy/.test(r.why)
           ? 'This looks like a part or a toy version, not the product itself.'
-          : `None of the ${meta.count.toLocaleString('en-US')} recall notices since ${monthYear(meta.since)} matched this, and it doesn't look like a risky sleep product.`)),
+          : `None of the ${noticeCount().toLocaleString('en-US')} recall notices since ${monthYear(meta.since)} matched this, and it doesn't look like a risky sleep product.`)),
       h('section', { class: 'check' },
         h('h3', {}, 'Before you buy'),
         h('p', {}, 'No match isn\'t the same as safe. Older recalls aren\'t in this list, and a listing rarely shows the model number. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.'),
@@ -192,7 +206,8 @@ function reset() {
 let recentCache = null;
 async function recentView() {
   if (!recentCache) {
-    const { cards } = await (await fetch('data/cards.json')).json();
+    const { cards: built } = await (await fetch('data/cards.json')).json();
+    const cards = [...liveCards, ...built];
     recentCache = cards.filter(c => INFANT.test(`${c.product} ${c.title}`) && safeUrl(c.image)).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
   }
   return h('div', { class: 'recent' },
@@ -214,9 +229,13 @@ function howList() {
     row('device', model === 'available'
       ? 'Your screenshot is read on this device by Chrome\'s built-in model.'
       : 'Your screenshot is read on your device when the browser has a built-in model (Chrome on a computer). On this browser, it\'s read by Gemini in the cloud.'),
-    row('search', `It's compared with ${meta.count.toLocaleString('en-US')} recall notices in this page. Nothing is sent for this step.`),
+    row('search', `It's compared with ${noticeCount().toLocaleString('en-US')} recall notices in this page. Nothing is sent for this step.`),
     row('cloud', 'Only a possible match goes to Gemini in the cloud, with the full recall notice and its photo, for a closer look.'),
   ];
+}
+
+function dataLine() {
+  $('data-line').textContent = `Recall data: U.S. Consumer Product Safety Commission, ${noticeCount().toLocaleString('en-US')} notices since ${monthYear(meta.since)}${liveCards.length ? `, with ${liveCards.length} published since this page was built, checked with CPSC today` : meta.built ? `, updated ${longDate(meta.built.slice(0, 10))}` : ''}.`;
 }
 
 async function start() {
@@ -228,7 +247,15 @@ async function start() {
   // Some browsers take a while to answer, or never do; the page doesn't wait on it.
   model = await Promise.race([deviceStatus(), new Promise(r => setTimeout(() => r('unknown'), 2500))]);
   $('how').replaceChildren(...howList());
-  $('data-line').textContent = `Recall data: U.S. Consumer Product Safety Commission, ${meta.count.toLocaleString('en-US')} notices since ${monthYear(meta.since)}${meta.built ? `, updated ${longDate(meta.built.slice(0, 10))}` : ''}.`;
+  dataLine();
+  await catchUp();
+  if (liveCards.length) {
+    recentCache = null;
+    recentView().then(v => { if (!running && $('side').querySelector('.recent')) $('side').replaceChildren(v); });
+    $('how').replaceChildren(...howList());
+    dataLine();
+  }
+
   if (!hasCloudAccess) $('lede').after(h('p', { class: 'notice' }, 'This copy of the page has no cloud access, so it can only check what it can read on this device.'));
 }
 start();

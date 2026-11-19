@@ -185,3 +185,35 @@ export function cardForPrompt(c) {
   const sold = c.from && c.to ? ` Sold ${c.from === c.to ? `in ${c.from}` : `${c.from} to ${c.to}`}.` : '';
   return `${c.product}.${sold} Hazard: ${clip(c.hazard, 90)}${c.tell ? `\nWhich units: ${c.tell}` : ''}`;
 }
+
+/**
+ * Cards for notices CPSC published after the build, made on the shopper's computer (engine.js, refreshRecalls).
+ * `baseCards` are the bundled cards. A handful of new notices is too few to tell a distinctive product line from an
+ * everyday one (cardsFromCpsc counts how many of 10,000 notices use each word), so here every line counts only
+ * together with the brand, and a one-word brand that names a kind of product in the bundled cards is dropped.
+ * That misses a listing that names only the line, never matches a listing on an everyday word.
+ */
+export function liveCardsFromCpsc(records, spots = new Map(), baseCards = []) {
+  const kindUse = new Map();
+  for (const c of baseCards) {
+    const own = new Set(c.brands.flat());
+    for (const t of new Set(c.kinds.flat())) if (!own.has(t)) kindUse.set(t, (kindUse.get(t) || 0) + 1);
+  }
+  const namesAKind = t => (kindUse.get(t) || 0) > 2;
+  const known = new Set(baseCards.map(c => c.id));
+  const out = [];
+  for (const r of records) {
+    const id = String(r.RecallNumber || '').trim();
+    if (known.has(id)) continue;
+    const c = cardFromCpsc(r, spots.get(id) || null);
+    if (!c) continue;
+    known.add(id);
+    const named = new Set(uniqueTokens(c.product));
+    c.brands = c.brands.filter(b => b.length > 1 || !namesAKind(b[0]) || (named.has(b[0]) && !c.kinds.some(k => k.includes(b[0]))));
+    c.linesWithBrand = c.lines;
+    c.lines = [];
+    c.live = true;
+    out.push(c);
+  }
+  return out.sort((a, b) => (a.date < b.date ? 1 : -1));
+}

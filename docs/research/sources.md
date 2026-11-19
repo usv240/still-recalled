@@ -181,6 +181,13 @@ Limits of this check: I searched the Chrome Web Store ("recall", "recalled produ
 
 ---
 
+### Recalls reaching secondhand owners (added 2026-11-19)
+
+| Claim | Source | Date |
+|---|---|---|
+| Kids In Danger reviewed the recall reports for children's products recalled in 2022; of those it could analyze, only 22% of the recalled items were returned, replaced or repaired. Only 36% of the monthly progress reports companies must file were sufficient. | 6abc Philadelphia, "Kids In Danger releases report on recall effectiveness": https://6abc.com/post/kids-in-danger-recall-report-children-product-safety/15296263/ | 2024 |
+| Product registration cards (required since 2010 for cribs, strollers, high chairs and other durable infant products) reach the registered owner; a secondhand buyer is not registered. CPSC put registration response at 10 to 30% for most children's products at the time. | Consumer Reports, "New rule aims to improve recall effectiveness": https://www.consumerreports.org/cro/news/2010/06/new-rule-aims-to-improve-recall-effectiveness/index.htm | 2010 |
+
 ### Notes for the build (my inferences from the sources above)
 
 - **Keyword matching on names is not enough.** Platforms already do it, and CR (2019, 2026) shows listings still get through. Sellers use generic names like "baby sleeper/rocker". Matching on *category* (incline, in-bed sleeper, bumper, drop-side) as well as recall names is the gap the sources point to.

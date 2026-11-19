@@ -46,7 +46,10 @@ model, otherwise by Gemini in the cloud.</p>
 
 <h2>What is stored</h2>
 <p>The extension keeps its results for each page in your browser for 7 days, so a page you return to isn't checked
-again, and keeps your settings. Nothing is stored on a server. Removing the extension removes them.</p>
+again, and keeps your settings. If you choose <em>Watch for recalls</em> on a listing, its title, price, photo address and link are kept in your browser so it can be checked against new recalls; you can stop watching it in the side panel. Nothing is stored on a server. Removing the extension removes them.</p>
+
+<h2>New recalls</h2>
+<p>Twice a day the extension asks the U.S. Consumer Product Safety Commission's public recall API for recalls published since its list was built. The request contains no information about you. Gemini, through Firebase, reads each new recall notice (a public government document) to write a short summary used for matching. Your watch list is checked on your computer; a watched listing is sent to the cloud only if your computer flags it against a new recall, as described above.</p>
 
 <h2>Verification</h2>
 <p>To protect the project's model quota, Google's reCAPTCHA Enterprise and Firebase App Check confirm that requests come

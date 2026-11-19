@@ -1,8 +1,10 @@
 // Builds the practice listings at still-recalled.web.app/try/: a made-up secondhand search page the extension runs on,
 // so anyone can try it in a minute without hunting for a risky listing on a live marketplace.
 //
-// Six listings are products the CPSC has recalled (their photos come from the recall notices, U.S. government works);
-// six are ordinary toys and baby things (public-domain photos, credited on the page). Titles and descriptions are
+// Eight listings are products the CPSC has recalled (their photos come from the recall notices, U.S. government works);
+// nine are ordinary toys and baby things (public-domain photos, credited on the page). One recall, the Kidsview
+// bouncer (27092, 2026-11-19), came out after the extension's recall list was built: it is matched only through live
+// recalls, which the extension fetches from CPSC itself. Titles and descriptions are
 // written the way sellers write them: no recall words, a nickname instead of the model name, the year left out.
 // Usage: node scripts/make-try.mjs   (writes web/try/index.html and web/try/item/*.html; build.mjs builds try.css)
 import { writeFile, mkdir, rm } from 'node:fs/promises';
@@ -37,6 +39,8 @@ const listings = [
   { id: 'compact-stroller', title: 'Baby Trend Tango Mini compact stroller, gray', price: 40, place: 'Puyallup', days: 2, img: 'stroller.jpg',
     label: 'stroller-label.jpg',
     text: 'Folds with one hand, fits in a small trunk. Canopy and basket in good shape. Photo of the sticker on the leg below.', source: 'cpsc' },
+  { id: 'infant-bouncer', title: 'Kidsview baby bouncer with toy bar, khaki', price: 35, place: 'Tukwila', days: 1, img: 'bouncer.png',
+    text: 'Bought on Amazon in 2022, used a few months. Toy bar with the elephant toys included. Folds flat.', source: 'cpsc', live: '27092' },
   { id: 'wooden-blocks', title: 'Wooden building blocks, painted', price: 8, place: 'Seattle', days: 6, img: 'wooden-blocks.jpg',
     text: 'About 40 blocks in a bag. Paint is worn on a few.', source: 'cc0' },
   { id: 'wooden-puzzle', title: 'Blank wooden jigsaw puzzle, 20 pieces', price: 3, place: 'Burien', days: 1, img: 'wooden-puzzle.jpg',
@@ -93,9 +97,11 @@ const index = `${head('Practice listings: Still Recalled', '../')}
 ${bar('../')}
 <main class="wrap">
   <section class="intro" aria-labelledby="intro-title">
-    <h1 id="intro-title">Try the extension on sixteen made-up listings</h1>
-    <p class="lede">Seven of these are products the CPSC has recalled, written the way sellers write them: a nickname,
-    often no model number, never the year. With the extension on, each of the seven gets a badge. Click it to see the recall, where the
+    <h1 id="intro-title">Try the extension on seventeen made-up listings</h1>
+    <p class="lede">Eight of these are products the CPSC has recalled, written the way sellers write them: a nickname,
+    often no model number, never the year. With the extension on, each of the eight gets a badge. The Kidsview bouncer was
+    recalled on November 19, 2026, after this version's recall list was built: the extension fetches new recalls from CPSC
+    itself, so it is flagged a minute after install. Click it to see the recall, where the
     problem is in the photo, and what to do. The Tango Mini stroller was recalled for four model numbers only:
     open its listing, save the seller's label photo, and add it to the card to settle it.</p>
     <ol class="steps">
@@ -150,5 +156,5 @@ await mkdir('web/try/item', { recursive: true });
 await writeFile('web/try/index.html', index);
 for (const l of listings) await writeFile(`web/try/item/${l.id}.html`, item(l));
 // The answer key, for the end-to-end test and the docs.
-await writeFile('web/try/answers.json', JSON.stringify(listings.map(({ id, title, source }) => ({ id, title, recalled: source === 'cpsc' })), null, 2));
+await writeFile('web/try/answers.json', JSON.stringify(listings.map(({ id, title, source, live }) => ({ id, title, recalled: source === 'cpsc', ...(live ? { liveRecall: live } : {}) })), null, 2));
 console.log(`web/try: ${listings.length} listings, ${listings.filter(l => l.source === 'cpsc').length} recalled`);

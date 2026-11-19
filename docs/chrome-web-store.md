@@ -51,11 +51,13 @@ Open source: https://github.com/usv240/still-recalled
 | Permission | Why |
 |---|---|
 | Host access to eBay, Mercari, Craigslist and the project's practice listings (still-recalled.web.app/try) | Read the listings on search pages and place the warning badges beside them. |
-| Host access to ebayimg.com, mercdn.net, fbcdn.net | Load a flagged listing's photo so the built-in model and the cloud check can look at it. |
-| Host access to saferproducts.gov and cpsc.gov | Load the full recall notice and its photo for the cloud check. |
+| Host access to ebayimg.com and mercdn.net | Load a flagged listing's photo so the built-in model and the cloud check can look at it. |
+| Host access to saferproducts.gov and cpsc.gov | Load the full recall notice and its photo for the cloud check, and fetch recalls CPSC publishes after the build. |
 | `offscreen` | Run the checking engine, including Chrome's built-in model, in a hidden extension page, so listings are checked with the side panel closed. |
 | `sidePanel` | Show every flag on the page in the side panel. |
-| `storage` | Keep results for 7 days and the shopper's settings. |
+| `storage` | Keep results for 7 days, the shopper's settings, recalls published since the build, and the listings the shopper chose to watch. |
+| `alarms` | Check the CPSC recall API for new recalls twice a day. |
+| `notifications` | Tell the shopper when a new recall matches a listing they chose to watch. |
 
 The development manifest also lists `scripting` and `activeTab` for a developer page; the release package drops both.
 
@@ -73,5 +75,5 @@ Certify: not sold to third parties; not used for unrelated purposes; not used fo
 ## Images
 
 - Icon: `extension/icons/icon-128.png`.
-- Screenshots (1280 x 800): `docs/gallery/1-extension.png`, `2-label-check.png`, `3-hybrid.png` and
-  `4-results.png`, resized. They show the practice listings, whose photos are CPSC notice photos or public domain.
+- Screenshots (1280 x 800): `docs/gallery/1-extension.png`, `2-label-check.png`, `3-new-recalls.png`,
+  `4-hybrid.png` and `5-results.png`, resized. They show the practice listings, whose photos are CPSC notice photos or public domain.

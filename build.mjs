@@ -32,6 +32,7 @@ await build({
     panel: 'extension/src/panel.js',
     offscreen: 'extension/src/offscreen.js',
     dev: 'extension/src/dev.js',
+    welcome: 'extension/src/welcome.js',
   },
 });
 

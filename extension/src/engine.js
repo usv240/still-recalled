@@ -13,15 +13,90 @@ import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
 import { fetchNotice } from '../../shared/notice.mjs';
 import { CONFIRM_SYSTEM, CONFIRM_SCHEMA, confirmParts, decideFinal } from '../../shared/confirm.mjs';
 import { present } from '../../shared/present.mjs';
+import { liveCardsFromCpsc } from '../../shared/cards.mjs';
+import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
 
 // Infant products get a photo check even without a recall candidate: a lounger listed as "baby bed" has no telling words.
 const INFANT = /\b(babys?|babies|infants?|newborns?|toddlers?|cribs?|cots?|bassinets?|cradles?|sleepers?|nests?|loungers?|swings?|bouncers?|rockers?|bumpers?|play\s*yards?|playards?|pack\s*'?n\s*'?play|nursery|co-?sleep\w*)\b/i;
 
-let indexPromise = null;
+let indexPromise = null, basePromise = null;
 let cardsUrl = () => chrome.runtime.getURL('data/cards.json');
-const index = () => (indexPromise ||= fetch(cardsUrl()).then(r => r.json()).then(d => buildIndex(d.cards)));
+// Recalls CPSC published after this build, found by refreshRecalls and kept by the service worker.
+let liveCards = [];
+// Testing only (tools/e2e.mjs): leave out bundled recalls from this date on, as if the build were older, so a real
+// recent notice arrives through the live path.
+let hideFrom = '';
+const baseCards = () => (basePromise ||= fetch(cardsUrl()).then(r => r.json()).then(d => d.cards))
+  .then(cards => (hideFrom ? cards.filter(c => c.date < hideFrom) : cards));
+const index = () => (indexPromise ||= baseCards().then(cards => buildIndex([...liveCards, ...cards])));
 /** For pages that are not extension pages: the web page and the local accuracy test. */
-export function useCards(url) { cardsUrl = () => url; indexPromise = null; }
+export function useCards(url) { cardsUrl = () => url; indexPromise = null; basePromise = null; }
+/** Recalls published after the build, from the service worker's store. */
+export function setLiveCards(cards, { hideFrom: hide = '' } = {}) { liveCards = cards || []; hideFrom = hide || ''; indexPromise = null; }
+
+const CPSC_API = 'https://www.saferproducts.gov/RestWebServices/Recall';
+const LIVE_MAX = 60;   // notices read by the cloud in one refresh; any beyond get cards from the plain-code rules
+const FIELD_GUIDE_MODEL = 'gemini-3.5-flash-lite';   // the model scripts/build-spotter.mjs used
+const daysBefore = (date, n) => new Date(Date.parse(date) - n * 864e5).toISOString().slice(0, 10);
+
+/**
+ * Live recalls. The bundled cards stop at the build; CPSC publishes new recalls every week. This asks the CPSC
+ * recall API for notices since the newest one known, and has Gemini in the cloud write each new notice's field-guide
+ * entry (the same prompt the build used for the 10,000 before it). From then on the device matches listings against
+ * the new recall on its own. Without the cloud (switched off, or no App Check), a new notice still gets a card from
+ * the plain-code rules: brand, model numbers and product name, without the field guide.
+ * Resolves to { cards, found, written, newest }: `cards` are the new ones only.
+ */
+export async function refreshRecalls({ cloud = true, fetchImpl = fetch } = {}) {
+  const base = await baseCards();
+  const known = [...liveCards, ...base];
+  const newest = known.reduce((m, c) => (c.date > m ? c.date : m), '1973-01-01');
+  // A week of overlap: CPSC sometimes posts a notice with an earlier date than ones already out. The API answers a
+  // URL it has seen with its earlier answer (on 2026-11-19 it left out that morning's four recalls), so each request
+  // is a new URL.
+  const end = new Date(Date.now() + 2 * 864e5).toISOString().slice(0, 10);
+  const res = await fetchImpl(`${CPSC_API}?format=json&RecallDateStart=${daysBefore(newest, 7)}&RecallDateEnd=${end}&_=${Date.now()}`, { signal: AbortSignal.timeout(30000), cache: 'no-store' });
+  if (!res.ok) throw new Error(`recall API ${res.status}`);
+  const ids = new Set(known.map(c => c.id));
+  const records = (await res.json()).filter(r => r && r.RecallNumber && !ids.has(String(r.RecallNumber).trim()));
+  const spots = new Map();
+  const settings = await liveSettings();
+  if (cloud && hasCloudAccess && settings.cloudCheck && settings.liveRecalls) {
+    const todo = records.slice(0, LIVE_MAX);
+    await Promise.all(Array.from({ length: Math.min(4, todo.length) }, async () => {
+      while (todo.length) {
+        const r = todo.shift();
+        try {
+          // The model that wrote the other 10,089 entries first, so new entries read like them.
+          const { answer } = await cloudJson({ system: SPOTTER_SYSTEM, schema: SPOTTER_SCHEMA, parts: [noticeText(r)], models: [...new Set([FIELD_GUIDE_MODEL, ...settings.models])] });
+          spots.set(String(r.RecallNumber).trim(), answer);
+        } catch { /* this notice keeps the plain-code card */ }
+      }
+    }));
+  }
+  const cards = liveCardsFromCpsc(records, spots, known);
+  liveCards = [...cards, ...liveCards];
+  indexPromise = null;
+  return { cards, found: records.length, written: spots.size, newest: cards[0] ? cards[0].date : newest };
+}
+
+/**
+ * Recall watch: listings the shopper saved, checked again when new recalls arrive. Only listings whose words could be
+ * one of the new recalls go through the pipeline (device, then cloud), so a quiet week costs nothing.
+ * Resolves to the results that flag one of `newIds`.
+ */
+export async function checkWatched(listings, newIds, { modelReady, cloud }) {
+  const fresh = liveCards.filter(c => newIds.includes(c.id));
+  if (!fresh.length || !listings.length) return [];
+  const small = buildIndex(fresh);
+  const hits = [];
+  for (const listing of listings) {
+    if (!shortlist(small, `${listing.title} ${listing.description || ''}`).length) continue;
+    const result = await checkListing(listing, { modelReady, cloud }).catch(() => null);
+    if (result && result.kind === 'recall' && (result.level === 'likely' || result.level === 'possible') && newIds.includes(result.recall.id)) hits.push(result);
+  }
+  return hits;
+}
 /** Step 1 alone, for a page that shows its progress. */
 export async function triageListing(listing) { return triage(await index(), listing); }
 
@@ -221,6 +296,20 @@ if (globalThis.chrome && chrome.runtime && chrome.runtime.onMessage) chrome.runt
   }
   if (msg.type === 'sr:engine-status') {
     Promise.all([deviceStatus(), liveSettings()]).then(([model, settings]) => reply({ model, cloudAccess: hasCloudAccess, settings, queued: queue.length, running }));
+    return true;
+  }
+  if (msg.type === 'sr:engine-live') {
+    setLiveCards(msg.cards, msg);
+    reply({ ok: true, count: liveCards.length });
+    return false;
+  }
+  if (msg.type === 'sr:engine-refresh') {
+    refreshRecalls(msg.settings || {}).then(reply, e => reply({ error: String(e).slice(0, 200) }));
+    return true;
+  }
+  if (msg.type === 'sr:engine-watch') {
+    deviceStatus().then(model => checkWatched(msg.listings, msg.newIds, { modelReady: model === 'available', cloud: (msg.settings || {}).cloud !== false }))
+      .then(hits => reply({ hits }), e => reply({ error: String(e).slice(0, 200) }));
     return true;
   }
   if (msg.type === 'sr:engine-label') {

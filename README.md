@@ -12,11 +12,18 @@ Logic hybrid inference.
 **What it found on real listings.** In four blind tests on 597 used baby-gear listings from eBay, Mercari and
 Craigslist, 74 were recalled products, padded crib bumpers or infant loungers, asking $5,527 in total. Still Recalled
 flagged 58 of them ($4,540), with 11 false alarms among the 481 listings that were fine. Word rules alone raised 86.
-77% of the listings never left the computer. It knows every CPSC recall since 1973.
+77% of the listings never left the computer. It knows every CPSC recall since 1973, and fetches each new one from CPSC
+twice a day.
 
-**Try it in a minute** on the practice listings at https://still-recalled.web.app/try: sixteen made-up listings, seven
-of them products the CPSC has recalled. With the extension installed, all seven get a badge and the nine ordinary ones
-don't (release 0.7.0, 2026-11-19, with and without Chrome's built-in model).
+**And it keeps watching what you bought.** Recall notices reach the first owner, not the next one: Kids In Danger found
+that only 22% of the children's products recalled in 2022 that it could analyze were ever returned, replaced or
+repaired. Watch a listing and Still Recalled checks it against every new recall on your computer, and notifies you if
+one matches.
+
+**Try it in a minute** on the practice listings at https://still-recalled.web.app/try: seventeen made-up listings,
+eight of them products the CPSC has recalled. With the extension installed, all eight get a badge and the nine ordinary
+ones don't. One, a Kidsview infant bouncer, was recalled on 2026-11-19, after release 0.8.0's recall list was built: the
+extension fetches it from CPSC on install.
 
 ## The problem
 
@@ -55,6 +62,15 @@ Clicking the badge opens a card that shows:
   item in front of you). The built-in model reads the model number and date, and code compares them with the notice.
 
 The side panel lists every flag on the page. The toolbar icon shows how many there are.
+
+**New recalls, twice a day.** The extension asks the CPSC recall API for notices published since the newest one it
+knows. Gemini, through Firebase AI Logic, writes each new notice's field-guide entry once (the same prompt that wrote the
+10,089 before it), and from then on the laptop matches against it on its own. Pages already open are checked again.
+
+**Watch for recalls.** On a listing's own page, the side panel offers **Watch for recalls**. When a new recall matches a
+watched listing, Chrome shows a notification, and the bell at the top of the panel lists the recall, the hazard and
+which units are affected. The watch list is kept on the computer and sent nowhere; a watched listing reaches the cloud
+only if the built-in model flags it against a new recall.
 
 **On the web page**, you add a screenshot of any listing, including Facebook Marketplace or OfferUp, or a photo of the
 item, and get the same check. It works on phones.
@@ -142,8 +158,9 @@ the flags, and the settings came from Firebase Remote Config), and all checks wi
 
 ## Try it
 
-**Practice listings:** https://still-recalled.web.app/try. Install the extension (below) and reload: seven of the
-sixteen get a badge. The Baby Trend stroller's listing has the seller's label photo; add it to the card's label check.
+**Practice listings:** https://still-recalled.web.app/try. Install the extension (below) and reload: eight of the
+seventeen get a badge. The Baby Trend stroller's listing has the seller's label photo; add it to the card's label check.
+Open any listing's own page and choose **Watch for recalls** in the side panel.
 
 **Web page:** https://still-recalled.web.app. On a phone or computer, add a screenshot, or use "Try it with an example photo".
 

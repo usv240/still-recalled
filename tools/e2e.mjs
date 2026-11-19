@@ -9,7 +9,7 @@
 // Usage: node build.mjs && node tools/e2e.mjs [search words] [--headful] [--url=<search page>] [--ext=<dir>] [--profile=<dir>]
 import puppeteer from 'puppeteer-core';
 import { builtInModelArgs, freshServiceWorkers } from './chrome-args.mjs';
-import { mkdtempSync, rmSync, mkdirSync } from 'node:fs';
+import { mkdtempSync, rmSync, mkdirSync , readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
@@ -41,8 +41,46 @@ try {
   const swTarget = await browser.waitForTarget(t => t.type() === 'service_worker' && t.url().startsWith(`chrome-extension://${id}/`), { timeout: 15000 });
   const worker = await swTarget.worker();
   step('service worker starts', !!worker);
+  // The install schedules a live-recall refresh a minute later; it would run alongside the test's own refresh.
+  await worker.evaluate(() => chrome.alarms.clearAll());
   // --fresh: forget results cached by an earlier run in a kept profile, so every listing is checked again.
-  if (args.includes('--fresh')) await worker.evaluate(() => Promise.all([chrome.storage.local.clear(), chrome.storage.session.clear()]));
+  // It also drops the Firebase SDK's IndexedDB stores (App Check token, Remote Config): a kept profile once held an
+  // App Check token the backend no longer accepted (401 "token is invalid"), and the SDK kept sending it.
+  if (args.includes('--fresh')) await worker.evaluate(async () => {
+    await Promise.all([chrome.storage.local.clear(), chrome.storage.session.clear()]);
+    if (await chrome.offscreen.hasDocument()) await chrome.offscreen.closeDocument();
+    for (const db of await indexedDB.databases()) if (/firebase/i.test(db.name)) await new Promise(r => { const q = indexedDB.deleteDatabase(db.name); q.onsuccess = q.onerror = q.onblocked = r; });
+  });
+  // And the App Check bridge page's own store on the site's origin, where its tokens are cached.
+  if (args.includes('--fresh')) {
+    const cdp = await browser.target().createCDPSession();
+    for (const origin of ['https://still-recalled.web.app', 'https://still-recalled.firebaseapp.com'])
+      await cdp.send('Storage.clearDataForOrigin', { origin, storageTypes: 'indexeddb,local_storage,service_workers,cache_storage' }).catch(() => {});
+    // The bridge page's own scripts too: an HTTP-cached copy from an earlier deploy would keep running.
+    await cdp.send('Network.clearBrowserCache').catch(() => {});
+    await cdp.detach().catch(() => {});
+  }
+
+  // Live recalls: the install starts a catch-up with CPSC. Wait for it, then run one more on a clean store, so the
+  // page below is checked against every recall published since the build.
+  const catchUp = await (async () => {
+    const p = await browser.newPage();
+    await p.goto(`chrome-extension://${id}/panel.html`, { waitUntil: 'domcontentloaded' }).catch(() => {});
+    const t0 = Date.now();
+    const out = await p.evaluate(async () => {
+      await chrome.runtime.sendMessage({ type: 'sr:refresh-recalls' });
+      await chrome.storage.local.set({ live: { cards: [] } });
+      await chrome.runtime.sendMessage({ type: 'sr:engine-live', cards: [], hideFrom: '' });
+      const out = await chrome.runtime.sendMessage({ type: 'sr:refresh-recalls' });
+      const { live } = await chrome.storage.local.get('live');
+      return { ...out, cards: live.cards.map(c => ({ id: c.id, date: c.date, product: c.product, guide: !!c.tell })) };
+    }).catch(e => ({ error: String(e) }));
+    await p.close().catch(() => {});
+    return { ...out, ms: Date.now() - t0 };
+  })();
+  results.catchUp = catchUp;
+  step('recall list catches up with CPSC', !!(catchUp && !catchUp.error && typeof catchUp.added === 'number'),
+    catchUp.error ? catchUp.error : `${catchUp.added} recalls published since the build (${catchUp.cards.map(c => `${c.id} ${c.date}`).join(', ')}), ${catchUp.cards.filter(c => c.guide).length} with field-guide entries from the cloud, ${Math.round(catchUp.ms / 1000)} s`);
 
   const page = await browser.newPage();
   const url = urlArg || `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(query)}&LH_ItemCondition=3000`;
@@ -74,6 +112,17 @@ try {
   step('engine checks the listings', !!state && checked > 0, state ? `${checked} of ${state.total} checked in ${Math.round((Date.now() - t0) / 1000)} s` : 'no tab state');
   const flagged = state ? Object.values(state.results).filter(r => r.level === 'possible' || r.level === 'likely') : [];
   const errors = state ? Object.values(state.results).filter(r => r.level === 'error') : [];
+  if (/\/try\//.test(url)) {
+    let key = [];
+    try { key = JSON.parse(readFileSync('web/try/answers.json', 'utf8')).filter(k => k.liveRecall); } catch {}
+    for (const k of key) {
+      const r = state && state.results[k.id];
+      const known = catchUp.cards && catchUp.cards.some(c => c.id === k.liveRecall);
+      if (!known) { log(`recall ${k.liveRecall} is in the bundled list or not yet published: live-recall listing check skipped`); continue; }
+      step('a recall published after the build is flagged', !!(r && (r.level === 'likely' || r.level === 'possible') && r.recall && r.recall.id === k.liveRecall),
+        r ? `${k.title}: ${r.level}${r.recall ? ` / recall ${r.recall.id} (${r.recall.date})` : ''}` : 'not checked');
+    }
+  }
   step('no engine errors', errors.length === 0, errors.slice(0, 2).map(e => e.error).join(' | '));
   results.cloudChecked = state ? Object.values(state.results).filter(r => r.how && r.how.cloudModel).length : 0;
   results.cloudErrors = state ? Object.values(state.results).filter(r => r.how && r.how.cloudError).map(r => r.how.cloudError) : [];
@@ -118,6 +167,32 @@ try {
     log('screenshot', path.join(out, 'popover.png'));
   }
   await page.screenshot({ path: path.join(out, 'page.png'), fullPage: false });
+
+  const extPage2 = await browser.newPage();
+  await extPage2.goto(`chrome-extension://${id}/panel.html`, { waitUntil: 'domcontentloaded' }).catch(() => {});
+  // Live recalls and the recall watch. The engine leaves out the bundled recalls from 2026-11-12 on, as if this
+  // build were older, so the notices since then (seven on 2026-11-12 and more) arrive through the live path: from the CPSC API, with field-guide
+  // entries written by Gemini in the cloud. A watched listing for one of them (the Huffy e-trike, recall 27086) must
+  // then raise an alert. Everything is put back afterwards.
+  const huffy = { id: 'e2e-huffy', title: 'Buzz Bicycles Cerana T2 electric trike, model E4004, gray, 500W', price: '$650',
+    image: 'https://www.cpsc.gov/s3fs-public/Huffy1.jpg?VersionId=QLL20sS7WlVoNJa5y3bJY3doTHAPJyhs', url: 'https://still-recalled.web.app/try/' };
+  const liveRun = await extPage2.evaluate(async listing => {
+    await chrome.storage.local.set({ devHideFrom: '2026-11-12', live: { cards: [] },
+      watch: { 'practice:e2e-huffy': { site: 'practice', listing, addedAt: new Date().toISOString(), alert: null } } });
+    await chrome.runtime.sendMessage({ type: 'sr:engine-live', cards: [], hideFrom: '2026-11-12' });
+    const t0 = Date.now();
+    const out = await chrome.runtime.sendMessage({ type: 'sr:refresh-recalls' });
+    const { watch, live } = await chrome.storage.local.get(['watch', 'live']);
+    await chrome.storage.local.set({ devHideFrom: '', live: { cards: [] }, watch: {} });
+    await chrome.runtime.sendMessage({ type: 'sr:engine-live', cards: [], hideFrom: '' });
+    return { out, ms: Date.now() - t0, alert: watch['practice:e2e-huffy'].alert, ids: live.cards.map(c => c.id), guide: live.cards.filter(c => c.tell).length };
+  }, huffy).catch(e => ({ error: String(e) }));
+  step('new recalls arrive from CPSC', !!(liveRun.out && liveRun.out.added >= 7 && liveRun.ids.includes('27086')),
+    liveRun.out ? `${liveRun.out.added} added (${liveRun.ids.join(', ')}), ${liveRun.out.written} field-guide entries written in the cloud, ${Math.round(liveRun.ms / 1000)} s` : JSON.stringify(liveRun).slice(0, 200));
+  step('watched listing raises an alert', !!(liveRun.alert && liveRun.alert.recall && liveRun.alert.recall.id === '27086'),
+    liveRun.alert ? `${liveRun.alert.level} / ${liveRun.alert.badge}: recall ${liveRun.alert.recall.id}${liveRun.alert.confirmed ? ', confirmed in the cloud' : ''}` : 'no alert');
+  results.live = liveRun;
+  await extPage2.close().catch(() => {});
 } catch (e) {
   step('run', false, String(e).slice(0, 300));
 } finally {

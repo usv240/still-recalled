@@ -1,9 +1,11 @@
 // Draws the Devpost gallery images (docs/gallery/*.png) from the test reports, so every number in them is measured:
 //   1-extension.png    the real extension on the practice listings, with one card open (scripts/shoot-try.mjs first)
 //   2-label-check.png  the label check on the practice stroller, read on the device (scripts/shoot-try.mjs first)
-//   3-hybrid.png       where each step runs and how many listings reached it (every test report)
-//   4-results.png      caught and false alarms, each test run three ways (every test report)
-//   5-web-page.jpg     the web page on a phone (scripts/record-phone.mjs; not drawn here)
+//   3-new-recalls.png  live recalls and the recall watch (docs/gallery/src/live-run.json and watch-panel.png, from
+//                      the release end-to-end run and tools/shoot-watch.mjs)
+//   4-hybrid.png       where each step runs and how many listings reached it (every test report)
+//   5-results.png      caught and false alarms, each test run three ways (every test report)
+//   6-web-page.jpg     the web page on a phone (scripts/record-phone.mjs; not drawn here)
 // The practice listings' photos are CPSC notice photos and public-domain photos, so every image is safe to publish.
 // Rendered by headless Chrome from local files only. Usage: node scripts/make-gallery.mjs
 import puppeteer from 'puppeteer-core';
@@ -169,11 +171,32 @@ const labelSlide = tryRun && tryRun.labelText && `<!doctype html><meta charset="
 </div><div class="card"><img src="${shot('try-label.png')}"></div></div>
 <div class="foot"><span>On 12 real CPSC label photos: 8 matched the recall, 4 could not be read, none wrong.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
-const slides = [['1-extension', hero], ['2-label-check', labelSlide], ['3-hybrid', hybrid], ['4-results', results]].filter(([, html]) => html);
+// 3. Live recalls and the watch: a recall CPSC published the morning after the build, matched that day.
+const liveRun = existsSync(path.join(src, 'live-run.json')) ? read(path.join(src, 'live-run.json')) : null;
+const day = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const liveSlide = liveRun && existsSync(path.join(src, 'watch-panel.png')) && `<!doctype html><meta charset="utf-8"><style>${base}
+.cols { display: grid; grid-template-columns: 1fr 470px; gap: 72px; margin-top: 44px; align-items: start; }
+.facts { display: grid; gap: 28px; }
+.fact { border-top: 2px solid var(--text); padding-top: 14px; }
+.fact b { display: block; font-size: 16px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+.fact p { margin: 0; font-size: 22px; line-height: 1.45; }
+.fact .big { font-size: 64px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; display: block; margin-bottom: 8px; }
+.phone { width: 470px; height: 650px; overflow: hidden; border-radius: 14px; background: #f8f8f8; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 12px 40px rgba(0,0,0,.10); }
+.phone img { display: block; width: 470px; }
+</style><div class="slide">
+<h1>A recall announced this morning, matched the same day. And a watch on what you bought.</h1>
+<div class="cols"><div class="facts">
+  <div class="fact"><b>Live recalls</b><span class="big">${liveRun.found} new</span><p>CPSC recalls published on ${day(liveRun.date)}, the day after the build. The installed extension fetched them from CPSC and Gemini wrote each one's field-guide entry, through Firebase AI Logic, in ${liveRun.seconds} s. From then on the laptop matches them on its own.</p></div>
+  <div class="fact"><b>On the practice listings</b><p>The ${liveRun.listing} was flagged against recall ${liveRun.recall}, published that morning.</p></div>
+  <div class="fact"><b>Why a watch</b><p>Recall notices reach the first owner. Only 22% of the children's products recalled in 2022 that Kids In Danger could analyze were returned, replaced or repaired. A watched listing is checked against every new recall on the laptop, and a match raises a notification.</p></div>
+</div><div class="phone"><img src="${pathToFileURL(path.join(src, 'watch-panel.png')).href}"></div></div>
+<div class="foot"><span>Release 0.8.0, ${day(liveRun.date)}: all ${liveRun.steps} end-to-end steps passed on the live practice listings.</span><span class="brand"><i></i>Still Recalled</span></div>
+</div>`;
+const slides = [['1-extension', hero], ['2-label-check', labelSlide], ['3-new-recalls', liveSlide], ['4-hybrid', hybrid], ['5-results', results]].filter(([, html]) => html);
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, pipe: true, args: ['--allow-file-access-from-files'] });
 try {
-  for (const old of ['1-hybrid.png', '2-results.png', '3-search-page.png', '3-listing.png', '4-card.png']) rmSync(path.join(out, old), { force: true });
+  for (const old of ['1-hybrid.png', '2-results.png', '3-search-page.png', '3-listing.png', '4-card.png', '3-hybrid.png', '4-results.png']) rmSync(path.join(out, old), { force: true });
   const page = await browser.newPage();
   await page.setViewport({ width: 1500, height: 1000, deviceScaleFactor: 1 });
   for (const [name, html] of slides) {
