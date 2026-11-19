@@ -1,0 +1,376 @@
+{
+  "labeller": "blind AI review (Claude), title + one photo + every CPSC recall since 1973",
+  "labelled_at": "2026-11-18T23:07:48.100Z",
+  "labels": {
+    "eLDjGA5LnT7kGb9gr76jrQ": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a plain quilted mattress pad/cover only; no matching recall.",
+      "confidence": "high"
+    },
+    "gW6ZB95hyy6p88E4GbBM8f": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Flat chenille bedspread laid out; bedding accessory, not a bumper or sleep product.",
+      "confidence": "high"
+    },
+    "g5ohaYu5LDn7i5b7FCsG12": {
+      "item": "product",
+      "recall_ids": [
+        "11224"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Title names Dream On Me model 628, a number in the 2011 Dream On Me drop-side crib recall (made 2006-2009), but it is called a convertible mini crib and no date or drop side is visible; check the label.",
+      "confidence": "low"
+    },
+    "tygRmxPV4SLjMZJ6ZfdYsN": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows a folded quilted elephant comforter, not a padded bumper; no recall match.",
+      "confidence": "high"
+    },
+    "mjaZxWKd9Kh2vkfsS7jdPT": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Crib mobile arm and hanging plush animals only; no matching recall.",
+      "confidence": "high"
+    },
+    "6hLhaMqCecrMSeo6WJqgr3": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Disassembled modern gray-painted crib panels with fixed slatted sides, no drop-side track hardware visible and no brand to match a recall.",
+      "confidence": "low"
+    },
+    "jynQq4mUZqGG31hKCNtmjQ": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Older unbranded oak crib on casters with a metal spring; the photo does not show whether a side rail drops.",
+      "confidence": "low"
+    },
+    "oRnuhticck5wPN2MnZxupM": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Small white doll crib with cabinet doors; toy, not a real crib.",
+      "confidence": "high"
+    },
+    "kBGvwRxx7bvuSLvGmw7Ek3": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Boxed vintage Chatham crib blanket; bedding only, no recall.",
+      "confidence": "high"
+    },
+    "aFWVquWvMwLizBYKLR9xRX": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Doll-size wooden cradle rocker with doll bedding; toy.",
+      "confidence": "high"
+    },
+    "gRzri8Ajc7RJaJxc6zDJjV": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Gray oval electric swing seat on a black base with no readable brand; cannot be tied to a specific swing recall.",
+      "confidence": "low"
+    },
+    "jnVMyBV2uhKs9KaLWweivz": {
+      "item": "product",
+      "recall_ids": [
+        "22200"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "No photo; a 4moms swing is most likely a MamaRoo, recalled for versions 1.0-4.0 (3-point harness) but not the newer 5-point model, so check the version.",
+      "confidence": "low"
+    },
+    "sYAHRrJaXrTB1Lig5RFPXd": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded fabric bucket swing hung from rope; no matching recall.",
+      "confidence": "high"
+    },
+    "msZpRjjwYQK13uNGh2zRmT": {
+      "item": "product",
+      "recall_ids": [
+        "24145"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Jool Baby Nova swing (recalled for units made Jun 2022-Sep 2023), but the photo shows sun/pink cloud/blue toys rather than the recalled moon/cloud/star set, suggesting a newer or repaired unit; check the date code.",
+      "confidence": "low"
+    },
+    "dFA2kdPzuhnt3akZNNM676": {
+      "item": "product",
+      "recall_ids": [
+        "22200"
+      ],
+      "recall_match": "yes",
+      "type": null,
+      "should_warn": "yes",
+      "note": "Photo shows the classic 4moms MamaRoo (egg-shaped plush seat, ball mobile, 3-point harness), the version 1.0-4.0 design recalled in 2022.",
+      "confidence": "high"
+    },
+    "g7u7o2wPgyogxVTAyJ2x1Q": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Momcozy 2-in-1 electric swing; no CPSC recall for Momcozy swings.",
+      "confidence": "high"
+    },
+    "fEnBX11g3oGzj7eyoSWjF9": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Modern Graco swing/soother with 5-point harness; Graco swing recalls cover pre-1997 restraints and the 2003 Travel Lite, not this.",
+      "confidence": "high"
+    },
+    "gg31i7igBCNfTXKArXxvt5": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded-titled side-to-side powered swing (Graco-style frame); no matching recall.",
+      "confidence": "low"
+    },
+    "3L15Tm6jq93obcvU9utEnk": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "New UPPAbaby/4moms MamaRoo with a visible 5-point harness, which the 2022 MamaRoo recall excludes.",
+      "confidence": "high"
+    },
+    "xzWA4byLghjM6ALp655Egd": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Two-seat glider swing for a backyard playset; not an infant product, no recall.",
+      "confidence": "high"
+    },
+    "e87HbGSfwVHoHvwz5G6NBu": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Guava Family Lotus-style mesh travel crib (play yard); Guava recall covers only Roam strollers.",
+      "confidence": "high"
+    },
+    "r7UTDKSJA1B75RSzMY3EcC": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "KidCo toddler bed rail with frame and straps; no KidCo bed rail recall (only PeaPod travel beds).",
+      "confidence": "high"
+    },
+    "cWP7ZsiTqAXcVdi17n5ob2": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Screenshot shows a Babyletto Hudson-style convertible crib with fixed sides; no recall.",
+      "confidence": "high"
+    },
+    "gYSLEWfjNYdAj9cvHsqkMg": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Dark wood compact crib with fixed slatted sides and wire spring; no drop-side hardware or brand visible.",
+      "confidence": "low"
+    },
+    "8yyr1kCU2gyrM1et6Lgprf": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Photo shows only an Avalon Baby nameplate, no crib; no Avalon crib recall (the Avalon recall is adult bedroom furniture), but whether a side drops cannot be seen.",
+      "confidence": "low"
+    },
+    "5vfoNqxQ7i49Buj8iLxLor": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Live Mini Rex rabbit for sale.",
+      "confidence": "high"
+    },
+    "nLaeSm7RzB7ThAZ6Wrfc1K": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Live Rex rabbit for sale.",
+      "confidence": "high"
+    },
+    "tnXp7o2XLJJ36UisqHzTyR": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Wanted-to-buy ad for old motorcycles.",
+      "confidence": "high"
+    },
+    "qCW4kucFdb8iUgGoUGxo77": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Furniture assembly service ad showing a vanity.",
+      "confidence": "high"
+    },
+    "aepoRsZbmyNvHA237fBUUv": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Furniture assembly service ad showing a vanity.",
+      "confidence": "high"
+    },
+    "kww2TFWokdbp8VdZRqhSjh": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco Simple Sway swing with overhead motor; no CPSC recall for this model.",
+      "confidence": "high"
+    },
+    "4osWRwQUWVBkGNbmMu5rak": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows an infant car seat (NHTSA, not CPSC) with no readable brand; stroller not shown.",
+      "confidence": "low"
+    },
+    "961MczUBWqVHS7DxuVnmCn": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco DuetSoothe swing/rocker; no CPSC recall for this model.",
+      "confidence": "high"
+    },
+    "16HSRHd1vArJgwEVN9GTkd": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Vintage cloth topsy-turvy doll.",
+      "confidence": "high"
+    },
+    "v7UpuZ9938pKUjvuu5Mdg6": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Garage sale ad; photo shows a drum kit.",
+      "confidence": "high"
+    },
+    "q3HaWddRugTmVGSNHvv9t5": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco DuetSoothe-style swing and rocker; no matching recall.",
+      "confidence": "high"
+    },
+    "bUo42rAsJcW3hmT2GLzcig": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Wanted-to-buy ad for old motorcycles.",
+      "confidence": "high"
+    },
+    "2sTm6Mo7zWe2yxu5ipgcp9": {
+      "item": "product",
+      "recall_ids": [
+        "24145"
+      ],
+      "recall_match": "yes",
+      "type": null,
+      "should_warn": "yes",
+      "note": "No photo; title names the Jool Baby Nova swing, recalled in 2024 for units made Jun 2022-Sep 2023, and nothing places it outside that range.",
+      "confidence": "low"
+    },
+    "rVbdchh8VnUgyD1CjY59df": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Playground and swing set assembly service ad.",
+      "confidence": "high"
+    },
+    "paPjqEkc9Gy8zL58FVwaMZ": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Large unbranded wooden backyard playset; not an infant product and no brand to match a recall.",
+      "confidence": "high"
+    }
+  }
+}

@@ -9,10 +9,10 @@ pages, plus a web page that checks a screenshot of any listing on a phone. Chrom
 at every baby product on your own computer, and only the few it flags go to Gemini in the cloud, through Firebase AI
 Logic hybrid inference.
 
-**What it found on real listings.** In three blind tests on 437 used baby-gear listings from eBay, Mercari and
-Craigslist, 52 were recalled products, padded crib bumpers or infant loungers, asking $3,211 in total. Still Recalled
-flagged 40 of them ($2,689), with 10 false alarms among the 365 listings that were fine. Word rules alone raised 62.
-80% of the listings never left the computer.
+**What it found on real listings.** In four blind tests on 597 used baby-gear listings from eBay, Mercari and
+Craigslist, 74 were recalled products, padded crib bumpers or infant loungers, asking $5,527 in total. Still Recalled
+flagged 58 of them ($4,540), with 11 false alarms among the 481 listings that were fine. Word rules alone raised 86.
+77% of the listings never left the computer. It knows every CPSC recall since 1973.
 
 ## The problem
 
@@ -39,12 +39,16 @@ Every figure is sourced in [docs/research/sources.md](docs/research/sources.md).
 
 Clicking the badge opens a card that shows:
 - the seller's photo beside the photo from the government recall notice;
+- **where in the photo**: the cloud check outlines what it saw, such as the padded bumper folded among the bedding;
+- **which units**: one sentence on how to tell a recalled unit from one that isn't (models, dates, where the label is);
 - what to check before buying;
 - **Ask the seller**: copies a question that asks for the one fact that settles it, usually the model number and
   date on the label, and opens eBay's message box for that seller (on other sites, the listing);
 - **Report to CPSC**, on likely flags where a recall or the law rules the sale out: copies a ready report with the
   listing's link and opens the SaferProducts.gov form. CPSC asks shoppers who find a recalled product for sale online
-  to report it there, and its e-commerce team has such listings taken down.
+  to report it there, and its e-commerce team has such listings taken down;
+- **Settle it with the label**, on a possible recall: add a photo of the product's label (from the seller, or of the
+  item in front of you). The built-in model reads the model number and date, and code compares them with the notice.
 
 The side panel lists every flag on the page. The toolbar icon shows how many there are.
 
@@ -57,7 +61,7 @@ It never says a product is safe. No match means no recall was found.
 
 ```
 every listing ── 1. word rules (instant, on the computer) ──────────────────────────────┐
-                    recall shortlist by brand, product line, model number (1,885 CPSC notices)
+                    recall shortlist by brand, line, model, years sold (every CPSC recall since 1973)
                     risky-type words; parts and toys dropped                             │
                                                                                          ▼
 baby products ─── 2. Chrome's built-in model (Gemini Nano, on the computer) ── title + photo
@@ -74,6 +78,19 @@ flags only ────── 3. Gemini in the cloud, via Firebase AI Logic ─�
 - **One engine:** both use the same engine, prompts and JSON schemas. Answers are structured JSON in both modes, so
   the on-device and cloud answers can be compared field by field.
 
+Three more places the device and the cloud work together:
+- **The cloud writes the device's field guide, once.** At build time, Gemini read all 10,089 CPSC recall notices since
+  1973 and wrote a short spotter card for each ([data/spotter.jsonl](data/spotter.jsonl), by
+  [scripts/build-spotter.mjs](scripts/build-spotter.mjs)): the brand a seller would type, the product line, the kind of
+  product, the years sold, and how to tell a recalled unit. The cards ship with the extension (2.4 MB compressed), so
+  the word rules and the built-in model use them on the shopper's computer with no cloud call. Matching stays in code.
+- **The cloud shows where.** Its answer includes a box around what decided it, and the card outlines that part of the
+  seller's photo.
+- **The device can raise the alarm on a label, but not clear it.** The built-in model reads a label photo, so it stays
+  on the computer, and a match to a recalled model stands. A reading that would reassure the shopper is read again in
+  the cloud first. On 12 real label photos from CPSC notices, this read 8 recalled model numbers correctly and gave no
+  wrong answer; the built-in model alone misread one ("615573" as "S16578") and would have said it wasn't recalled.
+
 Where Firebase AI Logic is called:
 - [extension/src/ai.js](extension/src/ai.js): `deviceModel`, `cloudJson`, `hybridModel` and `hybridJson`. The cloud side
   uses the `AgentPlatformBackend` (the Vertex AI Gemini API), billed per call, which answered 20 calls at once in a
@@ -89,26 +106,29 @@ the extension, judges included, gets the cloud check with App Check still enforc
 
 ## How well it works
 
-Three tests, each on listings collected after the fixes the test before it led to, labelled blind by separate
+Four tests, each on listings collected after the fixes the test before it led to, labelled blind by separate
 reviewers from what a shopper sees: the title, the price and one photo. Method, every miss and the limits are in
 [docs/accuracy.md](docs/accuracy.md).
 
-| Same engine, run as | Caught (of 52) | False alarms (of 365) |
+| Same engine, run as | Caught (of 74) | False alarms (of 481) |
 |---|---|---|
-| Words only | 31 | 62 |
-| Built-in model only | 35 | 30 |
-| **Hybrid** | **40** | **10** |
+| Words only | 43 | 86 |
+| Built-in model only | 47 | 50 |
+| **Hybrid** | **58** | **11** |
 
 | Test | Listings | Hybrid caught | Hybrid false alarms |
 |---|---|---|---|
 | First: eBay | 136 | 10 of 14 | 4 of 115 |
 | Second, after fixes: eBay and Craigslist | 125 | 2 of 4 | 0 of 117 |
 | Third, after fixes: eBay, Mercari and Craigslist | 176 | 28 of 34 | 6 of 133 |
+| Fourth, with every recall since 1973: eBay and Craigslist | 160 | 18 of 22 | 1 of 116 |
 
-- By kind: recall matches 3 of 3, infant loungers and nests 27 of 35, padded crib bumpers 10 of 14.
+- By kind: recall matches 6 of 8, infant loungers and nests 35 of 44, padded crib bumpers 17 of 22.
 - Loungers were the weak spot after two tests (4 of 10). The changes that followed raised that to 23 of 25 in the
-  third test, on listings collected after the changes.
-- The cloud saw 20% of the listings across the three tests.
+  third test and 8 of 9 in the fourth, on listings collected after the changes.
+- In the fourth test, two of the three recall catches were recalls older than the five years of data the first three
+  tests used: a 1995 Graco swing and a Graco Swyngomatic, under Graco's 2000 swing recall.
+- The cloud saw 23% of the listings across the four tests.
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
 badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. In a Chrome
@@ -174,8 +194,8 @@ What protects the project's model quota:
 
 ## Data and credits
 
-- **Recall data:** the U.S. Consumer Product Safety Commission recall API (saferproducts.gov), 1,885 notices since
-  November 2021. Still Recalled is not affiliated with CPSC.
+- **Recall data:** the U.S. Consumer Product Safety Commission recall API (saferproducts.gov), all 10,089 notices
+  since 1973. Still Recalled is not affiliated with CPSC.
 - **Example photo:** `web/example/recall-26591.jpg` is from CPSC recall notice 26591 (VEVOR baby loungers).
 - **Font:** Geist, SIL Open Font License, © Vercel ([extension/fonts/Geist-LICENSE.txt](extension/fonts/Geist-LICENSE.txt)).
 - **Origins:** Still Recalled was built during the #BuildHybridAI submission period, from November 14, 2026, and

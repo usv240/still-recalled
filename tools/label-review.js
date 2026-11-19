@@ -22,6 +22,7 @@ async function load(set) {
     eval: ['eval-labels.json'],
     fresh: ['fresh-labels-ebay.json', 'fresh-labels-craigslist.json'],
     third: ['third-labels-a.json', 'third-labels-b.json', 'third-labels-c.json'],
+    fourth: ['fourth-labels-a.json', 'fourth-labels-b.json', 'fourth-labels-c.json'],
   }[set];
   const [listings, ...labelSets] = await Promise.all([
     fetch(`/tools/${set}-listings.json`).then(r => r.json()),

@@ -5,6 +5,16 @@ import { icon, mark } from './icons.js';
 import uiCss from './ui.css';
 import contentCss from './content.css';
 
+/** One more than the highest z-index set inside a listing's card (at least 2), capped well below page chrome. */
+function layerAbove(el) {
+  let top = 1;
+  for (const n of [el, ...el.querySelectorAll('*')].slice(0, 400)) {
+    const z = parseInt(getComputedStyle(n).zIndex, 10);
+    if (Number.isFinite(z) && z > top && z < 10000) top = z;
+  }
+  return top + 1;
+}
+
 /**
  * Place a badge on a card: over the photo's top-left corner, or above the title on an item page. Craigslist prints the
  * price in the photo's top-left corner, so there the badge takes the top-right one.
@@ -21,9 +31,29 @@ export function attachBadge(host, card, { corner = 'left' } = {}) {
   const link = anchor.closest('a');
   if (link && link.parentElement && link.parentElement !== document.body) anchor = link.parentElement;
   if (getComputedStyle(anchor).position === 'static') anchor.style.position = 'relative';
-  // Just above the listing's photo, and below the site's own header: Craigslist scrolls its results under a fixed
-  // header, and a top z-index drew the badges over it. The card opens in the top layer (a popover), so it needs none.
-  host.style.cssText = `position:absolute;top:8px;${corner === 'right' ? 'right' : 'left'}:8px;z-index:2;`;
+  // Out of the photo component when the listing is a list item. eBay's photo carousel (November 2026) handles clicks
+  // inside it from listeners on the page that run first, and a badge inside it could not be opened (end-to-end test,
+  // 2026-11-18). On the listing's own row the badge sits over the same corner of the photo.
+  const photo = anchor;
+  const row = photo.closest('li');
+  if (row && row !== photo && row.contains(photo)) {
+    if (getComputedStyle(row).position === 'static') row.style.position = 'relative';
+    const place = () => {
+      const p = photo.getBoundingClientRect(), r = row.getBoundingClientRect();
+      if (!p.width || !r.width) return;
+      host.style.top = `${p.top - r.top + 8}px`;
+      host.style.left = corner === 'right' ? 'auto' : `${p.left - r.left + 8}px`;
+      host.style.right = corner === 'right' ? `${r.right - p.right + 8}px` : 'auto';
+    };
+    host.style.cssText = `position:absolute;z-index:${layerAbove(row)};`;
+    row.prepend(host);
+    place();
+    host.place = place;   // content.js calls this when the window is resized
+    return;
+  }
+  // Just above everything inside the listing, and below the site's own header. Craigslist scrolls its results under a
+  // fixed header, and a top z-index drew the badges over it. The card opens in the top layer (a popover).
+  host.style.cssText = `position:absolute;top:8px;${corner === 'right' ? 'right' : 'left'}:8px;z-index:${layerAbove(card.el)};`;
   anchor.prepend(host);
 }
 
@@ -54,7 +84,9 @@ export function buildBadge(r, { onOpenPanel, onLabel = null, shadowMode = 'close
   const root = host.attachShadow({ mode: shadowMode });   // 'open' only on the local preview page, for testing
   root.append(h('style', {}, uiCss + contentCss));
 
-  const pop = h('div', { class: 'pop', popover: 'auto', role: 'dialog', 'aria-label': `Still Recalled: ${r.badge}` });
+  // "manual", with light dismiss done here: an "auto" popover closes whenever the page opens one of its own, and
+  // eBay's photo carousel opens one on the same click, so the card never showed (end-to-end test, 2026-11-18).
+  const pop = h('div', { class: 'pop', popover: 'manual', role: 'dialog', 'aria-label': `Still Recalled: ${r.badge}` });
   const badge = h('button', { class: `badge ${r.level === 'likely' ? 'is-likely' : 'is-possible'}`, type: 'button', 'aria-haspopup': 'dialog' },
     icon('alert', { size: 14 }), r.badge);
 
@@ -105,13 +137,20 @@ export function buildBadge(r, { onOpenPanel, onLabel = null, shadowMode = 'close
   let raf = 0;
   const follow = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(place); };
   pop.addEventListener('beforetoggle', e => { if (e.newState === 'open') place(); });
+  // Light dismiss: a press outside the badge and the card, or Escape, closes it.
+  const outside = e => { if (!e.composedPath().includes(host)) pop.hidePopover(); };
+  const escape = e => { if (e.key === 'Escape') { pop.hidePopover(); badge.focus(); } };
   pop.addEventListener('toggle', e => {
     if (e.newState === 'open') {
       addEventListener('scroll', follow, { passive: true, capture: true });
       addEventListener('resize', follow);
+      addEventListener('pointerdown', outside, true);
+      addEventListener('keydown', escape, true);
     } else {
       removeEventListener('scroll', follow, { capture: true });
       removeEventListener('resize', follow);
+      removeEventListener('pointerdown', outside, true);
+      removeEventListener('keydown', escape, true);
     }
   });
 

@@ -1,0 +1,570 @@
+{
+  "labeller": "blind AI review (Claude), title + one photo + every CPSC recall since 1973",
+  "labelled_at": "2026-11-18T23:10:31.342Z",
+  "labels": {
+    "336900366107": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Modern Graco open-top swing with star toy bar; no CPSC recall covers this current-style swing.",
+      "confidence": "high"
+    },
+    "336792228853": {
+      "item": "product",
+      "recall_ids": [
+        "00098"
+      ],
+      "recall_match": "yes",
+      "type": null,
+      "should_warn": "yes",
+      "note": "1995 Graco Open Top 764AA swing with tray restraint in photo; recall 00098 covers Graco swings made before Nov 1997 (waist belt + tray restraint).",
+      "confidence": "high"
+    },
+    "800705595563": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Modern Graco Soothe n Sway bouncer-style swing; no matching CPSC recall.",
+      "confidence": "high"
+    },
+    "407268215043": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco Simple Sway swing shown; no CPSC recall for this model.",
+      "confidence": "high"
+    },
+    "860155691560": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Modern Graco Simple Sway-style swing with mobile; no matching recall.",
+      "confidence": "high"
+    },
+    "168869455156": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco DuetConnect LX swing; no CPSC recall for this model.",
+      "confidence": "high"
+    },
+    "407272460606": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Photo shows Graco Simple Sway 2-in-1 box; no recall for this model.",
+      "confidence": "high"
+    },
+    "800925397733": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco Simple Sway swing shown; no matching recall.",
+      "confidence": "high"
+    },
+    "820369982036": {
+      "item": "product",
+      "recall_ids": [
+        "00098"
+      ],
+      "recall_match": "yes",
+      "type": null,
+      "should_warn": "yes",
+      "note": "Vintage Graco Easy-Entry Swyngomatic swing box (pre-1997 Graco swing with tray restraint); recall 00098 covers Graco swings made before Nov 1997.",
+      "confidence": "high"
+    },
+    "287717335389": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco Duet Soothe swing/rocker; no CPSC recall for this model.",
+      "confidence": "high"
+    },
+    "800932036496": {
+      "item": "product",
+      "recall_ids": [
+        "07084",
+        "10171"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Disassembled Graco high chair (brown shell, slim white legs); model not shown and Graco Contempo/Harmony high chairs were recalled, so check the label.",
+      "confidence": "low"
+    },
+    "307236646725": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Cosco Simple Fold high chair; the only Cosco high chair recall is Options 5 (01041), a different model.",
+      "confidence": "high"
+    },
+    "147685230476": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded wooden high chair with tray; no brand to tie to any recall.",
+      "confidence": "high"
+    },
+    "840119940912": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Regalo Easy Diner hook-on chair #2662; no Regalo recall in CPSC records.",
+      "confidence": "high"
+    },
+    "137923117020": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco Floor2Table MPN 2081360 shown; the Graco Table2Table recall (18112) is model 1969721, not this.",
+      "confidence": "high"
+    },
+    "860150137098": {
+      "item": "product",
+      "recall_ids": [
+        "25166",
+        "25222"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Babyjoy (Costway) high chair with pink seat and wooden legs; Babyjoy high chairs were recalled, though this design differs from the described models, so check the model.",
+      "confidence": "low"
+    },
+    "287720307554": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Black Inglesina Fast table chair; the 2001 Inglesina table seat recall (01175) covered blue and yellow seats only.",
+      "confidence": "low"
+    },
+    "800916644577": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Maxi-Cosi high chair; no Maxi-Cosi high chair recall in CPSC records.",
+      "confidence": "high"
+    },
+    "377651521947": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Baby Delight GoWithMe portable chair; no matching recall.",
+      "confidence": "high"
+    },
+    "168871576741": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Only the Rainforest tray toy replacement part is sold; the Healthy Care high chair recall (10361) concerned leg pegs, not this toy.",
+      "confidence": "high"
+    },
+    "267841807413": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Crib bedding set in a pile (quilt, sheets, ruffled pieces); photo does not show clearly whether padded bumpers are included.",
+      "confidence": "low"
+    },
+    "257856004728": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Photo shows long padded quilted Mickey bumper pads in the set.",
+      "confidence": "high"
+    },
+    "127870186542": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Comforter/quilt and ruffled bed skirt shown; title lists no bumper and none is visible.",
+      "confidence": "low"
+    },
+    "128139117842": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Crib bedding set but photo shows only the quilt; cannot tell whether a bumper is included.",
+      "confidence": "low"
+    },
+    "237181005424": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "3-piece set (quilt, sheet, skirt) shown on crib with no bumper.",
+      "confidence": "high"
+    },
+    "206676049944": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "1994 Pooh lot photo clearly includes a padded crib bumper strip.",
+      "confidence": "high"
+    },
+    "398068685645": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Comforter, valance and diaper stacker shown; no bumper visible or listed.",
+      "confidence": "low"
+    },
+    "366820432072": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Two blankets/crib sheet only; no bumper.",
+      "confidence": "high"
+    },
+    "237129417193": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Stock photo of the Glenna Jean Isabella set shows padded bumpers around the crib.",
+      "confidence": "high"
+    },
+    "860120059030": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "7-piece Pooh set photo shows a padded ruffled headboard bumper and rolled bumper.",
+      "confidence": "high"
+    },
+    "407309775514": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Modern unbranded portable play yard; no matching recall.",
+      "confidence": "high"
+    },
+    "366795920675": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "ADOTOCAM play yard (photo shows carry bag); no CPSC recall for this brand.",
+      "confidence": "high"
+    },
+    "128056429456": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Generic modern panel playpen; no brand or recall.",
+      "confidence": "high"
+    },
+    "366777451398": {
+      "item": "product",
+      "recall_ids": [
+        "85039",
+        "86055"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Vintage Century folding mesh playpen with side-rail latches; Century dropside mesh playpens are in CPSC records 85039/86055, so check whether the side drops.",
+      "confidence": "low"
+    },
+    "920007861066": {
+      "item": "product",
+      "recall_ids": [
+        "99026",
+        "97015"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Vintage Graco Made-in-USA folding drop-side mesh playpen; Graco drop-sided mesh playpens made 1976-1990 (99026) and 1995-96 playards (97015) were recalled; date not shown.",
+      "confidence": "low"
+    },
+    "227450378096": {
+      "item": "product",
+      "recall_ids": [
+        "85039"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Vintage Cosco folding mesh playpen; Cosco dropside mesh playpens are in CPSC record 85039, model/date not shown.",
+      "confidence": "low"
+    },
+    "227529716528": {
+      "item": "product",
+      "recall_ids": [
+        "99026",
+        "97015"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Vintage Graco folding mesh playpen with bears pad; Graco drop-sided mesh playpens recalled (99026, 97015), date not shown.",
+      "confidence": "low"
+    },
+    "206562069491": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Small modern portable play yard; no brand in title and no matching recall.",
+      "confidence": "high"
+    },
+    "188095152679": {
+      "item": "product",
+      "recall_ids": [
+        "99026",
+        "97015"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "80s/90s Graco Made-in-USA folding drop-side mesh playpen; Graco playpens made 1976-11/1990 recalled (99026), exact date not shown.",
+      "confidence": "low"
+    },
+    "398396967296": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Chicco play yard; no Chicco play yard recall in CPSC records.",
+      "confidence": "high"
+    },
+    "307235454508": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Footed baby sleeper garment, not a Rock n Play sleeper.",
+      "confidence": "high"
+    },
+    "820353401856": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Footed sleepsuit garment.",
+      "confidence": "high"
+    },
+    "206709404206": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Gerber footed pajamas.",
+      "confidence": "high"
+    },
+    "377620590410": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Carters preemie sleep n play romper; not a recalled Carters style.",
+      "confidence": "high"
+    },
+    "377323569840": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Child of Mine puppy fleece sleeper; not the recalled Child of Mine style 715-839 (13167).",
+      "confidence": "high"
+    },
+    "407356913755": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Vinyl record album.",
+      "confidence": "high"
+    },
+    "377323505958": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Yellow stripe fleece duck sleeper; not a recalled Carters style.",
+      "confidence": "high"
+    },
+    "840139335319": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "45 rpm record.",
+      "confidence": "high"
+    },
+    "377654962704": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Lot of footed baby sleepers.",
+      "confidence": "high"
+    },
+    "377637168516": {
+      "item": "clothing",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Lot of Carters footed sleepers; none match recalled styles.",
+      "confidence": "high"
+    },
+    "206695908333": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Photo shows padded Care Bears headboard bumper and side bumper with ties.",
+      "confidence": "high"
+    },
+    "318858390143": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Crib quilt/comforter only.",
+      "confidence": "high"
+    },
+    "389250646639": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded wicker bassinet on folding legs; bassinet on legs is not a risky type and no brand ties it to a recall.",
+      "confidence": "high"
+    },
+    "336723712499": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Embroidered crib quilt and pillow sham only, no bumper.",
+      "confidence": "high"
+    },
+    "257856022190": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Fitted crib sheet only.",
+      "confidence": "high"
+    },
+    "128000630981": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Plush crib blanket only.",
+      "confidence": "high"
+    },
+    "287737874937": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Gabriel Busy Box crib activity toy; no Gabriel recall in CPSC records.",
+      "confidence": "high"
+    },
+    "227607648353": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Baby Looney Tunes crib set photo shows padded bumpers with ties.",
+      "confidence": "high"
+    },
+    "117528936078": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Crib blanket only.",
+      "confidence": "high"
+    },
+    "287739595238": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Ruffled crib mattress cover sheet only.",
+      "confidence": "high"
+    }
+  }
+}

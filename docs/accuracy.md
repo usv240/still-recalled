@@ -1,6 +1,6 @@
 # How well it works: the tests
 
-Three tests ran on 2026-11-15 and 2026-11-16 on a Windows PC with Chrome 157 and Chrome's built-in model (Gemini
+Four tests ran on 2026-11-15, 16 and 18 on a Windows PC with Chrome 157 and Chrome's built-in model (Gemini
 Nano). Each test set was collected after the fixes the test before it led to, so every set is new to the rules it
 measures. Cloud model: Gemini through Firebase AI Logic (`gemini-4-hydrogen`, falling back to `gemini-3.5-flash-lite`
 when it was busy).
@@ -14,31 +14,33 @@ A listing counts as flagged at "possible" or "likely".
 
 ## Results
 
-All three tests together: 437 listings, of which 52 must be flagged and 365 must not (20 can't be settled from the
+All four tests together: 597 listings, of which 74 must be flagged and 481 must not (42 can't be settled from the
 listing alone and are left out).
 
-| Same engine, run as | Caught (of 52) | False alarms (of 365) |
+| Same engine, run as | Caught (of 74) | False alarms (of 481) |
 |---|---|---|
-| Words only | 31 | 62 |
-| Built-in model only | 35 | 30 |
-| **Hybrid** | **40** | **10** |
+| Words only | 43 | 86 |
+| Built-in model only | 47 | 50 |
+| **Hybrid** | **58** | **11** |
 
 | Test | Listings | Hybrid caught | Hybrid false alarms | Words only: false alarms |
 |---|---|---|---|---|
 | First: eBay, Nov 15 | 136 | 10 of 14 | 4 of 115 | 22 |
 | Second, after fixes: eBay and Craigslist, Nov 15 | 125 | 2 of 4 | 0 of 117 | 16 |
 | Third, after fixes: eBay, Mercari and Craigslist, Nov 16 | 176 | 28 of 34 | 6 of 133 | 24 |
+| Fourth, every recall since 1973: eBay and Craigslist, Nov 18 | 160 | 18 of 22 | 1 of 116 | 24 |
 
-- **The built-in model halves the word rules' false alarms by looking at the photo, and the cloud check cuts them to a
-  sixth.** It also catches what words miss: products whose risky part shows only in the photo.
-- **By kind, across the three tests:** recall matches 3 of 3; infant loungers and nests 27 of 35; padded crib bumpers
-  10 of 14.
-- **Loungers were the weak spot after two tests (4 of 10). The changes made after the second test raised that to 23 of
-  25 in the third,** on listings collected after the changes.
-- **In a shopper's units:** the listings that should be flagged were asking $3,211 in total; the hybrid flagged $2,689
+- **The built-in model cuts the word rules' false alarms by looking at the photo, and the cloud check cuts them to an
+  eighth.** It also catches what words miss: products whose risky part shows only in the photo.
+- **By kind, across the four tests:** recall matches 6 of 8; infant loungers and nests 35 of 44; padded crib bumpers
+  17 of 22.
+- **Each test changed the product.** Loungers were the weak spot after two tests (4 of 10); the changes that followed
+  raised that to 23 of 25 in the third and 8 of 9 in the fourth. The fourth test was the first with every recall since
+  1973, and two of its three recall catches were recalls the earlier data didn't have.
+- **In a shopper's units:** the listings that should be flagged were asking $5,527 in total; the hybrid flagged $4,540
   of it.
-- **80% of the listings never left the computer.** The cloud saw 15%, 8% and 33% of the listings in the three tests
-  (the third test's searches were mostly loungers, and every true lounger goes to the cloud to be confirmed).
+- **77% of the listings never left the computer.** The cloud saw 15%, 8%, 33% and 32% of the listings in the four tests
+  (the last two searched mostly for loungers, recalled brands and old gear, which go to the cloud to be confirmed).
 
 ## 1. First test
 
@@ -121,7 +123,8 @@ test: 4 must be flagged, 117 must not, 4 can't be settled from the listing alone
 "plush animal" or "plush doll" does. Measured in the third test.
 
 **Outside the recall data.** The Craigslist reviewer found five Dream On Me 2-in-1 bassinet and cradle listings from a
-product family CPSC recalled in 2015. The recall data starts in November 2021, so these can't be matched yet.
+product family CPSC recalled in 2015. The recall data then started in November 2021, so these couldn't be matched; see
+section 7.
 
 ## 4. Changes made after the second test
 
@@ -193,7 +196,7 @@ every true lounger goes to the cloud to be confirmed. One cloud check timed out.
 **Outside the recall data.** The reviewers named three older recalls the data doesn't have: Dream On Me 2-in-1 bassinets
 (2015), BabyBjörn Babysitter Balance bouncers (2009) and UPPAbaby RumbleSeat adapters (2021).
 
-## 6. Found and fixed after the third test (not yet measured)
+## 6. Changes made after the third test
 
 - BreathableBaby, which makes only mesh liners, doesn't count as a padded bumper.
 - Titles like "Baby Bedding" and "Crib ... Bedding" count as a bedding set, so the cloud looks at the photo for a bumper.
@@ -202,16 +205,126 @@ every true lounger goes to the cloud to be confirmed. One cloud check timed out.
 
 These change 7 listings in the third test (the 3 mesh liners and 4 of the misses) and 1 in the second; none in the first.
 
-## 7. Limits
+## 7. Every recall since 1973
 
-- **Few positives per kind:** 52 listings must be flagged across the three tests, but only 14 are padded bumpers and 3
-  are recall matches, so each one moves those rates a lot.
+**Why.** Secondhand gear is old. The first three tests used the recalls of the last five years (1,885 notices), and
+the reviewers named 19 of their 437 listings that might fall under an older recall the data didn't have: Arm's Reach
+co-sleepers (2011), Dream On Me 2-in-1 bassinets (2015), Graco swings (2000), BabyBjörn bouncers (2009), the 2015
+UPPAbaby VISTA and CRUZ strollers. Only 3 listings matched a recall the data did have. The 2019 Rock 'n Play recall
+itself was outside the window.
+
+**What changed.**
+- **All 10,089 CPSC recall notices since 1973** are in the extension and the web page.
+- **The cloud writes a spotter card for each, once.** At build time, Gemini read every notice through Firebase AI Logic
+  and wrote: the brand a seller would type, the product lines, the kind of product and its other names, the model
+  numbers, the years the recalled units were sold, whether every unit is recalled, and one sentence on how to tell a
+  recalled unit (`data/spotter.jsonl`, `scripts/build-spotter.mjs`). Before, the brand was guessed from the notice's
+  title by code, and an old rattle maker came out as the brand "toy".
+- **Stricter matching, because five times the recalls means five times the chances of a false match.** A one-word
+  brand that is a kind of product elsewhere ("stand", "mattress") is dropped. Brand plus kind alone matches only a
+  recall of every unit; a recall of certain models needs the model or the line. A listing that states a year outside
+  the years sold doesn't match on brand alone. "2-1", "2 in 1" and "2-in-1" read the same.
+- **The built-in model is shown the card's "which units" line** and asked whether the listing names a model or year it
+  covers. Its answer is recorded next to the cloud's, and not yet acted on (see the fourth test).
+
+**Before any model runs.** On the 437 listings of the first three tests, with the word rules alone
+(`tools/cards-compare.mjs`): 44 listings got a recall candidate, against 47 before; 34 got a different or new one,
+including the Dream On Me 2-in-1 bassinet (2015), the 2015 UPPAbaby VISTA and CRUZ, and the Graco infant swings (2000);
+22 lost one, mostly false ones (a DeWalt heater recall on Pelonis heaters, a snow-bike kit on crib conversion kits).
+These listings were seen while the rules were written, so the measure that counts is the fourth test.
+
+## 8. Fourth test, with every recall since 1973
+
+**Test set.** 160 listings collected on 2026-11-18, after every change above:
+- eBay, used condition, 10 each: "graco baby swing", "fisher price infant swing", "vintage baby crib", "baby stroller",
+  "baby walker", "high chair baby", "play yard playpen", "crib bumper pads", "nursery bedding set", "rock n play
+  sleeper", "baby bassinet" (third page), "baby lounger nest" (second page). Brand searches and old gear on purpose:
+  that is where older recalls live.
+- Craigslist, Denver and Atlanta: "crib" and "baby swing" (10 each).
+
+Every listing seen in an earlier set was left out (`tools/fourth-listings.json`, built by `tools/merge-set.mjs`).
+
+**Labels.** Three separate AI reviewers with the same blind brief, now checking each listing against all 10,089 raw
+CPSC recall records since 1973 (not the product's cards): 22 must be flagged, 116 must not, 22 can't be settled from
+the listing alone (`tools/fourth-labels-a.json`, `-b.json`, `-c.json`).
+
+**What happened.**
+
+| Same engine, run as | Caught (of 22) | False alarms (of 116) |
+|---|---|---|
+| Words only | 12 | 24 |
+| Built-in model only | 12 | 20 |
+| **Hybrid** | **18** | **1** |
+
+- **By kind:** infant loungers and nests 8 of 9; padded crib bumpers 7 of 8; recall matches 3 of 5.
+- **Older recalls, now matched.** Two of the three recall catches came from recalls the old five-year data didn't
+  have: a 1995 Graco Open Top swing and a Graco Swyngomatic, both under Graco's 2000 recall of swings made before
+  November 1997 (00098). The third was a Jool Baby Nova swing (24145, 2024).
+- **In a shopper's units:** the 22 listings that should be flagged were asking $2,316; the hybrid flagged $1,851.
+- **Where it ran:** the built-in model looked at 124 listings (median 5.8 s each, including the cloud check where
+  there was one); 36 were settled by their wording. The cloud saw 51 (32%). No cloud call failed.
+- **Unclear listings:** 5 of the 22 were flagged "possible": a Maclaren stroller (a recall of all units sold before
+  2009), a vintage Century playpen, a Graco high chair, a Fisher-Price swing and a Jool Baby Nova swing. Each is the
+  same brand and kind as a recall, with the model or date not shown.
+
+**The 4 misses.**
+- A replacement seat pad for the Fisher-Price My Little Snugapuppy Cradle 'n Swing (model X7345). The 2024 recall
+  tells owners to remove and destroy exactly this pad, so the reviewer counted it; the word rules treat replacement
+  parts as not the product.
+- A classic 4moms MamaRoo titled only "4MOMS baby swing": the recall covers the 3-point-harness versions, and the
+  title gives no line or model for the word rules to match.
+- A Mickey Mouse bedding lot with padded bumpers in the photo, and a quilted MOONSEA nest pad.
+
+**The 1 false alarm:** a new UPPAbaby 4moms MamaRoo with a 5-point harness, which the MamaRoo recall excludes; it was
+flagged "possible", not "likely".
+
+**What the built-in model made of "which units".** On the 26 listings with a recall candidate, the built-in model was
+asked whether the listing names a model or year the card's "which units" line covers. It said "yes" 20 times; the
+cloud, reading the full notice, said "yes" once and "no" 16 times. Of the 20, the cloud agreed once. The built-in model agrees too easily, as it did with
+brands in the first week. So its answer is recorded and not used: the cloud decides which units, and the spotter cards
+help the device by naming brands, lines and years for the code to check.
+
+**All four tests together:** 597 listings, of which 74 must be flagged and 481 must not.
+
+| Same engine, run as | Caught (of 74) | False alarms (of 481) |
+|---|---|---|
+| Words only | 43 | 86 |
+| Built-in model only | 47 | 50 |
+| **Hybrid** | **58** | **11** |
+
+## 9. Settling a possible recall with the label
+
+A "possible recall" means the listing doesn't show the model number or date. The card now takes a photo of the label.
+The built-in model reads it (Firebase AI Logic hybrid inference, so the photo stays on the computer) and code compares
+the reading with the recall card's model numbers and years (`shared/label.mjs`).
+
+**The rule: the device can raise the alarm, not clear it.** A reading that matches a recalled model stands. Any other
+reading, which would reassure the shopper, is read again by Gemini in the cloud, and the cloud's reading decides.
+
+**Test.** 12 label close-ups from CPSC recall notices (strollers, cribs, a swing, a gate, a heater, a mattress), each
+judged against its own recall, where the answer should be "recalled", and against another recall of the same kind,
+where it should not (`tools/label-test.html`, `tools/label-run.mjs`, in the test profile with the built-in model).
+
+| Read by | Recalled model found | Couldn't read | Wrong answer |
+|---|---|---|---|
+| Built-in model alone (first run) | 6 of 12 | 4 | 2: one misread model ("S16578" for "615573"), one partly read |
+| **Built-in model, cloud before reassuring** | **8 of 12** | 4 | **0** |
+| Cloud alone | 7 of 12 | 5 | 0 |
+
+Against the other recall, no label was ever matched. The 4 unreadable photos show where a label is, not its print.
+The device read 6 labels alone, and the cloud was asked about the other 6.
+
+## 10. Limits
+
+- **Few positives per kind:** only a few listings per test are padded bumpers or recall matches, so each one moves
+  those rates a lot.
 - **AI labels:** the labels are from AI reviewers, not yet checked by a person. `tools/label-review.html` shows every
   label with its photo for a person to confirm or change; `tools/eval-score.mjs` then uses the person's answers.
-- **Two days of listings:** the sets were collected on November 15 and 16, 2026.
-- **Recall data since November 2021 only:** older recalls can't be matched.
+- **Three days of listings:** the sets were collected on November 15, 16 and 18, 2026.
+- **Label photos from notices:** the label check was tested on CPSC's own label photos, which are sharper than a
+  seller's phone photo.
 
-## 8. End to end, in a real browser
+## 11. End to end, in a real browser
 
 `tools/e2e.mjs` loads the unpacked extension into a separate Chrome profile and opens a live search. It then checks
 every hand-off:
@@ -232,6 +345,8 @@ step can be tested without anyone's own Chrome.
 
 | Site | Build | Listings checked | Flagged | Result |
 |---|---|---|---|---|
+| eBay, "crib bedding set" | release 0.6.0, 2026-11-18 | 70 in 145 s, 63 confirmed in the cloud, 0 errors | 16 | 10 of 10 steps pass |
+| Craigslist Seattle, "baby lounger", with the built-in model | release 0.6.0, 2026-11-18 | the 8 near the screen: 5 looked at by Gemini Nano, 4 confirmed in the cloud | 4 | 11 of 11 steps pass |
 | eBay, "crib bedding set" | release 0.5.0, 2026-11-16 | 63 in 148 s, 61 confirmed in the cloud, 0 errors | 21 | 10 of 10 steps pass |
 | Craigslist Seattle, "baby lounger", with the built-in model | release 0.5.0, 2026-11-16 | the 8 listings near the screen: 5 looked at by Gemini Nano, 3 confirmed in the cloud | 3 | 11 of 11 steps pass |
 | Craigslist Chicago, "bassinet" | release 0.5.0, 2026-11-16 | the 12 listings near the screen, 3 confirmed in the cloud, 0 errors | 3 | 10 of 10 steps pass |
@@ -245,6 +360,13 @@ step can be tested without anyone's own Chrome.
 
 On Mercari, the page reader was checked in a normal Chrome instead: it found all 30 listings, every one with a photo
 and a price.
+
+**Found on live pages on 2026-11-18, and fixed in 0.6.0:**
+- **eBay's new photo carousel.** eBay's search results gained a photo carousel, and a badge inside it could no longer
+  be opened: the page's own click handlers ran first. The badge now sits on the listing's row, over the same corner of
+  the photo, and the card closes itself on a click outside instead of relying on the browser.
+- **A page that sends most listings to the cloud.** A crib bedding search sends nearly every listing to the cloud for a
+  look at the photo, and 4 checks at a time took over 4 minutes a page. 8 at a time finishes 70 listings in under 2.5.
 
 **Found on live pages on 2026-11-16, and fixed in 0.5.0:**
 - **Craigslist photos.** Craigslist draws its photos after its listings and loads them as they near the screen. The
@@ -267,7 +389,9 @@ node tools/collector.mjs                    # local test server on :8766
 #   await __eval({ mode: 'words' }); await __eval({ mode: 'hybrid' })                       first test
 #   await __eval({ mode: 'words', set: 'fresh' }); await __eval({ mode: 'hybrid', set: 'fresh' })   second test
 # or, in a separate test profile with the built-in model (made once by node tools/nano-profile.mjs):
-node tools/eval-run.mjs --set=third --mode=words && node tools/eval-run.mjs --set=third --mode=hybrid
-node tools/eval-score.mjs                   # or --set=fresh, --set=third
+node tools/eval-run.mjs --set=fourth --mode=words && node tools/eval-run.mjs --set=fourth --mode=hybrid
+node tools/eval-score.mjs                   # or --set=fresh, --set=third, --set=fourth
 npm run e2e -- "crib bedding set"           # or --url=<a Craigslist or Mercari search>
+node tools/label-run.mjs                    # the label check on 12 CPSC label photos (--cloud: the cloud alone)
+node tools/cards-compare.mjs <old release folder> extension/data/cards.json   # word rules: old cards and code against new
 ```

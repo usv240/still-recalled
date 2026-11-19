@@ -1,0 +1,562 @@
+{
+  "labeller": "blind AI review (Claude), title + one photo + every CPSC recall since 1973",
+  "labelled_at": "2026-11-18T23:09:05.468Z",
+  "labels": {
+    "128201525495": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Bedside sleeper on legs with mesh sides; no CPSC recall for Baby Delight Beside Me Dreamer.",
+      "confidence": "high"
+    },
+    "198730299083": {
+      "item": "product",
+      "recall_ids": [
+        "86044"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Vintage woven wicker bassinet on folding legs, maker not shown; Badger Basket recalled wicker folding-leg bassinets made 1958-1982 (leg-brace collapse), so check the tag and date.",
+      "confidence": "low"
+    },
+    "366775007235": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded mesh-sided bassinet on legs; no matching recall.",
+      "confidence": "high"
+    },
+    "198403098806": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "HALO Bassinest swivel sleeper on a stand; no CPSC recall for the Bassinest.",
+      "confidence": "high"
+    },
+    "188904919298": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Chicco Close to You bedside bassinet on a pedestal base; no CPSC recall.",
+      "confidence": "high"
+    },
+    "206693836702": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Graco SmartSense soothing bassinet on legs; no CPSC recall.",
+      "confidence": "high"
+    },
+    "267692458483": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "maybe",
+      "note": "Eddie Bauer fold-out travel bed shown folded as a bag; likely a padded in-bed/floor sleeper, but the photo can't confirm. Eddie Bauer recalls cover play yards and rocking bassinets, not this.",
+      "confidence": "low"
+    },
+    "307248976390": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "maybe",
+      "note": "Eddie Bauer fold-out travel bassinet shown folded as a carry bag; likely a padded in-bed/floor sleeper, but the photo can't confirm. Not a recalled Eddie Bauer model.",
+      "confidence": "low"
+    },
+    "358773897710": {
+      "item": "product",
+      "recall_ids": [
+        "86044"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Vintage woven wicker bassinet with hood on folding legs, maker not shown; Badger Basket recalled wicker folding-leg bassinets made 1958-1982, so check the tag.",
+      "confidence": "low"
+    },
+    "336785506211": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Photo shows a padded portable baby bed with canopy sitting on the floor, an in-bed/travel sleeper; LulyBoo is not recalled.",
+      "confidence": "high"
+    },
+    "407342478688": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Wooden slatted cradle on legs, no brand; no matching recall.",
+      "confidence": "high"
+    },
+    "377657141563": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Snuggle Me infant lounger cushion (photo shows the lounger); a lounger type, not a CPSC recall.",
+      "confidence": "high"
+    },
+    "407345760910": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Quilted padded nest/lounger pad; MOONSEA's recall (24731) is pack-and-play mattresses, not this.",
+      "confidence": "low"
+    },
+    "267753827449": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Safety 1st Nap and Go rocking bassinet with flat mesh bed on rocker legs; not in any recall.",
+      "confidence": "high"
+    },
+    "318870010168": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Comfy BabyNest baby lounger (photo shows the brand label); a lounger type, no recall.",
+      "confidence": "high"
+    },
+    "860036655312": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Comfy BabyNest lounger in its packaging; a lounger type, no recall.",
+      "confidence": "high"
+    },
+    "820213996522": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Pink oval padded lounger pod (DockATot-style); a lounger type, no recall.",
+      "confidence": "high"
+    },
+    "358195671813": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Snuggle Me infant lounger shown; a lounger type, no recall.",
+      "confidence": "high"
+    },
+    "227179946885": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Loevin portable baby lounger (photo shows it zipped into a bag); title says it's a lounger; no recall.",
+      "confidence": "high"
+    },
+    "377329286567": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "in_bed_sleeper",
+      "should_warn": "yes",
+      "note": "Pink oval padded baby lounger shown; a lounger type.",
+      "confidence": "high"
+    },
+    "840119072833": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Mamababy T629 stroller; no CPSC recall.",
+      "confidence": "high"
+    },
+    "168839908481": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Maxi-Cosi Zelia Luxe travel system in its box; no CPSC recall.",
+      "confidence": "high"
+    },
+    "840142361155": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Orbit Baby stroller; no CPSC recall for Orbit Baby.",
+      "confidence": "high"
+    },
+    "327452690178": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Special Tomato 6200 special-needs jogger; no CPSC recall.",
+      "confidence": "high"
+    },
+    "198766596337": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Ingenuity 3Dmini umbrella stroller; no CPSC recall.",
+      "confidence": "high"
+    },
+    "920153716967": {
+      "item": "product",
+      "recall_ids": [
+        "10033",
+        "11222"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Maclaren Triumph umbrella stroller; all Maclaren umbrella strollers sold before Nov 2009 were recalled for hinge fingertip amputations, and the listing doesn't show the date.",
+      "confidence": "high"
+    },
+    "407369728142": {
+      "item": "product",
+      "recall_ids": [
+        "22772"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Baby Trend 3-wheel jogger with parent tray, model not shown; the Cityscape Travel Jogger (TJ75B12A, gray) was recalled, so check the label.",
+      "confidence": "low"
+    },
+    "168867422648": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "gb Pockit Air stroller; no CPSC recall.",
+      "confidence": "high"
+    },
+    "820280450932": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Joie folding stroller; no CPSC recall.",
+      "confidence": "high"
+    },
+    "920023545919": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Baby Jogger City Tour; Baby Jogger recalls cover City Mini, City Versa, adaptors and jump seats, not the City Tour.",
+      "confidence": "high"
+    },
+    "227620297836": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Infans folding seated walker; no CPSC recall for Infans walkers.",
+      "confidence": "high"
+    },
+    "377631761786": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Unbranded seated activity walker; no identifiable recall.",
+      "confidence": "high"
+    },
+    "198790659487": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "VTech Stroll & Discover push walker toy; no CPSC recall.",
+      "confidence": "high"
+    },
+    "940066488652": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "KidsEmbrace Batman car-style walker; no CPSC recall.",
+      "confidence": "high"
+    },
+    "227611214279": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Juppy walking harness; no CPSC recall.",
+      "confidence": "high"
+    },
+    "188926686504": {
+      "item": "product",
+      "recall_ids": [
+        "04064"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Graco Mobile Entertainer walker; Graco recalled the blue-antenna bumble bee toys shipped with Tot Wheels Mobile Entertainers made 2001-2003. No toy shows on the tray, but the model and date aren't shown.",
+      "confidence": "low"
+    },
+    "900023346491": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Sesame Street seated walker; no CPSC recall.",
+      "confidence": "high"
+    },
+    "237181637335": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "1960s Hoola Coupe circular walker with box; not the recalled Century Super Coupe (8209/8210, 1982).",
+      "confidence": "high"
+    },
+    "860085765775": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Batmobile car-style walker; no CPSC recall.",
+      "confidence": "high"
+    },
+    "236953678129": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Vintage Graco Round About walker #4700Y; Graco's walker tray recall covered only Tot Wheels II 45537.",
+      "confidence": "high"
+    },
+    "168856310874": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Photo shows a Raggedy Ann & Andy crib set that includes a padded bumper strip.",
+      "confidence": "high"
+    },
+    "206486079395": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Simplicity 9524 sewing pattern, not a product.",
+      "confidence": "high"
+    },
+    "237179418379": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Kwik Sew 3075 sewing pattern, not a product.",
+      "confidence": "high"
+    },
+    "880120990319": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "American Girl Bitty Baby doll crib with doll-size bedding.",
+      "confidence": "high"
+    },
+    "960149371366": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Doll-size crib bumper for an American Girl Bitty Baby (the photo shows the doll bumper only).",
+      "confidence": "high"
+    },
+    "356104037965": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "McCall's 8549 sewing pattern, not a product.",
+      "confidence": "high"
+    },
+    "177406342834": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Rock-A-Bye Quilts pattern leaflet, not a product.",
+      "confidence": "high"
+    },
+    "277332890161": {
+      "item": "other",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Simplicity 9140 sewing pattern, not a product.",
+      "confidence": "high"
+    },
+    "267830451092": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": "crib_bumper",
+      "should_warn": "yes",
+      "note": "Glenna Jean crib set; the photo shows padded bumper panels with ties alongside the quilt.",
+      "confidence": "high"
+    },
+    "198254468315": {
+      "item": "toy",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Retired American Girl Bitty Baby doll crib bumper and blanket.",
+      "confidence": "high"
+    },
+    "920043265330": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Fisher-Price Flutterbye Dreams open-top swing; that model is not in any Fisher-Price swing recall.",
+      "confidence": "high"
+    },
+    "137937708797": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Loose Fisher-Price swing motor/control unit only.",
+      "confidence": "high"
+    },
+    "137936856486": {
+      "item": "part",
+      "recall_ids": [
+        "25009"
+      ],
+      "recall_match": "yes",
+      "type": null,
+      "should_warn": "yes",
+      "note": "Replacement seat pad and plush headrest for My Little Snugapuppy Cradle 'n Swing X7345. Recall 25009 tells owners to remove and destroy exactly this headrest and body insert (suffocation; 5 deaths).",
+      "confidence": "high"
+    },
+    "137937459364": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Bare Cradle 'n Swing seat shell and rails only, model not shown; a part, not a whole swing.",
+      "confidence": "high"
+    },
+    "840111661944": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Fisher-Price AC adapter only.",
+      "confidence": "high"
+    },
+    "157951122996": {
+      "item": "product",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Pink Fisher-Price portable take-along swing; not the recalled Rainforest Take-Along (K7203/K7192/K7195) or a Snuga model.",
+      "confidence": "high"
+    },
+    "880100214153": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Battery cover with warning label only.",
+      "confidence": "high"
+    },
+    "880092458706": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Three plush mobile toys only.",
+      "confidence": "high"
+    },
+    "267276068954": {
+      "item": "product",
+      "recall_ids": [
+        "25009",
+        "16143"
+      ],
+      "recall_match": "possible",
+      "type": null,
+      "should_warn": "maybe",
+      "note": "Fisher-Price motorized swing, model not shown (the photo shows mostly a Boppy pillow and toys); several Fisher-Price cradle swings are recalled, so check the model number.",
+      "confidence": "low"
+    },
+    "188348659522": {
+      "item": "part",
+      "recall_ids": [],
+      "recall_match": "no",
+      "type": null,
+      "should_warn": "no",
+      "note": "Two hex screws only.",
+      "confidence": "high"
+    }
+  }
+}

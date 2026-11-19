@@ -18,7 +18,8 @@ const read = f => JSON.parse(readFileSync(f, 'utf8'));
 const first = read('tools/eval-report.json');
 const second = existsSync('tools/fresh-report.json') ? read('tools/fresh-report.json') : null;
 const third = existsSync('tools/third-report.json') ? read('tools/third-report.json') : null;
-const tests = [[first, 'First test', 'eBay'], [second, 'Second test', 'eBay, Craigslist'], [third, 'Third test', 'eBay, Mercari, Craigslist']].filter(t => t[0]);
+const fourth = existsSync('tools/fourth-report.json') ? read('tools/fourth-report.json') : null;
+const tests = [[first, 'First test', 'eBay'], [second, 'Second test', 'eBay, Craigslist'], [third, 'Third test', 'eBay, Mercari, Craigslist'], [fourth, 'Fourth test, every recall since 1973', 'eBay, Craigslist']].filter(t => t[0]);
 const font = f => pathToFileURL(path.resolve('extension/fonts', f)).href;
 
 const base = `
@@ -39,7 +40,7 @@ h1 { font-size: 52px; line-height: 1.08; font-weight: 600; letter-spacing: -0.02
 
 // 1. The hybrid: three steps, split by where they run, with the counts from one real run.
 // Counts summed over every test run, so the diagram shows how much reached each step in practice.
-const runs = [first, second, third].filter(Boolean);
+const runs = [first, second, third, fourth].filter(Boolean);
 const c = ['listings', 'lookedAtOnDevice', 'sentToCloud'].reduce((o, k) => ({ ...o, [k]: runs.reduce((n, r) => n + r.cost[k], 0) }), {});
 c.shareSentToCloud = c.sentToCloud / c.listings;
 const hybrid = `<!doctype html><meta charset="utf-8"><style>${base}
@@ -64,7 +65,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
 <div class="zones">
   <div class="zone laptop"><h2>On the laptop. Nothing leaves it.</h2><div class="steps">
     <div class="step"><span class="n">${c.listings}</span><span class="what">Word rules</span>
-      <span class="how">Every listing's title against 1,885 CPSC recall notices. Parts, toys and doll items dropped. Instant.</span></div>
+      <span class="how">Every listing's title against all 10,089 CPSC recalls since 1973. Parts, toys and doll items dropped. Instant.</span></div>
     <div class="step"><span class="n">${c.lookedAtOnDevice}</span><span class="what">Gemini Nano</span>
       <span class="how">Baby products only: title and photo. Is it the product, a part or a toy? Does it look like a lounger or a padded bumper?<br><code>ONLY_ON_DEVICE</code></span></div>
   </div></div>
@@ -77,7 +78,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
   <div><b>What goes to the cloud</b>A flagged listing's title, description and photo, with the recall notice it might match.</div>
   <div><b>What never leaves the laptop</b>The other listings, your searches and your browsing. No account, no tracking.</div>
 </div>
-<div class="foot"><span>${['', 'One test run', 'Two test runs', 'Three test runs'][runs.length]}, November 15 and 16, 2026: ${c.listings} real listings from eBay${third ? ', Mercari' : ''} and Craigslist. ${Math.round(c.shareSentToCloud * 100)}% went to the cloud.</span><span class="brand"><i></i>Still Recalled</span></div>
+<div class="foot"><span>${['', 'One test run', 'Two test runs', 'Three test runs', 'Four test runs'][runs.length]}, November 15 to 18, 2026: ${c.listings} real listings from eBay${third ? ', Mercari' : ''} and Craigslist. ${Math.round(c.shareSentToCloud * 100)}% went to the cloud.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
 
 // 2. Results: totals across every test, as two bar charts (different scales, so never one axis), hybrid in ink and
@@ -110,7 +111,7 @@ const results = `<!doctype html><meta charset="utf-8"><style>${base}
 .per td span { color: var(--muted); }
 </style><div class="slide">
 <h1>The built-in model removes false alarms. The cloud catches what words miss.</h1>
-<p class="lede">The same engine run three ways in ${['', 'one', 'two', 'three'][tests.length] || tests.length} blind tests: ${allListings} real listings the rules had never seen, each test collected after the fixes the one before led to.</p>
+<p class="lede">The same engine run three ways in ${['', 'one', 'two', 'three', 'four'][tests.length] || tests.length} blind tests: ${allListings} real listings the rules had never seen, each test collected after the fixes the one before led to.</p>
 <div class="charts">${bars(`False alarms, among ${allFine} listings that were fine`, Math.max(...SYSTEMS.map(([k]) => alarmsOf(k))), alarmsOf)}${bars(`Caught, of ${allFlag} that should be flagged`, allFlag, caughtOf)}</div>
 ${perTest}
 <div class="foot"><span>Labels by blind reviewers from the title and one photo. Method and every miss: docs/accuracy.md.</span><span class="brand"><i></i>Still Recalled</span></div>

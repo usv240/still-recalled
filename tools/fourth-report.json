@@ -1,0 +1,459 @@
+{
+ "set": "fourth",
+ "labeller": "blind AI review (Claude), title + one photo + every CPSC recall since 1973",
+ "listings": 160,
+ "mustFlag": 22,
+ "mustNotFlag": 116,
+ "unclear": 22,
+ "systems": {
+  "words only": {
+   "caught": 12,
+   "missed": [
+    {
+     "id": "336785506211",
+     "title": "LulyBoo Bassinet To-Go Portable Baby Bassinet w/ Canopy, Gray",
+     "why": "Photo shows a padded portable baby bed with canopy sitting on the floor, an in-bed/travel sleeper; LulyBoo is not recalled."
+    },
+    {
+     "id": "168856310874",
+     "title": "Raggedy Ann & Andy Crib Bedding Set",
+     "why": "Photo shows a Raggedy Ann & Andy crib set that includes a padded bumper strip."
+    },
+    {
+     "id": "267830451092",
+     "title": "Glenna Jean Crib Bedding Set Florence",
+     "why": "Glenna Jean crib set; the photo shows padded bumper panels with ties alongside the quilt."
+    },
+    {
+     "id": "137936856486",
+     "title": "Fisher Price My Little Puppy Cradle N' Swing X 7345 Replacement Seat Cushion",
+     "why": "Replacement seat pad and plush headrest for My Little Snugapuppy Cradle 'n Swing X7345. Recall 25009 tells owners to remove and destroy exactly this headrest and body insert (suffocation; 5 deaths)."
+    },
+    {
+     "id": "257856004728",
+     "title": "Vintage Dundee Mickey Mouse Bedding Lot Set,comforter, Dust Ruffle,(10 Pieces )",
+     "why": "Photo shows long padded quilted Mickey bumper pads in the set."
+    },
+    {
+     "id": "237129417193",
+     "title": "Glenna Jean Isabella Nursery Set",
+     "why": "Stock photo of the Glenna Jean Isabella set shows padded bumpers around the crib."
+    },
+    {
+     "id": "860120059030",
+     "title": "Rare 1996 Red Calliope Disney Classic Pooh ABC 7 Piece Crib Bedding Set USA Made",
+     "why": "7-piece Pooh set photo shows a padded ruffled headboard bumper and rolled bumper."
+    },
+    {
+     "id": "206695908333",
+     "title": "Vintage Care Bears Baby Crib Bedding Set Of 2, Multicolor Care Bears Bears Theme",
+     "why": "Photo shows padded Care Bears headboard bumper and side bumper with ties."
+    },
+    {
+     "id": "227607648353",
+     "title": "Vintage Baby Looney Tunes Space Neighbors Crib Set Missing Quilt",
+     "why": "Baby Looney Tunes crib set photo shows padded bumpers with ties."
+    },
+    {
+     "id": "dFA2kdPzuhnt3akZNNM676",
+     "title": "4MOMS baby swing. 1",
+     "why": "Photo shows the classic 4moms MamaRoo (egg-shaped plush seat, ball mobile, 3-point harness), the version 1.0-4.0 design recalled in 2022."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "900023346491",
+     "title": "Sesame Street Baby Walker Walking Aid Activity Seat w/ Toy Bar Blue/White",
+     "level": "possible",
+     "why": "Sesame Street seated walker; no CPSC recall."
+    },
+    {
+     "id": "920043265330",
+     "title": "Vintage Fisher-Price Deluxe Flutterbye Dreams Swing 6-Speed Lights/Sounds Infant",
+     "level": "possible",
+     "why": "Fisher-Price Flutterbye Dreams open-top swing; that model is not in any Fisher-Price swing recall."
+    },
+    {
+     "id": "137937708797",
+     "title": "Fisher Price Replacement Swing & Sounds Swing Unit",
+     "level": "possible",
+     "why": "Loose Fisher-Price swing motor/control unit only."
+    },
+    {
+     "id": "137937459364",
+     "title": "Fisher Price Cradle n Swing SEAT & SIDE RAILS ONLY",
+     "level": "possible",
+     "why": "Bare Cradle 'n Swing seat shell and rails only, model not shown; a part, not a whole swing."
+    },
+    {
+     "id": "157951122996",
+     "title": "Fisher-Price Portable Foldable Baby Swing w/ Toy Bar Pink White Gray Infant",
+     "level": "possible",
+     "why": "Pink Fisher-Price portable take-along swing; not the recalled Rainforest Take-Along (K7203/K7192/K7195) or a Snuga model."
+    },
+    {
+     "id": "336900366107",
+     "title": "Graco Infant Baby Swing Gray/White with Toy Bar Hanging Star Toys",
+     "level": "possible",
+     "why": "Modern Graco open-top swing with star toy bar; no CPSC recall covers this current-style swing."
+    },
+    {
+     "id": "800705595563",
+     "title": "Graco Soothe 'n Sway Bluetooth 3-in-1 Baby Swing Lucca",
+     "level": "possible",
+     "why": "Modern Graco Soothe n Sway bouncer-style swing; no matching CPSC recall."
+    },
+    {
+     "id": "407268215043",
+     "title": "Graco Simple Sway Infant Swing w/ Overhead Mobile, Music, vibration .. Plug-In",
+     "level": "possible",
+     "why": "Graco Simple Sway swing shown; no CPSC recall for this model."
+    },
+    {
+     "id": "860155691560",
+     "title": "graco baby electric swing and bouncer",
+     "level": "possible",
+     "why": "Modern Graco Simple Sway-style swing with mobile; no matching recall."
+    },
+    {
+     "id": "168869455156",
+     "title": "Graco DuetConnect LX Portable Infant Swing & Bouncer, Multiple Speeds, Redmond",
+     "level": "possible",
+     "why": "Graco DuetConnect LX swing; no CPSC recall for this model."
+    },
+    {
+     "id": "407272460606",
+     "title": "Graco Simple Sway 2in1 Baby Swing/bouncer for Infants and Toddlers Gray",
+     "level": "possible",
+     "why": "Photo shows Graco Simple Sway 2-in-1 box; no recall for this model."
+    },
+    {
+     "id": "800925397733",
+     "title": "Graco Simple Sway Baby Swing, Side‑to‑Side Motion, Infant Swing 6 Speeds Ivy",
+     "level": "possible",
+     "why": "Graco Simple Sway swing shown; no matching recall."
+    },
+    {
+     "id": "287717335389",
+     "title": "Graco Duet Soothe 2 in 1 Swing & Rocker, Music/Vibration very good condition.",
+     "level": "possible",
+     "why": "Graco Duet Soothe swing/rocker; no CPSC recall for this model."
+    },
+    {
+     "id": "137923117020",
+     "title": "Graco Floor2Table High Chair Gray/White Removable Tray Footrest MPN 2081360",
+     "level": "possible",
+     "why": "Graco Floor2Table MPN 2081360 shown; the Graco Table2Table recall (18112) is model 1969721, not this."
+    },
+    {
+     "id": "168871576741",
+     "title": "Fisher Price Rainforest High Chair K2927 Music Lights Tray Toy Replacement WORKS",
+     "level": "possible",
+     "why": "Only the Rainforest tray toy replacement part is sold; the Healthy Care high chair recall (10361) concerned leg pegs, not this toy."
+    },
+    {
+     "id": "237181005424",
+     "title": "Lambs & Ivy Disney Baby Winnie the Pooh Hugs 3pc Cotton Crib Bedding Set",
+     "level": "possible",
+     "why": "3-piece set (quilt, sheet, skirt) shown on crib with no bumper."
+    },
+    {
+     "id": "377620590410",
+     "title": "Carters Baby Outfit Boy Preemie Romper Sleeper Dog Faces Sleep N Play Cotton",
+     "level": "possible",
+     "why": "Carters preemie sleep n play romper; not a recalled Carters style."
+    },
+    {
+     "id": "377637168516",
+     "title": "Carters Sleepers Girl 3 Months Lot Rompers Outfits Sleep N Plays Bundle Cat Bird",
+     "level": "possible",
+     "why": "Lot of Carters footed sleepers; none match recalled styles."
+    },
+    {
+     "id": "128000630981",
+     "title": "Vintage Carter's Teddy bear Plush Velour Satin baby crib Blanket Excellent!",
+     "level": "possible",
+     "why": "Plush crib blanket only."
+    },
+    {
+     "id": "fEnBX11g3oGzj7eyoSWjF9",
+     "title": "Graco swing baby soother 1",
+     "level": "possible",
+     "why": "Modern Graco swing/soother with 5-point harness; Graco swing recalls cover pre-1997 restraints and the 2003 Travel Lite, not this."
+    },
+    {
+     "id": "3L15Tm6jq93obcvU9utEnk",
+     "title": "UPPAbaby 4moms MamaRoo Multi-Motion Baby Swing - Sage Green 1",
+     "level": "possible",
+     "why": "New UPPAbaby/4moms MamaRoo with a visible 5-point harness, which the 2022 MamaRoo recall excludes."
+    },
+    {
+     "id": "kww2TFWokdbp8VdZRqhSjh",
+     "title": "Graco Simple Sway Baby Swing 1",
+     "level": "possible",
+     "why": "Graco Simple Sway swing with overhead motor; no CPSC recall for this model."
+    },
+    {
+     "id": "961MczUBWqVHS7DxuVnmCn",
+     "title": "Graco Duetsoothe 2-1 Swing and bouncer 1",
+     "level": "possible",
+     "why": "Graco DuetSoothe swing/rocker; no CPSC recall for this model."
+    },
+    {
+     "id": "q3HaWddRugTmVGSNHvv9t5",
+     "title": "Graco baby swing and rocker 1",
+     "level": "possible",
+     "why": "Graco DuetSoothe-style swing and rocker; no matching recall."
+    }
+   ],
+   "flagged": 41,
+   "unclearFlagged": 5,
+   "recallRate": 0.545,
+   "precision": 0.333
+  },
+  "on-device only": {
+   "caught": 12,
+   "missed": [
+    {
+     "id": "336785506211",
+     "title": "LulyBoo Bassinet To-Go Portable Baby Bassinet w/ Canopy, Gray",
+     "why": "Photo shows a padded portable baby bed with canopy sitting on the floor, an in-bed/travel sleeper; LulyBoo is not recalled."
+    },
+    {
+     "id": "168856310874",
+     "title": "Raggedy Ann & Andy Crib Bedding Set",
+     "why": "Photo shows a Raggedy Ann & Andy crib set that includes a padded bumper strip."
+    },
+    {
+     "id": "267830451092",
+     "title": "Glenna Jean Crib Bedding Set Florence",
+     "why": "Glenna Jean crib set; the photo shows padded bumper panels with ties alongside the quilt."
+    },
+    {
+     "id": "137936856486",
+     "title": "Fisher Price My Little Puppy Cradle N' Swing X 7345 Replacement Seat Cushion",
+     "why": "Replacement seat pad and plush headrest for My Little Snugapuppy Cradle 'n Swing X7345. Recall 25009 tells owners to remove and destroy exactly this headrest and body insert (suffocation; 5 deaths)."
+    },
+    {
+     "id": "257856004728",
+     "title": "Vintage Dundee Mickey Mouse Bedding Lot Set,comforter, Dust Ruffle,(10 Pieces )",
+     "why": "Photo shows long padded quilted Mickey bumper pads in the set."
+    },
+    {
+     "id": "206676049944",
+     "title": "Disney Classic Pooh Crib Bedding Set 1994 Winnie the Pooh - HUGE LOT",
+     "why": "1994 Pooh lot photo clearly includes a padded crib bumper strip."
+    },
+    {
+     "id": "237129417193",
+     "title": "Glenna Jean Isabella Nursery Set",
+     "why": "Stock photo of the Glenna Jean Isabella set shows padded bumpers around the crib."
+    },
+    {
+     "id": "860120059030",
+     "title": "Rare 1996 Red Calliope Disney Classic Pooh ABC 7 Piece Crib Bedding Set USA Made",
+     "why": "7-piece Pooh set photo shows a padded ruffled headboard bumper and rolled bumper."
+    },
+    {
+     "id": "206695908333",
+     "title": "Vintage Care Bears Baby Crib Bedding Set Of 2, Multicolor Care Bears Bears Theme",
+     "why": "Photo shows padded Care Bears headboard bumper and side bumper with ties."
+    },
+    {
+     "id": "dFA2kdPzuhnt3akZNNM676",
+     "title": "4MOMS baby swing. 1",
+     "why": "Photo shows the classic 4moms MamaRoo (egg-shaped plush seat, ball mobile, 3-point harness), the version 1.0-4.0 design recalled in 2022."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "237179418379",
+     "title": "Kwik Sew 3075 Nursery Crib Linens Comforter Fitted Sheet 28X52 Organizer Bumpers",
+     "level": "possible",
+     "why": "Kwik Sew 3075 sewing pattern, not a product."
+    },
+    {
+     "id": "920043265330",
+     "title": "Vintage Fisher-Price Deluxe Flutterbye Dreams Swing 6-Speed Lights/Sounds Infant",
+     "level": "possible",
+     "why": "Fisher-Price Flutterbye Dreams open-top swing; that model is not in any Fisher-Price swing recall."
+    },
+    {
+     "id": "137937708797",
+     "title": "Fisher Price Replacement Swing & Sounds Swing Unit",
+     "level": "possible",
+     "why": "Loose Fisher-Price swing motor/control unit only."
+    },
+    {
+     "id": "336900366107",
+     "title": "Graco Infant Baby Swing Gray/White with Toy Bar Hanging Star Toys",
+     "level": "possible",
+     "why": "Modern Graco open-top swing with star toy bar; no CPSC recall covers this current-style swing."
+    },
+    {
+     "id": "800705595563",
+     "title": "Graco Soothe 'n Sway Bluetooth 3-in-1 Baby Swing Lucca",
+     "level": "possible",
+     "why": "Modern Graco Soothe n Sway bouncer-style swing; no matching CPSC recall."
+    },
+    {
+     "id": "407268215043",
+     "title": "Graco Simple Sway Infant Swing w/ Overhead Mobile, Music, vibration .. Plug-In",
+     "level": "possible",
+     "why": "Graco Simple Sway swing shown; no CPSC recall for this model."
+    },
+    {
+     "id": "860155691560",
+     "title": "graco baby electric swing and bouncer",
+     "level": "possible",
+     "why": "Modern Graco Simple Sway-style swing with mobile; no matching recall."
+    },
+    {
+     "id": "168869455156",
+     "title": "Graco DuetConnect LX Portable Infant Swing & Bouncer, Multiple Speeds, Redmond",
+     "level": "possible",
+     "why": "Graco DuetConnect LX swing; no CPSC recall for this model."
+    },
+    {
+     "id": "407272460606",
+     "title": "Graco Simple Sway 2in1 Baby Swing/bouncer for Infants and Toddlers Gray",
+     "level": "possible",
+     "why": "Photo shows Graco Simple Sway 2-in-1 box; no recall for this model."
+    },
+    {
+     "id": "800925397733",
+     "title": "Graco Simple Sway Baby Swing, Side‑to‑Side Motion, Infant Swing 6 Speeds Ivy",
+     "level": "possible",
+     "why": "Graco Simple Sway swing shown; no matching recall."
+    },
+    {
+     "id": "287717335389",
+     "title": "Graco Duet Soothe 2 in 1 Swing & Rocker, Music/Vibration very good condition.",
+     "level": "possible",
+     "why": "Graco Duet Soothe swing/rocker; no CPSC recall for this model."
+    },
+    {
+     "id": "137923117020",
+     "title": "Graco Floor2Table High Chair Gray/White Removable Tray Footrest MPN 2081360",
+     "level": "possible",
+     "why": "Graco Floor2Table MPN 2081360 shown; the Graco Table2Table recall (18112) is model 1969721, not this."
+    },
+    {
+     "id": "377620590410",
+     "title": "Carters Baby Outfit Boy Preemie Romper Sleeper Dog Faces Sleep N Play Cotton",
+     "level": "possible",
+     "why": "Carters preemie sleep n play romper; not a recalled Carters style."
+    },
+    {
+     "id": "377637168516",
+     "title": "Carters Sleepers Girl 3 Months Lot Rompers Outfits Sleep N Plays Bundle Cat Bird",
+     "level": "possible",
+     "why": "Lot of Carters footed sleepers; none match recalled styles."
+    },
+    {
+     "id": "fEnBX11g3oGzj7eyoSWjF9",
+     "title": "Graco swing baby soother 1",
+     "level": "possible",
+     "why": "Modern Graco swing/soother with 5-point harness; Graco swing recalls cover pre-1997 restraints and the 2003 Travel Lite, not this."
+    },
+    {
+     "id": "3L15Tm6jq93obcvU9utEnk",
+     "title": "UPPAbaby 4moms MamaRoo Multi-Motion Baby Swing - Sage Green 1",
+     "level": "possible",
+     "why": "New UPPAbaby/4moms MamaRoo with a visible 5-point harness, which the 2022 MamaRoo recall excludes."
+    },
+    {
+     "id": "r7UTDKSJA1B75RSzMY3EcC",
+     "title": "KidCo Convertible Crib Bed Rail 1",
+     "level": "possible",
+     "why": "KidCo toddler bed rail with frame and straps; no KidCo bed rail recall (only PeaPod travel beds)."
+    },
+    {
+     "id": "kww2TFWokdbp8VdZRqhSjh",
+     "title": "Graco Simple Sway Baby Swing 1",
+     "level": "possible",
+     "why": "Graco Simple Sway swing with overhead motor; no CPSC recall for this model."
+    },
+    {
+     "id": "961MczUBWqVHS7DxuVnmCn",
+     "title": "Graco Duetsoothe 2-1 Swing and bouncer 1",
+     "level": "possible",
+     "why": "Graco DuetSoothe swing/rocker; no CPSC recall for this model."
+    },
+    {
+     "id": "q3HaWddRugTmVGSNHvv9t5",
+     "title": "Graco baby swing and rocker 1",
+     "level": "possible",
+     "why": "Graco DuetSoothe-style swing and rocker; no matching recall."
+    }
+   ],
+   "flagged": 38,
+   "unclearFlagged": 6,
+   "recallRate": 0.545,
+   "precision": 0.375
+  },
+  "hybrid": {
+   "caught": 18,
+   "missed": [
+    {
+     "id": "407345760910",
+     "title": "MOONSEA Padded Baby Lounger Insert Gray White Stars Quilted Nest Pad",
+     "why": "Quilted padded nest/lounger pad; MOONSEA's recall (24731) is pack-and-play mattresses, not this."
+    },
+    {
+     "id": "137936856486",
+     "title": "Fisher Price My Little Puppy Cradle N' Swing X 7345 Replacement Seat Cushion",
+     "why": "Replacement seat pad and plush headrest for My Little Snugapuppy Cradle 'n Swing X7345. Recall 25009 tells owners to remove and destroy exactly this headrest and body insert (suffocation; 5 deaths)."
+    },
+    {
+     "id": "257856004728",
+     "title": "Vintage Dundee Mickey Mouse Bedding Lot Set,comforter, Dust Ruffle,(10 Pieces )",
+     "why": "Photo shows long padded quilted Mickey bumper pads in the set."
+    },
+    {
+     "id": "dFA2kdPzuhnt3akZNNM676",
+     "title": "4MOMS baby swing. 1",
+     "why": "Photo shows the classic 4moms MamaRoo (egg-shaped plush seat, ball mobile, 3-point harness), the version 1.0-4.0 design recalled in 2022."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "3L15Tm6jq93obcvU9utEnk",
+     "title": "UPPAbaby 4moms MamaRoo Multi-Motion Baby Swing - Sage Green 1",
+     "level": "possible",
+     "why": "New UPPAbaby/4moms MamaRoo with a visible 5-point harness, which the 2022 MamaRoo recall excludes."
+    }
+   ],
+   "flagged": 24,
+   "unclearFlagged": 5,
+   "recallRate": 0.818,
+   "precision": 0.947
+  }
+ },
+ "askingPrices": {
+  "mustFlag": 2315.89,
+  "words only": 1011.21,
+  "on-device only": 741.2,
+  "hybrid": 1851.21
+ },
+ "bySite": {
+  "ebay": {
+   "listings": 120,
+   "mustFlag": 20
+  },
+  "craigslist": {
+   "listings": 40,
+   "mustFlag": 2
+  }
+ },
+ "cost": {
+  "listings": 160,
+  "checkedByWordsOnly": 36,
+  "lookedAtOnDevice": 124,
+  "sentToCloud": 51,
+  "cloudErrors": 0,
+  "shareSentToCloud": 0.319,
+  "medianMs": 5827,
+  "totalMinutes": 24.7
+ }
+}

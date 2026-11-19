@@ -144,7 +144,10 @@ export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
 // in page order. Jobs for a page the tab has left are dropped.
 const queue = [];
 let running = false;
-const CLOUD_AT_ONCE = 4;   // cloud confirmations in flight at once, while the on-device model works through the queue
+// Cloud confirmations in flight at once, while the on-device model works through the queue. A bedding search sends
+// most of its 60 to 70 listings to the cloud for a photo check (about 13 s each); 4 at once took over 4 minutes a page.
+// The Vertex AI quota answered 20 at once in a load test.
+const CLOUD_AT_ONCE = 8;
 let cloudBusy = 0;
 const cloudWaiting = [];
 const cloudSlot = () => (cloudBusy < CLOUD_AT_ONCE ? (cloudBusy++, Promise.resolve()) : new Promise(r => cloudWaiting.push(r)));

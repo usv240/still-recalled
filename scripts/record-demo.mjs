@@ -75,9 +75,11 @@ try {
   const s = await state();
   const flagged = Object.values(s.results).filter(r => r.level === 'likely' || r.level === 'possible');
   const withPhoto = flagged.filter(r => r.listing.image);
-  const pick = withPhoto.find(r => r.level === 'likely' && prefer.test(`${r.badge} ${r.listing.title}`)) || withPhoto.find(r => r.level === 'likely') || withPhoto[0] || flagged[0];
-  marks.flagged = flagged.map(r => ({ id: r.id, level: r.level, badge: r.badge, title: r.listing.title, price: r.listing.price, device: !!(r.how && r.how.device), cloud: (r.how && r.how.cloudModel) || '' }));
-  marks.pick = pick && { id: pick.id, badge: pick.badge, title: pick.listing.title, price: pick.listing.price, how: pick.how };
+  // Prefer a listing the cloud outlined in its photo, so the recording shows where it saw the problem.
+  const outlined = withPhoto.filter(r => r.where);
+  const pick = outlined.find(r => r.level === 'likely' && prefer.test(`${r.badge} ${r.listing.title}`)) || withPhoto.find(r => r.level === 'likely' && prefer.test(`${r.badge} ${r.listing.title}`)) || outlined[0] || withPhoto.find(r => r.level === 'likely') || withPhoto[0] || flagged[0];
+  marks.flagged = flagged.map(r => ({ id: r.id, level: r.level, badge: r.badge, title: r.listing.title, price: r.listing.price, image: !!r.listing.image, where: r.where || null, device: !!(r.how && r.how.device), cloud: (r.how && r.how.cloudModel) || '' }));
+  marks.pick = pick && { id: pick.id, badge: pick.badge, title: pick.listing.title, price: pick.listing.price, where: pick.where || null, how: pick.how };
   if (!pick) throw new Error('nothing was flagged on this page');
   mark('picked', { title: pick.listing.title, badge: pick.badge });
 

@@ -1,6 +1,6 @@
 // Still Recalled on the web: one screenshot in, the extension's own check out.
 //   1. read the screenshot   hybrid inference: Chrome's built-in model when this device has it, Gemini otherwise
-//   2. words                 the extension's shortlist of 1,885 CPSC recall notices and its risky-type rules, here
+//   2. words                 the extension's shortlist of every CPSC recall since 1973 and its risky-type rules, here
 //   3. look and confirm      the extension's judge (hybrid) and its cloud double-check against the full notice
 import { useCards, triageListing, checkListing, readLabel } from '../../extension/src/engine.js';
 import { hybridJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
@@ -14,7 +14,7 @@ import { icon, mark } from '../../extension/src/ui/icons.js';
 useCards('data/cards.json');
 const $ = id => document.getElementById(id);
 const INFANT = /\b(bab(y|ies)|infants?|newborns?|toddlers?|cribs?|bassinets?|cradles?|nursery|high\s*chairs?|strollers?|car\s*seats?|loungers?|bedside\s*sleepers?|play\s*yards?|pacifiers?|teethers?)\b/i;
-let meta = { count: 1885, since: '2021-11-14', built: '' };
+let meta = { count: 10089, since: '1973-01-01', built: '' };
 let model = 'absent';
 let judge = null;
 let running = false;

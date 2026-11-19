@@ -29,7 +29,7 @@ const read = f => JSON.parse(readFileSync(f, 'utf8'));
 const pct = x => `${Math.round(x * 100)}%`;
 
 // ---- Numbers, from the reports ----------------------------------------------------------------------------------
-const reports = ['tools/eval-report.json', 'tools/fresh-report.json', 'tools/third-report.json'].filter(existsSync).map(read);
+const reports = ['tools/eval-report.json', 'tools/fresh-report.json', 'tools/third-report.json', 'tools/fourth-report.json'].filter(existsSync).map(read);
 const sum = f => reports.reduce((s, r) => s + f(r), 0);
 const N = {
   tests: reports.length,
@@ -42,7 +42,17 @@ const N = {
 };
 // The marketplace footage: eBay (scripts/record-demo.mjs) or another site (--url=... --name=craigslist).
 const SRC = opt('footage', existsSync(path.join(OUT, 'ebay.json')) && read(path.join(OUT, 'ebay.json')).end ? 'ebay' : 'craigslist');
-const M = read(path.join(OUT, `${SRC}.json`));
+// The recorder's times are wall-clock seconds; Puppeteer's screencast file runs longer than the wall clock (frames are
+// timed at the encoder's rate, 1.2x on this machine). Every time is scaled to the file's own length so a scene cuts
+// the moment it was meant to.
+const lastFrame = f => parseFloat(run('ffprobe', ['-v', 'error', '-select_streams', 'v', '-show_entries', 'packet=pts_time', '-of', 'csv=p=0', f]).trim().split(/\s+/).pop());
+const onFileTime = (marks, file) => {
+  const k = lastFrame(file) / marks.end.t;
+  const out = { ...marks };
+  for (const [name, v] of Object.entries(marks)) if (v && typeof v.t === 'number') out[name] = { ...v, t: +(v.t * k).toFixed(2) };
+  return out;
+};
+const M = onFileTime(read(path.join(OUT, `${SRC}.json`)), path.join(OUT, `${SRC}.webm`));
 const pick = M.pick;
 const SITE = { ebay: 'eBay', craigslist: 'Craigslist', mercari: 'Mercari' }[SRC] || SRC;
 const lounger = /lounger|nest/i.test(pick.badge);
@@ -55,15 +65,15 @@ const scenes = [
       ? `A parent shopping ${SITE} for a used baby lounger sees listings like these. Infant loungers are never safe for sleep: young babies can't lift their heads away from the soft padding, and many have been recalled. Nothing on the page says so.`
       : `A parent shopping ${SITE} for used crib bedding sees sets like these. Some include padded crib bumpers. Selling one has been against federal law since 2022, because bumpers can suffocate a baby. The titles rarely say so, and nothing on the page warns the parent.` },
   { key: 'scan', footage: SRC, from: M['first badge'].t + 1.5, to: M['engine done'].t, label: 'sped up',
-    say: `Still Recalled is a Chrome extension that checks every listing on the page. Chrome's built-in model, Gemini Nano, looks at each title and photo right on this laptop. Only the listings it flags go to Gemini in the cloud, through Firebase AI Logic, with the full recall notice and both photos.` },
+    say: `Still Recalled is a Chrome extension that checks every listing on the page, against every CPSC recall since 1973. Chrome's built-in model, Gemini Nano, looks at each title and photo right on this laptop. Only the listings it flags go to Gemini in the cloud, through Firebase AI Logic, with the full recall notice and both photos.` },
   { key: 'card', footage: SRC, from: M['listing in view'].t - 1, to: M.end.t,
     say: lounger
-      ? `This one is flagged as ${an(pick.badge.toLowerCase())}: the built-in model saw it in the photo, and the cloud confirmed it. The card says why, and gives the shopper the one question that settles it. For products the law bans outright, like padded crib bumpers, it also copies a ready report for CPSC.`
+      ? `This one is flagged as ${an(pick.badge.toLowerCase())}: the built-in model saw it in the photo, and the cloud confirmed it${pick.where ? ', and outlined exactly where it saw it' : ''}. The card says why, and gives the shopper the one question that settles it. For products the law bans outright, like padded crib bumpers, it also copies a ready report for CPSC.`
       : `This listing is flagged as ${an(pick.badge.toLowerCase())}. The card shows the seller's photo and the rule, asks the seller the one question that settles it, and when the law rules the sale out, copies a ready report for CPSC, which has listings like this taken down.` },
   { key: 'hybrid', slide: 'hybrid',
-    say: `Why hybrid? A search page has sixty listings, and a parent scrolls through hundreds. Screening them all in the cloud would send their browsing to a server and cost money for every look. So screening runs only on the device, and the cloud only confirms. Across ${["", "one", "two", "three"][N.tests] || N.tests} tests, ${pct(1 - N.cloudShare)} of listings never left the laptop.` },
+    say: `Why hybrid? A search page has sixty listings, and a parent scrolls through hundreds. Screening them all in the cloud would send their browsing to a server and cost money for every look. So screening runs only on the device, and the cloud only confirms. The cloud also wrote the device's field guide: it read all ten thousand recall notices once, so the laptop can match every one of them on its own. Across ${["", "one", "two", "three", "four"][N.tests] || N.tests} tests, ${pct(1 - N.cloudShare)} of listings never left the laptop.` },
   { key: 'results', slide: 'results',
-    say: `It was tested ${N.tests === 3 ? 'three times' : `${N.tests} times`}, on ${N.listings} real listings it had never seen, labelled blind. Word rules alone raised ${N.alarms('words only')} false alarms. The built-in model cut that to ${N.alarms('on-device only')} by looking at the photos, and the cloud check cut it to ${N.alarms('hybrid')}, while catching ${N.caught('hybrid')} of the ${N.mustFlag} listings that should be flagged.` },
+    say: `It was tested ${['', 'once', 'twice', 'three times', 'four times'][N.tests] || `${N.tests} times`}, on ${N.listings} real listings it had never seen, labelled blind. Word rules alone raised ${N.alarms('words only')} false alarms. The built-in model cut that to ${N.alarms('on-device only')} by looking at the photos, and the cloud check cut it to ${N.alarms('hybrid')}, while catching ${N.caught('hybrid')} of the ${N.mustFlag} listings that should be flagged.` },
   { key: 'phone', footage: 'phone', slide: 'phone',
     say: `A phone has no built-in model, so the web page asks Firebase AI Logic to prefer the device, and the same call runs on Gemini in the cloud instead. Take a screenshot of any listing, even on Facebook Marketplace, and get the same check.` },
   { key: 'close', slide: 'close',
@@ -103,7 +113,7 @@ const SLIDES = {
 <p class="lede">Firebase AI Logic runs the same prompt and JSON schema on Chrome's built-in Gemini Nano and on Gemini in the cloud.</p>
 <div class="zones">
   <div class="zone laptop"><h2>On the laptop. Nothing leaves it.</h2><div class="steps">
-    <div class="step"><span class="what">1. Word rules</span><span class="how">Every title against 1,885 CPSC recall notices. Parts, toys and doll items dropped.</span></div>
+    <div class="step"><span class="what">1. Word rules</span><span class="how">Every title against all 10,089 CPSC recalls since 1973. Parts, toys and doll items dropped.</span></div>
     <div class="step"><span class="what">2. Gemini Nano</span><span class="how">Baby products: title and photo. The product, a part or a toy? A lounger, a padded bumper?<br><br><code>ONLY_ON_DEVICE</code></span></div>
   </div></div>
   <div class="zone cloud"><h2>In the cloud</h2>
@@ -127,7 +137,7 @@ const SLIDES = {
 .val { font-size: 34px; font-weight: 600; font-variant-numeric: tabular-nums; }
 </style><div class="slide">
 <h1>The built-in model removes false alarms. The cloud catches what words miss.</h1>
-<p class="lede">${['', 'One', 'Two', 'Three'][N.tests] || N.tests} blind tests, ${N.listings} real listings from eBay${reports.length > 2 ? ', Mercari' : ''} and Craigslist that the rules had never seen.</p>
+<p class="lede">${['', 'One', 'Two', 'Three', 'Four'][N.tests] || N.tests} blind tests, ${N.listings} real listings from eBay${reports.length > 2 ? ', Mercari' : ''} and Craigslist that the rules had never seen.</p>
 <div class="charts">${chart(`False alarms, among ${N.mustNotFlag} listings that were fine`, Math.max(...rows.map(([k]) => N.alarms(k))), N.alarms)}${chart(`Caught, of ${N.mustFlag} that should be flagged`, N.mustFlag, N.caught)}</div>
 </div>`;
   })(),
@@ -185,7 +195,9 @@ for (const s of scenes) {
     const label = s.label && speed > 1.3 ? `,drawtext=fontfile='${esc(path.join(FONTS, 'Geist-Medium.ttf'))}':text='${Math.round(speed)}x speed':x=w-tw-40:y=36:fontsize=30:fontcolor=white:box=1:boxcolor=black@0.55:boxborderw=12` : '';
     ff(['-ss', String(s.from), '-t', String(span), '-i', path.join(OUT, `${s.footage}.webm`), '-vf', `setpts=PTS/${speed},scale=${W}:${H}:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2:color=0xf8f8f8${label},${vf}`, '-t', String(D), '-an', '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', clip]);
   } else if (s.footage === 'phone') {
-    const ph = read(path.join(OUT, 'phone.json'));
+    const raw = read(path.join(OUT, 'phone.json'));
+    const k = lastFrame(path.join(OUT, 'phone.webm')) / raw.end;   // the phone recorder saves bare numbers
+    const ph = Object.fromEntries(Object.entries(raw).map(([name, v]) => [name, typeof v === 'number' ? +(v * k).toFixed(2) : v]));
     const from = Math.max(0, ph['example tapped'] - 1.5), span = ph.end - from;
     const speed = Math.max(1, span / D);
     ff(['-loop', '1', '-i', path.join(work, 'slide-phone.png'), '-ss', String(from), '-i', path.join(OUT, 'phone.webm'),

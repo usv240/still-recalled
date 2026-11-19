@@ -6,6 +6,7 @@
 //   eval   the first test: 136 eBay listings, collected after the rules were written
 //   fresh  the second test: 125 eBay and Craigslist listings, collected after the fixes the first test led to
 //   third  the third test: 176 eBay, Mercari and Craigslist listings, collected after the fixes the second test led to
+//   fourth the fourth test: 160 eBay and Craigslist listings, collected after every recall since 1973 was added
 // Where a person has reviewed a label (tools/label-review.html -> tools/<set>-review.json), their answer is used.
 //
 // Three ways of running the same engine on the same held-out listings:
@@ -23,6 +24,7 @@ const labelFiles = {
   eval: ['./eval-labels.json'],
   fresh: ['./fresh-labels-ebay.json', './fresh-labels-craigslist.json'],
   third: ['./third-labels-a.json', './third-labels-b.json', './third-labels-c.json'],
+  fourth: ['./fourth-labels-a.json', './fourth-labels-b.json', './fourth-labels-c.json'],
 }[set].filter(has);
 const labelSets = labelFiles.map(read);
 const labels = Object.assign({}, ...labelSets.map(x => x.labels));

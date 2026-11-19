@@ -130,6 +130,9 @@ if (site) {
   // A lazy photo arriving changes an attribute, not the tree; scrolling brings waiting listings near the screen.
   new MutationObserver(later).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['src', 'srcset'] });
   addEventListener('scroll', later, { passive: true, capture: true });
+  // Badges placed on a listing's row follow its photo when the layout changes width.
+  let sizing = 0;
+  addEventListener('resize', () => { cancelAnimationFrame(sizing); sizing = requestAnimationFrame(() => { for (const host of hosts.values()) if (host.place) host.place(); }); });
   addEventListener('popstate', later);
   scan();
 }

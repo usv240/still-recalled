@@ -34,7 +34,7 @@ How it works
 - The side panel lists every flag on the page.
 
 Private by design
-- Every listing is checked on your computer first: by word rules against 1,885 CPSC recall notices, and by Chrome's
+- Every listing is checked on your computer first: by word rules against every CPSC recall since 1973 (10,089), and by Chrome's
   built-in model (Gemini Nano) where your computer has it.
 - Only listings flagged on your computer go to Gemini in the cloud for a double check, with the recall notice.
   You can turn this off.
