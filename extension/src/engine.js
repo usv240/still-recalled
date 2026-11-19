@@ -5,8 +5,8 @@
 //   2. on-device model (photo + title)  only listings that could matter: a recall candidate, banned-type words, a
 //                                       bedding set, or any infant product. Nothing leaves the device here.
 //   3. cloud model                      only listings step 2 flagged, with the full recall notice and both photos
-import { deviceStatus, deviceModel, imagePart, cloudJson, hybridJson, hasCloudAccess } from './ai.js';
-import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel } from '../../shared/label.mjs';
+import { deviceStatus, deviceModel, imagePart, cloudJson, hybridJson, hasCloudAccess, liveSettings } from './ai.js';
+import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings } from '../../shared/label.mjs';
 import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { bannedHints, notTheProduct, mayContain } from '../../shared/banned.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
@@ -86,7 +86,9 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
   const deviceLevel = device.level === 'none' && device.askCloud ? 'ask' : device.level;
   const how = { device: usedDevice, deviceLevel, deviceUnit, candidate: t.candidate ? `${t.candidate.card.id} ${t.candidate.strength}` : '', judgedInCloud: modelReady && !usedDevice && !deviceError, deviceError };
   const stage = { listing, hints: t.hints, device, photo, how, result: null };
-  if ((device.level === 'none' && !device.askCloud && !device.secondOpinion) || !cloud || !hasCloudAccess) {
+  // Remote Config's cloud_check switch can turn the cloud step off for everyone; flags then stand, unconfirmed.
+  const cloudOn = cloud && hasCloudAccess && (await liveSettings()).cloudCheck;
+  if ((device.level === 'none' && !device.askCloud && !device.secondOpinion) || !cloudOn) {
     stage.result = present(listing, device.level === 'none' ? device : decideFinal(device, null, t.hints), how);
   }
   return stage;
@@ -117,10 +119,10 @@ export async function readLabel(dataUrl, recall) {
     return { reading: await inCloud(), source: 'in_cloud', verdict: null };
   }
   const verdict = recall ? judgeLabel(reading, recall) : null;
-  if (source !== 'on_device' || !recall || verdict.state === 'recalled' || !hasCloudAccess) return { reading, source, verdict };
+  if (source !== 'on_device' || !recall || verdict.state === 'recalled' || !hasCloudAccess || !(await liveSettings()).cloudCheck) return { reading, source, verdict };
   const second = await inCloud().catch(() => null);
   if (!second) return { reading, source, verdict };
-  return { reading: second, source: 'device_then_cloud', verdict: judgeLabel(second, recall) };
+  return { reading: second, source: 'device_then_cloud', verdict: settleReadings(reading, second, recall) };
 }
 
 /** Step 3, for a stage lookOnDevice left open: the cloud reads the full recall notice and both photos. */
@@ -147,7 +149,9 @@ let running = false;
 // Cloud confirmations in flight at once, while the on-device model works through the queue. A bedding search sends
 // most of its 60 to 70 listings to the cloud for a photo check (about 13 s each); 4 at once took over 4 minutes a page.
 // The Vertex AI quota answered 20 at once in a load test.
-const CLOUD_AT_ONCE = 8;
+// Remote Config's cloud_at_once replaces this once it arrives.
+let CLOUD_AT_ONCE = 8;
+if (hasCloudAccess) liveSettings().then(s => { CLOUD_AT_ONCE = s.cloudAtOnce; });
 let cloudBusy = 0;
 const cloudWaiting = [];
 const cloudSlot = () => (cloudBusy < CLOUD_AT_ONCE ? (cloudBusy++, Promise.resolve()) : new Promise(r => cloudWaiting.push(r)));
@@ -216,7 +220,7 @@ if (globalThis.chrome && chrome.runtime && chrome.runtime.onMessage) chrome.runt
     return false;
   }
   if (msg.type === 'sr:engine-status') {
-    deviceStatus().then(model => reply({ model, cloudAccess: hasCloudAccess, queued: queue.length, running }));
+    Promise.all([deviceStatus(), liveSettings()]).then(([model, settings]) => reply({ model, cloudAccess: hasCloudAccess, settings, queued: queue.length, running }));
     return true;
   }
   if (msg.type === 'sr:engine-label') {

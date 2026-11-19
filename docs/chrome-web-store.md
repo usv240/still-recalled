@@ -50,7 +50,7 @@ Open source: https://github.com/usv240/still-recalled
 
 | Permission | Why |
 |---|---|
-| Host access to eBay, Mercari, Craigslist and Facebook Marketplace | Read the listings on search pages and place the warning badges beside them. |
+| Host access to eBay, Mercari, Craigslist and the project's practice listings (still-recalled.web.app/try) | Read the listings on search pages and place the warning badges beside them. |
 | Host access to ebayimg.com, mercdn.net, fbcdn.net | Load a flagged listing's photo so the built-in model and the cloud check can look at it. |
 | Host access to saferproducts.gov and cpsc.gov | Load the full recall notice and its photo for the cloud check. |
 | `offscreen` | Run the checking engine, including Chrome's built-in model, in a hidden extension page, so listings are checked with the side panel closed. |
@@ -73,5 +73,5 @@ Certify: not sold to third parties; not used for unrelated purposes; not used fo
 ## Images
 
 - Icon: `extension/icons/icon-128.png`.
-- Screenshots (1280 x 800): `docs/gallery/1-hybrid.png` and `2-results.png`, resized; plus captures of the badge and
-  card on a search page. Show sellers' listing photos only in your own captures, never in the public repository.
+- Screenshots (1280 x 800): `docs/gallery/1-extension.png`, `2-label-check.png`, `3-hybrid.png` and
+  `4-results.png`, resized. They show the practice listings, whose photos are CPSC notice photos or public domain.

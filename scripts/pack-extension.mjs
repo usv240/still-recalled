@@ -20,7 +20,10 @@ await rm(zip, { force: true });
 await mkdir(out, { recursive: true });
 
 const manifest = JSON.parse(await readFile(path.join(src, 'manifest.json'), 'utf8'));
-manifest.host_permissions = manifest.host_permissions.filter(h => !/localhost|127\.0\.0\.1/.test(h));
+const local = h => /localhost|127\.0\.0\.1/.test(h);
+manifest.host_permissions = manifest.host_permissions.filter(h => !local(h));
+for (const cs of manifest.content_scripts) cs.matches = cs.matches.filter(h => !local(h));
+for (const w of manifest.web_accessible_resources) w.matches = w.matches.filter(h => !local(h));
 // Only the developer page (left out below) injects scripts; the release asks for no permission it does not use.
 manifest.permissions = manifest.permissions.filter(p => p !== 'scripting' && p !== 'activeTab');
 const store = process.argv.includes('--store');

@@ -3,7 +3,7 @@
 //   numbers: tools/eval-report.json, tools/fresh-report.json, tools/third-report.json (every figure is measured)
 //   voice:   edge-tts (Microsoft neural voice; the narration text is sent to Microsoft's speech service)
 // Writes <out>/still-recalled-demo.mp4 (1920x1080, 30 fps) and <out>/still-recalled-demo.srt.
-// Usage: node scripts/make-video.mjs [--out=C:/tmp/video] [--footage=ebay|craigslist] [--voice=en-US-AvaNeural] [--rate=+6%]
+// Usage: node scripts/make-video.mjs [--out=C:/tmp/video] [--footage=practice|ebay|craigslist] [--voice=en-US-AvaNeural] [--rate=+6%]
 import puppeteer from 'puppeteer-core';
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
@@ -41,7 +41,7 @@ const N = {
   cloudShare: sum(r => r.cost.sentToCloud) / sum(r => r.cost.listings),
 };
 // The marketplace footage: eBay (scripts/record-demo.mjs) or another site (--url=... --name=craigslist).
-const SRC = opt('footage', existsSync(path.join(OUT, 'ebay.json')) && read(path.join(OUT, 'ebay.json')).end ? 'ebay' : 'craigslist');
+const SRC = opt('footage', existsSync(path.join(OUT, 'practice.json')) ? 'practice' : existsSync(path.join(OUT, 'ebay.json')) && read(path.join(OUT, 'ebay.json')).end ? 'ebay' : 'craigslist');
 // The recorder's times are wall-clock seconds; Puppeteer's screencast file runs longer than the wall clock (frames are
 // timed at the encoder's rate, 1.2x on this machine). Every time is scaled to the file's own length so a scene cuts
 // the moment it was meant to.
@@ -54,30 +54,45 @@ const onFileTime = (marks, file) => {
 };
 const M = onFileTime(read(path.join(OUT, `${SRC}.json`)), path.join(OUT, `${SRC}.webm`));
 const pick = M.pick;
-const SITE = { ebay: 'eBay', craigslist: 'Craigslist', mercari: 'Mercari' }[SRC] || SRC;
+const SITE = { ebay: 'eBay', craigslist: 'Craigslist', mercari: 'Mercari', practice: 'the practice listings' }[SRC] || SRC;
 const lounger = /lounger|nest/i.test(pick.badge);
 const an = w => `${/^[aeiou]/i.test(w) ? 'an' : 'a'} ${w}`;
 
+// The practice listings' answer key: how many recalled products the recording flagged, and how many ordinary ones.
+const key = read('web/try/answers.json');
+const recalledTitles = new Set(key.filter(k => k.recalled).map(k => k.title));
+const P = M.flagged ? {
+  recalled: recalledTitles.size, total: key.length,
+  caught: M.flagged.filter(f => recalledTitles.has(f.title)).length,
+  wrong: M.flagged.filter(f => !recalledTitles.has(f.title)).length,
+} : null;
+const words = n => ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen'][n] || String(n);
+const practice = SRC === 'practice';
+
 // ---- Narration: one entry per scene. Neutral voice; every number comes from the reports. ------------------------
 const scenes = [
-  { key: 'hook', footage: SRC, from: M['search loaded'].t, to: M['first badge'].t + 1.5,
-    say: lounger
-      ? `A parent shopping ${SITE} for a used baby lounger sees listings like these. Infant loungers are never safe for sleep: young babies can't lift their heads away from the soft padding, and many have been recalled. Nothing on the page says so.`
-      : `A parent shopping ${SITE} for used crib bedding sees sets like these. Some include padded crib bumpers. Selling one has been against federal law since 2022, because bumpers can suffocate a baby. The titles rarely say so, and nothing on the page warns the parent.` },
-  { key: 'scan', footage: SRC, from: M['first badge'].t + 1.5, to: M['engine done'].t, label: 'sped up',
-    say: `Still Recalled is a Chrome extension that checks every listing on the page, against every CPSC recall since 1973. Chrome's built-in model, Gemini Nano, looks at each title and photo right on this laptop. Only the listings it flags go to Gemini in the cloud, through Firebase AI Logic, with the full recall notice and both photos.` },
-  { key: 'card', footage: SRC, from: M['listing in view'].t - 1, to: M.end.t,
-    say: lounger
-      ? `This one is flagged as ${an(pick.badge.toLowerCase())}: the built-in model saw it in the photo, and the cloud confirmed it${pick.where ? ', and outlined exactly where it saw it' : ''}. The card says why, and gives the shopper the one question that settles it. For products the law bans outright, like padded crib bumpers, it also copies a ready report for CPSC.`
-      : `This listing is flagged as ${an(pick.badge.toLowerCase())}. The card shows the seller's photo and the rule, asks the seller the one question that settles it, and when the law rules the sale out, copies a ready report for CPSC, which has listings like this taken down.` },
+  { key: 'hook', footage: SRC, from: practice ? M['first badge'].t - 1 : M['search loaded'].t, to: practice ? M['first badge'].t + 14 : M['first badge'].t + 1.5, label: 'sped up',
+    say: practice
+      ? `Recalled baby gear is resold online every day: inclined sleepers linked to infant deaths, padded crib bumpers that federal law now bans. The listings rarely say so. Still Recalled is a Chrome extension that puts the warning on the listing itself.`
+      : lounger
+        ? `A parent shopping ${SITE} for a used baby lounger sees listings like these. Infant loungers are never safe for sleep: young babies can't lift their heads away from the soft padding, and many have been recalled. Nothing on the page says so.`
+        : `A parent shopping ${SITE} for used crib bedding sees sets like these. Some include padded crib bumpers. Selling one has been against federal law since 2022, because bumpers can suffocate a baby. The titles rarely say so, and nothing on the page warns the parent.` },
+  { key: 'scan', footage: SRC, from: M['first badge'].t + (practice ? 14 : 1.5), to: M['engine done'].t, label: 'sped up',
+    say: practice
+      ? `These are practice listings: ${words(P.recalled)} of the ${words(P.total)} are products the CPSC has recalled. Chrome's built-in model, Gemini Nano, looks at each title and photo right on this laptop, against every CPSC recall since 1973. Only the listings it flags go to Gemini in the cloud, through Firebase AI Logic, with the full recall notice. ${P.caught === P.recalled ? `All ${words(P.recalled)} are flagged` : `${P.caught} of ${P.recalled} are flagged`}${P.wrong ? `, with ${words(P.wrong)} false alarm${P.wrong > 1 ? 's' : ''}.` : ', and the toys and the bottle are left alone.'}`
+      : `Still Recalled is a Chrome extension that checks every listing on the page, against every CPSC recall since 1973. Chrome's built-in model, Gemini Nano, looks at each title and photo right on this laptop. Only the listings it flags go to Gemini in the cloud, through Firebase AI Logic, with the full recall notice and both photos.` },
+  { key: 'card', footage: SRC, from: M['listing in view'].t - 1, to: (M['card end'] || M.end).t,
+    say: `This one is flagged as ${an(pick.badge.toLowerCase())}: the built-in model saw it in the photo, and the cloud confirmed it${pick.where ? ', and outlined exactly where' : ''}. The card says why, and gives the shopper the one question that settles it. For products the law bans outright, it also copies a ready report for CPSC.` },
+  ...(M['label page'] ? [{ key: 'label', footage: SRC, from: M['label page'].t, to: M['label end'].t,
+    say: `A possible recall comes down to the model number. Add a photo of the label, and Gemini Nano reads it on the laptop; the photo never leaves it. Code, not the model, compares it with the notice. The device can raise the alarm on its own, but anything reassuring is read again in the cloud first.` }] : []),
   { key: 'hybrid', slide: 'hybrid',
     say: `Why hybrid? A search page has sixty listings, and a parent scrolls through hundreds. Screening them all in the cloud would send their browsing to a server and cost money for every look. So screening runs only on the device, and the cloud only confirms. The cloud also wrote the device's field guide: it read all ten thousand recall notices once, so the laptop can match every one of them on its own. Across ${["", "one", "two", "three", "four"][N.tests] || N.tests} tests, ${pct(1 - N.cloudShare)} of listings never left the laptop.` },
   { key: 'results', slide: 'results',
-    say: `It was tested ${['', 'once', 'twice', 'three times', 'four times'][N.tests] || `${N.tests} times`}, on ${N.listings} real listings it had never seen, labelled blind. Word rules alone raised ${N.alarms('words only')} false alarms. The built-in model cut that to ${N.alarms('on-device only')} by looking at the photos, and the cloud check cut it to ${N.alarms('hybrid')}, while catching ${N.caught('hybrid')} of the ${N.mustFlag} listings that should be flagged.` },
+    say: `It was tested ${['', 'once', 'twice', 'three times', 'four times'][N.tests] || `${N.tests} times`}, on ${N.listings} real listings from eBay, Mercari and Craigslist that it had never seen, labelled blind. Word rules alone raised ${N.alarms('words only')} false alarms. The built-in model cut that to ${N.alarms('on-device only')} by looking at the photos, and the cloud check cut it to ${N.alarms('hybrid')}, while catching ${N.caught('hybrid')} of the ${N.mustFlag} listings that should be flagged.` },
   { key: 'phone', footage: 'phone', slide: 'phone',
     say: `A phone has no built-in model, so the web page asks Firebase AI Logic to prefer the device, and the same call runs on Gemini in the cloud instead. Take a screenshot of any listing, even on Facebook Marketplace, and get the same check.` },
   { key: 'close', slide: 'close',
-    say: `It never says a product is safe: no match only means no recall was found. Still Recalled. Free, and open source.` },
+    say: `Try it yourself on the practice listings at still recalled dot web dot app, slash try. It never says a product is safe: no match only means no recall was found. Still Recalled. Free, and open source.` },
 ];
 
 // ---- Slides -------------------------------------------------------------------------------------------------------
@@ -117,7 +132,7 @@ const SLIDES = {
     <div class="step"><span class="what">2. Gemini Nano</span><span class="how">Baby products: title and photo. The product, a part or a toy? A lounger, a padded bumper?<br><br><code>ONLY_ON_DEVICE</code></span></div>
   </div></div>
   <div class="zone cloud"><h2>In the cloud</h2>
-    <div class="step"><span class="what">3. Gemini</span><span class="how">Only flagged listings, with the full recall notice and its photo. Confirms or clears.</span></div>
+    <div class="step"><span class="what">3. Gemini</span><span class="how">Only flagged listings, with the full recall notice and its photo. Confirms or clears.<br><br><code>ONLY_IN_CLOUD</code></span><span class="how">Models and an off switch: Firebase Remote Config.</span></div>
   </div>
 </div></div>`,
   results: (() => {
@@ -156,7 +171,7 @@ h1 { font-size: 60px; }
 .links b { color: var(--text); font-weight: 500; }
 </style><div class="slide">
 <div class="brand"><i></i>Still Recalled</div>
-<div class="links"><b>still-recalled.web.app</b><br>Chrome extension and code: <b>github.com/usv240/still-recalled</b><br>Built with Firebase AI Logic hybrid inference</div>
+<div class="links">Try it: <b>still-recalled.web.app/try</b><br>Chrome extension and code: <b>github.com/usv240/still-recalled</b><br>Built with Firebase AI Logic hybrid inference</div>
 </div>`,
 };
 

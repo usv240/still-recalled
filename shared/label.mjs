@@ -40,9 +40,40 @@ function sameModel(a, b) {
   return (short.length >= 4 && long.startsWith(short)) || (short.length >= 5 && long.includes(short));
 }
 
+/** One character changed, added or dropped, in codes of five or more characters: how a misread usually looks. */
+function oneOff(a, b) {
+  const x = bare(a), y = bare(b);
+  if (x === y || Math.min(x.length, y.length) < 5 || Math.abs(x.length - y.length) > 1) return false;
+  let i = 0, j = 0, edits = 0;
+  while (i < x.length && j < y.length) {
+    if (x[i] === y[j]) { i++; j++; continue; }
+    if (++edits > 1) return false;
+    if (x.length > y.length) i++; else if (y.length > x.length) j++; else { i++; j++; }
+  }
+  return edits + (x.length - i) + (y.length - j) <= 1;
+}
+
+/**
+ * Two readings of the same label, the built-in model's and the cloud's, settled together. The device can raise the
+ * alarm on its own, but a reassuring answer needs both readings to agree: when they read different model numbers and
+ * neither matches, the label is not clear enough to rule anything out. Returns the same shape as judgeLabel.
+ */
+export function settleReadings(device, cloud, card) {
+  const v = judgeLabel(cloud, card);
+  if (v.state !== 'not_listed' && v.state !== 'year_out') return v;
+  const ofDevice = judgeLabel(device, card);
+  if (ofDevice.state === 'near') return ofDevice;
+  const codes = r => new Set((r && r.readable !== false && Array.isArray(r.model_numbers) ? r.model_numbers : []).map(bare).filter(c => c.length >= 3));
+  const a = codes(device), b = codes(cloud);
+  if (a.size && b.size && ![...a].some(c => b.has(c))) return { ...v, state: 'disagree', other: [...(device.model_numbers || [])].slice(0, 2).join(', ') };
+  return v;
+}
+
 /**
  * Compare a label reading with a recall card. Returns { state, model, listed, year }:
  *   "recalled"    a model number on the label is one the notice lists (and the year, if read, is not outside the years sold)
+ *   "near"        a model number on the label is one character away from one the notice lists: a misread is likely
+ *                 (a blurred 6 read as 3 on a real CPSC label photo, 2026-11-19), so it is not ruled out
  *   "not_listed"  the label shows a model number, and it is not among those the notice lists
  *   "year_out"    no model to compare, but the label's year is outside the years the recalled units were sold
  *   "no_models"   the label was read, but the notice gives no model numbers to compare with
@@ -60,7 +91,13 @@ export function judgeLabel(reading, card) {
   if (!read.length && !year) return { ...base, state: 'unreadable' };
   const hit = read.find(m => listed.some(c => sameModel(m, c)));
   if (hit) return { ...base, state: 'recalled', model: hit };
-  if (read.length && listed.length) return { ...base, state: 'not_listed', model: read[0] };
+  if (read.length && listed.length) {
+    for (const m of read) {
+      const twin = listed.find(c => oneOff(m, c));
+      if (twin) return { ...base, state: 'near', model: m, twin };
+    }
+    return { ...base, state: 'not_listed', model: read[0] };
+  }
   if (yearOut) return { ...base, state: 'year_out', model: read[0] || '' };
   return { ...base, state: read.length ? 'no_models' : 'unreadable', model: read[0] || '' };
 }
@@ -74,6 +111,12 @@ export function labelCopy(v) {
     case 'recalled':
       return { tone: 'likely', title: 'The label matches the recall',
         text: `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ''}. Don't buy it unless the seller shows the recall's fix was done.` };
+    case 'near':
+      return { tone: 'possible', title: 'One character from a recalled model',
+        text: `The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: look at the label yourself, or ask for a sharper photo, before you buy.` };
+    case 'disagree':
+      return { tone: 'possible', title: 'The label is hard to read',
+        text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. Ask for a closer, sharper photo of the label.` };
     case 'not_listed':
       return { tone: 'plain', title: 'Not among the listed models',
         text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too: check the notice before you rely on this.` };

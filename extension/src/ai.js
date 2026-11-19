@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { initializeAppCheck, CustomProvider, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 import { getAI, getGenerativeModel, AgentPlatformBackend, InferenceMode } from 'firebase/ai';
+import { getRemoteConfig, fetchAndActivate, getValue } from 'firebase/remote-config';
 import { firebaseConfig, recaptchaSiteKey, appCheckBridgeUrl } from './firebase-config.js';
 
 // Cloud models used to confirm or clear what the on-device model flagged, in order of preference.
@@ -37,6 +38,46 @@ initializeAppCheck(app, {
 // quota answered 20 calls at once (tested 2026-11-16); the Gemini Developer API's free tier ran out at 3.
 const ai = getAI(app, { backend: new AgentPlatformBackend('global') });
 export const hasCloudAccess = !!debugToken || hasDocument;
+
+/**
+ * Settings that can change without a new build, from Firebase Remote Config: which cloud models to use and in what
+ * order, how many cloud checks run at once, and a switch that turns the cloud step off (the on-device flags then stand,
+ * marked unconfirmed, and nothing leaves the computer). A preview model can be retired, or a quota run out, while the
+ * extension is already installed; this is how the fix reaches every copy within the hour. The values in this file are
+ * the fallback when Remote Config cannot be reached.
+ * Resolves to { models, cloudCheck, cloudAtOnce, from: 'remote' | 'cached' | 'defaults' }.
+ */
+const DEFAULTS = { cloud_models: CLOUD_MODELS.join(','), cloud_check: true, cloud_at_once: 8 };
+let live = null;
+export function liveSettings() {
+  return live ||= (async () => {
+    const read = (rc, from) => {
+      const models = (rc ? getValue(rc, 'cloud_models').asString() : DEFAULTS.cloud_models)
+        .split(',').map(m => m.trim()).filter(m => /^gemini-[w.-]+$/.test(m));
+      const atOnce = rc ? getValue(rc, 'cloud_at_once').asNumber() : DEFAULTS.cloud_at_once;
+      return {
+        models: models.length ? models : CLOUD_MODELS,
+        cloudCheck: rc ? getValue(rc, 'cloud_check').asBoolean() : true,
+        cloudAtOnce: Math.max(1, Math.min(20, Math.round(atOnce) || DEFAULTS.cloud_at_once)),
+        from,
+      };
+    };
+    // Remote Config needs a page (IndexedDB and a window); the service worker never calls the models.
+    if (!hasDocument || typeof indexedDB === 'undefined') return read(null, 'defaults');
+    let rc = null;
+    try {
+      rc = getRemoteConfig(app);
+      rc.settings.minimumFetchIntervalMillis = 60 * 60 * 1000;
+      rc.settings.fetchTimeoutMillis = 5000;
+      rc.defaultConfig = DEFAULTS;
+      await fetchAndActivate(rc);
+      return read(rc, 'remote');
+    } catch {
+      // Offline or refused: the last values fetched, or the defaults above.
+      return read(rc, rc && rc.lastFetchStatus === 'success' ? 'cached' : 'defaults');
+    }
+  })();
+}
 
 /**
  * An App Check token for the extension, from appcheck-bridge.html on the site. That page runs reCAPTCHA Enterprise on
@@ -124,10 +165,15 @@ export function deviceModel({ system, schema }) {
  * the same schema shape the on-device model takes, so the two answers can be compared field by field.
  */
 export function cloudModel({ system, schema, model = CLOUD_MODEL }) {
+  // ONLY_IN_CLOUD on purpose: this step reads the full recall notice and two photos, a judgment the on-device model
+  // was measured to get wrong (it said "one of the recalled units" 20 times where the cloud agreed once).
   return getGenerativeModel(ai, {
-    model,
-    ...(system ? { systemInstruction: system } : {}),
-    generationConfig: schema ? { responseMimeType: 'application/json', responseJsonSchema: schema } : {},
+    mode: InferenceMode.ONLY_IN_CLOUD,
+    inCloudParams: {
+      model,
+      ...(system ? { systemInstruction: system } : {}),
+      generationConfig: schema ? { responseMimeType: 'application/json', responseJsonSchema: schema } : {},
+    },
   }, { timeout: CLOUD_TIMEOUT_MS });
 }
 
@@ -144,7 +190,8 @@ const retryDelay = (e, attempt) => {
  * One JSON answer from the cloud. Falls back through CLOUD_MODELS when a model is busy, and when every model is over
  * its per-minute quota, waits and tries again (twice). Returns { answer, model }.
  */
-export async function cloudJson({ system, schema, parts, models = CLOUD_MODELS, retries = 2 }) {
+export async function cloudJson({ system, schema, parts, models = null, retries = 2 }) {
+  models ||= (await liveSettings()).models;
   let last;
   for (let attempt = 0; attempt <= retries; attempt++) {
     for (const model of models) {
@@ -185,7 +232,8 @@ export function hybridModel({ system, schema, model = CLOUD_MODEL }) {
 }
 
 /** One JSON answer through hybrid inference. Returns { answer, source: 'on_device' | 'in_cloud', model }. */
-export async function hybridJson({ system, schema, parts, models = CLOUD_MODELS }) {
+export async function hybridJson({ system, schema, parts, models = null }) {
+  models ||= (await liveSettings()).models;
   let last;
   for (const model of models) {
     try {

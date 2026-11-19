@@ -16,6 +16,8 @@ test('listing links: each marketplace, including Craigslist old and 2026 formats
   assert.equal(id('sfbay.craigslist.org', 'https://sfbay.craigslist.org/sfc/bab/d/san-francisco-bassinet/7801234567.html'), '7801234567');
   assert.equal(id('sfbay.craigslist.org', 'https://sfbay.craigslist.org/view/d/san-francisco-snoo-smart-sleeper/5JJ79cTiC2NGjXLGS4HYLv'), '5JJ79cTiC2NGjXLGS4HYLv');
   assert.equal(id('sfbay.craigslist.org', 'https://sfbay.craigslist.org/search/sss?query=d'), null);
-  assert.equal(id('www.facebook.com', 'https://www.facebook.com/marketplace/item/1234567890/'), '1234567890');
+  assert.equal(id('still-recalled.web.app', 'https://still-recalled.web.app/try/item/newborn-lounger.html'), 'newborn-lounger');
+  assert.equal(id('still-recalled.web.app', 'https://still-recalled.web.app/'), null);
+  assert.equal(siteFor('www.facebook.com'), null);
   assert.equal(siteFor('www.amazon.com'), null);
 });

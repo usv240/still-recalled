@@ -8,7 +8,7 @@
 // reCAPTCHA scores headless Chrome as a bot, so the release build's cloud check needs --headful.
 // Usage: node build.mjs && node tools/e2e.mjs [search words] [--headful] [--url=<search page>] [--ext=<dir>] [--profile=<dir>]
 import puppeteer from 'puppeteer-core';
-import { builtInModelArgs } from './chrome-args.mjs';
+import { builtInModelArgs, freshServiceWorkers } from './chrome-args.mjs';
 import { mkdtempSync, rmSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -27,6 +27,7 @@ const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 const results = { query, steps: [] };
 const step = (name, ok, detail = '') => { results.steps.push({ name, ok, detail }); log(ok ? 'PASS' : 'FAIL', name, detail); };
 
+freshServiceWorkers(keptProfile);
 const browser = await puppeteer.launch({
   executablePath: CHROME, headless: !headful, pipe: true, enableExtensions: true, userDataDir: profile,
   defaultViewport: { width: 1366, height: 900 },
@@ -40,6 +41,8 @@ try {
   const swTarget = await browser.waitForTarget(t => t.type() === 'service_worker' && t.url().startsWith(`chrome-extension://${id}/`), { timeout: 15000 });
   const worker = await swTarget.worker();
   step('service worker starts', !!worker);
+  // --fresh: forget results cached by an earlier run in a kept profile, so every listing is checked again.
+  if (args.includes('--fresh')) await worker.evaluate(() => Promise.all([chrome.storage.local.clear(), chrome.storage.session.clear()]));
 
   const page = await browser.newPage();
   const url = urlArg || `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(query)}&LH_ItemCondition=3000`;
@@ -79,6 +82,15 @@ try {
     const onDevice = state ? Object.values(state.results).filter(r => r.how && r.how.device).length : 0;
     step('built-in model runs in the extension', onDevice > 0, `${onDevice} listings looked at on this device`);
   }
+  // The offscreen engine's settings: from Firebase Remote Config when it answered, else the built-in defaults.
+  // Asked from an extension page, as the side panel does: the service worker starts the offscreen engine if needed.
+  const extPage = await browser.newPage();
+  await extPage.goto(`chrome-extension://${id}/panel.html`, { waitUntil: 'domcontentloaded' }).catch(() => {});
+  const engine = await extPage.evaluate(() => chrome.runtime.sendMessage({ type: 'sr:engine-status' })).catch(e => ({ error: String(e) }));
+  await extPage.close().catch(() => {});
+  await page.bringToFront();
+  step('settings come from Remote Config', !!(engine && engine.settings && engine.settings.from !== 'defaults'),
+    engine && engine.settings ? `${engine.settings.from}: ${engine.settings.models.join(', ')}; cloud ${engine.settings.cloudCheck ? 'on' : 'off'}; ${engine.settings.cloudAtOnce} at once` : JSON.stringify(engine).slice(0, 160));
   results.flagged = flagged.map(r => ({ level: r.level, badge: r.badge, title: r.listing.title, cloud: r.how.cloudModel, device: r.how.device }));
   log(`flagged ${flagged.length}:`, flagged.slice(0, 8).map(r => `${r.level}/${r.badge}: ${r.listing.title.slice(0, 50)}`).join('\n  '));
 

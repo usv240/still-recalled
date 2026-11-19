@@ -6,7 +6,8 @@ const SITES = [
   { site: 'mercari', host: /(^|\.)mercari\.com$/, item: /\/item\/(m\d+)/ },
   // Craigslist moved from /d/<slug>/<digits>.html to /view/d/<slug>/<code> in 2026; both are matched.
   { site: 'craigslist', host: /(^|\.)craigslist\.org$/, item: /\/(?:view\/)?d\/[^/]+\/([A-Za-z0-9]{8,})(?:\.html)?(?:[?#]|$)/ },
-  { site: 'facebook', host: /(^|\.)facebook\.com$/, item: /\/marketplace\/item\/(\d+)/ },
+  // The practice listings on the project's own site (web/try/), for trying the extension without a live marketplace.
+  { site: 'practice', host: /^(still-recalled\.web\.app|still-recalled\.firebaseapp\.com|localhost)$/, item: /\/try\/item\/([a-z0-9-]+)\.html/ },
 ];
 
 export function siteFor(hostname) {

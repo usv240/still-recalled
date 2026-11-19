@@ -1,9 +1,10 @@
 // Draws the Devpost gallery images (docs/gallery/*.png) from the test reports, so every number in them is measured:
-//   1-hybrid.png    where each step runs and how many listings reached it (tools/eval-report.json)
-//   2-results.png   caught and false alarms, three ways of running the same engine (every test report)
-//   3-search-page.png  the real "crib bedding set" listings from the first test with the engine's real decisions
-//   4-card.png         the full card for one of them, in the side panel
-//                      (3 and 4 need tools/collector.mjs running, and tools/make-gallery-fixture.mjs run first)
+//   1-extension.png    the real extension on the practice listings, with one card open (scripts/shoot-try.mjs first)
+//   2-label-check.png  the label check on the practice stroller, read on the device (scripts/shoot-try.mjs first)
+//   3-hybrid.png       where each step runs and how many listings reached it (every test report)
+//   4-results.png      caught and false alarms, each test run three ways (every test report)
+//   5-web-page.jpg     the web page on a phone (scripts/record-phone.mjs; not drawn here)
+// The practice listings' photos are CPSC notice photos and public-domain photos, so every image is safe to publish.
 // Rendered by headless Chrome from local files only. Usage: node scripts/make-gallery.mjs
 import puppeteer from 'puppeteer-core';
 import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, rmSync } from 'node:fs';
@@ -65,13 +66,14 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
 <div class="zones">
   <div class="zone laptop"><h2>On the laptop. Nothing leaves it.</h2><div class="steps">
     <div class="step"><span class="n">${c.listings}</span><span class="what">Word rules</span>
-      <span class="how">Every listing's title against all 10,089 CPSC recalls since 1973. Parts, toys and doll items dropped. Instant.</span></div>
+      <span class="how">Every listing's title against the CPSC recall list (all 10,089 since 1973 in the current build). Parts, toys and doll items dropped. Instant.</span></div>
     <div class="step"><span class="n">${c.lookedAtOnDevice}</span><span class="what">Gemini Nano</span>
       <span class="how">Baby products only: title and photo. Is it the product, a part or a toy? Does it look like a lounger or a padded bumper?<br><code>ONLY_ON_DEVICE</code></span></div>
   </div></div>
   <div class="zone cloud"><h2>In the cloud</h2>
     <div class="step"><span class="n">${c.sentToCloud}</span><span class="what">Gemini</span>
-      <span class="how">Only what Nano flagged: title, photo, the full recall notice and its photo. Confirms, clears, or says what to check.<br><code>cloud model</code></span></div>
+      <span class="how">Only what Nano flagged: title, photo, the full recall notice and its photo. Confirms, clears, or says what to check.<br><code>ONLY_IN_CLOUD</code></span>
+      <span class="how">Which models, and a switch that turns this step off, come from Firebase Remote Config.</span></div>
   </div>
 </div>
 <div class="crosses">
@@ -111,34 +113,67 @@ const results = `<!doctype html><meta charset="utf-8"><style>${base}
 .per td span { color: var(--muted); }
 </style><div class="slide">
 <h1>The built-in model removes false alarms. The cloud catches what words miss.</h1>
-<p class="lede">The same engine run three ways in ${['', 'one', 'two', 'three', 'four'][tests.length] || tests.length} blind tests: ${allListings} real listings the rules had never seen, each test collected after the fixes the one before led to.</p>
+<p class="lede">Each of ${['', 'one', 'two', 'three', 'four'][tests.length] || tests.length} blind tests run three ways: word rules alone, the built-in model alone, and the hybrid. ${allListings} real listings the rules had never seen, each test collected after the fixes the one before led to.</p>
 <div class="charts">${bars(`False alarms, among ${allFine} listings that were fine`, Math.max(...SYSTEMS.map(([k]) => alarmsOf(k))), alarmsOf)}${bars(`Caught, of ${allFlag} that should be flagged`, allFlag, caughtOf)}</div>
 ${perTest}
-<div class="foot"><span>Labels by blind reviewers from the title and one photo. Method and every miss: docs/accuracy.md.</span><span class="brand"><i></i>Still Recalled</span></div>
+<div class="foot"><span>Labels by blind AI reviewers (Claude) that never saw the rules, from the title and one photo. Method and every miss: docs/accuracy.md.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
+
+// 1 and 2: the real extension on the practice listings, from scripts/shoot-try.mjs, scored against the page's answer key.
+const shot = f => pathToFileURL(path.join(src, f)).href;
+const tryRun = existsSync(path.join(src, 'try-run.json')) ? read(path.join(src, 'try-run.json')) : null;
+const key = read('web/try/answers.json');
+const recalledTitles = new Set(key.filter(k => k.recalled).map(k => k.title));
+const practice = tryRun && {
+  recalled: recalledTitles.size,
+  ordinary: key.length - recalledTitles.size,
+  caught: tryRun.flagged.filter(f => recalledTitles.has(f.title)).length,
+  falseAlarms: tryRun.flagged.filter(f => !recalledTitles.has(f.title)).length,
+};
+const hero = tryRun && `<!doctype html><meta charset="utf-8"><style>${base}
+.split { display: grid; grid-template-columns: 470px 792px; gap: 46px; height: 100%; align-items: center; }
+.split h1 { font-size: 48px; max-width: 470px; }
+.points { margin: 36px 0 0; padding: 0; list-style: none; display: grid; gap: 22px; }
+.points li { font-size: 21px; line-height: 1.4; padding-left: 22px; border-left: 3px solid var(--rule); }
+.points b { display: block; font-weight: 600; }
+.points li.on { border-color: var(--likely); }
+.small { margin-top: 32px; font-size: 17px; line-height: 1.45; color: var(--muted); }
+.frame { width: 792px; height: 628px; overflow: hidden; border-radius: 14px; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 12px 40px rgba(0,0,0,.10); background: #f8f8f8; }
+.frame img { display: block; width: 1080px; margin: -96px 0 0 -144px; }
+</style><div class="slide"><div class="split"><div>
+<h1>Flags recalled baby gear on secondhand listings, before you buy.</h1>
+<ul class="points">
+  <li class="on"><b>Gemini Nano looks at every listing on your laptop.</b>Nothing leaves it.</li>
+  <li><b>Gemini in the cloud checks only the few it flags,</b>against the full CPSC recall notice and its photo.</li>
+  <li><b>Every CPSC recall since 1973,</b>plus the padded bumpers and loungers that federal law now bans.</li>
+</ul>
+<p class="small">The real Chrome extension on the practice listings at still-recalled.web.app/try: ${practice.caught} of ${practice.recalled} recalled products flagged, ${practice.falseAlarms} of ${practice.ordinary} ordinary ones flagged, in ${tryRun.seconds} s.</p>
+</div><div class="frame"><img src="${shot('try-grid.png')}"></div></div></div>`;
+const labelSlide = tryRun && tryRun.labelText && `<!doctype html><meta charset="utf-8"><style>${base}
+.cols { display: grid; grid-template-columns: 1fr 520px; gap: 64px; margin-top: 40px; align-items: start; }
+.label { width: 100%; height: 400px; object-fit: cover; object-position: 30% 55%; border-radius: 12px; display: block; box-shadow: 0 12px 40px rgba(0,0,0,.10); }
+.cap { margin-top: 14px; font-size: 18px; color: var(--muted); }
+.card { width: 520px; height: 640px; overflow: hidden; border-radius: 14px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 12px 40px rgba(0,0,0,.10); }
+.card img { display: block; width: 2274px; margin: -500px 0 0 -1246px; }
+.rules { margin-top: 24px; display: grid; gap: 10px; font-size: 19px; line-height: 1.45; }
+.rules b { font-weight: 600; }
+</style><div class="slide">
+<h1>A possible recall comes down to the model number. Settle it with a photo of the label.</h1>
+<div class="cols"><div>
+  <img class="label" src="${pathToFileURL(path.resolve('web/try/img/stroller-label.jpg')).href}">
+  <p class="cap">The seller's photo of the sticker on the stroller's leg (CPSC recall 20052).</p>
+  <div class="rules">
+    <div><b>Read on the laptop.</b> Gemini Nano reads the label; code, not the model, compares it with the notice.</div>
+    <div><b>The device can raise the alarm, not clear it.</b> A reassuring reading is read again in the cloud. If the two disagree, or a number is one character off a recalled model, it says so.</div>
+  </div>
+</div><div class="card"><img src="${shot('try-label.png')}"></div></div>
+<div class="foot"><span>On 12 real CPSC label photos: 8 matched the recall, 4 could not be read, none wrong.</span><span class="brand"><i></i>Still Recalled</span></div>
+</div>`;
+const slides = [['1-extension', hero], ['2-label-check', labelSlide], ['3-hybrid', hybrid], ['4-results', results]].filter(([, html]) => html);
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, pipe: true, args: ['--allow-file-access-from-files'] });
 try {
-  // Captures of the real badges and card from the local preview pages, when the local server is running.
-  rmSync(path.join(out, '3-listing.png'), { force: true });
-  const local = await fetch('http://localhost:8766/tools/fixtures/bumpers.json').then(r => r.ok, () => false);
-  const slides = [['1-hybrid', hybrid], ['2-results', results]];
-  if (local) {
-    const cap = await browser.newPage();
-    await cap.setViewport({ width: 1500, height: 1000, deviceScaleFactor: 1 });
-    await cap.goto('http://localhost:8766/tools/preview/listings.html?fixture=bumpers&links=off&open=4', { waitUntil: 'networkidle0' });
-    await new Promise(r => setTimeout(r, 2500));
-    await cap.screenshot({ path: path.join(src, 'card-preview.png'), clip: { x: 0, y: 0, width: 1500, height: 1000 } });
-    await cap.setViewport({ width: 400, height: 1400, deviceScaleFactor: 2 });
-    await cap.goto('http://localhost:8766/tools/preview/panel.html?fixture=bumpers&detail=147631281873', { waitUntil: 'networkidle0' });
-    await new Promise(r => setTimeout(r, 2000));
-    const card = await cap.$eval('.detail', el => { const b = el.closest('.card') || el; const r = b.getBoundingClientRect(); return { y: r.bottom + 16 }; }).catch(() => ({ y: 1200 }));
-    await cap.screenshot({ path: path.join(src, 'panel-detail.png'), clip: { x: 0, y: 0, width: 400, height: Math.min(1400, Math.ceil(card.y)) } });
-    await cap.close();
-    copyFileSync(path.join(src, 'card-preview.png'), path.join(out, '3-search-page.png'));
-    copyFileSync(path.join(src, 'panel-detail.png'), path.join(out, '4-card.png'));
-    console.log('wrote', path.join(out, '3-search-page.png'), 'and 4-card.png');
-  }
+  for (const old of ['1-hybrid.png', '2-results.png', '3-search-page.png', '3-listing.png', '4-card.png']) rmSync(path.join(out, old), { force: true });
   const page = await browser.newPage();
   await page.setViewport({ width: 1500, height: 1000, deviceScaleFactor: 1 });
   for (const [name, html] of slides) {

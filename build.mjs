@@ -50,7 +50,7 @@ await build({ ...common, outdir: 'tools', format: 'esm', entryPoints: {
 
 // The web page (web/, served as-is by Firebase Hosting). It reuses the extension's engine, prompts and detail view.
 await build({ ...common, outdir: 'web/build', format: 'esm', entryPoints: { app: 'web/src/app.js', bridge: 'web/src/bridge.js' } });
-await build({ outdir: 'web/build', bundle: true, logLevel: 'info', entryPoints: { style: 'web/src/app.css' },
+await build({ outdir: 'web/build', bundle: true, logLevel: 'info', entryPoints: { style: 'web/src/app.css', try: 'web/src/try.css' },
   loader: { '.woff2': 'file' }, assetNames: 'fonts/[name]-[hash]' });
 await mkdir('web/data', { recursive: true });
 await cp('extension/data/cards.json', 'web/data/cards.json');

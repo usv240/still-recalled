@@ -8,7 +8,7 @@ import { byConcern } from '../../shared/present.mjs';
 import { clip } from '../../shared/text.mjs';
 import { deviceModel, deviceStatus, hasCloudAccess } from './ai.js';
 
-const SITE_NAMES = { ebay: 'eBay', mercari: 'Mercari', craigslist: 'Craigslist', facebook: 'Facebook Marketplace' };
+const SITE_NAMES = { ebay: 'eBay', mercari: 'Mercari', craigslist: 'Craigslist', practice: 'Practice listings' };
 const DEFAULTS = { cloud: true, badges: true };
 
 const $view = document.getElementById('view');

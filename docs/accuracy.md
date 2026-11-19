@@ -55,7 +55,7 @@ allowed to read the pipeline's code, prompts or answers. Labels: 14 listings mus
 be settled from the listing alone. The labels are in `tools/eval-labels.json`, with the visible evidence for each one.
 
 **What the cloud saw.** 21 of the 136 listings. The built-in model looked at 98 listings on the computer (median
-9.7 s each, including the cloud check where there was one). The other 38 were settled by their wording and never needed a model.
+8.0 s each, including the cloud check where there was one). The other 38 were settled by their wording and never needed a model.
 
 **What each part adds.**
 - **The built-in model** cuts false alarms from 22 to 8 by looking at the photo. For example, it saw that "Fisher-Price
@@ -100,15 +100,16 @@ and "baby lounger" results. That is why this set has only 4 listings that must b
 alarms. The set is `tools/fresh-listings.json`.
 
 How it was collected: `tools/collect-live.mjs` read the first searches with the extension's own page reader in a
-separate test browser. eBay answers an automated browser with an error page after a search or two, so the remaining
-eBay searches were read in a normal Chrome, one at a time, with the same page reader.
+separate test browser. After a search or two eBay stopped serving results to the test browser, so the remaining eBay
+searches were opened by hand in a normal Chrome, one at a time, and read with the same page reader. No site's limits
+were worked around: each page was one a shopper would open.
 
 **Labels.** Two separate AI reviewers, one for eBay and one for Craigslist, with the same blind brief as the first
 test: 4 must be flagged, 117 must not, 4 can't be settled from the listing alone. The labels are in
 `tools/fresh-labels-ebay.json` and `tools/fresh-labels-craigslist.json`.
 
 **What happened.**
-- **The cloud saw 10 of the 125 listings (8%).** The built-in model looked at 103 (median 11.1 s each, including the cloud check where there was one); 22 were settled
+- **The cloud saw 10 of the 125 listings (8%).** The built-in model looked at 103 (median 10.4 s each, including the cloud check where there was one); 22 were settled
   by their wording.
 - **The cloud cleared all six of the built-in model's false alarms:** two Mattel "Heart Family Rock'n Play" doll
   nursery sets, an UPPAbaby VISTA stroller (the UPPAbaby recall is for the RIDGE), and three cribs whose sides are fixed.
@@ -379,6 +380,44 @@ and a price.
   top of it. They now sit just above the listing photo, and the card opens in the browser's top layer.
 - **Badge over the price.** Craigslist prints the price in the photo's top-left corner; there the badge now takes the
   top-right one.
+
+## 12. Practice listings and release 0.7.0 (2026-11-19)
+
+**Practice listings.** https://still-recalled.web.app/try has sixteen made-up listings, built by
+`scripts/make-try.mjs` so anyone can try the extension without hunting for a risky listing. Seven are products the CPSC
+recalled, with their notice photos and titles written the way sellers write them; nine are ordinary toys and baby
+things with public-domain photos. The answer key is `web/try/answers.json`. They are a demonstration, not a test: the
+listing photo and the notice photo are the same picture, which makes a match easier than on a real listing. The four
+tests above are the measure.
+
+| Run (release 0.7.0) | Recalled flagged | Ordinary flagged | Time |
+|---|---|---|---|
+| With Chrome's built-in model | 7 of 7 | 0 of 9 | 52 to 107 s for the page |
+| Without it (words, then the cloud) | 6 of 6 (12-listing version of the page) | 0 of 6 | 45 s |
+
+The end-to-end test (`node tools/e2e.mjs --headful --fresh --profile=C:/tmp/sr-nano-profile --ext=dist/still-recalled-extension --url=https://still-recalled.web.app/try/`)
+passes all 12 steps with the release build: Gemini Nano ran inside the installed extension, the cloud confirmed every
+flag through the App Check bridge, and the engine's settings came from Firebase Remote Config.
+
+**Two label misreads, and what changed.** On a blurred CPSC label photo (Little Tikes swing, recall 17096, model
+615573), one run's cloud reading was 315573, and in another the built-in model read W2670 while the cloud read 313570.
+Under the earlier rules either would have shown "Not among the listed models", a reassurance the label did not support.
+Two rules now stop that (`shared/label.mjs`, tested in `tests/label.test.mjs`):
+- **One character off:** a model number one character from a recalled one, in codes of five or more characters, is
+  shown as "One character from a recalled model", never cleared.
+- **Readings disagree:** when the built-in model's and the cloud's readings share no model number and neither matches,
+  the card says the label is hard to read and asks for a sharper photo.
+
+Re-scored on the saved readings of the 12 CPSC label photos (§9), neither rule changed a result: 8 recalled, 4
+unreadable, and no "near" against the other recall each photo was also checked against.
+
+**A test-profile finding.** Chrome kept the Nano test profile's extension service worker from an earlier build and
+kept running it after the file on disk changed: the label check in that profile went to a background script from before
+the label check existed. Installs from the release zip are not affected. The test scripts now clear that cache before
+each launch (`freshServiceWorkers` in `tools/chrome-args.mjs`).
+
+**Firebase Remote Config.** `cloud_models`, `cloud_check` (an off switch for the cloud step) and `cloud_at_once` are
+read by `liveSettings()` in `extension/src/ai.js`, with the values in the code as the fallback.
 
 ## Reproduce
 

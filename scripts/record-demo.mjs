@@ -3,11 +3,12 @@
 //   <out>/ebay.webm      the page from load to the opened card
 //   <out>/ebay.json      when each moment happened (seconds from the start of the recording), for the edit
 // Usage: node scripts/record-demo.mjs ["crib bedding set"] [--out=C:/tmp/video] [--ext=extension] [--url=<any search page>]
-//        [--prefer=<badge words to open>] [--name=ebay]
+//        [--prefer=<badge words to open>] [--name=ebay] [--label=<item page URL>,<label photo file>]
+// --label: after the card, open that listing's page, add the label photo to its card, and record the label check.
 import puppeteer from 'puppeteer-core';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { builtInModelArgs } from '../tools/chrome-args.mjs';
+import { builtInModelArgs, freshServiceWorkers } from '../tools/chrome-args.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, dflt) => (args.find(a => a.startsWith(`--${name}=`)) || `--${name}=${dflt}`).split('=').slice(1).join('=');
@@ -22,6 +23,7 @@ const host = new URL(searchUrl).hostname.split('.').slice(-2).join('.');
 mkdirSync(out, { recursive: true });
 
 const W = 1440, H = 810;   // recorded at 1.3333x: 1920 x 1080
+freshServiceWorkers(opt('profile', 'C:/tmp/sr-nano-profile'));
 const browser = await puppeteer.launch({
   executablePath: process.env.CHROME || 'C:/Program Files/Google/Chrome/Application/chrome.exe',
   headless: false, pipe: true, ignoreDefaultArgs: true, protocolTimeout: 0,
@@ -32,6 +34,9 @@ const marks = {};
 let t0 = 0;
 const mark = (name, extra = {}) => { marks[name] = { t: +((Date.now() - t0) / 1000).toFixed(2), ...extra }; console.log(marks[name].t.toFixed(1).padStart(6), name, JSON.stringify(extra)); };
 try {
+  // A kept profile can hold an earlier install of the same extension (same key, same id) whose service worker Chrome
+  // keeps running from its old script; remove it first so this run tests the code on disk.
+  await browser.uninstallExtension('hpjnflbbhaokhgcoikhndmjapdiilkaa').catch(() => {});
   const id = await browser.installExtension(extDir);
   const worker = await (await browser.waitForTarget(t => t.type() === 'service_worker' && t.url().includes(id))).worker();
   // Results are kept for 7 days; start empty so the recording shows the real check.
@@ -102,6 +107,44 @@ try {
   await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
   mark('card opened');
   await new Promise(r => setTimeout(r, 9000));
+  mark('card end');
+
+  const labelArg = opt('label', '');
+  if (labelArg) {
+    const [itemUrl, labelFile] = labelArg.split(',');
+    await page.goto(itemUrl, { waitUntil: 'networkidle2' });
+    mark('label page');
+    let inline = null;
+    for (let i = 0; i < 90 && !inline; i++) { inline = await page.$('still-recalled-badge'); if (!inline) await new Promise(r => setTimeout(r, 1000)); }
+    if (!inline) throw new Error('no badge on the label listing');
+    await new Promise(r => setTimeout(r, 1500));
+    const ib = await inline.boundingBox();
+    await page.mouse.move(ib.x + 20, ib.y + 12, { steps: 15 });
+    await page.mouse.click(ib.x + 20, ib.y + 12);
+    mark('label card');
+    await new Promise(r => setTimeout(r, 2500));
+    // Scroll the card down to its label section, the way a shopper would.
+    await page.mouse.move(ib.x + 120, ib.y + 260, { steps: 10 });
+    for (let i = 0; i < 8; i++) { await page.mouse.wheel({ deltaY: 110 }); await new Promise(r => setTimeout(r, 120)); }
+    await new Promise(r => setTimeout(r, 1500));
+    // The card is in a closed shadow root; DevTools can still reach its file input, as a file picker would.
+    const cdp = await page.createCDPSession();
+    const kids = n => [...(n.children || []), ...(n.shadowRoots || [])];
+    const find = n => (n.nodeName === 'INPUT' && (n.attributes || []).join(' ').includes('file') ? n : kids(n).map(find).find(Boolean));
+    const texts = n => [n.nodeType === 3 ? n.nodeValue : '', ...kids(n).flatMap(texts)];
+    const input = find((await cdp.send('DOM.getDocument', { depth: -1, pierce: true })).root);
+    if (!input) throw new Error('no label input in the card');
+    await cdp.send('DOM.setFileInputFiles', { files: [path.resolve(labelFile)], backendNodeId: input.backendNodeId });
+    mark('label added');
+    for (let i = 0; i < 90; i++) {
+      await new Promise(r => setTimeout(r, 500));
+      if (texts((await cdp.send('DOM.getDocument', { depth: -1, pierce: true })).root).includes('Try another photo')) break;
+    }
+    mark('label read');
+    for (let i = 0; i < 4; i++) { await page.mouse.wheel({ deltaY: 120 }); await new Promise(r => setTimeout(r, 120)); }
+    await new Promise(r => setTimeout(r, 7000));
+    mark('label end');
+  }
   mark('end');
   await recorder.stop();
   await page.screenshot({ path: path.join(out, `${name}-card.png`) });

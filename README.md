@@ -14,6 +14,10 @@ Craigslist, 74 were recalled products, padded crib bumpers or infant loungers, a
 flagged 58 of them ($4,540), with 11 false alarms among the 481 listings that were fine. Word rules alone raised 86.
 77% of the listings never left the computer. It knows every CPSC recall since 1973.
 
+**Try it in a minute** on the practice listings at https://still-recalled.web.app/try: sixteen made-up listings, seven
+of them products the CPSC has recalled. With the extension installed, all seven get a badge and the nine ordinary ones
+don't (release 0.7.0, 2026-11-19, with and without Chrome's built-in model).
+
 ## The problem
 
 - **Some of these products have killed infants.** About 100 deaths were reported in Fisher-Price Rock 'n Play inclined
@@ -131,19 +135,22 @@ reviewers from what a shopper sees: the title, the price and one photo. Method, 
 - The cloud saw 23% of the listings across the four tests.
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
-badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. In a Chrome
-profile that has the built-in model, the release build passes all 11 steps on eBay: Gemini Nano looked at 59 of the
-60 listings inside the installed extension, and the cloud confirmed 41 with no errors. Without the model it passes all
-10 on eBay and on Craigslist.
+badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. On the practice listings, release 0.7.0 passes all 12 steps in a Chrome
+profile with the built-in model (Gemini Nano looked at the listings inside the installed extension, the cloud confirmed
+the flags, and the settings came from Firebase Remote Config), and all checks without the model. On live marketplaces
+(release 0.6.0, 2026-11-18) it passed on eBay and Craigslist; see `docs/accuracy.md` §11.
 
 ## Try it
+
+**Practice listings:** https://still-recalled.web.app/try. Install the extension (below) and reload: seven of the
+sixteen get a badge. The Baby Trend stroller's listing has the seller's label photo; add it to the card's label check.
 
 **Web page:** https://still-recalled.web.app. On a phone or computer, add a screenshot, or use "Try it with an example photo".
 
 **Chrome extension**
 1. Download `still-recalled-extension.zip` from the [latest release](https://github.com/usv240/still-recalled/releases/latest) and unzip it.
 2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and choose the unzipped folder.
-3. Search eBay for `baby lounger` (Condition: Used). Badges appear as listings are checked. Click one, or click the
+3. Open the practice listings, or search eBay for `baby lounger` (Condition: Used). Badges appear as listings are checked. Click one, or click the
    toolbar icon for the side panel.
 
 The on-device step needs Chrome 139 or later on a computer that can run Chrome's built-in model. Without it, the
