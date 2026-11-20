@@ -84,6 +84,7 @@ export function readOnce(v) {
  *   "near"        a model number on the label is one character away from one the notice lists: a misread is likely
  *                 (a blurred 6 read as 3 on a real CPSC label photo, 2026-11-19), so it is not ruled out
  *   "not_listed"  the label shows a model number, and it is not among those the notice lists
+ *   "list_cut"    the same, but the notice lists more model numbers than the card keeps, so nothing is ruled out
  *   "year_out"    no model to compare, but the label's year is outside the years the recalled units were sold
  *   "no_models"   the label was read, but the notice gives no model numbers to compare with
  *   "unreadable"  nothing useful could be read
@@ -105,6 +106,8 @@ export function judgeLabel(reading, card) {
       const twin = listed.find(c => oneOff(m, c));
       if (twin) return { ...base, state: 'near', model: m, twin };
     }
+    // The card keeps only some of the notice's model numbers: "not among them" would say nothing.
+    if (card.more) return { ...base, state: 'list_cut', model: read[0] };
     return { ...base, state: 'not_listed', model: read[0] };
   }
   if (yearOut) return { ...base, state: 'year_out', model: read[0] || '' };
@@ -129,6 +132,9 @@ export function labelCopy(v) {
     case 'read_once':
       return { tone: 'possible', title: 'Read once, on this device: not ruled out',
         text: `${v.was === 'year_out' ? `The label is dated ${v.year}; the notice covers units sold ${years(v)}.` : `The label reads ${v.model}; the notice lists ${some(v.listed)}.`} That would point away from this recall, but the label was read only once, by the model on this device, and it can misread a label. Compare the label with the notice yourself before you rely on it.` };
+    case 'list_cut':
+      return { tone: 'possible', title: 'Check this model against the notice',
+        text: `The label reads ${v.model}. This notice lists many model numbers, more than are kept here (${some(v.listed)}, and others), so look for ${v.model} in the notice itself before you rely on this.` };
     case 'not_listed':
       return { tone: 'plain', title: 'Model not listed in this recall',
         text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.` };

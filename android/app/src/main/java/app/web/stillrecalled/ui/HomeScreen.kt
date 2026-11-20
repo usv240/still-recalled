@@ -42,13 +42,18 @@ fun HomeScreen(m: AppModel) {
 
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text("Check a secondhand listing before you buy it", style = MaterialTheme.typography.displaySmall)
+            // Two choices, side by side: who is checking.
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                androidx.compose.material3.FilterChip(selected = !m.owner, onClick = { m.chooseOwner(false) }, label = { Text("I'm buying it") })
+                androidx.compose.material3.FilterChip(selected = m.owner, onClick = { m.chooseOwner(true) }, label = { Text("I own it") })
+            }
+            Text(if (m.owner) "Check what you own before you sell it or pass it on" else "Check a secondhand listing before you buy it", style = MaterialTheme.typography.displaySmall)
             Text("Share a listing or a screenshot from Facebook Marketplace, OfferUp, eBay or any app to Still Recalled. It's checked against every U.S. CPSC recall since 1973 and the infant sleep products linked to deaths.",
                 style = MaterialTheme.typography.bodyLarge, color = Ink.muted)
         }
 
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Primary("Choose a screenshot", { pick.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }, Modifier.fillMaxWidth())
+            Primary(if (m.owner) "Choose a photo of it" else "Choose a screenshot", { pick.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }, Modifier.fillMaxWidth())
             OutlinedTextField(
                 value = typed, onValueChange = { typed = it }, modifier = Modifier.fillMaxWidth(), singleLine = true,
                 label = { Text("Or type what it is") }, placeholder = { Text("Fisher-Price Rock 'n Play") },

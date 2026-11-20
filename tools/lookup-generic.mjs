@@ -38,15 +38,15 @@ for (let run = 0; run < runs; run++) {
       const r = await confirm(listing, device, t.hints, card.image);
       const without = decideFinal(device, { ...r.answer, recall_id: '' }, t.hints, []);
       Object.assign(row, { model: r.model, ms: r.ms, photo: r.photo, asked: r.lookups.map(x => `${x.asked.brand} / ${x.asked.product}`), returned: r.lookups.flatMap(x => x.found),
-        without: `${without.level}${without.kind ? ' ' + without.kind : ''}`, withLookup: `${r.final.level}${r.final.kind ? ' ' + r.final.kind : ''}${r.final.card ? ' ' + r.final.card.id : ''}`,
-        named: !!(r.final.lookedUp && r.final.card), right: !!(r.final.card && r.final.card.id === l.recall), sameProductOtherNotice: !!(r.final.card && r.final.card.id !== l.recall) });
-      console.log(`${l.recall} ${row.right ? 'RIGHT' : row.named ? 'other notice ' + r.final.card.id : 'not named'} | words: ${row.words} | asked: ${row.asked.join('; ') || 'no call'} -> ${row.returned.join(',') || '-'} | ${row.without} -> ${row.withLookup} | ${r.ms} ms ${r.model}`);
+        without: `${without.level}${without.kind ? ' ' + without.kind : ''}`, withLookup: `${r.final.level}${r.final.kind ? ' ' + r.final.kind : ''}${(r.final.card || r.final.alsoRecall) ? ' ' + (r.final.card || r.final.alsoRecall).id : ''}`,
+        named: !!((r.final.lookedUp && r.final.card) || r.final.alsoRecall), right: !!(((r.final.card || r.final.alsoRecall) || {}).id === l.recall), sameProductOtherNotice: !!((r.final.card || r.final.alsoRecall) && (r.final.card || r.final.alsoRecall).id !== l.recall), red: r.final.level === 'likely' && r.final.kind === 'recall' });
+      console.log(`${l.recall} ${row.right ? 'RIGHT' : row.named ? 'other notice' : 'not named'} | words: ${row.words} | asked: ${row.asked.join('; ') || 'no call'} -> ${row.returned.join(',') || '-'} | ${row.without} -> ${row.withLookup} | ${r.ms} ms ${r.model}`);
     } catch (e) { row.error = String(e).slice(0, 160); console.log(l.recall, 'ERROR', row.error); }
     rows.push(row);
   }
 }
 const ok = rows.filter(r => !r.error);
 const summary = { listings: LISTINGS.length, runs, checked: ok.length, wordsFoundRecall: ok.filter(r => /^\d/.test(r.words)).length, cloudAsked: ok.filter(r => r.asked.length).length, deviceReturnedTheRecall: ok.filter(r => r.returned.includes(r.recall)).length,
-  namedRightRecall: ok.filter(r => r.right).length, namedAnotherNotice: ok.filter(r => r.sameProductOtherNotice).length, flaggedWithoutLookup: ok.filter(r => !/^none/.test(r.without)).length, medianMs: ok.map(r => r.ms).sort((a, b) => a - b)[ok.length >> 1] || 0 };
+  namedRightRecall: ok.filter(r => r.right).length, namedAnotherNotice: ok.filter(r => r.sameProductOtherNotice).length, flaggedWithoutLookup: ok.filter(r => !/^none/.test(r.without)).length, redRecallOnTheCloudsWordAlone: ok.filter(r => r.red).length, medianMs: ok.map(r => r.ms).sort((a, b) => a - b)[ok.length >> 1] || 0 };
 writeFileSync('tools/lookup-generic.json', JSON.stringify({ at: new Date().toISOString(), note: 'Made-up listings with generic titles and each recall notice\'s own photo.', summary, rows }, null, 1));
 console.log(JSON.stringify(summary));

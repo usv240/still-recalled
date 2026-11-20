@@ -2,7 +2,7 @@
 // Its signature is the photo pair: the seller's photo beside the photo from the government recall notice.
 import { h, copyWithFeedback, safeUrl } from './dom.js';
 import { icon } from './icons.js';
-import { CPSC_REPORT_URL, isPractice } from '../../../shared/present.mjs';
+import { CPSC_REPORT_URL, isPractice, ownerView } from '../../../shared/present.mjs';
 import { judgeLabel, labelCopy } from '../../../shared/label.mjs';
 
 const DEFAULT_CHECK = {
@@ -102,7 +102,7 @@ function labelSection(r, onLabel) {
     button.disabled = true;
     text.textContent = 'Reading the label…';
     try {
-      const recall = { codes: r.recall.codes || [], from: r.recall.from || 0, to: r.recall.to || 0 };
+      const recall = { codes: r.recall.codes || [], more: !!r.recall.more, from: r.recall.from || 0, to: r.recall.to || 0 };
       const { reading, source, verdict } = await onLabel(await labelPhoto(file), recall);
       const copy = labelCopy(verdict || judgeLabel(reading, recall));
       const read = [reading.brand, ...(reading.model_numbers || []).slice(0, 3), reading.manufacture_date].filter(Boolean).join(' · ');
@@ -140,14 +140,18 @@ function howLine(r) {
  * `onOpenPanel` adds a "More in the side panel" action when given.
  * `onLabel(dataUrl, recall)` reads a label photo and resolves to { reading, source, verdict }; it adds "Settle it with the label".
  * `watch` ({ get(): Promise<boolean>, set(on): Promise }) adds "Watch for recalls", on a listing's own page.
+ * `audience` "owner": for someone who owns the item (about to sell it or give it away): what to do with it and what
+ * the recall offers, in place of the question for a seller and the report.
  */
-export function detailView(r, { compact = false, onOpenPanel = null, onLabel = null, watch = null } = {}) {
+export function detailView(r, { compact = false, onOpenPanel = null, onLabel = null, watch = null, audience = 'buyer' } = {}) {
   const root = h('div', { class: `detail ${compact ? 'is-compact' : ''}` });
+  const owner = audience === 'owner' ? ownerView(r) : null;
+  const mine = owner ? 'Your item' : 'This listing';
 
   root.append(h('div', { class: 'verdict' },
     statusPill(r),
     h('p', { class: 'verdict-line' }, r.verdict),
-    r.action ? h('p', { class: `action-line ${levelClass(r)}` }, r.action) : null,
+    (owner ? owner.action : r.action) ? h('p', { class: `action-line ${levelClass(r)}` }, owner ? owner.action : r.action) : null,
     r.confirmed && r.evidence ? h('p', { class: 'evidence' }, r.evidence) : null,
     r.foundBy ? h('p', { class: 'evidence found-by' }, r.foundBy) : null,
   ));
@@ -158,10 +162,10 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
     // A CPSC warning comes without a photo: the hazard, in CPSC's words, stands beside the listing instead.
     root.append(r.recall.image
       ? h('div', { class: 'pair' },
-        photo(r.listing.image, where ? 'This listing. Outlined: what the cloud check matched.' : 'This listing', r.listing.url, { where }),
+        photo(r.listing.image, where ? `${mine}. Outlined: what the cloud check matched.` : mine, r.listing.url, { where }),
         photo(r.recall.image, 'Recall notice', r.recall.url))
       : h('div', { class: 'pair is-single' },
-        photo(r.listing.image, where ? 'This listing. Outlined: what the cloud check matched.' : 'This listing', r.listing.url, { where }),
+        photo(r.listing.image, where ? `${mine}. Outlined: what the cloud check matched.` : mine, r.listing.url, { where }),
         h('div', { class: 'risk' }, h('p', { class: 'risk-text' }, r.recall.hazard || r.recall.title))));
     // Which units the notice recalls, in one sentence written from the notice.
     if (r.recall.tell && r.recall.tell !== r.check) root.append(h('p', { class: 'tell' }, h('b', {}, 'Which units: '), r.recall.tell));
@@ -173,7 +177,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
     ));
   } else if (r.kind === 'banned' && r.banned) {
     root.append(h('div', { class: 'pair is-single' },
-      photo(r.listing.image, 'This listing', r.listing.url),
+      photo(r.listing.image, mine, r.listing.url),
       h('div', { class: 'risk' }, h('p', { class: 'risk-text' }, r.banned.risk)),
     ));
   }
@@ -187,7 +191,8 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
     await copyWithFeedback(askBtn, r.question, label);
     if (askUrl) window.open(askUrl, '_blank', 'noopener');
   });
-  root.append(h('section', { class: 'check' },
+  if (owner) root.append(h('section', { class: 'check' }, h('h3', {}, owner.heading), ...owner.lines.map(l => h('p', {}, l))));
+  else root.append(h('section', { class: 'check' },
     h('h3', {}, 'Before you buy'),
     // The cloud's own line names the notice's models and label; without it, the type's advice or a plain default.
     h('p', {}, r.recall && r.recall.all ? `${r.recall.warning ? "CPSC's warning covers every unit of this product" : 'Every unit of this product is recalled'}, whatever its model number or date. Check that it is this product: the brand and the photos.`
@@ -208,7 +213,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
 
   // The last step: a report to CPSC, which asks shoppers to report recalled products for sale online at
   // SaferProducts.gov with the listing's link. Offered only for likely flags whose sale the law rules out.
-  if (r.report) {
+  if (r.report && !owner) {
     const repLabel = h('span', {}, 'Report to CPSC');
     const repBtn = h('button', { class: 'btn btn-secondary', type: 'button' }, icon('flag'), repLabel);
     repBtn.addEventListener('click', async () => {
@@ -244,6 +249,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
   root.append(h('div', { class: 'links' },
     source ? h('a', { class: 'link', href: source, target: '_blank', rel: 'noopener' },
       r.kind === 'recall' ? (r.recall.warning ? `Find warning ${r.recall.number} on CPSC's warnings page` : 'Read the CPSC recall notice') : 'CPSC safe sleep guidance', icon('external', { size: 14 })) : null,
+    r.also && !r.also.warning && safeUrl(r.also.url) ? h('a', { class: 'link', href: safeUrl(r.also.url), target: '_blank', rel: 'noopener' }, `CPSC recall ${r.also.number}`, icon('external', { size: 14 })) : null,
     onOpenPanel ? h('button', { class: 'link', type: 'button', onclick: onOpenPanel }, 'More in the side panel', icon('panel', { size: 14 })) : null,
   ));
 

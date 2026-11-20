@@ -182,12 +182,15 @@ export function cloudModel({ system, schema, model = CLOUD_MODEL, tools = null }
       model,
       ...(tools ? { tools } : {}),
       ...(system ? { systemInstruction: system } : {}),
-      generationConfig: schema ? { responseMimeType: 'application/json', responseJsonSchema: schema } : {},
+      // Temperature 0, as on Android: the same listing should get the same answer.
+      generationConfig: schema ? { responseMimeType: 'application/json', responseJsonSchema: schema, temperature: 0 } : { temperature: 0 },
     },
   }, { timeout: CLOUD_TIMEOUT_MS });
 }
 
-const RETRYABLE = /\b(429|500|503|504)\b|high demand|overloaded|RESOURCE_EXHAUSTED|UNAVAILABLE|timed? ?out|abort/i;
+// Errors that mean "try the next model": busy or over quota, and a model that is no longer there (404). A retired
+// preview model must not stop the check while Remote Config's list still names a working one.
+const RETRYABLE = /\b(404|429|500|503|504)\b|NOT_FOUND|high demand|overloaded|RESOURCE_EXHAUSTED|UNAVAILABLE|timed? ?out|abort/i;
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 // "Please retry in 12.3s" in a 429 answer; otherwise a growing wait.
@@ -228,9 +231,11 @@ export async function cloudJson({ system, schema, parts, models = null, retries 
   for (let attempt = 0; attempt <= retries; attempt++) {
     for (const model of models) {
       try {
-        const r = tool && onCall
+        let r = tool && onCall
           ? await askWithTool(cloudModel({ system, schema, model, tools: [{ functionDeclarations: [tool] }] }), parts, onCall)
           : await cloudModel({ system, schema, model }).generateContent(parts);
+        // A model that keeps calling the function after being told to answer leaves no text: ask once more without it.
+        if (tool && onCall && !/\{/.test(r.response.text() || '')) r = await cloudModel({ system, schema, model }).generateContent(parts);
         return { answer: JSON.parse(r.response.text()), model };
       } catch (e) {
         last = e;

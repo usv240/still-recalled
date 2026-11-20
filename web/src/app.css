@@ -123,3 +123,12 @@ h1, h2, h3, p { margin: 0; }
   .step[data-state="active"] .step-mark::after { animation: none; border-color: var(--text); opacity: 0.4; }
   .row, .btn { transition: none; }
 }
+
+/* Who is checking: two choices side by side. The pressed one is filled; the other is quiet. */
+.seg { display: inline-grid; grid-auto-flow: column; gap: 2px; padding: 2px; margin-bottom: 16px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); }
+.seg-btn { min-height: 36px; padding: 0 14px; border: 0; border-radius: var(--radius-chip); background: transparent; color: var(--muted); font: 500 14px/1 var(--font); cursor: pointer; transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 160ms var(--ease-out); }
+.seg-btn:hover { color: var(--text); }
+.seg-btn:active { transform: scale(0.97); }
+.seg-btn[aria-pressed="true"] { background: var(--primary); color: #fff; }
+.seg-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .seg-btn { transition: none; } }

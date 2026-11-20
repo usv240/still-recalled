@@ -82,7 +82,11 @@ export function cardFromCpsc(r, spot = null) {
   const codes = [...new Set([
     ...((spot && spot.models) || []).map(m => String(m).toUpperCase().trim()).filter(m => /\d/.test(m) && m.length >= 3 && m.length <= 24),
     ...modelCodes(product), ...modelCodes(captions), ...modelCodes(r.Description),
-  ])].filter(c => !/^(19|20)\d{2}$/.test(c)).slice(0, 14);       // years are not model numbers
+  ])].filter(c => !/^(19|20)\d{2}$/.test(c));                    // years are not model numbers
+  // A card keeps at most 14 model numbers. A notice with more is marked, so the label check never reads "not listed"
+  // from a list that was cut short.
+  const more = codes.length > 14;
+  codes.length = Math.min(codes.length, 14);
   const productTokens = uniqueTokens(product || title);
 
   // Brand names, each as the words a listing must contain. A brand made only of shop or everyday words is dropped.
@@ -120,6 +124,7 @@ export function cardFromCpsc(r, spot = null) {
     from: spot ? year(spot.sold_from) : 0,
     to: spot ? year(spot.sold_to) : 0,
     all: !!(spot && spot.all_units),
+    ...(more ? { more: true } : {}),
   };
 }
 

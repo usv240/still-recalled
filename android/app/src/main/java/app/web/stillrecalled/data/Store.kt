@@ -28,6 +28,11 @@ class Store(context: Context) {
     private val _live = MutableStateFlow(readLive())
     val live: StateFlow<JSONObject> = _live
 
+    /** Who is checking: someone who owns the item (selling it or giving it away), not a buyer. */
+    var owner: Boolean
+        get() = prefs.getBoolean("owner", false)
+        set(v) { prefs.edit().putBoolean("owner", v).apply() }
+
     var cloudCheck: Boolean
         get() = prefs.getBoolean("cloud", true)
         set(v) { prefs.edit().putBoolean("cloud", v).apply() }

@@ -193,3 +193,21 @@ Limits of this check: I searched the Chrome Web Store ("recall", "recalled produ
 - **Keyword matching on names is not enough.** Platforms already do it, and CR (2019, 2026) shows listings still get through. Sellers use generic names like "baby sleeper/rocker". Matching on *category* (incline, in-bed sleeper, bumper, drop-side) as well as recall names is the gap the sources point to.
 - **Word the flag as "may be", not as a verdict.** A recalled item can be sold legally once the remedy has been applied. Pre-2022 in-bed sleepers and loungers aren't federally banned unless recalled.
 - **Use the strongest legal line only for inclined_sleeper, crib_bumper and recalled items.** Those are illegal to sell regardless of age. Drop-side cribs: "CPSC says very likely illegal to sell."
+
+---
+
+## 9. Voices and polls cited in the write-up
+
+Read at the source on 2026-11-20. Quotes are verbatim.
+
+| Fact | Figure / quote | Source (date) |
+|---|---|---|
+| A mother still searches resale sites for the sleeper her son died in. | "Kiersten Connolly, whose 6-week-old son Jameson died while sleeping in a Rock 'n Play"; photo caption: "Jameson died in a Rock 'n Play in 2015." | NBC News, "Grieving parents demand online listings for Rock 'n Plays be removed before more babies die", https://www.nbcnews.com/news/us-news/grieving-parents-demand-facebook-listings-rock-n-plays-removed-rcna80463 (Apr 21, 2023) |
+| Where and how often she searches. | "Connolly checks Facebook Marketplace, eBay and e-commerce platform Mercari for Rock 'n Play listings every week." | same |
+| Sellers don't use the product's name. | "They're not always listed as Rock 'n Plays, so Connolly also uses other keywords, such as 'inclined sleeper.'" | same |
+| CPSC takedown notices, first half of fiscal 2026. | Acting CPSC chairman Peter Feldman: "In just the first half of fiscal year 2026, the CPSC has issued 82,000 takedown notices." The quote names no recipient; the sentence before it is about teams monitoring online platforms and removing unsafe listings. It covers all sellers, not only secondhand. The article says this is more than double the prior annual average of 37,000. | Consumer Reports, "Recalled Inclined Infant Sleepers Are Still in Use—and Still Dangerous", https://www.consumerreports.org/babies-kids/child-safety/recalled-inclined-infant-sleepers-still-causing-infant-death-a6165343859/ (Apr 23, 2026) |
+| The link to the first owner is lost on resale. | Lisa Trofe, executive director of the Baby Safety Alliance: "Once a product moves into the secondhand market, that connection is lost." | same |
+| Parents find used gear hard to judge. | "two-thirds (63%) feel it is hard to tell whether pre-owned equipment is safe" | C.S. Mott Children's Hospital National Poll on Children's Health, "Used but still safe? Parent views on pre-owned child equipment", vol. 43, issue 3, https://mottpoll.org/reports/used-still-safe-parent-views-pre-owned-child-equipment (May 15, 2023) |
+| Half search for recalls. | When they receive or buy pre-owned equipment, 49% are very likely to do an Internet search for "information about product recalls on the equipment". | same |
+| Who was polled. | "This report is based on responses from 932 parents with at least one child age 0-7." (Ipsos, nationally representative, February 2023) | same |
+| CPSC safety warnings are a separate list. | CPSC's product safety warnings file held 393 notices on 2026-11-20, 144 dated 2026. None is in the recall API. | https://www.cpsc.gov/s3fs-public/recall-data/product_safety_warning_listing.csv (read 2026-11-20) |

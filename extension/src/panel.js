@@ -283,7 +283,7 @@ function unsupportedView() {
       h('li', {}, h('span', {}, 'Mercari'), h('span', {}, 'Search and listings')),
       h('li', {}, h('span', {}, 'Craigslist'), h('span', {}, 'Search and listings'))),
     h('a', { class: 'link', href: 'https://still-recalled.web.app/try/', target: '_blank', rel: 'noopener' }, 'Try the practice listings', icon('external', { size: 14 })),
-    h('p', { class: 'note' }, 'Listings are checked on this computer. Only the ones it flags are double-checked in the cloud.'));
+    h('p', { class: 'note' }, 'Listings are checked on this computer. The ones it flags, and sets or parts it can\'t settle from the words, are double-checked in the cloud.'));
 }
 
 function modelNotice() {
@@ -320,7 +320,7 @@ function settingsView() {
     h('button', { class: 'back', type: 'button', onclick: () => go({ name: 'list' }) }, icon('back'), 'Back'),
     h('div', { class: 'head' }, h('h1', {}, 'Settings')),
     h('div', {},
-      toggle('cloud', 'Cloud double-check', 'Flagged listings only: their title, description, price and photo go to Google Gemini through Firebase, with the recall notice. Everything else stays on this computer.'),
+      toggle('cloud', 'Cloud double-check', 'Listings this computer flags or can\'t settle (bedding sets, possible parts): their title, description, price and photo go to Google Gemini through Firebase, with the recall notice. Everything else stays on this computer.'),
       toggle('badges', 'Badges on listings', 'Show a badge on flagged listings on eBay, Mercari and Craigslist.')),
     h('dl', { class: 'kv' },
       h('div', {}, h('dt', {}, 'On-device model'), h('dd', {}, modelWord)),

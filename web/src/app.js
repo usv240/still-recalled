@@ -6,7 +6,7 @@ import { useCards, triageListing, checkListing, readLabel, refreshRecalls, setLi
 import { hybridJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
 import { SYSTEM, SCHEMA } from '../../shared/judge.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
-import { productName, noMatchLine } from '../../shared/present.mjs';
+import { productName, noMatchLine, ownerView } from '../../shared/present.mjs';
 import { detailView } from '../../extension/src/ui/detail.js';
 import { h, safeUrl } from '../../extension/src/ui/dom.js';
 import { icon, mark } from '../../extension/src/ui/icons.js';
@@ -32,6 +32,16 @@ async function catchUp() {
     try { localStorage.setItem('sr-live', JSON.stringify({ at: Date.now(), built: meta.built, cards: liveCards })); } catch { /* fine */ }
   } catch { /* CPSC unreachable: the built data stands */ }
 }
+// Who is asking: someone about to buy a listing, or someone who owns the item (selling it, giving it away, or using
+// a hand-me-down). The check is the same; the words that follow it are not.
+let audience = 'buyer';
+try { if (localStorage.getItem('sr-audience') === 'owner') audience = 'owner'; } catch { /* no storage */ }
+const WHO = {
+  buyer: { title: 'Check a secondhand listing before you buy', add: 'Add a screenshot', hint: 'or drop or paste an image here',
+    lede: 'Add a screenshot of the listing. Still Recalled compares it with U.S. recall notices and flags baby sleep products that put infants at risk.' },
+  owner: { title: 'Check what you own before you sell it or pass it on', add: 'Add a photo of it', hint: 'the item, its label, or your draft listing',
+    lede: 'Selling it, giving it away, or using a hand-me-down? Add a photo. Still Recalled compares it with U.S. recall notices and safety warnings, and says what to do with it.' },
+};
 let model = 'absent';
 let judge = null;
 let running = false;
@@ -44,11 +54,28 @@ function inputView() {
   const file = h('input', { type: 'file', accept: 'image/*', id: 'file', class: 'visually-hidden' });
   file.addEventListener('change', () => { if (file.files[0]) run({ file: file.files[0] }); file.value = ''; });
 
-  const drop = h('label', { class: 'drop', for: 'file' },
-    icon('image', { size: 24 }),
-    h('span', { class: 'btn btn-primary drop-btn' }, 'Add a screenshot'),
-    h('span', { class: 'drop-hint' }, 'or drop or paste an image here'),
-  );
+  const addLabel = h('span', { class: 'btn btn-primary drop-btn' }, WHO[audience].add);
+  const addHint = h('span', { class: 'drop-hint' }, WHO[audience].hint);
+  const drop = h('label', { class: 'drop', for: 'file' }, icon('image', { size: 24 }), addLabel, addHint);
+
+  // Two choices, so a pair of buttons, not a menu. The words on the page follow the choice.
+  const choose = who => {
+    audience = who;
+    try { localStorage.setItem('sr-audience', who); } catch { /* fine */ }
+    for (const b of seg.children) b.setAttribute('aria-pressed', String(b.dataset.who === who));
+    addLabel.textContent = WHO[who].add;
+    addHint.textContent = WHO[who].hint;
+    $('title').textContent = WHO[who].title;
+    $('lede').textContent = WHO[who].lede;
+  };
+  const seg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Who is checking' },
+    ...[['buyer', "I'm buying it"], ['owner', 'I own it']].map(([who, label]) => {
+      const b = h('button', { class: 'seg-btn', type: 'button', 'data-who': who, 'aria-pressed': String(who === audience) }, label);
+      b.addEventListener('click', () => choose(who));
+      return b;
+    }));
+  $('title').textContent = WHO[audience].title;
+  $('lede').textContent = WHO[audience].lede;
   for (const type of ['dragenter', 'dragover']) drop.addEventListener(type, e => { e.preventDefault(); drop.dataset.over = ''; });
   for (const type of ['dragleave', 'drop']) drop.addEventListener(type, () => delete drop.dataset.over);
   drop.addEventListener('drop', e => {
@@ -68,7 +95,7 @@ function inputView() {
   const example = h('button', { class: 'link', type: 'button' }, 'Try it with an example photo');
   example.addEventListener('click', runExample);
 
-  return h('div', { class: 'input' }, file, drop, form, h('p', { class: 'example' }, example, h('span', { class: 'muted' }, ' (a made-up listing with the photo from a CPSC recall notice)')));
+  return h('div', { class: 'input' }, seg, file, drop, form, h('p', { class: 'example' }, example, h('span', { class: 'muted' }, ' (a made-up listing with the photo from a CPSC recall notice)')));
 }
 
 addEventListener('paste', e => {
@@ -167,20 +194,22 @@ function showResult(r, listing, { example }) {
   const head = h('div', { class: 'result-head' },
     listing.image ? h('img', { class: 'thumb', src: listing.image, alt: '' }) : null,
     h('div', { class: 'result-title' },
-      h('p', { class: 'muted small' }, example ? 'Example photo' : 'You checked'),
+      h('p', { class: 'muted small' }, example ? 'Example photo' : audience === 'owner' ? 'Your item' : 'You checked'),
       h('p', { class: 'strong clamp2' }, listing.title)),
   );
   let body;
   if (r.level === 'possible' || r.level === 'likely') {
-    body = detailView(r, { compact: false, onLabel: readLabel });
+    body = detailView(r, { compact: false, onLabel: readLabel, audience });
   } else {
     body = h('div', { class: 'detail' },
       h('div', { class: 'verdict' },
         h('span', { class: 'pill is-none' }, 'No match found'),
         h('p', { class: 'verdict-line' }, r.why === 'part or toy' || /part or a toy/.test(r.why)
           ? 'This looks like a part or a toy version, not the product itself.'
-          : noMatchLine(noticeCount().toLocaleString('en-US'), monthYear(meta.since)))),
-      h('section', { class: 'check' },
+          : audience === 'owner' ? ownerView(r).action : noMatchLine(noticeCount().toLocaleString('en-US'), monthYear(meta.since)))),
+      audience === 'owner'
+        ? h('section', { class: 'check' }, h('h3', {}, ownerView(r).heading), ...ownerView(r).lines.map(l => h('p', {}, l)))
+        : h('section', { class: 'check' },
         h('h3', {}, 'Before you buy'),
         h('p', {}, 'No match isn\'t the same as safe. A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.'),
         INFANT.test(listing.title) ? h('p', {}, 'For anything a baby sleeps in: a firm, flat surface with nothing else in it.') : null),

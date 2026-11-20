@@ -76,7 +76,8 @@ object Ai {
         }
     }
 
-    private val RETRYABLE = Regex("""\b(429|500|503|504)\b|high demand|overloaded|RESOURCE_EXHAUSTED|UNAVAILABLE|timed? ?out|Timeout""", RegexOption.IGNORE_CASE)
+    // Errors that mean "try the next model": busy or over quota, and a model that is no longer there (404).
+    private val RETRYABLE = Regex("""\b(404|429|500|503|504)\b|NOT_FOUND|high demand|overloaded|RESOURCE_EXHAUSTED|UNAVAILABLE|timed? ?out|Timeout""", RegexOption.IGNORE_CASE)
 
     /**
      * One JSON answer. Tries the cloud models in order when one is busy; when all are over quota, waits and tries
@@ -176,6 +177,9 @@ object Ai {
                         response.text ?: ""
                     }
                     android.util.Log.i("StillRecalled", "model call: $name, ${System.currentTimeMillis() - started} ms")
+                    // A model that keeps calling the function after being told to answer leaves no text: ask once
+                    // more without it.
+                    if (!text.contains('{')) return json(prompt, parts, Mode.CLOUD_ONLY, listOf(name))
                     return Answer(parseJson(text), false, name)
                 } catch (e: Throwable) {
                     last = e

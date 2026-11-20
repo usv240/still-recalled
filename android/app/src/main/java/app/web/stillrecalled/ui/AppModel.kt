@@ -51,6 +51,13 @@ class AppModel(app: Application) : AndroidViewModel(app) {
         private set
     val steps = mutableStateListOf<Checker.Step>()
     var outcome by mutableStateOf<Checker.Outcome?>(null)
+
+    /** Who is checking: a buyer, or the item's owner. The check is the same; the words after it are not. */
+    var owner by mutableStateOf(store.owner)
+        private set
+    fun chooseOwner(v: Boolean) { owner = v; store.owner = v }
+    /** The result said to the owner (shared/present.mjs ownerView): { action, heading, lines }. */
+    var ownerInfo by mutableStateOf<org.json.JSONObject?>(null)
         private set
     var error by mutableStateOf<String?>(null)
         private set
@@ -145,10 +152,12 @@ class AppModel(app: Application) : AndroidViewModel(app) {
                     if (i >= 0) steps[i] = steps[i].copy(state = Checker.State.DONE)
                 }
                 val t0 = System.currentTimeMillis()
+                ownerInfo = null
                 outcome = checker.check(photo, text) { s ->
                     val i = steps.indexOfFirst { it.key == s.key }
                     if (i >= 0) steps[i] = s
                 }
+                outcome?.let { o -> ownerInfo = try { Rules.obj("ownerView", o.result) } catch (_: Throwable) { null } }
                 outcome?.let { o -> android.util.Log.i("StillRecalled", "check done in ${System.currentTimeMillis() - t0} ms: ${o.result.optString("level")} / ${o.result.optString("badge")}; read on device: ${o.readOnDevice}; how: ${o.result.optJSONObject("how")}") }
             } catch (e: Checker.NothingFound) {
                 error = "No product in this image. Try a screenshot that shows the listing's title and photo, or type what it is."

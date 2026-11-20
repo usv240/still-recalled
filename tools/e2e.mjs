@@ -140,14 +140,15 @@ try {
   await page.bringToFront();
   step('settings come from Remote Config', !!(engine && engine.settings && engine.settings.from !== 'defaults'),
     engine && engine.settings ? `${engine.settings.from}: ${engine.settings.models.join(', ')}; cloud ${engine.settings.cloudCheck ? 'on' : 'off'}; ${engine.settings.cloudAtOnce} at once` : JSON.stringify(engine).slice(0, 160));
-  results.flagged = flagged.map(r => ({ level: r.level, badge: r.badge, title: r.listing.title, recall: r.recall ? r.recall.id : '', cloud: r.how.cloudModel, device: r.how.device, lookups: r.how.lookups || [] }));
+  results.flagged = flagged.map(r => ({ level: r.level, badge: r.badge, title: r.listing.title, recall: r.recall ? r.recall.id : '', also: r.also ? r.also.id : '', cloud: r.how.cloudModel, device: r.how.device, lookups: r.how.lookups || [] }));
   // The practice page's inclined sleeper is titled without its product's name. Its recall can only come from the cloud
   // naming the product in the photo and asking this device's field guide (shared/lookup.mjs, function calling).
   if (/still-recalled\.web\.app\/try/.test(urlArg)) {
     const unnamed = flagged.find(r => /^Inclined baby sleeper/.test(r.listing.title));
-    const asked = unnamed && (unnamed.how.lookups || []).find(l => unnamed.recall && l.found.includes(unnamed.recall.id));
+    const named = unnamed && (unnamed.also || unnamed.recall);
+    const asked = named && (unnamed.how.lookups || []).find(l => l.found.includes(named.id));
     step('the cloud asks the device for a product the title does not name', !!asked,
-      asked ? `asked the field guide for "${asked.asked.brand} ${asked.asked.product}"; the device returned ${asked.found.join(', ')}; shown as ${unnamed.badge}, recall ${unnamed.recall.id}` : unnamed ? `flagged as ${unnamed.badge}, but not through a lookup` : 'the listing was not flagged');
+      asked ? `asked the field guide for "${asked.asked.brand} ${asked.asked.product}"; the device returned ${asked.found.join(', ')}; shown as ${unnamed.badge}, with recall ${named.id} named on the card` : unnamed ? `flagged as ${unnamed.badge}, but not through a lookup` : 'the listing was not flagged');
   }
   log(`flagged ${flagged.length}:`, flagged.slice(0, 8).map(r => `${r.level}/${r.badge}: ${r.listing.title.slice(0, 50)}`).join('\n  '));
 

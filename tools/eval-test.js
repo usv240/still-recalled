@@ -17,7 +17,9 @@ const proxied = u => (u && /^https:/.test(u) ? `/img?u=${encodeURIComponent(u)}`
 const log = line => { document.getElementById('log').textContent += line + '\n'; };
 const save = (name, data) => fetch(`/save-as?name=${name}`, { method: 'POST', body: JSON.stringify(data) });
 
-window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '', resume = false } = {}) => {
+// `tag` names a later run of the same test ("-rerun"), so the first, published results are never overwritten.
+window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '', resume = false, tag = '' } = {}) => {
+  const name = `${set}-results-${mode}${tag}`;
   const status = await deviceStatus();
   const modelReady = mode === 'hybrid' && status === 'available';
   if (mode === 'hybrid' && !modelReady) { log(`on-device model is "${status}", not available: stopping`); return; }
@@ -26,7 +28,7 @@ window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '',
   const listings = Object.entries(sets).flatMap(([search, list]) => list.map(l => ({ ...l, search })));
   const pick = only ? listings.filter(l => new RegExp(only, 'i').test(l.title)) : listings;
   // resume: keep the rows a stopped run saved and continue with the rest (the browser tab can freeze mid-run).
-  const prior = resume ? await fetch(`/tools/${set}-results-${mode}.json`).then(r => r.json()).catch(() => null) : null;
+  const prior = resume ? await fetch(`/tools/${name}.json`).then(r => r.json()).catch(() => null) : null;
   const rows = prior ? prior.rows.filter(r => !r.error) : [];
   const done = new Set(rows.map(r => r.id));
   if (prior) log(`resuming after ${rows.length} saved rows`);
@@ -48,15 +50,17 @@ window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '',
       deviceUnit: (r.how && r.how.deviceUnit) || '', cloudMatch: (r.how && r.how.cloudMatch) || '', candidate: (r.how && r.how.candidate) || '',
       cloud: (r.how && r.how.cloudModel) || '', cloudError: (r.how && r.how.cloudError) || '', deviceError: (r.how && r.how.deviceError) || '',
       recall: r.recall ? r.recall.id : null, banned: r.banned ? r.banned.key : null,
+      // The cloud's questions to the device's field guide (shared/lookup.mjs), and a recall shown because of one.
+      lookups: (r.how && r.how.lookups) || [], lookedUp: !!r.lookedUp, also: r.also ? r.also.id : null,
       why: r.why || '', evidence: r.evidence || '', ms: Math.round(performance.now() - start), error: r.error || '',
     };
     rows.push(row);
     document.title = `eval ${mode}: ${rows.length}/${pick.length}`;
     log(`${String(rows.length).padStart(3)} ${String(row.device || '-').padEnd(8)} -> ${String(row.final).padEnd(8)} ${String(row.ms).padStart(5)}ms ${row.cloud ? 'cloud' : '     '} ${listing.title.slice(0, 70)}${row.error ? '  ERR ' + row.error : ''}`);
-    if (rows.length % 5 === 0) await save(`${set}-results-${mode}`, { partial: true, mode, status, totalMs: Math.round(performance.now() - t0), rows });
+    if (rows.length % 5 === 0) await save(name, { partial: true, mode, status, totalMs: Math.round(performance.now() - t0), rows });
   }
   const report = { when: new Date().toISOString(), mode, status, totalMs: Math.round(performance.now() - t0), rows };
-  await save(`${set}-results-${mode}`, report);
+  await save(name, report);
   document.title = `eval ${mode}: done ${rows.length}`;
   return rows.length;
 };

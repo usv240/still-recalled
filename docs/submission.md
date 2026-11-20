@@ -12,11 +12,11 @@ Flags recalled baby gear on secondhand listings. The device screens every listin
 
 Kiersten Connolly's six-week-old son died in a Fisher-Price Rock 'n Play in 2015. Eight years later, NBC News reported
 that she still searches Facebook Marketplace, eBay and Mercari every week for the sleeper, and that she searches
-"inclined sleeper" too, because sellers don't always use the product's name (NBC News, April 21, 2023). CPSC sent
-more than 82,000 takedown requests to online platforms in the first half of fiscal 2026 alone (Consumer Reports, April
-23, 2026). A parent scrolling a listing gets none of that help: 63% of parents say it is hard to tell whether
-pre-owned equipment is safe, and only 49% are very likely to search for recalls (C.S. Mott Children's Hospital
-National Poll, May 2023).
+"inclined sleeper" too, because sellers don't always use the product's name (NBC News, April 21, 2023). CPSC issued
+82,000 takedown notices in the first half of fiscal 2026 alone, its acting chairman said (Consumer Reports, April 23,
+2026). A parent scrolling a listing gets none of that help: 63% of parents say it is hard to tell whether pre-owned
+equipment is safe, and 49% are very likely to search online for recalls when they get some (C.S. Mott Children's
+Hospital National Poll, May 2023, 932 parents).
 
 eBay, Facebook Marketplace and Mercari already ban these products and filter listings by keyword. Consumer Reports
 still found banned or recalled baby gear on all four sites it checked in May and June 2026, because sellers use
@@ -25,7 +25,9 @@ words. Nothing checks what gets through for the buyer.
 
 **Still Recalled puts the warning on the listing itself:** in Chrome on eBay, Mercari and Craigslist search pages, on
 Android for any listing shared to it (Facebook Marketplace and OfferUp included), and on a web page for a screenshot.
-It then keeps watching what you bought, because recall notices reach the first owner and never the next one.
+It then keeps watching what you bought, because recall notices reach the first owner and never the next one. And it
+works from the other side too: choose **I own it**, and the same check tells a seller, or a grandparent with a
+hand-me-down, not to pass it on and what the recall offers its owner. Most sellers don't know (Consumer Reports).
 
 ### The idea: a hybrid that works in both directions
 Most hybrid apps run the small model first and fall back to the cloud. Here each side does a job the other cannot,
@@ -34,8 +36,8 @@ and each can ask the other.
 - **The cloud writes the device's field guide.** Gemini read all 10,089 CPSC recall notices since 1973 and wrote a
   spotter card for each: the brand a seller would type, the product line, the years sold, how to tell a recalled
   unit. It did the same for 392 CPSC safety warnings, the notices CPSC issues when a seller will not recall a
-  product (144 of them in 2026 alone, many for baby loungers and crib bumpers sold online). The recall API does not
-  list those. Each recall CPSC publishes later gets its card from the installed app.
+  product (144 of them in 2026 alone; 189 of the 392 are for babies or children). The recall API does not list
+  those. Each recall CPSC publishes later gets its card from the installed app.
 - **The device screens every listing.** Word rules match the cards, and Gemini Nano looks at each baby product's
   photo, one at a time, starting with the listings on screen. A quiet pill on the listing says where its check is:
   "Looking on this computer", then "Checking in the cloud". A parent's browsing is never sent anywhere to be screened.
@@ -46,8 +48,12 @@ and each can ask the other.
   guide lives on the device. So the confirmation carries one function, `lookup_recalls`, through Firebase AI Logic
   function calling: the cloud names the product, the call comes back to the device, the same code that shortlists
   listings answers it, and the cloud judges the listing against the notice the device found. A recall counts only if
-  it is one the device returned. On ten made-up listings titled this way, the word rules found the recall on none;
-  with the cloud asking, 8 of 10 came back with a recall of the right product, on each of two passes.
+  it is one the device returned, and because no code checked the brand, it is never a red "Recalled product" on the
+  cloud's word alone: it is named on a type flag that already stands, or shown as "Possible recall". On ten made-up
+  listings titled this way, each with its recall notice's own photo and checked one at a time as the web page does,
+  the word rules found the recall on none. With the cloud asking, GENERIC_RESULT. Once, the fallback model took a
+  look-alike rocking sleeper for a Rock 'n Play, which is why the rule above exists. In the extension the function
+  reaches the listings the device flags or can't settle, not every listing.
 - **The device may raise an alarm alone, never reassure alone.** Asked "is this one of the recalled units?", Gemini
   Nano said yes 20 times where the cloud agreed once, so that answer is never acted on. A label reading that would
   point away from a recall is read again in the cloud; with the cloud off, the card says "Read once: not ruled out".
@@ -55,12 +61,13 @@ and each can ask the other.
 ### Try it in a minute
 - **Practice listings:** https://still-recalled.web.app/try has seventeen made-up listings, eight of them recalled
   products, each shown with the photo from its own recall notice. Install the extension (steps on the page) and the
-  eight get a badge. The first is titled "Inclined baby sleeper, pink, folds flat": it comes back **Recalled
-  product**, the Rock 'n Play, found through the cloud's question to the device. Another, a Kidsview bouncer, was
+  eight get a badge. The first is titled "Inclined baby sleeper, pink, folds flat": it comes back **Inclined infant
+  sleeper**, and its card names the Rock 'n Play recall, found through the cloud's question to the device. Another, a Kidsview bouncer, was
   recalled after this version's recall list was built: the extension fetches it from CPSC itself.
 - **Android:** install https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk,
   then share a screenshot of any listing to Still Recalled, or tap "Try it with an example photo" (a made-up listing).
-- **Web page:** https://still-recalled.web.app. Add a screenshot of any listing. No account.
+- **Web page:** https://still-recalled.web.app. Add a screenshot of any listing, or choose **I own it** and add a
+  photo of something you're about to sell. No account.
 
 ### What a parent sees
 A used crib bedding set on eBay, $75. Folded among the sheets are padded bumpers, banned from sale since 2022. The
@@ -87,7 +94,8 @@ JSON schemas on both models.
 | New recall notices | `ONLY_IN_CLOUD` | Each notice CPSC publishes after the build, to write its spotter card |
 
 - **Firebase Remote Config** holds the cloud model list and switches for the cloud steps. A retired preview model is
-  replaced on every install within about an hour, with no update.
+  replaced on every install within about an hour, with no update, and a model that answers "not found" is skipped
+  for the next one in the list.
 - **Android runs the extension's own rules, not a rewrite:** the engine is bundled into the app and run in Jetpack's
   JavaScript sandbox, and the function call is answered there. On the web page and the phone a parent checks one
   listing at a time, so every baby product gets the cloud's look. Where the phone has no Gemini Nano, the device
@@ -112,14 +120,14 @@ can. Each test was run with the engine of its day, so the totals add four versio
 share one engine. The listings were labelled blind by AI reviewers (Claude) from the title, price and photo; a
 person has not yet checked those labels. Every label and every miss is in `docs/accuracy.md`.
 
-**What 0.10.0 added, measured on November 20, 2026.** On the 140 of those listings that went to the cloud, the
-function was called on 12 and changed no listing between flagged and not flagged: no new false alarms. Adding the 392
-warnings changed the word match of 1 listing in 597, which the cloud cleared.
+**On the current engine, November 20, 2026.** RERUN_RESULT
 
-**End to end, November 20, 2026.** The packed extension passed all 16 steps on the live practice page (a new Chrome
-profile, so without Gemini Nano). With Gemini Nano, in a development build, all 8 flagged listings were looked at on
-the laptop first; the 17 listings took 183 s. The Android release APK passed all 10 checks on an Android 16 emulator,
-which has no Gemini Nano, so the phone's on-device path has not been run yet.
+On the 140 listings the first runs sent to the cloud, the function was called on 12 (about half of them for a brand
+the title already named) and had a recall for 2; deciding the same cloud answers with and without it changed no
+listing between flagged and not flagged. Adding the 392 warnings changed the word match of 1 listing in 597, which
+the cloud cleared.
+
+**End to end, November 20, 2026.** E2E_RESULT
 
 ### Challenges
 - **The built-in model agrees too easily.** Asked "same brand?", it said yes to almost anything. So code checks the
@@ -137,7 +145,8 @@ works from the buyer's side, today.
 
 ### What's next
 The Chrome Web Store and Google Play; the Android on-device path on a phone with Gemini Nano; a person's check of the
-test labels; and a "check before you list" mode for sellers, most of whom don't know their item is recalled.
+test labels; real parents and sellers using it; and letting Gemini Nano name a brand it reads in a photo, so the
+extension can ask its own field guide without the cloud.
 
 ### Built with
 Firebase AI Logic (web and Android; `ONLY_ON_DEVICE`, `PREFER_ON_DEVICE`, `ONLY_IN_CLOUD`, function calling), Gemini,
@@ -174,7 +183,8 @@ Children's Health, "Used but still safe?", May 15, 2023. More in `docs/research/
 - **Android:** download https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk on
   an Android 8.0+ phone or emulator and allow the install. Tap "Try it with an example photo", or share a screenshot of
   a listing to Still Recalled. To see a CPSC warning, share the text "Aila+Aiden baby lounger, grey". The first check
-  after install can take up to a minute while the app gets its first App Check token; it says so.
+  after install can take up to a minute while the app gets its first App Check token; it says so. Choose **I own it**
+  on the start screen to see the seller's side.
 - **Extension:** download `still-recalled-extension.zip` from https://github.com/usv240/still-recalled/releases/latest
   and unzip it. Open `chrome://extensions`, turn on Developer mode, click Load unpacked and choose the
   `still-recalled-extension` folder. It also works on eBay, Mercari and Craigslist: search "crib bumper" or "baby

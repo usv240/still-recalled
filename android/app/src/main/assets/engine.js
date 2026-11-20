@@ -222,7 +222,9 @@
       ...modelCodes(product),
       ...modelCodes(captions),
       ...modelCodes(r.Description)
-    ])].filter((c) => !/^(19|20)\d{2}$/.test(c)).slice(0, 14);
+    ])].filter((c) => !/^(19|20)\d{2}$/.test(c));
+    const more = codes.length > 14;
+    codes.length = Math.min(codes.length, 14);
     const productTokens = uniqueTokens(product || title);
     const whole = (b) => String(b || "").replace(/['’]s\b/gi, "s").split(/[^A-Za-z0-9]+/).filter(Boolean).every((w) => w.length >= 2);
     let brands = spot ? phrases((spot.brands || []).filter(whole), 3).map((b) => b.filter((t) => !COMPANY_FORM.has(t))).filter((b) => b.length && !b.every((t) => NOT_BRAND.has(t) || EVERYDAY.has(t) || t.length < 3)) : [];
@@ -254,7 +256,8 @@
       tell: spot ? clip(spot.tell, 220) : "",
       from: spot ? year(spot.sold_from) : 0,
       to: spot ? year(spot.sold_to) : 0,
-      all: !!(spot && spot.all_units)
+      all: !!(spot && spot.all_units),
+      ...more ? { more: true } : {}
     };
   }
   function cardForPrompt(c) {
@@ -492,13 +495,8 @@ ${LOOKUP_SYSTEM}`;
     if (cloud.what_is_for_sale === "toy_or_doll_version" || cloud.what_is_for_sale === "part_or_accessory" && (cloud.banned_type === "none" || device.kind === "recall")) {
       return { ...base2, level: "none", why: "the listing is a part or a toy version, not the product" };
     }
-    const found = cloud.recall_id ? lookedUp.find((c) => c.id === String(cloud.recall_id).trim()) : null;
-    if (found && cloud.matches_recall === "yes") {
-      return { ...base2, level: "likely", kind: "recall", card: found, lookedUp: true, why: "the cloud named the product; the field guide on the device had its recall, and the listing matches the notice" };
-    }
-    if (found && cloud.matches_recall === "cannot_tell") {
-      return { ...base2, level: "possible", kind: "recall", card: found, lookedUp: true, why: "the cloud named the product; the field guide on the device had a recall for it, and the listing does not show which model" };
-    }
+    const hit = cloud.recall_id ? lookedUp.find((c) => c.id === String(cloud.recall_id).trim()) : null;
+    const found = hit && (cloud.matches_recall === "yes" || cloud.matches_recall === "cannot_tell") ? hit : null;
     if (device.kind === "recall" && device.card && !found) {
       if (cloud.matches_recall === "yes") {
         return { ...base2, level: "likely", kind: "recall", card: device.card, why: "matches the recalled product in the notice" };
@@ -510,7 +508,10 @@ ${LOOKUP_SYSTEM}`;
     const cloudBanned = BANNED_TYPES.find((t) => t.key === cloud.banned_type) || null;
     const deviceBanned = device.kind === "banned" ? device.banned : null;
     if (cloudBanned && (hints.length || deviceBanned)) {
-      return { ...base2, level: "likely", kind: "banned", banned: hints[0] || cloudBanned, why: "both models see a product type that may no longer be sold" };
+      return { ...base2, level: "likely", kind: "banned", banned: hints[0] || cloudBanned, why: "both models see a product type that may no longer be sold", ...found ? { alsoRecall: found } : {} };
+    }
+    if (found) {
+      return { ...base2, level: "possible", kind: "recall", card: found, lookedUp: true, why: "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it" };
     }
     if (hints.length) {
       return { ...base2, level: "possible", kind: "banned", banned: hints[0], why: "the wording names a product type that may no longer be sold; the photo did not confirm it" };
@@ -566,6 +567,9 @@ ${LOOKUP_SYSTEM}`;
     return "";
   }
   function verdictLine(r) {
+    if (r.kind === "recall" && r.lookedUp) {
+      return `Looks like the ${productName(r.recall.product)}, ${r.recall.warning ? "which CPSC warned people to stop using in" : "recalled"} ${monthYear(r.recall.date)}. The listing doesn't name it, so check the brand before you buy.`;
+    }
     if (r.kind === "recall" && r.recall.warning) {
       const product = productName(r.recall.product);
       return r.level === "likely" ? `Looks like the ${product}. CPSC warned people to stop using them in ${monthYear(r.recall.date)}; the seller behind them did not recall them.` : `Same brand and kind as the ${product}, which CPSC warned people to stop using in ${monthYear(r.recall.date)}.`;
@@ -582,6 +586,9 @@ ${LOOKUP_SYSTEM}`;
     return "";
   }
   function actionLine(r) {
+    if (r.kind === "recall" && r.lookedUp) {
+      return r.recall && r.recall.all ? "Don't buy it until you know it isn't this product: every unit of it is recalled." : "Don't buy it until the seller shows the brand and the label, and it isn't one of the recalled units.";
+    }
     if (r.kind === "recall" && r.recall && r.recall.warning) {
       return r.level === "possible" ? "Don't buy it until you know it isn't the product CPSC warned about." : "Don't buy it. CPSC has told people to stop using this product.";
     }
@@ -601,6 +608,9 @@ ${LOOKUP_SYSTEM}`;
     return "";
   }
   function sellerQuestion(r) {
+    if (r.kind === "recall" && r.lookedUp) {
+      return `Hi, before I buy: what brand and model is this? Could you send a photo of its label? It looks like a product CPSC ${r.recall.warning ? "warned about" : "recalled"} (${r.recall.warning ? "warning" : "recall"} ${r.recall.number}, ${productName(r.recall.product)}).`;
+    }
     if (r.kind === "recall" && r.recall.warning) {
       return `Hi, before I buy: what brand is this, and could you send a photo of its tag or label? CPSC has warned people to stop using a product like it (warning ${r.recall.number}, ${productName(r.recall.product)}).`;
     }
@@ -612,6 +622,58 @@ ${LOOKUP_SYSTEM}`;
     }
     if (r.kind === "banned") return (TYPE_COPY[r.banned.key] || {}).ask || "";
     return "";
+  }
+  var OWNER_TYPE = {
+    inclined_sleeper: "Selling an inclined infant sleeper has been against federal law since November 2022, whatever its age. CPSC says never to use one for sleep.",
+    crib_bumper: "Selling a padded crib bumper has been against federal law since November 2022, whatever its age. CPSC's advice is nothing in a crib but a fitted sheet.",
+    in_bed_sleeper: "eBay and Facebook Marketplace don't allow loungers and nests, many have been recalled, and CPSC says never to use one for sleep.",
+    drop_side_crib: "CPSC says cribs made before June 28, 2011, drop-sides included, are very likely illegal to sell."
+  };
+  function ownerView(r) {
+    const heading = "Before you sell it or give it away";
+    if (r.kind === "recall" && r.recall) {
+      const c = r.recall;
+      const sure = r.level === "likely";
+      if (c.warning) {
+        return {
+          heading,
+          action: sure ? "Don't sell it or give it away. CPSC has told people to stop using this product." : "Check the brand before you sell it or give it away.",
+          lines: [
+            sure ? "Its seller did not recall it, so there is no refund to claim. CPSC warned the public itself." : `CPSC warned people to stop using the ${productName(c.product)}. If yours is that brand, don't pass it on.`,
+            c.remedy ? `CPSC says: ${c.remedy}` : ""
+          ].filter(Boolean)
+        };
+      }
+      if (!sure || r.lookedUp) {
+        return {
+          heading,
+          action: r.lookedUp ? "Check the brand and the label before you sell it or give it away: it looks like a recalled product." : "Check its label before you sell it or give it away.",
+          lines: [
+            c.all ? `Every unit of the ${productName(c.product)} is recalled. If that is what you have, don't pass it on.` : c.tell ? `Which units are recalled: ${c.tell}` : `Some ${productName(c.product)} are recalled. The notice says which.`,
+            "CPSC says it is illegal to sell any recalled product.",
+            c.remedy ? `If yours is recalled, the recall's remedy: ${c.remedy} The notice says how to claim it.` : ""
+          ].filter(Boolean)
+        };
+      }
+      return {
+        heading,
+        action: "Don't sell it or give it away: it looks like a recalled product.",
+        lines: [
+          "Stop using it. CPSC says it is illegal to sell any recalled product.",
+          c.remedy ? `The recall's remedy: ${c.remedy} The notice says how to claim it.` : "The notice says what the maker offers and how to claim it.",
+          c.all ? "" : c.tell ? `Which units are recalled: ${c.tell}` : ""
+        ].filter(Boolean)
+      };
+    }
+    if (r.kind === "banned" && r.banned) {
+      const rule = OWNER_TYPE[r.banned.key] || "";
+      return r.level === "likely" ? { heading, action: "Don't sell it or give it away.", lines: [rule, r.also ? `It also looks like the ${productName(r.also.product)} (${r.also.warning ? "CPSC warning" : "recall"} ${r.also.number}): the notice says what its maker offers.` : ""].filter(Boolean) } : { heading, action: "Check what it is before you sell it or give it away.", lines: [r.banned.advice, rule].filter(Boolean) };
+    }
+    return {
+      heading,
+      action: "No recall found for what we could read. That doesn't mean it's safe to pass on.",
+      lines: ["Many recalls cover only some models. Find the model number and date on its label and search them at SaferProducts.gov before you sell it or give it away."]
+    };
   }
   var SALE_RULE = {
     inclined_sleeper: "Under the Safe Sleep for Babies Act of 2021 (Pub. L. 117-126) and 16 CFR 1310, inclined sleepers for infants may not be sold after November 12, 2022.",
@@ -658,7 +720,9 @@ ${LOOKUP_SYSTEM}`;
     return `${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][m - 1]} ${y}`;
   }
   function present(listing, decision, how = {}) {
-    const asked = decision.lookedUp && decision.card ? (how.lookups || []).find((l) => l.found.includes(decision.card.id)) : null;
+    const via = decision.alsoRecall || decision.lookedUp && decision.card || null;
+    const asked = via ? (how.lookups || []).find((l) => l.found.includes(via.id)) : null;
+    const askedFor = asked ? clip([asked.asked.brand, asked.asked.product].filter(Boolean).join(" "), 70) : "";
     const base2 = {
       id: listing.id,
       listing: { title: listing.title, price: listing.price || "", image: listing.image || "", url: listing.url || "" },
@@ -686,7 +750,11 @@ ${LOOKUP_SYSTEM}`;
         lookups: (how.lookups || []).slice(0, 3)
       },
       // Said on the card when the listing's own words did not lead to the recall.
-      foundBy: asked ? `The listing's words didn't lead to this recall. Gemini in the cloud named the product (${clip([asked.asked.brand, asked.asked.product].filter(Boolean).join(" "), 70)}) and asked the recall field guide on this device, which had it.` : "",
+      foundBy: !asked ? "" : decision.alsoRecall ? `It looks like the ${productName(via.product)}, ${via.warning ? "which CPSC warned about in" : "recalled"} ${monthYear(via.date)} (${via.warning ? "warning" : "recall"} ${via.id.replace(/^W/, "")}). The listing's words didn't name it: Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.` : `The listing's words didn't lead to this recall. Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`,
+      // A recall shown because the cloud named the product, not because the listing's words did.
+      lookedUp: !!(decision.lookedUp && decision.card && decision.level !== "none"),
+      // On a type flag that stands on its own: the recall the cloud and the device's field guide pointed to as well.
+      also: decision.alsoRecall && decision.level !== "none" ? { id: via.id, number: via.id.replace(/^W/, ""), warning: !!via.warning, product: via.product, date: via.date, url: via.url } : null,
       recall: null,
       banned: null,
       checkedAt: (/* @__PURE__ */ new Date()).toISOString()
@@ -707,6 +775,7 @@ ${LOOKUP_SYSTEM}`;
         // For the card's "which units" line and the label check.
         tell: c.tell || "",
         codes: (c.codes || []).slice(0, 14),
+        more: !!c.more,
         from: c.from || 0,
         to: c.to || 0,
         all: !!c.all
@@ -852,6 +921,7 @@ ${LOOKUP_SYSTEM}`;
         const twin = listed.find((c) => oneOff(m, c));
         if (twin) return { ...base2, state: "near", model: m, twin };
       }
+      if (card.more) return { ...base2, state: "list_cut", model: read[0] };
       return { ...base2, state: "not_listed", model: read[0] };
     }
     if (yearOut) return { ...base2, state: "year_out", model: read[0] || "" };
@@ -884,6 +954,12 @@ ${LOOKUP_SYSTEM}`;
           tone: "possible",
           title: "Read once, on this device: not ruled out",
           text: `${v.was === "year_out" ? `The label is dated ${v.year}; the notice covers units sold ${years(v)}.` : `The label reads ${v.model}; the notice lists ${some(v.listed)}.`} That would point away from this recall, but the label was read only once, by the model on this device, and it can misread a label. Compare the label with the notice yourself before you rely on it.`
+        };
+      case "list_cut":
+        return {
+          tone: "possible",
+          title: "Check this model against the notice",
+          text: `The label reads ${v.model}. This notice lists many model numbers, more than are kept here (${some(v.listed)}, and others), so look for ${v.model} in the notice itself before you rely on this.`
         };
       case "not_listed":
         return {
@@ -1057,6 +1133,10 @@ ${LOOKUP_SYSTEM}`;
     finish(listing, device, cloud, hints, how, lookedUp) {
       const decision = cloud ? decideFinal(device, cloud, hints, lookedUp || []) : device.level === "none" ? device : decideFinal(device, null, hints);
       return out(present(listing, decision, how));
+    },
+    /** The same result, said to someone who owns the item: { action, heading, lines }. */
+    ownerView(result) {
+      return out(ownerView(result));
     },
     judgeLabel(reading, recall) {
       return out(judgeLabel(reading, recall));

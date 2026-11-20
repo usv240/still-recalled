@@ -120,11 +120,17 @@ test('the cloud asks the device: a recall it names counts only when the device r
   // The device flagged only a type (the title never names the product).
   const device = { level: 'possible', kind: 'banned', card: null, banned: { key: 'inclined_sleeper' } };
   const cloud = { what_is_for_sale: 'the_product', matches_recall: 'yes', banned_type: 'inclined_sleeper', evidence: 'e', check_before_buying: 'c', where: [], recall_id: '19-112' };
+  // A type flag that stands on its own stays the flag; the recall rides along. A recall found by the cloud naming the
+  // product never becomes a red "recalled product" by itself.
   const named = decideFinal(device, cloud, [{ key: 'inclined_sleeper' }], cands.map(c => c.card));
   assert.equal(named.level, 'likely');
-  assert.equal(named.kind, 'recall');
-  assert.equal(named.card.id, '19-112');
-  assert.equal(named.lookedUp, true);
+  assert.equal(named.kind, 'banned');
+  assert.equal(named.alsoRecall.id, '19-112');
+  const noType = decideFinal({ level: 'none', kind: null, card: null, banned: null, secondOpinion: true }, { ...cloud, banned_type: 'none' }, [], cands.map(c => c.card));
+  assert.equal(noType.level, 'possible');
+  assert.equal(noType.kind, 'recall');
+  assert.equal(noType.card.id, '19-112');
+  assert.equal(noType.lookedUp, true);
   // A recall number the device never returned is ignored: the type flag stands instead.
   const invented = decideFinal(device, { ...cloud, recall_id: '99-999' }, [{ key: 'inclined_sleeper' }], cands.map(c => c.card));
   assert.equal(invented.kind, 'banned');

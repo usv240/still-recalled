@@ -106,13 +106,12 @@ export function decideFinal(device, cloud, hints, lookedUp = []) {
   }
 
   // The cloud named the product, asked the device's field guide, and judged the listing against what it returned.
-  const found = cloud.recall_id ? lookedUp.find(c => c.id === String(cloud.recall_id).trim()) : null;
-  if (found && cloud.matches_recall === 'yes') {
-    return { ...base, level: 'likely', kind: 'recall', card: found, lookedUp: true, why: 'the cloud named the product; the field guide on the device had its recall, and the listing matches the notice' };
-  }
-  if (found && cloud.matches_recall === 'cannot_tell') {
-    return { ...base, level: 'possible', kind: 'recall', card: found, lookedUp: true, why: 'the cloud named the product; the field guide on the device had a recall for it, and the listing does not show which model' };
-  }
+  // A recall found this way rests on the cloud recognising the product: the listing's words did not name it, so no
+  // code checked the brand, and look-alikes exist (many rocking sleepers resemble the Rock 'n Play). It is shown, but
+  // it never becomes a red "Recalled product" on its own: at most a soft flag, or a line on a type flag that stands
+  // without it.
+  const hit = cloud.recall_id ? lookedUp.find(c => c.id === String(cloud.recall_id).trim()) : null;
+  const found = hit && (cloud.matches_recall === 'yes' || cloud.matches_recall === 'cannot_tell') ? hit : null;
 
   if (device.kind === 'recall' && device.card && !found) {
     if (cloud.matches_recall === 'yes') {
@@ -128,7 +127,10 @@ export function decideFinal(device, cloud, hints, lookedUp = []) {
   const deviceBanned = device.kind === 'banned' ? device.banned : null;
   if (cloudBanned && (hints.length || deviceBanned)) {
     // Trust the listing's words for which type when there are any; models confuse look-alike types.
-    return { ...base, level: 'likely', kind: 'banned', banned: hints[0] || cloudBanned, why: 'both models see a product type that may no longer be sold' };
+    return { ...base, level: 'likely', kind: 'banned', banned: hints[0] || cloudBanned, why: 'both models see a product type that may no longer be sold', ...(found ? { alsoRecall: found } : {}) };
+  }
+  if (found) {
+    return { ...base, level: 'possible', kind: 'recall', card: found, lookedUp: true, why: 'the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it' };
   }
   if (hints.length) {
     return { ...base, level: 'possible', kind: 'banned', banned: hints[0], why: 'the wording names a product type that may no longer be sold; the photo did not confirm it' };

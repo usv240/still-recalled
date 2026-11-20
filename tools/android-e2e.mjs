@@ -83,10 +83,11 @@ try {
   await check('shared text: Graco swing', () => share('Graco baby swing, wind-up, still swings'), lv => lv !== 'none');
   // CPSC warned about these loungers in 2026; their seller never recalled them, so the recall API has no notice.
   await check('shared text: a product CPSC warned about (Aila+Aiden lounger)', () => share('Aila+Aiden baby lounger, grey, like new'), (lv, badge, how) => lv !== 'none' && /^W26-742 /.test(how.candidate || '') && /CPSC warning/.test(badge));
-  // The words name no brand or product line, so the phone's word rules find only a type. The cloud knows the product
-  // by the seller's description, calls lookup_recalls, and the field guide on the phone answers (function calling).
-  await check('shared text: a product described without its name (the cloud asks the phone)', () => share('Inclined baby sleeper, pink, folds flat. It is the rock and play one everyone had, used 3 months'),
-    (lv, badge, how) => lv !== 'none' && !how.candidate && (how.lookups || []).some(l => l.found.length) && /Recalled product|Possible recall/.test(badge));
+  // The words name no brand, only a nickname ("the rock and play one"), so the phone's word rules find only a type.
+  // The cloud knows the product by that description, calls lookup_recalls, and the field guide on the phone answers
+  // (function calling). The type flag stands; the recall is named on the card.
+  await check('shared text: no brand, only a nickname (the cloud asks the phone)', () => share('Inclined baby sleeper, pink, folds flat. It is the rock and play one everyone had, used 3 months'),
+    (lv, _badge, how) => lv !== 'none' && !how.candidate && (how.lookups || []).some(l => l.found.includes('23088')));
   await check('shared text: wooden blocks', () => share('Wooden building blocks, painted'), lv => lv === 'none');
   await check('shared text: recall published after the build (Kidsview, 2026-11-19)', () => share('Kidsview baby bouncer with toy bar, khaki'), (lv, _b, how) => lv !== 'none');
 

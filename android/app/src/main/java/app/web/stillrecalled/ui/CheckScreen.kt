@@ -102,6 +102,8 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
     val ctx = LocalContext.current
     val level = r.optString("level")
     val flagged = level == "likely" || level == "possible"
+    // For the item's owner: what to do with it, in place of the question for a seller and the report.
+    val owner = if (m.owner) m.ownerInfo else null
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
             Thumb(null, o.photo, 56.dp)
@@ -112,13 +114,13 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
         }
 
         if (!flagged) {
-            NoMatch(r)
+            NoMatch(r, owner)
         } else {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Pill(r.optString("badge"), level)
                 Text(r.optString("verdict"), style = MaterialTheme.typography.headlineSmall)
                 // What to do, in one line: a flag that only names a product leaves "so can I buy it?" open.
-                r.optString("action").takeIf { it.isNotEmpty() }?.let {
+                (owner?.optString("action") ?: r.optString("action")).takeIf { it.isNotEmpty() }?.let {
                     Row(Modifier.height(IntrinsicSize.Min)) {
                         Box(Modifier.width(3.dp).fillMaxHeight().background(if (level == "likely") Ink.likely else Ink.possible))
                         Text(it, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(start = 10.dp))
@@ -129,11 +131,11 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
                 r.optString("foundBy").takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Ink.muted) }
             }
             Photos(r, o)
-            BeforeYouBuy(r)
+            if (owner != null) OwnerCard(owner) else BeforeYouBuy(r)
             val recall = r.optJSONObject("recall")
             if (r.optString("kind") == "recall" && recall != null && !recall.optBoolean("all") &&
                 ((recall.optJSONArray("codes")?.length() ?: 0) > 0 || recall.optInt("from") > 0)) LabelCheck(m)
-            Report(r)
+            if (owner == null) Report(r)
             if (recall != null) Facts(recall)
             val src = recall?.optString("url") ?: r.optJSONObject("banned")?.optString("source")
             if (!src.isNullOrEmpty()) LinkButton(when {
@@ -148,8 +150,26 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
 }
 
 @Composable
-private fun NoMatch(r: JSONObject) {
+private fun OwnerCard(owner: JSONObject) {
+    SectionCard {
+        Heading(owner.optString("heading"))
+        val lines = owner.optJSONArray("lines")
+        if (lines != null) for (i in 0 until lines.length()) Text(lines.getString(i), style = MaterialTheme.typography.bodyMedium)
+    }
+}
+
+@Composable
+private fun NoMatch(r: JSONObject, owner: JSONObject? = null) {
     val ctx = LocalContext.current
+    if (owner != null) {
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Pill("No match found", "none")
+            Text(owner.optString("action"), style = MaterialTheme.typography.headlineSmall)
+            OwnerCard(owner)
+            LinkButton("Search SaferProducts.gov ↗", { ctx.open("https://www.saferproducts.gov/") })
+        }
+        return
+    }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Pill("No match found", "none")
         Text(if (Regex("part or (a )?toy").containsMatchIn(r.optString("why"))) "This looks like a part or a toy version, not the product itself."

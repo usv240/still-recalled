@@ -28,7 +28,9 @@ export function noticeFromCpsc(r) {
 
 /** Fetch one notice by recall number. `fetchImpl` lets tests and pages pass their own fetch. */
 export async function fetchNotice(id, fetchImpl = fetch) {
-  const res = await fetchImpl(`${API}?format=json&RecallNumber=${encodeURIComponent(id)}`);
+  // A recall API that stops answering must not hold a listing at "checking": give up after 15 s, and the flag
+  // stands unconfirmed.
+  const res = await fetchImpl(`${API}?format=json&RecallNumber=${encodeURIComponent(id)}`, { signal: AbortSignal.timeout(15000) });
   if (!res.ok) throw new Error(`recall API ${res.status}`);
   const list = await res.json();
   const r = Array.isArray(list) && list.find(x => String(x.RecallNumber) === String(id));

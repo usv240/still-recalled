@@ -10,7 +10,7 @@ import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
 import { noticeFromCpsc } from '../../shared/notice.mjs';
 import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal } from '../../shared/confirm.mjs';
 import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse } from '../../shared/lookup.mjs';
-import { present, productName } from '../../shared/present.mjs';
+import { present, productName, ownerView } from '../../shared/present.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
 import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, labelCopy, readOnce } from '../../shared/label.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
@@ -108,6 +108,9 @@ globalThis.SR = {
     const decision = cloud ? decideFinal(device, cloud, hints, lookedUp || []) : device.level === 'none' ? device : decideFinal(device, null, hints);
     return out(present(listing, decision, how));
   },
+
+  /** The same result, said to someone who owns the item: { action, heading, lines }. */
+  ownerView(result) { return out(ownerView(result)); },
 
   judgeLabel(reading, recall) { return out(judgeLabel(reading, recall)); },
   settleReadings(device, cloud, recall) { return out(settleReadings(device, cloud, recall)); },

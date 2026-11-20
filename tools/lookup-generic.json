@@ -1,17 +1,18 @@
 {
- "at": "2026-11-20T07:40:19.654Z",
+ "at": "2026-11-20T08:25:40.258Z",
  "note": "Made-up listings with generic titles and each recall notice's own photo.",
  "summary": {
   "listings": 10,
   "runs": 2,
   "checked": 20,
   "wordsFoundRecall": 0,
-  "cloudAsked": 16,
-  "deviceReturnedTheRecall": 14,
-  "namedRightRecall": 14,
+  "cloudAsked": 15,
+  "deviceReturnedTheRecall": 13,
+  "namedRightRecall": 13,
   "namedAnotherNotice": 2,
   "flaggedWithoutLookup": 12,
-  "medianMs": 16226
+  "redRecallOnTheCloudsWordAlone": 0,
+  "medianMs": 23545
  },
  "rows": [
   {
@@ -20,7 +21,7 @@
    "title": "Inclined baby sleeper, pink, folds flat",
    "words": "type: inclined_sleeper",
    "model": "gemini-4-hydrogen",
-   "ms": 9436,
+   "ms": 10841,
    "photo": true,
    "asked": [
     "Fisher-Price / Rock 'n Play sleeper"
@@ -30,50 +31,50 @@
     "19105"
    ],
    "without": "likely banned",
-   "withLookup": "likely recall 23088",
+   "withLookup": "likely banned 23088",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "21198",
    "product": "Boppy Original Newborn Loungers, Boppy Preferred Newborn Loungers and Pottery Barn Kids Boppy Newborn Loungers",
    "title": "Newborn lounger pillow, washed cover",
    "words": "type: in_bed_sleeper",
-   "model": "gemini-4-hydrogen",
-   "ms": 12781,
+   "model": "gemini-3.5-flash-lite",
+   "ms": 92011,
    "photo": true,
-   "asked": [
-    "Boppy / Newborn Lounger"
-   ],
-   "returned": [
-    "21198"
-   ],
-   "without": "possible banned",
-   "withLookup": "likely recall 21198",
-   "named": true,
-   "right": true,
-   "sameProductOtherNotice": false
+   "asked": [],
+   "returned": [],
+   "without": "likely banned",
+   "withLookup": "likely banned",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "23089",
    "product": "All models of Kids2 Rocking Sleepers",
    "title": "Baby rocking sleeper, vibrates",
    "words": "type: inclined_sleeper",
-   "model": "gemini-4-hydrogen",
-   "ms": 16045,
+   "model": "gemini-3.5-flash-lite",
+   "ms": 93524,
    "photo": true,
    "asked": [
-    "Kids II / Rocking Sleeper"
+    "Fisher-Price / Rock 'n Play Sleeper"
    ],
    "returned": [
-    "23089"
+    "23088",
+    "19105"
    ],
    "without": "likely banned",
-   "withLookup": "likely recall 23089",
+   "withLookup": "likely banned 23088",
    "named": true,
-   "right": true,
-   "sameProductOtherNotice": false
+   "right": false,
+   "sameProductOtherNotice": true,
+   "red": false
   },
   {
    "recall": "22200",
@@ -81,7 +82,7 @@
    "title": "Baby swing, plugs in, five motions",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 19342,
+   "ms": 35242,
    "photo": true,
    "asked": [
     "4moms / MamaRoo"
@@ -93,7 +94,8 @@
    "withLookup": "possible recall 22200",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "20062",
@@ -101,10 +103,10 @@
    "title": "Rocking seat for baby, grey",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 18019,
+   "ms": 9452,
    "photo": true,
    "asked": [
-    "Graco / Little Lounger Rocking Seat"
+    "Graco / Little Lounger rocking seat"
    ],
    "returned": [
     "20062"
@@ -113,7 +115,8 @@
    "withLookup": "possible recall 20062",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "20059",
@@ -121,10 +124,10 @@
    "title": "Bedside baby sleeper, folds for travel",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 58432,
+   "ms": 24080,
    "photo": true,
    "asked": [
-    "Summer Infant / SwaddleMe By Your Bed Sleeper"
+    "Summer Infant / SwaddleMe By Your Bed Inclined Sleeper"
    ],
    "returned": [
     "W20-055",
@@ -134,7 +137,8 @@
    "withLookup": "possible recall 20059",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "12247",
@@ -142,7 +146,7 @@
    "title": "Baby floor seat, foam",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 30958,
+   "ms": 40794,
    "photo": true,
    "asked": [
     "Bumbo / floor seat"
@@ -155,7 +159,8 @@
    "withLookup": "possible recall 12247",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "13083",
@@ -163,19 +168,21 @@
    "title": "Baby recliner, foam with fitted cover",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 23101,
+   "ms": 15068,
    "photo": true,
    "asked": [
-    "Baby Matters / Nap Nanny"
+    "Baby Matters / Nap Nanny infant recliner"
    ],
    "returned": [
-    "10309"
+    "10309",
+    "13083"
    ],
    "without": "none",
-   "withLookup": "likely recall 10309",
+   "withLookup": "possible recall 13083",
    "named": true,
-   "right": false,
-   "sameProductOtherNotice": true
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "20052",
@@ -183,7 +190,7 @@
    "title": "Compact stroller, folds small, grey",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 29891,
+   "ms": 23545,
    "photo": true,
    "asked": [],
    "returned": [],
@@ -191,7 +198,8 @@
    "withLookup": "none",
    "named": false,
    "right": false,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "26569",
@@ -199,7 +207,7 @@
    "title": "Baby nest lounger, grey stars",
    "words": "type: in_bed_sleeper",
    "model": "gemini-4-hydrogen",
-   "ms": 6215,
+   "ms": 7005,
    "photo": true,
    "asked": [],
    "returned": [],
@@ -207,7 +215,8 @@
    "withLookup": "likely banned",
    "named": false,
    "right": false,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "23088",
@@ -215,20 +224,21 @@
    "title": "Inclined baby sleeper, pink, folds flat",
    "words": "type: inclined_sleeper",
    "model": "gemini-4-hydrogen",
-   "ms": 9532,
+   "ms": 6742,
    "photo": true,
    "asked": [
-    "Fisher-Price / Rock 'n Play Sleeper"
+    "Fisher-Price / Rock 'n Play sleeper"
    ],
    "returned": [
     "23088",
     "19105"
    ],
    "without": "likely banned",
-   "withLookup": "likely recall 23088",
+   "withLookup": "likely banned 23088",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "21198",
@@ -236,7 +246,7 @@
    "title": "Newborn lounger pillow, washed cover",
    "words": "type: in_bed_sleeper",
    "model": "gemini-4-hydrogen",
-   "ms": 10051,
+   "ms": 102073,
    "photo": true,
    "asked": [
     "Boppy / Newborn Lounger"
@@ -245,10 +255,11 @@
     "21198"
    ],
    "without": "possible banned",
-   "withLookup": "likely recall 21198",
+   "withLookup": "possible recall 21198",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "23089",
@@ -256,7 +267,7 @@
    "title": "Baby rocking sleeper, vibrates",
    "words": "type: inclined_sleeper",
    "model": "gemini-4-hydrogen",
-   "ms": 12502,
+   "ms": 9797,
    "photo": true,
    "asked": [
     "Kids II / Rocking Sleeper"
@@ -265,10 +276,11 @@
     "23089"
    ],
    "without": "likely banned",
-   "withLookup": "likely recall 23089",
+   "withLookup": "likely banned 23089",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "22200",
@@ -276,7 +288,7 @@
    "title": "Baby swing, plugs in, five motions",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 68355,
+   "ms": 30037,
    "photo": true,
    "asked": [
     "4moms / MamaRoo"
@@ -288,7 +300,8 @@
    "withLookup": "possible recall 22200",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "20062",
@@ -296,10 +309,10 @@
    "title": "Rocking seat for baby, grey",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 12764,
+   "ms": 10180,
    "photo": true,
    "asked": [
-    "Graco / Little Lounger rocking seat"
+    "Graco / Little Lounger Rocking Seat"
    ],
    "returned": [
     "20062"
@@ -308,7 +321,8 @@
    "withLookup": "possible recall 20062",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "20059",
@@ -316,7 +330,7 @@
    "title": "Bedside baby sleeper, folds for travel",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 11185,
+   "ms": 10827,
    "photo": true,
    "asked": [
     "Summer Infant / SwaddleMe By Your Bed Sleeper"
@@ -329,7 +343,8 @@
    "withLookup": "possible recall 20059",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "12247",
@@ -337,20 +352,21 @@
    "title": "Baby floor seat, foam",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 53761,
+   "ms": 35102,
    "photo": true,
    "asked": [
-    "Bumbo / floor seat"
+    "Bumbo / Baby floor seat"
    ],
    "returned": [
     "12247",
     "08046"
    ],
    "without": "none",
-   "withLookup": "likely recall 12247",
+   "withLookup": "possible recall 12247",
    "named": true,
    "right": true,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "13083",
@@ -358,27 +374,28 @@
    "title": "Baby recliner, foam with fitted cover",
    "words": "nothing",
    "model": "gemini-4-hydrogen",
-   "ms": 16226,
+   "ms": 12867,
    "photo": true,
    "asked": [
-    "Nap Nanny / infant recliner"
+    "Baby Matters / Nap Nanny"
    ],
    "returned": [
     "10309"
    ],
    "without": "none",
-   "withLookup": "likely recall 10309",
+   "withLookup": "possible recall 10309",
    "named": true,
    "right": false,
-   "sameProductOtherNotice": true
+   "sameProductOtherNotice": true,
+   "red": false
   },
   {
    "recall": "20052",
    "product": "Tango Mini Strollers",
    "title": "Compact stroller, folds small, grey",
    "words": "nothing",
-   "model": "gemini-4-hydrogen",
-   "ms": 34184,
+   "model": "gemini-3.5-flash-lite",
+   "ms": 91717,
    "photo": true,
    "asked": [],
    "returned": [],
@@ -386,7 +403,8 @@
    "withLookup": "none",
    "named": false,
    "right": false,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   },
   {
    "recall": "26569",
@@ -394,7 +412,7 @@
    "title": "Baby nest lounger, grey stars",
    "words": "type: in_bed_sleeper",
    "model": "gemini-4-hydrogen",
-   "ms": 6735,
+   "ms": 8917,
    "photo": true,
    "asked": [],
    "returned": [],
@@ -402,7 +420,8 @@
    "withLookup": "likely banned",
    "named": false,
    "right": false,
-   "sameProductOtherNotice": false
+   "sameProductOtherNotice": false,
+   "red": false
   }
  ]
 }

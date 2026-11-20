@@ -47,3 +47,12 @@ test('one reading on the device, with no second reading in the cloud, never rule
   const hit = readOnce(judgeLabel({ readable: true, model_numbers: ['615573'], manufacture_date: '', year: 0, brand: '' }, card));
   assert.equal(hit.state, 'recalled');
 });
+
+test('a notice with more model numbers than the card keeps never reads "not listed"', () => {
+  const reading = { readable: true, model_numbers: ['ZZ99123'], manufacture_date: '', year: 0, brand: '' };
+  assert.equal(judgeLabel(reading, { codes: ['AB12345'], from: 0, to: 0 }).state, 'not_listed');
+  const cut = judgeLabel(reading, { codes: ['AB12345'], more: true, from: 0, to: 0 });
+  assert.equal(cut.state, 'list_cut');
+  assert.equal(labelCopy(cut).tone, 'possible');
+  assert.equal(judgeLabel({ ...reading, model_numbers: ['AB12345'] }, { codes: ['AB12345'], more: true, from: 0, to: 0 }).state, 'recalled');
+});

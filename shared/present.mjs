@@ -56,6 +56,10 @@ export function badgeText(r) {
 
 /** One sentence saying what was found, for the panel row and the top of the detail. */
 export function verdictLine(r) {
+  // Found by the cloud's question to the device's field guide: the listing itself does not name the product.
+  if (r.kind === 'recall' && r.lookedUp) {
+    return `Looks like the ${productName(r.recall.product)}, ${r.recall.warning ? 'which CPSC warned people to stop using in' : 'recalled'} ${monthYear(r.recall.date)}. The listing doesn't name it, so check the brand before you buy.`;
+  }
   if (r.kind === 'recall' && r.recall.warning) {
     const product = productName(r.recall.product);
     return r.level === 'likely'
@@ -81,6 +85,11 @@ export function verdictLine(r) {
  * I buy it?". Advice, not a verdict on the listing, which the tool can be wrong about.
  */
 export function actionLine(r) {
+  if (r.kind === 'recall' && r.lookedUp) {
+    return r.recall && r.recall.all
+      ? "Don't buy it until you know it isn't this product: every unit of it is recalled."
+      : "Don't buy it until the seller shows the brand and the label, and it isn't one of the recalled units.";
+  }
   if (r.kind === 'recall' && r.recall && r.recall.warning) {
     return r.level === 'possible'
       ? "Don't buy it until you know it isn't the product CPSC warned about."
@@ -111,6 +120,10 @@ export function noMatchLine(count, since) {
 
 /** A message the shopper can paste to the seller. Plain, polite, and asks for the one fact that settles it. */
 export function sellerQuestion(r) {
+  if (r.kind === 'recall' && r.lookedUp) {
+    return `Hi, before I buy: what brand and model is this? Could you send a photo of its label? ` +
+      `It looks like a product CPSC ${r.recall.warning ? 'warned about' : 'recalled'} (${r.recall.warning ? 'warning' : 'recall'} ${r.recall.number}, ${productName(r.recall.product)}).`;
+  }
   if (r.kind === 'recall' && r.recall.warning) {
     return `Hi, before I buy: what brand is this, and could you send a photo of its tag or label? ` +
       `CPSC has warned people to stop using a product like it (warning ${r.recall.number}, ${productName(r.recall.product)}).`;
@@ -130,6 +143,51 @@ export function sellerQuestion(r) {
 // with a screenshot and a link to the listing (cpsc.gov, FAQs for Buying and Selling Products Online, read
 // 2026-11-15). Its e-commerce team asks sites to take recalled and banned products down.
 export const CPSC_REPORT_URL = 'https://www.saferproducts.gov/IncidentReporting';
+
+// For the person who owns the thing: about to list it, give it away, or keep using a hand-me-down. Most sellers of
+// recalled baby gear do not know it is recalled (Consumer Reports, September 2026), and a listing that is never posted
+// needs no takedown. Same check, other words: what to do with it, and what the recall offers its owner.
+const OWNER_TYPE = {
+  inclined_sleeper: 'Selling an inclined infant sleeper has been against federal law since November 2022, whatever its age. CPSC says never to use one for sleep.',
+  crib_bumper: 'Selling a padded crib bumper has been against federal law since November 2022, whatever its age. CPSC\'s advice is nothing in a crib but a fitted sheet.',
+  in_bed_sleeper: 'eBay and Facebook Marketplace don\'t allow loungers and nests, many have been recalled, and CPSC says never to use one for sleep.',
+  drop_side_crib: 'CPSC says cribs made before June 28, 2011, drop-sides included, are very likely illegal to sell.',
+};
+
+/**
+ * What the owner of a checked item reads: { action, heading, lines }. `r` is a presented result (present()), flagged
+ * or not. Advice, in CPSC's terms; never "safe to sell".
+ */
+export function ownerView(r) {
+  const heading = 'Before you sell it or give it away';
+  if (r.kind === 'recall' && r.recall) {
+    const c = r.recall;
+    const sure = r.level === 'likely';
+    if (c.warning) {
+      return { heading, action: sure ? "Don't sell it or give it away. CPSC has told people to stop using this product." : 'Check the brand before you sell it or give it away.',
+        lines: [sure ? 'Its seller did not recall it, so there is no refund to claim. CPSC warned the public itself.' : `CPSC warned people to stop using the ${productName(c.product)}. If yours is that brand, don't pass it on.`,
+          c.remedy ? `CPSC says: ${c.remedy}` : ''].filter(Boolean) };
+    }
+    if (!sure || r.lookedUp) {
+      return { heading, action: r.lookedUp ? 'Check the brand and the label before you sell it or give it away: it looks like a recalled product.' : 'Check its label before you sell it or give it away.',
+        lines: [c.all ? `Every unit of the ${productName(c.product)} is recalled. If that is what you have, don't pass it on.` : c.tell ? `Which units are recalled: ${c.tell}` : `Some ${productName(c.product)} are recalled. The notice says which.`,
+          'CPSC says it is illegal to sell any recalled product.',
+          c.remedy ? `If yours is recalled, the recall's remedy: ${c.remedy} The notice says how to claim it.` : ''].filter(Boolean) };
+    }
+    return { heading, action: "Don't sell it or give it away: it looks like a recalled product.",
+      lines: ['Stop using it. CPSC says it is illegal to sell any recalled product.',
+        c.remedy ? `The recall's remedy: ${c.remedy} The notice says how to claim it.` : 'The notice says what the maker offers and how to claim it.',
+        c.all ? '' : c.tell ? `Which units are recalled: ${c.tell}` : ''].filter(Boolean) };
+  }
+  if (r.kind === 'banned' && r.banned) {
+    const rule = OWNER_TYPE[r.banned.key] || '';
+    return r.level === 'likely'
+      ? { heading, action: "Don't sell it or give it away.", lines: [rule, r.also ? `It also looks like the ${productName(r.also.product)} (${r.also.warning ? 'CPSC warning' : 'recall'} ${r.also.number}): the notice says what its maker offers.` : ''].filter(Boolean) }
+      : { heading, action: 'Check what it is before you sell it or give it away.', lines: [r.banned.advice, rule].filter(Boolean) };
+  }
+  return { heading, action: "No recall found for what we could read. That doesn't mean it's safe to pass on.",
+    lines: ['Many recalls cover only some models. Find the model number and date on its label and search them at SaferProducts.gov before you sell it or give it away.'] };
+}
 
 // The rule a CPSC reader needs, per type: only the types whose sale the law itself rules out. Loungers and nests are
 // not offered a report unless a recall names them, since older ones are not covered by a sales ban.
@@ -201,7 +259,9 @@ function monthYear(isoDate) {
  */
 export function present(listing, decision, how = {}) {
   // The cloud's question to the device's field guide that led to this recall (lookup.mjs), if one did.
-  const asked = decision.lookedUp && decision.card ? (how.lookups || []).find(l => l.found.includes(decision.card.id)) : null;
+  const via = decision.alsoRecall || (decision.lookedUp && decision.card) || null;
+  const asked = via ? (how.lookups || []).find(l => l.found.includes(via.id)) : null;
+  const askedFor = asked ? clip([asked.asked.brand, asked.asked.product].filter(Boolean).join(' '), 70) : '';
   const base = {
     id: listing.id,
     listing: { title: listing.title, price: listing.price || '', image: listing.image || '', url: listing.url || '' },
@@ -228,7 +288,13 @@ export function present(listing, decision, how = {}) {
       lookups: (how.lookups || []).slice(0, 3),
     },
     // Said on the card when the listing's own words did not lead to the recall.
-    foundBy: asked ? `The listing's words didn't lead to this recall. Gemini in the cloud named the product (${clip([asked.asked.brand, asked.asked.product].filter(Boolean).join(' '), 70)}) and asked the recall field guide on this device, which had it.` : '',
+    foundBy: !asked ? '' : decision.alsoRecall
+      ? `It looks like the ${productName(via.product)}, ${via.warning ? 'which CPSC warned about in' : 'recalled'} ${monthYear(via.date)} (${via.warning ? 'warning' : 'recall'} ${via.id.replace(/^W/, '')}). The listing's words didn't name it: Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`
+      : `The listing's words didn't lead to this recall. Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`,
+    // A recall shown because the cloud named the product, not because the listing's words did.
+    lookedUp: !!(decision.lookedUp && decision.card && decision.level !== 'none'),
+    // On a type flag that stands on its own: the recall the cloud and the device's field guide pointed to as well.
+    also: decision.alsoRecall && decision.level !== 'none' ? { id: via.id, number: via.id.replace(/^W/, ''), warning: !!via.warning, product: via.product, date: via.date, url: via.url } : null,
     recall: null,
     banned: null,
     checkedAt: new Date().toISOString(),
@@ -237,7 +303,7 @@ export function present(listing, decision, how = {}) {
     const c = decision.card;
     base.recall = { id: c.id, warning: !!c.warning, number: c.warning ? c.id.replace(/^W/, '') : c.id, date: c.date, product: c.product, title: c.title, hazard: c.hazard, remedy: c.remedy, url: c.url, image: c.image,
       // For the card's "which units" line and the label check.
-      tell: c.tell || '', codes: (c.codes || []).slice(0, 14), from: c.from || 0, to: c.to || 0, all: !!c.all };
+      tell: c.tell || '', codes: (c.codes || []).slice(0, 14), more: !!c.more, from: c.from || 0, to: c.to || 0, all: !!c.all };
   }
   if (base.kind === 'banned' && decision.banned) {
     const t = TYPE_COPY[decision.banned.key] || {};

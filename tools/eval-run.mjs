@@ -11,6 +11,7 @@ const set = opt('set', 'eval');
 const mode = opt('mode', 'hybrid');
 const profile = opt('profile', 'C:/tmp/sr-nano-profile');
 const resume = args.includes('--resume');
+const tag = opt('tag', '');   // "-rerun": save beside the first run's results, not over them
 
 const browser = await puppeteer.launch({
   executablePath: process.env.CHROME || 'C:/Program Files/Google/Chrome/Application/chrome.exe',
@@ -30,8 +31,8 @@ try {
     await new Promise(r => setTimeout(r, 5000));
   }
   const t0 = Date.now();
-  await page.evaluate((o) => window.__eval(o), { mode, set, resume });
-  console.log(`${set} ${mode}: finished in ${Math.round((Date.now() - t0) / 1000)} s -> tools/${set}-results-${mode}.json`);
+  await page.evaluate((o) => window.__eval(o), { mode, set, resume, tag });
+  console.log(`${set} ${mode}: finished in ${Math.round((Date.now() - t0) / 1000)} s -> tools/${set}-results-${mode}${tag}.json`);
 } finally {
   await browser.close();
 }

@@ -40,8 +40,10 @@ if (has(`./${set}-review.json`)) {
   }
   labeller += `; ${Object.keys(answers).length} labels checked by a person, ${changed} changed`;
 }
-const words = read(`./${set}-results-words.json`).rows;
-const hybrid = has(`./${set}-results-hybrid.json`) ? read(`./${set}-results-hybrid.json`) : null;
+// --tag=-rerun scores a later run of the same test, saved beside the first one (tools/eval-run.mjs --tag).
+const tag = (process.argv.find(a => a.startsWith('--tag=')) || '--tag=').slice(6);
+const words = read(`./${set}-results-words${tag}.json`).rows;
+const hybrid = has(`./${set}-results-hybrid${tag}.json`) ? read(`./${set}-results-hybrid${tag}.json`) : null;
 if (hybrid && hybrid.partial) console.log('NOTE: hybrid results are partial');
 
 const flagged = level => level === 'possible' || level === 'likely';
@@ -99,7 +101,8 @@ if (hybrid) {
     medianMs: ms[Math.floor(ms.length / 2)], totalMinutes: +((hybrid.totalMs || 0) / 60000).toFixed(1),
   };
 }
-writeFileSync(new URL(`./${set}-report.json`, import.meta.url), JSON.stringify(report, null, 1));
+if (tag) report.run = tag.replace(/^-/, '');
+writeFileSync(new URL(`./${set}-report${tag}.json`, import.meta.url), JSON.stringify(report, null, 1));
 
 console.log(`${ids.length} listings: ${pos.length} must be flagged, ${neg.length} must not, ${maybe.length} unclear from the listing alone`);
 console.log('| | caught | missed | false alarms | precision |');

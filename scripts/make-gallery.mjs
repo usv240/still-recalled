@@ -70,7 +70,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
 <div class="zones">
   <div class="zone laptop"><h2>On the laptop</h2><div class="steps">
     <div class="step"><span class="n">${c.listings}</span><span class="what">Word rules</span>
-      <span class="how">Every listing's title against the field guide the cloud wrote: 10,089 CPSC recalls since 1973 and 392 CPSC safety warnings. Parts, toys and doll items dropped. Instant.</span></div>
+      <span class="how">Every listing's title against the field guide the cloud wrote: 10,089 CPSC recalls since 1973 (392 CPSC safety warnings were added after these tests). Parts, toys and doll items dropped. Instant.</span></div>
     <div class="step"><span class="n">${c.lookedAtOnDevice}</span><span class="what">Gemini Nano</span>
       <span class="how">Baby products only: title and photo. Is it the product, a part or a toy? Does it look like a lounger or a padded bumper?<br><code>ONLY_ON_DEVICE</code></span></div>
   </div></div>
