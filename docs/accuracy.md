@@ -546,6 +546,46 @@ stock line now asks for a screenshot; a share naming the product is checked as b
 decide the published numbers (every "must flag" and "unclear" listing, and every "must not" listing any of the three
 ways flagged), answered with keys 1 to 4. `tools/eval-score.mjs` uses a person's answer where there is one.
 
+## 16. A second independent review, and release 0.9.2 (2026-11-20)
+
+A fresh review of 0.9.1 (an AI judge reading the rules, the write-up, the code and the reports, not a person) checked
+the published numbers against the reports and found them right, and found claims the code did not support. Each was
+fixed in the words or in the code:
+
+- **"The device can raise the alarm, never clear it" was too broad.** Gemini Nano does drop a word match whose photo
+  is plainly another kind of product, without the cloud (`shared/judge.mjs`, `decide`), and that is where most false
+  alarms end (86 with word rules alone, 50 after its look). What it never does alone is tell a parent a unit is not
+  one of the recalled ones: a label that would reassure is read again in the cloud. The write-up now says that.
+- **"Only flags leave the device" was too broad.** Bedding sets that may hide a bumper, and listings the words call a
+  part that name a risky type, also go to the cloud for a look at the photo; a crib bedding search sends most of its
+  page. Without Gemini Nano, the look itself runs in the cloud. The write-up, README and gallery now say so.
+- **Gallery slide 1 said federal law bans loungers.** It bans padded crib bumpers and inclined sleepers from sale
+  whatever their age; 16 CFR 1243 covers loungers made after May 5, 2025, and older ones are banned only by platform
+  policy unless recalled (`docs/research/sources.md`). Corrected.
+- **The README mixed two end-to-end runs.** The 15-step passes ran in a profile without the built-in model; the
+  on-device end-to-end pass was release 0.7.0 (12 steps, §12). Corrected. The extension's end-to-end test now saves
+  its report to `tools/e2e-report-*.json`.
+- **"A retired model is replaced within the hour" was not guaranteed.** The settings were kept for the life of the
+  hidden page (extension) or the app process (Android). Both now read them again every 10 minutes; Remote Config goes
+  to the network at most once an hour.
+- **Field-guide entries for new recalls are written by each install**, not once for everyone. The words now say so.
+- **The example photo named no recall.** It was the bare photo from recall 26591, so only the lounger type could be
+  seen. It is now a made-up listing around that photo, with a seller's title (`scripts/make-example.mjs`), so the
+  check names the recall, which covers every unit. The page and the app say the listing is made up.
+- **Badges came slowly on a long page:** Gemini Nano looks at one listing at a time, a few seconds each (60 eBay
+  listings took 468 s). The page now tells the engine which listings are on screen, and those are looked at first.
+- **Not said before:** eBay, Facebook Marketplace and Mercari already ban these products by policy, and the practice
+  listings use each recall notice's own photo. The write-up now says both, and that the four tests' totals add four
+  engine versions.
+
+**0.9.2 results (2026-11-20).** 65 unit tests pass, one new: the example listing's words match recall 26591. The
+packed extension passed all 15 end-to-end steps on the live practice page in a new Chrome profile (9 recalls caught up
+in 10 s, 17 of 17 listings checked in 45 s, 8 of 8 recalled listings badged and confirmed in the cloud, a watched
+listing alerted); the report is `tools/e2e-report-release.json`. On the Android 16 emulator (no Gemini Nano) the
+release APK passed 8 of 8; the example now comes back "Recalled product", recall 26591, in 16 s. On the live web page,
+in a desktop Chrome with Gemini Nano, the example was read on the device and confirmed in the cloud as recall 26591:
+"Don't buy it. Every unit of this product is recalled."
+
 ## Reproduce
 
 ```

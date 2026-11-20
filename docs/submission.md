@@ -4,7 +4,7 @@
 Still Recalled
 
 ## Tagline (elevator pitch, 200 characters max)
-Flags recalled and banned baby gear on secondhand listings. The cloud teaches the device once, the device screens every listing, and only the flags leave it.
+Flags recalled and banned baby gear on secondhand listings. The cloud teaches the device once, the device screens every listing, and only what it flags goes to the cloud.
 
 ---
 
@@ -17,30 +17,44 @@ more than 82,000 takedown requests to online platforms in the first half of fisc
 23, 2026). A parent scrolling a listing gets none of that help. As the Baby Safety Alliance's Lisa Trofe put it to
 Consumer Reports: "Once a product moves into the secondhand market, that connection is lost."
 
-**Still Recalled puts the warning on the listing itself, while the parent is still scrolling:** in Chrome on eBay,
-Mercari and Craigslist, on Android for any listing shared to it (Facebook Marketplace and OfferUp included), and on a
-web page for a screenshot. It then keeps watching what you bought, because recall notices reach the first owner and
-never the next one.
+eBay, Facebook Marketplace and Mercari already ban these products by policy and filter listings by keyword. Consumer
+Reports still found banned or recalled baby gear on all four sites it checked in May and June 2026; on Facebook it
+"stopped counting after finding 50 in-bed sleepers in an analysis of just 65 listings", and most listings it reported
+were not removed (Consumer Reports, September 23, 2026). Sellers use generic names, which keyword filters miss. The
+platforms screen the seller's words; nothing checks what gets through for the buyer.
 
-### The idea: the cloud teaches the device, the device screens, only flags leave
+**Still Recalled puts the warning on the listing itself:** in Chrome on eBay, Mercari and Craigslist search pages, on
+Android for any listing shared to it (Facebook Marketplace and OfferUp included), and on a web page for a screenshot.
+It then keeps watching what you bought, because recall notices reach the first owner and never the next one.
+
+### The idea: the cloud teaches the device, the device screens, only what it flags leaves
 - **The cloud writes the device's field guide, once.** At build time Gemini read all 10,089 CPSC recall notices since
   1973 and wrote a spotter card for each: the brand a seller would type, the product line, the years sold, how to tell
-  a recalled unit. Each recall CPSC publishes later gets its card the same way, from the installed app, twice a day.
+  a recalled unit. For each recall CPSC publishes later, the installed app fetches the notice and has the cloud write
+  its card the same way.
 - **The device screens every listing.** Word rules match the cards, and Gemini Nano looks at the photo: is this the
-  product, a part or a toy? Is that a padded bumper folded in the bedding? A whole search page is private and free.
-- **Only flags leave the device.** Gemini in the cloud sees just what the device flagged, with the full recall notice
-  and its photo, and confirms, clears, or names the one thing to check. In the tests, 77% of listings never left the
-  laptop.
-- **The device can raise the alarm, never clear it.** Anything that would reassure a parent is read again in the cloud
-  first. I measured why: asked "is this one of the recalled units?", Gemini Nano said yes 20 times where the cloud
-  agreed once, so that answer is recorded and never acted on.
+  product, a part or a toy? Is that a padded bumper folded in the bedding? A word match whose photo is plainly another
+  kind of product is dropped there, which is where most false alarms end (86 with word rules alone, 50 after Gemini
+  Nano's look). The words settle most listings at once; Gemini Nano looks at the rest one at a time, a few seconds
+  each, starting with the ones on the parent's screen.
+- **Only what the device flags, or can't settle, leaves it.** Gemini in the cloud sees the flags, plus bedding sets
+  and listings the words call a part that may hide a banned item in the photo, with the full recall notice and its
+  photo. It confirms, clears, or names the one thing to check. In the tests, 77% of listings never left the laptop;
+  a crib bedding search sends most of its page, because bumpers show only in photos. Without Gemini Nano (most
+  phones, and the web page on a phone), the look itself runs in the cloud, and the app says so.
+- **The device never tells a parent a unit is not one of the recalled ones.** That is the answer a parent would act
+  on, so a label that would reassure is read again in the cloud first. I measured why: asked "is this one of the
+  recalled units?", Gemini Nano said yes 20 times where the cloud agreed once, so its answer to that question is
+  recorded and never acted on.
 
 ### Try it in a minute
-- **Practice listings:** https://still-recalled.web.app/try has seventeen made-up listings, eight of them recalled.
-  Install the extension (steps on the page) and the eight get a badge. One, a Kidsview bouncer, was recalled on
+- **Practice listings:** https://still-recalled.web.app/try has seventeen made-up listings, eight of them recalled
+  products, each shown with the photo from its own recall notice. Install the extension (steps on the page) and the
+  eight get a badge. One, a Kidsview bouncer, was recalled on
   November 19, 2026, after this version's recall list was built: the extension fetches it from CPSC itself.
 - **Android:** install https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk,
-  then share a screenshot of any listing to Still Recalled, or tap "Try it with an example photo".
+  then share a screenshot of any listing to Still Recalled, or tap "Try it with an example photo" (a made-up listing for
+  a VEVOR lounger, a recall that covers every unit).
 - **Web page:** https://still-recalled.web.app. Add a screenshot of any listing. No account.
 
 ### What a parent sees
@@ -65,12 +79,12 @@ and JSON schemas on both models, so their answers can be compared field by field
 |---|---|---|
 | Word rules | code, on the device | Every listing's title, against all 10,089 recalls |
 | Gemini Nano | `ONLY_ON_DEVICE` | Baby products: title and photo |
-| Gemini, to confirm | `ONLY_IN_CLOUD` | Only what the device flagged, with the full notice and its photo; returns a box around what decided it |
+| Gemini, to confirm | `ONLY_IN_CLOUD` | Only what the device flagged or couldn't settle, with the full notice and its photo; returns a box around what decided it |
 | Screenshot or label photo | `PREFER_ON_DEVICE` | Read on the device when it has Gemini Nano, in the cloud otherwise; the result shows `inferenceSource` |
-| New recall notices | `ONLY_IN_CLOUD` | Each notice CPSC publishes after the build, once, to write its spotter card |
+| New recall notices | `ONLY_IN_CLOUD` | Each notice CPSC publishes after the build, to write its spotter card |
 
 - **Firebase Remote Config** holds the cloud model list, how many cloud checks run at once, and switches that turn off
-  the cloud check or the writing of new cards. A retired preview model is replaced on every install within the hour.
+  the cloud check or the writing of new cards. A retired preview model is replaced on every install within about an hour, with no update.
 - **Android runs the extension's own rules, not a rewrite:** the engine is bundled into the app and run in Jetpack's
   JavaScript sandbox. Where the phone has no Gemini Nano, the device steps go to the cloud's lightest model: a check
   takes 6 to 14 s.
@@ -92,8 +106,9 @@ rules had never seen. 74 should be flagged. Each was run three ways:
 | **Hybrid** | **58** | **11** |
 
 The device cuts false alarms by looking at the photo (pajamas called "sleeper", a dollhouse "bassinet"); the cloud,
-which saw 23% of the listings, catches what neither can, like a bumper that shows only in the photo. Each test changed
-the product: loungers went from 4 of 10 caught to 23 of 25, then 8 of 9. The listings were labelled blind by AI
+which saw 23% of the listings, catches what neither can, like a bumper that shows only in the photo. Each test was run
+with the engine of its day, so the totals add four versions; within a test, the three ways share one engine. Each test
+changed the product: loungers went from 4 of 10 caught to 23 of 25, then 8 of 9. The listings were labelled blind by AI
 reviewers (Claude) from the title, price and photo, without seeing the rules or answers. Tests 3 and 4 searched for
 risky product types on purpose. Every label and every miss is in `docs/accuracy.md`.
 

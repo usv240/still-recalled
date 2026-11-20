@@ -84,3 +84,11 @@ test('live recalls and the watch', () => {
   assert.ok(call('SR.recentInfant(6)').length === 6);
   call('SR.setLive([])');
 });
+
+test('the example listing (made up, VEVOR lounger) is matched by its words to recall 26591, which covers every unit', () => {
+  const listing = call(`SR.listingFromText(${lit('VEVOR baby lounger nest, snow deer print. Portable newborn lounger with pillow.')})`);
+  const t = call(`SR.triage(${lit(listing)})`);
+  assert.ok(t.needsEyes);
+  assert.equal(t.candidate?.card?.id, '26591');
+  assert.equal(t.candidate.card.all, true);
+});

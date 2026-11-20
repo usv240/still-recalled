@@ -58,7 +58,7 @@ fun HomeScreen(m: AppModel) {
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 LinkButton("Try it with an example photo", { m.checkExample() })
-                Muted("  from a CPSC recall notice")
+                Muted("  a made-up listing")
             }
         }
 

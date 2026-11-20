@@ -67,12 +67,29 @@ function scan() {
   }
   // Results can arrive before a lazily rendered card exists, and pages re-render cards: keep badges attached.
   for (const id of results.keys()) ensureBadge(id);
+  reportOnScreen();
   if (!fresh.length) return;
   const scope = detail ? detail.title : scopeOf();
   chrome.runtime.sendMessage({
     type: 'sr:page',
     page: { url: pageUrl, site: site.site, kind: detail ? 'item' : 'search', scope, listings: fresh },
   }).catch(() => {});
+}
+
+// The built-in model looks at one listing at a time, a few seconds each, so a long page takes minutes. Tell the engine
+// which listings are on screen now, and it looks at those first: the badges arrive where the shopper is looking.
+let lastOnScreen = '';
+function reportOnScreen() {
+  const ids = [];
+  for (const [id, c] of cards) {
+    if (c.inline || !sent.has(id) || results.has(id)) continue;
+    const r = c.el.getBoundingClientRect();
+    if (r.bottom > -innerHeight * 0.25 && r.top < innerHeight * 1.25) ids.push(id);
+  }
+  const key = ids.join(',');
+  if (key === lastOnScreen) return;
+  lastOnScreen = key;
+  chrome.runtime.sendMessage({ type: 'sr:on-screen', ids }).catch(() => {});
 }
 
 // ---- Badges --------------------------------------------------------------------------------------------------

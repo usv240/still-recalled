@@ -72,7 +72,8 @@ try {
   step('recall list catches up with CPSC (background worker)', !!caught);
   await sleep(3000);
 
-  await check('example photo: infant lounger', () => tapText('Try it with an example photo'), (lv, badge) => lv !== 'none' && /lounger/i.test(badge));
+  // The example is a made-up listing for a VEVOR lounger, recall 26591, which covers every unit: the check must name it.
+  await check('example photo: VEVOR lounger, recall 26591', () => tapText('Try it with an example photo'), (lv, _b, how) => lv !== 'none' && /^26591 /.test(how.candidate || ''));
   if (args.includes('--nano')) {
     const ex = results.checks.find(c => c.name.startsWith('example photo'));
     step('the example photo was read by Gemini Nano on the phone', !!ex && ex.readOnDevice === 'true', ex ? `read on device: ${ex.readOnDevice}` : '');

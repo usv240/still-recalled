@@ -6,10 +6,10 @@ a baby. The title never says "bumper", so no keyword filter catches it, and noth
 
 **Still Recalled puts the warning on the listing.** It is a Chrome extension for eBay, Mercari and Craigslist search
 pages, an Android app that checks any listing shared to it (Facebook Marketplace and OfferUp included), and a web page
-that checks a screenshot. **The cloud teaches the device once, the device screens every listing, and only the flags
-leave it:** Gemini in the cloud wrote a spotter card for every CPSC recall since 1973, the word rules and Gemini Nano
-check each listing on your own computer or phone, and only the few they flag go to Gemini in the cloud, through
-Firebase AI Logic hybrid inference.
+that checks a screenshot. **The cloud teaches the device once, the device screens every listing, and only what it
+flags goes to the cloud:** Gemini in the cloud wrote a spotter card for every CPSC recall since 1973, the word rules and Gemini Nano
+check each listing on your own computer or phone, and only what they flag, or can't settle from the words, goes to
+Gemini in the cloud, through Firebase AI Logic hybrid inference.
 
 **Install:** [Chrome extension](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-extension.zip)
 (unzip, open `chrome://extensions`, turn on Developer mode, Load unpacked, choose the `still-recalled-extension` folder) ·
@@ -72,8 +72,8 @@ Clicking the badge opens a card that shows:
 The side panel lists every flag on the page. The toolbar icon shows how many there are.
 
 **New recalls, twice a day.** The extension asks the CPSC recall API for notices published since the newest one it
-knows. Gemini, through Firebase AI Logic, writes each new notice's field-guide entry once (the same prompt that wrote the
-10,089 before it), and from then on the laptop matches against it on its own. Pages already open are checked again.
+knows. Gemini, through Firebase AI Logic, writes each new notice's field-guide entry (the same prompt that wrote the
+10,089 before it; each install writes its own), and from then on the laptop matches against it on its own. Pages already open are checked again.
 
 **Watch for recalls.** On a listing's own page, the side panel offers **Watch for recalls**. When a new recall matches a
 watched listing, Chrome shows a notification, and the bell at the top of the panel lists the recall, the hazard and
@@ -100,7 +100,9 @@ flags only ────── 3. Gemini in the cloud, via Firebase AI Logic ─�
 ```
 
 - **Extension:** step 2 uses `InferenceMode.ONLY_ON_DEVICE`. A shopper's browsing is never sent to the cloud just to
-  be screened; only listings already flagged on the computer go to step 3.
+  be screened. Step 3 gets the listings flagged on the computer, and the ones the words can't settle without a closer
+  look at the photo: bedding sets that may hide a bumper, and "parts" whose words name a risky type. A crib bedding
+  search therefore sends most of its page; a lounger search, few.
 - **Web page:** steps 1 and 2 use `InferenceMode.PREFER_ON_DEVICE`. The same code runs on the built-in model in
   desktop Chrome and falls back to Gemini on phones. The page shows which one was used.
 - **One engine:** both use the same engine, prompts and JSON schemas. Answers are structured JSON in both modes, so
@@ -159,10 +161,13 @@ reviewers from what a shopper sees: the title, the price and one photo. Method, 
 - The cloud saw 23% of the listings across the four tests.
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
-badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. On the practice listings, the packed release passes all 15 steps in a Chrome
-profile with the built-in model (Gemini Nano looked at the listings inside the installed extension, the cloud confirmed
-the flags, and the settings came from Firebase Remote Config), and all checks without the model. On live marketplaces
-(release 0.6.0, 2026-11-18) it passed on eBay and Craigslist; see `docs/accuracy.md` §11.
+badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step, and saves
+its report to `tools/e2e-report-*.json`. On the practice listings, the packed 0.9.1 release passes all 15 steps in a
+new Chrome profile, which has no built-in model (words, then the cloud). The on-device step was run end to end with
+release 0.7.0 in a profile with Gemini Nano: all 12 steps of that version passed, Gemini Nano looked at the listings
+inside the installed extension, the cloud confirmed the flags, and the settings came from Firebase Remote Config. In
+that heavily automated profile reCAPTCHA later refused release tokens, so later on-device runs used the development
+build. On live marketplaces (release 0.6.0, 2026-11-18) it passed on eBay and Craigslist; see `docs/accuracy.md`.
 
 ## Try it
 
@@ -179,7 +184,7 @@ app. "Watch for recalls" on a result adds it to the watch list.
 **Chrome extension**
 1. Download `still-recalled-extension.zip` from the [latest release](https://github.com/usv240/still-recalled/releases/latest) and unzip it.
 2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and choose the unzipped folder.
-3. Open the practice listings, or search eBay for `baby lounger` (Condition: Used). Badges appear as listings are checked. Click one, or click the
+3. Open the practice listings, or search eBay for `baby lounger` (Condition: Used). Badges appear as listings are checked, the ones on screen first. Click one, or click the
    toolbar icon for the side panel.
 
 The on-device step needs Chrome 139 or later on a computer that can run Chrome's built-in model. Without it, the
@@ -257,7 +262,8 @@ What protects the project's model quota:
 
 - **Recall data:** the U.S. Consumer Product Safety Commission recall API (saferproducts.gov), all 10,089 notices
   since 1973. Still Recalled is not affiliated with CPSC.
-- **Example photo:** `web/example/recall-26591.jpg` is from CPSC recall notice 26591 (VEVOR baby loungers).
+- **Example photo:** `web/example/recall-26591.jpg` is from CPSC recall notice 26591 (VEVOR baby loungers). The example
+  listing around it, `web/example/listing-26591.jpg` (`scripts/make-example.mjs`), is made up.
 - **Font:** Geist, SIL Open Font License, © Vercel ([extension/fonts/Geist-LICENSE.txt](extension/fonts/Geist-LICENSE.txt)).
 - **Origins:** Still Recalled was built during the #BuildHybridAI submission period, from November 14, 2026, and
   reuses no code. The idea comes from my earlier project, [SafeState](https://safestate.vercel.app). SafeState gives

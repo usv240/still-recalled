@@ -67,7 +67,7 @@ function inputView() {
   const example = h('button', { class: 'link', type: 'button' }, 'Try it with an example photo');
   example.addEventListener('click', runExample);
 
-  return h('div', { class: 'input' }, file, drop, form, h('p', { class: 'example' }, example, h('span', { class: 'muted' }, ' (from a CPSC recall notice)')));
+  return h('div', { class: 'input' }, file, drop, form, h('p', { class: 'example' }, example, h('span', { class: 'muted' }, ' (a made-up listing with the photo from a CPSC recall notice)')));
 }
 
 addEventListener('paste', e => {
@@ -76,10 +76,10 @@ addEventListener('paste', e => {
   if (item) { e.preventDefault(); run({ file: item.getAsFile() }); }
 });
 
-// The example is the photo from a CPSC recall notice (26591, VEVOR baby loungers, July 2026), kept with the page
-// because cpsc.gov images can't be read from another site. It shows what a match looks like without a real listing.
+// The example is a made-up listing (scripts/make-example.mjs) around the photo from CPSC recall notice 26591 (VEVOR
+// baby loungers, July 2026, every unit recalled). It shows what a match looks like without a real listing.
 async function runExample() {
-  const blob = await fetch('example/recall-26591.jpg').then(r => (r.ok ? r.blob() : null), () => null);
+  const blob = await fetch('example/listing-26591.jpg').then(r => (r.ok ? r.blob() : null), () => null);
   if (!blob) { showError('The example photo could not be loaded. Add your own screenshot instead.'); return; }
   run({ file: new File([blob], 'example.jpg', { type: 'image/jpeg' }), example: true });
 }

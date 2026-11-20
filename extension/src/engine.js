@@ -205,9 +205,11 @@ export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
 }
 
 // ---- Queue -------------------------------------------------------------------------------------------------------
-// One listing at a time (the on-device model is one session). Listings that matched words go first, then the rest
-// in page order. Jobs for a page the tab has left are dropped.
+// One listing at a time (the on-device model is one session). Listings the words settle go first (they take no time),
+// then the ones on the shopper's screen, then words-matched ones before the rest, in page order. Jobs for a page the
+// tab has left are dropped.
 const queue = [];
+const onScreen = new Map();   // tabId -> Set of listing ids on screen now (content.js reportOnScreen)
 let running = false;
 // Cloud confirmations in flight at once, while the on-device model works through the queue. A bedding search sends
 // most of its 60 to 70 listings to the cloud for a photo check (about 13 s each); 4 at once took over 4 minutes a page.
@@ -233,9 +235,10 @@ async function pump() {
   running = true;
   try {
     const idx = await index();
+    if (hasCloudAccess) CLOUD_AT_ONCE = (await liveSettings()).cloudAtOnce;
     while (queue.length) {
       // Re-rank each time: new pages arrive while old ones run.
-      queue.sort((a, b) => rank(idx, a) - rank(idx, b) || a.order - b.order);
+      queue.sort((a, b) => priority(idx, a) - priority(idx, b) || a.order - b.order);
       const job = queue.shift();
       if (livePage.get(job.tabId) !== job.pageKey) continue;
       const status = await deviceStatus();
@@ -262,6 +265,13 @@ async function pump() {
   }
 }
 
+function priority(idx, job) {
+  const r = rank(idx, job);
+  if (r === 0) return 0;
+  const seen = onScreen.get(job.tabId);
+  return (seen && seen.has(job.listing.id) ? 0 : 2) + r;
+}
+
 const rankCache = new WeakMap();
 function rank(idx, job) {
   if (!rankCache.has(job)) {
@@ -278,8 +288,13 @@ if (globalThis.chrome && chrome.runtime && chrome.runtime.onMessage) chrome.runt
     reply({ queued: queue.length });
     return false;
   }
+  if (msg.type === 'sr:engine-on-screen') {
+    onScreen.set(msg.tabId, new Set(msg.ids || []));
+    return false;
+  }
   if (msg.type === 'sr:engine-forget') {
     livePage.delete(msg.tabId);
+    onScreen.delete(msg.tabId);
     return false;
   }
   if (msg.type === 'sr:engine-status') {

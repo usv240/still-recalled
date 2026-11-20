@@ -23,9 +23,11 @@ object LiveSettings {
 
     private val lock = Mutex()
     private var cached: Values? = null
+    private var cachedAt = 0L
 
+    /** Read again every 10 minutes, since the app process can live for days; Remote Config goes to the network at most once an hour. */
     suspend fun get(): Values = lock.withLock {
-        cached?.let { return it }
+        cached?.let { if (System.currentTimeMillis() - cachedAt < 600_000) return it }
         val rc = Firebase.remoteConfig
         val from = try {
             rc.setConfigSettingsAsync(remoteConfigSettings {
@@ -47,6 +49,6 @@ object LiveSettings {
             cloudCheck = rc.getBoolean("cloud_check"),
             liveRecalls = rc.getBoolean("live_recalls"),
             from = if (from == "cached" && rc.info.lastFetchStatus != com.google.firebase.remoteconfig.FirebaseRemoteConfig.LAST_FETCH_STATUS_SUCCESS) "defaults" else from,
-        ).also { cached = it }
+        ).also { cached = it; cachedAt = System.currentTimeMillis() }
     }
 }

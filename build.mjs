@@ -70,4 +70,4 @@ const { cards } = JSON.parse(await readFile('extension/data/cards.json', 'utf8')
 const CHUNK = 200;
 for (let i = 0; i * CHUNK < cards.length; i++) await write(`${assets}/cards/${String(i).padStart(3, '0')}.json`, JSON.stringify(cards.slice(i * CHUNK, (i + 1) * CHUNK)));
 await cp('extension/data/meta.json', `${assets}/meta.json`);
-await cp('web/example/recall-26591.jpg', `${assets}/example.jpg`);
+await cp('web/example/listing-26591.jpg', `${assets}/example.jpg`);

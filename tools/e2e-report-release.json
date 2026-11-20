@@ -1,0 +1,267 @@
+{
+  "at": "2026-11-20T05:19:37.431Z",
+  "version": "0.9.2",
+  "ext": "dist/still-recalled-extension",
+  "builtInModelProfile": false,
+  "url": "https://still-recalled.web.app/try/",
+  "query": "baby lounger",
+  "passed": 15,
+  "failed": 0,
+  "steps": [
+    {
+      "name": "extension installs",
+      "ok": true,
+      "detail": "hpjnflbbhaokhgcoikhndmjapdiilkaa"
+    },
+    {
+      "name": "service worker starts",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "recall list catches up with CPSC",
+      "ok": true,
+      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 9 with field-guide entries from the cloud, 10 s"
+    },
+    {
+      "name": "search page loads",
+      "ok": true,
+      "detail": "Practice listings: Still Recalled (34 item links)"
+    },
+    {
+      "name": "engine checks the listings",
+      "ok": true,
+      "detail": "17 of 17 checked in 45 s"
+    },
+    {
+      "name": "a recall published after the build is flagged",
+      "ok": true,
+      "detail": "Kidsview baby bouncer with toy bar, khaki: possible / recall 27092 (2026-11-19)"
+    },
+    {
+      "name": "no engine errors",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "cloud double-check runs",
+      "ok": true,
+      "detail": "8 confirmed in the cloud, 0 cloud errors "
+    },
+    {
+      "name": "settings come from Remote Config",
+      "ok": true,
+      "detail": "remote: gemini-4-hydrogen, gemini-3.5-flash-lite; cloud on; 8 at once"
+    },
+    {
+      "name": "badges appear on flagged listings",
+      "ok": true,
+      "detail": "8 badges for 8 flagged"
+    },
+    {
+      "name": "toolbar count matches",
+      "ok": true,
+      "detail": "toolbar \"8\", flagged 8"
+    },
+    {
+      "name": "badge click stays on the page",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "card offers the next step",
+      "ok": true,
+      "detail": "Ask the seller: yes; Report to CPSC: yes"
+    },
+    {
+      "name": "new recalls arrive from CPSC",
+      "ok": true,
+      "detail": "16 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082), 16 field-guide entries written in the cloud, 35 s"
+    },
+    {
+      "name": "watched listing raises an alert",
+      "ok": true,
+      "detail": "likely / Recalled product: recall 27086, confirmed in the cloud"
+    }
+  ],
+  "catchUp": {
+    "added": 9,
+    "written": 9,
+    "total": 9,
+    "checkedAt": "2026-11-20T05:18:10.086Z",
+    "hits": 0,
+    "cards": [
+      {
+        "id": "27099",
+        "date": "2026-11-19",
+        "product": "Xentrawave XT016 and XT026 Adult Portable Bed Rails",
+        "guide": true
+      },
+      {
+        "id": "27091",
+        "date": "2026-11-19",
+        "product": "Model Year 2024-2026 Vanderhall Brawley GTS electric recreational off highway vehicles",
+        "guide": true
+      },
+      {
+        "id": "27094",
+        "date": "2026-11-19",
+        "product": "Qpancy Children’s Pajama Sets",
+        "guide": true
+      },
+      {
+        "id": "27097",
+        "date": "2026-11-19",
+        "product": "Ororo PD10K-Pro Rechargeable Lithium-Ion Battery Packs",
+        "guide": true
+      },
+      {
+        "id": "27092",
+        "date": "2026-11-19",
+        "product": "Kidsview Infant Bouncer",
+        "guide": true
+      },
+      {
+        "id": "27090",
+        "date": "2026-11-19",
+        "product": "Custom Leather Craft (CLC) Lighted Portfolio, Johnson Level & Tool (Johnson Level) Digital Angle Locator, Digital Calip…",
+        "guide": true
+      },
+      {
+        "id": "27093",
+        "date": "2026-11-19",
+        "product": "Fidlock Hermetic Dry Bags",
+        "guide": true
+      },
+      {
+        "id": "27098",
+        "date": "2026-11-19",
+        "product": "Cipton Bike Helmets",
+        "guide": true
+      },
+      {
+        "id": "27096",
+        "date": "2026-11-19",
+        "product": "CHE-US Magnetic Robot Toys",
+        "guide": true
+      }
+    ],
+    "ms": 10240
+  },
+  "cloudChecked": 8,
+  "cloudErrors": [],
+  "flagged": [
+    {
+      "level": "likely",
+      "badge": "Recalled product",
+      "title": "AirClub bedside bassinet QX-831, gray mesh, with pad",
+      "cloud": "gemini-4-hydrogen",
+      "device": false
+    },
+    {
+      "level": "likely",
+      "badge": "Padded crib bumper",
+      "title": "Braided crib bumper, mint, fits a standard crib",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false
+    },
+    {
+      "level": "possible",
+      "badge": "Possible recall",
+      "title": "Baby Trend Tango Mini compact stroller, gray",
+      "cloud": "gemini-4-hydrogen",
+      "device": false
+    },
+    {
+      "level": "possible",
+      "badge": "Possible recall",
+      "title": "Kidsview baby bouncer with toy bar, khaki",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false
+    },
+    {
+      "level": "likely",
+      "badge": "Recalled product",
+      "title": "Boppy newborn lounger, floral cover, washed",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false
+    },
+    {
+      "level": "likely",
+      "badge": "Recalled product",
+      "title": "Fisher-Price Rock 'n Play sleeper, pink, folds flat",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false
+    },
+    {
+      "level": "likely",
+      "badge": "Recalled product",
+      "title": "Bright Starts rocking sleeper, vibrates, pink",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false
+    },
+    {
+      "level": "possible",
+      "badge": "Possible recall",
+      "title": "Graco baby swing, wind-up, still swings",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false
+    }
+  ],
+  "live": {
+    "out": {
+      "added": 16,
+      "written": 16,
+      "total": 16,
+      "checkedAt": "2026-11-20T05:19:05.376Z",
+      "hits": 1
+    },
+    "ms": 35381,
+    "alert": {
+      "at": "2026-11-20T05:19:35.560Z",
+      "badge": "Recalled product",
+      "confirmed": true,
+      "level": "likely",
+      "recall": {
+        "all": false,
+        "codes": [
+          "E4004",
+          "500-WATT",
+          "48-VOLT"
+        ],
+        "date": "2026-11-12",
+        "from": 2024,
+        "hazard": "The recalled tricycles’ rear wheels can become loose or separate from the rear frame, posing a risk of serious injury from a fall hazard.",
+        "id": "27086",
+        "image": "https://www.cpsc.gov/s3fs-public/Huffy1.jpg?VersionId=QLL20sS7WlVoNJa5y3bJY3doTHAPJyhs",
+        "product": "Buzz Bicycles Cerana T2 E-Trike",
+        "remedy": "Consumers should stop using the recalled tricycles immediately and contact Huffy for free replacement rear axle assemblies. The rear wheel…",
+        "tell": "You can identify the recalled e-trike by model number E4004 printed on a label near the pedals on the bottom side of the frame's downtube.",
+        "title": "Huffy Recalls Buzz Bicycles Cerana T2 E-Trikes Due to Risk of Serious Injury from Fall Hazard",
+        "to": 2026,
+        "url": "https://www.cpsc.gov/Recalls/2027/Huffy-Recalls-Buzz-Bicycles-Cerana-T2-E-Trikes-Due-to-Risk-of-Serious-Injury-from-Fall-Hazard"
+      },
+      "seen": false,
+      "verdict": "Looks like the Buzz Bicycles Cerana T2 E-Trike, recalled November 2026."
+    },
+    "ids": [
+      "27099",
+      "27091",
+      "27094",
+      "27097",
+      "27092",
+      "27090",
+      "27093",
+      "27098",
+      "27096",
+      "27083",
+      "27084",
+      "27085",
+      "27086",
+      "27087",
+      "27088",
+      "27082"
+    ],
+    "guide": 16
+  }
+}

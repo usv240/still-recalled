@@ -50,7 +50,13 @@ export const hasCloudAccess = !!debugToken || hasDocument;
  */
 const DEFAULTS = { cloud_models: CLOUD_MODELS.join(','), cloud_check: true, cloud_at_once: 8, live_recalls: true };
 let live = null;
+let liveAt = 0;
+// The hidden page can stay open for days, so the values are read again every 10 minutes. Remote Config itself goes to
+// the network at most once an hour (minimumFetchIntervalMillis below), so a change reaches every copy in about an hour.
+const LIVE_FOR = 10 * 60 * 1000;
 export function liveSettings() {
+  if (live && Date.now() - liveAt > LIVE_FOR) live = null;
+  if (!live) liveAt = Date.now();
   return live ||= (async () => {
     const read = (rc, from) => {
       const models = (rc ? getValue(rc, 'cloud_models').asString() : DEFAULTS.cloud_models)

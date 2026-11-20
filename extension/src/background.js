@@ -117,6 +117,9 @@ chrome.runtime.onMessage.addListener((msg, sender, reply) => {
     case 'sr:page':
       if (tabId != null) onPage(tabId, msg.page).then(() => reply({ ok: true }), e => reply({ ok: false, error: String(e) }));
       return true;
+    case 'sr:on-screen':
+      if (tabId != null) chrome.runtime.sendMessage({ type: 'sr:engine-on-screen', tabId, ids: msg.ids }).catch(() => {});
+      return false;
     case 'sr:engine-result':
       onResult(msg.tabId, msg.pageKey, msg.result);
       return false;

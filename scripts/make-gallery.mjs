@@ -76,7 +76,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
   </div></div>
   <div class="zone cloud"><h2>In the cloud</h2>
     <div class="step"><span class="n">${c.sentToCloud}</span><span class="what">Gemini</span>
-      <span class="how">Only what Nano flagged: title, photo, the full recall notice and its photo. Confirms, clears, or says what to check.<br><code>ONLY_IN_CLOUD</code></span>
+      <span class="how">What Nano flagged or couldn't settle: title, photo, the full recall notice and its photo. Confirms, clears, or says what to check.<br><code>ONLY_IN_CLOUD</code></span>
       <span class="how">Which models, and a switch that turns this step off, come from Firebase Remote Config.</span></div>
   </div>
 </div>
@@ -148,8 +148,8 @@ const hero = tryRun && `<!doctype html><meta charset="utf-8"><style>${base}
 <h1>Flags recalled baby gear on secondhand listings, before you buy.</h1>
 <ul class="points">
   <li class="on"><b>Gemini Nano screens each listing on your laptop.</b>In the tests, ${Math.round(100 - 100 * c.shareSentToCloud)}% of listings never left it.</li>
-  <li><b>Gemini in the cloud checks only the few it flags,</b>against the full CPSC recall notice and its photo.</li>
-  <li><b>Every CPSC recall since 1973,</b>plus the padded bumpers and loungers that federal law now bans.</li>
+  <li><b>Gemini in the cloud checks what it flags or can't settle,</b>against the full CPSC recall notice and its photo.</li>
+  <li><b>Every CPSC recall since 1973,</b>plus padded crib bumpers and inclined sleepers, which federal law bans from sale, and infant loungers.</li>
 </ul>
 <p class="small">The real Chrome extension on the practice listings at still-recalled.web.app/try: ${practice.caught} of ${practice.recalled} recalled products flagged, ${practice.falseAlarms} of ${practice.ordinary} ordinary ones flagged, in ${tryRun.seconds} s.</p>
 </div><div class="frame"><img src="${shot('try-grid.png')}"></div></div></div>`;
@@ -191,8 +191,8 @@ const liveSlide = liveRun && existsSync(path.join(src, 'watch-panel.png')) && `<
 </style><div class="slide">
 <h1>A recall announced this morning, matched the same day. And a watch on what you bought.</h1>
 <div class="cols"><div class="facts">
-  <div class="fact"><b>Live recalls</b><span class="big">${watchRun ? watchRun.added : liveRun.found} new</span><p>CPSC recalls published after this version's recall list was built, up to ${day(watchRun ? new Date(watchRun.at).toLocaleDateString('en-CA') : liveRun.date)}. The installed extension fetched them from CPSC and Gemini wrote each one's field-guide entry once, through Firebase AI Logic. From then on the laptop matches them on its own.</p></div>
-  <div class="fact"><b>On the practice listings</b><p>The ${liveRun.listing} was flagged against recall ${liveRun.recall}, published that morning.</p></div>
+  <div class="fact"><b>Live recalls</b><span class="big">${watchRun ? watchRun.added : liveRun.found} new</span><p>CPSC recalls published after this version's recall list was built, up to ${day(watchRun ? new Date(watchRun.at).toLocaleDateString('en-CA') : liveRun.date)}. The installed extension fetched them from CPSC and Gemini wrote each one's field-guide entry, through Firebase AI Logic. From then on the laptop matches them on its own.</p></div>
+  <div class="fact"><b>On the practice listings</b><p>The ${liveRun.listing} was flagged against recall ${liveRun.recall}, published after this version's recall list was built.</p></div>
   <div class="fact"><b>Why a watch</b><p>Recall notices reach the first owner. Only 22% of the children's products recalled in 2022 that Kids In Danger could analyze were returned, replaced or repaired. A watched listing is checked against every new recall on the laptop, and a match raises a notification.</p></div>
 </div><div class="phone"><img src="${pathToFileURL(path.join(src, 'watch-panel.png')).href}"></div></div>
 <div class="foot"><span>Release ${liveRun.release}, ${day(liveRun.date)}: all ${liveRun.steps} end-to-end steps passed on the live practice listings. The watch list shown is a replay of the same recall's arrival.</span><span class="brand"><i></i>Still Recalled</span></div>
@@ -214,7 +214,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #eee; padding
 </style><div class="slide">
 <h1>On Android too. Share any listing from any app.</h1>
 <div class="cols"><div class="facts">
-  <div class="fact"><b>Share a screenshot of any listing</b><p>Facebook Marketplace, OfferUp, eBay. Gemini Nano reads it on phones that have it; elsewhere Firebase AI Logic runs the same call in the cloud.</p></div>
+  <div class="fact"><b>Share a screenshot of any listing</b><p>Facebook Marketplace, OfferUp, eBay. Firebase AI Logic prefers Gemini Nano on phones that have it; elsewhere, as on the emulator shown, the same call runs in the cloud.</p></div>
   <div class="fact"><b>The same rules, not a rewrite</b><p>The extension's rules engine runs on the phone in Jetpack's JavaScript sandbox: all ${'10,089'} recalls, matched on the phone.</p></div>
   <div class="fact"><b>A watch that outlives the purchase</b><p>New CPSC recalls twice a day, in the background. A match raises a notification.</p></div>
   <div class="fact"><b>App Check without Google Play</b><p>A sideloaded app gets tokens from the site's reCAPTCHA Enterprise bridge. No debug token ships.</p></div>
