@@ -19,7 +19,7 @@ the device's model gives a brand for an unnamed product, the device looks it up 
 install, then share any listing's screenshot to it) · [web page](https://still-recalled.web.app) (no install).
 
 **What it found on real listings.** In five blind tests on 775 used baby-gear listings from eBay, Mercari and
-Craigslist, 83 were recalled products, padded crib bumpers, infant loungers or inclined sleepers, asking $6,064 in
+Craigslist, 83 were recalled products, padded crib bumpers, infant loungers or inclined sleepers, asking $6,063 in
 total. Still Recalled flagged 65 of them ($5,022), with 12 false alarms among the 630 listings that were fine. Word
 rules alone raised 109. 77% of the listings never left the computer (each test on the engine of its day). The fifth test is this version's
 own: 178 new listings, labelled by AI reviewers who could not see the product: 7 of 9 caught, 1 false alarm among 149. It

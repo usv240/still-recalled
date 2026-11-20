@@ -46,7 +46,7 @@ The first four tests alone (597 listings, 74 to flag, 481 not), as earlier versi
 - **Each test changed the product.** Loungers were the weak spot after two tests (4 of 10); the changes that followed
   raised that to 23 of 25 in the third and 8 of 9 in the fourth. The fourth test was the first with every recall since
   1973, and two of its three recall catches were recalls the earlier data didn't have.
-- **In a shopper's units:** the listings that should be flagged were asking $6,064 in total; the hybrid flagged $5,022
+- **In a shopper's units:** the listings that should be flagged were asking $6,063 in total; the hybrid flagged $5,022
   of it.
 - **77% of the listings never left the computer.** The cloud saw 15%, 8%, 33%, 32% and 21% of the listings in the five
   tests (the third and fourth searched mostly for loungers, recalled brands and old gear, which go to the cloud to be
