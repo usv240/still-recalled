@@ -68,7 +68,7 @@ export function boxFrom(where) {
  * Prompt parts for the cloud model: text, the listing photo, then the notice and the recall photo.
  * `listingPhoto` and `recallPhoto` are inlineData parts or null.
  */
-export function confirmParts({ listing, notice, listingPhoto, recallPhoto }) {
+export function confirmParts({ listing, notice, listingPhoto, recallPhoto, seen = null }) {
   const parts = [[
     'LISTING',
     `Title: ${clip(listing.title, 200)}`,
@@ -83,6 +83,19 @@ export function confirmParts({ listing, notice, listingPhoto, recallPhoto }) {
     : '\nRECALL NOTICE\n(none given)');
   if (notice && recallPhoto) parts.push(recallPhoto);
 
+  // The device's own lookup (lookup.mjs deviceLookup): `seen` is { brand, id, notice }. It is a guess to check, not a
+  // match by the listing's words. On ten test photos the built-in model gave "Fisher-Price" for three different
+  // sleepers and was right once, so the cloud is told the reading may be wrong, and how to answer about it or about
+  // another product it can name itself.
+  if (seen && seen.notice) {
+    parts.push(['', 'FOUND BY THE DEVICE (unverified)',
+      `The listing's words name no brand. A small model on the device looked at the photo and gave the brand "${clip(seen.brand, 60)}", and the device's field guide has the recall below for that brand and kind of product. The reading may be wrong: small models guess a brand from a product's shape.`,
+      `If you can see that brand in the photo, or recognise the product for sale as the one in this notice, answer recall_id "${seen.id}" and matches_recall for it. If it is another product that you can name, call lookup_recalls for that product. Otherwise leave recall_id empty.`,
+      `recall_id: ${seen.id}`,
+      noticeForPrompt(seen.notice), !notice && recallPhoto ? 'Photo of the recalled product, from this notice:' : ''].filter(Boolean).join('\n'));
+    if (!notice && recallPhoto) parts.push(recallPhoto);
+  }
+
   parts.push(['', 'BANNED TYPES', ...BANNED_TYPES.map(t => `- ${t.key}: ${t.looksLike}`)].join('\n'));
   return parts;
 }
@@ -93,9 +106,15 @@ export function confirmParts({ listing, notice, listingPhoto, recallPhoto }) {
  * Levels: "none" (show nothing), "possible" (soft flag), "likely" (warning). Never "safe".
  * `lookedUp`: the recall cards the device returned when the cloud called lookup_recalls. A recall the cloud names
  * counts only when it is one of them.
+ * `device.seen`: the recall card the device's own lookup found from a brand read in the photo, if any.
  */
 export function decideFinal(device, cloud, hints, lookedUp = []) {
-  if (!cloud) return { ...device, confirmed: false };
+  if (!cloud) {
+    // The device's own lookup is a guess for the cloud to check (the built-in model often gives a brand it did not
+    // read). Unchecked, it is not shown: the decision is what the device had without it.
+    const { seen, ...rest } = device;
+    return { ...rest, confirmed: false };
+  }
   const base = { kind: null, card: null, banned: null, confirmed: true, evidence: cloud.evidence || '', check: cloud.check_before_buying || '', where: boxFrom(cloud.where) };
 
   // A toy is never the product. "Part or accessory" clears a listing only when the cloud also sees no banned type:
@@ -110,17 +129,30 @@ export function decideFinal(device, cloud, hints, lookedUp = []) {
   // code checked the brand, and look-alikes exist (many rocking sleepers resemble the Rock 'n Play). It is shown, but
   // it never becomes a red "Recalled product" on its own: at most a soft flag, or a line on a type flag that stands
   // without it.
-  const hit = cloud.recall_id ? lookedUp.find(c => c.id === String(cloud.recall_id).trim()) : null;
-  const found = hit && (cloud.matches_recall === 'yes' || cloud.matches_recall === 'cannot_tell') ? hit : null;
+  // The same caution holds for a recall the device's own lookup found (device.seen): the model that looked at the
+  // photo read a brand there, and the field guide had a recall for that brand and kind (lookup.mjs, deviceLookup).
+  // The cloud is given it as "found by the device, unverified" and answers with its recall_id only when it sees that
+  // brand or product itself.
+  const agrees = cloud.matches_recall === 'yes' || cloud.matches_recall === 'cannot_tell';
+  const pool = device.seen ? [...lookedUp, device.seen] : lookedUp;
+  const hit = cloud.recall_id ? pool.find(c => c.id === String(cloud.recall_id).trim()) : null;
+  const found = agrees ? hit : null;
+  // The recall the listing's own words matched, checked by code.
+  const wordsCard = device.kind === 'recall' && device.card && !device.seen ? device.card : null;
 
-  if (device.kind === 'recall' && device.card && !found) {
+  if (wordsCard && !hit) {
     if (cloud.matches_recall === 'yes') {
-      return { ...base, level: 'likely', kind: 'recall', card: device.card, why: 'matches the recalled product in the notice' };
+      return { ...base, level: 'likely', kind: 'recall', card: wordsCard, why: 'matches the recalled product in the notice' };
     }
     if (cloud.matches_recall === 'cannot_tell') {
-      return { ...base, level: 'possible', kind: 'recall', card: device.card, why: 'same brand and kind as a recalled product; the listing does not show which model' };
+      return { ...base, level: 'possible', kind: 'recall', card: wordsCard, why: 'same brand and kind as a recalled product; the listing does not show which model' };
     }
     // "no": not this recall. A banned type can still apply, so fall through.
+  }
+  if (wordsCard && hit && agrees) {
+    // The cloud judged a recall its lookup returned, not the one the listing's words matched. The words' recall was
+    // checked by code and is not ruled out, so it stays on the card, soft, and the other is named beside it.
+    return { ...base, level: 'possible', kind: 'recall', card: wordsCard, alsoRecall: hit, why: 'the listing\'s words match one recall; the cloud named another product and the field guide on the device had a recall for it too' };
   }
 
   const cloudBanned = BANNED_TYPES.find(t => t.key === cloud.banned_type) || null;
@@ -130,7 +162,9 @@ export function decideFinal(device, cloud, hints, lookedUp = []) {
     return { ...base, level: 'likely', kind: 'banned', banned: hints[0] || cloudBanned, why: 'both models see a product type that may no longer be sold', ...(found ? { alsoRecall: found } : {}) };
   }
   if (found) {
-    return { ...base, level: 'possible', kind: 'recall', card: found, lookedUp: true, why: 'the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it' };
+    return { ...base, level: 'possible', kind: 'recall', card: found, lookedUp: true, why: device.seen && found.id === device.seen.id
+      ? 'a brand was read in the photo on the device; its field guide had a recall for that brand and kind of product; the cloud saw the same product; the listing\'s words do not name it'
+      : 'the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it' };
   }
   if (hints.length) {
     return { ...base, level: 'possible', kind: 'banned', banned: hints[0], why: 'the wording names a product type that may no longer be sold; the photo did not confirm it' };

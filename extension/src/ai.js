@@ -265,7 +265,8 @@ export function hybridModel({ system, schema, model = CLOUD_MODEL }) {
     inCloudParams: {
       model,
       ...(system ? { systemInstruction: system } : {}),
-      generationConfig: schema ? { responseMimeType: 'application/json', responseJsonSchema: schema } : {},
+      // Temperature 0 here too: on a phone or another browser this is the cloud path for every step.
+      generationConfig: schema ? { responseMimeType: 'application/json', responseJsonSchema: schema, temperature: 0 } : { temperature: 0 },
     },
   }, { timeout: CLOUD_TIMEOUT_MS });
 }

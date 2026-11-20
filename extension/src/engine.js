@@ -10,12 +10,13 @@ import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, readOnce } from
 import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer } from '../../shared/triage.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
-import { fetchNotice, noticeFromCpsc } from '../../shared/notice.mjs';
+import { fetchNotice, noticeFromCpsc, noticeFromCard } from '../../shared/notice.mjs';
 import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal } from '../../shared/confirm.mjs';
-import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse } from '../../shared/lookup.mjs';
+import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse, applyDeviceLookup } from '../../shared/lookup.mjs';
 import { present } from '../../shared/present.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
+import { WARNINGS_CSV, warningRecords, warningNotice } from '../../shared/warnings.mjs';
 
 let indexPromise = null, basePromise = null;
 let cardsUrl = () => chrome.runtime.getURL('data/cards.json');
@@ -35,7 +36,9 @@ const warningTexts = () => (warningsPromise ||= fetch(cardsUrl().replace(/cards\
 /** The full notice the cloud check reads: from the CPSC recall API, or, for a warning, from the bundled file. */
 async function noticeFor(id) {
   if (!/^W/.test(String(id))) return fetchNotice(id);
-  const r = (await warningTexts())[id];
+  // A warning published after the build carries its text on its card (newWarnings below).
+  const fresh = liveCards.find(c => c.id === id && c.notice);
+  const r = fresh ? fresh.notice : (await warningTexts())[id];
   if (!r) throw new Error(`warning ${id} not found`);
   return noticeFromCpsc(r);
 }
@@ -68,25 +71,60 @@ export async function refreshRecalls({ cloud = true, fetchImpl = fetch } = {}) {
   if (!res.ok) throw new Error(`recall API ${res.status}`);
   const ids = new Set(known.map(c => c.id));
   const records = (await res.json()).filter(r => r && r.RecallNumber && !ids.has(String(r.RecallNumber).trim()));
-  const spots = new Map();
   const settings = await liveSettings();
-  if (cloud && hasCloudAccess && settings.cloudCheck && settings.liveRecalls) {
-    const todo = records.slice(0, LIVE_MAX);
-    await Promise.all(Array.from({ length: Math.min(4, todo.length) }, async () => {
-      while (todo.length) {
-        const r = todo.shift();
-        try {
-          // The model that wrote the other 10,089 entries first, so new entries read like them.
-          const { answer } = await cloudJson({ system: SPOTTER_SYSTEM, schema: SPOTTER_SCHEMA, parts: [noticeText(r)], models: [...new Set([FIELD_GUIDE_MODEL, ...settings.models])] });
-          spots.set(String(r.RecallNumber).trim(), answer);
-        } catch { /* this notice keeps the plain-code card */ }
-      }
-    }));
-  }
+  const cloudOn = cloud && hasCloudAccess && settings.cloudCheck && settings.liveRecalls;
+  const spots = cloudOn ? await writeSpots(records, settings) : new Map();
   const cards = liveCardsFromCpsc(records, spots, known);
-  liveCards = [...cards, ...liveCards];
+  // CPSC's safety warnings published since the build, from CPSC's warnings file. Without them, the recalls stand.
+  let warned = { cards: [], found: 0, written: 0 };
+  try { warned = await newWarnings(known, { cloudOn, settings, fetchImpl }); } catch { /* CPSC's file unreachable */ }
+  liveCards = [...cards, ...warned.cards, ...liveCards];
   indexPromise = null;
-  return { cards, found: records.length, written: spots.size, newest: cards[0] ? cards[0].date : newest };
+  return { cards: [...cards, ...warned.cards], found: records.length + warned.found, written: spots.size + warned.written, warnings: warned.cards.length, newest: cards[0] ? cards[0].date : newest };
+}
+
+/** Gemini in the cloud writes each new notice's field-guide entry. Returns Map of notice number -> entry. */
+async function writeSpots(records, settings) {
+  const spots = new Map();
+  const todo = records.slice(0, LIVE_MAX);
+  await Promise.all(Array.from({ length: Math.min(4, todo.length) }, async () => {
+    while (todo.length) {
+      const r = todo.shift();
+      try {
+        // The model that wrote the other entries first, so new entries read like them.
+        const { answer } = await cloudJson({ system: SPOTTER_SYSTEM, schema: SPOTTER_SCHEMA, parts: [noticeText(r)], models: [...new Set([FIELD_GUIDE_MODEL, ...settings.models])] });
+        spots.set(String(r.RecallNumber).trim(), answer);
+      } catch { /* this notice keeps the plain-code card */ }
+    }
+  }));
+  return spots;
+}
+
+/**
+ * Live warnings. CPSC's safety warnings (shared/warnings.mjs) are not in the recall API; CPSC publishes them as one
+ * file, about three new ones a week in 2026. The extension reads that file with each refresh and gives every warning
+ * newer than the bundled ones a card, the way a new recall gets one. Each card carries its warning's text, which the
+ * cloud check reads in place of a recall notice. Only the extension can do this: CPSC's file has no CORS header, so a
+ * web page cannot read it, and there the bundled warnings stand.
+ */
+async function newWarnings(known, { cloudOn, settings, fetchImpl }) {
+  const none = { cards: [], found: 0, written: 0 };
+  if (!(globalThis.chrome && chrome.runtime && chrome.runtime.id)) return none;
+  const have = known.filter(c => c.warning);
+  if (!have.length) return none;
+  const newest = have.reduce((m, c) => (c.date > m ? c.date : m), '');
+  const res = await fetchImpl(`${WARNINGS_CSV}?_=${Date.now()}`, { signal: AbortSignal.timeout(30000), cache: 'no-store' });
+  if (!res.ok) throw new Error(`warnings file ${res.status}`);
+  const ids = new Set(known.map(c => c.id));
+  // A week of overlap, as for recalls. Older warnings that never got a card (nothing to match on) are not retried.
+  // Every new warning gets a card in this pass: the next pass starts from the newest one carded, so one left out now
+  // would never be fetched. The cloud writes field-guide entries for the first LIVE_MAX; the rest get plain-code cards.
+  const records = warningRecords(await res.text()).filter(r => r.RecallDate >= daysBefore(newest, 7) && !ids.has(r.RecallNumber));
+  if (!records.length) return none;
+  const spots = cloudOn ? await writeSpots(records, settings) : new Map();
+  const byId = new Map(records.map(r => [r.RecallNumber, r]));
+  const cards = liveCardsFromCpsc(records, spots, known).map(c => ({ ...c, warning: true, notice: warningNotice(byId.get(c.id)) }));
+  return { cards, found: records.length, written: spots.size };
 }
 
 /**
@@ -112,6 +150,9 @@ export async function triageListing(listing) { return triage(await index(), list
 let judge = null;
 const judgeModel = () => (judge ||= deviceModel({ system: SYSTEM, schema: SCHEMA }));
 const DEVICE_TIMEOUT_MS = 45000;
+// The built-in model is one session: its looks run one after another, whoever asks.
+let deviceChain = Promise.resolve();
+const oneLookAtATime = fn => { const run = deviceChain.then(fn, fn); deviceChain = run.catch(() => {}); return run; };
 const withTimeout = (promise, ms, what) => Promise.race([promise,
   new Promise((_, reject) => setTimeout(() => reject(new Error(`${what} did not answer within ${ms / 1000} s`)), ms))]);
 
@@ -128,29 +169,55 @@ export async function checkListing(listing, opts) {
  * `judge` replaces the on-device-only model: the web page passes a hybrid one, which runs on the device when it can.
  * `secondOpinion` (web page only): every baby product goes to the cloud, which may raise a soft flag on its own.
  */
-export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u => u, judge: judgeOverride = null, secondOpinion = false }) {
+export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u => u, judge: judgeOverride = null, secondOpinion = false, wordsFirst = false, onLook = null }) {
   const idx = await index();
   const t = triage(idx, listing);
   if (!t.needsEyes) return { result: present(listing, { level: 'none', why: t.partOrToy ? 'part or toy' : 'no recall or risky type in the words' }, { words: true }) };
+  // Remote Config's cloud_check switch can turn the cloud step off for everyone; flags then stand, unconfirmed.
+  const cloudOn = cloud && hasCloudAccess && (await liveSettings()).cloudCheck;
 
-  let device, photo = null, usedDevice = false, deviceError = '', deviceUnit = '';
-  if (modelReady) {
+  // `wordsFirst` (the extension's queue): a listing whose words name a risky type, and no recall, goes to the cloud
+  // check whatever the built-in model would say, and with the cloud's answer the result is the same either way
+  // (confirm.decideFinal trusts the words for the type). So it skips the model's look and its cloud check starts at
+  // once, while the model, one listing at a time, looks at the listings where its answer decides something. With the
+  // cloud off, the model looks at these too, and when the cloud check then fails, the model looks after all
+  // (confirmInCloud). The cloud can name an unnamed product itself (lookup_recalls), so the device's own lookup is
+  // not needed for these. Measured before this: 17 listings took 183 s with the built-in model against 30 to 81 s
+  // without it.
+  const skipLook = wordsFirst && cloudOn && modelReady && t.hints.length > 0 && !t.candidate;
+
+  let device, photo = null, usedDevice = false, deviceError = '', deviceUnit = '', seen = null, lookedInCloud = false;
+  if (modelReady && !skipLook) {
+    if (onLook) onLook();
     photo = listing.image ? await imagePart(imageUrl(listing.image)).catch(() => null) : null;
     const parts = [promptText(listing, t.candidate, t.hints)];
     if (photo) parts.push(photo);
-    try {
-      // A stuck model session must not stall the whole page: give up on this listing's look and start a fresh
-      // session for the next one.
-      const r = await withTimeout((judgeOverride || judgeModel()).generateContent(parts), DEVICE_TIMEOUT_MS, 'the built-in model');
-      const answer = JSON.parse(r.response.text());
+    const settle = answer => {
       device = decide(answer, t.candidate, t.hints, t.maybe);
       // What the built-in model made of the card's "which units" line; recorded beside the cloud's answer.
       if (t.candidate && device.kind === 'recall') deviceUnit = answer.recalled_unit || '';
+      // The device asks its own field guide: a brand the model read in the photo that the listing's words don't say.
+      ({ device, seen } = applyDeviceLookup(idx, listing, answer, t.candidate, device));
+    };
+    try {
+      // A stuck model session must not stall the whole page: give up on this listing's look and start a fresh
+      // session for the next one.
+      const r = await oneLookAtATime(() => withTimeout((judgeOverride || judgeModel()).generateContent(parts), DEVICE_TIMEOUT_MS, 'the built-in model'));
+      settle(JSON.parse(r.response.text()));
       usedDevice = (r.response.inferenceSource || 'on_device') === 'on_device';
     } catch (e) {
       if (!judgeOverride) judge = null;
       deviceError = String(e).slice(0, 160);
-      device = decide(wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe);
+      device = null;
+      // On the web page the look is hybrid: when the built-in model fails on a photo, Gemini in the cloud looks
+      // instead, as the Android app does. The extension keeps the look on the computer.
+      if (judgeOverride && cloudOn) {
+        try {
+          settle((await cloudJson({ system: SYSTEM, schema: SCHEMA, parts })).answer);
+          lookedInCloud = true;
+        } catch { device = null; }
+      }
+      device ||= decide(wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe);
     }
   } else {
     // No built-in model on this computer: the words alone decide what the cloud should look at.
@@ -159,10 +226,8 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
 
   if (secondOpinion && !/part or a toy/.test(device.why || '')) device = { ...device, secondOpinion: true };
   const deviceLevel = device.level === 'none' && device.askCloud ? 'ask' : device.level;
-  const how = { device: usedDevice, deviceLevel, deviceUnit, candidate: t.candidate ? `${t.candidate.card.id} ${t.candidate.strength}` : '', judgedInCloud: modelReady && !usedDevice && !deviceError, deviceError };
-  const stage = { listing, hints: t.hints, device, photo, how, result: null };
-  // Remote Config's cloud_check switch can turn the cloud step off for everyone; flags then stand, unconfirmed.
-  const cloudOn = cloud && hasCloudAccess && (await liveSettings()).cloudCheck;
+  const how = { device: usedDevice, deviceLevel, deviceUnit, candidate: t.candidate ? `${t.candidate.card.id} ${t.candidate.strength}` : '', judgedInCloud: lookedInCloud || (modelReady && !skipLook && !usedDevice && !deviceError), deviceError, ...(seen ? { seen } : {}) };
+  const stage = { listing, hints: t.hints, device, photo, how, result: null, skippedLook: skipLook };
   if ((device.level === 'none' && !device.askCloud && !device.secondOpinion) || !cloudOn) {
     stage.result = present(listing, device.level === 'none' ? device : decideFinal(device, null, t.hints), how);
   }
@@ -218,21 +283,37 @@ export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
   const { listing, device, hints, how } = stage;
   try {
     const photo = stage.photo || (listing.image ? await imagePart(imageUrl(listing.image)).catch(() => null) : null);
-    const notice = device.kind === 'recall' && device.card ? await noticeFor(device.card.id) : null;
+    // The recall the cloud compares the listing with: the one the words matched, or the one the device's own lookup
+    // found from a brand read in the photo (device.seen).
+    const wordsCard = device.kind === 'recall' && device.card ? device.card : null;
+    const inHand = wordsCard || device.seen || null;
+    // When the CPSC recall API does not answer, the check goes on with the short record on the device's own card.
+    const notice = inHand ? await noticeFor(inHand.id).catch(() => noticeFromCard(inHand)) : null;
     const recallPhoto = notice && notice.images[0] ? await imagePart(imageUrl(notice.images[0])).catch(() => null) : null;
     const lookups = [], lookedUp = [];
+    // Each notice's remedy in full, for the card: the recall card keeps only its first 140 characters.
+    const remedies = notice && notice.remedy ? { [inHand.id]: notice.remedy } : {};
     const onCall = async (_name, args) => {
-      const found = lookupCards(await index(), args, { exclude: device.card ? device.card.id : '' });
+      const found = lookupCards(await index(), args, { exclude: inHand ? inHand.id : '' });
       const notices = await Promise.all(found.map(c => noticeFor(c.card.id).catch(() => null)));
       lookups.push({ asked: lookupArgs(args), found: found.map(c => c.card.id) });
       lookedUp.push(...found.map(c => c.card));
+      found.forEach((c, i) => { if (notices[i] && notices[i].remedy) remedies[c.card.id] = notices[i].remedy; });
+      // (lookupResponse writes a candidate without a notice from its card's own lines.)
       return lookupResponse(found, notices);
     };
-    const { answer, model } = await cloudJson({ system: CONFIRM_SYSTEM_LOOKUP, schema: CONFIRM_SCHEMA_LOOKUP, parts: confirmParts({ listing, notice, listingPhoto: photo, recallPhoto }), tool: LOOKUP_TOOL, onCall });
-    return present(listing, decideFinal(device, answer, hints, lookedUp), { ...how, cloud: { model, answer }, ...(lookups.length ? { lookups } : {}) });
+    const { answer, model } = await cloudJson({ system: CONFIRM_SYSTEM_LOOKUP, schema: CONFIRM_SCHEMA_LOOKUP, parts: confirmParts({ listing, notice: wordsCard ? notice : null, listingPhoto: photo, recallPhoto, seen: !wordsCard && device.seen && notice && how.seen ? { brand: how.seen.brand, id: device.seen.id, notice } : null }), tool: LOOKUP_TOOL, onCall });
+    return present(listing, decideFinal(device, answer, hints, lookedUp), { ...how, cloud: { model, answer }, remedies, ...(lookups.length ? { lookups } : {}) });
   } catch (e) {
+    const cloudError = String(e).slice(0, 400);
+    // The cloud check failed. A listing that skipped the built-in model's look because the cloud was going to check
+    // it gets that look now, so it ends as it would with the cloud off, not as words alone.
+    if (stage.skippedLook) {
+      const again = await lookOnDevice(listing, { modelReady: true, cloud: false, imageUrl }).catch(() => null);
+      if (again && again.result) return { ...again.result, how: { ...again.result.how, cloudError } };
+    }
     // The on-device flag stands, marked unconfirmed.
-    return present(listing, device.level === 'none' ? device : decideFinal(device, null, hints), { ...how, cloudError: String(e).slice(0, 400) });
+    return present(listing, device.level === 'none' ? device : decideFinal(device, null, hints), { ...how, cloudError });
   }
 }
 
@@ -251,14 +332,27 @@ let CLOUD_AT_ONCE = 8;
 if (hasCloudAccess) liveSettings().then(s => { CLOUD_AT_ONCE = s.cloudAtOnce; });
 let cloudBusy = 0;
 const cloudWaiting = [];
-const cloudSlot = () => (cloudBusy < CLOUD_AT_ONCE ? (cloudBusy++, Promise.resolve()) : new Promise(r => cloudWaiting.push(r)));
-const releaseCloudSlot = () => { const next = cloudWaiting.shift(); if (next) next(); else cloudBusy--; };
+let queueIndex = null;   // the card index, for ranking waiting cloud checks (set by pump)
+const cloudSlot = job => (cloudBusy < CLOUD_AT_ONCE ? (cloudBusy++, Promise.resolve()) : new Promise(resolve => cloudWaiting.push({ resolve, job })));
+// A freed slot goes to the waiting listing the shopper is most likely looking at: on screen now, then page order.
+// Ranked when the slot frees, not when the listing joined, so scrolling moves a listing up.
+function releaseCloudSlot() {
+  if (!cloudWaiting.length) { cloudBusy--; return; }
+  let best = 0;
+  for (let i = 1; i < cloudWaiting.length; i++) {
+    const a = cloudWaiting[i].job, b = cloudWaiting[best].job;
+    const gone = j => (livePage.get(j.tabId) === j.pageKey ? 0 : 1);   // a page the tab has left only needs its slot back
+    if ((gone(b) - gone(a) || (queueIndex ? priority(queueIndex, a) - priority(queueIndex, b) : 0) || a.order - b.order) < 0) best = i;
+  }
+  cloudWaiting.splice(best, 1)[0].resolve();
+}
 const livePage = new Map();   // tabId -> pageKey
 
 // Offscreen pages cannot read chrome.storage, so the background sends the shopper's settings with each batch.
-function enqueue(tabId, pageKey, listings, { cloud = true } = {}) {
+function enqueue(tabId, pageKey, listings, { cloud = true, thorough = false } = {}) {
   livePage.set(tabId, pageKey);
-  listings.forEach((listing, i) => queue.push({ tabId, pageKey, listing, order: listing.order ?? i, cloud }));
+  // `thorough` (a setting, off by default): every baby product gets the cloud's look, as on the web page.
+  listings.forEach((listing, i) => queue.push({ tabId, pageKey, listing, order: listing.order ?? i, cloud, thorough: !!thorough && cloud }));
   pump();
 }
 
@@ -267,6 +361,7 @@ async function pump() {
   running = true;
   try {
     const idx = await index();
+    queueIndex = idx;
     if (hasCloudAccess) CLOUD_AT_ONCE = (await liveSettings()).cloudAtOnce;
     while (queue.length) {
       // Re-rank each time: new pages arrive while old ones run.
@@ -283,8 +378,7 @@ async function pump() {
       const stageIs = s => chrome.runtime.sendMessage({ type: 'sr:engine-stage', tabId: job.tabId, id: job.listing.id, stage: s }).catch(() => {});
       let stage;
       try {
-        if (status === 'available' && rank(idx, job) !== 0) stageIs('device');
-        stage = await lookOnDevice(job.listing, { modelReady: status === 'available', cloud: job.cloud });
+        stage = await lookOnDevice(job.listing, { modelReady: status === 'available', cloud: job.cloud, wordsFirst: true, secondOpinion: job.thorough, onLook: () => stageIs('device') });
       } catch (e) {
         failed(e);
         continue;
@@ -292,9 +386,9 @@ async function pump() {
       if (stage.result) { send(stage.result); continue; }
       // The built-in model is one session, so it works through listings one at a time; cloud checks run alongside it,
       // up to CLOUD_AT_ONCE. When all cloud slots are busy, the queue waits for one.
+      // The queue does not wait for a free slot: the built-in model keeps looking at the next listing meanwhile.
       stageIs('cloud');
-      await cloudSlot();
-      confirmInCloud(stage).then(send, failed).finally(releaseCloudSlot);
+      cloudSlot(job).then(() => (livePage.get(job.tabId) === job.pageKey ? confirmInCloud(stage).then(send, failed) : null)).finally(releaseCloudSlot);
     }
   } finally {
     running = false;

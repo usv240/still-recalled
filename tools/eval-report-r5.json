@@ -1,0 +1,321 @@
+{
+ "set": "eval",
+ "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+ "listings": 136,
+ "mustFlag": 14,
+ "mustNotFlag": 115,
+ "unclear": 7,
+ "systems": {
+  "words only": {
+   "caught": 7,
+   "missed": [
+    {
+     "id": "307117103153",
+     "title": "Abreeze Portable Bedside Baby Sleeper, Gray/White, Carry Bag",
+     "why": "Despite the 'bedside sleeper' title, the photo shows a padded baby nest/lounger in an Abreeze bag; no Abreeze recall in cards."
+    },
+    {
+     "id": "366812057413",
+     "title": "Vintage Quiltex Precious Moments Crib Bedding Set Bless This Baby",
+     "why": "Photo shows a rolled, padded crib bumper with ties next to the quilt and sheets."
+    },
+    {
+     "id": "267843698279",
+     "title": "Vintage 1986 Red Calliope Teddy Bear Baby Crib Bedding Set Blue Pastel USA",
+     "why": "Photo shows a padded, ruffled crib bumper panel with ties."
+    },
+    {
+     "id": "336898849272",
+     "title": "Crib Bedding Set Cotton White Blue Pink Teddy Bear w/ Quilt Blanket & Mobile Arm",
+     "why": "A ruffled padded bumper is visible laid out around the quilt."
+    },
+    {
+     "id": "168855967039",
+     "title": "Vintage Lambs & Ivy Sleepytime Baby Snoopy 7 Piece Nursery Bedding & Decor Set",
+     "why": "Package photo shows the padded bumper fitted around the crib; it is part of the 7-piece set."
+    },
+    {
+     "id": "147631281873",
+     "title": "Elephant Crib Bedding Set Unisex Baby Nursery Gray Blue White Bedding Set",
+     "why": "Photo shows padded bumper sections with ties among the set pieces."
+    },
+    {
+     "id": "880089415306",
+     "title": "Care Bears Baby Crib Bedding Set Green Yellow Stars 2 Piece Baby Hugs Rare",
+     "why": "Photo shows a padded headboard bumper and side bumper pieces."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "257842016919",
+     "title": "Nested Bean Zen One swaddle/Sleepsack 3-6 months",
+     "level": "possible",
+     "why": "Wearable Nested Bean swaddle/sleep sack garment; no Nested Bean recall in cards."
+    },
+    {
+     "id": "960167294786",
+     "title": "Pottery Barn Kids & Levtex Crib Bedding Bundle – 2 Sheets + Pink Crib Skirt",
+     "level": "possible",
+     "why": "Only two crib sheets and a crib skirt are listed and shown; no bumper."
+    },
+    {
+     "id": "287707048490",
+     "title": "Disney baby Winnie the Pooh You Are So Loved Crib Bedding Set Comforter & Sheet",
+     "level": "possible",
+     "why": "Title and photo show only a comforter and a fitted sheet."
+    },
+    {
+     "id": "206681045132",
+     "title": "Fisher Price Little People Nursery Furniture Set Bassinet Changing Table 2007",
+     "level": "possible",
+     "why": "Little People dollhouse nursery furniture (toy bassinet and changing table)."
+    },
+    {
+     "id": "198536001187",
+     "title": "Fisher-Price Bassinet Bedside Sleeper Breathable Mesh Side White/Gray",
+     "level": "possible",
+     "why": "Fisher-Price mesh bassinet with control panel; no Fisher-Price bassinet recall in cards."
+    },
+    {
+     "id": "920143177033",
+     "title": "Graco Foldable Baby Swing with Toy Bar for Infant, Gray and White",
+     "level": "possible",
+     "why": "Graco compact folding swing; no Graco swing recall in cards."
+    },
+    {
+     "id": "236460677683",
+     "title": "Mobile Toy Bar Plastic Arm 4moms mamaRoo Swing Replacement OEM Swing Parts",
+     "level": "possible",
+     "why": "Replacement mamaRoo toy-bar mobile only; the 4moms recall concerned the seat straps, not this part."
+    },
+    {
+     "id": "860023300721",
+     "title": "graco baby electric swing and bouncer",
+     "level": "possible",
+     "why": "Graco electric swing (Graco logo on motor); no Graco swing recall in cards."
+    },
+    {
+     "id": "158080492386",
+     "title": "VTG Graco Baby Swing Swyngomatic Quiet Ride Wind Up Crank Bear Tray WORKS TESTED",
+     "level": "possible",
+     "why": "Vintage Graco Quiet Ride Swyngomatic wind-up swing with tray; no Graco swing recall in cards."
+    },
+    {
+     "id": "227601930110",
+     "title": "DockATot Grand Morris & Co Blue Floral Toddler Lounger Spare Cover Cover Only",
+     "level": "possible",
+     "why": "Title says spare cover only, for the toddler-size DockATot Grand."
+    },
+    {
+     "id": "800917550637",
+     "title": "Baby Bjorn Bouncer Bliss - Dark Gray Mesh Cover and Toy Bar, Adjustable",
+     "level": "possible",
+     "why": "BabyBjorn Bouncer Bliss mesh; no recall in cards."
+    },
+    {
+     "id": "407358567068",
+     "title": "Vintage Graco Pack ’n Play Disney Winnie the Pooh Edition",
+     "level": "possible",
+     "why": "Vintage Graco Pooh Pack 'n Play; no recall in cards."
+    },
+    {
+     "id": "147355782408",
+     "title": "Dark Brown Solid Wood 10-Drawer Bedroom Dresser w/ Metal Pull Handles",
+     "level": "likely",
+     "why": "Traditional solid-wood chest-on-chest; no matching dresser recall."
+    },
+    {
+     "id": "800849362259",
+     "title": "2 Child Craft by Smith Dressers / Drawers with Changing Table - Nursery Bedroom",
+     "level": "possible",
+     "why": "Oak Child Craft dresser with changing top; no Child Craft dresser recall in cards."
+    },
+    {
+     "id": "128193451769",
+     "title": "Vintage Fisher-Price bundle 12-18M Cotton One-Piece Sleepers Floral Snap Button",
+     "level": "possible",
+     "why": "Two one-piece sleeper pajamas (garments)."
+    },
+    {
+     "id": "227440606415",
+     "title": "Vintage Fisher Price Pajamas Size 4T Kidswear Toys Print Sleeper Footie Footed",
+     "level": "possible",
+     "why": "Footed sleeper pajamas (garment)."
+    },
+    {
+     "id": "227552102253",
+     "title": "Vintage Fisher Price Little People One Piece Footie Sleeper Pajamas 4T 1993 USA",
+     "level": "possible",
+     "why": "Footed sleeper pajamas (garment)."
+    },
+    {
+     "id": "176889159836",
+     "title": "Fisher Price Vintage 12 Months Train Footed Outfit Terry Cloth Sleeper",
+     "level": "possible",
+     "why": "Footed terry sleeper outfit (garment)."
+    },
+    {
+     "id": "227596474742",
+     "title": "Vintage Fisher Price Loving Family Baby Girl Infant In Orange Sleeper",
+     "level": "possible",
+     "why": "Small dollhouse baby figure (about 2 in)."
+    }
+   ],
+   "flagged": 27,
+   "unclearFlagged": 1,
+   "recallRate": 0.5,
+   "precision": 0.269
+  },
+  "on-device only": {
+   "caught": 7,
+   "missed": [
+    {
+     "id": "307117103153",
+     "title": "Abreeze Portable Bedside Baby Sleeper, Gray/White, Carry Bag",
+     "why": "Despite the 'bedside sleeper' title, the photo shows a padded baby nest/lounger in an Abreeze bag; no Abreeze recall in cards."
+    },
+    {
+     "id": "366812057413",
+     "title": "Vintage Quiltex Precious Moments Crib Bedding Set Bless This Baby",
+     "why": "Photo shows a rolled, padded crib bumper with ties next to the quilt and sheets."
+    },
+    {
+     "id": "267843698279",
+     "title": "Vintage 1986 Red Calliope Teddy Bear Baby Crib Bedding Set Blue Pastel USA",
+     "why": "Photo shows a padded, ruffled crib bumper panel with ties."
+    },
+    {
+     "id": "336898849272",
+     "title": "Crib Bedding Set Cotton White Blue Pink Teddy Bear w/ Quilt Blanket & Mobile Arm",
+     "why": "A ruffled padded bumper is visible laid out around the quilt."
+    },
+    {
+     "id": "168855967039",
+     "title": "Vintage Lambs & Ivy Sleepytime Baby Snoopy 7 Piece Nursery Bedding & Decor Set",
+     "why": "Package photo shows the padded bumper fitted around the crib; it is part of the 7-piece set."
+    },
+    {
+     "id": "147631281873",
+     "title": "Elephant Crib Bedding Set Unisex Baby Nursery Gray Blue White Bedding Set",
+     "why": "Photo shows padded bumper sections with ties among the set pieces."
+    },
+    {
+     "id": "880089415306",
+     "title": "Care Bears Baby Crib Bedding Set Green Yellow Stars 2 Piece Baby Hugs Rare",
+     "why": "Photo shows a padded headboard bumper and side bumper pieces."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "960167294786",
+     "title": "Pottery Barn Kids & Levtex Crib Bedding Bundle – 2 Sheets + Pink Crib Skirt",
+     "level": "possible",
+     "why": "Only two crib sheets and a crib skirt are listed and shown; no bumper."
+    },
+    {
+     "id": "198536001187",
+     "title": "Fisher-Price Bassinet Bedside Sleeper Breathable Mesh Side White/Gray",
+     "level": "possible",
+     "why": "Fisher-Price mesh bassinet with control panel; no Fisher-Price bassinet recall in cards."
+    },
+    {
+     "id": "920143177033",
+     "title": "Graco Foldable Baby Swing with Toy Bar for Infant, Gray and White",
+     "level": "possible",
+     "why": "Graco compact folding swing; no Graco swing recall in cards."
+    },
+    {
+     "id": "860023300721",
+     "title": "graco baby electric swing and bouncer",
+     "level": "possible",
+     "why": "Graco electric swing (Graco logo on motor); no Graco swing recall in cards."
+    },
+    {
+     "id": "158080492386",
+     "title": "VTG Graco Baby Swing Swyngomatic Quiet Ride Wind Up Crank Bear Tray WORKS TESTED",
+     "level": "possible",
+     "why": "Vintage Graco Quiet Ride Swyngomatic wind-up swing with tray; no Graco swing recall in cards."
+    },
+    {
+     "id": "800917550637",
+     "title": "Baby Bjorn Bouncer Bliss - Dark Gray Mesh Cover and Toy Bar, Adjustable",
+     "level": "possible",
+     "why": "BabyBjorn Bouncer Bliss mesh; no recall in cards."
+    },
+    {
+     "id": "407358567068",
+     "title": "Vintage Graco Pack ’n Play Disney Winnie the Pooh Edition",
+     "level": "possible",
+     "why": "Vintage Graco Pooh Pack 'n Play; no recall in cards."
+    },
+    {
+     "id": "147355782408",
+     "title": "Dark Brown Solid Wood 10-Drawer Bedroom Dresser w/ Metal Pull Handles",
+     "level": "likely",
+     "why": "Traditional solid-wood chest-on-chest; no matching dresser recall."
+    },
+    {
+     "id": "800849362259",
+     "title": "2 Child Craft by Smith Dressers / Drawers with Changing Table - Nursery Bedroom",
+     "level": "possible",
+     "why": "Oak Child Craft dresser with changing top; no Child Craft dresser recall in cards."
+    },
+    {
+     "id": "128193451769",
+     "title": "Vintage Fisher-Price bundle 12-18M Cotton One-Piece Sleepers Floral Snap Button",
+     "level": "possible",
+     "why": "Two one-piece sleeper pajamas (garments)."
+    }
+   ],
+   "flagged": 18,
+   "unclearFlagged": 1,
+   "recallRate": 0.5,
+   "precision": 0.412
+  },
+  "hybrid": {
+   "caught": 13,
+   "missed": [
+    {
+     "id": "820357887587",
+     "title": "Sleepyhead DockATot Deluxe+ Baby Infant Lounger Cover",
+     "why": "Title says 'cover' but the photo shows a filled DockATot Deluxe+ dock; in-bed lounger type."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "158080492386",
+     "title": "VTG Graco Baby Swing Swyngomatic Quiet Ride Wind Up Crank Bear Tray WORKS TESTED",
+     "level": "likely",
+     "why": "Vintage Graco Quiet Ride Swyngomatic wind-up swing with tray; no Graco swing recall in cards."
+    }
+   ],
+   "flagged": 15,
+   "unclearFlagged": 1,
+   "recallRate": 0.929,
+   "precision": 0.929
+  }
+ },
+ "askingPrices": {
+  "mustFlag": 908.03,
+  "words only": 356.04,
+  "on-device only": 356.04,
+  "hybrid": 845.15
+ },
+ "bySite": {
+  "ebay": {
+   "listings": 136,
+   "mustFlag": 14
+  }
+ },
+ "cost": {
+  "listings": 136,
+  "checkedByWordsOnly": 42,
+  "lookedAtOnDevice": 94,
+  "sentToCloud": 31,
+  "cloudErrors": 0,
+  "shareSentToCloud": 0.228,
+  "medianMs": 7004,
+  "totalMinutes": 19.9
+ },
+ "run": "r5"
+}

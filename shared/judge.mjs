@@ -15,13 +15,14 @@ export const SYSTEM = [
   'same_kind_as_recalled: true only when the product for sale is the same kind of product as the RECALLED PRODUCT given. If none is given, answer false.',
   'recalled_unit: read "Which units" under RECALLED PRODUCT. "no" only when the listing itself names a model, version or year that those lines leave out. "yes" when it names one they include. Otherwise, or if none is given, "cannot_tell".',
   'banned_type: choose a type only when the listing clearly is that kind of product. Otherwise "none".',
+  'brand_seen: a brand or maker name you can read in the photo, printed on the product, its tag, its label or its box. Copy the letters you see. Empty when you cannot read one. Never guess a brand from the product\'s shape or colour.',
 ].join('\n');
 
 // A fixed schema, so one model instance serves every listing.
 export const SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['what_is_for_sale', 'product_kind', 'same_kind_as_recalled', 'recalled_unit', 'banned_type'],
+  required: ['what_is_for_sale', 'product_kind', 'same_kind_as_recalled', 'recalled_unit', 'banned_type', 'brand_seen'],
   properties: {
     what_is_for_sale: { type: 'string', enum: ['the_product', 'part_or_accessory', 'toy_or_doll_version', 'unclear'] },
     product_kind: { type: 'string' },
@@ -30,6 +31,9 @@ export const SCHEMA = {
     // next to the cloud's own answer and not yet acted on: see docs/accuracy.md, "The cloud teaches the device".
     recalled_unit: { type: 'string', enum: ['yes', 'no', 'cannot_tell'] },
     banned_type: { type: 'string', enum: ['none', ...BANNED_TYPES.map(t => t.key)] },
+    // A brand name read in the photo. When the listing's words do not say it, the device looks it up in its own
+    // field guide (lookup.mjs, deviceLookup): sellers often leave the brand out of the title.
+    brand_seen: { type: 'string' },
   },
 };
 

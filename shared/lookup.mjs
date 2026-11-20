@@ -9,7 +9,7 @@
 // device returned (confirm.mjs decideFinal), and the match is made by the shortlist's code, not by a model.
 import { shortlist } from './shortlist.mjs';
 import { noticeForPrompt } from './notice.mjs';
-import { clip } from './text.mjs';
+import { clip, uniqueTokens } from './text.mjs';
 
 /** The function declaration, in the JSON Schema shape both Firebase AI Logic SDKs take. */
 export const LOOKUP_TOOL = {
@@ -29,7 +29,7 @@ export const LOOKUP_TOOL = {
 /** Added to the confirmation's system prompt when the function is offered. */
 export const LOOKUP_SYSTEM = [
   'lookup_recalls: the device has already searched its field guide with the listing\'s own words; the RECALL NOTICE given, if any, is what that search found. Call lookup_recalls once, and only when you can name a brand or product line that the listing\'s words do not state: you recognise it in the photo, read it on the product or its label in the photo, or know the product by a name the seller did not use. Do not call it for a brand or product the title or description already names, and do not call it when you cannot name a brand.',
-  'recall_id: when lookup_recalls returned a recall of the product for sale, its recall number, and answer matches_recall for that recall. Otherwise empty.',
+  'recall_id: when the product for sale is covered by a recall that lookup_recalls returned, or by the one under FOUND BY THE DEVICE, that recall\'s number, and answer matches_recall for that recall. Otherwise empty.',
 ].join('\n');
 
 const str = v => (typeof v === 'string' ? v : '').replace(/\s+/g, ' ').trim().slice(0, 80);
@@ -55,6 +55,45 @@ export function lookupCards(index, args, { exclude = '' } = {}) {
     if (found.length) return found;
   }
   return [];
+}
+
+// What a model writes when it has no brand to give, and words that are not a brand.
+const NO_BRAND = /^(none|n\/?a|unknown|no brand|not (visible|readable|shown)|unbranded|generic|brand|baby|infant|kids?)$/i;
+
+/**
+ * The device asks its own field guide. The model that looks at the listing (Gemini Nano where the device has it)
+ * copies out a brand name it can read in the photo (judge.mjs, brand_seen). When the listing's words do not already
+ * say that brand, the shortlist's code looks it up together with the kind of product. The match is made by code, on
+ * the brand that was read: a card counts only when one of its brand names is among the words read.
+ * Returns { card, strength, brand } or null.
+ */
+export function deviceLookup(index, listing, answer) {
+  const brand = str(answer && answer.brand_seen);
+  if (brand.length < 3 || NO_BRAND.test(brand)) return null;
+  const said = new Set(uniqueTokens(`${listing.title} ${listing.description || ''}`));
+  const read = new Set([brand, brand.replace(/\s+II$/i, '2'), brand.replace(/[\s-]+/g, '')].flatMap(uniqueTokens));
+  // Already in the listing's words: the shortlist had its chance with it.
+  if (!read.size || uniqueTokens(brand).every(t => said.has(t))) return null;
+  const found = lookupCards(index, { brand, product: `${str(answer.product_kind)} ${str(listing.title)}` });
+  const hit = found.find(c => c.matched.brand && c.card.brands.some(b => b.every(t => read.has(t))));
+  return hit ? { card: hit.card, strength: hit.strength, brand } : null;
+}
+
+/**
+ * The device's decision (judge.decide) with its own lookup applied. `answer` is the looking model's answer, or null
+ * when no model looked; `candidate` is what the listing's words found. Returns { device, seen }: `seen` is
+ * { brand, id } when the lookup found a recall, else null.
+ *
+ * What the lookup finds is a question for the cloud, not a flag: the device's own level does not change, the listing
+ * is sent to the cloud check (askCloud) with the recall attached (device.seen), and it is shown only if the cloud
+ * sees that product too, and then as a soft flag at most (confirm.decideFinal). Measured on ten photos, the built-in
+ * model gave "Fisher-Price" for three different sleepers and was right once: it guesses a brand from a shape.
+ */
+export function applyDeviceLookup(index, listing, answer, candidate, device) {
+  if (candidate || !answer || device.kind === 'recall' || /part or a toy/.test(device.why || '')) return { device, seen: null };
+  const hit = deviceLookup(index, listing, answer);
+  if (!hit) return { device, seen: null };
+  return { device: { ...device, askCloud: true, seen: hit.card }, seen: { brand: hit.brand, id: hit.card.id } };
 }
 
 /**

@@ -198,6 +198,9 @@ try {
   }, huffy).catch(e => ({ error: String(e) }));
   step('new recalls arrive from CPSC', !!(liveRun.out && liveRun.out.added >= 7 && liveRun.ids.includes('27086')),
     liveRun.out ? `${liveRun.out.added} added (${liveRun.ids.join(', ')}), ${liveRun.out.written} field-guide entries written in the cloud, ${Math.round(liveRun.ms / 1000)} s` : JSON.stringify(liveRun).slice(0, 200));
+  // CPSC's safety warnings are not in the recall API: the extension reads CPSC's warnings file with the same refresh.
+  const liveWarnings = (liveRun.ids || []).filter(i => /^W\d/.test(i));
+  step('new CPSC safety warnings arrive too', liveWarnings.length >= 1, liveWarnings.length ? `${liveWarnings.length} warnings (${liveWarnings.slice(0, 4).join(', ')})` : 'none');
   step('watched listing raises an alert', !!(liveRun.alert && liveRun.alert.recall && liveRun.alert.recall.id === '27086'),
     liveRun.alert ? `${liveRun.alert.level} / ${liveRun.alert.badge}: recall ${liveRun.alert.recall.id}${liveRun.alert.confirmed ? ', confirmed in the cloud' : ''}` : 'no alert');
   results.live = liveRun;

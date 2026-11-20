@@ -30,11 +30,14 @@ checked by word rules and, when your computer has it, by Chrome's built-in model
 Listings these steps clear never leave it. Your searches and the rest of your browsing are not sent anywhere.</p>
 
 <h2>What is sent to the cloud, and why</h2>
-<p>When a listing is flagged on your computer, its title, description and photo are sent, with the CPSC recall notice it
-might match, to Gemini through Google's Firebase AI Logic, so a larger model can confirm or clear the flag. On the web
-page, the screenshot or text you add is read and checked the same way: on your device when your browser has a built-in
-model, otherwise by Gemini in the cloud.</p>
-<p>You can turn the cloud check off in the extension's side panel settings. Google processes these requests under
+<p>When a listing is flagged on your computer, or your computer can't settle it (a bedding set that may hide a bumper,
+a possible part, or a product whose photo suggests a recalled brand its title doesn't name), its title, description,
+price and photo are sent, with the CPSC recall notice it might match, to Gemini through Google's Firebase AI Logic, so
+a larger model can confirm or clear it. In our tests this was about one listing in four. On the web page and in the
+Android app, which check one listing at a time, the screenshot or text you add is read on your device when it has a
+built-in model, otherwise by Gemini in the cloud, and every baby product you check gets the cloud's look.</p>
+<p>You can turn the cloud check off in the extension's side panel settings. A second setting, off unless you turn it
+on, sends every baby product on a page for the cloud's look, as the web page does. Google processes these requests under
 <a class="link" href="https://firebase.google.com/terms/data-processing-terms" target="_blank" rel="noopener">Firebase's data processing terms</a>.</p>
 
 <h2>What is not collected</h2>
@@ -49,7 +52,7 @@ model, otherwise by Gemini in the cloud.</p>
 again, and keeps your settings. If you choose <em>Watch for recalls</em> on a listing, its title, price, photo address and link are kept in your browser so it can be checked against new recalls; you can stop watching it in the side panel. Nothing is stored on a server. Removing the extension removes them.</p>
 
 <h2>New recalls</h2>
-<p>Twice a day the extension asks the U.S. Consumer Product Safety Commission's public recall API for recalls published since its list was built. The request contains no information about you. Gemini, through Firebase, reads each new recall notice (a public government document) to write a short summary used for matching. Your watch list is checked on your computer; a watched listing is sent to the cloud only if your computer flags it against a new recall, as described above.</p>
+<p>Twice a day the extension asks the U.S. Consumer Product Safety Commission's public recall API for recalls published since its list was built, and reads CPSC's public file of safety warnings. The requests contain no information about you. Gemini, through Firebase, reads each new recall notice (a public government document) to write a short summary used for matching. Your watch list is checked on your computer; a watched listing is sent to the cloud only if your computer flags it against a new recall, as described above.</p>
 
 <h2>Verification</h2>
 <p>To protect the project's model quota, Google's reCAPTCHA Enterprise and Firebase App Check confirm that requests come

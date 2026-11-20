@@ -14,56 +14,12 @@
 import { readFileSync, writeFileSync, existsSync, appendFileSync, mkdirSync } from 'node:fs';
 import { liveCardsFromCpsc } from '../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../shared/spotter.mjs';
+import { WARNINGS_CSV, warningRecords } from '../shared/warnings.mjs';
 
-const SOURCE = 'https://www.cpsc.gov/s3fs-public/recall-data/product_safety_warning_listing.csv';
-const LIST_URL = 'https://www.cpsc.gov/Warnings';
+const SOURCE = WARNINGS_CSV;
 const RAW = 'data/raw/cpsc-warnings.csv';
-
-function parseCsv(text) {
-  const rows = []; let row = [], cell = '', q = false;
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    if (q) { if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
-    else if (ch === '"') q = true;
-    else if (ch === ',') { row.push(cell); cell = ''; }
-    else if (ch === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; }
-    else if (ch !== '\r') cell += ch;
-  }
-  if (cell || row.length) { row.push(cell); rows.push(row); }
-  return rows;
-}
-
-const ENT = { amp: '&', nbsp: ' ', quot: '"', apos: "'", lt: '<', gt: '>', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“', ndash: '–', mdash: '—', reg: '®', trade: '™', eacute: 'é' };
-const plain = s => String(s || '')
-  .replace(/<[^>]*>/g, ' ')
-  .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-  .replace(/&([a-z]+);/gi, (m, n) => ENT[n.toLowerCase()] ?? ' ')
-  .replace(/https?:\/\/\S+\s+lang=\S*/g, ' ')
-  .replace(/\s+/g, ' ').trim();
 const clip = (s, n) => (s.length <= n ? s : s.slice(0, n - 1) + '…');
-const isoDate = s => { const d = new Date(`${s} UTC`); return Number.isNaN(+d) ? '' : d.toISOString().slice(0, 10); };
-
-/** CPSC's warnings file as records in the recall API's shape, so the same card and notice code reads them. */
-export function warningRecords(csv) {
-  const rows = parseCsv(csv.replace(/^﻿/, ''));
-  const head = rows[0];
-  return rows.slice(1).filter(r => r.length === head.length).map(r => Object.fromEntries(head.map((h, i) => [h, plain(r[i])]))).map(w => ({
-    RecallNumber: `W${w['Product Safety Warning Number']}`,
-    RecallDate: isoDate(w['Product Safety Warning Date']),
-    Title: w['Product Safety Warning Title'],
-    Description: clip(w.Description, 2400),
-    URL: LIST_URL,
-    Products: [{ Name: w['Name of product'], NumberOfUnits: w.Units }],
-    Hazards: [{ Name: w['Hazard Description'] }],
-    Remedies: [{ Name: w['Consumer Action'] }],
-    Retailers: w['Sold At'] ? [{ Name: w['Sold At'] }] : [],
-    Manufacturers: w.Manufacturers ? [{ Name: w.Manufacturers }] : [],
-    Importers: w.Importers ? [{ Name: w.Importers }] : [],
-    Distributors: w.Distributors ? [{ Name: w.Distributors }] : [],
-    Images: [],
-    Warning: true,
-  })).filter(r => /^W\d{2}-\d+$/.test(r.RecallNumber) && r.RecallDate && r.Title);
-}
+export { warningRecords };
 
 /** Warning cards, made the careful way cards for new notices are (liveCardsFromCpsc), marked as warnings. */
 export function warningCards(records, spots, baseCards) {

@@ -9,7 +9,9 @@ import { buildIndex } from '../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer } from '../shared/triage.mjs';
 import { decide } from '../shared/judge.mjs';
 import { decideFinal } from '../shared/confirm.mjs';
-import { confirm } from './lookup-run.mjs';
+import { confirm, look } from './lookup-run.mjs';
+import { applyDeviceLookup } from '../shared/lookup.mjs';
+
 
 const LISTINGS = [
   { recall: '23088', title: 'Inclined baby sleeper, pink, folds flat', text: 'Used for about four months. Gentle rocking, folds flat for travel.' },
@@ -26,21 +28,35 @@ const LISTINGS = [
 const { cards } = JSON.parse(readFileSync('extension/data/cards.json', 'utf8'));
 const index = buildIndex(cards);
 const runs = Number((process.argv.find(a => a.startsWith('--runs=')) || '--runs=1').slice(7));
+// --masked: the real listings whose naming words were stripped by code (tools/masked-build.mjs), with the
+// sellers' own photos, in place of the ten made-up ones.
+const masked = process.argv.includes('--masked');
+const key = masked ? JSON.parse(readFileSync('tools/masked-key.json', 'utf8')).key : null;
+const SET = masked
+  ? JSON.parse(readFileSync('tools/masked-listings.json', 'utf8')).masked.map(l => ({ recall: key[l.id].recall, title: l.title, text: '', image: l.image }))
+  : LISTINGS;
+const outFile = masked ? 'tools/lookup-masked.json' : 'tools/lookup-generic.json';
 const rows = [];
 for (let run = 0; run < runs; run++) {
-  for (const l of LISTINGS) {
+  for (const l of SET) {
     const card = cards.find(c => c.id === l.recall);
+    const image = l.image || card.image;
     const listing = { title: l.title, description: l.text, price: '' };
     const t = triage(index, listing);
-    const device = { ...decide(wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe), secondOpinion: true };
     const row = { recall: l.recall, product: card.product, title: l.title, words: t.candidate ? `${t.candidate.card.id} ${t.candidate.strength}` : t.hints.length ? `type: ${t.hints[0].key}` : 'nothing' };
     try {
-      const r = await confirm(listing, device, t.hints, card.image);
+      // The look, then the device's own lookup from a brand the looking model gave, then the confirmation.
+      const answer = t.needsEyes ? await look(listing, t, image).catch(() => null) : null;
+      let device = decide(answer || wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe), seen = null;
+      if (answer) ({ device, seen } = applyDeviceLookup(index, listing, answer, t.candidate, device));
+      device = { ...device, secondOpinion: true };
+      Object.assign(row, { brandGiven: (answer && answer.brand_seen) || '', deviceFound: seen ? seen.id : '' });
+      const r = await confirm(listing, device, t.hints, image, seen);
       const without = decideFinal(device, { ...r.answer, recall_id: '' }, t.hints, []);
       Object.assign(row, { model: r.model, ms: r.ms, photo: r.photo, asked: r.lookups.map(x => `${x.asked.brand} / ${x.asked.product}`), returned: r.lookups.flatMap(x => x.found),
         without: `${without.level}${without.kind ? ' ' + without.kind : ''}`, withLookup: `${r.final.level}${r.final.kind ? ' ' + r.final.kind : ''}${(r.final.card || r.final.alsoRecall) ? ' ' + (r.final.card || r.final.alsoRecall).id : ''}`,
         named: !!((r.final.lookedUp && r.final.card) || r.final.alsoRecall), right: !!(((r.final.card || r.final.alsoRecall) || {}).id === l.recall), sameProductOtherNotice: !!((r.final.card || r.final.alsoRecall) && (r.final.card || r.final.alsoRecall).id !== l.recall), red: r.final.level === 'likely' && r.final.kind === 'recall' });
-      console.log(`${l.recall} ${row.right ? 'RIGHT' : row.named ? 'other notice' : 'not named'} | words: ${row.words} | asked: ${row.asked.join('; ') || 'no call'} -> ${row.returned.join(',') || '-'} | ${row.without} -> ${row.withLookup} | ${r.ms} ms ${r.model}`);
+      console.log(`${l.recall} ${row.right ? 'RIGHT' : row.named ? 'other notice' : 'not named'} | words: ${row.words} | brand given: ${row.brandGiven || '-'}${row.deviceFound ? ' -> ' + row.deviceFound : ''} | asked: ${row.asked.join('; ') || 'no call'} -> ${row.returned.join(',') || '-'} | ${row.without} -> ${row.withLookup} | ${r.ms} ms ${r.model}`);
     } catch (e) { row.error = String(e).slice(0, 160); console.log(l.recall, 'ERROR', row.error); }
     rows.push(row);
   }
@@ -48,5 +64,9 @@ for (let run = 0; run < runs; run++) {
 const ok = rows.filter(r => !r.error);
 const summary = { listings: LISTINGS.length, runs, checked: ok.length, wordsFoundRecall: ok.filter(r => /^\d/.test(r.words)).length, cloudAsked: ok.filter(r => r.asked.length).length, deviceReturnedTheRecall: ok.filter(r => r.returned.includes(r.recall)).length,
   namedRightRecall: ok.filter(r => r.right).length, namedAnotherNotice: ok.filter(r => r.sameProductOtherNotice).length, flaggedWithoutLookup: ok.filter(r => !/^none/.test(r.without)).length, redRecallOnTheCloudsWordAlone: ok.filter(r => r.red).length, medianMs: ok.map(r => r.ms).sort((a, b) => a - b)[ok.length >> 1] || 0 };
-writeFileSync('tools/lookup-generic.json', JSON.stringify({ at: new Date().toISOString(), note: 'Made-up listings with generic titles and each recall notice\'s own photo.', summary, rows }, null, 1));
+summary.lookGaveABrand = ok.filter(r => r.brandGiven).length;
+summary.deviceLookupFoundARecall = ok.filter(r => r.deviceFound).length;
+summary.deviceLookupFoundTheRightRecall = ok.filter(r => r.deviceFound === r.recall).length;
+summary.listings = SET.length;
+writeFileSync(outFile, JSON.stringify({ at: new Date().toISOString(), note: masked ? 'Real listings whose naming words were stripped by code; the sellers\' own photos.' : 'Made-up listings with generic titles and each recall notice\'s own photo.', summary, rows }, null, 1));
 console.log(JSON.stringify(summary));

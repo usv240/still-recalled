@@ -1,0 +1,357 @@
+{
+ "set": "fifth",
+ "labeller": "blind AI review (Claude), title + one photo + every CPSC recall since 1973 and CPSC's safety warnings",
+ "listings": 178,
+ "mustFlag": 9,
+ "mustNotFlag": 149,
+ "unclear": 20,
+ "systems": {
+  "words only": {
+   "caught": 4,
+   "missed": [
+    {
+     "id": "377630756875",
+     "title": "Baby Rocker",
+     "why": "Title only says Baby Rocker, but the photo shows a Fisher-Price tagged inclined sleeper with deep padded mesh sides, a head support, a folding frame and a power cord, the shape of an Auto Rock 'n Play Sleeper, and every Rock 'n Play is recalled."
+    },
+    {
+     "id": "267677028231",
+     "title": "Snuggle Me Gray Baby Pillow Comfortable Infant Support Cushion for Newborns",
+     "why": "Title says Snuggle Me infant support cushion for newborns and the photo shows the gray padded oval infant lounger; no CPSC recall, but it is an infant lounger."
+    },
+    {
+     "id": "128192879005",
+     "title": "Vtg Raggedy Ann & Andy Express 6-Pc Crib Bedding Set Quilt Sheet Nursery",
+     "why": "Vintage Raggedy Ann 6-piece crib bedding set whose photo shows long padded panel strips with ties laid beside the quilt, which look like the bumper."
+    },
+    {
+     "id": "318791804360",
+     "title": "Lulyboo PLUS Portable Foldable Bassinet Sleeper Bed, Gray Oval, Handles",
+     "why": "Lulyboo PLUS soft oval padded baby bed with handles lying on the floor; it is a portable lounger or in-bed sleeper rather than a bassinet on a stand."
+    },
+    {
+     "id": "168872267613",
+     "title": "Raggedy Ann & Andy Crib Bedding Set",
+     "why": "Raggedy Ann and Andy crib bedding set; the long padded strip with ties at the top of the photo is a crib bumper."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "nWb3R9uubPHVRBqTQXPzhc",
+     "title": "Ingenuity Foldaway Rocking Bassinet used 1",
+     "level": "possible",
+     "why": "Box reads Ingenuity Foldaway Rocking Bassinet (item 4384), a flat bassinet; it is not on the Kids II rocking sleeper recall list, which names only Rocking Sleepers."
+    },
+    {
+     "id": "jz88Zw84rj6ASriruwM71n",
+     "title": "2-in-1 Graco DuetConnect LX Baby Swing & Portable Bouncer 1",
+     "level": "possible",
+     "why": "Graco DuetConnect LX swing and bouncer; Graco's swing recalls cover 1990s swings and the 2002-2004 Travel Lite, not the DuetConnect."
+    },
+    {
+     "id": "aZwH2BXEUZxc4ym1u1D6wb",
+     "title": "Graco baby swing and rocker 1",
+     "level": "possible",
+     "why": "Graco swing and rocker still packed in its box with a current design; Graco's swing recalls are for 1990s swings and the 2002-2004 Travel Lite, but the title gives no model."
+    },
+    {
+     "id": "pM9xuRD1FinFeAxQodG5cv",
+     "title": "Graco DreamGlider Bassinet Swing 1",
+     "level": "possible",
+     "why": "Graco DreamGlider gliding swing and bassinet; CPSC has no DreamGlider recall and swings and bassinets are not the risky types."
+    },
+    {
+     "id": "6j5iLLBNXx9EdEZmucxDiS",
+     "title": "Baby Bassinet Bedside Crib for Newborn, 4-in-1 Baby Bassinet Bedside 1",
+     "level": "possible",
+     "why": "Unbranded 4-in-1 bedside bassinet in a stock photo; not a risky type and no brand to match."
+    },
+    {
+     "id": "820346533996",
+     "title": "Ingenuity Bouncer REPLACEMENT Keep Cozy 3-in-1 Rocker Toy Arch Mobile Elephant",
+     "level": "possible",
+     "why": "Replacement toy arch for an Ingenuity Keep Cozy 3-in-1 bouncer, circled in the photo; a part only."
+    },
+    {
+     "id": "168870386935",
+     "title": "3 in 1 Baby Bassinet, Upgraded Beside Crib with 360 Highly - Scratch & Dent",
+     "level": "possible",
+     "why": "Unbranded 3-in-1 bedside bassinet in a stock photo; not a risky type and no brand to match."
+    },
+    {
+     "id": "377648465380",
+     "title": "Plastic Toddler Bed, Disney Princess",
+     "level": "possible",
+     "why": "Plastic Disney Princess toddler bed; not an infant sleep type and no matching toddler bed recall."
+    },
+    {
+     "id": "820372727692",
+     "title": "Pottery Barn Kids Disney Princess Castle TWIN sheet set 100% Organic Cotton READ",
+     "level": "possible",
+     "why": "Pottery Barn Kids twin sheet set, folded; bedding for an older child."
+    },
+    {
+     "id": "2FNy9AQ4GvwKPgQRbUmjTt",
+     "title": "Kids’ Backyard Swing Set 1",
+     "level": "possible",
+     "why": "Unbranded metal A-frame backyard swing set, not an infant sleep product and no brand to match a recall."
+    },
+    {
+     "id": "io57AFraR89veZi4W1EwQ6",
+     "title": "Graco DuetSoothe Swing & Rocker 1",
+     "level": "possible",
+     "why": "Graco DuetSoothe swing and rocker in the photo; no CPSC recall covers this model."
+    },
+    {
+     "id": "398385877338",
+     "title": "Fisher-Price Infant-to-Toddler Rocker Vibrating Bouncer Seat, Multicolor",
+     "level": "possible",
+     "why": "Fisher-Price Infant-to-Toddler Rocker in the photo; a rocker is not one of the listed types and no numbered recall or warning for it is in the supplied CPSC files."
+    },
+    {
+     "id": "188687562654",
+     "title": "Fisher-Price Giraffe Plush Infant Support Pillow Lounger, Medium, HNL01",
+     "level": "possible",
+     "why": "Fisher-Price plush giraffe tummy-time support roll (HNL01), a prop pillow and not a lounger a baby lies in; no recall found."
+    },
+    {
+     "id": "800848836039",
+     "title": "Disney Princess \"Enchanted Tales\" 4-piece toddler bed set",
+     "level": "possible",
+     "why": "Packaged Disney Princess 4-piece toddler bed set (bedspread, sheets, pillowcase) with no bumper."
+    },
+    {
+     "id": "qdq4VC4A4mDYPRL78uHxeA",
+     "title": "Baby Trend Portable Playard with Bassinet and Changing Table 1",
+     "level": "possible",
+     "why": "Baby Trend Retreat Nursery Center playard PY75C54C (store-page screenshot); Baby Trend playard recalls are 1990s models only."
+    },
+    {
+     "id": "jah7TmZY1kCK2BceWHGncu",
+     "title": "Pottery Barn 3-in-1 Convertible Crib with Acrylic Slats 1",
+     "level": "possible",
+     "why": "Pottery Barn Kids crib with grey frame and clear acrylic slats, fixed sides; not the recalled Penny, Spindle or drop-side cribs."
+    },
+    {
+     "id": "137945117593",
+     "title": "Ingenuity Keep Cozy 3-in-1 Grow with Me Baby Bouncer, Rocker & Toddler Seat",
+     "level": "possible",
+     "why": "Ingenuity Keep Cozy 3-in-1 bouncer and rocker; not one of the Kids2 rocking sleepers and no recall found for it."
+    },
+    {
+     "id": "147662183391",
+     "title": "Bumbo Foam Infant Floor Seat PLUS+ with Tray for Babies 3-12 Months Old, Agave",
+     "level": "possible",
+     "why": "Bumbo Floor Seat PLUS+ with tray in its retail box, harness shown; a current model sold after the 2012 recall of older seats."
+    },
+    {
+     "id": "257634991292",
+     "title": "Fisher-Price Portable Baby Chair Sit-Me-Up Floor Seat With Developmental Toys",
+     "level": "possible",
+     "why": "Fisher-Price Sit-Me-Up floor seat with toys (stock photo); no recall found for it."
+    },
+    {
+     "id": "366817078094",
+     "title": "Graco DuetConnect LX Infant Swing Music Adj Speeds White/Gray 2160534",
+     "level": "possible",
+     "why": "Graco DuetConnect LX swing 2160534; Graco swing recalls are from 2004 and earlier models."
+    },
+    {
+     "id": "940094292615",
+     "title": "4moms mamaroo 1046 Multi Motion Baby Swing. All functions operate properly.",
+     "level": "possible",
+     "why": "4moms MamaRoo model 1046 with a 5-point harness visible; recall 22-200 covers only 3-point harness models 4M-005, 1026 and 1037."
+    },
+    {
+     "id": "376745182514",
+     "title": "Disney Winnie The Pooh Sunny Day Newborn Keepsake Pillow No Writing Clean No Tag",
+     "level": "possible",
+     "why": "Winnie the Pooh birth-record keepsake pillow; decor."
+    },
+    {
+     "id": "820370957595",
+     "title": "Marvel Spiderman Spidey & Friends Toddler Bed Set Comforter Boys Bedding",
+     "level": "possible",
+     "why": "Spidey and Friends toddler bed comforter set; toddler bedding with no bumper."
+    }
+   ],
+   "flagged": 38,
+   "unclearFlagged": 11,
+   "recallRate": 0.444,
+   "precision": 0.148
+  },
+  "on-device only": {
+   "caught": 4,
+   "missed": [
+    {
+     "id": "377630756875",
+     "title": "Baby Rocker",
+     "why": "Title only says Baby Rocker, but the photo shows a Fisher-Price tagged inclined sleeper with deep padded mesh sides, a head support, a folding frame and a power cord, the shape of an Auto Rock 'n Play Sleeper, and every Rock 'n Play is recalled."
+    },
+    {
+     "id": "267677028231",
+     "title": "Snuggle Me Gray Baby Pillow Comfortable Infant Support Cushion for Newborns",
+     "why": "Title says Snuggle Me infant support cushion for newborns and the photo shows the gray padded oval infant lounger; no CPSC recall, but it is an infant lounger."
+    },
+    {
+     "id": "128192879005",
+     "title": "Vtg Raggedy Ann & Andy Express 6-Pc Crib Bedding Set Quilt Sheet Nursery",
+     "why": "Vintage Raggedy Ann 6-piece crib bedding set whose photo shows long padded panel strips with ties laid beside the quilt, which look like the bumper."
+    },
+    {
+     "id": "318791804360",
+     "title": "Lulyboo PLUS Portable Foldable Bassinet Sleeper Bed, Gray Oval, Handles",
+     "why": "Lulyboo PLUS soft oval padded baby bed with handles lying on the floor; it is a portable lounger or in-bed sleeper rather than a bassinet on a stand."
+    },
+    {
+     "id": "168872267613",
+     "title": "Raggedy Ann & Andy Crib Bedding Set",
+     "why": "Raggedy Ann and Andy crib bedding set; the long padded strip with ties at the top of the photo is a crib bumper."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "jz88Zw84rj6ASriruwM71n",
+     "title": "2-in-1 Graco DuetConnect LX Baby Swing & Portable Bouncer 1",
+     "level": "possible",
+     "why": "Graco DuetConnect LX swing and bouncer; Graco's swing recalls cover 1990s swings and the 2002-2004 Travel Lite, not the DuetConnect."
+    },
+    {
+     "id": "aZwH2BXEUZxc4ym1u1D6wb",
+     "title": "Graco baby swing and rocker 1",
+     "level": "possible",
+     "why": "Graco swing and rocker still packed in its box with a current design; Graco's swing recalls are for 1990s swings and the 2002-2004 Travel Lite, but the title gives no model."
+    },
+    {
+     "id": "pM9xuRD1FinFeAxQodG5cv",
+     "title": "Graco DreamGlider Bassinet Swing 1",
+     "level": "possible",
+     "why": "Graco DreamGlider gliding swing and bassinet; CPSC has no DreamGlider recall and swings and bassinets are not the risky types."
+    },
+    {
+     "id": "6j5iLLBNXx9EdEZmucxDiS",
+     "title": "Baby Bassinet Bedside Crib for Newborn, 4-in-1 Baby Bassinet Bedside 1",
+     "level": "possible",
+     "why": "Unbranded 4-in-1 bedside bassinet in a stock photo; not a risky type and no brand to match."
+    },
+    {
+     "id": "2FNy9AQ4GvwKPgQRbUmjTt",
+     "title": "Kids’ Backyard Swing Set 1",
+     "level": "possible",
+     "why": "Unbranded metal A-frame backyard swing set, not an infant sleep product and no brand to match a recall."
+    },
+    {
+     "id": "io57AFraR89veZi4W1EwQ6",
+     "title": "Graco DuetSoothe Swing & Rocker 1",
+     "level": "possible",
+     "why": "Graco DuetSoothe swing and rocker in the photo; no CPSC recall covers this model."
+    },
+    {
+     "id": "398385877338",
+     "title": "Fisher-Price Infant-to-Toddler Rocker Vibrating Bouncer Seat, Multicolor",
+     "level": "possible",
+     "why": "Fisher-Price Infant-to-Toddler Rocker in the photo; a rocker is not one of the listed types and no numbered recall or warning for it is in the supplied CPSC files."
+    },
+    {
+     "id": "188687562654",
+     "title": "Fisher-Price Giraffe Plush Infant Support Pillow Lounger, Medium, HNL01",
+     "level": "possible",
+     "why": "Fisher-Price plush giraffe tummy-time support roll (HNL01), a prop pillow and not a lounger a baby lies in; no recall found."
+    },
+    {
+     "id": "jah7TmZY1kCK2BceWHGncu",
+     "title": "Pottery Barn 3-in-1 Convertible Crib with Acrylic Slats 1",
+     "level": "possible",
+     "why": "Pottery Barn Kids crib with grey frame and clear acrylic slats, fixed sides; not the recalled Penny, Spindle or drop-side cribs."
+    },
+    {
+     "id": "rNiuevSwJbeq6stxFNupeZ",
+     "title": "Carter's 4-in-1 Convertible Crib 1",
+     "level": "possible",
+     "why": "Carter's 4-in-1 convertible crib, white with fixed sides (stock photo); no crib recall names Carter's."
+    },
+    {
+     "id": "147662183391",
+     "title": "Bumbo Foam Infant Floor Seat PLUS+ with Tray for Babies 3-12 Months Old, Agave",
+     "level": "possible",
+     "why": "Bumbo Floor Seat PLUS+ with tray in its retail box, harness shown; a current model sold after the 2012 recall of older seats."
+    },
+    {
+     "id": "166597897184",
+     "title": "Judi•S Squeak-A-Boo Jack In The Box Crib 5-Piece Bumperless Bedding Set Boy Girl",
+     "level": "possible",
+     "why": "Judi's Jack in the Box crib bedding, title says bumperless and the photo shows only a quilt."
+    },
+    {
+     "id": "366817078094",
+     "title": "Graco DuetConnect LX Infant Swing Music Adj Speeds White/Gray 2160534",
+     "level": "possible",
+     "why": "Graco DuetConnect LX swing 2160534; Graco swing recalls are from 2004 and earlier models."
+    },
+    {
+     "id": "940094292615",
+     "title": "4moms mamaroo 1046 Multi Motion Baby Swing. All functions operate properly.",
+     "level": "possible",
+     "why": "4moms MamaRoo model 1046 with a 5-point harness visible; recall 22-200 covers only 3-point harness models 4M-005, 1026 and 1037."
+    }
+   ],
+   "flagged": 30,
+   "unclearFlagged": 12,
+   "recallRate": 0.444,
+   "precision": 0.222
+  },
+  "hybrid": {
+   "caught": 7,
+   "missed": [
+    {
+     "id": "377630756875",
+     "title": "Baby Rocker",
+     "why": "Title only says Baby Rocker, but the photo shows a Fisher-Price tagged inclined sleeper with deep padded mesh sides, a head support, a folding frame and a power cord, the shape of an Auto Rock 'n Play Sleeper, and every Rock 'n Play is recalled."
+    },
+    {
+     "id": "267677028231",
+     "title": "Snuggle Me Gray Baby Pillow Comfortable Infant Support Cushion for Newborns",
+     "why": "Title says Snuggle Me infant support cushion for newborns and the photo shows the gray padded oval infant lounger; no CPSC recall, but it is an infant lounger."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "188687562654",
+     "title": "Fisher-Price Giraffe Plush Infant Support Pillow Lounger, Medium, HNL01",
+     "level": "possible",
+     "why": "Fisher-Price plush giraffe tummy-time support roll (HNL01), a prop pillow and not a lounger a baby lies in; no recall found."
+    }
+   ],
+   "flagged": 19,
+   "unclearFlagged": 11,
+   "recallRate": 0.778,
+   "precision": 0.875
+  }
+ },
+ "askingPrices": {
+  "mustFlag": 536.73,
+  "words only": 212.54,
+  "on-device only": 212.54,
+  "hybrid": 482.49
+ },
+ "bySite": {
+  "craigslist": {
+   "listings": 78,
+   "mustFlag": 0
+  },
+  "ebay": {
+   "listings": 100,
+   "mustFlag": 9
+  }
+ },
+ "cost": {
+  "listings": 178,
+  "checkedByWordsOnly": 22,
+  "lookedAtOnDevice": 156,
+  "sentToCloud": 38,
+  "cloudErrors": 0,
+  "shareSentToCloud": 0.213,
+  "medianMs": 6956,
+  "totalMinutes": 28.4
+ }
+}

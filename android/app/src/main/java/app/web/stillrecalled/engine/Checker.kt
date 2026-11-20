@@ -86,7 +86,7 @@ class Checker(private val cloudAllowed: () -> Boolean) {
         } catch (e: Throwable) {
             deviceError = e.toString().take(160)
         }
-        val look = Rules.obj("afterLook", answer, t, JSONObject().put("secondOpinion", true))
+        val look = Rules.obj("afterLook", answer, t, JSONObject().put("secondOpinion", true), listing)
         val device = look.getJSONObject("device")
         val candidate = t.optJSONObject("candidate")
         val how = JSONObject()
@@ -96,6 +96,9 @@ class Checker(private val cloudAllowed: () -> Boolean) {
             .put("candidate", candidate?.let { "${it.getJSONObject("card").optString("id")} ${it.optString("strength")}" } ?: "")
             .put("judgedInCloud", answer != null && !lookedOnDevice)
             .put("deviceError", deviceError)
+        // The phone asked its own field guide: a brand the looking model read in the photo (shared/lookup.mjs).
+        val seen = look.optJSONObject("seen")
+        if (seen != null) how.put("seen", seen)
         val hints = t.optJSONArray("hints") ?: JSONArray()
 
         if (!look.optBoolean("needsCloud") || !cloudOn) {
@@ -107,9 +110,13 @@ class Checker(private val cloudAllowed: () -> Boolean) {
         step("look", "Looking closer", State.ACTIVE, "${if (lookedOnDevice) "Looked at on this phone. " else ""}Comparing with the full recall notice in the cloud")
         return try {
             val id = look.optString("recallId")
-            val notice = if (id.isNotEmpty()) Net.notice(id) else null
+            // When the CPSC recall API does not answer, the check goes on with the phone's own card (bridge.js).
+            val notice = if (id.isNotEmpty()) try { Net.notice(id) } catch (e: Throwable) { null } else null
             val recallPhoto = notice?.let { n -> Rules.str("noticeImage", n).takeIf { it.isNotEmpty() }?.let { Net.photo(it, 512) } }
-            val texts = Rules.arr("confirmParts", listing, notice, small != null, recallPhoto != null)
+            val texts = Rules.arr("confirmParts", listing, notice, small != null, recallPhoto != null, seen?.optString("brand") ?: "", id)
+            // Each notice's remedy in full, for the card.
+            val remedies = JSONObject()
+            if (notice != null) remedies.put(id, Rules.str("remedy", notice))
             val parts = (0 until texts.length()).map { i ->
                 when (val s = texts.getString(i)) {
                     "\u0000LISTING_PHOTO" -> Ai.Image(small!!)
@@ -127,6 +134,7 @@ class Checker(private val cloudAllowed: () -> Boolean) {
                 val cards = found.getJSONArray("cards")
                 val notices = JSONArray()
                 for (i in 0 until ids.length()) notices.put(try { Net.notice(ids.getString(i)) ?: JSONObject.NULL } catch (e: Throwable) { JSONObject.NULL })
+                for (i in 0 until ids.length()) (notices.opt(i) as? JSONObject)?.let { remedies.put(ids.getString(i), Rules.str("remedy", it)) }
                 for (i in 0 until cards.length()) lookedUp.put(cards.getJSONObject(i))
                 lookups.put(JSONObject().put("asked", found.getJSONObject("asked")).put("found", ids))
                 Rules.obj("lookupResponse", found, notices)
@@ -134,6 +142,7 @@ class Checker(private val cloudAllowed: () -> Boolean) {
             val cloud = Ai.jsonWithFunction(prompt("confirm"), parts, settings.models, fn)
             how.put("cloud", JSONObject().put("model", cloud.model).put("answer", cloud.json))
             if (lookups.length() > 0) how.put("lookups", lookups)
+            how.put("remedies", remedies)
             step("look", "Looking closer", State.DONE, if (lookups.length() > 0) "The cloud asked this phone's field guide, then compared with the notice" else "Compared with the full recall notice")
             Outcome(Rules.obj("finish", listing, device, cloud.json, hints, how, lookedUp), listing, photo, readOnDevice)
         } catch (e: Throwable) {
@@ -162,7 +171,7 @@ class Checker(private val cloudAllowed: () -> Boolean) {
      * reading that matches a recalled model stands; anything that would reassure is read again in the cloud, and if the
      * two readings disagree, or a number is one character off a recalled one, the card says so (shared/label.mjs).
      */
-    suspend fun readLabel(photo: Bitmap, recall: JSONObject): LabelOutcome {
+    suspend fun readLabel(photo: Bitmap, recall: JSONObject, owner: Boolean = false): LabelOutcome {
         val settings = LiveSettings.get()
         val cloudOn = cloudAllowed() && settings.cloudCheck
         val parts = listOf(Ai.Text("Read the label in this photo."), Ai.Image(Net.scaled(photo, 1280)!!))
@@ -171,17 +180,17 @@ class Checker(private val cloudAllowed: () -> Boolean) {
         } catch (e: Throwable) {
             if (!cloudOn) throw e
             val c = Ai.json(prompt("label"), parts, Ai.Mode.CLOUD_ONLY, settings.models)
-            return LabelOutcome(c.json, "in_cloud", Rules.obj("labelCopy", Rules.obj("judgeLabel", c.json, recall)))
+            return LabelOutcome(c.json, "in_cloud", Rules.obj("labelCopy", Rules.obj("judgeLabel", c.json, recall), owner))
         }
         val verdict = Rules.obj("judgeLabel", first.json, recall)
         if (!first.onDevice || verdict.optString("state") == "recalled") {
-            return LabelOutcome(first.json, if (first.onDevice) "on_device" else "in_cloud", Rules.obj("labelCopy", verdict))
+            return LabelOutcome(first.json, if (first.onDevice) "on_device" else "in_cloud", Rules.obj("labelCopy", verdict, owner))
         }
         // Anything that would reassure needs a second reading. Without one (the cloud is off, or failed), the phone's
         // reading does not rule the recall out (shared/label.mjs readOnce).
         val second = (if (cloudOn) try { Ai.json(prompt("label"), parts, Ai.Mode.CLOUD_ONLY, settings.models) } catch (e: Throwable) { null } else null)
-            ?: return LabelOutcome(first.json, "on_device", Rules.obj("labelCopy", Rules.obj("readOnce", verdict)))
+            ?: return LabelOutcome(first.json, "on_device", Rules.obj("labelCopy", Rules.obj("readOnce", verdict), owner))
         val settled = Rules.obj("settleReadings", first.json, second.json, recall)
-        return LabelOutcome(second.json, "device_then_cloud", Rules.obj("labelCopy", settled))
+        return LabelOutcome(second.json, "device_then_cloud", Rules.obj("labelCopy", settled, owner))
     }
 }

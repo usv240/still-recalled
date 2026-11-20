@@ -45,6 +45,24 @@ export function productName(product) {
   return clip(String(product || '').replace(/^all\s+(models\s+of\s+|units\s+of\s+)?/i, '').replace(/^the\s+/i, ''), 90);
 }
 
+/**
+ * A recall card keeps the first 140 characters of the notice's remedy, which often ends mid-word. For reading: the
+ * whole sentences that fit, or, when the first sentence itself was cut, whole words and a note that the notice has
+ * the rest. A remedy that was not cut is returned as it is.
+ */
+export function remedyText(remedy) {
+  const s = String(remedy || '').trim();
+  if (!/…$/.test(s)) return s;
+  const body = s.slice(0, -1).trim();
+  // Cut exactly at the end of a sentence: nothing is missing from what is shown.
+  if (/[.!?]$/.test(body)) return body;
+  const stop = body.search(/[.!?](?=\s+[A-Z][^.!?]*$)/);
+  if (stop > 40) return body.slice(0, stop + 1);
+  // No whole sentence: drop the cut word (and a cut web address), and say where the rest is.
+  const words = body.replace(/\s*\S*$/, '').replace(/\s+https?:\S*$/i, '').replace(/(?:[\s,;:(]+(?:and|or|to|go|visit|at|for|the|a|an|of|with|by|on|in))*[\s,;:(]*$/i, '');
+  return `${words}… (the notice has the rest)`;
+}
+
 /** The badge text on the listing: short, specific, never "safe". */
 export function badgeText(r) {
   // A CPSC safety warning: the maker did not recall the product, so CPSC warned the public itself.
@@ -58,7 +76,7 @@ export function badgeText(r) {
 export function verdictLine(r) {
   // Found by the cloud's question to the device's field guide: the listing itself does not name the product.
   if (r.kind === 'recall' && r.lookedUp) {
-    return `Looks like the ${productName(r.recall.product)}, ${r.recall.warning ? 'which CPSC warned people to stop using in' : 'recalled'} ${monthYear(r.recall.date)}. The listing doesn't name it, so check the brand before you buy.`;
+    return `Looks like the ${productName(r.recall.product)}, ${r.recall.warning ? 'which CPSC warned people to stop using in' : 'recalled'} ${monthYear(r.recall.date)}. The listing's words don't name this product, so check the brand before you buy.`;
   }
   if (r.kind === 'recall' && r.recall.warning) {
     const product = productName(r.recall.product);
@@ -144,9 +162,8 @@ export function sellerQuestion(r) {
 // 2026-11-15). Its e-commerce team asks sites to take recalled and banned products down.
 export const CPSC_REPORT_URL = 'https://www.saferproducts.gov/IncidentReporting';
 
-// For the person who owns the thing: about to list it, give it away, or keep using a hand-me-down. Most sellers of
-// recalled baby gear do not know it is recalled (Consumer Reports, September 2026), and a listing that is never posted
-// needs no takedown. Same check, other words: what to do with it, and what the recall offers its owner.
+// For the person who owns the thing: about to list it, give it away, or keep using a hand-me-down. A listing that is
+// never posted needs no takedown. Same check, other words: what to do with it, and what the recall offers its owner.
 const OWNER_TYPE = {
   inclined_sleeper: 'Selling an inclined infant sleeper has been against federal law since November 2022, whatever its age. CPSC says never to use one for sleep.',
   crib_bumper: 'Selling a padded crib bumper has been against federal law since November 2022, whatever its age. CPSC\'s advice is nothing in a crib but a fitted sheet.',
@@ -154,11 +171,43 @@ const OWNER_TYPE = {
   drop_side_crib: 'CPSC says cribs made before June 28, 2011, drop-sides included, are very likely illegal to sell.',
 };
 
+// What to check on a possible type flag, said to the person holding the item (TYPE_COPY's advice speaks to a buyer).
+const OWNER_ADVICE = {
+  inclined_sleeper: 'Many inclined sleepers are also recalled: look for the brand and model on its label.',
+  crib_bumper: 'A thin, breathable mesh liner is a different product from a padded bumper. Check which one yours is.',
+  in_bed_sleeper: 'Several loungers have been recalled: look for the brand and model on its label.',
+  drop_side_crib: 'Check whether a side of the crib slides down, and the manufacture date on its label.',
+};
+
+/** The one-line finding, said to the owner: no "listing", no "before you buy". */
+function ownerVerdict(r) {
+  if (r.kind !== 'recall' || !r.recall) return r.verdict || '';
+  const product = productName(r.recall.product);
+  const when = monthYear(r.recall.date);
+  if (r.lookedUp) return `Looks like the ${product}, ${r.recall.warning ? 'which CPSC warned people to stop using in' : 'recalled'} ${when}. Check the brand on yours.`;
+  if (r.recall.warning) return r.verdict || '';
+  return r.level === 'likely' ? `Looks like the ${product}, recalled ${when}.` : `Same brand and kind as the ${product}, recalled ${when}. Its label shows which model you have.`;
+}
+
 /**
- * What the owner of a checked item reads: { action, heading, lines }. `r` is a presented result (present()), flagged
- * or not. Advice, in CPSC's terms; never "safe to sell".
+ * What the owner of a checked item reads: { verdict, foundBy, action, heading, lines }. `r` is a presented result
+ * (present()), flagged or not. Advice, in CPSC's terms; never "safe to sell".
  */
 export function ownerView(r) {
+  return { verdict: ownerVerdict(r), evidence: ownerWords(r.evidence), foundBy: String(r.foundBy || '').replace(/The listing's words/g, 'The words you gave'), ...ownerAdvice(r) };
+}
+
+/** The cloud's one-line reason speaks of "the listing"; the owner gave a photo or typed words, and has no listing. */
+function ownerWords(text) {
+  const s = String(text || '')
+    .replace(/\bthe listing(?:['’]s)? (?:photo|image|picture)\b/gi, 'your photo')
+    .replace(/\bthe listing(?:['’]s)? (?:title|description|text|words|wording)\b/gi, 'what you entered')
+    .replace(/\bthe listing\b/gi, 'what you entered')
+    .replace(/\bthis listing\b/gi, 'this item');
+  return s.replace(/(^|[.!?]\s+)([a-z])/g, (m, a, b) => a + b.toUpperCase());
+}
+
+function ownerAdvice(r) {
   const heading = 'Before you sell it or give it away';
   if (r.kind === 'recall' && r.recall) {
     const c = r.recall;
@@ -183,7 +232,7 @@ export function ownerView(r) {
     const rule = OWNER_TYPE[r.banned.key] || '';
     return r.level === 'likely'
       ? { heading, action: "Don't sell it or give it away.", lines: [rule, r.also ? `It also looks like the ${productName(r.also.product)} (${r.also.warning ? 'CPSC warning' : 'recall'} ${r.also.number}): the notice says what its maker offers.` : ''].filter(Boolean) }
-      : { heading, action: 'Check what it is before you sell it or give it away.', lines: [r.banned.advice, rule].filter(Boolean) };
+      : { heading, action: 'Check what it is before you sell it or give it away.', lines: [OWNER_ADVICE[r.banned.key] || r.banned.advice, rule].filter(Boolean) };
   }
   return { heading, action: "No recall found for what we could read. That doesn't mean it's safe to pass on.",
     lines: ['Many recalls cover only some models. Find the model number and date on its label and search them at SaferProducts.gov before you sell it or give it away.'] };
@@ -258,10 +307,16 @@ function monthYear(isoDate) {
  * `how`: { words: true } | { device: true, cloud: { model } | null, cloudError? }.
  */
 export function present(listing, decision, how = {}) {
-  // The cloud's question to the device's field guide that led to this recall (lookup.mjs), if one did.
+  // A recall the listing's words did not lead to (lookup.mjs), and which question to the device's field guide did:
+  // the cloud's (`asked`), or the device's own, from a brand read in the photo (`seenIt`).
   const via = decision.alsoRecall || (decision.lookedUp && decision.card) || null;
   const asked = via ? (how.lookups || []).find(l => l.found.includes(via.id)) : null;
   const askedFor = asked ? clip([asked.asked.brand, asked.asked.product].filter(Boolean).join(' '), 70) : '';
+  const seenIt = via && !asked && how.seen && how.seen.id === via.id ? how.seen : null;
+  const ledBy = seenIt
+    ? `${how.device ? 'Gemini Nano, on this device,' : 'Gemini'} read “${clip(seenIt.brand, 40)}” in the photo and asked the recall field guide on this device, which had it.`
+    : `Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`;
+  const viaNumber = via ? `${via.warning ? 'warning' : 'recall'} ${via.id.replace(/^W/, '')}` : '';
   const base = {
     id: listing.id,
     listing: { title: listing.title, price: listing.price || '', image: listing.image || '', url: listing.url || '' },
@@ -286,11 +341,15 @@ export function present(listing, decision, how = {}) {
       cloudError: how.cloudError || '',
       // What the cloud asked the device's field guide, and the recalls the device returned.
       lookups: (how.lookups || []).slice(0, 3),
+      // The device's own question to its field guide: the brand read in the photo, and the recall it found.
+      seen: how.seen ? { brand: clip(how.seen.brand, 40), id: how.seen.id } : null,
     },
     // Said on the card when the listing's own words did not lead to the recall.
-    foundBy: !asked ? '' : decision.alsoRecall
-      ? `It looks like the ${productName(via.product)}, ${via.warning ? 'which CPSC warned about in' : 'recalled'} ${monthYear(via.date)} (${via.warning ? 'warning' : 'recall'} ${via.id.replace(/^W/, '')}). The listing's words didn't name it: Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`
-      : `The listing's words didn't lead to this recall. Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`,
+    // Hedged on purpose: other makers sell look-alikes (a Kids2 rocking sleeper was once named as a Rock 'n Play), so
+    // the line sends the reader to the brand on the label.
+    foundBy: !(asked || seenIt) ? '' : decision.alsoRecall
+      ? `${decision.kind === 'recall' ? 'It may also be' : 'It may be'} the ${productName(via.product)}, ${via.warning ? 'which CPSC warned about in' : 'recalled'} ${monthYear(via.date)} (${viaNumber}). Other makers sell look-alikes, so check the brand on its label. The listing's words didn't name it: ${ledBy}`
+      : `The listing's words didn't lead to this recall. ${ledBy}`,
     // A recall shown because the cloud named the product, not because the listing's words did.
     lookedUp: !!(decision.lookedUp && decision.card && decision.level !== 'none'),
     // On a type flag that stands on its own: the recall the cloud and the device's field guide pointed to as well.
@@ -301,7 +360,9 @@ export function present(listing, decision, how = {}) {
   };
   if (base.kind === 'recall' && decision.card) {
     const c = decision.card;
-    base.recall = { id: c.id, warning: !!c.warning, number: c.warning ? c.id.replace(/^W/, '') : c.id, date: c.date, product: c.product, title: c.title, hazard: c.hazard, remedy: c.remedy, url: c.url, image: c.image,
+    // The remedy in full when the notice was fetched for the cloud check; otherwise the card's, cut back to whole words.
+    const remedy = how.remedies && how.remedies[c.id] ? clip(how.remedies[c.id], 700) : remedyText(c.remedy);
+    base.recall = { id: c.id, warning: !!c.warning, number: c.warning ? c.id.replace(/^W/, '') : c.id, date: c.date, product: c.product, title: c.title, hazard: c.hazard, remedy, url: c.url, image: c.image,
       // For the card's "which units" line and the label check.
       tell: c.tell || '', codes: (c.codes || []).slice(0, 14), more: !!c.more, from: c.from || 0, to: c.to || 0, all: !!c.all };
   }

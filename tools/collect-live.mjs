@@ -26,7 +26,7 @@ const searches = [
 ];
 
 const seen = new Set();
-for (const f of ['tools/eval-listings.json', 'tools/live-listings.json', 'tools/fresh-listings.json', 'tools/third-listings.json'].filter(f => path.resolve(f) !== outFile)) {
+for (const f of ['tools/eval-listings.json', 'tools/live-listings.json', 'tools/fresh-listings.json', 'tools/third-listings.json', 'tools/fourth-listings.json', 'tools/fifth-listings.json'].filter(f => path.resolve(f) !== outFile)) {
   if (!existsSync(f)) continue;
   for (const list of Object.values(JSON.parse(readFileSync(f, 'utf8')))) for (const l of list) seen.add(l.id);
 }

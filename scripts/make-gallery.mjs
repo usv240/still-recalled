@@ -24,7 +24,8 @@ const first = read('tools/eval-report.json');
 const second = existsSync('tools/fresh-report.json') ? read('tools/fresh-report.json') : null;
 const third = existsSync('tools/third-report.json') ? read('tools/third-report.json') : null;
 const fourth = existsSync('tools/fourth-report.json') ? read('tools/fourth-report.json') : null;
-const tests = [[first, 'First test', 'eBay'], [second, 'Second test', 'eBay, Craigslist'], [third, 'Third test', 'eBay, Mercari, Craigslist'], [fourth, 'Fourth test, every recall since 1973', 'eBay, Craigslist']].filter(t => t[0]);
+const fifth = existsSync('tools/fifth-report.json') ? read('tools/fifth-report.json') : null;
+const tests = [[first, 'First test', 'eBay'], [second, 'Second test', 'eBay, Craigslist'], [third, 'Third test', 'eBay, Mercari, Craigslist'], [fourth, 'Fourth test, every recall since 1973', 'eBay, Craigslist'], [fifth, 'Fifth test, on release 0.12.0', 'eBay, Craigslist']].filter(t => t[0]);
 const font = f => pathToFileURL(path.resolve('extension/fonts', f)).href;
 
 const base = `
@@ -45,7 +46,7 @@ h1 { font-size: 52px; line-height: 1.08; font-weight: 600; letter-spacing: -0.02
 
 // 1. The hybrid: three steps, split by where they run, with the counts from one real run.
 // Counts summed over every test run, so the diagram shows how much reached each step in practice.
-const runs = [first, second, third, fourth].filter(Boolean);
+const runs = [first, second, third, fourth, fifth].filter(Boolean);
 const c = ['listings', 'lookedAtOnDevice', 'sentToCloud'].reduce((o, k) => ({ ...o, [k]: runs.reduce((n, r) => n + r.cost[k], 0) }), {});
 c.shareSentToCloud = c.sentToCloud / c.listings;
 const hybrid = `<!doctype html><meta charset="utf-8"><style>${base}
@@ -70,21 +71,21 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
 <div class="zones">
   <div class="zone laptop"><h2>On the laptop</h2><div class="steps">
     <div class="step"><span class="n">${c.listings}</span><span class="what">Word rules</span>
-      <span class="how">Every listing's title against the field guide the cloud wrote: 10,089 CPSC recalls since 1973 (392 CPSC safety warnings were added after these tests). Parts, toys and doll items dropped. Instant.</span></div>
+      <span class="how">Every listing's title against the field guide the cloud wrote: 10,089 CPSC recalls since 1973, and 392 CPSC safety warnings from the fifth test on. Parts, toys and doll items dropped. Instant.</span></div>
     <div class="step"><span class="n">${c.lookedAtOnDevice}</span><span class="what">Gemini Nano</span>
       <span class="how">Baby products only: title and photo. Is it the product, a part or a toy? Does it look like a lounger or a padded bumper?<br><code>ONLY_ON_DEVICE</code></span></div>
   </div></div>
   <div class="zone cloud"><h2>In the cloud</h2>
     <div class="step"><span class="n">${c.sentToCloud}</span><span class="what">Gemini</span>
       <span class="how">What Nano flagged or couldn't settle: title, photo, the full recall notice and its photo. Confirms, clears, or says what to check.<br><code>ONLY_IN_CLOUD</code></span>
-      <span class="how"><b>It can ask the laptop.</b> When it recognises a product the listing doesn't name, it calls <code>lookup_recalls</code> (function calling); the laptop's field guide answers.</span></div>
+      <span class="how"><b>Each can ask the other.</b> When the cloud recognises a product the listing doesn't name, it calls <code>lookup_recalls</code> (function calling) and the laptop's field guide answers. When Nano gives a brand for an unnamed product, the laptop looks it up and asks the cloud to check.</span></div>
   </div>
 </div>
 <div class="crosses">
   <div><b>What goes to the cloud</b>A flagged listing's title, description, price and photo, with the recall notice it might match.</div>
   <div><b>What never leaves the laptop</b>The other listings, your searches and your browsing. No account, no tracking.</div>
 </div>
-<div class="foot"><span>${['', 'One test run', 'Two test runs', 'Three test runs', 'Four test runs'][runs.length]}, November 15 to 18, 2026: ${c.listings} real listings from eBay${third ? ', Mercari' : ''} and Craigslist. ${Math.round(c.shareSentToCloud * 100)}% went to the cloud.</span><span class="brand"><i></i>Still Recalled</span></div>
+<div class="foot"><span>${['', 'One test run', 'Two test runs', 'Three test runs', 'Four test runs', 'Five test runs'][runs.length]}, November 15 to ${fifth ? 20 : 18}, 2026: ${c.listings} real listings from eBay${third ? ', Mercari' : ''} and Craigslist. ${Math.round(c.shareSentToCloud * 100)}% went to the cloud.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
 
 // 2. Results: totals across every test, as two bar charts (different scales, so never one axis), hybrid in ink and
@@ -117,7 +118,7 @@ const results = `<!doctype html><meta charset="utf-8"><style>${base}
 .per td span { color: var(--muted); }
 </style><div class="slide">
 <h1>The built-in model removes false alarms. The cloud catches what words miss.</h1>
-<p class="lede">Each of ${['', 'one', 'two', 'three', 'four'][tests.length] || tests.length} blind tests run three ways: word rules alone, the built-in model alone, and the hybrid. ${allListings} real listings the rules had never seen, each test collected after the fixes the one before led to.</p>
+<p class="lede">Each of ${['', 'one', 'two', 'three', 'four', 'five'][tests.length] || tests.length} blind tests run three ways: word rules alone, the built-in model alone, and the hybrid. ${allListings} real listings the rules had never seen, each test collected after the fixes the one before led to.</p>
 <div class="charts">${bars(`False alarms, among ${allFine} listings that were fine`, Math.max(...SYSTEMS.map(([k]) => alarmsOf(k))), alarmsOf)}${bars(`Caught, of ${allFlag} that should be flagged`, allFlag, caughtOf)}</div>
 ${perTest}
 <div class="foot"><span>Labels by blind AI reviewers (Claude) that never saw the rules, from the title and one photo. Method and every miss: docs/accuracy.md.</span><span class="brand"><i></i>Still Recalled</span></div>
@@ -222,7 +223,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #eee; padding
 <div><div class="phone top"><img src="${shotA('android-result.png')}"></div><p class="cap">A shared Rock 'n Play listing, matched to its recall and confirmed in the cloud.</p></div>
 <div><div class="phone top"><img src="${shotA('android-watch.png')}"></div><p class="cap">A watched bouncer, matched to a recall published the day after the build.</p></div>
 </div>
-<div class="foot"><span>Android 16 emulator, ${day(androidRun.date)} (tools/android-e2e.mjs): the release APK passed all ${androidRun.release} checks; a debug build replaying a recall's arrival passed all ${androidRun.watch}.</span><span class="brand"><i></i>Still Recalled</span></div>
+<div class="foot"><span>Android 16 emulator, ${day(androidRun.date)} (tools/android-e2e.mjs): the release APK passed all ${androidRun.release} checks; a debug build replaying a recall's arrival passed all ${androidRun.watch}${androidRun.watchDate ? ` on ${day(androidRun.watchDate)}` : ''}.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
 // 7. The web page on a phone: the live page's own example check, from tools/capture-phone.mjs.
 const webSlide = existsSync(path.join(src, 'phone-start.png')) && existsSync(path.join(src, 'phone-result.png')) && `<!doctype html><meta charset="utf-8"><style>${base}
@@ -242,10 +243,10 @@ code { font-family: Geist, monospace; font-size: 16px; background: #eee; padding
   <div class="fact"><b>One call, either model</b><p><code>PREFER_ON_DEVICE</code>: Chrome's Gemini Nano reads the screenshot on a computer that has it; on a phone the same call runs on Gemini in the cloud. The page reads <code>inferenceSource</code> and says which ran.</p></div>
   <div class="fact"><b>Never "safe"</b><p>No match only means no recall was found for what the screenshot shows.</p></div>
 </div>
-<div><div class="phone"><img src="${shot('phone-start.png')}"></div><p class="cap">still-recalled.web.app at phone size.</p></div>
+<div><div class="phone"><img src="${shot('phone-start.png')}"></div><p class="cap">The page at phone size: buying it, or owning it.</p></div>
 <div><div class="phone"><img src="${shot('phone-result.png')}"></div><p class="cap">Its example listing (made up), checked: a recalled lounger.</p></div>
 </div>
-<div class="foot"><span>The live page in Chrome at phone size (390 × 844), ${day(new Date().toISOString().slice(0, 10))}.</span><span class="brand"><i></i>Still Recalled</span></div>
+<div class="foot"><span>Release ${read('extension/manifest.json').version}'s page in Chrome at phone size (390 × 844), ${day(new Date().toISOString().slice(0, 10))}, run from a local build: reCAPTCHA refuses the automated browser on the live site.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
 const slides = [['1-extension', hero], ['2-android', androidSlide], ['3-label-check', labelSlide], ['4-new-recalls', liveSlide], ['5-hybrid', hybrid], ['6-results', results], ['7-web-page', webSlide]].filter(([, html]) => html);
 

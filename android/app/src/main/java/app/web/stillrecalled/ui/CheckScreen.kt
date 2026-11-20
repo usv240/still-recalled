@@ -108,7 +108,7 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
             Thumb(null, o.photo, 56.dp)
             Column(Modifier.weight(1f)) {
-                Muted(if (example) "Example photo" else "You checked")
+                Muted(if (example) "Example photo" else if (owner != null) "Your item" else "You checked")
                 Text(o.listing.optString("title"), style = MaterialTheme.typography.titleMedium, maxLines = 3)
             }
         }
@@ -118,7 +118,7 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
         } else {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Pill(r.optString("badge"), level)
-                Text(r.optString("verdict"), style = MaterialTheme.typography.headlineSmall)
+                Text(owner?.optString("verdict")?.takeIf { it.isNotEmpty() } ?: r.optString("verdict"), style = MaterialTheme.typography.headlineSmall)
                 // What to do, in one line: a flag that only names a product leaves "so can I buy it?" open.
                 (owner?.optString("action") ?: r.optString("action")).takeIf { it.isNotEmpty() }?.let {
                     Row(Modifier.height(IntrinsicSize.Min)) {
@@ -126,11 +126,11 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
                         Text(it, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(start = 10.dp))
                     }
                 }
-                if (r.optBoolean("confirmed") && r.optString("evidence").isNotEmpty()) Text(r.optString("evidence"), style = MaterialTheme.typography.bodyMedium, color = Ink.muted)
+                if (r.optBoolean("confirmed") && r.optString("evidence").isNotEmpty()) Text(owner?.optString("evidence")?.takeIf { it.isNotEmpty() } ?: r.optString("evidence"), style = MaterialTheme.typography.bodyMedium, color = Ink.muted)
                 // The listing's words did not name the product: the cloud did, and asked the phone's field guide.
-                r.optString("foundBy").takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Ink.muted) }
+                (owner?.optString("foundBy")?.takeIf { it.isNotEmpty() } ?: r.optString("foundBy")).takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Ink.muted) }
             }
-            Photos(r, o)
+            Photos(r, o, owner != null)
             if (owner != null) OwnerCard(owner) else BeforeYouBuy(r)
             val recall = r.optJSONObject("recall")
             if (r.optString("kind") == "recall" && recall != null && !recall.optBoolean("all") &&
@@ -183,7 +183,7 @@ private fun NoMatch(r: JSONObject, owner: JSONObject? = null) {
 }
 
 @Composable
-private fun Photos(r: JSONObject, o: Checker.Outcome) {
+private fun Photos(r: JSONObject, o: Checker.Outcome, owner: Boolean = false) {
     val where = r.optJSONObject("where")
     val recall = r.optJSONObject("recall")
     val photo = o.photo
@@ -193,9 +193,10 @@ private fun Photos(r: JSONObject, o: Checker.Outcome) {
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 if (photo != null) {
                     FramedBitmap(photo, where)
-                    Muted(if (where != null) "This listing. Outlined: what the cloud check matched." else "This listing")
+                    val mine = if (owner) "Your item" else "This listing"
+                    Muted(if (where != null) "$mine. Outlined: what the cloud check matched." else mine)
                 } else {
-                    Muted("This is the recalled product. Compare it with the listing's photos.")
+                    Muted(if (owner) "This is the recalled product. Compare it with yours." else "This is the recalled product. Compare it with the listing's photos.")
                 }
             }
             // A CPSC warning comes without a photo: the hazard, in CPSC's words, stands beside the listing instead.
@@ -247,7 +248,8 @@ private fun LabelCheck(m: AppModel) {
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { u: Uri? -> u?.let { ctx.loadBitmap(it) }?.let { m.readLabel(it) } }
     SectionCard {
         Heading("Settle it with the label")
-        Text("Have the item in front of you, or a photo of its label from the seller? Its model number and date are read and compared with the notice.", style = MaterialTheme.typography.bodyMedium)
+        Text(if (m.owner) "Take a photo of the label on your item. Its model number and date are read and compared with the notice."
+            else "Have the item in front of you, or a photo of its label from the seller? Its model number and date are read and compared with the notice.", style = MaterialTheme.typography.bodyMedium)
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Secondary(if (m.labelBusy) "Reading the label…" else "Take a photo", { camera.launch(uri) }, Modifier.weight(1f), enabled = !m.labelBusy)
             Secondary("Choose a photo", { pick.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }, Modifier.weight(1f), enabled = !m.labelBusy)

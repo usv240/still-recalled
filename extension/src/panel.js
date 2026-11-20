@@ -10,7 +10,7 @@ import { safeUrl } from './ui/dom.js';
 import { deviceModel, deviceStatus, hasCloudAccess } from './ai.js';
 
 const SITE_NAMES = { ebay: 'eBay', mercari: 'Mercari', craigslist: 'Craigslist', practice: 'Practice listings' };
-const DEFAULTS = { cloud: true, badges: true };
+const DEFAULTS = { cloud: true, badges: true, thorough: false };
 
 const $view = document.getElementById('view');
 document.getElementById('mark').append(mark(18));
@@ -219,12 +219,12 @@ function watchView() {
     const out = await chrome.runtime.sendMessage({ type: 'sr:refresh-recalls' }).catch(e => ({ error: String(e) }));
     refreshBtn.disabled = false;
     label.textContent = out && !out.error
-      ? (out.added ? `${plural(out.added, 'new recall', 'new recalls')} added` : 'No new recalls since the last check')
+      ? (out.added ? `${plural(out.added, 'new notice', 'new notices')} added` : 'No new recalls or warnings since the last check')
       : 'Could not reach CPSC. Try again later';
   });
   const status = h('p', { class: 'where' },
     live && live.checkedAt ? `Recall list checked ${dayOf(live.checkedAt)}` : `Recall list from ${meta ? dayOf(meta.built) : 'this version'}`,
-    added ? ` · ${plural(added, 'recall', 'recalls')} added since this version` : '');
+    added ? ` · ${plural(added, 'notice', 'notices')} added since this version` : '');
   const parts = [
     h('button', { class: 'back', type: 'button', onclick: () => go({ name: 'list' }) }, icon('back'), 'Back'),
     h('div', { class: 'head' }, h('h1', {}, alerts.length ? `${plural(alerts.length, 'watched listing matches', 'watched listings match')} a new recall` : 'Watching for recalls'), status),
@@ -235,7 +235,7 @@ function watchView() {
     parts.push(h('ul', { class: 'rows watch-rows' }, ...items.map(([k, w]) => h('li', {}, watchRow(k, w)))));
   }
   parts.push(h('div', {}, refreshBtn),
-    h('p', { class: 'note' }, 'New recalls are fetched from CPSC twice a day. Your watched listings stay on this computer: Chrome’s built-in model checks them, and only a listing it flags against a new recall is sent to the cloud to confirm.'));
+    h('p', { class: 'note' }, 'New recalls and CPSC safety warnings are fetched from CPSC twice a day. Your watched listings stay on this computer: Chrome’s built-in model checks them, and only a listing it flags against a new recall is sent to the cloud to confirm.'));
   return h('section', { class: 'view' }, ...parts);
 }
 
@@ -309,7 +309,7 @@ function modelNotice() {
 function settingsView() {
   const toggle = (key, title, desc) => {
     const input = h('input', { type: 'checkbox', role: 'switch', class: 'switch', id: `set-${key}`, 'aria-describedby': `desc-${key}` });
-    input.checked = settings[key] !== false;
+    input.checked = DEFAULTS[key] ? settings[key] !== false : settings[key] === true;
     input.addEventListener('change', () => chrome.storage.local.set({ settings: { ...settings, [key]: input.checked } }));
     return h('div', { class: 'setting' },
       h('label', { class: 'setting-title', for: `set-${key}` }, title), input,
@@ -321,6 +321,7 @@ function settingsView() {
     h('div', { class: 'head' }, h('h1', {}, 'Settings')),
     h('div', {},
       toggle('cloud', 'Cloud double-check', 'Listings this computer flags or can\'t settle (bedding sets, possible parts): their title, description, price and photo go to Google Gemini through Firebase, with the recall notice. Everything else stays on this computer.'),
+      toggle('thorough', 'Check every baby product in the cloud', 'Off: only what this computer flags goes to the cloud. On: every baby product on the page gets a look from Gemini, as on the web page and the phone. That catches a recalled product whose seller left its name out and that this computer\'s model did not recognise, and it sends more of what you browse. Needs the cloud double-check.'),
       toggle('badges', 'Badges on listings', 'Show a badge on flagged listings on eBay, Mercari and Craigslist.')),
     h('dl', { class: 'kv' },
       h('div', {}, h('dt', {}, 'On-device model'), h('dd', {}, modelWord)),

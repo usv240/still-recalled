@@ -3,7 +3,7 @@
 // Per-tab state lives in chrome.storage.session under "tab:<id>", so the side panel can render from it and follow it.
 // Results are cached per listing in chrome.storage.local for a week, so a page seen again is instant.
 const CACHE_DAYS = 7;
-const PIPELINE = 'v3';   // bump when the pipeline changes enough that cached results should be redone
+const PIPELINE = 'v4';   // bump when the pipeline changes enough that cached results should be redone
 
 chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
 
@@ -21,8 +21,9 @@ async function ensureOffscreen() {
   await chrome.runtime.sendMessage({ type: 'sr:engine-live', cards: (live && live.cards) || [], hideFrom: devHideFrom || '' }).catch(() => {});
 }
 
-// The shopper's choices. Cloud double-check is on by default and sends only flagged listings.
-const DEFAULT_SETTINGS = { cloud: true, badges: true };
+// The shopper's choices. Cloud double-check is on by default and sends only flagged listings. "Thorough" is off by
+// default: with it on, every baby product on a page gets the cloud's look, as on the web page and the phone.
+const DEFAULT_SETTINGS = { cloud: true, badges: true, thorough: false };
 async function getSettings() {
   return { ...DEFAULT_SETTINGS, ...((await chrome.storage.local.get('settings')).settings || {}) };
 }
@@ -63,6 +64,8 @@ async function onPage(tabId, page) {
   await liveStampReady;
   const pageKey = `${page.site}:${page.url}`;
   const fresh = [];
+  const first = await getSettings();
+  const thorough = first.cloud !== false && first.thorough === true;
   const state = await withTab(tabId, async prior => {
     const state = prior && prior.pageKey === pageKey
       ? prior
@@ -73,7 +76,10 @@ async function onPage(tabId, page) {
       if (state.results[l.id] || state.pending[l.id]) continue;
       const order = state.order++;
       const cached = (await chrome.storage.local.get(cacheKey(page.site, l.id)))[cacheKey(page.site, l.id)];
-      if (cached && now - Date.parse(cached.checkedAt) < CACHE_DAYS * 864e5) {
+      // With "check every baby product in the cloud" on, a listing that was cleared without the cloud's look is
+      // checked again; one that got it, or was flagged, is not.
+      const redo = thorough && cached && cached.level === 'none' && !cached.thorough;
+      if (cached && !redo && now - Date.parse(cached.checkedAt) < CACHE_DAYS * 864e5) {
         state.results[l.id] = { ...cached, order, cached: true };
       } else {
         state.pending[l.id] = { title: l.title, order };
@@ -99,8 +105,11 @@ async function onResult(tabId, pageKey, result) {
     return state;
   });
   if (!state) return;
-  if (result.level !== 'error') {
+  // A result whose cloud check failed is shown but not kept: the next visit asks the cloud again.
+  if (result.level !== 'error' && !(result.how && result.how.cloudError)) {
     const { order, ...stored } = result;
+    const s = await getSettings();
+    if (s.cloud !== false && s.thorough === true) stored.thorough = true;
     chrome.storage.local.set({ [cacheKey(state.site, result.id)]: stored }).catch(() => {});
   }
   if (result.level === 'likely' || result.level === 'possible') sendToTab(tabId, [result]);

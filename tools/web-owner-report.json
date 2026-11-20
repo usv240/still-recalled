@@ -1,0 +1,59 @@
+{
+ "at": "2026-11-20T18:39:49.932Z",
+ "url": "http://localhost:8766/web/index.html",
+ "version": "0.12.0",
+ "build": "development (App Check debug token)",
+ "failed": 0,
+ "steps": [
+  {
+   "name": "choosing \"I own it\" changes the page's words",
+   "ok": true,
+   "detail": "Check what you own before you sell it or pass it on"
+  },
+  {
+   "name": "a recalled product: \"Don't sell it or give it away\"",
+   "ok": true,
+   "detail": "Your item Boppy newborn lounger, floral cover Recalled product Looks like the Boppy Original Newborn Loungers, Boppy Preferred Newborn Loungers and Pottery Barn Kids B…, recalled September 2021. Don't"
+  },
+  {
+   "name": "it says selling a recalled product is illegal, and gives the remedy",
+   "ok": true,
+   "detail": "The recall's remedy: Consumers should immediately stop using the recalled loungers and contact The Boppy Company for a refund."
+  },
+  {
+   "name": "the remedy is whole, not cut mid-word",
+   "ok": true,
+   "detail": "Consumers should immediately stop using the recalled loungers and contact The Boppy Company for a refund."
+  },
+  {
+   "name": "no buyer wording on the owner's card",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the card is captioned \"Your item\"",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "a product with no match is never called safe to pass on",
+   "ok": true,
+   "detail": "Your item Graco Pack n Play playard with bassinet No match found No recall found for what we could read. That doesn't mean it's safe to pass on. Before you sell"
+  },
+  {
+   "name": "no buyer wording there either",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "a padded crib bumper: the rule, in plain words",
+   "ok": true,
+   "detail": "Your item padded crib bumper set, pink Padded crib bumper This looks like a padded crib bumper. Don't sell it or give it away. What you entered states that the item for sale is a padded crib bumper se"
+  },
+  {
+   "name": "no buyer wording on a type flag",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

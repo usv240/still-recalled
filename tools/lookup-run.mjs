@@ -30,19 +30,32 @@ async function photoPart(src) {
 }
 
 /** The confirmation as extension/src/engine.js confirmInCloud makes it. `device` is the device's decision. */
-export async function confirm(listing, device, hints, image) {
-  const notice = device.kind === 'recall' && device.card ? await fetchNotice(device.card.id).catch(() => null) : null;
-  const [listingPhoto, recallPhoto] = await Promise.all([photoPart(image), notice && notice.images[0] ? imagePart(notice.images[0]) : null]);
+/** The look step as the web page and the phone run it where there is no built-in model: the same prompt, in the cloud. */
+export async function look(listing, t, image) {
+  const { SYSTEM, SCHEMA, promptText } = await import('../shared/judge.mjs');
+  const { cloudJson } = await import('./cloud-node.mjs');
+  const photo = await photoPart(image);
+  const parts = [promptText(listing, t.candidate, t.hints)];
+  if (photo) parts.push(photo);
+  // The lightest model first, as the phone does for the device's steps.
+  return (await cloudJson({ system: SYSTEM, schema: SCHEMA, parts, models: ['gemini-3.5-flash-lite', 'gemini-4-hydrogen'], temperature: 0 })).answer;
+}
+
+export async function confirm(listing, device, hints, image, seen = null) {
+  const wordsCard = device.kind === 'recall' && device.card ? device.card : null;
+  const inHand = wordsCard || device.seen || null;
+  const notice = inHand ? await fetchNotice(inHand.id).catch(() => null) : null;
+  const [listingPhoto, recallPhoto] = await Promise.all([photoPart(image), notice && notice.images[0] ? imagePart(notice.images[0]).catch(() => null) : null]);
   const lookups = [], lookedUp = [];
   const onCall = async (_n, a) => {
-    const found = lookupCards(index, a, { exclude: device.card ? device.card.id : '' });
+    const found = lookupCards(index, a, { exclude: inHand ? inHand.id : '' });
     const notices = await Promise.all(found.map(c => fetchNotice(c.card.id).catch(() => null)));
     lookups.push({ asked: lookupArgs(a), found: found.map(c => c.card.id) });
     lookedUp.push(...found.map(c => c.card));
     return lookupResponse(found, notices);
   };
   const t0 = Date.now();
-  const { answer, model } = await cloudJsonTool({ system: CONFIRM_SYSTEM_LOOKUP, schema: CONFIRM_SCHEMA_LOOKUP, parts: confirmParts({ listing, notice, listingPhoto, recallPhoto }), tool: LOOKUP_TOOL, onCall });
+  const { answer, model } = await cloudJsonTool({ system: CONFIRM_SYSTEM_LOOKUP, schema: CONFIRM_SCHEMA_LOOKUP, parts: confirmParts({ listing, notice: wordsCard ? notice : null, listingPhoto, recallPhoto, seen: !wordsCard && device.seen && notice && seen ? { brand: seen.brand, id: device.seen.id, notice } : null }), tool: LOOKUP_TOOL, onCall });
   const final = decideFinal(device, answer, hints, lookedUp);
   return { final, answer, model, lookups, ms: Date.now() - t0, photo: !!listingPhoto };
 }

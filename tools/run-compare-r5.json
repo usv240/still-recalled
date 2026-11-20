@@ -1,0 +1,176 @@
+{
+ "at": "2026-11-20T19:12:12.656Z",
+ "a": "-rerun",
+ "b": "-r5",
+ "sets": {
+  "eval": {
+   "listings": 136,
+   "mustFlag": 14,
+   "mustNot": 115,
+   "a": {
+    "caught": 14,
+    "falseAlarms": 1,
+    "cloud": 31
+   },
+   "b": {
+    "caught": 13,
+    "falseAlarms": 1,
+    "cloud": 31
+   }
+  },
+  "fresh": {
+   "listings": 125,
+   "mustFlag": 4,
+   "mustNot": 117,
+   "a": {
+    "caught": 1,
+    "falseAlarms": 2,
+    "cloud": 13
+   },
+   "b": {
+    "caught": 1,
+    "falseAlarms": 2,
+    "cloud": 14
+   }
+  }
+ },
+ "total": {
+  "listings": 261,
+  "mustFlag": 18,
+  "mustNot": 232,
+  "a": {
+   "caught": 15,
+   "falseAlarms": 3,
+   "softFalseAlarms": 2,
+   "cloud": 44,
+   "words": {
+    "caught": 8,
+    "falseAlarms": 31
+   },
+   "device": {
+    "caught": 10,
+    "falseAlarms": 19
+   },
+   "lookups": 5,
+   "lookupFound": 1,
+   "shownViaLookup": 0
+  },
+  "b": {
+   "caught": 14,
+   "falseAlarms": 3,
+   "softFalseAlarms": 2,
+   "cloud": 45,
+   "words": {
+    "caught": 8,
+    "falseAlarms": 31
+   },
+   "device": {
+    "caught": 8,
+    "falseAlarms": 17
+   },
+   "lookups": 6,
+   "lookupFound": 1,
+   "shownViaLookup": 0
+  },
+  "shareSentToCloudA": 0.169,
+  "shareSentToCloudB": 0.172
+ },
+ "seen": {
+  "gaveABrandNotInTheWords": 0,
+  "foundARecall": 4,
+  "sentToCloudOnlyForIt": 4,
+  "cloudTookItUp": 0,
+  "cloudNamedAnother": 0,
+  "shown": 0,
+  "shownOnShouldFlag": 0,
+  "shownOnShouldNot": 0,
+  "brands": {
+   "Graco": 1,
+   "Fisher-Price": 1,
+   "Delta": 2
+  }
+ },
+ "changes": [
+  {
+   "set": "eval",
+   "label": "yes",
+   "title": "Sleepyhead DockATot Deluxe+ Baby Infant Lounger Cover",
+   "a": "possible banned",
+   "b": "none",
+   "better": false,
+   "deviceA": "ask",
+   "deviceB": "possible",
+   "cloudA": true,
+   "cloudB": true,
+   "seen": null,
+   "lookedUp": false,
+   "why": "the listing is a part or a toy version, not the product"
+  }
+ ],
+ "falseAlarmsB": [
+  {
+   "set": "eval",
+   "title": "VTG Graco Baby Swing Swyngomatic Quiet Ride Wind Up Crank Bear Tray WORKS TESTED",
+   "level": "likely",
+   "kind": "recall",
+   "recall": "00098",
+   "seen": null,
+   "lookedUp": false,
+   "why": "matches the recalled product in the notice"
+  },
+  {
+   "set": "fresh",
+   "title": "NEW Dream On Me Lacy Portable 2 in 1 Bassinet & Cradle BED BABY CRIB 1",
+   "level": "possible",
+   "kind": "recall",
+   "recall": "15088",
+   "seen": null,
+   "lookedUp": false,
+   "why": "same brand and kind as a recalled product; the listing does not show which model"
+  },
+  {
+   "set": "fresh",
+   "title": "UPPAbaby VISTA Single Stroller, Gray/Black, Folding w/ Canopy & 5-Point",
+   "level": "possible",
+   "kind": "recall",
+   "recall": "15196",
+   "seen": null,
+   "lookedUp": false,
+   "why": "same brand and kind as a recalled product; the listing does not show which model"
+  }
+ ],
+ "missedB": [
+  {
+   "set": "eval",
+   "title": "Sleepyhead DockATot Deluxe+ Baby Infant Lounger Cover",
+   "device": "possible",
+   "cloud": true,
+   "why": "the listing is a part or a toy version, not the product"
+  },
+  {
+   "set": "fresh",
+   "title": "Mockingbird Double Stroller + Bassinet + Scooter Board + Accessories 1",
+   "device": "none",
+   "cloud": false,
+   "why": ""
+  },
+  {
+   "set": "fresh",
+   "title": "Disney Classic Pooh Piglet Crib Headboard Cover Ruffle Floral Vintage Style v",
+   "device": "none",
+   "cloud": false,
+   "why": ""
+  },
+  {
+   "set": "fresh",
+   "title": "White Contoured Foam Crib Wedge Triangular Support Pillow",
+   "device": "none",
+   "cloud": false,
+   "why": ""
+  }
+ ],
+ "sets_compared": [
+  "eval",
+  "fresh"
+ ]
+}

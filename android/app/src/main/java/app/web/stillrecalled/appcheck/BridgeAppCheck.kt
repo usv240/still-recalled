@@ -64,6 +64,7 @@ internal object Bridge {
     private var nextId = 0
     private val waiting = HashMap<Int, (String?, Long, String?) -> Unit>()
     private val queued = ArrayList<Int>()
+    private var loadingSince = 0L
 
     /** True once the site has handed over a token, so the app can tell the user the first one is still on its way. */
     val ready = kotlinx.coroutines.flow.MutableStateFlow(false)
@@ -76,8 +77,19 @@ internal object Bridge {
         waiting[id] = done
         val proxy = reply
         if (proxy != null) send(proxy, id) else { queued += id; start(context) }
-        // A bridge that never answers must not hold up the check: give up after 25 s and start over next time.
-        main.postDelayed({ waiting.remove(id)?.let { Log.w(TAG, "timed out"); it(null, 0, "timed out"); reset() } }, 25_000)
+        // A bridge that never answers must not hold up the check: this request gives up after 25 s.
+        main.postDelayed({
+            waiting.remove(id)?.let {
+                Log.w(TAG, "timed out")
+                it(null, 0, "timed out")
+                queued.remove(id)
+                // A page that is ready and silent is stuck: start over next time. A page still loading is a slow phone
+                // or network: let it finish, so the next request finds it ready. Starting over every 25 s meant a
+                // page that needed 30 s never loaded at all (seen on a busy emulator: every cloud call was refused).
+                // A page that could not load at all is reset at once by onReceivedError below.
+                if (reply != null || System.currentTimeMillis() - loadingSince > 75_000) reset()
+            }
+        }, 25_000)
     }
 
     private fun send(proxy: JavaScriptReplyProxy, id: Int) = proxy.postMessage(JSONObject().put("type", "get").put("id", id).toString())
@@ -99,6 +111,10 @@ internal object Bridge {
         view.webViewClient = object : WebViewClient() {
             // The WebView stays on the bridge page; reCAPTCHA runs in its own frames.
             override fun shouldOverrideUrlLoading(v: WebView, r: WebResourceRequest) = r.isForMainFrame && r.url.host != Uri.parse(origin).host
+            // The page itself could not be loaded (offline, DNS): not a slow load. Start over on the next request.
+            override fun onReceivedError(v: WebView, r: WebResourceRequest, e: android.webkit.WebResourceError) {
+                if (r.isForMainFrame && v === web) { Log.w(TAG, "page failed to load: ${e.description}"); failAll("the App Check page could not be loaded"); reset() }
+            }
         }
         WebViewCompat.addWebMessageListener(view, "SRAndroid", setOf(origin)) { _, message: WebMessageCompat, sourceOrigin, isMainFrame, proxy ->
             if (!isMainFrame || sourceOrigin.toString().trimEnd('/') != origin) return@addWebMessageListener
@@ -107,19 +123,24 @@ internal object Bridge {
                 "ready" -> {
                     Log.i(TAG, "bridge ready")
                     reply = proxy
+                    // Every request that was waiting has given up (a slow load): ask for a token anyway, so the app
+                    // knows the bridge works and the next request is answered from the page's cache.
+                    if (queued.isEmpty()) send(proxy, ++nextId)
                     queued.forEach { send(proxy, it) }
                     queued.clear()
                 }
                 "token" -> {
-                    val cb = waiting.remove(data.optInt("id")) ?: return@addWebMessageListener
                     val token = data.optString("token")
+                    // Marked ready even when the request that asked has already given up: the next one will be quick.
                     if (token.isNotEmpty()) { Log.i(TAG, "token received"); ready.value = true }
+                    val cb = waiting.remove(data.optInt("id")) ?: return@addWebMessageListener
                     if (token.isNotEmpty()) cb(token, data.optLong("expireTimeMillis", System.currentTimeMillis() + 30 * 60_000), null)
                     else { Log.w(TAG, "refused: ${data.optString("error")}"); cb(null, 0, data.optString("error")); reset() }
                 }
             }
         }
         web = view
+        loadingSince = System.currentTimeMillis()
         Log.i(TAG, "loading bridge")
         view.loadUrl(BuildConfig.BRIDGE_URL)
     }

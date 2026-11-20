@@ -1,0 +1,363 @@
+{
+ "at": "2026-11-20T18:00:53.037Z",
+ "note": "The extension's own pipeline with Gemini Nano (tools/eval-run.mjs), 0.12.0 engine before release, on (a) the first seven brand-stripped real listings and (b) the ten made-up generic-title listings.",
+ "masked": {
+  "note": "seven real listings, brand stripped from the title by code, sellers' photos",
+  "when": "2026-11-20T14:42:32.786Z",
+  "status": "available",
+  "rows": [
+   {
+    "id": "m307280068610",
+    "title": "Infant Baby Swing/Bouncer w/ Music, Gray Seat, White Base",
+    "want": "22200",
+    "device": "ask",
+    "final": "possible",
+    "kind": "recall",
+    "recall": "22200",
+    "also": null,
+    "seen": {
+     "brand": "Fisher-Price",
+     "id": "25009"
+    },
+    "lookups": [
+     {
+      "asked": {
+       "brand": "4moms",
+       "product": "mamaRoo",
+       "model_number": ""
+      },
+      "found": [
+       "22200"
+      ]
+     }
+    ],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 48686,
+    "right": true
+   },
+   {
+    "id": "m206690454998",
+    "title": "Early 2000s the Classic Crib Bedding Set 4 Piece Set",
+    "want": "08022",
+    "device": "ask",
+    "final": "possible",
+    "kind": "banned",
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 32411,
+    "right": false
+   },
+   {
+    "id": "m377568327669",
+    "title": "Ultra-Soft Breathable Reversible Cotton Newborn Baby Nest Lounger B",
+    "want": "24340",
+    "device": "possible",
+    "final": "likely",
+    "kind": "banned",
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 13773,
+    "right": false
+   },
+   {
+    "id": "m137936856486",
+    "title": "Puppy Cradle N' X 7345 Replacement Seat Cushion",
+    "want": "25009",
+    "device": "words",
+    "final": "none",
+    "kind": null,
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "",
+    "ms": 0,
+    "right": false
+   },
+   {
+    "id": "m336792228853",
+    "title": "1995 Open Top Infant Swing Adjustable Speeds, Washable Cover, WORKS!",
+    "want": "00098",
+    "device": "ask",
+    "final": "possible",
+    "kind": "recall",
+    "recall": "00098",
+    "also": null,
+    "seen": {
+     "brand": "Graco",
+     "id": "00098"
+    },
+    "lookups": [],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 26416,
+    "right": true
+   },
+   {
+    "id": "m820369982036",
+    "title": "Easy-Entry Swyngomatic Baby Swing Reclining Seat Non-Stop Motor Brown",
+    "want": "00098",
+    "device": "ask",
+    "final": "possible",
+    "kind": "recall",
+    "recall": "00098",
+    "also": null,
+    "seen": {
+     "brand": "Graco",
+     "id": "00098"
+    },
+    "lookups": [],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 36523,
+    "right": true
+   },
+   {
+    "id": "m206676049944",
+    "title": "Classic Crib Bedding Set 1994 the - HUGE LOT",
+    "want": "05540",
+    "device": "ask",
+    "final": "possible",
+    "kind": "banned",
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 15004,
+    "right": false
+   }
+  ],
+  "summary": {
+   "listings": 7,
+   "rightRecallNamed": 3,
+   "flagged": 6,
+   "deviceLookupFired": 3,
+   "deviceLookupRight": 2,
+   "sentToCloud": 6
+  }
+ },
+ "generic": {
+  "note": "ten made-up listings with generic titles, each recall notice's own photo",
+  "when": "2026-11-20T14:39:34.330Z",
+  "status": "available",
+  "rows": [
+   {
+    "id": "g23088",
+    "title": "Inclined baby sleeper, pink, folds flat",
+    "want": "23088",
+    "device": "likely",
+    "final": "likely",
+    "kind": "banned",
+    "recall": null,
+    "also": "23088",
+    "seen": null,
+    "lookups": [
+     {
+      "asked": {
+       "brand": "Fisher-Price",
+       "product": "Rock 'n Play sleeper",
+       "model_number": ""
+      },
+      "found": [
+       "23088",
+       "19105"
+      ]
+     }
+    ],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 36614,
+    "right": true
+   },
+   {
+    "id": "g21198",
+    "title": "Newborn lounger pillow, washed cover",
+    "want": "21198",
+    "device": "possible",
+    "final": "possible",
+    "kind": "recall",
+    "recall": "21198",
+    "also": null,
+    "seen": null,
+    "lookups": [
+     {
+      "asked": {
+       "brand": "Boppy",
+       "product": "Newborn Lounger",
+       "model_number": ""
+      },
+      "found": [
+       "21198"
+      ]
+     }
+    ],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 19569,
+    "right": true
+   },
+   {
+    "id": "g23089",
+    "title": "Baby rocking sleeper, vibrates",
+    "want": "23089",
+    "device": "possible",
+    "final": "likely",
+    "kind": "banned",
+    "recall": null,
+    "also": "23089",
+    "seen": {
+     "brand": "Fisher-Price",
+     "id": "23088"
+    },
+    "lookups": [
+     {
+      "asked": {
+       "brand": "Kids II",
+       "product": "Rocking Sleeper",
+       "model_number": ""
+      },
+      "found": [
+       "23089"
+      ]
+     }
+    ],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 16473,
+    "right": true
+   },
+   {
+    "id": "g22200",
+    "title": "Baby swing, plugs in, five motions",
+    "want": "22200",
+    "device": "ask",
+    "final": "possible",
+    "kind": "recall",
+    "recall": "22200",
+    "also": null,
+    "seen": {
+     "brand": "Fisher-Price",
+     "id": "25009"
+    },
+    "lookups": [
+     {
+      "asked": {
+       "brand": "4moms",
+       "product": "MamaRoo",
+       "model_number": ""
+      },
+      "found": [
+       "22200"
+      ]
+     }
+    ],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 28520,
+    "right": true
+   },
+   {
+    "id": "g20062",
+    "title": "Rocking seat for baby, grey",
+    "want": "20062",
+    "device": "none",
+    "final": "none",
+    "kind": null,
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "",
+    "ms": 6074,
+    "right": false
+   },
+   {
+    "id": "g20059",
+    "title": "Bedside baby sleeper, folds for travel",
+    "want": "20059",
+    "device": "ask",
+    "final": "none",
+    "kind": null,
+    "recall": null,
+    "also": null,
+    "seen": {
+     "brand": "Fisher-Price",
+     "id": "23088"
+    },
+    "lookups": [],
+    "cloud": "gemini-3.5-flash-lite",
+    "ms": 48554,
+    "right": false
+   },
+   {
+    "id": "g12247",
+    "title": "Baby floor seat, foam",
+    "want": "12247",
+    "device": "none",
+    "final": "none",
+    "kind": null,
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "",
+    "ms": 6020,
+    "right": false
+   },
+   {
+    "id": "g13083",
+    "title": "Baby recliner, foam with fitted cover",
+    "want": "13083",
+    "device": "none",
+    "final": "none",
+    "kind": null,
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "",
+    "ms": 6601,
+    "right": false
+   },
+   {
+    "id": "g20052",
+    "title": "Compact stroller, folds small, grey",
+    "want": "20052",
+    "device": "words",
+    "final": "none",
+    "kind": null,
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "",
+    "ms": 1,
+    "right": false
+   },
+   {
+    "id": "g26569",
+    "title": "Baby nest lounger, grey stars",
+    "want": "26569",
+    "device": "possible",
+    "final": "likely",
+    "kind": "banned",
+    "recall": null,
+    "also": null,
+    "seen": null,
+    "lookups": [],
+    "cloud": "gemini-4-hydrogen",
+    "ms": 13168,
+    "right": false
+   }
+  ],
+  "summary": {
+   "listings": 10,
+   "rightRecallNamed": 4,
+   "flagged": 5,
+   "deviceLookupFired": 3,
+   "deviceLookupRight": 0,
+   "sentToCloud": 6
+  }
+ }
+}

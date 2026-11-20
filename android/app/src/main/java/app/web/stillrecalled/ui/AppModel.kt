@@ -56,7 +56,7 @@ class AppModel(app: Application) : AndroidViewModel(app) {
     var owner by mutableStateOf(store.owner)
         private set
     fun chooseOwner(v: Boolean) { owner = v; store.owner = v }
-    /** The result said to the owner (shared/present.mjs ownerView): { action, heading, lines }. */
+    /** The result said to the owner (shared/present.mjs ownerView): { verdict, foundBy, action, heading, lines }. */
     var ownerInfo by mutableStateOf<org.json.JSONObject?>(null)
         private set
     var error by mutableStateOf<String?>(null)
@@ -180,9 +180,11 @@ class AppModel(app: Application) : AndroidViewModel(app) {
     fun readLabel(photo: Bitmap) {
         val recall = outcome?.result?.optJSONObject("recall") ?: return
         val r = JSONObject().put("codes", recall.optJSONArray("codes") ?: JSONArray()).put("from", recall.optInt("from")).put("to", recall.optInt("to"))
+            // The card keeps 14 of the notice's model numbers; "more" stops "not listed" being read from a cut list.
+            .put("more", recall.optBoolean("more"))
         labelBusy = true; labelError = null
         viewModelScope.launch {
-            try { label = checker.readLabel(photo, r) } catch (e: Throwable) { labelError = "The label couldn't be read right now. Try again in a moment." }
+            try { label = checker.readLabel(photo, r, owner) } catch (e: Throwable) { labelError = "The label couldn't be read right now. Try again in a moment." }
             labelBusy = false
         }
     }

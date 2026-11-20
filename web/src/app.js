@@ -3,7 +3,7 @@
 //   2. words                 the extension's shortlist of every CPSC recall since 1973 and its risky-type rules, here
 //   3. look and confirm      the extension's judge (hybrid) and its cloud double-check against the full notice
 import { useCards, triageListing, checkListing, readLabel, refreshRecalls, setLiveCards } from '../../extension/src/engine.js';
-import { hybridJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
+import { hybridJson, cloudJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
 import { SYSTEM, SCHEMA } from '../../shared/judge.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
 import { productName, noMatchLine, ownerView } from '../../shared/present.mjs';
@@ -156,7 +156,13 @@ async function run({ file, text, example = null }) {
     if (file) {
       setStep('read', 'active', model === 'available' ? 'On this device' : 'In the cloud: this browser has no built-in model');
       const photo = await imagePart(imageUrl, 1024);
-      const { answer, source } = await hybridJson({ system: READ_SYSTEM, schema: READ_SCHEMA, parts: ['Read this image.', photo] });
+      const readParts = ['Read this image.', photo];
+      // The built-in model can fail on a photo it can't take; Gemini in the cloud reads it instead, as on Android.
+      const { answer, source } = await hybridJson({ system: READ_SYSTEM, schema: READ_SCHEMA, parts: readParts })
+        .catch(async e => {
+          if (/app ?check|attestation|40[13]|permission/i.test(String(e))) throw e;
+          return { ...(await cloudJson({ system: READ_SYSTEM, schema: READ_SCHEMA, parts: readParts })), source: 'in_cloud' };
+        });
       readSource = source;
       if (answer.found === 'nothing') { showError('No product in this image. Try a screenshot that shows the listing\'s title and photo, or type what it is.'); return; }
       listing = listingFromRead(answer, imageUrl);

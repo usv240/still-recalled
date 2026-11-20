@@ -1,0 +1,241 @@
+{
+ "set": "fresh",
+ "labeller": "blind AI review (Claude), title + one photo + CPSC data",
+ "listings": 125,
+ "mustFlag": 4,
+ "mustNotFlag": 117,
+ "unclear": 4,
+ "systems": {
+  "words only": {
+   "caught": 1,
+   "missed": [
+    {
+     "id": "318866483780",
+     "title": "Disney Classic Pooh Piglet Crib Headboard Cover Ruffle Floral Vintage Style v",
+     "why": "Quilted, padded Pooh headboard panel with ruffle and ties to fasten inside the crib, i.e. a padded headboard bumper piece."
+    },
+    {
+     "id": "147681812682",
+     "title": "White Contoured Foam Crib Wedge Triangular Support Pillow",
+     "why": "Quilted foam crib wedge to incline and position a sleeping baby, a padded sleep positioner (also an inclined surface)."
+    },
+    {
+     "id": "7QSs8Ei8Tfvm2EoUGov5uv",
+     "title": "Mockingbird Double Stroller + Bassinet + Scooter Board + Accessories 1",
+     "why": "Title and photo show a Mockingbird stroller with a second seat, the recalled Single-to-Double line (frame can crack); the recall covers lot numbers 20091-22602, so check the lot label."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "920038195360",
+     "title": "Summer Infant Oval Bassinet w/ Adjustable Canopy & Storage Shelf, Gray/White Image 1 of 4",
+     "level": "possible",
+     "why": "Summer Infant oval bassinet; no Summer Infant bassinet recall in the CPSC data."
+    },
+    {
+     "id": "188957402106",
+     "title": "The Heart Family Rock'n Play Musical Nursery 1987 Playset Mattel #4674 with box",
+     "level": "possible",
+     "why": "1987 Mattel Heart Family doll nursery playset; 'Rock'n Play' is the toy's name, not the Fisher-Price sleeper."
+    },
+    {
+     "id": "860135301212",
+     "title": "Disney Vampirina Rock n Jam Touring Van Bus RV Vehicle Car Just Play Toy",
+     "level": "possible",
+     "why": "Disney Vampirina toy van; unrelated to baby sleep products."
+    },
+    {
+     "id": "206578468935",
+     "title": "Heart Family Rock'n Play Musical Nursery Playset Play Center Box Only Mattel Lot",
+     "level": "possible",
+     "why": "Empty boxes for Mattel Heart Family doll playsets; not the Fisher-Price sleeper."
+    },
+    {
+     "id": "237179701821",
+     "title": "Vtg 1987 Mattel Heart Family Rock'n Play Nursery 4674 Parts or Repair Lot",
+     "level": "possible",
+     "why": "Doll-size Heart Family Rock'n Play nursery crib and chair parts; toy, not the Fisher-Price sleeper."
+    },
+    {
+     "id": "920076205965",
+     "title": "2004 Fisher Price Flutterbye Dreams Lullaby Birdies Soother Crib Toy WORKS! EXC",
+     "level": "possible",
+     "why": "Fisher-Price Flutterbye Dreams crib soother; Fisher-Price recalls in the data cover other products."
+    },
+    {
+     "id": "366797743790",
+     "title": "Newborn Baby Nest Change Extra Cover (Suit for All Dockatot Deluxe Docks)",
+     "level": "possible",
+     "why": "Title says extra cover only ($10) for a DockATot Deluxe, though the photo shows a full baby nest; a cover is not the sleeper itself."
+    },
+    {
+     "id": "377371520009",
+     "title": "Babyletto Hudson 3-in-1 convertible crib set- Washed Natural-M4201NX",
+     "level": "possible",
+     "why": "Babyletto Hudson fixed-side convertible crib, not drop-side; the Babyletto recall in the data is a glider."
+    },
+    {
+     "id": "366812315964",
+     "title": "Fisher-Price Lullaby Birdies Soother Crib Toy Night Light Birds G2623",
+     "level": "possible",
+     "why": "Fisher-Price Lullaby Birdies crib soother; no matching recall."
+    },
+    {
+     "id": "167397933092",
+     "title": "ARMS REACH 9111-N ORIGINAL CO-SLEEPER BEDSIDE BASSINET PAD, & PAD COVER GREAT",
+     "level": "possible",
+     "why": "Photo shows a full Arm's Reach Original Co-Sleeper (model 9111-N) with pad; no Arm's Reach recall in the CPSC data."
+    },
+    {
+     "id": "206695109739",
+     "title": "UPPAbaby VISTA Single Stroller, Gray/Black, Folding w/ Canopy & 5-Point",
+     "level": "possible",
+     "why": "UPPAbaby VISTA stroller; the UPPAbaby recall in the data is the RIDGE jogging stroller (22215), a different model."
+    },
+    {
+     "id": "mUAr55Yz7FRaxXR9wBwcrb",
+     "title": "NEW Dream On Me Lacy Portable 2 in 1 Bassinet & Cradle BED BABY CRIB 1",
+     "level": "possible",
+     "why": "Dream On Me Lacy 2-in-1 bassinet & cradle (brand printed on the bassinet in the photo); no Dream On Me recall in cards.json."
+    }
+   ],
+   "flagged": 13,
+   "unclearFlagged": 0,
+   "recallRate": 0.25,
+   "precision": 0.077
+  },
+  "on-device only": {
+   "caught": 1,
+   "missed": [
+    {
+     "id": "318866483780",
+     "title": "Disney Classic Pooh Piglet Crib Headboard Cover Ruffle Floral Vintage Style v",
+     "why": "Quilted, padded Pooh headboard panel with ruffle and ties to fasten inside the crib, i.e. a padded headboard bumper piece."
+    },
+    {
+     "id": "147681812682",
+     "title": "White Contoured Foam Crib Wedge Triangular Support Pillow",
+     "why": "Quilted foam crib wedge to incline and position a sleeping baby, a padded sleep positioner (also an inclined surface)."
+    },
+    {
+     "id": "7QSs8Ei8Tfvm2EoUGov5uv",
+     "title": "Mockingbird Double Stroller + Bassinet + Scooter Board + Accessories 1",
+     "why": "Title and photo show a Mockingbird stroller with a second seat, the recalled Single-to-Double line (frame can crack); the recall covers lot numbers 20091-22602, so check the lot label."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "188957402106",
+     "title": "The Heart Family Rock'n Play Musical Nursery 1987 Playset Mattel #4674 with box",
+     "level": "possible",
+     "why": "1987 Mattel Heart Family doll nursery playset; 'Rock'n Play' is the toy's name, not the Fisher-Price sleeper."
+    },
+    {
+     "id": "206578468935",
+     "title": "Heart Family Rock'n Play Musical Nursery Playset Play Center Box Only Mattel Lot",
+     "level": "possible",
+     "why": "Empty boxes for Mattel Heart Family doll playsets; not the Fisher-Price sleeper."
+    },
+    {
+     "id": "366797743790",
+     "title": "Newborn Baby Nest Change Extra Cover (Suit for All Dockatot Deluxe Docks)",
+     "level": "possible",
+     "why": "Title says extra cover only ($10) for a DockATot Deluxe, though the photo shows a full baby nest; a cover is not the sleeper itself."
+    },
+    {
+     "id": "377371520009",
+     "title": "Babyletto Hudson 3-in-1 convertible crib set- Washed Natural-M4201NX",
+     "level": "possible",
+     "why": "Babyletto Hudson fixed-side convertible crib, not drop-side; the Babyletto recall in the data is a glider."
+    },
+    {
+     "id": "167397933092",
+     "title": "ARMS REACH 9111-N ORIGINAL CO-SLEEPER BEDSIDE BASSINET PAD, & PAD COVER GREAT",
+     "level": "possible",
+     "why": "Photo shows a full Arm's Reach Original Co-Sleeper (model 9111-N) with pad; no Arm's Reach recall in the CPSC data."
+    },
+    {
+     "id": "206695109739",
+     "title": "UPPAbaby VISTA Single Stroller, Gray/Black, Folding w/ Canopy & 5-Point",
+     "level": "possible",
+     "why": "UPPAbaby VISTA stroller; the UPPAbaby recall in the data is the RIDGE jogging stroller (22215), a different model."
+    },
+    {
+     "id": "mUAr55Yz7FRaxXR9wBwcrb",
+     "title": "NEW Dream On Me Lacy Portable 2 in 1 Bassinet & Cradle BED BABY CRIB 1",
+     "level": "possible",
+     "why": "Dream On Me Lacy 2-in-1 bassinet & cradle (brand printed on the bassinet in the photo); no Dream On Me recall in cards.json."
+    }
+   ],
+   "flagged": 8,
+   "unclearFlagged": 0,
+   "recallRate": 0.25,
+   "precision": 0.125
+  },
+  "hybrid": {
+   "caught": 1,
+   "missed": [
+    {
+     "id": "318866483780",
+     "title": "Disney Classic Pooh Piglet Crib Headboard Cover Ruffle Floral Vintage Style v",
+     "why": "Quilted, padded Pooh headboard panel with ruffle and ties to fasten inside the crib, i.e. a padded headboard bumper piece."
+    },
+    {
+     "id": "147681812682",
+     "title": "White Contoured Foam Crib Wedge Triangular Support Pillow",
+     "why": "Quilted foam crib wedge to incline and position a sleeping baby, a padded sleep positioner (also an inclined surface)."
+    },
+    {
+     "id": "7QSs8Ei8Tfvm2EoUGov5uv",
+     "title": "Mockingbird Double Stroller + Bassinet + Scooter Board + Accessories 1",
+     "why": "Title and photo show a Mockingbird stroller with a second seat, the recalled Single-to-Double line (frame can crack); the recall covers lot numbers 20091-22602, so check the lot label."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "206695109739",
+     "title": "UPPAbaby VISTA Single Stroller, Gray/Black, Folding w/ Canopy & 5-Point",
+     "level": "possible",
+     "why": "UPPAbaby VISTA stroller; the UPPAbaby recall in the data is the RIDGE jogging stroller (22215), a different model."
+    },
+    {
+     "id": "mUAr55Yz7FRaxXR9wBwcrb",
+     "title": "NEW Dream On Me Lacy Portable 2 in 1 Bassinet & Cradle BED BABY CRIB 1",
+     "level": "possible",
+     "why": "Dream On Me Lacy 2-in-1 bassinet & cradle (brand printed on the bassinet in the photo); no Dream On Me recall in cards.json."
+    }
+   ],
+   "flagged": 3,
+   "unclearFlagged": 0,
+   "recallRate": 0.25,
+   "precision": 0.333
+  }
+ },
+ "askingPrices": {
+  "mustFlag": 437.99,
+  "words only": 30,
+  "on-device only": 30,
+  "hybrid": 30
+ },
+ "bySite": {
+  "ebay": {
+   "listings": 85,
+   "mustFlag": 3
+  },
+  "craigslist": {
+   "listings": 40,
+   "mustFlag": 1
+  }
+ },
+ "cost": {
+  "listings": 125,
+  "checkedByWordsOnly": 19,
+  "lookedAtOnDevice": 106,
+  "sentToCloud": 14,
+  "cloudErrors": 0,
+  "shareSentToCloud": 0.112,
+  "medianMs": 7912,
+  "totalMinutes": 21
+ },
+ "run": "r5"
+}

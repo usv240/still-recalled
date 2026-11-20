@@ -1,8 +1,8 @@
 # How well it works: the tests
 
-Four tests ran on 2026-11-15, 16 and 18 on a Windows PC with Chrome 157 and Chrome's built-in model (Gemini
+Five tests ran on 2026-11-15, 16, 18 and 20 on a Windows PC with Chrome 157 and Chrome's built-in model (Gemini
 Nano). Each test set was collected after the fixes the test before it led to, so every set is new to the rules it
-measures. Cloud model: Gemini through Firebase AI Logic (`gemini-4-hydrogen`, falling back to `gemini-3.5-flash-lite`
+measures. The labels are by AI reviewers working blind; a person has not yet checked them. Cloud model: Gemini through Firebase AI Logic (`gemini-4-hydrogen`, falling back to `gemini-3.5-flash-lite`
 when it was busy).
 
 Each test runs the same engine three ways (`tools/eval-test.html`, scored by `tools/eval-score.mjs`):
@@ -14,8 +14,16 @@ A listing counts as flagged at "possible" or "likely".
 
 ## Results
 
-All four tests together: 597 listings, of which 74 must be flagged and 481 must not (42 can't be settled from the
+All five tests together: 775 listings, of which 83 must be flagged and 630 must not (62 can't be settled from the
 listing alone and are left out).
+
+| Same engine, run as | Caught (of 83) | False alarms (of 630) |
+|---|---|---|
+| Words only | 47 | 109 |
+| Built-in model only | 51 | 64 |
+| **Hybrid** | **65** | **12** |
+
+The first four tests alone (597 listings, 74 to flag, 481 not), as earlier versions of this page reported them:
 
 | Same engine, run as | Caught (of 74) | False alarms (of 481) |
 |---|---|---|
@@ -29,18 +37,23 @@ listing alone and are left out).
 | Second, after fixes: eBay and Craigslist, Nov 15 | 125 | 2 of 4 | 0 of 117 | 16 |
 | Third, after fixes: eBay, Mercari and Craigslist, Nov 16 | 176 | 28 of 34 | 6 of 133 | 24 |
 | Fourth, every recall since 1973: eBay and Craigslist, Nov 18 | 160 | 18 of 22 | 1 of 116 | 24 |
+| Fifth, on release 0.12.0, plain searches: eBay and Craigslist, Nov 20 | 178 | 7 of 9 | 1 of 149 | 23 |
 
 - **The built-in model cuts the word rules' false alarms by looking at the photo, and the cloud check cuts them to an
   eighth.** It also catches what words miss: products whose risky part shows only in the photo.
-- **By kind, across the four tests:** recall matches 6 of 8; infant loungers and nests 35 of 44; padded crib bumpers
-  17 of 22.
+- **By kind, across the five tests:** recall matches 7 of 9; infant loungers and nests 39 of 49; padded crib bumpers
+  19 of 24; inclined sleepers 0 of 1 (a Rock 'n Play listed only as "Baby Rocker"; section 19).
 - **Each test changed the product.** Loungers were the weak spot after two tests (4 of 10); the changes that followed
   raised that to 23 of 25 in the third and 8 of 9 in the fourth. The fourth test was the first with every recall since
   1973, and two of its three recall catches were recalls the earlier data didn't have.
-- **In a shopper's units:** the listings that should be flagged were asking $5,527 in total; the hybrid flagged $4,540
+- **In a shopper's units:** the listings that should be flagged were asking $6,064 in total; the hybrid flagged $5,022
   of it.
-- **77% of the listings never left the computer.** The cloud saw 15%, 8%, 33% and 32% of the listings in the four tests
-  (the last two searched mostly for loungers, recalled brands and old gear, which go to the cloud to be confirmed).
+- **77% of the listings never left the computer.** The cloud saw 15%, 8%, 33%, 32% and 21% of the listings in the five
+  tests (the third and fourth searched mostly for loungers, recalled brands and old gear, which go to the cloud to be
+  confirmed).
+- **The fifth test is the only one run on the released engine.** Each earlier test ran on the engine of its day, and
+  its misses were then used to change the engine. The fifth was collected and labelled after 0.12.0's engine was
+  frozen, and run once (section 19).
 
 ## 1. First test
 
@@ -652,7 +665,7 @@ practice page in a new Chrome profile, without the built-in model (17 of 17 list
 listings badged and confirmed, the unnamed sleeper matched to recall 23088 through `lookup_recalls`); report
 `tools/e2e-report-release.json`. In the Gemini Nano test profile, with the development build (reCAPTCHA refuses that
 automated profile's release tokens, section 13), the 17 listings took 183 s, all 8 flagged listings were looked at on
-the computer first, and the unnamed sleeper was matched the same way; `docs/gallery/src/try-run.json`. On the Android
+the computer first, and the unnamed sleeper was matched the same way; `tools/try-run-nano-0.10.0.json`. On the Android
 16 emulator (no Gemini Nano) the release APK passed 10 of 10: the example, four shared texts, a CPSC warning ("CPSC
 warning", 21 s), and a listing described without its product's name, where the cloud called the function and the
 phone answered ("Recalled product", 12 s); checks took 6 to 21 s.
@@ -696,9 +709,9 @@ cloud at temperature 0, the 392 warnings and the function included). No cloud or
 - 31 listings changed between flagged and not: 19 for the better, 12 for the worse. Two catches were lost in the
   second set (a Mockingbird stroller and a crib headboard cover), where Gemini Nano's look said nothing this time:
   its answer for a listing is not the same on every run.
-- Of the 13 false alarms, 11 are soft "possible" flags. Six are UPPAbaby VISTA and CRUZ "V2" strollers flagged against
-  the 2015 recall of the first version: the cloud answered "cannot tell" where the listing's "V2" places it outside
-  the notice. Not fixed here, so that this table is not tuned to. One, a Graco Swyngomatic swing, was labelled "no"
+- Of the 13 false alarms, 11 are soft "possible" flags. Six are UPPAbaby VISTA and CRUZ strollers, five of them titled "V2",
+  flagged against the 2015 recall of the first version: the cloud answered "cannot tell" where the listing's "V2"
+  places it outside the notice. Not fixed here, so that this table is not tuned to. One, a Graco Swyngomatic swing, was labelled "no"
   before every recall since 1973 was added; the fourth test counts the same swing as a catch.
 - The function was called on 14 of the 165 cloud checks, the device had a recall for 1, and no result was shown
   because of it: on these real listings, whose sellers mostly name the brand, it found nothing new.
@@ -713,7 +726,7 @@ Unit tests cover each case. Run end to end on the local web page (a typed Boppy 
 "Checking in the cloud" and a cloud slot). A model that answers 404 is skipped for the next in Remote Config's list
 (web and Android). A function-calling round that ends without text is asked once more without the function. 692 recall
 cards hold only 14 of a notice's model numbers; they are marked, and the label check now says "Check this model
-against the notice" there, not "Model not listed". The web cloud calls now use temperature 0, as Android's do.
+against the notice" there, not "Model not listed". The cloud confirmation on the web now uses temperature 0, as Android's does (the web page's hybrid calls followed in 0.12.0).
 
 **Sources.** The three sources the write-up quotes were read at the source and added to `docs/research/sources.md`
 (section 9). One line was too strong: CPSC "issued 82,000 takedown notices" in the first half of fiscal 2026, in its
@@ -726,6 +739,209 @@ On the Android 16 emulator (no Gemini Nano) the release APK passed 10 of 10: the
 warning, and a shared text that names no brand, only a nickname ("the rock and play one everyone had"), where the cloud
 called the function, the phone answered, and the card named recall 23088.
 
+## 19. A fourth review, a fifth blind test, and release 0.12.0 (2026-11-20)
+
+A fifth independent review (an AI judge, not a person) read 0.11.0, recomputed section 18's numbers from the files
+and found them right. It also found bugs, three claims the sources did not support, and one idea worth building.
+What changed, and what was measured.
+
+**The device asks its own field guide** (`shared/lookup.mjs`, `deviceLookup`). In the extension the cloud's
+`lookup_recalls` reaches only what the device flags or can't settle. A baby product with a plain title and no risky
+type words never got there. So the model that looks at a listing now also answers one more field, `brand_seen`: a
+brand name it can read in the photo. When the listing's words don't already say that brand, the shortlist's code looks
+it up with the kind of product, and a recall it finds goes to the cloud as a question, attached to the listing.
+
+- **Gemini Nano guesses more than it reads.** On the ten made-up listings (each with its recall notice's own photo)
+  it gave "Fisher-Price" for three different sleepers and was right once; in a second pass it gave "Fisher-Price" for
+  a 4moms MamaRoo. On two real Graco swings it read "Graco" off the product, correctly.
+- **So its answer is never shown on its own.** The device's level does not change. The listing goes to the cloud with
+  the recall marked "found by the device, unverified", and the cloud is told a small model may have guessed the brand
+  from the shape. The recall is shown only when the cloud answers with that recall's number, and then as "Possible
+  recall" at most. If the cloud names another product, it calls `lookup_recalls` and that recall is shown instead.
+  With the cloud off, or the cloud call failing, nothing from this lookup is shown (`shared/confirm.mjs`,
+  `decideFinal`; unit tests in `tests/device-lookup.test.mjs`).
+- **The brand left out, real photos** (`node tools/masked-build.mjs`, `node tools/eval-run.mjs --set=masked`).
+  23 real listings from the five test sets whose words named a recalled product and whose blind label agrees (8
+  labelled "should be flagged", 15 "can't tell" with the same recall named by the reviewer). Code stripped the naming
+  words from each title (the card's brand, product line and model numbers), leaving what many sellers write ("Infant
+  Floor Seat Baby Sit Up Chair"). The sellers' own photos were kept. The word rules then find a recall on none.
+  - **Checked one at a time** (`node tools/lookup-generic.mjs --masked`, `tools/lookup-masked.json`): the right recall
+    was named on 12 of 23. Seven came through the device's own lookup: the look read "Graco" on two swings and
+    "Bumbo" on five floor seats, and all seven lookups were right. Five came through the cloud's `lookup_recalls`: a
+    MamaRoo, a Maclaren Triumph, a Jool Nova and two BOB joggers. No other recall was named and none was a red
+    recall. 15 of 23 were flagged in all, against 3 with both lookups taken away. Here the look ran in the cloud
+    (Gemini's lightest model), which reads a logo better than Gemini Nano.
+  - **In the extension, with Gemini Nano:** the first seven of these (the set as first built, from the third and fourth
+    tests) were run through the extension's own pipeline: the right recall was named on 3 of 7, and 6 of 7 were
+    flagged. Gemini Nano read "Graco" on both swings. For the MamaRoo it said "Fisher-Price", which was wrong, but the
+    lookup still sent the listing to the cloud, and the cloud named the swing (`tools/lookup-nano.json`). The full 23
+    have not been run with Gemini Nano.
+  - **The ten made-up listings, one at a time, on this version** (`node tools/lookup-generic.mjs`): the right recall
+    named on 6 of 10 (two through the device's own lookup), an earlier notice for the same product on 1, and 8 of 10
+    flagged against 6 without the lookups. None was a red recall.
+- **On the ten made-up listings, in the extension's pipeline with Gemini Nano:** the right recall was named on 4 of
+  10. Gemini Nano gave a brand three times and was wrong each time; none of those was shown. One of the four, the
+  MamaRoo, reached the cloud only because of the device's lookup: the guess was wrong, the cloud named the swing, and
+  the device's field guide had the recall (`tools/lookup-nano.json`, `tools/generic-listings.json`).
+- **Taken together:** with Gemini's lightest cloud model doing the look, the device's lookup was right 9 times of 9
+  (7 on the real photos, 2 on the made-up set). With Gemini Nano doing it, 2 of 6. That is why the lookup's answer is
+  a question for the cloud and never a flag.
+
+**Fifth test, blind, on 0.12.0's engine.** 178 listings collected on 2026-11-20 with searches and cities no earlier
+set used (`tools/collect-fifth.sh`, `tools/fifth-listings.json`): eBay, used condition, 10 each for "baby rocker",
+"bedside bassinet", "baby sleeper bed", "infant floor seat", "crib bedding set bumper", "baby swing", "newborn lounger
+pillow", "baby gear lot", "toddler bed" and "jogging stroller"; Craigslist in Phoenix, Boston, Portland and Miami
+(78). Plain searches on purpose: this is what a parent types. Three separate AI reviewers labelled them blind, from
+the title, the price and one photo, against all 10,089 raw CPSC recall records and CPSC's warnings file, with no
+access to the product's code, documents or answers (`tools/fifth-labels-a.json`, `-b.json`, `-c.json`; the brief is
+in `tools/fifth-label-brief.txt`): 9 must be flagged, 149 must not, 20 can't be settled from the listing alone. The
+engine was frozen before the labels existed and the test was run once.
+
+| Same engine, run as | Caught (of 9) | False alarms (of 149) |
+|---|---|---|
+| Words only | 4 | 23 |
+| Built-in model only | 4 | 14 |
+| **Hybrid** | **7** | **1** |
+
+- **By kind:** infant loungers 4 of 5; padded crib bumpers 2 of 2 (both bedding sets whose titles never say
+  "bumper"); recall matches 1 of 1 (a 4moms mamaRoo); inclined sleepers 0 of 1.
+- **The two misses.** A listing titled only "Baby Rocker" whose photo shows a Fisher-Price Rock 'n Play, and a Snuggle
+  Me lounger sold as a "baby pillow". Gemini Nano looked at both photos and saw nothing to flag, so neither left the
+  laptop. This is the extension's limit, measured: when the words say nothing, the device's model has to notice
+  something. Checked alone, the way the web page and the phone check a listing, both are flagged: for the rocker the
+  cloud read the Fisher-Price tag, called `lookup_recalls`, the device returned recalls 23088 and 19105, and the card
+  says "Possible recall".
+- **The one false alarm** is a soft flag: a Fisher-Price giraffe tummy-time roll, taken for a lounger.
+- **Where it ran:** the built-in model looked at 156 listings (median 7.0 s each, including the cloud check where
+  there was one); 22 were settled by their wording. The cloud saw 38 (21%). No cloud or device call failed.
+- **The two lookups found nothing here.** The cloud called `lookup_recalls` on 5 of its 38 checks and the device had
+  no recall for any. The device's own lookup fired once in 178 (Gemini Nano gave "Fisher-Price" for an unbranded
+  swing); the cloud did not take it up, and nothing was shown.
+- **Unclear listings:** 11 of the 20 were flagged, 10 of them softly: Bumbo floor seats (every seat sold through
+  2012 is recalled), BOB and InStep joggers, an UPPAbaby Vista, an Oeuf crib. In 10 of the 11 the recall on the card
+  is one the reviewer named too.
+- **In a shopper's units:** the 9 listings that should be flagged were asking $537; the hybrid flagged $482.
+- **Eight Craigslist photos** reached the reviewers as black placeholders; those listings were labelled from the
+  title (all "no" or "can't tell").
+
+**The same 178, checked one at a time** (`node tools/single-run.mjs --for=fifth`, `tools/fifth-results-single.json`).
+The web page and the Android app check one listing at a time, so every baby product gets the cloud's look. Run that
+way on the same 178 (the look in the cloud, as on a device without a built-in model; labels unchanged, engine
+unchanged, run once after the extension's run): **9 of 9 caught, 3 false alarms of 149, all three soft.** 147
+listings went to the cloud (83%), against 38 (21%) in the extension.
+
+| The same 178 listings | Caught (of 9) | False alarms (of 149) | Sent to the cloud |
+|---|---|---|---|
+| The extension: only what the device flags or can't settle | 7 | 1 | 38 (21%) |
+| One at a time: every baby product gets the cloud's look | 9 | 3 | 147 (83%) |
+
+- The "Baby Rocker" listing is flagged "Inclined infant sleeper", and its card names the Rock 'n Play recall: the
+  first look gave "Fisher-Price" for the photo, the device's own lookup found recall 23088, and the cloud, calling
+  `lookup_recalls`, settled on the first Rock 'n Play notice, 19105.
+- The cloud called `lookup_recalls` on 28 of its 147 checks; the device had a recall for 8; a recall was shown through
+  it on 2. One is the rocker. The other is a false alarm: an unbranded "Electric Baby swing" shown as a possible
+  4moms MamaRoo (22200). Look-alikes are the cost of naming a product from a photo, and why such a recall is never
+  more than "Possible recall".
+- The other two false alarms: a Bumbo floor seat of the current model (every seat sold through 2012 is recalled; the
+  reviewer judged this one newer), and the giraffe tummy-time roll the extension also flagged.
+- This is the choice the extension's thorough mode offers a parent: 21% of listings leaving the computer with the
+  unnamed rocker missed, or 83% with it caught.
+
+**Five blind tests together.** 775 listings, 83 that should be flagged. Hybrid: 65 caught, 12 false alarms of 630.
+Word rules only: 47 caught, 109 false alarms. Built-in model only: 51 caught, 64 false alarms. The cloud saw 178
+listings (23%). Each test was run with the engine of its day.
+
+**The earlier sets again, on 0.12.0: two of the four** (`bash tools/rerun-all.sh -r5`, `node tools/run-compare.mjs
+--a=-rerun --b=-r5 --sets=eval,fresh`, `tools/run-compare-r5.json`). Not blind: these sets were used to fix the engine.
+Only the first two sets (261 listings) were run. The third and fourth were started and thrown away: other programs
+on the test computer left Gemini Nano too little memory, 34 of its looks timed out, and results with timeouts would
+measure the computer. `tools/rerun-all.sh` now runs a listing again when its model call fails.
+
+| The first two sets (261 listings) | Caught (of 18) | False alarms (of 232) | Sent to the cloud |
+|---|---|---|---|
+| First runs, each on the engine of its day (blind) | 12 | 4 | 31 |
+| Run again on 0.11.0 | 15 | 3 | 44 |
+| Run again on 0.12.0 | 14 | 3 | 45 |
+
+- One listing changed between flagged and not: a "DockATot Deluxe+ ... Lounger Cover" whose photo shows the whole
+  lounger. The cloud called it a part this time. The three false alarms are the same three listings as on 0.11.0.
+- The device's own lookup fired on 4 of the 261 (Gemini Nano gave "Graco", "Fisher-Price" and, twice, "Delta" for
+  products whose titles name no brand). Each went to the cloud only because of it, the cloud took none up, and
+  nothing was shown. Its cost here was four cloud checks; its benefit, none.
+- The cloud called `lookup_recalls` on 6 of its 45 checks, the device had a recall for 1, and nothing was shown
+  because of it. No cloud or device call failed in these two sets.
+
+**Faster with Gemini Nano** (`extension/src/engine.js`, `wordsFirst`). 0.11.0 took 183 s for the 17 practice listings
+with the built-in model, against 30 to 81 s without it: the model looks at one listing at a time, and every cloud
+check waited its turn behind it. A listing whose words name a risky type goes to the cloud whatever the model says,
+and with the cloud's answer the result is the same either way, so those now skip the model's look and their cloud
+check starts at once; the queue also no longer waits for a free cloud slot. On the 17 practice
+listings that removes 2 of the 10 looks. I could not time the result fairly: the run with Gemini Nano on this version
+took 223 s for 8 looks (about 28 s a look) on a computer busy with other programs, against 183 s for 10 looks (about
+18 s) on 0.10.0. All 8 recalled listings were flagged, and the label was read on the device in 9 s
+(`tools/try-run-nano.json`; the 0.10.0 run is `tools/try-run-nano-0.10.0.json`). No speed gain is claimed.
+
+**Thorough mode** (a setting, off by default). The extension can send every baby product on a page for the cloud's
+look, as the web page and the phone do. It is the parent's choice between the two results above: fewer listings
+leaving the computer, or the unnamed Rock 'n Play caught.
+
+**CPSC warnings, live.** New recalls already arrived from CPSC's API after install; CPSC's safety warnings, which are
+not in that API, did not. The extension now reads CPSC's warnings file with each refresh and gives every warning newer
+than the bundled ones a card, written in the cloud like a recall's; the card carries the warning's text for the cloud
+check (`shared/warnings.mjs`, `engine.js` `newWarnings`). Extension only: the file has no CORS header, so a web page
+cannot read it, and the Android app does not fetch it yet.
+
+**Bugs fixed.**
+- When the CPSC recall API did not answer, the cloud check gave up and the device's flag stood unconfirmed. Seen in
+  a test run on this day, while the API timed out: six listings, all false alarms. The check now runs on the short
+  record on the device's own card (`shared/notice.mjs`, `noticeFromCard`; web and Android).
+- The Android label check dropped the mark for a model list cut at 14, so it could still say "Model not listed in
+  this recall" where the web says "Check this model against the notice".
+- A recall the cloud looked up could replace one the listing's words had matched, with a line saying the listing did
+  not name it. The words' recall now stays on the card, soft, and the other is named beside it.
+- The line naming a looked-up recall on a type flag now says "It may be", and that other makers sell look-alikes.
+- "I own it" still used a buyer's words in four places: the finding ("The listing doesn't show which model"), the
+  bumper advice ("before you buy"), the label result ("Don't buy it unless the seller shows...") and the cloud's
+  reason ("The listing offers..."). Each now has the owner's words.
+- A recall card keeps 140 characters of the remedy, cut mid-word on 6,295 of 10,481 cards. The card now shows whole
+  sentences, and the full remedy whenever the notice was fetched for the cloud check.
+- On the web page, when the built-in model fails on a photo, Gemini in the cloud now reads or looks instead, as the
+  Android app already did.
+- The web page's hybrid calls now run at temperature 0 as well. Section 18 said "the web cloud calls now use
+  temperature 0"; that was true of the confirmation only.
+
+**Claims corrected.** "Six of the 13 false alarms are UPPAbaby V2 strollers": six are UPPAbaby strollers and five of
+those say "V2". "Most sellers don't know (Consumer Reports)" had no source and is removed. The finding that sellers
+use generic names is from Consumer Reports' 2019 study, not its 2026 one. The write-up's "6 to 21 s" for an Android
+check was 6.6 to 22.7 s. The 183 s run's record was cited from a folder that is not in the repository; it is now
+`tools/try-run-nano.json`.
+
+**0.12.0 results (2026-11-20).** 82 unit tests pass.
+- **Extension, packed release, new Chrome profile (no built-in model):** all 17 end-to-end steps on the live practice
+  page: 17 listings checked in 39 s, 8 flagged and confirmed in the cloud with no cloud error, the unnamed sleeper
+  flagged "Inclined infant sleeper" with recall 23088 named through `lookup_recalls`, 9 recalls published since the
+  build fetched from CPSC, and, new in this version, 4 CPSC safety warnings fetched live (W27-079, W27-080, W27-081,
+  W27-089); report `tools/e2e-report-release.json`.
+- **Extension with Gemini Nano, development build:** the 17 practice listings, 8 flagged, 8 looked at on the
+  computer, the stroller's label read on the device (`tools/try-run-nano.json`). reCAPTCHA refuses that automated
+  profile's release tokens (section 13), so the packed release has not been run with Gemini Nano.
+- **Web page, "I own it", development build:** all 10 steps (`node tools/web-owner.mjs`,
+  `tools/web-owner-report.json`): a recalled lounger, a product with no match and a padded bumper, each in the
+  owner's words, with the remedy whole. A local build, because reCAPTCHA refuses an automated browser on the live site.
+- **Android, release APK, Android 16 emulator (2 GB of memory, no Gemini Nano):** all 10 checks
+  (`tools/android-e2e-out/report.json`): the App Check token 14 s after launch, the example, four shared texts, a CPSC
+  warning, and the nickname listing where the cloud called the function and the phone answered; checks with a model
+  call took 8.1 to 17.1 s. "I own it": all 6 checks (`tools/android-owner.mjs`,
+  `tools/android-e2e-out/owner-report.json`).
+- **A first Android run failed, and found a bug.** On an emulator starved by another test, the App Check page needed
+  more than 25 s to load; the app gave up at 25 s, threw the page away and started again, so no token ever arrived
+  and every cloud call was refused. A slow load is now left to finish, a failed load is retried at once, and the app
+  asks for a token as soon as the page is ready (`appcheck/BridgeAppCheck.kt`).
+- **An independent review of this version's code changes** (an AI reviewer, before release) found seven defects,
+  all fixed: cached results ignored the new setting; waiting cloud checks no longer followed what is on screen; a
+  listing that skipped the built-in model's look was left with words alone when the cloud failed; two faults in the
+  Android token bridge; a cap that could skip new warnings for good; and a remedy cut exactly at a full stop.
+
 ## Reproduce
 
 ```
@@ -736,7 +952,13 @@ node tools/collector.mjs                    # local test server on :8766
 #   await __eval({ mode: 'words', set: 'fresh' }); await __eval({ mode: 'hybrid', set: 'fresh' })   second test
 # or, in a separate test profile with the built-in model (made once by node tools/nano-profile.mjs):
 node tools/eval-run.mjs --set=fourth --mode=words && node tools/eval-run.mjs --set=fourth --mode=hybrid
-node tools/eval-score.mjs                   # or --set=fresh, --set=third, --set=fourth
+node tools/eval-score.mjs                   # or --set=fresh, --set=third, --set=fourth, --set=fifth
+bash tools/collect-fifth.sh                 # how the fifth set was collected (eBay and Craigslist, new searches)
+node tools/single-run.mjs --for=fifth       # the fifth set checked one listing at a time, as the web page does
+node tools/masked-build.mjs && node tools/lookup-generic.mjs --masked   # real listings with the brand stripped from the title
+node tools/lookup-generic.mjs               # the ten made-up generic-title listings, one at a time
+bash tools/rerun-all.sh -r5 && node tools/run-compare.mjs --a=-rerun --b=-r5   # the earlier sets again, and two runs compared
+node tools/web-owner.mjs; node tools/android-owner.mjs                  # "I own it", web page and Android
 npm run e2e -- "crib bedding set"           # or --url=<a Craigslist or Mercari search>
 node tools/label-run.mjs                    # the label check on 12 CPSC label photos (--cloud: the cloud alone)
 node tools/cards-compare.mjs <old release folder> extension/data/cards.json   # word rules: old cards and code against new

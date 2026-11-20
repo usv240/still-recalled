@@ -1,0 +1,547 @@
+{
+ "labeller": "blind AI review (Claude), title + one photo + every CPSC recall since 1973 and CPSC's safety warnings",
+ "labelled_at": "2026-11-20T15:06:54+00:00",
+ "labels": {
+  "uGTesvW2e3tv1couuudQPK": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Angelbliss bedside bassinet on a stand with mesh sides; no CPSC recall or warning names Angelbliss.",
+   "confidence": "high"
+  },
+  "ryQAa2uukevKdox7BPfxva": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Vintage Babyhood pram-style carriage with a rocker chair; no recall found for Babyhood carriages.",
+   "confidence": "high"
+  },
+  "vShH68hHo4fy424ABocyP1": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "4moms MamaRoo Sleep Bassinet (flat mesh bassinet on a stand); recall 22-200 covers MamaRoo swings and RockaRoo rockers, not the bassinet.",
+   "confidence": "high"
+  },
+  "wc6nNp4APPtpoPX2BdBCdS": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Maxi-Cosi Cassia swing; no CPSC recall found for the Cassia swing.",
+   "confidence": "high"
+  },
+  "k7SB5rN8AyoUtvVdv1WT7P": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Unbranded electric baby swing with a pill-shaped base; no brand shown, and it does not match the photos of the recalled canopy-style swings I checked.",
+   "confidence": "low"
+  },
+  "oC3dGENqx6zwWJUA8KcvWd": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "White pressure-mount walk-through gate, stock photo with a small brand mark that reads like Babelio; not one of the recalled or warned gate brands.",
+   "confidence": "high"
+  },
+  "gYDruV3TBbExeejU2Yy8Yc": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Antique spindle cradle on rockers with fixed sides; no drop side, no maker shown.",
+   "confidence": "high"
+  },
+  "gwHxMbFLtYxCDh91YZcmm4": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Guava Family Lotus travel crib in its carry bag; the only Guava recall is the Roam stroller.",
+   "confidence": "high"
+  },
+  "b5YKwX21hrPVcb4WAktJuq": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "American Girl Bitty Baby doll crib with doll bedding; a toy, not a real crib.",
+   "confidence": "high"
+  },
+  "rAMdJwFtykL8eD9b2TxmWJ": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Newton Baby crib mattress and cover; no recall or warning names Newton Baby.",
+   "confidence": "high"
+  },
+  "9sSTsj7B7jGBFpUSjs3Lsg": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Adult wooden glider rocker with blue cushions, no brand shown; not an infant sleep product.",
+   "confidence": "high"
+  },
+  "jRQgM3hTRB9QZ1KcRUMXYu": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Labebe unicorn plush rocking horse; no recall found for Labebe.",
+   "confidence": "high"
+  },
+  "69nxEGz9jAy4RBaryesz9z": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Rocking chair with foot stool; the photo is a blank black image, title shows adult furniture with no brand.",
+   "confidence": "low"
+  },
+  "qdq4VC4A4mDYPRL78uHxeA": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Baby Trend Retreat Nursery Center playard PY75C54C (store-page screenshot); Baby Trend playard recalls are 1990s models only.",
+   "confidence": "high"
+  },
+  "4LJb7BgZ5t3a8YRCtFkAzS": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Happiest Baby SNOO bassinet with swaddle sacks; no recall or warning found for SNOO.",
+   "confidence": "high"
+  },
+  "sPq4WFMrb2SJGXk25Eqott": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Arm's Reach Mini Ezee 2-in-1 co-sleeper; recall 11-187 covers only Original and Universal styles made 1997 to 2001.",
+   "confidence": "high"
+  },
+  "33ADVuHKqfhnRWX61tq9SP": {
+   "item": "product",
+   "recall_ids": [
+    "07252",
+    "13204"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "Pottery Barn crib set for $10 with a blank black photo; it may be bedding that includes a padded bumper, and Pottery Barn Kids recalled Matelasse and Sweet Lambie bumpers.",
+   "confidence": "low"
+  },
+  "mhenx3SutHLSj5qVdEdRMa": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Crib with mattress and bedding, no brand in the title; stock photo of a fixed-side sleigh crib (looks like DaVinci Kalani, not a recalled model) and no bumper is shown.",
+   "confidence": "low"
+  },
+  "hd7oEkS845gPgP4ipCicjR": {
+   "item": "other",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Day care retirement sale of mixed kid items; blank black photo and no specific product named.",
+   "confidence": "low"
+  },
+  "qz5PtWdsSnDZxGGjMEx54A": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Bedside bassinet with curved dark wood ends and mesh sides, no brand in the title; a bassinet, not a risky type.",
+   "confidence": "high"
+  },
+  "2EX8UsU4QgGjBHPU3HoPUZ": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Unbranded black bedside bassinet with mesh sides and a storage basket; no brand to match a recall.",
+   "confidence": "high"
+  },
+  "2J3V4aSwFYEmbTDecXYJ3e": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Unbranded grey 3-in-1 rocking bedside sleeper on wheels (stock photo); does not show the Papablic or AirClub features named in those recalls.",
+   "confidence": "high"
+  },
+  "jGtBYkgNYbwn3x4PmxCiAp": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Plain white crib mattress leaning on a sofa; no brand shown.",
+   "confidence": "high"
+  },
+  "jah7TmZY1kCK2BceWHGncu": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Pottery Barn Kids crib with grey frame and clear acrylic slats, fixed sides; not the recalled Penny, Spindle or drop-side cribs.",
+   "confidence": "high"
+  },
+  "rNiuevSwJbeq6stxFNupeZ": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Carter's 4-in-1 convertible crib, white with fixed sides (stock photo); no crib recall names Carter's.",
+   "confidence": "high"
+  },
+  "hdh7HHJNByXWTQX4YSC7yX": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Modern natural-wood crib with fixed slatted sides, no brand shown; no drop side visible.",
+   "confidence": "high"
+  },
+  "137945117593": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Ingenuity Keep Cozy 3-in-1 bouncer and rocker; not one of the Kids2 rocking sleepers and no recall found for it.",
+   "confidence": "high"
+  },
+  "227620545183": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Baby Einstein Ocean Explorers infant-to-toddler rocker with toy bar; no recall found for it.",
+   "confidence": "high"
+  },
+  "287705389977": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Only the toy bar from a 4moms RockaRoo 4M-012; the rocker itself is under recall 22-200 but this part is not.",
+   "confidence": "high"
+  },
+  "117522952969": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Maxi-Cosi Lora bedside bassinet in blue; no recall found for it.",
+   "confidence": "high"
+  },
+  "407375111480": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Graco bedside bassinet with mesh sides and Graco badge on the base; no recall found for Graco bassinets of this kind.",
+   "confidence": "high"
+  },
+  "168836876430": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Angelbliss BN02 bedside bassinet (stock photo); no CPSC recall or warning names Angelbliss.",
+   "confidence": "high"
+  },
+  "318791804360": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Lulyboo PLUS soft oval padded baby bed with handles lying on the floor; it is a portable lounger or in-bed sleeper rather than a bassinet on a stand.",
+   "confidence": "low"
+  },
+  "940042942548": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Books to Bed zip-front pajama sleeper, size 18 to 24 months; clothing.",
+   "confidence": "high"
+  },
+  "287702442004": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Carter's red and grey striped footless fleece sleeper; not the yellow footed animal pajamas in recall 23-048.",
+   "confidence": "high"
+  },
+  "237069805447": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Burt's Bees Baby floral zip wearable blanket; the Burt's Bees recall 17-183 is for snap coveralls.",
+   "confidence": "high"
+  },
+  "147662183391": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Bumbo Floor Seat PLUS+ with tray in its retail box, harness shown; a current model sold after the 2012 recall of older seats.",
+   "confidence": "high"
+  },
+  "257634991292": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Fisher-Price Sit-Me-Up floor seat with toys (stock photo); no recall found for it.",
+   "confidence": "high"
+  },
+  "117519108559": {
+   "item": "product",
+   "recall_ids": [
+    "12247",
+    "08046"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "Pink Bumbo foam floor seat with a belt; Bumbo recalled about 4 million seats sold 2003 to 2012 for a belt repair kit, and the photo does not show when this one was made.",
+   "confidence": "high"
+  },
+  "168872267613": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "crib_bumper",
+   "should_warn": "yes",
+   "note": "Raggedy Ann and Andy crib bedding set; the long padded strip with ties at the top of the photo is a crib bumper.",
+   "confidence": "high"
+  },
+  "407365699462": {
+   "item": "toy",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Bitty Baby doll crib with doll bumper, quilt and doll; a toy set.",
+   "confidence": "high"
+  },
+  "166597897184": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Judi's Jack in the Box crib bedding, title says bumperless and the photo shows only a quilt.",
+   "confidence": "high"
+  },
+  "366817078094": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Graco DuetConnect LX swing 2160534; Graco swing recalls are from 2004 and earlier models.",
+   "confidence": "high"
+  },
+  "940094292615": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "4moms MamaRoo model 1046 with a 5-point harness visible; recall 22-200 covers only 3-point harness models 4M-005, 1026 and 1037.",
+   "confidence": "high"
+  },
+  "137933906948": {
+   "item": "part",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Photo shows only the fabric seat cover for a Bright Starts portable swing, not the swing.",
+   "confidence": "high"
+  },
+  "137922918626": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Nuna Leaf Grow seat with toy bar; the only Nuna recall is a high chair.",
+   "confidence": "high"
+  },
+  "137698912092": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "maybe",
+   "note": "Plush yellow animal-shaped infant support pillow sold as a baby lounger seat, no brand; a padded support cushion, but it may be a sit-up seat rather than a lounger.",
+   "confidence": "low"
+  },
+  "860157274397": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": "in_bed_sleeper",
+   "should_warn": "yes",
+   "note": "Padded baby nest lounger with raised bumper sides and tie closure, ocean print; no brand shown to match a specific lounger recall.",
+   "confidence": "high"
+  },
+  "376745182514": {
+   "item": "other",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Winnie the Pooh birth-record keepsake pillow; decor.",
+   "confidence": "high"
+  },
+  "840090292558": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Two Tactical Baby Gear front baby carriers; no recall or warning names the brand.",
+   "confidence": "high"
+  },
+  "117267169558": {
+   "item": "other",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Tactical Baby Gear diaper bag with pouch; a bag, no recall found.",
+   "confidence": "high"
+  },
+  "236639681574": {
+   "item": "clothing",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Lot of baby girl long-sleeve bodysuits; clothing.",
+   "confidence": "high"
+  },
+  "178195984917": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Pink wooden house-frame toddler floor bed, no brand; not an infant sleep type.",
+   "confidence": "high"
+  },
+  "860095146192": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Dora the Explorer 4-piece toddler bedding set in its package; toddler bedding with no bumper.",
+   "confidence": "high"
+  },
+  "820370957595": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Spidey and Friends toddler bed comforter set; toddler bedding with no bumper.",
+   "confidence": "high"
+  },
+  "198795790375": {
+   "item": "other",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Handmade Pinky and the Brain fabric blanket; a blanket.",
+   "confidence": "high"
+  },
+  "137261786562": {
+   "item": "product",
+   "recall_ids": [
+    "04136"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "Baby Trend full-size stroller with child tray, navy fabric; Baby Trend recalled certain Passport strollers and the listing does not name the model or year.",
+   "confidence": "low"
+  },
+  "287728409987": {
+   "item": "product",
+   "recall_ids": [],
+   "recall_match": "no",
+   "type": null,
+   "should_warn": "no",
+   "note": "Baby Jogger Joggeroo-16 three-wheel jogging stroller; Baby Jogger recalls cover City Mini and City Versa models, not the Joggeroo.",
+   "confidence": "high"
+  },
+  "840132998571": {
+   "item": "product",
+   "recall_ids": [
+    "12006"
+   ],
+   "recall_match": "possible",
+   "type": null,
+   "should_warn": "maybe",
+   "note": "BOB Revolution SE jogging stroller with the BOB logo on the canopy; recall 12-006 covers all BOB strollers made up to November 2010 and the listing does not show the build date.",
+   "confidence": "low"
+  }
+ }
+}

@@ -21,7 +21,7 @@ const CHOICES = [
 ];
 const proxied = u => (u ? `/img?u=${encodeURIComponent(u)}` : '');
 
-const SETS = ['eval', 'fresh', 'third', 'fourth'];
+const SETS = ['eval', 'fresh', 'third', 'fourth', 'fifth'];
 
 async function loadQuick() {
   const parts = await Promise.all(SETS.map(async set => {
@@ -43,6 +43,7 @@ async function load(set) {
     fresh: ['fresh-labels-ebay.json', 'fresh-labels-craigslist.json'],
     third: ['third-labels-a.json', 'third-labels-b.json', 'third-labels-c.json'],
     fourth: ['fourth-labels-a.json', 'fourth-labels-b.json', 'fourth-labels-c.json'],
+    fifth: ['fifth-labels-a.json', 'fifth-labels-b.json', 'fifth-labels-c.json'],
   }[set];
   const [listings, ...labelSets] = await Promise.all([
     fetch(`/tools/${set}-listings.json`).then(r => r.json()),

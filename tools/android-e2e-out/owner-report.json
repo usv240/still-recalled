@@ -1,0 +1,37 @@
+{
+ "at": "2026-11-20T19:04:12.487Z",
+ "version": "0.12.0",
+ "failed": 0,
+ "steps": [
+  {
+   "name": "the start screen offers \"I own it\"",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the heading follows the choice",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "a recalled product: the result speaks to the owner",
+   "ok": true,
+   "detail": "Don't sell it or give it away: it looks like a recalled product."
+  },
+  {
+   "name": "no buyer wording on the owner's card",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "it says what the recall offers",
+   "ok": true,
+   "detail": "The recall's remedy: Consumers should immediately stop using the recalled loungers and contact The Boppy Company for a r"
+  },
+  {
+   "name": "no question for a seller, no report",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

@@ -117,18 +117,21 @@ export function judgeLabel(reading, card) {
 const years = v => (v.from && v.to ? (v.from === v.to ? `in ${v.from}` : `from ${v.from} to ${v.to}`) : '');
 const some = list => (list.length > 6 ? `${list.slice(0, 6).join(', ')} and ${list.length - 6} more` : list.join(', '));
 
-/** What the shopper reads: { tone: "likely" | "possible" | "plain", title, text }. Never "safe". */
-export function labelCopy(v) {
+/**
+ * What the shopper reads: { tone: "likely" | "possible" | "plain", title, text }. Never "safe".
+ * `owner`: said to the person who owns the item, not to a buyer.
+ */
+export function labelCopy(v, { owner = false } = {}) {
   switch (v.state) {
     case 'recalled':
       return { tone: 'likely', title: 'The label matches the recall',
-        text: `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ''}. Don't buy it unless the seller shows the recall's fix was done.` };
+        text: `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ''}. ${owner ? "Don't sell it or give it away unless the recall's fix was done." : "Don't buy it unless the seller shows the recall's fix was done."}` };
     case 'near':
       return { tone: 'possible', title: 'One character from a recalled model',
-        text: `The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: look at the label yourself, or ask for a sharper photo, before you buy.` };
+        text: `The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: ${owner ? 'look at the label yourself before you pass it on.' : 'look at the label yourself, or ask for a sharper photo, before you buy.'}` };
     case 'disagree':
       return { tone: 'possible', title: 'The label is hard to read',
-        text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. Ask for a closer, sharper photo of the label.` };
+        text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. ${owner ? 'Take' : 'Ask for'} a closer, sharper photo of the label.` };
     case 'read_once':
       return { tone: 'possible', title: 'Read once, on this device: not ruled out',
         text: `${v.was === 'year_out' ? `The label is dated ${v.year}; the notice covers units sold ${years(v)}.` : `The label reads ${v.model}; the notice lists ${some(v.listed)}.`} That would point away from this recall, but the label was read only once, by the model on this device, and it can misread a label. Compare the label with the notice yourself before you rely on it.` };

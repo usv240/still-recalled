@@ -9,19 +9,22 @@ pages, an Android app that checks any listing shared to it (Facebook Marketplace
 that checks a screenshot. **The cloud teaches the device once, the device screens every listing, and only what it
 flags goes to the cloud:** Gemini in the cloud wrote a spotter card for every CPSC recall since 1973, the word rules and Gemini Nano
 check each listing on your own computer or phone, and only what they flag, or can't settle from the words, goes to
-Gemini in the cloud, through Firebase AI Logic hybrid inference. **And the cloud can ask the device:** when it
-recognises a product the listing doesn't name, it calls a function that the device answers from its field guide.
+Gemini in the cloud, through Firebase AI Logic hybrid inference. **And each can ask the other:** when the cloud
+recognises a product the listing doesn't name, it calls a function that the device answers from its field guide; when
+the device's model gives a brand for an unnamed product, the device looks it up and asks the cloud to check.
 
 **Install:** [Chrome extension](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-extension.zip)
 (unzip, open `chrome://extensions`, turn on Developer mode, Load unpacked, choose the `still-recalled-extension` folder) ·
 [Android app](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk) (allow the
 install, then share any listing's screenshot to it) · [web page](https://still-recalled.web.app) (no install).
 
-**What it found on real listings.** In four blind tests on 597 used baby-gear listings from eBay, Mercari and
-Craigslist, 74 were recalled products, padded crib bumpers or infant loungers, asking $5,527 in total. Still Recalled
-flagged 58 of them ($4,540), with 11 false alarms among the 481 listings that were fine. Word rules alone raised 86.
-77% of the listings never left the computer. It knows every CPSC recall since 1973 and 392 CPSC safety warnings (the
-notices CPSC issues when a seller will not recall a product), and fetches each new recall from CPSC twice a day.
+**What it found on real listings.** In five blind tests on 775 used baby-gear listings from eBay, Mercari and
+Craigslist, 83 were recalled products, padded crib bumpers, infant loungers or inclined sleepers, asking $6,064 in
+total. Still Recalled flagged 65 of them ($5,022), with 12 false alarms among the 630 listings that were fine. Word
+rules alone raised 109. 77% of the listings never left the computer. The fifth test is this version's own: 178
+listings collected and labelled after the engine was frozen, run once: 7 of 9 caught, 1 false alarm among 149. It
+knows every CPSC recall since 1973 and 392 CPSC safety warnings (the notices CPSC issues when a seller will not recall
+a product), and fetches each new recall and warning from CPSC twice a day.
 
 **And it keeps watching what you bought.** Recall notices reach the first owner, not the next one: Kids In Danger found
 that only 22% of the children's products recalled in 2022 that it could analyze were ever returned, replaced or
@@ -42,8 +45,8 @@ extension fetches it from CPSC on install.
   November 2022, whatever their age. Selling a recalled product is unlawful too, for private sellers as well,
   unless the recall's fix has been applied.
 - **They are still for sale secondhand.** In May–June 2026, Consumer Reports found these product types for sale on
-  Facebook Marketplace, eBay, Mercari and Craigslist, with all four types on Facebook Marketplace. Its earlier
-  investigation found that sellers use generic names, which keyword filters miss.
+  Facebook Marketplace, eBay, Mercari and Craigslist, with all four types on Facebook Marketplace. Its 2019
+  investigation found that sellers use generic names ("baby sleeper/rocker", "bassinet"), which keyword filters miss.
 - **Parents rely on secondhand gear.** About two in three U.S. parents bought kids' or baby items secondhand in the
   past year (Mercari Reuse Report, 2022).
 - **Nothing warns the buyer.** The similar Chrome extensions check new-product pages on retail sites (Amazon, and in
@@ -73,9 +76,11 @@ Clicking the badge opens a card that shows:
 
 The side panel lists every flag on the page. The toolbar icon shows how many there are.
 
-**New recalls, twice a day.** The extension asks the CPSC recall API for notices published since the newest one it
-knows. Gemini, through Firebase AI Logic, writes each new notice's field-guide entry (the same prompt that wrote the
-10,089 before it; each install writes its own), and from then on the laptop matches against it on its own. Pages already open are checked again.
+**New recalls and warnings, twice a day.** The extension asks the CPSC recall API for notices published since the
+newest one it knows, and reads CPSC's file of safety warnings, which that API leaves out. Gemini, through Firebase AI
+Logic, writes each new notice's field-guide entry (the same prompt that wrote the 10,089 before it; each install
+writes its own), and from then on the laptop matches against it on its own. Pages already open are checked again.
+(The web page and the Android app fetch new recalls; new warnings reach only the extension so far.)
 
 **Watch for recalls.** On a listing's own page, the side panel offers **Watch for recalls**. When a new recall matches a
 watched listing, Chrome shows a notification, and the bell at the top of the panel lists the recall, the hazard and
@@ -122,10 +127,37 @@ on the cloud's word alone. It is named on a type flag that already stands, or sh
   page and the Android app do, the word rules found the recall on none. With the function, the right recall was named on 6 of 10 and 7 of 10 in two passes; one more each pass named another notice (once an earlier notice for the same product, once a look-alike product, by the fallback model). 9 of 10 were flagged, against 6 without it, and none as a red recall on the cloud's word alone
   (`node tools/lookup-generic.mjs`, `tools/lookup-generic.json`).
 - In the extension the function reaches the listings the device flags or can't settle. A generic title with no risky
-  type words reaches the cloud only when Gemini Nano sees a risky type in the photo.
+  type words reaches the cloud only when Gemini Nano sees a risky type in the photo, or gives a brand for it (below).
 - On the 140 real test listings that went to the cloud, the function was called on 12, the device had a recall for 2,
   and no listing changed between flagged and not flagged (`node tools/lookup-run.mjs --set=third`,
   `tools/*-lookup.json`).
+
+**The device asks itself, and the cloud checks the answer** ([shared/lookup.mjs](shared/lookup.mjs), `deviceLookup`).
+The model that looks at a listing also says which brand it can read in the photo. When the listing's words don't
+already say it, the shortlist's code looks that brand up with the kind of product. Gemini Nano guesses here more than
+it reads: on ten test photos it said "Fisher-Price" for three different sleepers and was right once. So what the
+lookup finds is never shown on the device's word: the listing goes to the cloud with the recall attached as "found by
+the device, unverified", and it is shown, as "Possible recall" at most, only if the cloud answers with that recall's
+number. If the cloud names another product, it calls `lookup_recalls` and that recall is shown instead. With the cloud
+off, nothing from this lookup is shown.
+- **The brand left out, real photos.** 23 real test listings whose words named a recalled product had those words
+  stripped from the title by code; the sellers' own photos were kept. The word rules then find no recall. Checked one
+  at a time, the two lookups named the right recall on 12 of 23 (7 through the device's own lookup, all right; 5
+  through `lookup_recalls`), named no other recall, and none was a red recall (`node tools/masked-build.mjs`,
+  `node tools/lookup-generic.mjs --masked`, `tools/lookup-masked.json`).
+- In the extension with Gemini Nano: the first seven of those listings were run through the extension's own
+  pipeline. The right recall was named on 3 of 7: Gemini Nano read "Graco" on two swings, and its wrong guess for a
+  MamaRoo still sent that listing to the cloud, which named it. Across both small sets Gemini Nano's brand was right 2
+  times of 6, against 9 of 9 for Gemini's lightest cloud model (`tools/lookup-nano.json`).
+
+**Thorough mode.** The extension sends only what the device flags or can't settle. A setting, off by default, sends
+every baby product on a page for the cloud's look, as the web page and the Android app do for the one listing they
+check. The fifth test shows what the choice is: with the default, a listing titled only "Baby Rocker" whose photo is a
+Rock 'n Play never left the laptop and was missed; checked the other way, its card names the recall.
+On that test's 178 listings: the extension's default caught 7 of 9 with 1 false alarm and sent 21% to the cloud;
+checked one at a time, 9 of 9 with 3 soft false alarms, and 83% sent (`node tools/single-run.mjs --for=fifth`,
+`tools/fifth-results-single.json`). One of those false alarms came through the lookup: an unbranded swing shown as a
+possible MamaRoo.
 
 **CPSC safety warnings** ([scripts/build-warnings.mjs](scripts/build-warnings.mjs)). When a seller will not recall a
 hazardous product, CPSC warns the public itself. Those notices are not in the recall API: on 2026-11-20 CPSC's file
@@ -136,7 +168,8 @@ cloud cleared (`node tools/warnings-check.mjs`).
 **For the person who owns it** ([shared/present.mjs](shared/present.mjs), `ownerView`). On the web page and in the
 Android app, choose **I own it**: the same check then speaks to someone about to sell an item, give it away, or use a
 hand-me-down. A match says not to pass it on, that CPSC says it is illegal to sell a recalled product, and what the
-recall offers its owner. Most sellers of recalled baby gear don't know it is recalled (Consumer Reports, 2026).
+recall offers its owner. The words on the card are the owner's: no "listing", no "before you buy"
+(`node tools/web-owner.mjs`, `node tools/android-owner.mjs`; reports in `tools/`).
 
 **While a page is checked,** a quiet pill on each listing says where its check is: "Looking on this computer" (Gemini
 Nano), then "Checking in the cloud" for what the computer flagged.
@@ -170,15 +203,15 @@ the extension, judges included, gets the cloud check with App Check still enforc
 
 ## How well it works
 
-Four tests, each on listings collected after the fixes the test before it led to, labelled blind by separate
-reviewers from what a shopper sees: the title, the price and one photo. Method, every miss and the limits are in
-[docs/accuracy.md](docs/accuracy.md).
+Five tests, each on listings collected after the fixes the test before it led to, labelled blind by separate AI
+reviewers from what a shopper sees: the title, the price and one photo. A person has not yet checked those labels.
+Method, every miss and the limits are in [docs/accuracy.md](docs/accuracy.md).
 
-| Same engine, run as | Caught (of 74) | False alarms (of 481) |
+| Same engine, run as | Caught (of 83) | False alarms (of 630) |
 |---|---|---|
-| Words only | 43 | 86 |
-| Built-in model only | 47 | 50 |
-| **Hybrid** | **58** | **11** |
+| Words only | 47 | 109 |
+| Built-in model only | 51 | 64 |
+| **Hybrid** | **65** | **12** |
 
 | Test | Listings | Hybrid caught | Hybrid false alarms |
 |---|---|---|---|
@@ -186,22 +219,32 @@ reviewers from what a shopper sees: the title, the price and one photo. Method, 
 | Second, after fixes: eBay and Craigslist | 125 | 2 of 4 | 0 of 117 |
 | Third, after fixes: eBay, Mercari and Craigslist | 176 | 28 of 34 | 6 of 133 |
 | Fourth, with every recall since 1973: eBay and Craigslist | 160 | 18 of 22 | 1 of 116 |
+| Fifth, on release 0.12.0, plain searches: eBay and Craigslist | 178 | 7 of 9 | 1 of 149 |
 
-- By kind: recall matches 6 of 8, infant loungers and nests 35 of 44, padded crib bumpers 17 of 22.
+- By kind: recall matches 7 of 9, infant loungers and nests 39 of 49, padded crib bumpers 19 of 24, inclined sleepers
+  0 of 1.
+- The fifth test's two misses are a listing titled only "Baby Rocker" whose photo shows a Rock 'n Play, and a lounger
+  sold as a "baby pillow". Gemini Nano saw nothing in either photo. Both are flagged when checked one at a time, the
+  way the web page and the phone check a listing.
 - Loungers were the weak spot after two tests (4 of 10). The changes that followed raised that to 23 of 25 in the
   third test and 8 of 9 in the fourth, on listings collected after the changes.
 - In the fourth test, two of the three recall catches were recalls older than the five years of data the first three
   tests used: a 1995 Graco swing and a Graco Swyngomatic, under Graco's 2000 swing recall.
-- The cloud saw 23% of the listings across the four tests.
+- The cloud saw 23% of the listings across the five tests.
 - **Run again on 0.11.0** (2026-11-20, with the warnings and the function): 67 of 74 caught, 13 false alarms, 28% sent
   to the cloud. Not a blind result: the first three sets were used to fix the engine. The newest set came out the same
-  (18 of 22, no false alarms). Six of the 13 false alarms are UPPAbaby "V2" strollers, flagged softly against the 2015
-  recall of the first version, and 31 listings changed between the two runs (19 for the better): Gemini Nano's answer
-  is not the same on every run. `node tools/rerun-compare.mjs`, `docs/accuracy.md` section 18.
+  (18 of 22, no false alarms). Six of the 13 false alarms are UPPAbaby strollers, five of them titled "V2", flagged
+  softly against the 2015 recall of the first version, and 31 listings changed between the two runs (19 for the
+  better): Gemini Nano's answer is not the same on every run. `node tools/rerun-compare.mjs`, `docs/accuracy.md`
+  section 18.
+- **The first two sets again on 0.12.0** (261 listings; the other two could not be finished with Gemini Nano on the
+  test computer that day): 14 of 18 caught, 3 false alarms, against 15 and 3 on 0.11.0. Not blind. The device's own
+  lookup fired on 4 of the 261 and nothing was shown because of it. `node tools/run-compare.mjs --a=-rerun --b=-r5
+  --sets=eval,fresh`, `docs/accuracy.md` section 19.
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
 badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step, and saves
-its report to `tools/e2e-report-*.json`. On the practice listings, the packed release passes all 16 steps in a
+its report to `tools/e2e-report-*.json`. On the practice listings, the packed release passes all 17 steps in a
 new Chrome profile, which has no built-in model (words, then the cloud). With the built-in model, the development
 build looked at all 8 flagged listings on the computer first (`docs/accuracy.md` sections 17 and 18). The on-device step was run end to end with
 release 0.7.0 in a profile with Gemini Nano: all 12 steps of that version passed, Gemini Nano looked at the listings
@@ -264,7 +307,11 @@ npm test             # unit tests
 npm run e2e          # the real extension in a separate Chrome profile, on a live eBay search
 node scripts/pack-extension.mjs    # release package in dist/ (no debug token, no developer pages)
 node scripts/build-warnings.mjs    # CPSC safety warnings: spotter cards written in the cloud, merged after the recall cards
-bash tools/rerun-all.sh            # the four accuracy tests again on the current engine, saved beside the first runs
+bash tools/rerun-all.sh -r5        # the first four accuracy tests again on the current engine, saved beside the first runs
+node tools/run-compare.mjs --a=-rerun --b=-r5   # two such runs compared, and what the device's own lookup did
+node tools/single-run.mjs --for=fifth           # a test set checked one listing at a time, as the web page does
+node tools/masked-build.mjs        # real listings with the brand stripped from the title, for the two lookups
+node tools/web-owner.mjs           # "I own it" on the web page, end to end (tools/web-owner-report.json)
 node tools/nano-profile.mjs        # a separate Chrome test profile with the built-in model (Chrome downloads it, ~4 GB)
 npm run e2e -- --profile=C:/tmp/sr-nano-profile    # the end-to-end test with the on-device step
 node tools/eval-run.mjs --set=third --mode=hybrid  # an accuracy test run in that profile
@@ -296,14 +343,16 @@ What protects the project's model quota:
 
 - Listings that the word rules and the built-in model clear stay on the computer.
 - A flagged listing's title, description, price and photo are sent to Gemini through Firebase AI Logic, with the recall
-  notice, for the double check. You can turn the cloud check off in the side panel's settings.
+  notice, for the double check. You can turn the cloud check off in the side panel's settings. A second setting, off
+  by default, sends every baby product on a page for the cloud's look.
 - No accounts and no tracking. Results are kept in the browser for 7 days.
 - The full policy: [still-recalled.web.app/privacy.html](https://still-recalled.web.app/privacy.html).
 
 ## Data and credits
 
 - **Recall data:** the U.S. Consumer Product Safety Commission recall API (saferproducts.gov), all 10,089 notices
-  since 1973, and CPSC's product safety warnings file (392 warnings, read 2026-11-20). Still Recalled is not affiliated with CPSC.
+  since 1973, and CPSC's product safety warnings file (392 warnings, read 2026-11-20; the extension reads it again
+  twice a day). Still Recalled is not affiliated with CPSC.
 - **Example photo:** `web/example/recall-26591.jpg` is from CPSC recall notice 26591 (VEVOR baby loungers). The example
   listing around it, `web/example/listing-26591.jpg` (`scripts/make-example.mjs`), is made up.
 - **Font:** Geist, SIL Open Font License, © Vercel ([extension/fonts/Geist-LICENSE.txt](extension/fonts/Geist-LICENSE.txt)).

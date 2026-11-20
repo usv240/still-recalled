@@ -26,6 +26,35 @@ export function noticeFromCpsc(r) {
   };
 }
 
+/**
+ * A stand-in notice made from the recall card on the device, for when the CPSC recall API does not answer. The cloud
+ * check then still runs, on less text, where it used to give up and leave the device's flag standing unconfirmed
+ * (six listings in one test run, while the API was timing out).
+ */
+export function noticeFromCard(c) {
+  return {
+    id: String(c.id || ''),
+    date: c.date || '',
+    title: c.title || c.product || '',
+    product: c.product || '',
+    units: '',
+    description: [
+      c.all ? 'Every unit of this product is recalled.' : '',
+      c.tell ? `Which units are recalled: ${c.tell}` : '',
+      c.from && c.to ? `Sold ${c.from === c.to ? `in ${c.from}` : `from ${c.from} to ${c.to}`}.` : '',
+      c.codes && c.codes.length ? `Model numbers in the notice: ${c.codes.join(', ')}${c.more ? ', and others' : ''}.` : '',
+      '(The full notice could not be fetched; this is the short record kept on the device.)',
+    ].filter(Boolean).join(' '),
+    hazard: c.hazard || '',
+    remedy: '',
+    soldAt: '',
+    upcs: [],
+    images: c.image ? [c.image] : [],
+    url: c.url || '',
+    fromCard: true,
+  };
+}
+
 /** Fetch one notice by recall number. `fetchImpl` lets tests and pages pass their own fetch. */
 export async function fetchNotice(id, fetchImpl = fetch) {
   // A recall API that stops answering must not hold a listing at "checking": give up after 15 s, and the flag

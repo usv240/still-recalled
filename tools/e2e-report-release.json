@@ -1,11 +1,11 @@
 {
-  "at": "2026-11-20T08:33:34.326Z",
-  "version": "0.11.0",
+  "at": "2026-11-20T18:38:37.475Z",
+  "version": "0.12.0",
   "ext": "dist/still-recalled-extension",
   "builtInModelProfile": false,
   "url": "https://still-recalled.web.app/try/",
   "query": "baby lounger",
-  "passed": 16,
+  "passed": 17,
   "failed": 0,
   "steps": [
     {
@@ -21,7 +21,7 @@
     {
       "name": "recall list catches up with CPSC",
       "ok": true,
-      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 9 with field-guide entries from the cloud, 10 s"
+      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 9 with field-guide entries from the cloud, 27 s"
     },
     {
       "name": "search page loads",
@@ -31,7 +31,7 @@
     {
       "name": "engine checks the listings",
       "ok": true,
-      "detail": "17 of 17 checked in 81 s"
+      "detail": "17 of 17 checked in 39 s"
     },
     {
       "name": "a recall published after the build is flagged",
@@ -56,7 +56,7 @@
     {
       "name": "the cloud asks the device for a product the title does not name",
       "ok": true,
-      "detail": "asked the field guide for \"Fisher-Price Rock 'n Play Sleeper\"; the device returned 23088, 19105; shown as Inclined infant sleeper, with recall 23088 named on the card"
+      "detail": "asked the field guide for \"Fisher-Price Rock 'n Play sleeper\"; the device returned 23088, 19105; shown as Inclined infant sleeper, with recall 23088 named on the card"
     },
     {
       "name": "badges appear on flagged listings",
@@ -81,7 +81,12 @@
     {
       "name": "new recalls arrive from CPSC",
       "ok": true,
-      "detail": "16 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082), 16 field-guide entries written in the cloud, 18 s"
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 20 field-guide entries written in the cloud, 17 s"
+    },
+    {
+      "name": "new CPSC safety warnings arrive too",
+      "ok": true,
+      "detail": "4 warnings (W27-079, W27-089, W27-080, W27-081)"
     },
     {
       "name": "watched listing raises an alert",
@@ -93,7 +98,7 @@
     "added": 9,
     "written": 9,
     "total": 9,
-    "checkedAt": "2026-11-20T08:31:49.510Z",
+    "checkedAt": "2026-11-20T18:37:35.746Z",
     "hits": 0,
     "cards": [
       {
@@ -151,7 +156,7 @@
         "guide": true
       }
     ],
-    "ms": 10263
+    "ms": 26647
   },
   "cloudChecked": 8,
   "cloudErrors": [],
@@ -162,7 +167,7 @@
       "title": "AirClub bedside bassinet QX-831, gray mesh, with pad",
       "recall": "26342",
       "also": "",
-      "cloud": "gemini-3.5-flash-lite",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     },
@@ -172,7 +177,7 @@
       "title": "Braided crib bumper, mint, fits a standard crib",
       "recall": "",
       "also": "",
-      "cloud": "gemini-3.5-flash-lite",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     },
@@ -182,7 +187,7 @@
       "title": "Baby Trend Tango Mini compact stroller, gray",
       "recall": "20052",
       "also": "",
-      "cloud": "gemini-3.5-flash-lite",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     },
@@ -192,14 +197,14 @@
       "title": "Inclined baby sleeper, pink, folds flat",
       "recall": "",
       "also": "23088",
-      "cloud": "gemini-3.5-flash-lite",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": [
         {
           "asked": {
             "brand": "Fisher-Price",
             "model_number": "",
-            "product": "Rock 'n Play Sleeper"
+            "product": "Rock 'n Play sleeper"
           },
           "found": [
             "23088",
@@ -214,7 +219,7 @@
       "title": "Kidsview baby bouncer with toy bar, khaki",
       "recall": "27092",
       "also": "",
-      "cloud": "gemini-3.5-flash-lite",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     },
@@ -224,7 +229,7 @@
       "title": "Boppy newborn lounger, floral cover, washed",
       "recall": "21198",
       "also": "",
-      "cloud": "gemini-3.5-flash-lite",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     },
@@ -234,32 +239,32 @@
       "title": "Bright Starts rocking sleeper, vibrates, pink",
       "recall": "19112",
       "also": "",
-      "cloud": "gemini-3.5-flash-lite",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     },
     {
-      "level": "possible",
-      "badge": "Possible recall",
+      "level": "likely",
+      "badge": "Recalled product",
       "title": "Graco baby swing, wind-up, still swings",
       "recall": "00098",
       "also": "",
-      "cloud": "gemini-3.5-flash-lite",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     }
   ],
   "live": {
     "out": {
-      "added": 16,
-      "written": 16,
-      "total": 16,
-      "checkedAt": "2026-11-20T08:33:26.676Z",
+      "added": 20,
+      "written": 20,
+      "total": 20,
+      "checkedAt": "2026-11-20T18:38:30.030Z",
       "hits": 1
     },
-    "ms": 17672,
+    "ms": 17326,
     "alert": {
-      "at": "2026-11-20T08:33:33.326Z",
+      "at": "2026-11-20T18:38:36.604Z",
       "badge": "Recalled product",
       "confirmed": true,
       "level": "likely",
@@ -278,8 +283,8 @@
         "more": false,
         "number": "27086",
         "product": "Buzz Bicycles Cerana T2 E-Trike",
-        "remedy": "Consumers should stop using the recalled tricycles immediately and contact Huffy for free replacement rear axle assemblies. The rear wheel…",
-        "tell": "You can tell a recalled unit by checking the model number E4004 printed on a label near the pedals on the bottom side of the frame's downtube.",
+        "remedy": "Consumers should stop using the recalled tricycles immediately and contact Huffy for free replacement rear axle assemblies. The rear wheel axle assemblies will be sent directly to consumers or to a third-party who will repair the tricycle. Huffy Corporation will reimburse consumers up to $100 for charges incurred by the third-party repair.",
+        "tell": "You can identify the recalled e-trike by checking the model number E4004 printed on a label near the pedals on the bottom side of the frame's downtube.",
         "title": "Huffy Recalls Buzz Bicycles Cerana T2 E-Trikes Due to Risk of Serious Injury from Fall Hazard",
         "to": 2026,
         "url": "https://www.cpsc.gov/Recalls/2027/Huffy-Recalls-Buzz-Bicycles-Cerana-T2-E-Trikes-Due-to-Risk-of-Serious-Injury-from-Fall-Hazard",
@@ -304,8 +309,12 @@
       "27086",
       "27087",
       "27088",
-      "27082"
+      "27082",
+      "W27-079",
+      "W27-089",
+      "W27-080",
+      "W27-081"
     ],
-    "guide": 16
+    "guide": 20
   }
 }

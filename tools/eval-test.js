@@ -52,6 +52,8 @@ window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '',
       recall: r.recall ? r.recall.id : null, banned: r.banned ? r.banned.key : null,
       // The cloud's questions to the device's field guide (shared/lookup.mjs), and a recall shown because of one.
       lookups: (r.how && r.how.lookups) || [], lookedUp: !!r.lookedUp, also: r.also ? r.also.id : null,
+      // The device's own question to its field guide: the brand the built-in model read in the photo, and the recall.
+      seen: (r.how && r.how.seen) || null,
       why: r.why || '', evidence: r.evidence || '', ms: Math.round(performance.now() - start), error: r.error || '',
     };
     rows.push(row);

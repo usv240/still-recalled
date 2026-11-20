@@ -1,0 +1,356 @@
+{
+ "at": "2026-11-20T16:14:40.686Z",
+ "note": "Real listings whose words named a recalled product and whose blind label agrees; the naming words were stripped by code. Photos are the sellers' own.",
+ "listings": 23,
+ "skipped": [
+  {
+   "id": "2sTm6Mo7zWe2yxu5ipgcp9",
+   "title": "Jool baby Nova",
+   "left": ""
+  }
+ ],
+ "key": {
+  "m307280068610": {
+   "set": "third",
+   "label": "yes",
+   "reviewerNamedIt": true,
+   "original": "4moms mamaRoo Infant Baby Swing/Bouncer w/ Music, Gray Seat, White Base",
+   "removed": [
+    "4moms",
+    "mamaRoo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m206690454998": {
+   "set": "third",
+   "label": "yes",
+   "reviewerNamedIt": false,
+   "original": "Early 2000s Disney Winnie the Pooh Classic Crib Bedding Set 4 Piece Set",
+   "removed": [
+    "Disney",
+    "Winnie",
+    "Pooh"
+   ],
+   "recall": "08022",
+   "strength": "line",
+   "product": "Disney™ Deluxe Winnie-the-Pooh 23-Piece Play Sets",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m377568327669": {
+   "set": "third",
+   "label": "yes",
+   "reviewerNamedIt": true,
+   "original": "Mamibaby Ultra-Soft Breathable Reversible Cotton Newborn Baby Nest Lounger B",
+   "removed": [
+    "Mamibaby"
+   ],
+   "recall": "24340",
+   "strength": "brand",
+   "product": "Mamibaby and Cosy Nation Baby Loungers",
+   "allUnits": true,
+   "wordsNow": "type: in_bed_sleeper"
+  },
+  "m920153716967": {
+   "set": "fourth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Maclaren Triumph Stroller",
+   "removed": [
+    "Maclaren"
+   ],
+   "recall": "11222",
+   "strength": "brand",
+   "product": "Maclaren strollers (sold prior to November 2009)",
+   "allUnits": true,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m137936856486": {
+   "set": "fourth",
+   "label": "yes",
+   "reviewerNamedIt": true,
+   "original": "Fisher Price My Little Puppy Cradle N' Swing X 7345 Replacement Seat Cushion",
+   "removed": [
+    "Fisher",
+    "Price",
+    "My",
+    "Little",
+    "Swing"
+   ],
+   "recall": "25009",
+   "strength": "brand",
+   "product": "All Models of Fisher-Price Snuga Swings",
+   "allUnits": true,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m267276068954": {
+   "set": "fourth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Fisher-Price Motorized Baby Swing plus Baby Boppy, Car, & Blanket PICK-UP ONLY!!",
+   "removed": [
+    "Fisher-Price",
+    "Swing"
+   ],
+   "recall": "25009",
+   "strength": "brand",
+   "product": "All Models of Fisher-Price Snuga Swings",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m336792228853": {
+   "set": "fourth",
+   "label": "yes",
+   "reviewerNamedIt": true,
+   "original": "1995 Graco Open Top Infant Swing 764AA Adjustable Speeds, Washable Cover, WORKS!",
+   "removed": [
+    "Graco",
+    "764AA"
+   ],
+   "recall": "00098",
+   "strength": "brand",
+   "product": "Graco infant swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m820369982036": {
+   "set": "fourth",
+   "label": "yes",
+   "reviewerNamedIt": true,
+   "original": "Graco Easy-Entry Swyngomatic Baby Swing Reclining Seat Non-Stop Motor Brown",
+   "removed": [
+    "Graco"
+   ],
+   "recall": "00098",
+   "strength": "brand",
+   "product": "Graco infant swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m800932036496": {
+   "set": "fourth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Graco High Chair w/ Removable Tray & Safety Harness, Brown/White",
+   "removed": [
+    "Graco"
+   ],
+   "recall": "10171",
+   "strength": "brand",
+   "product": "Graco Harmony™ High Chairs",
+   "allUnits": true,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m206676049944": {
+   "set": "fourth",
+   "label": "yes",
+   "reviewerNamedIt": false,
+   "original": "Disney Classic Pooh Crib Bedding Set 1994 Winnie the Pooh - HUGE LOT",
+   "removed": [
+    "Disney",
+    "Pooh",
+    "Winnie",
+    "Pooh"
+   ],
+   "recall": "05540",
+   "strength": "line",
+   "product": "Winnie the Pooh Plate Set with plastic fork and spoon",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m366777451398": {
+   "set": "fourth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Vintage Century Portable Play Yard Playpen Pack N Play Foldable w/ Mattress Pad",
+   "removed": [
+    "Century"
+   ],
+   "recall": "86055",
+   "strength": "brand",
+   "product": "Bilt-Rite dropside mesh-sided cribs and playpens",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "mmsZpRjjwYQK13uNGh2zRmT": {
+   "set": "fourth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Jool Baby Nova Signature Baby Swing – Gray, With Box 1",
+   "removed": [
+    "Jool",
+    "Baby",
+    "Nova",
+    "Baby"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "mx7rfKyM7T77oMGGerXbKGT": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Uppa Baby Vista Stroller (includes bassinet) 1",
+   "removed": [
+    "Vista"
+   ],
+   "recall": "15196",
+   "strength": "line",
+   "product": "UPPAbaby 2015 CRUZ, 2015 VISTA strollers and 2015 RumbleSeat",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "mnUV6zgoNpYkKLDvxs54buH": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Oeuf Sparrow Crib and 6-Drawer Wood Dresser & Changing Table, in Birch 1",
+   "removed": [
+    "Oeuf",
+    "Sparrow"
+   ],
+   "recall": "14236",
+   "strength": "line",
+   "product": "Sparrow Cribs",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m840126158558": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Bumbo Infant Floor Seat Baby Sit Up Play Chair with Adjustable Harness Cool Gray",
+   "removed": [
+    "Bumbo"
+   ],
+   "recall": "12247",
+   "strength": "brand",
+   "product": "Bumbo Baby Seats",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m366821193547": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Bumbo Infant Floor Seat Baby Sit Up Chair w/Adjustable Harness, Green/Blue",
+   "removed": [
+    "Bumbo"
+   ],
+   "recall": "12247",
+   "strength": "brand",
+   "product": "Bumbo Baby Seats",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m227340108123": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Bumbo Infant Floor Seat Baby Sit Up Chair w/Adjustable Harness, Green/Blue",
+   "removed": [
+    "Bumbo"
+   ],
+   "recall": "12247",
+   "strength": "brand",
+   "product": "Bumbo Baby Seats",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m377619220407": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Bumbo Floor Seat Cool Gray Baby Infant Toddler Support Chair Cushion With Straps",
+   "removed": [
+    "Bumbo"
+   ],
+   "recall": "12247",
+   "strength": "brand",
+   "product": "Bumbo Baby Seats",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m117519108559": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Bumbo Floor Seat Infant Baby Floor Seat with Safety Harness, Pink",
+   "removed": [
+    "Bumbo"
+   ],
+   "recall": "12247",
+   "strength": "brand",
+   "product": "Bumbo Baby Seats",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m237193192678": {
+   "set": "fifth",
+   "label": "yes",
+   "reviewerNamedIt": true,
+   "original": "4moms mamaRoo Baby Swing Gray Seat, Bluetooth Music, Toy Bar Balls, Adapter",
+   "removed": [
+    "4moms",
+    "mamaRoo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m257821185378": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "Used BOB Stroller Revolution Running Jogging",
+   "removed": [
+    "BOB",
+    "Stroller"
+   ],
+   "recall": "12006",
+   "strength": "brand",
+   "product": "B.O.B.® single and double strollers",
+   "allUnits": true,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m147684376618": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "B M W InSTEP Safari TT Blue Single 3-Wheel Jogger Stroller, Pneumatic Tires",
+   "removed": [
+    "InSTEP",
+    "Safari"
+   ],
+   "recall": "16219",
+   "strength": "line",
+   "product": "Instep and Schwinn swivel wheel jogging strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m840132998571": {
+   "set": "fifth",
+   "label": "maybe",
+   "reviewerNamedIt": true,
+   "original": "BOB Stroller Revolution SE Running Jogging",
+   "removed": [
+    "BOB",
+    "Stroller"
+   ],
+   "recall": "12006",
+   "strength": "brand",
+   "product": "B.O.B.® single and double strollers",
+   "allUnits": true,
+   "wordsNow": "nothing: no model looks"
+  }
+ }
+}

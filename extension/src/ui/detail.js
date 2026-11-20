@@ -89,7 +89,7 @@ async function labelPhoto(file) {
  * "Settle it with the label": the shopper adds a photo of the product's label; `onLabel(dataUrl, recall)` has a model
  * read it and compare it with the notice in plain code (label.mjs), and resolves to { reading, source, verdict }.
  */
-function labelSection(r, onLabel) {
+function labelSection(r, onLabel, owner = false) {
   const input = h('input', { type: 'file', accept: 'image/*', class: 'visually-hidden', tabindex: '-1', 'aria-hidden': 'true' });
   const text = h('span', {}, 'Add a label photo');
   const button = h('button', { class: 'btn btn-secondary', type: 'button' }, icon('tag'), text);
@@ -104,7 +104,7 @@ function labelSection(r, onLabel) {
     try {
       const recall = { codes: r.recall.codes || [], more: !!r.recall.more, from: r.recall.from || 0, to: r.recall.to || 0 };
       const { reading, source, verdict } = await onLabel(await labelPhoto(file), recall);
-      const copy = labelCopy(verdict || judgeLabel(reading, recall));
+      const copy = labelCopy(verdict || judgeLabel(reading, recall), { owner });
       const read = [reading.brand, ...(reading.model_numbers || []).slice(0, 3), reading.manufacture_date].filter(Boolean).join(' · ');
       out.replaceChildren(h('div', { class: `label-result is-${copy.tone}` },
         h('p', { class: 'label-title' }, copy.title),
@@ -120,7 +120,8 @@ function labelSection(r, onLabel) {
   });
   return h('section', { class: 'check label-check' },
     h('h3', {}, 'Settle it with the label'),
-    h('p', {}, 'Have a photo of the label, from the seller or of the item itself? Its model number and date are read and compared with the notice.'),
+    h('p', {}, owner ? 'Take a photo of the label on your item. Its model number and date are read and compared with the notice.'
+      : 'Have a photo of the label, from the seller or of the item itself? Its model number and date are read and compared with the notice.'),
     input, button, out);
 }
 
@@ -150,10 +151,10 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
 
   root.append(h('div', { class: 'verdict' },
     statusPill(r),
-    h('p', { class: 'verdict-line' }, r.verdict),
+    h('p', { class: 'verdict-line' }, owner ? owner.verdict : r.verdict),
     (owner ? owner.action : r.action) ? h('p', { class: `action-line ${levelClass(r)}` }, owner ? owner.action : r.action) : null,
-    r.confirmed && r.evidence ? h('p', { class: 'evidence' }, r.evidence) : null,
-    r.foundBy ? h('p', { class: 'evidence found-by' }, r.foundBy) : null,
+    r.confirmed && r.evidence ? h('p', { class: 'evidence' }, owner ? owner.evidence : r.evidence) : null,
+    r.foundBy ? h('p', { class: 'evidence found-by' }, owner ? owner.foundBy : r.foundBy) : null,
   ));
 
   // The cloud check's outline of what it saw in the seller's photo. Only when the photo was there to look at.
@@ -208,7 +209,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
   // Settle it with the label: the one fact a "possible recall" is missing. Not offered when the notice recalls every
   // unit (no model number would change the answer) or lists no models and no years to compare with.
   if (onLabel && r.kind === 'recall' && r.recall && !r.recall.all && ((r.recall.codes || []).length || r.recall.from)) {
-    root.append(labelSection(r, onLabel));
+    root.append(labelSection(r, onLabel, !!owner));
   }
 
   // The last step: a report to CPSC, which asks shoppers to report recalled products for sale online at

@@ -1,0 +1,129 @@
+{
+  "seconds": 183,
+  "flagged": [
+    {
+      "title": "AirClub bedside bassinet QX-831, gray mesh, with pad",
+      "badge": "Recalled product",
+      "recall": "26342",
+      "device": true,
+      "cloud": "gemini-4-hydrogen",
+      "where": true,
+      "lookups": []
+    },
+    {
+      "title": "Braided crib bumper, mint, fits a standard crib",
+      "badge": "Padded crib bumper",
+      "recall": "",
+      "device": true,
+      "cloud": "gemini-3.5-flash-lite",
+      "where": false,
+      "lookups": []
+    },
+    {
+      "title": "Baby Trend Tango Mini compact stroller, gray",
+      "badge": "Possible recall",
+      "recall": "20052",
+      "device": true,
+      "cloud": "gemini-4-hydrogen",
+      "where": true,
+      "lookups": []
+    },
+    {
+      "title": "Inclined baby sleeper, pink, folds flat",
+      "badge": "Recalled product",
+      "recall": "23088",
+      "device": true,
+      "cloud": "gemini-4-hydrogen",
+      "where": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "Fisher-Price",
+            "model_number": "",
+            "product": "Rock 'n Play Sleeper"
+          },
+          "found": [
+            "23088",
+            "19105"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Kidsview baby bouncer with toy bar, khaki",
+      "badge": "Possible recall",
+      "recall": "27092",
+      "device": true,
+      "cloud": "gemini-4-hydrogen",
+      "where": false,
+      "lookups": []
+    },
+    {
+      "title": "Boppy newborn lounger, floral cover, washed",
+      "badge": "Recalled product",
+      "recall": "21198",
+      "device": true,
+      "cloud": "gemini-4-hydrogen",
+      "where": false,
+      "lookups": []
+    },
+    {
+      "title": "Bright Starts rocking sleeper, vibrates, pink",
+      "badge": "Recalled product",
+      "recall": "19112",
+      "device": true,
+      "cloud": "gemini-4-hydrogen",
+      "where": true,
+      "lookups": []
+    },
+    {
+      "title": "Graco baby swing, wind-up, still swings",
+      "badge": "Recalled product",
+      "recall": "00098",
+      "device": true,
+      "cloud": "gemini-4-hydrogen",
+      "where": false,
+      "lookups": []
+    }
+  ],
+  "cleared": [
+    {
+      "title": "Lot of baby toys: mirror, soft books, teethers",
+      "device": true
+    },
+    {
+      "title": "Glass baby bottle, never used",
+      "device": true
+    },
+    {
+      "title": "Wooden peg people and stable set",
+      "device": false
+    },
+    {
+      "title": "Yellow ride-on car, metal, vintage style",
+      "device": false
+    },
+    {
+      "title": "Wooden train tracks with a bridge, about 30 pieces",
+      "device": false
+    },
+    {
+      "title": "Wooden building blocks, painted",
+      "device": false
+    },
+    {
+      "title": "Blank wooden jigsaw puzzle, 20 pieces",
+      "device": false
+    },
+    {
+      "title": "Small wooden train and tree",
+      "device": false
+    },
+    {
+      "title": "Kids xylophone with two mallets",
+      "device": false
+    }
+  ],
+  "labelText": "The label matches the recall | Model ST31D11A is one of the models in the notice. Don't buy it unless the seller shows the recall's fix was done. | Read on this device; the photo did not leave it. On the label: TANGO · ST31D11A · 09 20 2019.",
+  "labelSeconds": 5
+}

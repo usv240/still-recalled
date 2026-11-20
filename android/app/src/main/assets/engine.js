@@ -297,12 +297,13 @@ Which units: ${c.tell}` : ""}`;
     'product_kind: the kind of product for sale in at most five words, for example "infant swing" or "air fryer".',
     "same_kind_as_recalled: true only when the product for sale is the same kind of product as the RECALLED PRODUCT given. If none is given, answer false.",
     'recalled_unit: read "Which units" under RECALLED PRODUCT. "no" only when the listing itself names a model, version or year that those lines leave out. "yes" when it names one they include. Otherwise, or if none is given, "cannot_tell".',
-    'banned_type: choose a type only when the listing clearly is that kind of product. Otherwise "none".'
+    'banned_type: choose a type only when the listing clearly is that kind of product. Otherwise "none".',
+    "brand_seen: a brand or maker name you can read in the photo, printed on the product, its tag, its label or its box. Copy the letters you see. Empty when you cannot read one. Never guess a brand from the product's shape or colour."
   ].join("\n");
   var SCHEMA = {
     type: "object",
     additionalProperties: false,
-    required: ["what_is_for_sale", "product_kind", "same_kind_as_recalled", "recalled_unit", "banned_type"],
+    required: ["what_is_for_sale", "product_kind", "same_kind_as_recalled", "recalled_unit", "banned_type", "brand_seen"],
     properties: {
       what_is_for_sale: { type: "string", enum: ["the_product", "part_or_accessory", "toy_or_doll_version", "unclear"] },
       product_kind: { type: "string" },
@@ -310,7 +311,10 @@ Which units: ${c.tell}` : ""}`;
       // The built-in model's reading of the card's "which units" line, written by the cloud at build time. Recorded
       // next to the cloud's own answer and not yet acted on: see docs/accuracy.md, "The cloud teaches the device".
       recalled_unit: { type: "string", enum: ["yes", "no", "cannot_tell"] },
-      banned_type: { type: "string", enum: ["none", ...BANNED_TYPES.map((t) => t.key)] }
+      banned_type: { type: "string", enum: ["none", ...BANNED_TYPES.map((t) => t.key)] },
+      // A brand name read in the photo. When the listing's words do not say it, the device looks it up in its own
+      // field guide (lookup.mjs, deviceLookup): sellers often leave the brand out of the title.
+      brand_seen: { type: "string" }
     }
   };
   function promptText(listing, candidate, hints) {
@@ -372,6 +376,29 @@ Which units: ${c.tell}` : ""}`;
       url: r.URL || ""
     };
   }
+  function noticeFromCard(c) {
+    return {
+      id: String(c.id || ""),
+      date: c.date || "",
+      title: c.title || c.product || "",
+      product: c.product || "",
+      units: "",
+      description: [
+        c.all ? "Every unit of this product is recalled." : "",
+        c.tell ? `Which units are recalled: ${c.tell}` : "",
+        c.from && c.to ? `Sold ${c.from === c.to ? `in ${c.from}` : `from ${c.from} to ${c.to}`}.` : "",
+        c.codes && c.codes.length ? `Model numbers in the notice: ${c.codes.join(", ")}${c.more ? ", and others" : ""}.` : "",
+        "(The full notice could not be fetched; this is the short record kept on the device.)"
+      ].filter(Boolean).join(" "),
+      hazard: c.hazard || "",
+      remedy: "",
+      soldAt: "",
+      upcs: [],
+      images: c.image ? [c.image] : [],
+      url: c.url || "",
+      fromCard: true
+    };
+  }
   function noticeForPrompt(n) {
     return [
       `Recall ${n.id}, ${n.date}: ${clip(n.title, 220)}`,
@@ -399,7 +426,7 @@ Which units: ${c.tell}` : ""}`;
   };
   var LOOKUP_SYSTEM = [
     "lookup_recalls: the device has already searched its field guide with the listing's own words; the RECALL NOTICE given, if any, is what that search found. Call lookup_recalls once, and only when you can name a brand or product line that the listing's words do not state: you recognise it in the photo, read it on the product or its label in the photo, or know the product by a name the seller did not use. Do not call it for a brand or product the title or description already names, and do not call it when you cannot name a brand.",
-    "recall_id: when lookup_recalls returned a recall of the product for sale, its recall number, and answer matches_recall for that recall. Otherwise empty."
+    "recall_id: when the product for sale is covered by a recall that lookup_recalls returned, or by the one under FOUND BY THE DEVICE, that recall's number, and answer matches_recall for that recall. Otherwise empty."
   ].join("\n");
   var str = (v) => (typeof v === "string" ? v : "").replace(/\s+/g, " ").trim().slice(0, 80);
   function lookupArgs(args) {
@@ -415,6 +442,23 @@ Which units: ${c.tell}` : ""}`;
       if (found.length) return found;
     }
     return [];
+  }
+  var NO_BRAND = /^(none|n\/?a|unknown|no brand|not (visible|readable|shown)|unbranded|generic|brand|baby|infant|kids?)$/i;
+  function deviceLookup(index2, listing, answer) {
+    const brand = str(answer && answer.brand_seen);
+    if (brand.length < 3 || NO_BRAND.test(brand)) return null;
+    const said = new Set(uniqueTokens(`${listing.title} ${listing.description || ""}`));
+    const read = new Set([brand, brand.replace(/\s+II$/i, "2"), brand.replace(/[\s-]+/g, "")].flatMap(uniqueTokens));
+    if (!read.size || uniqueTokens(brand).every((t) => said.has(t))) return null;
+    const found = lookupCards(index2, { brand, product: `${str(answer.product_kind)} ${str(listing.title)}` });
+    const hit = found.find((c) => c.matched.brand && c.card.brands.some((b) => b.every((t) => read.has(t))));
+    return hit ? { card: hit.card, strength: hit.strength, brand } : null;
+  }
+  function applyDeviceLookup(index2, listing, answer, candidate, device) {
+    if (candidate || !answer || device.kind === "recall" || /part or a toy/.test(device.why || "")) return { device, seen: null };
+    const hit = deviceLookup(index2, listing, answer);
+    if (!hit) return { device, seen: null };
+    return { device: { ...device, askCloud: true, seen: hit.card }, seen: { brand: hit.brand, id: hit.card.id } };
   }
   function lookupResponse(candidates, notices = []) {
     if (!candidates.length) return { recalls: [], note: "The field guide has no recall for that brand and product. Answer from the listing alone." };
@@ -475,7 +519,7 @@ ${LOOKUP_SYSTEM}`;
     if (w < 0.04 || h < 0.04 || w * h > 0.7) return null;
     return { x: +x0.toFixed(3), y: +y0.toFixed(3), w: +w.toFixed(3), h: +h.toFixed(3) };
   }
-  function confirmParts({ listing, notice, listingPhoto, recallPhoto }) {
+  function confirmParts({ listing, notice, listingPhoto, recallPhoto, seen = null }) {
     const parts = [[
       "LISTING",
       `Title: ${clip(listing.title, 200)}`,
@@ -486,24 +530,45 @@ ${LOOKUP_SYSTEM}`;
     if (listingPhoto) parts.push(listingPhoto);
     parts.push(notice ? ["", "RECALL NOTICE", noticeForPrompt(notice), recallPhoto ? "Photo of the recalled product, from the notice:" : ""].filter(Boolean).join("\n") : "\nRECALL NOTICE\n(none given)");
     if (notice && recallPhoto) parts.push(recallPhoto);
+    if (seen && seen.notice) {
+      parts.push([
+        "",
+        "FOUND BY THE DEVICE (unverified)",
+        `The listing's words name no brand. A small model on the device looked at the photo and gave the brand "${clip(seen.brand, 60)}", and the device's field guide has the recall below for that brand and kind of product. The reading may be wrong: small models guess a brand from a product's shape.`,
+        `If you can see that brand in the photo, or recognise the product for sale as the one in this notice, answer recall_id "${seen.id}" and matches_recall for it. If it is another product that you can name, call lookup_recalls for that product. Otherwise leave recall_id empty.`,
+        `recall_id: ${seen.id}`,
+        noticeForPrompt(seen.notice),
+        !notice && recallPhoto ? "Photo of the recalled product, from this notice:" : ""
+      ].filter(Boolean).join("\n"));
+      if (!notice && recallPhoto) parts.push(recallPhoto);
+    }
     parts.push(["", "BANNED TYPES", ...BANNED_TYPES.map((t) => `- ${t.key}: ${t.looksLike}`)].join("\n"));
     return parts;
   }
   function decideFinal(device, cloud, hints, lookedUp = []) {
-    if (!cloud) return { ...device, confirmed: false };
+    if (!cloud) {
+      const { seen, ...rest } = device;
+      return { ...rest, confirmed: false };
+    }
     const base2 = { kind: null, card: null, banned: null, confirmed: true, evidence: cloud.evidence || "", check: cloud.check_before_buying || "", where: boxFrom(cloud.where) };
     if (cloud.what_is_for_sale === "toy_or_doll_version" || cloud.what_is_for_sale === "part_or_accessory" && (cloud.banned_type === "none" || device.kind === "recall")) {
       return { ...base2, level: "none", why: "the listing is a part or a toy version, not the product" };
     }
-    const hit = cloud.recall_id ? lookedUp.find((c) => c.id === String(cloud.recall_id).trim()) : null;
-    const found = hit && (cloud.matches_recall === "yes" || cloud.matches_recall === "cannot_tell") ? hit : null;
-    if (device.kind === "recall" && device.card && !found) {
+    const agrees = cloud.matches_recall === "yes" || cloud.matches_recall === "cannot_tell";
+    const pool = device.seen ? [...lookedUp, device.seen] : lookedUp;
+    const hit = cloud.recall_id ? pool.find((c) => c.id === String(cloud.recall_id).trim()) : null;
+    const found = agrees ? hit : null;
+    const wordsCard = device.kind === "recall" && device.card && !device.seen ? device.card : null;
+    if (wordsCard && !hit) {
       if (cloud.matches_recall === "yes") {
-        return { ...base2, level: "likely", kind: "recall", card: device.card, why: "matches the recalled product in the notice" };
+        return { ...base2, level: "likely", kind: "recall", card: wordsCard, why: "matches the recalled product in the notice" };
       }
       if (cloud.matches_recall === "cannot_tell") {
-        return { ...base2, level: "possible", kind: "recall", card: device.card, why: "same brand and kind as a recalled product; the listing does not show which model" };
+        return { ...base2, level: "possible", kind: "recall", card: wordsCard, why: "same brand and kind as a recalled product; the listing does not show which model" };
       }
+    }
+    if (wordsCard && hit && agrees) {
+      return { ...base2, level: "possible", kind: "recall", card: wordsCard, alsoRecall: hit, why: "the listing's words match one recall; the cloud named another product and the field guide on the device had a recall for it too" };
     }
     const cloudBanned = BANNED_TYPES.find((t) => t.key === cloud.banned_type) || null;
     const deviceBanned = device.kind === "banned" ? device.banned : null;
@@ -511,7 +576,7 @@ ${LOOKUP_SYSTEM}`;
       return { ...base2, level: "likely", kind: "banned", banned: hints[0] || cloudBanned, why: "both models see a product type that may no longer be sold", ...found ? { alsoRecall: found } : {} };
     }
     if (found) {
-      return { ...base2, level: "possible", kind: "recall", card: found, lookedUp: true, why: "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it" };
+      return { ...base2, level: "possible", kind: "recall", card: found, lookedUp: true, why: device.seen && found.id === device.seen.id ? "a brand was read in the photo on the device; its field guide had a recall for that brand and kind of product; the cloud saw the same product; the listing's words do not name it" : "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it" };
     }
     if (hints.length) {
       return { ...base2, level: "possible", kind: "banned", banned: hints[0], why: "the wording names a product type that may no longer be sold; the photo did not confirm it" };
@@ -560,6 +625,16 @@ ${LOOKUP_SYSTEM}`;
   function productName(product) {
     return clip(String(product || "").replace(/^all\s+(models\s+of\s+|units\s+of\s+)?/i, "").replace(/^the\s+/i, ""), 90);
   }
+  function remedyText(remedy) {
+    const s = String(remedy || "").trim();
+    if (!/…$/.test(s)) return s;
+    const body = s.slice(0, -1).trim();
+    if (/[.!?]$/.test(body)) return body;
+    const stop = body.search(/[.!?](?=\s+[A-Z][^.!?]*$)/);
+    if (stop > 40) return body.slice(0, stop + 1);
+    const words = body.replace(/\s*\S*$/, "").replace(/\s+https?:\S*$/i, "").replace(/(?:[\s,;:(]+(?:and|or|to|go|visit|at|for|the|a|an|of|with|by|on|in))*[\s,;:(]*$/i, "");
+    return `${words}\u2026 (the notice has the rest)`;
+  }
   function badgeText(r) {
     if (r.kind === "recall" && r.recall && r.recall.warning) return r.level === "likely" ? "CPSC warning" : "Possible CPSC warning";
     if (r.kind === "recall") return r.level === "likely" ? "Recalled product" : "Possible recall";
@@ -568,7 +643,7 @@ ${LOOKUP_SYSTEM}`;
   }
   function verdictLine(r) {
     if (r.kind === "recall" && r.lookedUp) {
-      return `Looks like the ${productName(r.recall.product)}, ${r.recall.warning ? "which CPSC warned people to stop using in" : "recalled"} ${monthYear(r.recall.date)}. The listing doesn't name it, so check the brand before you buy.`;
+      return `Looks like the ${productName(r.recall.product)}, ${r.recall.warning ? "which CPSC warned people to stop using in" : "recalled"} ${monthYear(r.recall.date)}. The listing's words don't name this product, so check the brand before you buy.`;
     }
     if (r.kind === "recall" && r.recall.warning) {
       const product = productName(r.recall.product);
@@ -629,7 +704,28 @@ ${LOOKUP_SYSTEM}`;
     in_bed_sleeper: "eBay and Facebook Marketplace don't allow loungers and nests, many have been recalled, and CPSC says never to use one for sleep.",
     drop_side_crib: "CPSC says cribs made before June 28, 2011, drop-sides included, are very likely illegal to sell."
   };
+  var OWNER_ADVICE = {
+    inclined_sleeper: "Many inclined sleepers are also recalled: look for the brand and model on its label.",
+    crib_bumper: "A thin, breathable mesh liner is a different product from a padded bumper. Check which one yours is.",
+    in_bed_sleeper: "Several loungers have been recalled: look for the brand and model on its label.",
+    drop_side_crib: "Check whether a side of the crib slides down, and the manufacture date on its label."
+  };
+  function ownerVerdict(r) {
+    if (r.kind !== "recall" || !r.recall) return r.verdict || "";
+    const product = productName(r.recall.product);
+    const when = monthYear(r.recall.date);
+    if (r.lookedUp) return `Looks like the ${product}, ${r.recall.warning ? "which CPSC warned people to stop using in" : "recalled"} ${when}. Check the brand on yours.`;
+    if (r.recall.warning) return r.verdict || "";
+    return r.level === "likely" ? `Looks like the ${product}, recalled ${when}.` : `Same brand and kind as the ${product}, recalled ${when}. Its label shows which model you have.`;
+  }
   function ownerView(r) {
+    return { verdict: ownerVerdict(r), evidence: ownerWords(r.evidence), foundBy: String(r.foundBy || "").replace(/The listing's words/g, "The words you gave"), ...ownerAdvice(r) };
+  }
+  function ownerWords(text) {
+    const s = String(text || "").replace(/\bthe listing(?:['’]s)? (?:photo|image|picture)\b/gi, "your photo").replace(/\bthe listing(?:['’]s)? (?:title|description|text|words|wording)\b/gi, "what you entered").replace(/\bthe listing\b/gi, "what you entered").replace(/\bthis listing\b/gi, "this item");
+    return s.replace(/(^|[.!?]\s+)([a-z])/g, (m, a, b) => a + b.toUpperCase());
+  }
+  function ownerAdvice(r) {
     const heading = "Before you sell it or give it away";
     if (r.kind === "recall" && r.recall) {
       const c = r.recall;
@@ -667,7 +763,7 @@ ${LOOKUP_SYSTEM}`;
     }
     if (r.kind === "banned" && r.banned) {
       const rule = OWNER_TYPE[r.banned.key] || "";
-      return r.level === "likely" ? { heading, action: "Don't sell it or give it away.", lines: [rule, r.also ? `It also looks like the ${productName(r.also.product)} (${r.also.warning ? "CPSC warning" : "recall"} ${r.also.number}): the notice says what its maker offers.` : ""].filter(Boolean) } : { heading, action: "Check what it is before you sell it or give it away.", lines: [r.banned.advice, rule].filter(Boolean) };
+      return r.level === "likely" ? { heading, action: "Don't sell it or give it away.", lines: [rule, r.also ? `It also looks like the ${productName(r.also.product)} (${r.also.warning ? "CPSC warning" : "recall"} ${r.also.number}): the notice says what its maker offers.` : ""].filter(Boolean) } : { heading, action: "Check what it is before you sell it or give it away.", lines: [OWNER_ADVICE[r.banned.key] || r.banned.advice, rule].filter(Boolean) };
     }
     return {
       heading,
@@ -723,6 +819,9 @@ ${LOOKUP_SYSTEM}`;
     const via = decision.alsoRecall || decision.lookedUp && decision.card || null;
     const asked = via ? (how.lookups || []).find((l) => l.found.includes(via.id)) : null;
     const askedFor = asked ? clip([asked.asked.brand, asked.asked.product].filter(Boolean).join(" "), 70) : "";
+    const seenIt = via && !asked && how.seen && how.seen.id === via.id ? how.seen : null;
+    const ledBy = seenIt ? `${how.device ? "Gemini Nano, on this device," : "Gemini"} read \u201C${clip(seenIt.brand, 40)}\u201D in the photo and asked the recall field guide on this device, which had it.` : `Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`;
+    const viaNumber = via ? `${via.warning ? "warning" : "recall"} ${via.id.replace(/^W/, "")}` : "";
     const base2 = {
       id: listing.id,
       listing: { title: listing.title, price: listing.price || "", image: listing.image || "", url: listing.url || "" },
@@ -747,10 +846,14 @@ ${LOOKUP_SYSTEM}`;
         cloudModel: how.cloud && how.cloud.model || "",
         cloudError: how.cloudError || "",
         // What the cloud asked the device's field guide, and the recalls the device returned.
-        lookups: (how.lookups || []).slice(0, 3)
+        lookups: (how.lookups || []).slice(0, 3),
+        // The device's own question to its field guide: the brand read in the photo, and the recall it found.
+        seen: how.seen ? { brand: clip(how.seen.brand, 40), id: how.seen.id } : null
       },
       // Said on the card when the listing's own words did not lead to the recall.
-      foundBy: !asked ? "" : decision.alsoRecall ? `It looks like the ${productName(via.product)}, ${via.warning ? "which CPSC warned about in" : "recalled"} ${monthYear(via.date)} (${via.warning ? "warning" : "recall"} ${via.id.replace(/^W/, "")}). The listing's words didn't name it: Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.` : `The listing's words didn't lead to this recall. Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`,
+      // Hedged on purpose: other makers sell look-alikes (a Kids2 rocking sleeper was once named as a Rock 'n Play), so
+      // the line sends the reader to the brand on the label.
+      foundBy: !(asked || seenIt) ? "" : decision.alsoRecall ? `${decision.kind === "recall" ? "It may also be" : "It may be"} the ${productName(via.product)}, ${via.warning ? "which CPSC warned about in" : "recalled"} ${monthYear(via.date)} (${viaNumber}). Other makers sell look-alikes, so check the brand on its label. The listing's words didn't name it: ${ledBy}` : `The listing's words didn't lead to this recall. ${ledBy}`,
       // A recall shown because the cloud named the product, not because the listing's words did.
       lookedUp: !!(decision.lookedUp && decision.card && decision.level !== "none"),
       // On a type flag that stands on its own: the recall the cloud and the device's field guide pointed to as well.
@@ -761,6 +864,7 @@ ${LOOKUP_SYSTEM}`;
     };
     if (base2.kind === "recall" && decision.card) {
       const c = decision.card;
+      const remedy = how.remedies && how.remedies[c.id] ? clip(how.remedies[c.id], 700) : remedyText(c.remedy);
       base2.recall = {
         id: c.id,
         warning: !!c.warning,
@@ -769,7 +873,7 @@ ${LOOKUP_SYSTEM}`;
         product: c.product,
         title: c.title,
         hazard: c.hazard,
-        remedy: c.remedy,
+        remedy,
         url: c.url,
         image: c.image,
         // For the card's "which units" line and the label check.
@@ -929,25 +1033,25 @@ ${LOOKUP_SYSTEM}`;
   }
   var years = (v) => v.from && v.to ? v.from === v.to ? `in ${v.from}` : `from ${v.from} to ${v.to}` : "";
   var some = (list) => list.length > 6 ? `${list.slice(0, 6).join(", ")} and ${list.length - 6} more` : list.join(", ");
-  function labelCopy(v) {
+  function labelCopy(v, { owner = false } = {}) {
     switch (v.state) {
       case "recalled":
         return {
           tone: "likely",
           title: "The label matches the recall",
-          text: `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ""}. Don't buy it unless the seller shows the recall's fix was done.`
+          text: `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ""}. ${owner ? "Don't sell it or give it away unless the recall's fix was done." : "Don't buy it unless the seller shows the recall's fix was done."}`
         };
       case "near":
         return {
           tone: "possible",
           title: "One character from a recalled model",
-          text: `The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: look at the label yourself, or ask for a sharper photo, before you buy.`
+          text: `The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: ${owner ? "look at the label yourself before you pass it on." : "look at the label yourself, or ask for a sharper photo, before you buy."}`
         };
       case "disagree":
         return {
           tone: "possible",
           title: "The label is hard to read",
-          text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. Ask for a closer, sharper photo of the label.`
+          text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. ${owner ? "Take" : "Ask for"} a closer, sharper photo of the label.`
         };
       case "read_once":
         return {
@@ -1092,26 +1196,37 @@ ${LOOKUP_SYSTEM}`;
      * `secondOpinion`: every baby product goes to the cloud, which may raise a soft flag on its own (the web page and
      * the phone do this; a search page of 60 listings does not).
      */
-    afterLook(answer, t, { secondOpinion = false } = {}) {
+    afterLook(answer, t, { secondOpinion = false } = {}, listing = null) {
       let device = decide(answer || wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe);
+      let seen = null;
+      if (listing && answer) ({ device, seen } = applyDeviceLookup(index(), listing, answer, t.candidate, device));
       if (secondOpinion && !/part or a toy/.test(device.why || "")) device = { ...device, secondOpinion: true };
       const needsCloud = !(device.level === "none" && !device.askCloud && !device.secondOpinion);
       const deviceLevel = device.level === "none" && device.askCloud ? "ask" : device.level;
-      const recallId = device.kind === "recall" && device.card ? device.card.id : "";
-      return out({ device, needsCloud, deviceLevel, recallId, recallImage: "" });
+      const inHand = device.kind === "recall" && device.card ? device.card : device.seen || null;
+      return out({ device, needsCloud, deviceLevel, recallId: inHand ? inHand.id : "", seen, recallImage: "" });
     },
     /**
      * Step 3's prompt, as text parts in order. A photo goes where a part is "\u0000LISTING_PHOTO" or
      * "\u0000RECALL_PHOTO". `noticeRecord` is the raw CPSC API record, or null.
      */
-    confirmParts(listing, noticeRecord, hasListingPhoto, hasRecallPhoto) {
-      const notice = noticeRecord ? noticeFromCpsc(noticeRecord) : null;
-      const parts = confirmParts({ listing, notice, listingPhoto: hasListingPhoto ? PHOTO.listing : null, recallPhoto: notice && hasRecallPhoto ? PHOTO.recall : null });
+    confirmParts(listing, noticeRecord, hasListingPhoto, hasRecallPhoto, seenBrand, recallId) {
+      let notice = noticeRecord ? noticeFromCpsc(noticeRecord) : null;
+      if (!notice && recallId) {
+        const card = [...live, ...base].find((c) => c.id === recallId);
+        if (card) notice = noticeFromCard(card);
+      }
+      const seen = seenBrand && notice ? { brand: seenBrand, id: notice.id, notice } : null;
+      const parts = confirmParts({ listing, notice: seen ? null : notice, listingPhoto: hasListingPhoto ? PHOTO.listing : null, recallPhoto: notice && hasRecallPhoto ? PHOTO.recall : null, seen });
       return out(parts);
     },
     noticeImage(noticeRecord) {
       const n = noticeFromCpsc(noticeRecord);
       return out(n.images[0] || "");
+    },
+    /** The notice's remedy in full, for the card (a recall card keeps only its first 140 characters). */
+    remedy(noticeRecord) {
+      return out(noticeRecord ? noticeFromCpsc(noticeRecord).remedy : "");
     },
     /**
      * The cloud asks the device: its lookup_recalls call, answered by the shortlist's code on the phone. Returns
@@ -1134,7 +1249,7 @@ ${LOOKUP_SYSTEM}`;
       const decision = cloud ? decideFinal(device, cloud, hints, lookedUp || []) : device.level === "none" ? device : decideFinal(device, null, hints);
       return out(present(listing, decision, how));
     },
-    /** The same result, said to someone who owns the item: { action, heading, lines }. */
+    /** The same result, said to someone who owns the item: { verdict, evidence, foundBy, action, heading, lines }. */
     ownerView(result) {
       return out(ownerView(result));
     },
@@ -1144,8 +1259,8 @@ ${LOOKUP_SYSTEM}`;
     settleReadings(device, cloud, recall) {
       return out(settleReadings(device, cloud, recall));
     },
-    labelCopy(verdict) {
-      return out(labelCopy(verdict));
+    labelCopy(verdict, owner) {
+      return out(labelCopy(verdict, { owner: !!owner }));
     },
     /** A reading by the phone alone, with no second reading in the cloud: it never rules a recall out. */
     readOnce(verdict) {
