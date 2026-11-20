@@ -232,7 +232,7 @@ function howList() {
       ? 'Your screenshot is read on this device by Chrome\'s built-in model.'
       : 'Your screenshot is read on your device when the browser has a built-in model (Chrome on a computer). On this browser, it\'s read by Gemini in the cloud.'),
     row('search', `It's compared with ${noticeCount().toLocaleString('en-US')} recall notices in this page. Nothing is sent for this step.`),
-    row('cloud', 'Only a possible match goes to Gemini in the cloud, with the full recall notice and its photo, for a closer look.'),
+    row('cloud', 'A baby product, or a possible match, then goes to Gemini in the cloud for a closer look, with the full recall notice and its photo. Anything else stays here.'),
   ];
 }
 

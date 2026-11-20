@@ -93,7 +93,7 @@ fun ModelCard(m: AppModel) {
             }, style = MaterialTheme.typography.titleSmall)
         }
         Muted(when (m.model) {
-            "available" -> "Screenshots and listings are read and looked at on this phone${if (m.modelName.isNotEmpty()) " (${m.modelName})" else ""}. Only a listing that may match a recall goes to the cloud, with the recall notice."
+            "available" -> "Screenshots and listings are read and looked at on this phone${if (m.modelName.isNotEmpty()) " (${m.modelName})" else ""}. A baby product, or a possible match, then goes to the cloud for a closer look, with the recall notice."
             "downloadable", "downloading" -> "Download it once and screenshots are read on this phone, privately and at no cost. Until then they're read by Gemini in the cloud."
             "checking" -> ""
             else -> "Firebase AI Logic runs the same check on Gemini in the cloud instead. On a phone with Gemini Nano, it runs here."

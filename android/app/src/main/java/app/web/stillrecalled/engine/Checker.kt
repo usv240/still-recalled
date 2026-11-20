@@ -45,7 +45,14 @@ class Checker(private val cloudAllowed: () -> Boolean) {
         var readOnDevice: Boolean? = null
         if (photo != null) {
             step("read", "Reading the screenshot", State.ACTIVE, "")
-            val ans = Ai.json(prompt("read"), listOf(Ai.Text("Read this image."), Ai.Image(Net.scaled(photo, 1024)!!)), mode(cloudOn), deviceStepModels(settings.models))
+            val readParts = listOf(Ai.Text("Read this image."), Ai.Image(Net.scaled(photo, 1024)!!))
+            val ans = try {
+                Ai.json(prompt("read"), readParts, mode(cloudOn), deviceStepModels(settings.models))
+            } catch (e: Throwable) {
+                // Gemini Nano can fail on a photo it can't take; the cloud reads it instead, and the step says so.
+                if (!cloudOn) throw e
+                Ai.json(prompt("read"), readParts, Ai.Mode.CLOUD_ONLY, deviceStepModels(settings.models))
+            }
             if (ans.json.optString("found") == "nothing") throw NothingFound()
             listing = Rules.obj("listingFromRead", ans.json, "")
             readOnDevice = ans.onDevice
@@ -152,11 +159,13 @@ class Checker(private val cloudAllowed: () -> Boolean) {
             return LabelOutcome(c.json, "in_cloud", Rules.obj("labelCopy", Rules.obj("judgeLabel", c.json, recall)))
         }
         val verdict = Rules.obj("judgeLabel", first.json, recall)
-        if (!first.onDevice || verdict.optString("state") == "recalled" || !cloudOn) {
+        if (!first.onDevice || verdict.optString("state") == "recalled") {
             return LabelOutcome(first.json, if (first.onDevice) "on_device" else "in_cloud", Rules.obj("labelCopy", verdict))
         }
-        val second = try { Ai.json(prompt("label"), parts, Ai.Mode.CLOUD_ONLY, settings.models) } catch (e: Throwable) { null }
-            ?: return LabelOutcome(first.json, "on_device", Rules.obj("labelCopy", verdict))
+        // Anything that would reassure needs a second reading. Without one (the cloud is off, or failed), the phone's
+        // reading does not rule the recall out (shared/label.mjs readOnce).
+        val second = (if (cloudOn) try { Ai.json(prompt("label"), parts, Ai.Mode.CLOUD_ONLY, settings.models) } catch (e: Throwable) { null } else null)
+            ?: return LabelOutcome(first.json, "on_device", Rules.obj("labelCopy", Rules.obj("readOnce", verdict)))
         val settled = Rules.obj("settleReadings", first.json, second.json, recall)
         return LabelOutcome(second.json, "device_then_cloud", Rules.obj("labelCopy", settled))
     }

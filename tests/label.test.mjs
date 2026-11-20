@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { judgeLabel, settleReadings, labelCopy } from '../shared/label.mjs';
+import { judgeLabel, settleReadings, labelCopy, readOnce } from '../shared/label.mjs';
 
 const card = { codes: ['615573'], from: 2009, to: 2014 };
 const read = (...models) => ({ readable: true, model_numbers: models, manufacture_date: '', year: 0, brand: '' });
@@ -31,4 +31,19 @@ test('device and cloud readings that disagree cannot clear a listing', () => {
   assert.equal(settleReadings(read('S16578'), read('615573'), card).state, 'recalled');
   // A device reading one character off is kept even when the cloud read something else.
   assert.equal(settleReadings(read('615578'), read('720004'), card).state, 'near');
+});
+
+test('one reading on the device, with no second reading in the cloud, never rules a recall out', () => {
+  const card = { codes: ['615573'], from: 2019, to: 2021 };
+  // The misread from a real CPSC label photo: alone, it would have said "not listed".
+  const alone = readOnce(judgeLabel({ readable: true, model_numbers: ['S1657899'], manufacture_date: '', year: 0, brand: '' }, card));
+  assert.equal(alone.state, 'read_once');
+  assert.equal(labelCopy(alone).tone, 'possible');
+  assert.match(labelCopy(alone).title, /not ruled out/);
+  const dated = readOnce(judgeLabel({ readable: true, model_numbers: [], manufacture_date: '2015', year: 2015, brand: '' }, { codes: [], from: 2019, to: 2021 }));
+  assert.equal(dated.state, 'read_once');
+  assert.match(labelCopy(dated).text, /dated 2015/);
+  // The alarm still stands on one reading.
+  const hit = readOnce(judgeLabel({ readable: true, model_numbers: ['615573'], manufacture_date: '', year: 0, brand: '' }, card));
+  assert.equal(hit.state, 'recalled');
 });

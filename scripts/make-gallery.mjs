@@ -65,7 +65,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
 .crosses div { border-top: 2px solid var(--text); padding-top: 14px; font-size: 20px; line-height: 1.45; }
 .crosses b { display: block; font-size: 16px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
 </style><div class="slide">
-<h1>Every listing is checked on your laptop. Only the few it flags go to the cloud.</h1>
+<h1>Every listing is checked on your laptop. Only what it flags, or can't settle, goes to the cloud.</h1>
 <p class="lede">Firebase AI Logic runs the same prompt and JSON schema on Chrome's built-in Gemini Nano and on Gemini in the cloud.</p>
 <div class="zones">
   <div class="zone laptop"><h2>On the laptop</h2><div class="steps">
@@ -243,7 +243,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #eee; padding
   <div class="fact"><b>Never "safe"</b><p>No match only means no recall was found for what the screenshot shows.</p></div>
 </div>
 <div><div class="phone"><img src="${shot('phone-start.png')}"></div><p class="cap">still-recalled.web.app at phone size.</p></div>
-<div><div class="phone"><img src="${shot('phone-result.png')}"></div><p class="cap">Its example photo, checked: an infant lounger.</p></div>
+<div><div class="phone"><img src="${shot('phone-result.png')}"></div><p class="cap">Its example listing (made up), checked: a recalled lounger.</p></div>
 </div>
 <div class="foot"><span>The live page in Chrome at phone size (390 × 844), ${day(new Date().toISOString().slice(0, 10))}.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;

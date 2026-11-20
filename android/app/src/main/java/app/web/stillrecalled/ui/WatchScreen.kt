@@ -112,7 +112,7 @@ fun AboutScreen(m: AppModel) {
         }
         SectionCard(tone = Ink.cloud) {
             Heading("In the cloud")
-            Text("Only a listing that may match goes to Gemini through Firebase AI Logic, with the full recall notice, to confirm or clear it. On a phone without Gemini Nano, the screenshot is read in the cloud too.", style = MaterialTheme.typography.bodyMedium)
+            Text("A baby product, or a listing that may match, goes to Gemini through Firebase AI Logic, with the full recall notice, to confirm or clear it. Anything else stays on the phone. On a phone without Gemini Nano, the screenshot is read in the cloud too.", style = MaterialTheme.typography.bodyMedium)
         }
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {

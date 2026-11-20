@@ -70,6 +70,15 @@ export function settleReadings(device, cloud, card) {
 }
 
 /**
+ * A verdict from one reading by the device's model, with no second reading in the cloud (the cloud check is off, or
+ * could not be reached). It can raise the alarm, but it never rules a recall out: the built-in model misread "615573"
+ * as "S16578" on a real label, so "not listed" and "dated outside" become "read once".
+ */
+export function readOnce(v) {
+  return v && (v.state === 'not_listed' || v.state === 'year_out') ? { ...v, was: v.state, state: 'read_once' } : v;
+}
+
+/**
  * Compare a label reading with a recall card. Returns { state, model, listed, year }:
  *   "recalled"    a model number on the label is one the notice lists (and the year, if read, is not outside the years sold)
  *   "near"        a model number on the label is one character away from one the notice lists: a misread is likely
@@ -117,6 +126,9 @@ export function labelCopy(v) {
     case 'disagree':
       return { tone: 'possible', title: 'The label is hard to read',
         text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. Ask for a closer, sharper photo of the label.` };
+    case 'read_once':
+      return { tone: 'possible', title: 'Read once, on this device: not ruled out',
+        text: `${v.was === 'year_out' ? `The label is dated ${v.year}; the notice covers units sold ${years(v)}.` : `The label reads ${v.model}; the notice lists ${some(v.listed)}.`} That would point away from this recall, but the label was read only once, by the model on this device, and it can misread a label. Compare the label with the notice yourself before you rely on it.` };
     case 'not_listed':
       return { tone: 'plain', title: 'Model not listed in this recall',
         text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.` };

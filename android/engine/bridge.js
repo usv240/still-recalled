@@ -11,7 +11,7 @@ import { noticeFromCpsc } from '../../shared/notice.mjs';
 import { CONFIRM_SYSTEM, CONFIRM_SCHEMA, confirmParts, decideFinal } from '../../shared/confirm.mjs';
 import { present, productName } from '../../shared/present.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
-import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, labelCopy } from '../../shared/label.mjs';
+import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, labelCopy, readOnce } from '../../shared/label.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
 
@@ -93,6 +93,8 @@ globalThis.SR = {
   judgeLabel(reading, recall) { return out(judgeLabel(reading, recall)); },
   settleReadings(device, cloud, recall) { return out(settleReadings(device, cloud, recall)); },
   labelCopy(verdict) { return out(labelCopy(verdict)); },
+  /** A reading by the phone alone, with no second reading in the cloud: it never rules a recall out. */
+  readOnce(verdict) { return out(readOnce(verdict)); },
 
   // ---- Live recalls and the watch ---------------------------------------------------------------------------------
   newest() { return out([...live, ...base].reduce((m, c) => (c.date > m ? c.date : m), '1973-01-01')); },

@@ -6,7 +6,7 @@
 //                                       bedding set, or any infant product. Nothing leaves the device here.
 //   3. cloud model                      only listings step 2 flagged, with the full recall notice and both photos
 import { deviceStatus, deviceModel, imagePart, cloudJson, hybridJson, hasCloudAccess, liveSettings } from './ai.js';
-import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings } from '../../shared/label.mjs';
+import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, readOnce } from '../../shared/label.mjs';
 import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer } from '../../shared/triage.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
@@ -168,23 +168,31 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
  * S16578), which alone would have said "not among the listed models"; the cloud read it correctly.
  * Resolves to { reading, source: 'on_device' | 'in_cloud' | 'device_then_cloud', verdict }.
  */
-export async function readLabel(dataUrl, recall) {
+export async function readLabel(dataUrl, recall, { cloud = true } = {}) {
   const m = /^data:(image\/(?:jpeg|png));base64,(.+)$/.exec(String(dataUrl || ''));
   if (!m) throw new Error('not a photo');
   const parts = ['Read the label in this photo.', { inlineData: { mimeType: m[1], data: m[2] } }];
   const inCloud = async () => (await cloudJson({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA, parts })).answer;
+  // The cloud is off when the shopper switched it off, or Remote Config did: the photo then stays on the device.
+  const cloudOn = cloud && hasCloudAccess && (await liveSettings()).cloudCheck;
   let reading, source;
   try {
-    ({ answer: reading, source } = await hybridJson({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA, parts }));
+    if (cloudOn) ({ answer: reading, source } = await hybridJson({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA, parts }));
+    else {
+      const r = await deviceModel({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA }).generateContent(parts);
+      reading = JSON.parse(r.response.text());
+      source = 'on_device';
+    }
   } catch (e) {
     // The built-in model can fail on a photo it can't take; the cloud reads it instead, and the card says so.
-    if (!hasCloudAccess) throw e;
+    if (!cloudOn) throw e;
     return { reading: await inCloud(), source: 'in_cloud', verdict: null };
   }
   const verdict = recall ? judgeLabel(reading, recall) : null;
-  if (source !== 'on_device' || !recall || verdict.state === 'recalled' || !hasCloudAccess || !(await liveSettings()).cloudCheck) return { reading, source, verdict };
-  const second = await inCloud().catch(() => null);
-  if (!second) return { reading, source, verdict };
+  if (source !== 'on_device' || !recall || verdict.state === 'recalled') return { reading, source, verdict };
+  // Anything that would reassure needs a second reading. Without one, it is not ruled out (readOnce).
+  const second = cloudOn ? await inCloud().catch(() => null) : null;
+  if (!second) return { reading, source, verdict: readOnce(verdict) };
   return { reading: second, source: 'device_then_cloud', verdict: settleReadings(reading, second, recall) };
 }
 
@@ -316,7 +324,7 @@ if (globalThis.chrome && chrome.runtime && chrome.runtime.onMessage) chrome.runt
     return true;
   }
   if (msg.type === 'sr:engine-label') {
-    readLabel(msg.dataUrl, msg.recall).then(reply, e => reply({ error: String(e).slice(0, 200) }));
+    readLabel(msg.dataUrl, msg.recall, { cloud: msg.cloud !== false }).then(reply, e => reply({ error: String(e).slice(0, 200) }));
     return true;
   }
   return false;

@@ -84,7 +84,7 @@ const scenes = [
   { key: 'card', footage: SRC, from: M['listing in view'].t - 1, to: (M['card end'] || M.end).t,
     say: `This one is flagged as ${an(pick.badge.toLowerCase())}: the built-in model saw it in the photo, and the cloud confirmed it${pick.where ? ', and outlined exactly where' : ''}. The card says why, and gives the shopper the one question that settles it. For products the law bans outright, it also copies a ready report for CPSC.` },
   ...(M['label page'] ? [{ key: 'label', footage: SRC, from: M['label page'].t, to: M['label end'].t,
-    say: `A possible recall comes down to the model number. Add a photo of the label, and Gemini Nano reads it on the laptop; the photo never leaves it. Code, not the model, compares it with the notice. The device can raise the alarm on its own, but anything reassuring is read again in the cloud first.` }] : []),
+    say: `A possible recall comes down to the model number. Add a photo of the label, and Gemini Nano reads it on the laptop. Code, not the model, compares it with the notice. A match stands on the laptop's reading alone; anything that would reassure is read again in the cloud first.` }] : []),
   { key: 'hybrid', slide: 'hybrid',
     say: `Why hybrid? A search page has sixty listings, and a parent scrolls through hundreds. Screening them all in the cloud would send their browsing to a server and cost money for every look. So screening runs only on the device, and the cloud only confirms. The cloud also wrote the device's field guide: it read all ten thousand recall notices once, so the laptop can match every one of them on its own. Across ${["", "one", "two", "three", "four"][N.tests] || N.tests} tests, ${pct(1 - N.cloudShare)} of listings never left the laptop.` },
   { key: 'results', slide: 'results',
@@ -124,7 +124,7 @@ const SLIDES = {
 .what { font-size: 34px; font-weight: 600; letter-spacing: -0.01em; }
 .how { font-size: 23px; line-height: 1.45; color: var(--muted); }
 </style><div class="slide">
-<h1>Every listing is checked on the laptop. Only the few it flags go to the cloud.</h1>
+<h1>Every listing is checked on the laptop. Only what it flags, or can't settle, goes to the cloud.</h1>
 <p class="lede">Firebase AI Logic runs the same prompt and JSON schema on Chrome's built-in Gemini Nano and on Gemini in the cloud.</p>
 <div class="zones">
   <div class="zone laptop"><h2>On the laptop. Nothing leaves it.</h2><div class="steps">
