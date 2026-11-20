@@ -14,7 +14,7 @@ export const TYPE_COPY = {
     name: 'Inclined infant sleeper',
     short: 'inclined sleeper',
     risk: 'Selling an inclined infant sleeper has been against federal law since November 2022. CPSC says products with an incline over 10° should never be used for infant sleep; about 100 deaths were reported in one recalled model alone.',
-    advice: 'If you buy it, never use it for sleep. Ask for the brand and model too: many inclined sleepers are also recalled.',
+    advice: 'Never use it for sleep. Many inclined sleepers are also recalled, so ask for the brand and model.',
     ask: 'Hi, before I buy: what brand and model is this, and what is the manufacture date on its label?',
   },
   crib_bumper: {
@@ -28,7 +28,7 @@ export const TYPE_COPY = {
     name: 'Infant lounger or nest',
     short: 'lounger',
     risk: 'Many young babies can\'t lift their heads to pull away from soft padding. CPSC says these are never for sleep, eBay and Facebook Marketplace don\'t allow them, and many have been recalled.',
-    advice: 'If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.',
+    advice: 'Never use it for sleep, not even for a nap. Several loungers have been recalled, so ask for the brand and model.',
     ask: 'Hi, before I buy: what brand and model is this? Could you send a photo of the label?',
   },
   drop_side_crib: {
@@ -66,6 +66,34 @@ export function verdictLine(r) {
     return r.level === 'likely' ? `This looks like ${a} ${name}.` : `This may be or include ${a} ${name}.`;
   }
   return '';
+}
+
+/**
+ * What to do, in one line, at the top of the card: a flag that only names a product leaves the shopper asking "so can
+ * I buy it?". Advice, not a verdict on the listing, which the tool can be wrong about.
+ */
+export function actionLine(r) {
+  if (r.kind === 'recall') {
+    if (r.level === 'possible') return "Don't buy it until the seller's label shows it isn't one of the recalled units.";
+    return r.recall && r.recall.all
+      ? "Don't buy it. Every unit of this product is recalled."
+      : "Don't buy it unless the seller's label shows it isn't one of the recalled units.";
+  }
+  if (r.kind === 'banned') {
+    if (r.level === 'possible') return 'Ask the seller what it is before you buy.';
+    return ({
+      crib_bumper: "Skip this one. CPSC's advice: nothing in a crib but a fitted sheet.",
+      inclined_sleeper: 'Skip this one, and never use an inclined sleeper for sleep.',
+      in_bed_sleeper: 'Never use it for sleep, not even for a nap.',
+      drop_side_crib: "Skip this one: drop-side cribs don't meet today's crib standard.",
+    })[r.banned && r.banned.key] || 'Never use it for sleep.';
+  }
+  return '';
+}
+
+/** What the shopper reads when nothing matched: never an all-clear. */
+export function noMatchLine(count, since) {
+  return `No recall found for what we could read. That doesn't mean it's safe: ${count} recall notices since ${since} were searched, and only what the listing shows can be matched.`;
 }
 
 /** A message the shopper can paste to the seller. Plain, polite, and asks for the one fact that settles it. */
@@ -120,6 +148,11 @@ export function cpscReport(r, seen = new Date()) {
   ].filter(Boolean).join('\n');
   const why = [what, r.confirmed && r.evidence ? `What the listing shows: ${r.evidence}` : ''].filter(Boolean).join('\n');
   return [head, facts, why].join('\n\n');
+}
+
+/** A made-up listing on the practice page (still-recalled.web.app/try): nothing there to report or message. */
+export function isPractice(r) {
+  return /^https:\/\/still-recalled\.web\.app\/try\//.test((r.listing && r.listing.url) || '');
 }
 
 /** The listing's own address without search-page tracking: what a report or a message should point at. */
@@ -189,6 +222,7 @@ export function present(listing, decision, how = {}) {
   if (base.kind) {
     base.badge = badgeText(base);
     base.verdict = verdictLine(base);
+    base.action = actionLine(base);
     base.question = sellerQuestion(base);
     base.messageUrl = sellerMessageUrl(base);
     base.report = cpscReport(base);

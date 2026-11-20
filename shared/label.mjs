@@ -118,10 +118,10 @@ export function labelCopy(v) {
       return { tone: 'possible', title: 'The label is hard to read',
         text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. Ask for a closer, sharper photo of the label.` };
     case 'not_listed':
-      return { tone: 'plain', title: 'Not among the listed models',
-        text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too: check the notice before you rely on this.` };
+      return { tone: 'plain', title: 'Model not listed in this recall',
+        text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.` };
     case 'year_out':
-      return { tone: 'plain', title: 'Dated outside the recalled years',
+      return { tone: 'plain', title: 'Dated outside this recall',
         text: `The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.` };
     case 'no_models':
       return { tone: 'possible', title: 'The notice lists no model numbers',

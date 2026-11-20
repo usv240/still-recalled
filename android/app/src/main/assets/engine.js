@@ -469,7 +469,7 @@ Which units: ${c.tell}` : ""}`;
       name: "Inclined infant sleeper",
       short: "inclined sleeper",
       risk: "Selling an inclined infant sleeper has been against federal law since November 2022. CPSC says products with an incline over 10\xB0 should never be used for infant sleep; about 100 deaths were reported in one recalled model alone.",
-      advice: "If you buy it, never use it for sleep. Ask for the brand and model too: many inclined sleepers are also recalled.",
+      advice: "Never use it for sleep. Many inclined sleepers are also recalled, so ask for the brand and model.",
       ask: "Hi, before I buy: what brand and model is this, and what is the manufacture date on its label?"
     },
     crib_bumper: {
@@ -483,7 +483,7 @@ Which units: ${c.tell}` : ""}`;
       name: "Infant lounger or nest",
       short: "lounger",
       risk: "Many young babies can't lift their heads to pull away from soft padding. CPSC says these are never for sleep, eBay and Facebook Marketplace don't allow them, and many have been recalled.",
-      advice: "If you buy it, never use it for sleep. Ask for the brand and model too: several loungers have been recalled.",
+      advice: "Never use it for sleep, not even for a nap. Several loungers have been recalled, so ask for the brand and model.",
       ask: "Hi, before I buy: what brand and model is this? Could you send a photo of the label?"
     },
     drop_side_crib: {
@@ -511,6 +511,22 @@ Which units: ${c.tell}` : ""}`;
       const name = (TYPE_COPY[r.banned.key] || { name: "infant sleep product" }).name.toLowerCase();
       const a = /^[aeiou]/.test(name) ? "an" : "a";
       return r.level === "likely" ? `This looks like ${a} ${name}.` : `This may be or include ${a} ${name}.`;
+    }
+    return "";
+  }
+  function actionLine(r) {
+    if (r.kind === "recall") {
+      if (r.level === "possible") return "Don't buy it until the seller's label shows it isn't one of the recalled units.";
+      return r.recall && r.recall.all ? "Don't buy it. Every unit of this product is recalled." : "Don't buy it unless the seller's label shows it isn't one of the recalled units.";
+    }
+    if (r.kind === "banned") {
+      if (r.level === "possible") return "Ask the seller what it is before you buy.";
+      return {
+        crib_bumper: "Skip this one. CPSC's advice: nothing in a crib but a fitted sheet.",
+        inclined_sleeper: "Skip this one, and never use an inclined sleeper for sleep.",
+        in_bed_sleeper: "Never use it for sleep, not even for a nap.",
+        drop_side_crib: "Skip this one: drop-side cribs don't meet today's crib standard."
+      }[r.banned && r.banned.key] || "Never use it for sleep.";
     }
     return "";
   }
@@ -623,6 +639,7 @@ Which units: ${c.tell}` : ""}`;
     if (base2.kind) {
       base2.badge = badgeText(base2);
       base2.verdict = verdictLine(base2);
+      base2.action = actionLine(base2);
       base2.question = sellerQuestion(base2);
       base2.messageUrl = sellerMessageUrl(base2);
       base2.report = cpscReport(base2);
@@ -782,13 +799,13 @@ Which units: ${c.tell}` : ""}`;
       case "not_listed":
         return {
           tone: "plain",
-          title: "Not among the listed models",
-          text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ""} Some notices recall by date or serial number too: check the notice before you rely on this.`
+          title: "Model not listed in this recall",
+          text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ""} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.`
         };
       case "year_out":
         return {
           tone: "plain",
-          title: "Dated outside the recalled years",
+          title: "Dated outside this recall",
           text: `The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.`
         };
       case "no_models":

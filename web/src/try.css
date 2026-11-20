@@ -20,6 +20,11 @@ code { font: 500 13px/1 ui-monospace, SFMono-Regular, Consolas, monospace; backg
 .steps { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 10px; max-width: 70ch; }
 .steps li { padding-left: 4px; }
 .steps .btn { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; margin-right: 4px; text-decoration: none; }
+.steps .copy { font: 500 12px/1 var(--font); height: 24px; padding: 0 8px; margin: 0 2px; border: 0; border-radius: 6px; background: var(--surface); color: var(--text); box-shadow: inset 0 0 0 1px var(--border); cursor: pointer; transition: transform 160ms var(--ease-out); }
+.steps .copy:active { transform: scale(0.96); }
+/* Whether the extension is on the page: muted until its content script marks the page, then plain ink. */
+.status { font-size: 14px; line-height: 21px; color: var(--muted); max-width: 70ch; padding: 10px 12px; border-radius: var(--radius-control); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+.status.is-on { color: var(--text); font-weight: 500; box-shadow: inset 3px 0 0 var(--likely), inset 0 0 0 1px var(--border); }
 .note { font-size: 14px; line-height: 21px; color: var(--muted); max-width: 70ch; }
 .note a { color: var(--text); }
 

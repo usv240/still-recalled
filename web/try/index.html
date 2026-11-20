@@ -25,9 +25,12 @@
     open its listing, save the seller's label photo, and add it to the card to settle it.</p>
     <ol class="steps">
       <li><a class="btn" href="https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-extension.zip">Download the extension</a> and unzip it.</li>
-      <li>Open <code>chrome://extensions</code>, turn on Developer mode, choose Load unpacked, pick the folder.</li>
+      <li>Copy <code>chrome://extensions</code> <button class="copy" type="button" data-copy="chrome://extensions">Copy</button>
+      and paste it into the address bar. Switch on <b>Developer mode</b> (top right), click <b>Load unpacked</b>, and
+      choose the <b>still-recalled-extension</b> folder (the one with manifest.json in it).</li>
       <li>Reload this page. Badges appear as listings are checked, the matched ones first.</li>
     </ol>
+    <p class="status" id="sr-status" role="status">Extension not detected on this page yet. After installing it, reload this page.</p>
     <p class="note">Chrome's built-in model (Gemini Nano) does the first look on your computer when Chrome has it. Without it the
     extension still works: the listing's words decide what the cloud looks at. No Chrome? <a href="../">Check a screenshot on the web page</a>.</p>
   </section>
@@ -129,5 +132,20 @@
   <p>A made-up search page for trying <a href="../">Still Recalled</a>. The recalled products' photos, and the label photo, are from their
   U.S. Consumer Product Safety Commission recall notices. Other photos, all public domain (CC0): &quot;Colorful xylophone kids&quot;, CC0, via rawpixel; &quot;Baby toys&quot; by Mvolz, CC0, via Wikimedia Commons; &quot;Baby Bottle&quot; by Burst, CC0, via StockSnap; &quot;Wooden toy train • tracks and bridge&quot; by Thane Keller, CC0, via Wikimedia Commons; &quot;Wooden toy train&quot; by Markus Spiske, CC0, via rawpixel; &quot;Wooden Toys&quot; by Kristin Hardwick, CC0, via StockSnap; &quot;Yellow toy car&quot; by Jebulon, CC0, via Wikimedia Commons; &quot;Geometric wood kids toy&quot;, CC0, via rawpixel; &quot;Wooden jigsaw puzzle&quot; by Markus Spiske, CC0, via rawpixel.</p>
 </footer>
+<script>
+// Copy buttons, and whether the extension is on this page (its content script marks the page).
+for (const b of document.querySelectorAll('[data-copy]')) b.addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied'; setTimeout(() => (b.textContent = 'Copy'), 1500); } catch {}
+});
+const out = document.getElementById('sr-status'), root = document.documentElement;
+const show = () => {
+  if (root.dataset.stillRecalled !== 'on') return;
+  const n = Number(root.dataset.srFlagged || 0);
+  out.classList.add('is-on');
+  out.textContent = n ? 'Extension on. ' + n + ' of the 8 recalled listings flagged so far; the rest are checked as they come into view.' : 'Extension on. Checking the listings: the first badges appear within a few seconds.';
+};
+new MutationObserver(show).observe(root, { attributes: true, attributeFilter: ['data-still-recalled', 'data-sr-flagged'] });
+show();
+</script>
 </body>
 </html>

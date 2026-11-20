@@ -62,6 +62,13 @@ fun HomeScreen(m: AppModel) {
             }
         }
 
+        m.shareNote?.let { note ->
+            SectionCard(tone = Ink.possibleBg) {
+                Text(note, style = MaterialTheme.typography.bodyMedium, color = Ink.possibleInk)
+                LinkButton("OK", { m.dismissShareNote() }, Ink.possibleInk)
+            }
+        }
+
         ModelCard(m)
 
         if (m.engine != "starting" && m.engine != "ready") SectionCard(tone = Ink.likelyBg) { Text(m.engine, color = Ink.likelyInk) }

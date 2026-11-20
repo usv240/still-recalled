@@ -7,6 +7,11 @@
 // Kidsview bouncer (recalled 2026-11-19) is checked and watched, then the recall list is refreshed and the watch must
 // raise a notification. It needs a debug build (the "forget" switch exists only there), with no debug token in
 // android/local.properties, so App Check still goes through the bridge.
+//
+// --nano is for a phone with Gemini Nano (AICore; for example a recent Pixel or Galaxy flagship): the run fails unless
+// the app reports the on-device model as available and the example photo is read on the phone. The report records the
+// phone, the model and, for each check, whether its reading ran on the device. The model can take a while to download
+// the first time; open the app once and let it finish ("Gemini Nano is ready on this phone" on the start screen) first.
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
@@ -22,7 +27,7 @@ mkdirSync(out, { recursive: true });
 const adb = (...a) => execFileSync(ADB, a, { encoding: 'utf8', env: { ...process.env, MSYS_NO_PATHCONV: '1' }, maxBuffer: 64 << 20 });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const log = () => adb('logcat', '-d', '-v', 'brief');
-const results = { apk, steps: [], checks: [] };
+const results = { apk, build: /debug/.test(apk) ? 'debug' : 'release', steps: [], checks: [] };
 const step = (name, ok, detail = '') => { results.steps.push({ name, ok, detail }); console.log(`${ok ? 'PASS' : 'FAIL'} ${name} ${detail}`); };
 async function waitFor(re, ms) {
   for (const t0 = Date.now(); Date.now() - t0 < ms; await sleep(1500)) { const m = log().match(re); if (m) return m; }
@@ -50,7 +55,8 @@ async function check(name, start, expect) {
 
 try {
   step('device connected', /\tdevice/.test(adb('devices')));
-  adb('install', '-r', apk);
+  // A build signed with another key (debug vs release) can't update in place: start from a clean install.
+  try { adb('install', '-r', apk); } catch { adb('uninstall', PKG); adb('install', apk); }
   adb('shell', 'pm', 'clear', PKG);
   adb('shell', 'pm', 'grant', PKG, 'android.permission.POST_NOTIFICATIONS');
   adb('logcat', '-c');
@@ -58,11 +64,19 @@ try {
   adb('shell', 'am', 'start', '-n', `${PKG}/.MainActivity`);
   const tok = await waitFor(/AppCheckBridge.*token received/, 45000);
   step('App Check token from the reCAPTCHA bridge', !!tok, tok ? `${((Date.now() - t0) / 1000).toFixed(0)} s after launch` : '');
+  const dm = (log().match(/on-device model: ([^;]+); device ([^\r\n]+)/) || []);
+  results.device = { model: (dm[1] || 'unknown').trim(), phone: (dm[2] || '').trim() };
+  console.log(`device: ${results.device.phone}; on-device model: ${results.device.model}`);
+  if (args.includes('--nano')) step('Gemini Nano available on this phone', /^available/.test(results.device.model), results.device.model);
   const caught = await waitFor(/Worker result SUCCESS for Work.*RecallWorker/, 120000);
   step('recall list catches up with CPSC (background worker)', !!caught);
   await sleep(3000);
 
   await check('example photo: infant lounger', () => tapText('Try it with an example photo'), (lv, badge) => lv !== 'none' && /lounger/i.test(badge));
+  if (args.includes('--nano')) {
+    const ex = results.checks.find(c => c.name.startsWith('example photo'));
+    step('the example photo was read by Gemini Nano on the phone', !!ex && ex.readOnDevice === 'true', ex ? `read on device: ${ex.readOnDevice}` : '');
+  }
   adb('shell', 'input', 'keyevent', '4');
   await check('shared text: Rock n Play', () => share("Fisher-Price Rock n Play sleeper, pink, folds flat"), (lv, _b, how) => lv !== 'none' && /^\d+ /.test(how.candidate || ''));
   await check('shared text: Graco swing', () => share('Graco baby swing, wind-up, still swings'), lv => lv !== 'none');
@@ -95,7 +109,7 @@ try {
 } catch (e) {
   step('run', false, String(e).slice(0, 300));
 }
-writeFileSync(path.join(out, 'report.json'), JSON.stringify({ at: new Date().toISOString(), ...results }, null, 2));
+writeFileSync(path.join(out, args.includes('--nano') ? 'report-nano.json' : args.includes('--watch') ? 'report-watch.json' : 'report.json'), JSON.stringify({ at: new Date().toISOString(), ...results }, null, 2));
 const failed = results.steps.filter(s => !s.ok).length;
 console.log(JSON.stringify({ passed: results.steps.length - failed, failed }));
 process.exit(failed ? 1 : 0);

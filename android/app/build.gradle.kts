@@ -25,8 +25,8 @@ android {
         applicationId = "app.web.stillrecalled"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.9.0"
+        versionCode = 2
+        versionName = "0.9.1"
         buildConfigField("String", "BRIDGE_URL", "\"https://still-recalled.web.app/appcheck-bridge.html?android=1\"")
     }
 
@@ -82,7 +82,8 @@ dependencies {
     implementation("com.google.firebase:firebase-ai:18.2.0")
     implementation("com.google.firebase:firebase-ai-ondevice:16.0.0-beta08")
     implementation("com.google.firebase:firebase-appcheck:20.1.0")
-    implementation("com.google.firebase:firebase-appcheck-debug:20.1.0")
+    // Only development builds carry the debug provider.
+    debugImplementation("com.google.firebase:firebase-appcheck-debug:20.1.0")
     implementation("com.google.firebase:firebase-config:24.0.1")
 
     // The shared rules engine runs in Jetpack's JavaScript sandbox.

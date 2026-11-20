@@ -13,6 +13,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -112,6 +117,13 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Pill(r.optString("badge"), level)
                 Text(r.optString("verdict"), style = MaterialTheme.typography.headlineSmall)
+                // What to do, in one line: a flag that only names a product leaves "so can I buy it?" open.
+                r.optString("action").takeIf { it.isNotEmpty() }?.let {
+                    Row(Modifier.height(IntrinsicSize.Min)) {
+                        Box(Modifier.width(3.dp).fillMaxHeight().background(if (level == "likely") Ink.likely else Ink.possible))
+                        Text(it, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(start = 10.dp))
+                    }
+                }
                 if (r.optBoolean("confirmed") && r.optString("evidence").isNotEmpty()) Text(r.optString("evidence"), style = MaterialTheme.typography.bodyMedium, color = Ink.muted)
             }
             Photos(r, o)
@@ -135,10 +147,10 @@ private fun NoMatch(r: JSONObject) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Pill("No match found", "none")
         Text(if (Regex("part or (a )?toy").containsMatchIn(r.optString("why"))) "This looks like a part or a toy version, not the product itself."
-            else "None of the recall notices since 1973 matched this, and it doesn't look like a risky sleep product.", style = MaterialTheme.typography.headlineSmall)
+            else "No recall found for what we could read. That doesn't mean it's safe: every CPSC recall notice since 1973 was searched, and only what the listing shows can be matched.", style = MaterialTheme.typography.headlineSmall)
         SectionCard {
             Heading("Before you buy")
-            Text("No match isn't the same as safe. A listing rarely shows the model number. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.", style = MaterialTheme.typography.bodyMedium)
+            Text("A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.", style = MaterialTheme.typography.bodyMedium)
             LinkButton("Search SaferProducts.gov ↗", { ctx.open("https://www.saferproducts.gov/") })
         }
     }
@@ -182,15 +194,16 @@ private fun BeforeYouBuy(r: JSONObject) {
     val ctx = LocalContext.current
     SectionCard {
         Heading("Before you buy")
-        val check = r.optString("check").ifEmpty { r.optJSONObject("banned")?.optString("advice") ?: "" }.ifEmpty {
+        val all = r.optJSONObject("recall")?.optBoolean("all") == true
+        val check = if (all) "Every unit of this product is recalled, whatever its model number or date. Check that it is this product: the brand and the photos." else r.optString("check").ifEmpty { r.optJSONObject("banned")?.optString("advice") ?: "" }.ifEmpty {
             if (r.optString("kind") == "recall") "Ask for a photo of the label. The model number and manufacture date decide whether this unit is one of the recalled ones."
             else "Check the photos and the description for what the product is. A name in the title is not enough to rule it out."
         }
         Text(check, style = MaterialTheme.typography.bodyMedium)
         Text(r.optString("question"), style = MaterialTheme.typography.bodyMedium, fontStyle = FontStyle.Italic,
             modifier = Modifier.fillMaxWidth().background(Ink.ground, Control).padding(12.dp))
-        Primary("Ask the seller", { ctx.copy("Question for the seller", r.optString("question")); ctx.shareText(r.optString("question"), "Send the question to the seller") }, Modifier.fillMaxWidth())
-        Muted("Copies the question and opens Android's share menu, so you can send it in Messenger, OfferUp or the app you found it in.")
+        Primary("Copy and send the question", { ctx.copy("Question for the seller", r.optString("question")); ctx.shareText(r.optString("question"), "Send the question to the seller") }, Modifier.fillMaxWidth())
+        Muted("Copies the question and opens Android's share menu. Pick Messenger or the app you found it in, or paste it into the seller chat.")
     }
 }
 
@@ -259,11 +272,21 @@ private fun WatchCard(m: AppModel, o: Checker.Outcome, flagged: Boolean) {
     val list by m.store.watch.collectAsState()
     val key = m.watchKey(o)
     val on = list.any { it.key == key }
-    val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { m.toggleWatch(o) }
+    val ctx = LocalContext.current
+    var denied by remember { mutableStateOf(false) }
+    val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted -> denied = !granted; m.toggleWatch(o) }
+    val notesOff = on && (denied || !androidx.core.app.NotificationManagerCompat.from(ctx).areNotificationsEnabled())
     SectionCard {
         Heading(if (flagged) "Bought it anyway, or already own one?" else "Buying it, or already own one?")
         Muted("Recall notices reach the first owner, not the next one. Watch it, and Still Recalled checks it against every new CPSC recall, twice a day, and tells you if one matches. The watch list stays on this phone.")
         if (on) Secondary("✓ Watching for recalls", { m.toggleWatch(o) }, Modifier.fillMaxWidth())
+        // Watching without notifications would never reach the user: say so, with the way to turn them on.
+        if (notesOff) {
+            Text("Alerts are off, so you won't hear about a recall. Turn on notifications for Still Recalled.", style = MaterialTheme.typography.bodyMedium, color = Ink.likelyInk)
+            LinkButton("Open notification settings", {
+                ctx.startActivity(android.content.Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, ctx.packageName))
+            })
+        }
         else Primary("Watch for recalls", {
             if (Build.VERSION.SDK_INT >= 33) ask.launch(Manifest.permission.POST_NOTIFICATIONS) else m.toggleWatch(o)
         }, Modifier.fillMaxWidth())

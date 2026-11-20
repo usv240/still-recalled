@@ -6,12 +6,14 @@ import { useCards, triageListing, checkListing, readLabel, refreshRecalls, setLi
 import { hybridJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
 import { SYSTEM, SCHEMA } from '../../shared/judge.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
-import { productName } from '../../shared/present.mjs';
+import { productName, noMatchLine } from '../../shared/present.mjs';
 import { detailView } from '../../extension/src/ui/detail.js';
 import { h, safeUrl } from '../../extension/src/ui/dom.js';
 import { icon, mark } from '../../extension/src/ui/icons.js';
 
 useCards('data/cards.json');
+// Phone visitors on Android get the app, which takes shared listings from any app.
+if (/Android/i.test(navigator.userAgent)) document.getElementById('android-cta').hidden = false;
 const $ = id => document.getElementById(id);
 const INFANT = /\b(bab(y|ies)|infants?|newborns?|toddlers?|cribs?|bassinets?|cradles?|nursery|high\s*chairs?|strollers?|car\s*seats?|loungers?|bedside\s*sleepers?|play\s*yards?|pacifiers?|teethers?)\b/i;
 let meta = { count: 10089, since: '1973-01-01', built: '' };
@@ -176,10 +178,10 @@ function showResult(r, listing, { example }) {
         h('span', { class: 'pill is-none' }, 'No match found'),
         h('p', { class: 'verdict-line' }, r.why === 'part or toy' || /part or a toy/.test(r.why)
           ? 'This looks like a part or a toy version, not the product itself.'
-          : `None of the ${noticeCount().toLocaleString('en-US')} recall notices since ${monthYear(meta.since)} matched this, and it doesn't look like a risky sleep product.`)),
+          : noMatchLine(noticeCount().toLocaleString('en-US'), monthYear(meta.since)))),
       h('section', { class: 'check' },
         h('h3', {}, 'Before you buy'),
-        h('p', {}, 'No match isn\'t the same as safe. Older recalls aren\'t in this list, and a listing rarely shows the model number. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.'),
+        h('p', {}, 'No match isn\'t the same as safe. A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.'),
         INFANT.test(listing.title) ? h('p', {}, 'For anything a baby sleeps in: a firm, flat surface with nothing else in it.') : null),
       h('div', { class: 'links' },
         h('a', { class: 'link', href: 'https://www.saferproducts.gov/', target: '_blank', rel: 'noopener' }, 'Search SaferProducts.gov', icon('external', { size: 14 })),

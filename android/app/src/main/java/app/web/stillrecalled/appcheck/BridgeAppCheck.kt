@@ -65,6 +65,9 @@ internal object Bridge {
     private val waiting = HashMap<Int, (String?, Long, String?) -> Unit>()
     private val queued = ArrayList<Int>()
 
+    /** True once the site has handed over a token, so the app can tell the user the first one is still on its way. */
+    val ready = kotlinx.coroutines.flow.MutableStateFlow(false)
+
     /** Start loading the page early, so a token is ready by the first check (the AI SDK waits about 10 s for one). */
     fun warm(context: Context) = main.post { if (web == null) start(context) }
 
@@ -110,7 +113,7 @@ internal object Bridge {
                 "token" -> {
                     val cb = waiting.remove(data.optInt("id")) ?: return@addWebMessageListener
                     val token = data.optString("token")
-                    if (token.isNotEmpty()) Log.i(TAG, "token received")
+                    if (token.isNotEmpty()) { Log.i(TAG, "token received"); ready.value = true }
                     if (token.isNotEmpty()) cb(token, data.optLong("expireTimeMillis", System.currentTimeMillis() + 30 * 60_000), null)
                     else { Log.w(TAG, "refused: ${data.optString("error")}"); cb(null, 0, data.optString("error")); reset() }
                 }

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Still Recalled",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Flags secondhand listings that look like a recalled product or a risky baby sleep product, and watches what you bought for new recalls.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3UqM2Xc/OvJ2h6JgUmlJLZjhZUabOJOpWrvim1fIfB+0b2VbDbLYqT+Z2igu47XlOebq6T7Txl3PXn0mApJP7wGDqDc035dhMjMKNnX70pV/tXEC56UfwO8JLJ9yfeXCNjJHDB08+SItOZDZtnnwvhCQXCX6eu2a/I0M+xoLLZ+ssuR0t85bpsFM47cK+qTP1PKSWyQUXXa4j3ei2pxIFtvb47Lj0XpwJLoIB5fiDYcMdBWzMvkc0YbmMIwhYVx+o0j/qW8B2MEdVC7hiESkAF9RNEDvVBpBAHRnyL6tN4Lf22UK+QzLhbOl0nChKSoHqAocf8KOE/Fup48LevRdnwIDAQAB",
   "minimum_chrome_version": "139",

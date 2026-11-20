@@ -79,7 +79,7 @@ export function anchorFor(card) {
 }
 
 /** A badge and its popover in a closed shadow root. `onOpenPanel` is called from the popover's panel link. */
-export function buildBadge(r, { onOpenPanel, onLabel = null, shadowMode = 'closed' } = {}) {
+export function buildBadge(r, { onOpenPanel, onLabel = null, watch = null, shadowMode = 'closed' } = {}) {
   const host = document.createElement('still-recalled-badge');
   const root = host.attachShadow({ mode: shadowMode });   // 'open' only on the local preview page, for testing
   root.append(h('style', {}, uiCss + contentCss));
@@ -98,6 +98,7 @@ export function buildBadge(r, { onOpenPanel, onLabel = null, shadowMode = 'close
       compact: true,
       onOpenPanel,
       onLabel,
+      watch,
     }),
   );
 

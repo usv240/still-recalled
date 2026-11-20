@@ -2,6 +2,10 @@
 // running. Shows every "must flag" and "unclear" label, plus every "must not" label in a fixed order after them, with
 // the listing's photo. Each answer is saved to tools/<set>-review.json; tools/eval-score.mjs uses the person's answer
 // where there is one.
+//
+// "Quick review" (the default) shows, across all four tests, only the labels that decide the published numbers: every
+// "must flag" and "unclear" listing, and every "must not" listing that any of the three ways (word rules, built-in
+// model, hybrid) flagged. Keys 1 to 4 answer the listing in view and move to the next one.
 const $ = s => document.querySelector(s);
 const el = (tag, attrs = {}, ...kids) => {
   const e = document.createElement(tag);
@@ -16,6 +20,22 @@ const CHOICES = [
   ['maybe', "Can't tell from this"],
 ];
 const proxied = u => (u ? `/img?u=${encodeURIComponent(u)}` : '');
+
+const SETS = ['eval', 'fresh', 'third', 'fourth'];
+
+async function loadQuick() {
+  const parts = await Promise.all(SETS.map(async set => {
+    const got = await load(set);
+    const rows = f => fetch(`/tools/${set}-results-${f}.json`).then(r => r.json()).then(j => j.rows).catch(() => []);
+    const [words, hybrid] = await Promise.all([rows('words'), rows('hybrid')]);
+    const raised = new Set([...words, ...hybrid].filter(r => r.final !== 'none' || (r.device && r.device !== 'none')).map(r => r.id));
+    return got.all.filter(l => got.labels[l.id].should_warn !== 'no' || raised.has(l.id)).map(l => ({ ...l, set, lab: got.labels[l.id], review: got.review }));
+  }));
+  const all = parts.flat();
+  const order = { yes: 0, maybe: 1, no: 2 };
+  all.sort((a, b) => order[a.lab.should_warn] - order[b.lab.should_warn]);
+  return all;
+}
 
 async function load(set) {
   const labelFiles = {
@@ -38,28 +58,32 @@ async function load(set) {
 
 async function render() {
   const set = $('#set').value;
-  const { all, labels, review } = await load(set);
+  const items = set === 'quick' ? await loadQuick()
+    : await load(set).then(({ all, labels, review }) => all.map(l => ({ ...l, set, lab: labels[l.id], review })));
   const list = $('#list');
   list.replaceChildren();
   const progress = () => {
-    const n = Object.keys(review.answers).length;
-    $('#progress').textContent = `${n} of ${all.length} reviewed`;
+    const n = items.filter(l => l.review.answers[l.id]).length;
+    $('#progress').textContent = `${n} of ${items.length} reviewed`;
   };
-  const save = () => fetch(`/save-as?name=${set}-review`, { method: 'POST', body: JSON.stringify({ reviewer: 'person', updated: new Date().toISOString(), answers: review.answers }) });
-  for (const l of all) {
-    const lab = labels[l.id];
-    const buttons = CHOICES.map(([value, text]) => {
-      const b = el('button', { type: 'button', 'aria-pressed': String(review.answers[l.id] === value) }, text);
-      b.addEventListener('click', async () => {
-        review.answers[l.id] = value;
-        for (const x of b.parentElement.children) x.setAttribute('aria-pressed', String(x === b));
-        row.classList.add('done');
-        progress();
-        await save();
-      });
+  const save = l => fetch(`/save-as?name=${l.set}-review`, { method: 'POST', body: JSON.stringify({ reviewer: 'person', updated: new Date().toISOString(), answers: l.review.answers }) });
+  for (const l of items) {
+    const lab = l.lab;
+    const row = el('article', { class: `row ${l.review.answers[l.id] ? 'done' : ''}`, tabindex: '-1' });
+    const answer = async value => {
+      l.review.answers[l.id] = value;
+      for (const x of row.querySelectorAll('.choices button')) x.setAttribute('aria-pressed', String(x.dataset.value === value));
+      row.classList.add('done');
+      progress();
+      await save(l);
+    };
+    row.answer = answer;
+    const buttons = CHOICES.map(([value, text], i) => {
+      const b = el('button', { type: 'button', 'data-value': value, 'aria-pressed': String(l.review.answers[l.id] === value) }, `${i + 1} · ${text}`);
+      b.addEventListener('click', () => answer(value));
       return b;
     });
-    const row = el('article', { class: `row ${review.answers[l.id] ? 'done' : ''}` },
+    row.append(
       el('img', { src: proxied(l.image), alt: '', loading: 'lazy' }),
       el('div', {},
         el('div', { class: 'title' }, l.title),
@@ -72,6 +96,23 @@ async function render() {
     list.append(row);
   }
   progress();
+  focusNext();
 }
+
+// The listing in view: the first one not yet answered, or the one last clicked.
+let current = null;
+function focusNext() {
+  const rows = [...document.querySelectorAll('.row')];
+  current = rows.find(r => !r.classList.contains('done')) || rows.at(-1) || null;
+  if (current) { current.focus({ preventScroll: true }); current.scrollIntoView({ block: 'center' }); }
+}
+document.addEventListener('click', e => { const r = e.target.closest('.row'); if (r) current = r; });
+document.addEventListener('keydown', async e => {
+  const i = ['1', '2', '3', '4'].indexOf(e.key);
+  if (i < 0 || !current || e.target.closest('select')) return;
+  e.preventDefault();
+  await current.answer(CHOICES[i][0]);
+  focusNext();
+});
 $('#set').addEventListener('change', render);
 render();

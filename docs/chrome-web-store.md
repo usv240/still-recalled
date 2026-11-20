@@ -65,7 +65,7 @@ The development manifest also lists `scripting` and `activeTab` for a developer 
 
 ## Privacy practices
 
-**Data collected:** Website content: the title, description and photo of listings flagged on the computer are sent to
+**Data collected:** Website content: the title, description, price and photo of listings flagged on the computer are sent to
 Google's Firebase AI Logic (Gemini) for the cloud check. Nothing else.
 
 Certify: not sold to third parties; not used for unrelated purposes; not used for creditworthiness or lending.

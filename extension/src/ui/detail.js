@@ -2,7 +2,7 @@
 // Its signature is the photo pair: the seller's photo beside the photo from the government recall notice.
 import { h, copyWithFeedback, safeUrl } from './dom.js';
 import { icon } from './icons.js';
-import { CPSC_REPORT_URL } from '../../../shared/present.mjs';
+import { CPSC_REPORT_URL, isPractice } from '../../../shared/present.mjs';
 import { judgeLabel, labelCopy } from '../../../shared/label.mjs';
 
 const DEFAULT_CHECK = {
@@ -139,13 +139,15 @@ function howLine(r) {
  * Build the detail. `compact` drops the recall facts table (the popover links out to the panel for those).
  * `onOpenPanel` adds a "More in the side panel" action when given.
  * `onLabel(dataUrl, recall)` reads a label photo and resolves to { reading, source, verdict }; it adds "Settle it with the label".
+ * `watch` ({ get(): Promise<boolean>, set(on): Promise }) adds "Watch for recalls", on a listing's own page.
  */
-export function detailView(r, { compact = false, onOpenPanel = null, onLabel = null } = {}) {
+export function detailView(r, { compact = false, onOpenPanel = null, onLabel = null, watch = null } = {}) {
   const root = h('div', { class: `detail ${compact ? 'is-compact' : ''}` });
 
   root.append(h('div', { class: 'verdict' },
     statusPill(r),
     h('p', { class: 'verdict-line' }, r.verdict),
+    r.action ? h('p', { class: `action-line ${levelClass(r)}` }, r.action) : null,
     r.confirmed && r.evidence ? h('p', { class: 'evidence' }, r.evidence) : null,
   ));
 
@@ -183,10 +185,12 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
   root.append(h('section', { class: 'check' },
     h('h3', {}, 'Before you buy'),
     // The cloud's own line names the notice's models and label; without it, the type's advice or a plain default.
-    h('p', {}, r.check || (r.banned && r.banned.advice) || DEFAULT_CHECK[r.kind] || ''),
+    h('p', {}, r.recall && r.recall.all ? 'Every unit of this product is recalled, whatever its model number or date. Check that it is this product: the brand and the photos.'
+      : r.check || (r.banned && r.banned.advice) || DEFAULT_CHECK[r.kind] || ''),
     h('blockquote', { class: 'question' }, r.question),
     askBtn,
-    askUrl ? h('p', { class: 'hint' }, /m2mOpen/.test(askUrl)
+    isPractice(r) ? h('p', { class: 'hint' }, 'Practice listing: the question is copied, but there is no seller to message.')
+    : askUrl ? h('p', { class: 'hint' }, /m2mOpen/.test(askUrl)
       ? 'Copies the question and opens eBay\'s message box for this seller.'
       : 'Copies the question and opens the listing, where the seller\'s message button is.') : null,
   ));
@@ -204,7 +208,8 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
     const repBtn = h('button', { class: 'btn btn-secondary', type: 'button' }, icon('flag'), repLabel);
     repBtn.addEventListener('click', async () => {
       await copyWithFeedback(repBtn, r.report, repLabel);
-      window.open(CPSC_REPORT_URL, '_blank', 'noopener');
+      // A made-up practice listing must never reach CPSC's real form.
+      if (!isPractice(r)) window.open(CPSC_REPORT_URL, '_blank', 'noopener');
     });
     root.append(h('section', { class: 'report' },
       h('h3', {}, 'Report the listing'),
@@ -213,9 +218,12 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
         : 'CPSC\'s e-commerce team looks for recalled and banned products listed for sale and has the listings taken down. You can report this one at SaferProducts.gov, with its link and a screenshot.'),
       compact ? null : h('details', { class: 'report-text' }, h('summary', {}, 'The report text'), h('pre', {}, r.report)),
       repBtn,
-      h('p', { class: 'hint' }, 'Copies the report, with the listing link, and opens the CPSC form. Paste it into the description.'),
+      h('p', { class: 'hint' }, isPractice(r) ? 'Practice listing: the report is copied so you can see it, and the CPSC form is not opened.'
+        : 'Copies the report, with the listing link, and opens the CPSC form. Paste it into the description.'),
     ));
   }
+
+  if (watch) root.append(watchSection(watch));
 
   if (!compact && r.kind === 'recall' && r.recall) {
     root.append(h('dl', { class: 'facts' },
@@ -236,4 +244,18 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
 
   root.append(h('p', { class: 'how' }, howLine(r)));
   return root;
+}
+
+/** "Watch for recalls" on a listing's own page: a recall announced after the purchase still reaches the buyer. */
+function watchSection(watch) {
+  const label = h('span', {}, 'Watch for recalls');
+  const btn = h('button', { class: 'btn btn-secondary', type: 'button', 'aria-pressed': 'false' }, icon('bell', { size: 16 }), label);
+  let on = false;
+  const show = v => { on = v; btn.setAttribute('aria-pressed', String(v)); label.textContent = v ? 'Watching for recalls' : 'Watch for recalls'; };
+  watch.get().then(show, () => {});
+  btn.addEventListener('click', async () => { const next = !on; show(next); try { await watch.set(next); } catch { show(!next); } });
+  return h('section', { class: 'watch' },
+    h('h3', {}, 'Bought it, or already own one?'),
+    h('p', {}, 'Recall notices reach the first owner, not the next one. Watch this listing and Still Recalled checks it against every new CPSC recall, on this computer.'),
+    btn);
 }

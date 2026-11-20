@@ -85,6 +85,11 @@ function ensureBadge(id) {
   const host = buildBadge(r, {
     onOpenPanel: () => chrome.runtime.sendMessage({ type: 'sr:open-panel', id: r.id }).catch(() => {}),
     onLabel: (dataUrl, recall) => chrome.runtime.sendMessage({ type: 'sr:read-label', dataUrl, recall }).then(r => { if (!r || r.error) throw new Error((r && r.error) || 'no answer'); return r; }),
+    // On the listing's own page, the card can watch it too (the same entry as the side panel's button).
+    watch: card.inline ? {
+      get: () => chrome.storage.local.get('watch').then(({ watch }) => !!(watch && watch[`${site.site}:${r.id}`])),
+      set: on => chrome.runtime.sendMessage({ type: 'sr:watch', on, item: { site: site.site, id: r.id, listing: { ...r.listing, id: r.id } } }),
+    } : null,
   });
   hosts.set(id, host);
   attachBadge(host, card, { corner: site.site === 'craigslist' ? 'right' : 'left' });
@@ -96,7 +101,11 @@ function applyResults(list) {
     results.set(r.id, r);
     ensureBadge(r.id);
   }
+  if (site && site.site === 'practice') document.documentElement.dataset.srFlagged = String(results.size);
 }
+
+// The practice page says whether the extension is on it: a first-time user otherwise can't tell until a badge appears.
+if (site && site.site === 'practice') document.documentElement.dataset.stillRecalled = 'on';
 
 // ---- Wiring ------------------------------------------------------------------------------------------------------
 chrome.runtime.onMessage.addListener((msg, _sender, reply) => {

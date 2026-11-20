@@ -18,6 +18,7 @@ import app.web.stillrecalled.engine.Rules
 import com.google.firebase.ai.DownloadStatus
 import com.google.firebase.ai.type.PublicPreviewAPI
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
@@ -61,6 +62,19 @@ class AppModel(app: Application) : AndroidViewModel(app) {
         private set
     private var job: Job? = null
 
+    /** Shown on the start screen when a share held only a link: ask for a screenshot instead. */
+    var shareNote by mutableStateOf<String?>(null)
+        private set
+    fun shareOnlyLink() {
+        home()
+        shareNote = "This share only had a link, and Still Recalled can't open Facebook or OfferUp links. Take a screenshot of the listing (with its title and photo) and share the screenshot instead."
+    }
+    fun dismissShareNote() { shareNote = null }
+    fun watchOwnHint() {
+        home()
+        shareNote = "To watch something you own: take a photo of it (the label too, if you can), share a screenshot of the listing you bought it from, or type its brand and name. Then choose Watch for recalls on the result."
+    }
+
     // Live recalls.
     var refreshing by mutableStateOf(false)
         private set
@@ -80,6 +94,7 @@ class AppModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             model = Ai.deviceStatus()
             if (model == "available") { modelName = Ai.deviceModelName(); Ai.warmUp() }
+            android.util.Log.i("StillRecalled", "on-device model: $model${if (modelName.isNotEmpty()) " ($modelName)" else ""}; device ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}, Android ${android.os.Build.VERSION.RELEASE}")
         }
         viewModelScope.launch { settings = LiveSettings.get() }
         // Recalls that arrive in the background show up in the recent list too.
@@ -110,15 +125,25 @@ class AppModel(app: Application) : AndroidViewModel(app) {
 
     fun check(photo: Bitmap?, text: String?, example: Boolean = false) {
         if (photo == null && text.isNullOrBlank()) return
+        shareNote = null
         job?.cancel()
         screen = Checking(photo, text, example)
         steps.clear()
+        // The first App Check token after install can take most of a minute (reCAPTCHA on a fresh WebView). Say so,
+        // and wait for it, rather than let the first cloud call fail.
+        val needToken = store.cloudCheck && !app.web.stillrecalled.BuildConfig.DEBUG_APPCHECK && !app.web.stillrecalled.appcheck.Bridge.ready.value
+        if (needToken) steps += Checker.Step("secure", "Connecting securely (first launch only, up to a minute)", Checker.State.ACTIVE)
         steps += listOf(Checker.Step("read", if (photo != null) "Reading the screenshot" else "Reading the listing"),
             Checker.Step("words", "Searching recall notices"), Checker.Step("look", "Looking closer"))
         outcome = null; error = null; label = null; labelError = null
         job = viewModelScope.launch {
             try {
                 if (engine != "ready") Rules.start(getApplication(), store.liveCards())
+                if (needToken) {
+                    kotlinx.coroutines.withTimeoutOrNull(60_000) { app.web.stillrecalled.appcheck.Bridge.ready.first { it } }
+                    val i = steps.indexOfFirst { it.key == "secure" }
+                    if (i >= 0) steps[i] = steps[i].copy(state = Checker.State.DONE)
+                }
                 val t0 = System.currentTimeMillis()
                 outcome = checker.check(photo, text) { s ->
                     val i = steps.indexOfFirst { it.key == s.key }

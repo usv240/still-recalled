@@ -3,7 +3,7 @@
 // quiet listing. Uses a throwaway profile and the development build.
 // Usage: node tools/shoot-watch.mjs [extDir] -> tools/e2e-out/welcome.png, watch-panel.png, item-panel.png
 import puppeteer from 'puppeteer-core';
-import { mkdtempSync, mkdirSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
@@ -25,8 +25,11 @@ await welcome.screenshot({ path: path.join(out, 'welcome.png'), fullPage: true }
 const panel = await b.newPage();
 await panel.setViewport({ width: 400, height: 860, deviceScaleFactor: 2 });
 await panel.goto(`chrome-extension://${id}/panel.html`, { waitUntil: 'domcontentloaded' });
+const tRefresh = Date.now();
 const refresh = await panel.evaluate(() => chrome.runtime.sendMessage({ type: 'sr:refresh-recalls' }));
 console.log('refresh', JSON.stringify(refresh));
+// The gallery's live-recall numbers come from this same refresh, so the slide and the panel beside it agree.
+writeFileSync(path.resolve('docs/gallery/src/watch-run.json'), JSON.stringify({ at: new Date().toISOString(), added: refresh.added, written: refresh.written, seconds: Math.round((Date.now() - tRefresh) / 1000) }, null, 2));
 const watched = await panel.evaluate(async () => {
   const bouncer = { id: 'infant-bouncer', title: 'Kidsview baby bouncer with toy bar, khaki', price: '$35',
     image: 'https://still-recalled.web.app/try/img/bouncer.png', url: 'https://still-recalled.web.app/try/item/infant-bouncer.html' };
@@ -36,8 +39,8 @@ const watched = await panel.evaluate(async () => {
   const card = live && live.cards.find(c => c.id === '27092');
   const day = n => new Date(Date.now() - n * 864e5).toISOString();
   const watch = {
-    'practice:wooden-blocks': { site: 'practice', listing: blocks, addedAt: day(9), alert: null },
-    'practice:infant-bouncer': { site: 'practice', listing: bouncer, addedAt: day(30), alert: card ? {
+    'practice:wooden-blocks': { site: 'practice', listing: blocks, addedAt: day(2), alert: null },
+    'practice:infant-bouncer': { site: 'practice', listing: bouncer, addedAt: day(4), alert: card ? {
       at: new Date().toISOString(), level: 'possible', badge: 'Possible recall', confirmed: true, seen: false,
       recall: { id: card.id, date: card.date, product: card.product, hazard: card.hazard, url: card.url, tell: card.tell } } : null },
   };

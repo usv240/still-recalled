@@ -6,3 +6,7 @@ local.properties
 captures/
 .kotlin/
 *.jks
+
+# JVM crash logs
+hs_err_pid*.log
+replay_pid*.log

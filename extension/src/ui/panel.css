@@ -109,7 +109,7 @@ h1, h2, h3, p { margin: 0; }
 /* Bar actions; the watch button carries a dot while an alert is unseen. */
 .bar-actions { display: inline-flex; gap: 2px; }
 .icon-btn[aria-pressed="true"] { background: var(--raised); color: var(--text); }
-#watching { position: relative; }
+#watching { position: relative; width: auto; grid-auto-flow: column; gap: 6px; padding: 0 10px; font: 500 13px/20px var(--font); }
 #watching.has-alert::after { content: ""; position: absolute; top: 6px; right: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--likely); box-shadow: 0 0 0 2px var(--ground); }
 
 /* Recall watch. */

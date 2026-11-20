@@ -31,7 +31,7 @@ import java.text.DateFormat
 import java.util.Date
 
 @Composable
-fun WatchScreen(m: AppModel) {
+fun WatchScreen(m: AppModel, onAdd: () -> Unit) {
     val list by m.store.watch.collectAsState()
     val live by m.store.live.collectAsState()
     LaunchedEffect(list.count { it.alert != null && !it.alert.optBoolean("seen") }) { if (list.any { it.alert != null && !it.alert.optBoolean("seen") }) m.store.markAlertsSeen() }
@@ -57,6 +57,7 @@ fun WatchScreen(m: AppModel) {
             }
             HorizontalDivider(color = Ink.border)
         }
+        Secondary("+ Watch something you own", onAdd, Modifier.fillMaxWidth())
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             LinkButton(if (m.refreshing) "Checking with CPSC…" else "↻ Check for new recalls now", { m.refreshNow() })
             m.refreshNote?.let { if (!m.refreshing) Muted(it) }
@@ -75,7 +76,7 @@ private fun WatchRow(m: AppModel, w: Store.Watched) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(w.listing.optString("title"), style = MaterialTheme.typography.titleSmall, maxLines = 2)
             if (a == null) {
-                Muted("Watching since ${DateFormat.getDateInstance().format(Date(w.addedAt))} · no recall found")
+                Muted("Watching since ${DateFormat.getDateInstance().format(Date(w.addedAt))} · no recall yet")
             } else {
                 val r = a.getJSONObject("recall")
                 val likely = a.optString("level") == "likely"
@@ -86,6 +87,10 @@ private fun WatchRow(m: AppModel, w: Store.Watched) {
                     val fg = if (likely) Ink.likelyInk else Ink.possibleInk
                     Text("CPSC recalled the ${r.optString("product")} on ${longDate(r.optString("date"))}. ${r.optString("hazard")}", style = MaterialTheme.typography.bodySmall, color = fg)
                     r.optString("tell").takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = Ink.text) }
+                    // What to do with something already in the house.
+                    Text(if (likely) "What to do: stop using it, and follow the remedy in the recall notice (often a refund, repair or replacement from the maker)."
+                        else "What to do: check its label against the units the notice lists. If it matches, stop using it and follow the notice's remedy.",
+                        style = MaterialTheme.typography.bodySmall, color = Ink.text)
                     LinkButton("Read the recall notice ↗", { ctx.open(r.optString("url")) }, fg)
                 }
             }

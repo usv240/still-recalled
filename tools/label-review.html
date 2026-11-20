@@ -23,6 +23,7 @@
   .choices button { padding: 6px 12px; border: 1px solid #cfcfcf; border-radius: 6px; background: #fff; cursor: pointer; }
   .choices button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
   .row.done { opacity: .55; }
+  .row:focus { outline: 3px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
   a { color: inherit; }
   @media (max-width: 560px) { .row { grid-template-columns: 1fr; } .row img { width: 100%; height: 220px; } }
 </style>
@@ -30,9 +31,9 @@
 <body>
 <header>
   <h1>Label review</h1>
-  <label>Set <select id="set"><option value="eval">First test (136)</option><option value="fresh">Second test (125)</option><option value="third">Third test (176)</option><option value="fourth">Fourth test (160)</option></select></label>
+  <label>Set <select id="set"><option value="quick">Quick review: the labels that decide the numbers</option><option value="eval">First test (136)</option><option value="fresh">Second test (125)</option><option value="third">Third test (176)</option><option value="fourth">Fourth test (160)</option></select></label>
   <p id="progress"></p>
-  <p>For each listing: is the AI's label right, judging only from the title and photo? Answers save as you click.</p>
+  <p>For each listing: is the AI's label right, judging only from the title and photo? Keys 1 to 4 answer and move on. Answers save as you go.</p>
 </header>
 <main id="list"></main>
 <script type="module" src="label-review.js"></script>

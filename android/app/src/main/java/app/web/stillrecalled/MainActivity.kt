@@ -78,11 +78,23 @@ class MainActivity : ComponentActivity() {
             loadBitmap(uri)?.let { tab = 0; model.check(it, null) }
         } else {
             val text = listOfNotNull(intent.getStringExtra(Intent.EXTRA_SUBJECT), intent.getStringExtra(Intent.EXTRA_TEXT)).joinToString(" ").trim()
-            if (text.replace(Regex("""https?://\S+"""), "").isNotBlank()) { tab = 0; model.check(null, text) }
+            // Marketplace apps often share only a link, or a stock line around it ("Check out this item on
+            // Marketplace"). Neither says what the product is, and the app can't open a Facebook link, so checking
+            // it would only ever say "no match". Ask for a screenshot instead.
+            val words = productWords(text)
+            tab = 0
+            if (words.split(' ').count { it.length > 2 } >= 2) model.check(null, words)
+            else model.shareOnlyLink()
         }
     }
 
-    companion object { const val OPEN_WATCH = "open_watch" }
+    companion object {
+        const val OPEN_WATCH = "open_watch"
+        private val STOCK = Regex("""(?i)\b(check out|look at|see|i found)\s+(this|what i found)?\s*(item|listing|post)?\s*(on|at|from)?\s*(facebook\s+)?(marketplace|offerup|ebay|mercari|craigslist|nextdoor)\b[:!.,]*|\b(shared|sent)\s+(from|via)\s+\S+""")
+
+        /** What a shared text says about the product: without links and the apps' stock share lines. */
+        fun productWords(text: String) = text.replace(Regex("""https?://\S+"""), " ").replace(STOCK, " ").replace(Regex("""\s+"""), " ").trim()
+    }
 }
 
 @Composable
@@ -113,7 +125,7 @@ private fun App(m: AppModel, tab: Int, setTab: (Int) -> Unit) {
                     Text("Still Recalled", style = MaterialTheme.typography.titleMedium)
                 }
                 when (tab) {
-                    1 -> WatchScreen(m)
+                    1 -> WatchScreen(m) { m.watchOwnHint(); setTab(0) }
                     2 -> AboutScreen(m)
                     else -> when (val s = m.screen) {
                         is AppModel.Checking -> CheckScreen(m, s)

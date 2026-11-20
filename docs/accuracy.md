@@ -500,6 +500,52 @@ short of memory). The label's cloud re-read, the reading that can clear a listin
 **Not tested:** Gemini Nano on Android (the emulator has none; the SDK's on-device inference is experimental, and needs a phone
 whose AICore offers Gemini Nano).
 
+## 15. Simulated first-time-user walkthroughs and release 0.9.1 (2026-11-19)
+
+**What they were.** Two cognitive walkthroughs run by AI agents playing first-time users: a first-time parent on a
+budget who buys on Facebook Marketplace on an Android phone, and a grandparent buying on eBay and Craigslist in Chrome
+who has never installed an extension outside the Web Store. **They are simulations, not user research:** the agents read
+the UI code, the screenshots and the live pages, and listed where such a person would stop, be misled or give up.
+
+**What they found, and what changed in 0.9.1:**
+- **Flags named a product but didn't say what to do.** "This looks like an infant lounger or nest" read as a category,
+  not a warning. Every flag now carries an action line on all three surfaces (`shared/present.mjs` `actionLine`), such
+  as "Skip this one. CPSC's advice: nothing in a crib but a fitted sheet." or "Don't buy it. Every unit of this product
+  is recalled." A recall covering every unit no longer asks for a label photo "to confirm".
+- **Wording that could read as "safe".** "…and it doesn't look like a risky sleep product" became "No recall found for
+  what we could read. That doesn't mean it's safe…". "If you buy it, never use it for sleep" (heard as permission to
+  buy) became "Never use it for sleep, not even for a nap." A label not in the notice now reads "Model not listed in
+  this recall", adding that other recalls may still apply.
+- **A practice listing offered "Report to CPSC"** and opened the real SaferProducts.gov form about a made-up listing.
+  On the practice page the report is now copied for viewing and the form is never opened.
+- **The practice page couldn't tell whether the extension was installed.** It now says "Extension on" and how many of
+  the eight are flagged so far, and has a copy button for `chrome://extensions` with the exact folder to choose.
+- **Watching was hard to find.** "Watch for recalls" is now in the card on a listing's own page too, and the side
+  panel's bell is labelled "Watch list".
+- **The web page never mentioned the Android app.** It now has an Android section with plain install steps, shown at
+  the top for Android visitors.
+- **Android: a share holding only a link (Facebook often shares just a link, or "Check out this item on Marketplace")
+  was either ignored or checked as that stock phrase.** The app now strips links and stock share lines, and when
+  nothing about the product is left, asks for a screenshot instead.
+- **Android: watching with notifications turned off would never alert.** The watch card now says alerts are off and
+  opens the notification settings. Watch alerts now say what to do, and the watch list has "Watch something you own".
+- **Android: the first check after install could wait most of a minute with no explanation** (the first App Check token).
+  The check now shows "Connecting securely (first launch only, up to a minute)" and waits for the token.
+- **Android release builds no longer contain Firebase's App Check debug provider** (`debugImplementation`; checked in
+  the release APK's dex files).
+- Settings wording: "Clear saved results" (which re-checks the page) is "Check this page again"; "Set up / Not set up in
+  this build" is "Available / Off"; the welcome page's "One step left" for the model download is "Optional".
+
+**0.9.1 results (2026-11-19).** The packed extension passed all 15 end-to-end steps on the live practice page in a
+new Chrome profile (8 of 8 recalled listings badged, 8 confirmed in the cloud, a watched listing alerted). On the
+Android 16 emulator the release APK passed 8 of 8 (App Check token 10 s after launch; checks 5 to 10 s) and the debug
+watch replay 12 of 12 (notification 15 s after the refresh). A share holding only a Facebook Marketplace link and its
+stock line now asks for a screenshot; a share naming the product is checked as before.
+
+**Label review tool.** `tools/label-review.html` has a quick review (the default): only the 314 of 597 labels that
+decide the published numbers (every "must flag" and "unclear" listing, and every "must not" listing any of the three
+ways flagged), answered with keys 1 to 4. `tools/eval-score.mjs` uses a person's answer where there is one.
+
 ## Reproduce
 
 ```

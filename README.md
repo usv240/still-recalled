@@ -6,9 +6,15 @@ a baby. The title never says "bumper", so no keyword filter catches it, and noth
 
 **Still Recalled puts the warning on the listing.** It is a Chrome extension for eBay, Mercari and Craigslist search
 pages, an Android app that checks any listing shared to it (Facebook Marketplace and OfferUp included), and a web page
-that checks a screenshot. Chrome's built-in model (Gemini Nano) looks
-at every baby product on your own computer, and only the few it flags go to Gemini in the cloud, through Firebase AI
-Logic hybrid inference.
+that checks a screenshot. **The cloud teaches the device once, the device screens every listing, and only the flags
+leave it:** Gemini in the cloud wrote a spotter card for every CPSC recall since 1973, the word rules and Gemini Nano
+check each listing on your own computer or phone, and only the few they flag go to Gemini in the cloud, through
+Firebase AI Logic hybrid inference.
+
+**Install:** [Chrome extension](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-extension.zip)
+(unzip, open `chrome://extensions`, turn on Developer mode, Load unpacked, choose the `still-recalled-extension` folder) ·
+[Android app](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk) (allow the
+install, then share any listing's screenshot to it) · [web page](https://still-recalled.web.app) (no install).
 
 **What it found on real listings.** In four blind tests on 597 used baby-gear listings from eBay, Mercari and
 Craigslist, 74 were recalled products, padded crib bumpers or infant loungers, asking $5,527 in total. Still Recalled
@@ -23,7 +29,7 @@ one matches.
 
 **Try it in a minute** on the practice listings at https://still-recalled.web.app/try: seventeen made-up listings,
 eight of them products the CPSC has recalled. With the extension installed, all eight get a badge and the nine ordinary
-ones don't. One, a Kidsview infant bouncer, was recalled on 2026-11-19, after release 0.8.0's recall list was built: the
+ones don't. One, a Kidsview infant bouncer, was recalled on 2026-11-19, after this version's recall list was built: the
 extension fetches it from CPSC on install.
 
 ## The problem
@@ -38,8 +44,9 @@ extension fetches it from CPSC on install.
   investigation found that sellers use generic names, which keyword filters miss.
 - **Parents rely on secondhand gear.** About two in three U.S. parents bought kids' or baby items secondhand in the
   past year (Mercari Reuse Report, 2022).
-- **Nothing warns the buyer.** The only similar Chrome extension checks Amazon product pages only. No tool flags
-  secondhand marketplace listings from the buyer's side.
+- **Nothing warns the buyer.** The similar Chrome extensions check new-product pages on retail sites (Amazon, and in
+  one case Walmart, Target and Best Buy), mostly when you click. None flags secondhand marketplace listings as you
+  scroll, or banned sleep products.
 
 Every figure is sourced in [docs/research/sources.md](docs/research/sources.md).
 
@@ -152,7 +159,7 @@ reviewers from what a shopper sees: the title, the price and one photo. Method, 
 - The cloud saw 23% of the listings across the four tests.
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
-badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. On the practice listings, release 0.7.0 passes all 12 steps in a Chrome
+badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step. On the practice listings, the packed release passes all 15 steps in a Chrome
 profile with the built-in model (Gemini Nano looked at the listings inside the installed extension, the cloud confirmed
 the flags, and the settings came from Firebase Remote Config), and all checks without the model. On live marketplaces
 (release 0.6.0, 2026-11-18) it passed on eBay and Craigslist; see `docs/accuracy.md` §11.
@@ -197,6 +204,12 @@ Build: `node build.mjs` (writes the engine and cards into `android/app/src/main/
 SDK path, the release signing key and, for development builds only, an App Check debug token. Test on an emulator or
 phone with `node tools/android-e2e.mjs` (add `--watch` with a debug build to replay a recall arriving after a purchase).
 
+**On a phone with Gemini Nano** (AICore; recent Pixel and Galaxy flagships): turn on USB debugging, plug the phone in,
+open the app once and wait until its start screen says Gemini Nano is ready (the model downloads the first time), then
+run `node tools/android-e2e.mjs --nano`. It fails unless the app reports the on-device model as available and the
+example photo is read on the phone, and writes the phone, the model and each check's timing to
+`tools/android-e2e-out/report-nano.json`.
+
 ## Build
 
 ```
@@ -235,7 +248,7 @@ What protects the project's model quota:
 ## Privacy
 
 - Listings that the word rules and the built-in model clear stay on the computer.
-- A flagged listing's title, description and photo are sent to Gemini through Firebase AI Logic, with the recall
+- A flagged listing's title, description, price and photo are sent to Gemini through Firebase AI Logic, with the recall
   notice, for the double check. You can turn the cloud check off in the side panel's settings.
 - No accounts and no tracking. Results are kept in the browser for 7 days.
 - The full policy: [still-recalled.web.app/privacy.html](https://still-recalled.web.app/privacy.html).

@@ -111,6 +111,10 @@ h1, h2, h3, p { margin: 0; }
 .extension { display: grid; gap: 10px; padding-top: 40px; padding-bottom: 40px; border-top: 1px solid var(--border); }
 .extension h2 { font: 600 20px/28px var(--font); letter-spacing: -0.01em; }
 .extension p { max-width: 62ch; text-wrap: pretty; }
+.extension .how-steps { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 8px; max-width: 62ch; }
+.bar-links { display: flex; gap: 16px; }
+.android-cta { font-size: 15px; line-height: 22px; padding: 10px 12px; border-radius: var(--radius-control); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+.android-cta[hidden] { display: none; }
 .foot { display: grid; gap: 6px; padding-top: 24px; padding-bottom: 40px; border-top: 1px solid var(--border); font-size: 13px; line-height: 20px; color: var(--muted); }
 .foot p { max-width: 80ch; }
 

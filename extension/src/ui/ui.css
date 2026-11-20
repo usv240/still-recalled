@@ -78,6 +78,9 @@
 .detail p { margin: 0; }
 .verdict { display: grid; gap: 8px; justify-items: start; }
 .verdict-line { font-size: 15px; line-height: 22px; font-weight: 500; text-wrap: pretty; }
+/* What to do, in one line, under what was found. */
+.action-line { font-size: 14px; line-height: 20px; font-weight: 600; color: var(--text); padding-left: 10px; border-left: 3px solid var(--likely); text-wrap: pretty; }
+.action-line.is-possible { border-left-color: var(--possible); }
 .evidence { font-size: 13px; line-height: 20px; color: var(--muted); text-wrap: pretty; }
 
 /* Signature: the seller's photo beside the government's. */
@@ -121,10 +124,10 @@
 .risk-name { font-weight: 600; }
 .risk-text { font-size: 13px; line-height: 20px; text-wrap: pretty; }
 
-.check, .report { display: grid; gap: 10px; justify-items: start; }
-.check h3, .report h3 { margin: 0; font: 600 13px/20px var(--font); }
-.check > p, .report > p { text-wrap: pretty; }
-.report { padding-top: 14px; border-top: 1px solid var(--rule); }
+.check, .report, .watch { display: grid; gap: 10px; justify-items: start; }
+.check h3, .report h3, .watch h3 { margin: 0; font: 600 13px/20px var(--font); }
+.check > p, .report > p, .watch > p { text-wrap: pretty; }
+.report, .watch { padding-top: 14px; border-top: 1px solid var(--rule); }
 .hint { margin-top: -4px; font-size: 12px; line-height: 16px; color: var(--muted); }
 .report-text { justify-self: stretch; font-size: 12px; line-height: 18px; }
 .report-text summary { cursor: pointer; color: var(--muted); }

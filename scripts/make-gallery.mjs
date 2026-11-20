@@ -68,7 +68,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
 <h1>Every listing is checked on your laptop. Only the few it flags go to the cloud.</h1>
 <p class="lede">Firebase AI Logic runs the same prompt and JSON schema on Chrome's built-in Gemini Nano and on Gemini in the cloud.</p>
 <div class="zones">
-  <div class="zone laptop"><h2>On the laptop. Nothing leaves it.</h2><div class="steps">
+  <div class="zone laptop"><h2>On the laptop</h2><div class="steps">
     <div class="step"><span class="n">${c.listings}</span><span class="what">Word rules</span>
       <span class="how">Every listing's title against the CPSC recall list (all 10,089 since 1973 in the current build). Parts, toys and doll items dropped. Instant.</span></div>
     <div class="step"><span class="n">${c.lookedAtOnDevice}</span><span class="what">Gemini Nano</span>
@@ -147,7 +147,7 @@ const hero = tryRun && `<!doctype html><meta charset="utf-8"><style>${base}
 </style><div class="slide"><div class="split"><div>
 <h1>Flags recalled baby gear on secondhand listings, before you buy.</h1>
 <ul class="points">
-  <li class="on"><b>Gemini Nano looks at every listing on your laptop.</b>Nothing leaves it.</li>
+  <li class="on"><b>Gemini Nano screens each listing on your laptop.</b>In the tests, ${Math.round(100 - 100 * c.shareSentToCloud)}% of listings never left it.</li>
   <li><b>Gemini in the cloud checks only the few it flags,</b>against the full CPSC recall notice and its photo.</li>
   <li><b>Every CPSC recall since 1973,</b>plus the padded bumpers and loungers that federal law now bans.</li>
 </ul>
@@ -175,6 +175,7 @@ const labelSlide = tryRun && tryRun.labelText && `<!doctype html><meta charset="
 </div>`;
 // 3. Live recalls and the watch: a recall CPSC published the morning after the build, matched that day.
 const liveRun = existsSync(path.join(src, 'live-run.json')) ? read(path.join(src, 'live-run.json')) : null;
+const watchRun = existsSync(path.join(src, 'watch-run.json')) ? read(path.join(src, 'watch-run.json')) : null;
 const day = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 const liveSlide = liveRun && existsSync(path.join(src, 'watch-panel.png')) && `<!doctype html><meta charset="utf-8"><style>${base}
 .cols { display: grid; grid-template-columns: 1fr 470px; gap: 72px; margin-top: 44px; align-items: start; }
@@ -183,16 +184,18 @@ const liveSlide = liveRun && existsSync(path.join(src, 'watch-panel.png')) && `<
 .fact b { display: block; font-size: 16px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
 .fact p { margin: 0; font-size: 22px; line-height: 1.45; }
 .fact .big { font-size: 64px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; display: block; margin-bottom: 8px; }
-.phone { width: 470px; height: 650px; overflow: hidden; border-radius: 14px; background: #f8f8f8; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 12px 40px rgba(0,0,0,.10); }
-.phone img { display: block; width: 470px; }
+.phone { width: 440px; height: 600px; overflow: hidden; border-radius: 14px; background: #f8f8f8; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 12px 40px rgba(0,0,0,.10); }
+.phone img { display: block; width: 440px; }
+.cols { grid-template-columns: 1fr 440px; margin-top: 36px; }
+.fact p { font-size: 20px; }
 </style><div class="slide">
 <h1>A recall announced this morning, matched the same day. And a watch on what you bought.</h1>
 <div class="cols"><div class="facts">
-  <div class="fact"><b>Live recalls</b><span class="big">${liveRun.found} new</span><p>CPSC recalls published on ${day(liveRun.date)}, the day after the build. The installed extension fetched them from CPSC and Gemini wrote each one's field-guide entry, through Firebase AI Logic, in ${liveRun.seconds} s. From then on the laptop matches them on its own.</p></div>
+  <div class="fact"><b>Live recalls</b><span class="big">${watchRun ? watchRun.added : liveRun.found} new</span><p>CPSC recalls published after this version's recall list was built, up to ${day(watchRun ? new Date(watchRun.at).toLocaleDateString('en-CA') : liveRun.date)}. The installed extension fetched them from CPSC and Gemini wrote each one's field-guide entry once, through Firebase AI Logic. From then on the laptop matches them on its own.</p></div>
   <div class="fact"><b>On the practice listings</b><p>The ${liveRun.listing} was flagged against recall ${liveRun.recall}, published that morning.</p></div>
   <div class="fact"><b>Why a watch</b><p>Recall notices reach the first owner. Only 22% of the children's products recalled in 2022 that Kids In Danger could analyze were returned, replaced or repaired. A watched listing is checked against every new recall on the laptop, and a match raises a notification.</p></div>
 </div><div class="phone"><img src="${pathToFileURL(path.join(src, 'watch-panel.png')).href}"></div></div>
-<div class="foot"><span>Release 0.8.0, ${day(liveRun.date)}: all ${liveRun.steps} end-to-end steps passed on the live practice listings.</span><span class="brand"><i></i>Still Recalled</span></div>
+<div class="foot"><span>Release ${liveRun.release}, ${day(liveRun.date)}: all ${liveRun.steps} end-to-end steps passed on the live practice listings. The watch list shown is a replay of the same recall's arrival.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
 // The Android app: the same rules engine and prompts on a phone, through Firebase AI Logic on Android.
 const androidRun = existsSync(path.join(src, 'android-run.json')) ? read(path.join(src, 'android-run.json')) : null;
@@ -211,7 +214,7 @@ code { font-family: Geist, monospace; font-size: 16px; background: #eee; padding
 </style><div class="slide">
 <h1>On Android too. Share any listing from any app.</h1>
 <div class="cols"><div class="facts">
-  <div class="fact"><b>Share a screenshot or a link</b><p>From Facebook Marketplace, OfferUp or eBay. Gemini Nano reads it on phones that have it; elsewhere Firebase AI Logic runs the same call in the cloud.</p></div>
+  <div class="fact"><b>Share a screenshot of any listing</b><p>Facebook Marketplace, OfferUp, eBay. Gemini Nano reads it on phones that have it; elsewhere Firebase AI Logic runs the same call in the cloud.</p></div>
   <div class="fact"><b>The same rules, not a rewrite</b><p>The extension's rules engine runs on the phone in Jetpack's JavaScript sandbox: all ${'10,089'} recalls, matched on the phone.</p></div>
   <div class="fact"><b>A watch that outlives the purchase</b><p>New CPSC recalls twice a day, in the background. A match raises a notification.</p></div>
   <div class="fact"><b>App Check without Google Play</b><p>A sideloaded app gets tokens from the site's reCAPTCHA Enterprise bridge. No debug token ships.</p></div>
@@ -219,13 +222,36 @@ code { font-family: Geist, monospace; font-size: 16px; background: #eee; padding
 <div><div class="phone top"><img src="${shotA('android-result.png')}"></div><p class="cap">A shared Rock 'n Play listing, matched to its recall and confirmed in the cloud.</p></div>
 <div><div class="phone top"><img src="${shotA('android-watch.png')}"></div><p class="cap">A watched bouncer, matched to a recall published the day after the build.</p></div>
 </div>
-<div class="foot"><span>Android 16 emulator, November 19, 2026 (tools/android-e2e.mjs): the release APK passed all 8 checks; a debug build replaying a recall's arrival passed all 12.</span><span class="brand"><i></i>Still Recalled</span></div>
+<div class="foot"><span>Android 16 emulator, ${day(androidRun.date)} (tools/android-e2e.mjs): the release APK passed all ${androidRun.release} checks; a debug build replaying a recall's arrival passed all ${androidRun.watch}.</span><span class="brand"><i></i>Still Recalled</span></div>
 </div>`;
-const slides = [['1-extension', hero], ['2-android', androidSlide], ['3-label-check', labelSlide], ['4-new-recalls', liveSlide], ['5-hybrid', hybrid], ['6-results', results]].filter(([, html]) => html);
+// 7. The web page on a phone: the live page's own example check, from tools/capture-phone.mjs.
+const webSlide = existsSync(path.join(src, 'phone-start.png')) && existsSync(path.join(src, 'phone-result.png')) && `<!doctype html><meta charset="utf-8"><style>${base}
+.cols { display: grid; grid-template-columns: 1fr 300px 300px; gap: 40px; margin-top: 40px; align-items: start; }
+.phone { width: 300px; height: 620px; border-radius: 30px; overflow: hidden; background: #f8f8f8; box-shadow: 0 0 0 8px #141414, 0 18px 50px rgba(0,0,0,.18); }
+.phone img { display: block; width: 300px; }
+.cap { margin-top: 18px; font-size: 17px; color: var(--muted); width: 300px; }
+.facts { display: grid; gap: 22px; }
+.fact { border-top: 2px solid var(--text); padding-top: 12px; }
+.fact b { display: block; font-size: 16px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+.fact p { margin: 0; font-size: 20px; line-height: 1.42; }
+code { font-family: Geist, monospace; font-size: 16px; background: #eee; padding: 1px 6px; border-radius: 4px; }
+</style><div class="slide">
+<h1>No install at all: the web page checks a screenshot.</h1>
+<div class="cols"><div class="facts">
+  <div class="fact"><b>Any phone or computer</b><p>Add a screenshot of a listing, from any marketplace. It is matched against all 10,089 CPSC recalls since 1973, in the page.</p></div>
+  <div class="fact"><b>One call, either model</b><p><code>PREFER_ON_DEVICE</code>: Chrome's Gemini Nano reads the screenshot on a computer that has it; on a phone the same call runs on Gemini in the cloud. The page reads <code>inferenceSource</code> and says which ran.</p></div>
+  <div class="fact"><b>Never "safe"</b><p>No match only means no recall was found for what the screenshot shows.</p></div>
+</div>
+<div><div class="phone"><img src="${shot('phone-start.png')}"></div><p class="cap">still-recalled.web.app at phone size.</p></div>
+<div><div class="phone"><img src="${shot('phone-result.png')}"></div><p class="cap">Its example photo, checked: an infant lounger.</p></div>
+</div>
+<div class="foot"><span>The live page in Chrome at phone size (390 × 844), ${day(new Date().toISOString().slice(0, 10))}.</span><span class="brand"><i></i>Still Recalled</span></div>
+</div>`;
+const slides = [['1-extension', hero], ['2-android', androidSlide], ['3-label-check', labelSlide], ['4-new-recalls', liveSlide], ['5-hybrid', hybrid], ['6-results', results], ['7-web-page', webSlide]].filter(([, html]) => html);
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, pipe: true, args: ['--allow-file-access-from-files'] });
 try {
-  for (const old of ['1-hybrid.png', '2-results.png', '3-search-page.png', '3-listing.png', '4-card.png', '3-hybrid.png', '4-results.png', '2-label-check.png', '3-new-recalls.png', '4-hybrid.png', '5-results.png']) rmSync(path.join(out, old), { force: true });
+  for (const old of ['7-web-page.jpg', '1-hybrid.png', '2-results.png', '3-search-page.png', '3-listing.png', '4-card.png', '3-hybrid.png', '4-results.png', '2-label-check.png', '3-new-recalls.png', '4-hybrid.png', '5-results.png']) rmSync(path.join(out, old), { force: true });
   const page = await browser.newPage();
   await page.setViewport({ width: 1500, height: 1000, deviceScaleFactor: 1 });
   for (const [name, html] of slides) {

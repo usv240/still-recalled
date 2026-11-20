@@ -34,8 +34,8 @@ async function show() {
     });
     $model.replaceChildren(h('div', { class: 'status' },
       h('span', { class: 'status-dot is-wait' }), h('div', {},
-        h('h3', {}, 'One step left: Chrome’s built-in model'),
-        h('p', {}, 'Gemini Nano checks listing photos on this computer. Chrome downloads it once (a few GB). Until then, listings are matched by their words, and flagged ones are checked in the cloud.'),
+        h('h3', {}, 'Optional: let Chrome check photos on this computer'),
+        h('p', {}, 'Still Recalled already works without it. With Gemini Nano, Chrome’s built-in model, it also looks at each listing’s photo on this computer, which catches more and raises fewer false alarms. Chrome downloads it once (a few GB).'),
         bar, btn)));
     return;
   }

@@ -17,7 +17,7 @@ document.getElementById('mark').append(mark(18));
 const settingsBtn = document.getElementById('settings');
 settingsBtn.append(icon('settings'));
 const watchBtn = document.getElementById('watching');
-watchBtn.append(icon('bell'));
+watchBtn.append(icon('bell'), Object.assign(document.createElement('span'), { textContent: 'Watch list' }));
 
 let tab = null;            // { id, url }
 let state = null;          // per-tab state from the service worker
@@ -121,7 +121,7 @@ function listView() {
   if (!done) {
     parts.push(h('div', { class: 'progress', role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': state.total, 'aria-valuenow': checked, 'aria-label': 'Listings checked' },
       h('div', { class: 'progress-track' }, h('div', { class: 'progress-fill', style: { transform: `scaleX(${state.total ? checked / state.total : 0})` } })),
-      h('div', { class: 'progress-label' }, h('span', {}, `Checked ${checked} of ${state.total}`), h('span', {}, model === 'available' ? 'On this device' : 'By their words'))));
+      h('div', { class: 'progress-label' }, h('span', {}, `Checked ${checked} of ${state.total}`), h('span', {}, model === 'available' ? 'On this computer' : 'Matching by name'))));
   }
 
   const modelNote = modelNotice();
@@ -252,8 +252,12 @@ function watchRow(key, w) {
             h('span', { class: `pill ${a.level === 'likely' ? 'is-likely' : 'is-possible'}` }, a.badge || 'Possible recall'),
             h('p', {}, `CPSC recalled the ${a.recall.product} on ${dayOf(a.recall.date)}. ${a.recall.hazard || ''}`),
             a.recall.tell ? h('p', { class: 'muted' }, a.recall.tell) : null,
+            // What to do with something already in the house (the same words as the Android app).
+            h('p', {}, a.level === 'likely'
+              ? 'What to do: stop using it, and follow the remedy in the recall notice (often a refund, repair or replacement from the maker).'
+              : "What to do: check its label against the units the notice lists. If it matches, stop using it and follow the notice's remedy."),
             h('a', { class: 'link', href: safeUrl(a.recall.url), target: '_blank', rel: 'noreferrer' }, 'Read the recall notice', icon('external', { size: 14 })))
-        : h('span', { class: 'row-line2' }, `Watching since ${dayOf(w.addedAt)} · no recall found`),
+        : h('span', { class: 'row-line2' }, `Watching since ${dayOf(w.addedAt)} · no recall yet`),
       h('button', { class: 'link muted', type: 'button', onclick: () => chrome.runtime.sendMessage({ type: 'sr:watch', on: false, item: { site: w.site, id: l.id } }) }, 'Stop watching')));
 }
 
@@ -278,7 +282,8 @@ function unsupportedView() {
       h('li', {}, h('span', {}, 'eBay'), h('span', {}, 'Search and listings')),
       h('li', {}, h('span', {}, 'Mercari'), h('span', {}, 'Search and listings')),
       h('li', {}, h('span', {}, 'Craigslist'), h('span', {}, 'Search and listings'))),
-    h('p', { class: 'note' }, 'Photos are checked on this computer by Chrome’s built-in AI. Only listings it flags are double-checked in the cloud.'));
+    h('a', { class: 'link', href: 'https://still-recalled.web.app/try/', target: '_blank', rel: 'noopener' }, 'Try the practice listings', icon('external', { size: 14 })),
+    h('p', { class: 'note' }, 'Listings are checked on this computer. Only the ones it flags are double-checked in the cloud.'));
 }
 
 function modelNotice() {
@@ -315,16 +320,16 @@ function settingsView() {
     h('button', { class: 'back', type: 'button', onclick: () => go({ name: 'list' }) }, icon('back'), 'Back'),
     h('div', { class: 'head' }, h('h1', {}, 'Settings')),
     h('div', {},
-      toggle('cloud', 'Cloud double-check', 'Sends only flagged listings (title, price and photo) to Gemini through Firebase, with the recall notice. Every other listing is checked on this computer.'),
+      toggle('cloud', 'Cloud double-check', 'Flagged listings only: their title, description, price and photo go to Google Gemini through Firebase, with the recall notice. Everything else stays on this computer.'),
       toggle('badges', 'Badges on listings', 'Show a badge on flagged listings on eBay, Mercari and Craigslist.')),
     h('dl', { class: 'kv' },
       h('div', {}, h('dt', {}, 'On-device model'), h('dd', {}, modelWord)),
-      h('div', {}, h('dt', {}, 'Cloud check'), h('dd', {}, hasCloudAccess ? 'Set up' : 'Not set up in this build')),
+      h('div', {}, h('dt', {}, 'Cloud check'), h('dd', {}, hasCloudAccess ? 'Available' : 'Off')),
       h('div', {}, h('dt', {}, 'Recall notices'), h('dd', {}, meta ? (meta.count + (live ? live.cards.length : 0)).toLocaleString('en-US') : '–')),
       h('div', {}, h('dt', {}, 'Recalls since'), h('dd', {}, meta ? meta.since : '–')),
       h('div', {}, h('dt', {}, 'Added since this version'), h('dd', {}, String(live ? live.cards.length : 0))),
       h('div', {}, h('dt', {}, 'Last checked with CPSC'), h('dd', {}, live && live.checkedAt ? dayOf(live.checkedAt) : meta ? `${meta.built.slice(0, 10)} (this version)` : '–'))),
-    h('button', { class: 'btn btn-secondary', type: 'button', style: { justifySelf: 'start' }, onclick: recheck }, icon('refresh'), 'Clear saved results'));
+    h('button', { class: 'btn btn-secondary', type: 'button', style: { justifySelf: 'start' }, onclick: recheck }, icon('refresh'), 'Check this page again'));
 }
 
 async function recheck() {
