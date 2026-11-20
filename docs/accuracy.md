@@ -657,6 +657,75 @@ the computer first, and the unnamed sleeper was matched the same way; `docs/gall
 warning", 21 s), and a listing described without its product's name, where the cloud called the function and the
 phone answered ("Recalled product", 12 s); checks took 6 to 21 s.
 
+## 18. A third review, the 597 run again, and release 0.11.0 (2026-11-20)
+
+A fourth independent review (an AI judge, not a person) checked every number in section 17 against the files and
+found them right. It also found bugs and claims to tighten. What changed, and what was measured.
+
+**A recall the cloud named is never a red "Recalled product" on its own.** When the cloud calls `lookup_recalls`, the
+listing's words did not name the brand, so no code checked it, and look-alike products exist. Such a recall is now
+shown as "Possible recall", or, when a type flag already stands (words and photo agree on an inclined sleeper), as a
+line on that flag's card naming the recall (`shared/confirm.mjs`, `decideFinal`; `shared/present.mjs`, `also`,
+`foundBy`). The rule was needed: in the run below, the fallback model named a Kids2 rocking sleeper as a Rock 'n Play.
+
+- `node tools/lookup-generic.mjs --runs=2` under this rule (ten made-up listings with generic titles, each with its
+  recall notice's own photo, checked one at a time as the web page and the Android app do): the right recall was
+  named on 6 of 10, then 7 of 10. One more each pass named another notice: an earlier notice for the same product
+  (Nap Nanny), and the look-alike above. 9 of 10 were flagged for the parent on each pass, against 6 without the
+  function. None was a red recall on the cloud's word alone. This run shared its cloud quota with the 597 run, so the
+  fallback model answered several times; the earlier run (section 17), on the main model, named 8 of 10.
+- In the extension the function reaches only what the device flags or can't settle: 6 of those 10 titles have no
+  risky type words, so there they reach the cloud only if Gemini Nano sees a risky type in the photo.
+- Section 17's "no listing changed between flagged and not" compared the same cloud answers decided with and without
+  the function. It did not compare two separate runs.
+
+**All 597 listings again, on the current engine** (`bash tools/rerun-all.sh`, `node tools/rerun-compare.mjs`,
+results in `tools/*-rerun.json` and `tools/rerun-compare.json`; Gemini Nano in the test profile, development build,
+cloud at temperature 0, the 392 warnings and the function included). No cloud or device errors; every photo loaded.
+
+| | Caught (of 74) | False alarms (of 481) | Sent to the cloud |
+|---|---|---|---|
+| First runs, each on the engine of its day (blind) | 58 | 11 | 140 (23%) |
+| Run again on 0.11.0: word rules only | 45 | 78 | |
+| Run again on 0.11.0: Gemini Nano only | 48 | 66 | |
+| Run again on 0.11.0: hybrid | 67 | 13 | 165 (28%) |
+
+- **This is not a blind result.** The first three sets were used to fix the engine after each test, so catching more
+  of them (10 to 14 of 14, 28 to 34 of 34) shows the fixes hold, not how it does on unseen listings. The fourth set,
+  the newest, came out the same: 18 of 22, with 0 false alarms where it had 1. The blind figures stay 58 and 11.
+- 31 listings changed between flagged and not: 19 for the better, 12 for the worse. Two catches were lost in the
+  second set (a Mockingbird stroller and a crib headboard cover), where Gemini Nano's look said nothing this time:
+  its answer for a listing is not the same on every run.
+- Of the 13 false alarms, 11 are soft "possible" flags. Six are UPPAbaby VISTA and CRUZ "V2" strollers flagged against
+  the 2015 recall of the first version: the cloud answered "cannot tell" where the listing's "V2" places it outside
+  the notice. Not fixed here, so that this table is not tuned to. One, a Graco Swyngomatic swing, was labelled "no"
+  before every recall since 1973 was added; the fourth test counts the same swing as a catch.
+- The function was called on 14 of the 165 cloud checks, the device had a recall for 1, and no result was shown
+  because of it: on these real listings, whose sellers mostly name the brand, it found nothing new.
+- 72% of listings never left the laptop, against 77% in the first runs.
+
+**For the person who owns it (`ownerView`).** "I own it" on the web page and in the Android app: the same check, then
+"Don't sell it or give it away", that CPSC says it is illegal to sell a recalled product, and the recall's remedy
+from the card. For a CPSC warning: no refund to claim. For loungers, no claim of a federal ban. Never "safe to sell".
+Unit tests cover each case. Run end to end on the local web page (a typed Boppy lounger: "Don't sell it or give it away", with the refund) and on the Android emulator (`node tools/android-owner.mjs`: the same, with no question for a seller and no report). Not tried with real sellers.
+
+**Bugs fixed.** The recall API fetch for a notice now times out after 15 s (a stalled fetch held a listing at
+"Checking in the cloud" and a cloud slot). A model that answers 404 is skipped for the next in Remote Config's list
+(web and Android). A function-calling round that ends without text is asked once more without the function. 692 recall
+cards hold only 14 of a notice's model numbers; they are marked, and the label check now says "Check this model
+against the notice" there, not "Model not listed". The web cloud calls now use temperature 0, as Android's do.
+
+**Sources.** The three sources the write-up quotes were read at the source and added to `docs/research/sources.md`
+(section 9). One line was too strong: CPSC "issued 82,000 takedown notices" in the first half of fiscal 2026, in its
+acting chairman's words; the write-up had said "more than 82,000 takedown requests to online platforms".
+
+**0.11.0 results (2026-11-20).** 71 unit tests pass. The packed extension passed all 16 end-to-end steps on the live
+practice page in a new Chrome profile, without the built-in model; the unnamed sleeper is flagged "Inclined infant
+sleeper" with recall 23088 named on its card through `lookup_recalls`; report `tools/e2e-report-release.json`.
+On the Android 16 emulator (no Gemini Nano) the release APK passed 10 of 10: the example, four shared texts, a CPSC
+warning, and a shared text that names no brand, only a nickname ("the rock and play one everyone had"), where the cloud
+called the function, the phone answered, and the card named recall 23088.
+
 ## Reproduce
 
 ```

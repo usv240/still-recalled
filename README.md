@@ -30,8 +30,8 @@ one matches.
 
 **Try it in a minute** on the practice listings at https://still-recalled.web.app/try: seventeen made-up listings,
 eight of them products the CPSC has recalled. With the extension installed, all eight get a badge and the nine ordinary
-ones don't. The first is titled "Inclined baby sleeper, pink, folds flat", the way sellers often write it: it comes
-back as the recalled Rock 'n Play, through the cloud's question to the device. One, a Kidsview infant bouncer, was recalled on 2026-11-19, after this version's recall list was built: the
+ones don't. The first is titled "Inclined baby sleeper, pink, folds flat", the way sellers often write it: it is
+flagged as an inclined sleeper, and its card names the Rock 'n Play recall, through the cloud's question to the device. One, a Kidsview infant bouncer, was recalled on 2026-11-19, after this version's recall list was built: the
 extension fetches it from CPSC on install.
 
 ## The problem
@@ -115,10 +115,14 @@ the word rules find only a risky type, or nothing. The cloud model can often nam
 field guide of every recall lives on the device. So the cloud's confirmation carries one function, `lookup_recalls`,
 through Firebase AI Logic function calling (web SDK and Android SDK). The cloud names the brand and product; the call
 comes back to the device; the same shortlist code that matches listings answers it, with the notices it found; and the
-cloud judges the listing against them. A recall the cloud names counts only when it is one the device returned.
-- On ten made-up listings with generic titles and each recall notice's own photo, the word rules found the recall on
-  none. With the function, 8 of 10 came back with a recall of the right product, on each of two passes
+cloud judges the listing against them. A recall the cloud names counts only when it is one the device returned. And
+because the listing's words never named the brand, no code checked it: such a recall is never a red "Recalled product"
+on the cloud's word alone. It is named on a type flag that already stands, or shown as "Possible recall".
+- On ten made-up listings with generic titles and each recall notice's own photo, checked one at a time as the web
+  page and the Android app do, the word rules found the recall on none. With the function, the right recall was named on 6 of 10 and 7 of 10 in two passes; one more each pass named another notice (once an earlier notice for the same product, once a look-alike product, by the fallback model). 9 of 10 were flagged, against 6 without it, and none as a red recall on the cloud's word alone
   (`node tools/lookup-generic.mjs`, `tools/lookup-generic.json`).
+- In the extension the function reaches the listings the device flags or can't settle. A generic title with no risky
+  type words reaches the cloud only when Gemini Nano sees a risky type in the photo.
 - On the 140 real test listings that went to the cloud, the function was called on 12, the device had a recall for 2,
   and no listing changed between flagged and not flagged (`node tools/lookup-run.mjs --set=third`,
   `tools/*-lookup.json`).
@@ -128,6 +132,11 @@ hazardous product, CPSC warns the public itself. Those notices are not in the re
 held 393 of them, 144 dated 2026. Each gets a spotter card the way a recall does, and its own wording on the card
 ("CPSC warning", not "Recalled product"). Adding them changed the word match of 1 of the 597 test listings, which the
 cloud cleared (`node tools/warnings-check.mjs`).
+
+**For the person who owns it** ([shared/present.mjs](shared/present.mjs), `ownerView`). On the web page and in the
+Android app, choose **I own it**: the same check then speaks to someone about to sell an item, give it away, or use a
+hand-me-down. A match says not to pass it on, that CPSC says it is illegal to sell a recalled product, and what the
+recall offers its owner. Most sellers of recalled baby gear don't know it is recalled (Consumer Reports, 2026).
 
 **While a page is checked,** a quiet pill on each listing says where its check is: "Looking on this computer" (Gemini
 Nano), then "Checking in the cloud" for what the computer flagged.
@@ -184,12 +193,17 @@ reviewers from what a shopper sees: the title, the price and one photo. Method, 
 - In the fourth test, two of the three recall catches were recalls older than the five years of data the first three
   tests used: a 1995 Graco swing and a Graco Swyngomatic, under Graco's 2000 swing recall.
 - The cloud saw 23% of the listings across the four tests.
+- **Run again on 0.11.0** (2026-11-20, with the warnings and the function): 67 of 74 caught, 13 false alarms, 28% sent
+  to the cloud. Not a blind result: the first three sets were used to fix the engine. The newest set came out the same
+  (18 of 22, no false alarms). Six of the 13 false alarms are UPPAbaby "V2" strollers, flagged softly against the 2015
+  recall of the first version, and 31 listings changed between the two runs (19 for the better): Gemini Nano's answer
+  is not the same on every run. `node tools/rerun-compare.mjs`, `docs/accuracy.md` section 18.
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
 badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step, and saves
-its report to `tools/e2e-report-*.json`. On the practice listings, the packed 0.10.0 release passes all 16 steps in a
-new Chrome profile, which has no built-in model (words, then the cloud). With the built-in model, the 0.10.0
-development build looked at all 8 flagged listings on the computer first (`docs/accuracy.md` section 17). The on-device step was run end to end with
+its report to `tools/e2e-report-*.json`. On the practice listings, the packed release passes all 16 steps in a
+new Chrome profile, which has no built-in model (words, then the cloud). With the built-in model, the development
+build looked at all 8 flagged listings on the computer first (`docs/accuracy.md` sections 17 and 18). The on-device step was run end to end with
 release 0.7.0 in a profile with Gemini Nano: all 12 steps of that version passed, Gemini Nano looked at the listings
 inside the installed extension, the cloud confirmed the flags, and the settings came from Firebase Remote Config. In
 that heavily automated profile reCAPTCHA later refused release tokens, so later on-device runs used the development
@@ -250,6 +264,7 @@ npm test             # unit tests
 npm run e2e          # the real extension in a separate Chrome profile, on a live eBay search
 node scripts/pack-extension.mjs    # release package in dist/ (no debug token, no developer pages)
 node scripts/build-warnings.mjs    # CPSC safety warnings: spotter cards written in the cloud, merged after the recall cards
+bash tools/rerun-all.sh            # the four accuracy tests again on the current engine, saved beside the first runs
 node tools/nano-profile.mjs        # a separate Chrome test profile with the built-in model (Chrome downloads it, ~4 GB)
 npm run e2e -- --profile=C:/tmp/sr-nano-profile    # the end-to-end test with the on-device step
 node tools/eval-run.mjs --set=third --mode=hybrid  # an accuracy test run in that profile

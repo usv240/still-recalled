@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-20T07:36:02.314Z",
+  "at": "2026-11-20T09:36:53.509Z",
   "apk": "android/app/build/outputs/apk/release/app-release.apk",
   "build": "release",
   "steps": [
@@ -11,7 +11,7 @@
     {
       "name": "App Check token from the reCAPTCHA bridge",
       "ok": true,
-      "detail": "15 s after launch"
+      "detail": "8 s after launch"
     },
     {
       "name": "recall list catches up with CPSC (background worker)",
@@ -21,43 +21,43 @@
     {
       "name": "example photo: VEVOR lounger, recall 26591",
       "ok": true,
-      "detail": "likely / Recalled product in 13.7 s (gemini-3.5-flash-lite 1600 ms, gemini-3.5-flash-lite 1117 ms, gemini-4-hydrogen 8866 ms)"
+      "detail": "likely / Recalled product in 15.6 s (gemini-3.5-flash-lite 1546 ms, gemini-3.5-flash-lite 1469 ms, gemini-4-hydrogen 10497 ms)"
     },
     {
       "name": "shared text: Rock n Play",
       "ok": true,
-      "detail": "likely / Recalled product in 6.0 s (gemini-3.5-flash-lite 1071 ms, gemini-4-hydrogen 4771 ms)"
+      "detail": "likely / Recalled product in 6.6 s (gemini-3.5-flash-lite 865 ms, gemini-4-hydrogen 5433 ms)"
     },
     {
       "name": "shared text: Graco swing",
       "ok": true,
-      "detail": "possible / Possible recall in 7.5 s (gemini-3.5-flash-lite 1030 ms, gemini-4-hydrogen 6289 ms)"
+      "detail": "possible / Possible recall in 7.5 s (gemini-3.5-flash-lite 1496 ms, gemini-4-hydrogen 5865 ms)"
     },
     {
       "name": "shared text: a product CPSC warned about (Aila+Aiden lounger)",
       "ok": true,
-      "detail": "likely / CPSC warning in 20.6 s (gemini-3.5-flash-lite 876 ms, gemini-4-hydrogen 19651 ms)"
+      "detail": "likely / CPSC warning in 22.7 s (gemini-3.5-flash-lite 929 ms, gemini-4-hydrogen 21669 ms)"
     },
     {
-      "name": "shared text: a product described without its name (the cloud asks the phone)",
+      "name": "shared text: no brand, only a nickname (the cloud asks the phone)",
       "ok": true,
-      "detail": "likely / Recalled product in 12.0 s (gemini-3.5-flash-lite 978 ms, gemini-4-hydrogen 10949 ms)"
+      "detail": "likely / Inclined infant sleeper in 8.7 s (gemini-3.5-flash-lite 783 ms, gemini-4-hydrogen 7838 ms)"
     },
     {
       "name": "shared text: wooden blocks",
       "ok": true,
-      "detail": "none / no match in 0.0 s (no model call)"
+      "detail": "none / no match in 0.1 s (no model call)"
     },
     {
       "name": "shared text: recall published after the build (Kidsview, 2026-11-19)",
       "ok": true,
-      "detail": "possible / Possible recall in 7.6 s (gemini-3.5-flash-lite 1215 ms, gemini-4-hydrogen 6200 ms)"
+      "detail": "possible / Possible recall in 7.4 s (gemini-3.5-flash-lite 1112 ms, gemini-4-hydrogen 5972 ms)"
     }
   ],
   "checks": [
     {
       "name": "example photo: VEVOR lounger, recall 26591",
-      "ms": 13732,
+      "ms": 15581,
       "level": "likely",
       "badge": "Recalled product",
       "readOnDevice": "false",
@@ -74,14 +74,14 @@
         "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 1600 ms",
-        "gemini-3.5-flash-lite 1117 ms",
-        "gemini-4-hydrogen 8866 ms"
+        "gemini-3.5-flash-lite 1546 ms",
+        "gemini-3.5-flash-lite 1469 ms",
+        "gemini-4-hydrogen 10497 ms"
       ]
     },
     {
       "name": "shared text: Rock n Play",
-      "ms": 5965,
+      "ms": 6610,
       "level": "likely",
       "badge": "Recalled product",
       "readOnDevice": "null",
@@ -98,13 +98,13 @@
         "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 1071 ms",
-        "gemini-4-hydrogen 4771 ms"
+        "gemini-3.5-flash-lite 865 ms",
+        "gemini-4-hydrogen 5433 ms"
       ]
     },
     {
       "name": "shared text: Graco swing",
-      "ms": 7528,
+      "ms": 7457,
       "level": "possible",
       "badge": "Possible recall",
       "readOnDevice": "null",
@@ -121,13 +121,13 @@
         "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 1030 ms",
-        "gemini-4-hydrogen 6289 ms"
+        "gemini-3.5-flash-lite 1496 ms",
+        "gemini-4-hydrogen 5865 ms"
       ]
     },
     {
       "name": "shared text: a product CPSC warned about (Aila+Aiden lounger)",
-      "ms": 20641,
+      "ms": 22725,
       "level": "likely",
       "badge": "CPSC warning",
       "readOnDevice": "null",
@@ -144,15 +144,15 @@
         "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 876 ms",
-        "gemini-4-hydrogen 19651 ms"
+        "gemini-3.5-flash-lite 929 ms",
+        "gemini-4-hydrogen 21669 ms"
       ]
     },
     {
-      "name": "shared text: a product described without its name (the cloud asks the phone)",
-      "ms": 11968,
+      "name": "shared text: no brand, only a nickname (the cloud asks the phone)",
+      "ms": 8682,
       "level": "likely",
-      "badge": "Recalled product",
+      "badge": "Inclined infant sleeper",
       "readOnDevice": "null",
       "how": {
         "device": false,
@@ -179,13 +179,13 @@
         ]
       },
       "calls": [
-        "gemini-3.5-flash-lite 978 ms",
-        "gemini-4-hydrogen 10949 ms"
+        "gemini-3.5-flash-lite 783 ms",
+        "gemini-4-hydrogen 7838 ms"
       ]
     },
     {
       "name": "shared text: wooden blocks",
-      "ms": 20,
+      "ms": 75,
       "level": "none",
       "badge": "",
       "readOnDevice": "null",
@@ -205,7 +205,7 @@
     },
     {
       "name": "shared text: recall published after the build (Kidsview, 2026-11-19)",
-      "ms": 7631,
+      "ms": 7402,
       "level": "possible",
       "badge": "Possible recall",
       "readOnDevice": "null",
@@ -222,8 +222,8 @@
         "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 1215 ms",
-        "gemini-4-hydrogen 6200 ms"
+        "gemini-3.5-flash-lite 1112 ms",
+        "gemini-4-hydrogen 5972 ms"
       ]
     }
   ],

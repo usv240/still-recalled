@@ -51,7 +51,7 @@ and each can ask the other.
   it is one the device returned, and because no code checked the brand, it is never a red "Recalled product" on the
   cloud's word alone: it is named on a type flag that already stands, or shown as "Possible recall". On ten made-up
   listings titled this way, each with its recall notice's own photo and checked one at a time as the web page does,
-  the word rules found the recall on none. With the cloud asking, GENERIC_RESULT. Once, the fallback model took a
+  the word rules found the recall on none. With the cloud asking, the right recall was named on 6 and then 7 of the 10 in two passes, and 9 of 10 were flagged for the parent, against 6 without the function. Once, the fallback model took a
   look-alike rocking sleeper for a Rock 'n Play, which is why the rule above exists. In the extension the function
   reaches the listings the device flags or can't settle, not every listing.
 - **The device may raise an alarm alone, never reassure alone.** Asked "is this one of the recalled units?", Gemini
@@ -120,14 +120,23 @@ can. Each test was run with the engine of its day, so the totals add four versio
 share one engine. The listings were labelled blind by AI reviewers (Claude) from the title, price and photo; a
 person has not yet checked those labels. Every label and every miss is in `docs/accuracy.md`.
 
-**On the current engine, November 20, 2026.** RERUN_RESULT
+**On the current engine, November 20, 2026.** I ran all 597 again on 0.11.0, with the warnings and the function
+included: 67 caught, 13 false alarms, and 72% never left the laptop. That is not a blind result: the first three sets
+were used to fix the engine after each test. The newest set, which was not, came out the same (18 of 22, no false
+alarms). Six of the 13 false alarms are UPPAbaby "V2" strollers flagged softly against the 2015 recall of the first
+version; I left that unfixed rather than tune to the test. Gemini Nano's answer for a listing also varies from run to
+run: 31 listings changed, 19 for the better and 12 for the worse.
 
 On the 140 listings the first runs sent to the cloud, the function was called on 12 (about half of them for a brand
 the title already named) and had a recall for 2; deciding the same cloud answers with and without it changed no
 listing between flagged and not flagged. Adding the 392 warnings changed the word match of 1 listing in 597, which
 the cloud cleared.
 
-**End to end, November 20, 2026.** E2E_RESULT
+**End to end, November 20, 2026.** The packed extension passed all 16 steps on the live practice page (a new Chrome
+profile, so without Gemini Nano). With Gemini Nano, in a development build of 0.10.0, all 8 flagged listings were
+looked at on the laptop first; the 17 listings took 183 s, against 30 to 81 s without it. The Android release APK
+passed all 10 checks on an Android 16 emulator, which has no Gemini Nano, so the phone's on-device path has not
+been run yet.
 
 ### Challenges
 - **The built-in model agrees too easily.** Asked "same brand?", it said yes to almost anything. So code checks the
