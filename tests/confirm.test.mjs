@@ -102,3 +102,32 @@ test('web second opinion: the cloud alone raises only a soft flag, and only when
   assert.equal(web.level, 'possible');
   assert.equal(web.banned.key, 'in_bed_sleeper');
 });
+
+test('the cloud asks the device: a recall it names counts only when the device returned it', async () => {
+  const { lookupCards, lookupResponse, lookupArgs } = await import('../shared/lookup.mjs');
+  const { buildIndex } = await import('../shared/shortlist.mjs');
+  const card = { id: '19-112', date: '2019-04-12', product: 'Fisher-Price Rock \'n Play Sleepers', title: 'Fisher-Price Recalls Rock \'n Play Sleepers', hazard: 'Infant fatalities', tell: 'All models.', all: true, from: 2009, to: 2019,
+    brands: [['fisher', 'price']], lines: [['rock', 'n', 'play']], linesWithBrand: [], kinds: [['sleeper']], productTokens: [], codes: [] };
+  const index = buildIndex([card]);
+  const cands = lookupCards(index, { brand: 'Fisher-Price', product: 'Rock \'n Play sleeper' });
+  assert.equal(cands[0].card.id, '19-112');
+  assert.equal(lookupCards(index, { brand: 'Fisher-Price', product: 'Rock \'n Play sleeper' }, { exclude: '19-112' }).length, 0);
+  assert.equal(lookupCards(index, { brand: '', product: 'sleeper' }).length, 0);
+  assert.deepEqual(lookupArgs({ brand: 7, product: ' a  b ' }), { brand: '', product: 'a b', model_number: '' });
+  assert.equal(lookupResponse(cands).recalls[0].recall_id, '19-112');
+  assert.match(lookupResponse([]).note, /no recall/);
+
+  // The device flagged only a type (the title never names the product).
+  const device = { level: 'possible', kind: 'banned', card: null, banned: { key: 'inclined_sleeper' } };
+  const cloud = { what_is_for_sale: 'the_product', matches_recall: 'yes', banned_type: 'inclined_sleeper', evidence: 'e', check_before_buying: 'c', where: [], recall_id: '19-112' };
+  const named = decideFinal(device, cloud, [{ key: 'inclined_sleeper' }], cands.map(c => c.card));
+  assert.equal(named.level, 'likely');
+  assert.equal(named.kind, 'recall');
+  assert.equal(named.card.id, '19-112');
+  assert.equal(named.lookedUp, true);
+  // A recall number the device never returned is ignored: the type flag stands instead.
+  const invented = decideFinal(device, { ...cloud, recall_id: '99-999' }, [{ key: 'inclined_sleeper' }], cands.map(c => c.card));
+  assert.equal(invented.kind, 'banned');
+  const none = decideFinal(device, cloud, [{ key: 'inclined_sleeper' }]);
+  assert.equal(none.kind, 'banned');
+});

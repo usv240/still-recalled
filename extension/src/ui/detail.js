@@ -149,15 +149,20 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
     h('p', { class: 'verdict-line' }, r.verdict),
     r.action ? h('p', { class: `action-line ${levelClass(r)}` }, r.action) : null,
     r.confirmed && r.evidence ? h('p', { class: 'evidence' }, r.evidence) : null,
+    r.foundBy ? h('p', { class: 'evidence found-by' }, r.foundBy) : null,
   ));
 
   // The cloud check's outline of what it saw in the seller's photo. Only when the photo was there to look at.
   const where = r.where && r.listing.image ? r.where : null;
   if (r.kind === 'recall' && r.recall) {
-    root.append(h('div', { class: 'pair' },
-      photo(r.listing.image, where ? 'This listing. Outlined: what the cloud check matched.' : 'This listing', r.listing.url, { where }),
-      photo(r.recall.image, 'Recall notice', r.recall.url),
-    ));
+    // A CPSC warning comes without a photo: the hazard, in CPSC's words, stands beside the listing instead.
+    root.append(r.recall.image
+      ? h('div', { class: 'pair' },
+        photo(r.listing.image, where ? 'This listing. Outlined: what the cloud check matched.' : 'This listing', r.listing.url, { where }),
+        photo(r.recall.image, 'Recall notice', r.recall.url))
+      : h('div', { class: 'pair is-single' },
+        photo(r.listing.image, where ? 'This listing. Outlined: what the cloud check matched.' : 'This listing', r.listing.url, { where }),
+        h('div', { class: 'risk' }, h('p', { class: 'risk-text' }, r.recall.hazard || r.recall.title))));
     // Which units the notice recalls, in one sentence written from the notice.
     if (r.recall.tell && r.recall.tell !== r.check) root.append(h('p', { class: 'tell' }, h('b', {}, 'Which units: '), r.recall.tell));
   } else if (r.kind === 'banned' && r.banned && where) {
@@ -185,7 +190,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
   root.append(h('section', { class: 'check' },
     h('h3', {}, 'Before you buy'),
     // The cloud's own line names the notice's models and label; without it, the type's advice or a plain default.
-    h('p', {}, r.recall && r.recall.all ? 'Every unit of this product is recalled, whatever its model number or date. Check that it is this product: the brand and the photos.'
+    h('p', {}, r.recall && r.recall.all ? `${r.recall.warning ? "CPSC's warning covers every unit of this product" : 'Every unit of this product is recalled'}, whatever its model number or date. Check that it is this product: the brand and the photos.`
       : r.check || (r.banned && r.banned.advice) || DEFAULT_CHECK[r.kind] || ''),
     h('blockquote', { class: 'question' }, r.question),
     askBtn,
@@ -227,18 +232,18 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
 
   if (!compact && r.kind === 'recall' && r.recall) {
     root.append(h('dl', { class: 'facts' },
-      h('div', {}, h('dt', {}, 'Recall'), h('dd', { class: 'num' }, r.recall.id)),
-      h('div', {}, h('dt', {}, 'Recalled'), h('dd', { class: 'num' }, r.recall.date)),
+      h('div', {}, h('dt', {}, r.recall.warning ? 'CPSC warning' : 'Recall'), h('dd', { class: 'num' }, r.recall.number || r.recall.id)),
+      h('div', {}, h('dt', {}, r.recall.warning ? 'Warned' : 'Recalled'), h('dd', { class: 'num' }, r.recall.date)),
       h('div', {}, h('dt', {}, 'Product'), h('dd', {}, r.recall.product)),
       r.recall.hazard ? h('div', {}, h('dt', {}, 'Hazard'), h('dd', {}, r.recall.hazard)) : null,
-      r.recall.remedy ? h('div', {}, h('dt', {}, 'Remedy'), h('dd', {}, r.recall.remedy)) : null,
+      r.recall.remedy ? h('div', {}, h('dt', {}, r.recall.warning ? 'CPSC says' : 'Remedy'), h('dd', {}, r.recall.remedy)) : null,
     ));
   }
 
   const source = r.kind === 'recall' ? safeUrl(r.recall && r.recall.url) : safeUrl(r.banned && r.banned.source);
   root.append(h('div', { class: 'links' },
     source ? h('a', { class: 'link', href: source, target: '_blank', rel: 'noopener' },
-      r.kind === 'recall' ? 'Read the CPSC recall notice' : 'CPSC safe sleep guidance', icon('external', { size: 14 })) : null,
+      r.kind === 'recall' ? (r.recall.warning ? `Find warning ${r.recall.number} on CPSC's warnings page` : 'Read the CPSC recall notice') : 'CPSC safe sleep guidance', icon('external', { size: 14 })) : null,
     onOpenPanel ? h('button', { class: 'link', type: 'button', onclick: onOpenPanel }, 'More in the side panel', icon('panel', { size: 14 })) : null,
   ));
 

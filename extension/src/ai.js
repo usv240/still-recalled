@@ -173,13 +173,14 @@ export function deviceModel({ system, schema }) {
  * A cloud Gemini model through Firebase AI Logic. With `schema`, the answer is JSON following that JSON Schema,
  * the same schema shape the on-device model takes, so the two answers can be compared field by field.
  */
-export function cloudModel({ system, schema, model = CLOUD_MODEL }) {
+export function cloudModel({ system, schema, model = CLOUD_MODEL, tools = null }) {
   // ONLY_IN_CLOUD on purpose: this step reads the full recall notice and two photos, a judgment the on-device model
   // was measured to get wrong (it said "one of the recalled units" 20 times where the cloud agreed once).
   return getGenerativeModel(ai, {
     mode: InferenceMode.ONLY_IN_CLOUD,
     inCloudParams: {
       model,
+      ...(tools ? { tools } : {}),
       ...(system ? { systemInstruction: system } : {}),
       generationConfig: schema ? { responseMimeType: 'application/json', responseJsonSchema: schema } : {},
     },
@@ -196,16 +197,40 @@ const retryDelay = (e, attempt) => {
 };
 
 /**
- * One JSON answer from the cloud. Falls back through CLOUD_MODELS when a model is busy, and when every model is over
- * its per-minute quota, waits and tries again (twice). Returns { answer, model }.
+ * One request with a function the cloud model may call (Firebase AI Logic function calling). `onCall(name, args)`
+ * runs on this device and returns the function's response; the model then gives its JSON answer. At most two rounds
+ * of calls: a model that keeps asking is told to answer.
  */
-export async function cloudJson({ system, schema, parts, models = null, retries = 2 }) {
+async function askWithTool(model, parts, onCall) {
+  const chat = model.startChat();
+  let r = await chat.sendMessage(parts);
+  for (let round = 0; round < 3; round++) {
+    const calls = (r.response.functionCalls && r.response.functionCalls()) || [];
+    if (!calls.length) break;
+    const answers = [];
+    for (const c of calls.slice(0, 3)) {
+      const response = round < 2 ? await onCall(c.name, c.args || {}) : { note: 'No more lookups. Answer now.' };
+      answers.push({ functionResponse: { name: c.name, response } });
+    }
+    r = await chat.sendMessage(answers);
+  }
+  return r;
+}
+
+/**
+ * One JSON answer from the cloud. Falls back through CLOUD_MODELS when a model is busy, and when every model is over
+ * its per-minute quota, waits and tries again (twice). With `tool` (a function declaration) and `onCall`, the model
+ * may call that function, which runs here, before it answers. Returns { answer, model }.
+ */
+export async function cloudJson({ system, schema, parts, models = null, retries = 2, tool = null, onCall = null }) {
   models ||= (await liveSettings()).models;
   let last;
   for (let attempt = 0; attempt <= retries; attempt++) {
     for (const model of models) {
       try {
-        const r = await cloudModel({ system, schema, model }).generateContent(parts);
+        const r = tool && onCall
+          ? await askWithTool(cloudModel({ system, schema, model, tools: [{ functionDeclarations: [tool] }] }), parts, onCall)
+          : await cloudModel({ system, schema, model }).generateContent(parts);
         return { answer: JSON.parse(r.response.text()), model };
       } catch (e) {
         last = e;

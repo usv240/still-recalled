@@ -117,10 +117,25 @@ class Checker(private val cloudAllowed: () -> Boolean) {
                     else -> Ai.Text(s)
                 }
             }
-            val cloud = Ai.json(prompt("confirm"), parts, Ai.Mode.CLOUD_ONLY, settings.models)
+            // The cloud asks the phone: when it can name a product the listing's words did not, it calls
+            // lookup_recalls, and the field guide on this phone answers (shared/lookup.mjs).
+            val lookups = JSONArray()
+            val lookedUp = JSONArray()
+            val fn = Ai.Function((prompts ?: Rules.obj("prompts").also { prompts = it }).getJSONObject("confirm").getJSONObject("tool")) { args ->
+                val found = Rules.obj("lookup", args, id)
+                val ids = found.getJSONArray("ids")
+                val cards = found.getJSONArray("cards")
+                val notices = JSONArray()
+                for (i in 0 until ids.length()) notices.put(try { Net.notice(ids.getString(i)) ?: JSONObject.NULL } catch (e: Throwable) { JSONObject.NULL })
+                for (i in 0 until cards.length()) lookedUp.put(cards.getJSONObject(i))
+                lookups.put(JSONObject().put("asked", found.getJSONObject("asked")).put("found", ids))
+                Rules.obj("lookupResponse", found, notices)
+            }
+            val cloud = Ai.jsonWithFunction(prompt("confirm"), parts, settings.models, fn)
             how.put("cloud", JSONObject().put("model", cloud.model).put("answer", cloud.json))
-            step("look", "Looking closer", State.DONE, "Compared with the full recall notice")
-            Outcome(Rules.obj("finish", listing, device, cloud.json, hints, how), listing, photo, readOnDevice)
+            if (lookups.length() > 0) how.put("lookups", lookups)
+            step("look", "Looking closer", State.DONE, if (lookups.length() > 0) "The cloud asked this phone's field guide, then compared with the notice" else "Compared with the full recall notice")
+            Outcome(Rules.obj("finish", listing, device, cloud.json, hints, how, lookedUp), listing, photo, readOnDevice)
         } catch (e: Throwable) {
             // The on-device flag stands, marked unconfirmed.
             how.put("cloudError", e.toString().take(400))

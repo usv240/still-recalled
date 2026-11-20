@@ -8,7 +8,8 @@ import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer, INFANT } from '../../shared/triage.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
 import { noticeFromCpsc } from '../../shared/notice.mjs';
-import { CONFIRM_SYSTEM, CONFIRM_SCHEMA, confirmParts, decideFinal } from '../../shared/confirm.mjs';
+import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal } from '../../shared/confirm.mjs';
+import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse } from '../../shared/lookup.mjs';
 import { present, productName } from '../../shared/present.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
 import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, labelCopy, readOnce } from '../../shared/label.mjs';
@@ -33,7 +34,8 @@ globalThis.SR = {
     return out({
       read: { system: READ_SYSTEM, schema: READ_SCHEMA },
       judge: { system: SYSTEM, schema: SCHEMA },
-      confirm: { system: CONFIRM_SYSTEM, schema: CONFIRM_SCHEMA },
+      // The confirmation carries one function the cloud may call, answered on the phone (shared/lookup.mjs).
+      confirm: { system: CONFIRM_SYSTEM_LOOKUP, schema: CONFIRM_SCHEMA_LOOKUP, tool: LOOKUP_TOOL },
       label: { system: LABEL_SYSTEM, schema: LABEL_SCHEMA },
       spotter: { system: SPOTTER_SYSTEM, schema: SPOTTER_SCHEMA },
     });
@@ -84,9 +86,26 @@ globalThis.SR = {
   },
   noticeImage(noticeRecord) { const n = noticeFromCpsc(noticeRecord); return out(n.images[0] || ''); },
 
-  /** The presented result. `cloud` is the cloud's answer, or null when the cloud did not run. */
-  finish(listing, device, cloud, hints, how) {
-    const decision = cloud ? decideFinal(device, cloud, hints) : device.level === 'none' ? device : decideFinal(device, null, hints);
+  /**
+   * The cloud asks the device: its lookup_recalls call, answered by the shortlist's code on the phone. Returns
+   * { asked, ids, cards, strengths }; `exclude` is the recall the confirmation already has.
+   */
+  lookup(args, exclude) {
+    const found = lookupCards(index(), args, { exclude: exclude || '' });
+    return out({ asked: lookupArgs(args), ids: found.map(c => c.card.id), cards: found.map(c => c.card), strengths: found.map(c => c.strength) });
+  },
+  /** The function's response for the cloud. `noticeRecords`: the raw CPSC record for each id, or null, in order. */
+  lookupResponse(found, noticeRecords) {
+    const candidates = (found.cards || []).map((card, i) => ({ card, strength: (found.strengths || [])[i] || 'brand' }));
+    return out(lookupResponse(candidates, (noticeRecords || []).map(r => (r ? noticeFromCpsc(r) : null))));
+  },
+
+  /**
+   * The presented result. `cloud` is the cloud's answer, or null when the cloud did not run. `lookedUp`: the cards
+   * the phone returned to the cloud's lookups.
+   */
+  finish(listing, device, cloud, hints, how, lookedUp) {
+    const decision = cloud ? decideFinal(device, cloud, hints, lookedUp || []) : device.level === 'none' ? device : decideFinal(device, null, hints);
     return out(present(listing, decision, how));
   },
 
@@ -97,7 +116,8 @@ globalThis.SR = {
   readOnce(verdict) { return out(readOnce(verdict)); },
 
   // ---- Live recalls and the watch ---------------------------------------------------------------------------------
-  newest() { return out([...live, ...base].reduce((m, c) => (c.date > m ? c.date : m), '1973-01-01')); },
+  // Warnings come from another CPSC file at build time: they say nothing about how new the recall list is.
+  newest() { return out([...live, ...base].filter(c => !c.warning).reduce((m, c) => (c.date > m ? c.date : m), '1973-01-01')); },
   /** The records of an API answer that are not known yet. */
   unknown(records) {
     const ids = new Set([...live, ...base].map(c => c.id));

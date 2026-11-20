@@ -57,3 +57,49 @@ export async function cloudJson({ system, schema, parts, models = CLOUD_MODELS, 
   }
   throw new Error(last);
 }
+
+/**
+ * One JSON answer, with a function the model may call first (as extension/src/ai.js askWithTool does through the SDK).
+ * `onCall(name, args)` runs here and returns the function's response. Returns { answer, model, calls }.
+ */
+export async function cloudJsonTool({ system, schema, parts, tool, onCall, models = CLOUD_MODELS }) {
+  const base = {
+    ...(system ? { systemInstruction: { parts: [{ text: system }] } } : {}),
+    tools: [{ functionDeclarations: [tool] }],
+    generationConfig: { responseMimeType: 'application/json', responseJsonSchema: schema },
+  };
+  let last = '';
+  for (let attempt = 0; attempt < 5; attempt++) {
+    for (const model of models) {
+      const contents = [{ role: 'user', parts: parts.map(p => (typeof p === 'string' ? { text: p } : p)) }];
+      const calls = [];
+      let failed = false;
+      for (let round = 0; round < 4 && !failed; round++) {
+        const res = await fetch(`https://firebasevertexai.googleapis.com/v1beta/projects/still-recalled/locations/global/publishers/google/models/${model}:generateContent`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key, 'X-Firebase-AppCheck': await appCheck() },
+          body: JSON.stringify({ ...base, contents }), signal: AbortSignal.timeout(90000),
+        }).catch(e => ({ ok: false, status: 0, text: async () => String(e) }));
+        if (!res.ok) {
+          last = `${res.status} ${(await res.text()).slice(0, 160)}`;
+          if (![0, 429, 500, 502, 503, 504].includes(res.status)) throw new Error(last);
+          failed = true; break;
+        }
+        const got = (await res.json()).candidates?.[0]?.content?.parts || [];
+        const asked = got.filter(p => p.functionCall);
+        if (!asked.length) {
+          try { return { answer: JSON.parse(got.map(p => p.text || '').join('')), model, calls }; } catch { last = 'unreadable answer'; failed = true; break; }
+        }
+        contents.push({ role: 'model', parts: got });
+        const answers = [];
+        for (const p of asked.slice(0, 3)) {
+          const response = round < 2 ? await onCall(p.functionCall.name, p.functionCall.args || {}) : { note: 'No more lookups. Answer now.' };
+          calls.push({ args: p.functionCall.args || {}, response });
+          answers.push({ functionResponse: { name: p.functionCall.name, response } });
+        }
+        contents.push({ role: 'user', parts: answers });
+      }
+    }
+    await new Promise(ok => setTimeout(ok, 2000 * 2 ** attempt));
+  }
+  throw new Error(last);
+}

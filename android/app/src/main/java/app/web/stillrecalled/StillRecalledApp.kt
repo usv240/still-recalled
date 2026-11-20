@@ -20,6 +20,7 @@ class StillRecalledApp : Application() {
         Firebase.appCheck.installAppCheckProviderFactory(
             if (BuildConfig.DEBUG_APPCHECK) DevAppCheck.factory() else BridgeAppCheckProviderFactory(this))
         store = Store(this)
+        app.web.stillrecalled.data.Net.assets = assets
         // Fetch the first App Check token now, so it is ready by the time the user checks a listing.
         if (!BuildConfig.DEBUG_APPCHECK) app.web.stillrecalled.appcheck.Bridge.warm(this)
         Firebase.appCheck.getAppCheckToken(false)

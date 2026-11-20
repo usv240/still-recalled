@@ -90,6 +90,8 @@ dependencies {
     implementation("androidx.javascriptengine:javascriptengine:1.1.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.11.0")
+    // Function calling passes arguments and results as kotlinx.serialization JSON (Firebase AI Logic's own types).
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
 
     implementation("androidx.webkit:webkit:1.18.0")
     implementation("androidx.work:work-runtime-ktx:2.12.0")

@@ -7,6 +7,7 @@
 import { BANNED_TYPES } from './banned.mjs';
 import { noticeForPrompt } from './notice.mjs';
 import { clip } from './text.mjs';
+import { LOOKUP_SYSTEM } from './lookup.mjs';
 
 const BANNED_KEYS = BANNED_TYPES.map(t => t.key);
 
@@ -39,6 +40,16 @@ export const CONFIRM_SCHEMA = {
     check_before_buying: { type: 'string' },
     where: { type: 'array', items: { type: 'integer' } },
   },
+};
+
+// The confirmation with the lookup_recalls function offered (lookup.mjs): the cloud can ask the device's field guide
+// for the recall of a product it names from the photo, and says which recall it matched.
+export const CONFIRM_SYSTEM_LOOKUP = `${CONFIRM_SYSTEM}
+${LOOKUP_SYSTEM}`;
+export const CONFIRM_SCHEMA_LOOKUP = {
+  ...CONFIRM_SCHEMA,
+  required: [...CONFIRM_SCHEMA.required, 'recall_id'],
+  properties: { ...CONFIRM_SCHEMA.properties, recall_id: { type: 'string' } },
 };
 
 /**
@@ -80,8 +91,10 @@ export function confirmParts({ listing, notice, listingPhoto, recallPhoto }) {
  * Final decision from the on-device flag (`device`, the output of judge.decide) and the cloud answer.
  * With no cloud answer (offline, quota, error) the on-device flag stands, marked as unconfirmed.
  * Levels: "none" (show nothing), "possible" (soft flag), "likely" (warning). Never "safe".
+ * `lookedUp`: the recall cards the device returned when the cloud called lookup_recalls. A recall the cloud names
+ * counts only when it is one of them.
  */
-export function decideFinal(device, cloud, hints) {
+export function decideFinal(device, cloud, hints, lookedUp = []) {
   if (!cloud) return { ...device, confirmed: false };
   const base = { kind: null, card: null, banned: null, confirmed: true, evidence: cloud.evidence || '', check: cloud.check_before_buying || '', where: boxFrom(cloud.where) };
 
@@ -92,7 +105,16 @@ export function decideFinal(device, cloud, hints) {
     return { ...base, level: 'none', why: 'the listing is a part or a toy version, not the product' };
   }
 
-  if (device.kind === 'recall' && device.card) {
+  // The cloud named the product, asked the device's field guide, and judged the listing against what it returned.
+  const found = cloud.recall_id ? lookedUp.find(c => c.id === String(cloud.recall_id).trim()) : null;
+  if (found && cloud.matches_recall === 'yes') {
+    return { ...base, level: 'likely', kind: 'recall', card: found, lookedUp: true, why: 'the cloud named the product; the field guide on the device had its recall, and the listing matches the notice' };
+  }
+  if (found && cloud.matches_recall === 'cannot_tell') {
+    return { ...base, level: 'possible', kind: 'recall', card: found, lookedUp: true, why: 'the cloud named the product; the field guide on the device had a recall for it, and the listing does not show which model' };
+  }
+
+  if (device.kind === 'recall' && device.card && !found) {
     if (cloud.matches_recall === 'yes') {
       return { ...base, level: 'likely', kind: 'recall', card: device.card, why: 'matches the recalled product in the notice' };
     }

@@ -10,8 +10,9 @@ import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, readOnce } from
 import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer } from '../../shared/triage.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
-import { fetchNotice } from '../../shared/notice.mjs';
-import { CONFIRM_SYSTEM, CONFIRM_SCHEMA, confirmParts, decideFinal } from '../../shared/confirm.mjs';
+import { fetchNotice, noticeFromCpsc } from '../../shared/notice.mjs';
+import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal } from '../../shared/confirm.mjs';
+import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse } from '../../shared/lookup.mjs';
 import { present } from '../../shared/present.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
@@ -27,7 +28,17 @@ const baseCards = () => (basePromise ||= fetch(cardsUrl()).then(r => r.json()).t
   .then(cards => (hideFrom ? cards.filter(c => c.date < hideFrom) : cards));
 const index = () => (indexPromise ||= baseCards().then(cards => buildIndex([...liveCards, ...cards])));
 /** For pages that are not extension pages: the web page and the local accuracy test. */
-export function useCards(url) { cardsUrl = () => url; indexPromise = null; basePromise = null; }
+export function useCards(url) { cardsUrl = () => url; indexPromise = null; basePromise = null; warningsPromise = null; }
+// CPSC safety warnings (scripts/build-warnings.mjs) are not in the recall API, so their full text ships beside the cards.
+let warningsPromise = null;
+const warningTexts = () => (warningsPromise ||= fetch(cardsUrl().replace(/cards\.json$/, 'warnings.json')).then(r => (r.ok ? r.json() : {})).catch(() => ({})));
+/** The full notice the cloud check reads: from the CPSC recall API, or, for a warning, from the bundled file. */
+async function noticeFor(id) {
+  if (!/^W/.test(String(id))) return fetchNotice(id);
+  const r = (await warningTexts())[id];
+  if (!r) throw new Error(`warning ${id} not found`);
+  return noticeFromCpsc(r);
+}
 /** Recalls published after the build, from the service worker's store. */
 export function setLiveCards(cards, { hideFrom: hide = '' } = {}) { liveCards = cards || []; hideFrom = hide || ''; indexPromise = null; }
 
@@ -47,7 +58,8 @@ const daysBefore = (date, n) => new Date(Date.parse(date) - n * 864e5).toISOStri
 export async function refreshRecalls({ cloud = true, fetchImpl = fetch } = {}) {
   const base = await baseCards();
   const known = [...liveCards, ...base];
-  const newest = known.reduce((m, c) => (c.date > m ? c.date : m), '1973-01-01');
+  // Warnings come from another CPSC file at build time: they say nothing about how new the recall list is.
+  const newest = known.filter(c => !c.warning).reduce((m, c) => (c.date > m ? c.date : m), '1973-01-01');
   // A week of overlap: CPSC sometimes posts a notice with an earlier date than ones already out. The API answers a
   // URL it has seen with its earlier answer (on 2026-11-19 it left out that morning's four recalls), so each request
   // is a new URL.
@@ -196,16 +208,28 @@ export async function readLabel(dataUrl, recall, { cloud = true } = {}) {
   return { reading: second, source: 'device_then_cloud', verdict: settleReadings(reading, second, recall) };
 }
 
-/** Step 3, for a stage lookOnDevice left open: the cloud reads the full recall notice and both photos. */
+/**
+ * Step 3, for a stage lookOnDevice left open: the cloud reads the full recall notice and both photos. The call
+ * carries one function, lookup_recalls (shared/lookup.mjs): when the cloud can name a product the listing's words
+ * did not, it asks this device's field guide for that product's recall, and the shortlist's code answers.
+ */
 export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
   if (stage.result) return stage.result;
   const { listing, device, hints, how } = stage;
   try {
     const photo = stage.photo || (listing.image ? await imagePart(imageUrl(listing.image)).catch(() => null) : null);
-    const notice = device.kind === 'recall' && device.card ? await fetchNotice(device.card.id) : null;
+    const notice = device.kind === 'recall' && device.card ? await noticeFor(device.card.id) : null;
     const recallPhoto = notice && notice.images[0] ? await imagePart(imageUrl(notice.images[0])).catch(() => null) : null;
-    const { answer, model } = await cloudJson({ system: CONFIRM_SYSTEM, schema: CONFIRM_SCHEMA, parts: confirmParts({ listing, notice, listingPhoto: photo, recallPhoto }) });
-    return present(listing, decideFinal(device, answer, hints), { ...how, cloud: { model, answer } });
+    const lookups = [], lookedUp = [];
+    const onCall = async (_name, args) => {
+      const found = lookupCards(await index(), args, { exclude: device.card ? device.card.id : '' });
+      const notices = await Promise.all(found.map(c => noticeFor(c.card.id).catch(() => null)));
+      lookups.push({ asked: lookupArgs(args), found: found.map(c => c.card.id) });
+      lookedUp.push(...found.map(c => c.card));
+      return lookupResponse(found, notices);
+    };
+    const { answer, model } = await cloudJson({ system: CONFIRM_SYSTEM_LOOKUP, schema: CONFIRM_SCHEMA_LOOKUP, parts: confirmParts({ listing, notice, listingPhoto: photo, recallPhoto }), tool: LOOKUP_TOOL, onCall });
+    return present(listing, decideFinal(device, answer, hints, lookedUp), { ...how, cloud: { model, answer }, ...(lookups.length ? { lookups } : {}) });
   } catch (e) {
     // The on-device flag stands, marked unconfirmed.
     return present(listing, device.level === 'none' ? device : decideFinal(device, null, hints), { ...how, cloudError: String(e).slice(0, 400) });

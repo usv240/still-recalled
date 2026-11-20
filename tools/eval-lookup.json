@@ -1,0 +1,602 @@
+{
+ "at": "2026-11-20T06:47:49.251Z",
+ "summary": {
+  "set": "eval",
+  "cloudChecked": 21,
+  "errors": 0,
+  "calledLookup": 0,
+  "deviceHadRecall": 0,
+  "changedByLookup": 0,
+  "medianMs": 7233
+ },
+ "rows": [
+  {
+   "id": "960167294786",
+   "title": "Pottery Barn Kids & Levtex Crib Bedding Bundle – 2 Sheets + Pink Crib Skirt",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 4731,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing is for crib sheets and a crib skirt, whereas the recall notice is for Pottery Barn Kids drop-side cribs.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "267843698279",
+   "title": "Vintage 1986 Red Calliope Teddy Bear Baby Crib Bedding Set Blue Pastel USA",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6217,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing photo shows a thick padded crib bumper panel with ties included in the bedding set.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "366812057413",
+   "title": "Vintage Quiltex Precious Moments Crib Bedding Set Bless This Baby",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7144,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a thick padded crib bumper with fabric ties included in the crib bedding set.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "407360995490",
+   "title": "Snuggle Me Organic Cotton Newborn Infant Lounger Curve - Birch 0-6 M, Retail $99",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9075,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show a Snuggle Me Organic infant lounger cushion with a raised padded rim around a center pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "168855967039",
+   "title": "Vintage Lambs & Ivy Sleepytime Baby Snoopy 7 Piece Nursery Bedding & Decor Set",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5501,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The packaging photo for this nursery bedding set shows a thick padded crib bumper lining the inside rails of the crib.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "287707048490",
+   "title": "Disney baby Winnie the Pooh You Are So Loved Crib Bedding Set Comforter & Sheet",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 4597,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a crib comforter and fitted sheet, which is a different product from the recalled rattle set and does not include a crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "336898849272",
+   "title": "Crib Bedding Set Cotton White Blue Pink Teddy Bear w/ Quilt Blanket & Mobile Arm",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10850,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a thick padded crib bumper surrounding the quilt in the bedding set.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "960150054374",
+   "title": "Circo Floral Flower Baby Crib Bedding 4 PC SET Comforter, Sheet, Skirt, Diaper",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5382,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The 4-piece Circo crib bedding set includes a comforter, fitted sheet, crib skirt, and hanging diaper stacker, with no crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "168863317694",
+   "title": "Vintage Patch Kraft Designs 5-Piece Toddler Crib Bedding Set Wall Swan",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 12592,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a floral bedding set with canopy valance, comforter, sham, bed skirt, diaper stacker, and wall swan, with no padded crib bumper visible and no recall notice provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "940069271637",
+   "title": "Vintage Health-tex Baby Crib Bedding Set Quilt/Comforter, Skirt & Sheet",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5316,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing is a Health-tex crib bedding set containing a quilt, a sheet, and a crib skirt, with no crib bumper included.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "147631281873",
+   "title": "Elephant Crib Bedding Set Unisex Baby Nursery Gray Blue White Bedding Set",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10205,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The bedding set photo shows thick padded crib bumper panels with fabric ties folded on the right.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "257810399135",
+   "title": "Newton Bassinet & Bedside Sleeper",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5275,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a Newton flat bedside bassinet with mesh sides, and no recall notice was provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "880089415306",
+   "title": "Care Bears Baby Crib Bedding Set Green Yellow Stars 2 Piece Baby Hugs Rare",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8762,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing photo shows thick padded fabric panels with ties made to line the inside of a crib.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "860065660250",
+   "title": "Simplicity 3795 Shirley Botsford Nursery Quilt Canopy Bumper Pad Pattern Cut Com",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9717,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing sells a Simplicity 3795 paper sewing pattern for nursery items rather than a finished crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "374968808335",
+   "title": "VINTAGE (1982) Simplicity House 125 10 Baby Basics Coverlet Bumper Pads Crib Toy",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9180,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing photo shows a 1982 Simplicity House sewing pattern envelope for making baby items rather than an actual crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "377187474054",
+   "title": "NK Medical Products Inc. 9687 Pediatrics Medical Crib with Drop Side Rails",
+   "label": "no",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7233,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title states this is a crib with drop side rails, and the photo shows a metal crib with a front sliding rail.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "336086930867",
+   "title": "VINTAGE (1982) Simplicity House 125 10 Baby Basics Coverlet Bumper Pads Crib Toy",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 16594,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing is for a vintage Simplicity House sewing pattern envelope for making nursery items, not a physical crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "188913914459",
+   "title": "My Little Essentials Baby Lounger- Elephant Design for Babies",
+   "label": "maybe",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6708,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a plush elephant-shaped upright baby sit-up floor seat with leg openings, not an inclined sleeper, crib bumper, drop-side crib, or flat in-bed sleeper.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "960198699912",
+   "title": "Snuggle Me Organic infant lounger with cover",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10244,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing and photo show a Snuggle Me Organic infant lounger, a flat soft cushion with a raised padded rim all the way around.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "257844718972",
+   "title": "DockATot Deluxe Baby Lounger Tan Mint Chevron Infant 0-8 Months Scandi Nursery",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8149,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and photo show a DockATot Deluxe baby lounger, a flat cushion with a raised padded rim around a flat pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "287664123446",
+   "title": "Snuggle Me Infant Organic Lounger Portable for Infants Birch Color",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7216,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows an infant lounger cushion with a flat center pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  }
+ ]
+}

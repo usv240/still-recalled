@@ -1,0 +1,303 @@
+{
+ "at": "2026-11-20T06:48:46.813Z",
+ "summary": {
+  "set": "fresh",
+  "cloudChecked": 10,
+  "errors": 0,
+  "calledLookup": 1,
+  "deviceHadRecall": 0,
+  "changedByLookup": 0,
+  "medianMs": 10631
+ },
+ "rows": [
+  {
+   "id": "7QSs8Ei8Tfvm2EoUGov5uv",
+   "title": "Mockingbird Double Stroller + Bassinet + Scooter Board + Accessories 1",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "23042"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6217,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a Mockingbird double stroller with a bassinet and scooter board, and no recall notice was provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "xmR3ELhNHeAwQTmYu7psmr",
+   "title": "Two Piece Baby Set - powdered swing and bassinet/bouncer",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7906,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title lists a swing and bassinet or bouncer without a brand, and the listing photo is completely black.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "7BaFFhVJLdK6MuZf5aYVY2",
+   "title": "Graco crib/toddler bed with mattress 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10903,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a Graco crib converted into a toddler bed with a mattress, and no recall notice was given.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "24zFjFPHBXSrmUrmGtSox2",
+   "title": "Modern Baby Crib White and Walnut Oeuf with bed conversion kit 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 12119,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Oeuf",
+      "product": "Classic crib",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a white and walnut Oeuf baby crib with fixed slatted sides and no recall notice is given.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "riYiJtXs8j8J6RS5ULjh2f",
+   "title": "Used crib, two sided mattress & conversion kit 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8911,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a dark wood crib with a mattress and conversion kit, and no brand, model number, or drop-side mechanism is visible.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "206578468935",
+   "title": "Heart Family Rock'n Play Musical Nursery Playset Play Center Box Only Mattel Lot",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8269,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows empty boxes and an instruction sheet for a Mattel Heart Family doll nursery playset, not an infant product.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "188957402106",
+   "title": "The Heart Family Rock'n Play Musical Nursery 1987 Playset Mattel #4674 with box",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 11294,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and photo show a 1987 Mattel The Heart Family doll playset with miniature nursery furniture.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "377371520009",
+   "title": "Babyletto Hudson 3-in-1 convertible crib set- Washed Natural-M4201NX",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6920,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing is for a Babyletto Hudson 3-in-1 convertible crib with no recall notice given and no listed restricted product type shown.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "206695109739",
+   "title": "UPPAbaby VISTA Single Stroller, Gray/Black, Folding w/ Canopy & 5-Point",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10631,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "cannot_tell",
+   "evidence": "The listing shows an UPPAbaby VISTA stroller without stating its model year, model number, or serial number.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "15196",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "15196"
+   }
+  },
+  {
+   "id": "318866483780",
+   "title": "Disney Classic Pooh Piglet Crib Headboard Cover Ruffle Floral Vintage Style v",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 44920,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a Disney Classic Pooh crib headboard cover with no recall notice provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  }
+ ]
+}

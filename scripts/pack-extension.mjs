@@ -6,6 +6,7 @@
 //            its own ID and rejects a key). Add that ID to extensionIds in src/firebase-config.js and to the
 //            frame-ancestors header in firebase.json, then redeploy the site, so the store copy gets App Check tokens.
 import { execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -40,6 +41,7 @@ await copy('fonts');
 await copy('icons');
 await copy('data/cards.json');
 await copy('data/meta.json');
+if (existsSync(path.join('extension', 'data', 'warnings.json'))) await copy('data/warnings.json');
 
 // The token must not be anywhere in the package.
 let token = '';

@@ -125,6 +125,8 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
                     }
                 }
                 if (r.optBoolean("confirmed") && r.optString("evidence").isNotEmpty()) Text(r.optString("evidence"), style = MaterialTheme.typography.bodyMedium, color = Ink.muted)
+                // The listing's words did not name the product: the cloud did, and asked the phone's field guide.
+                r.optString("foundBy").takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Ink.muted) }
             }
             Photos(r, o)
             BeforeYouBuy(r)
@@ -134,7 +136,11 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
             Report(r)
             if (recall != null) Facts(recall)
             val src = recall?.optString("url") ?: r.optJSONObject("banned")?.optString("source")
-            if (!src.isNullOrEmpty()) LinkButton(if (recall != null) "Read the CPSC recall notice ↗" else "CPSC safe sleep guidance ↗", { ctx.open(src) })
+            if (!src.isNullOrEmpty()) LinkButton(when {
+                recall == null -> "CPSC safe sleep guidance ↗"
+                recall.optBoolean("warning") -> "Find warning ${recall.optString("number")} on CPSC's warnings page ↗"
+                else -> "Read the CPSC recall notice ↗"
+            }, { ctx.open(src) })
         }
         WatchCard(m, o, flagged)
         HowChecked(r, o)
@@ -172,9 +178,14 @@ private fun Photos(r: JSONObject, o: Checker.Outcome) {
                     Muted("This is the recalled product. Compare it with the listing's photos.")
                 }
             }
+            // A CPSC warning comes without a photo: the hazard, in CPSC's words, stands beside the listing instead.
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                FramedUrl(recall.optString("image"), "The photo from the recall notice")
-                Muted("Recall notice")
+                if (recall.optString("image").isNotEmpty()) {
+                    FramedUrl(recall.optString("image"), "The photo from the recall notice")
+                    Muted("Recall notice")
+                } else {
+                    Text(recall.optString("hazard").ifEmpty { recall.optString("title") }, style = MaterialTheme.typography.bodyMedium)
+                }
             }
         }
         val tell = recall.optString("tell")
@@ -257,11 +268,12 @@ private fun Report(r: JSONObject) {
 private fun Facts(recall: JSONObject) {
     Column {
         HorizontalDivider(color = Ink.border)
-        KeyValue("Recall", recall.optString("id"))
-        KeyValue("Recalled", longDate(recall.optString("date")))
+        val warning = recall.optBoolean("warning")
+        KeyValue(if (warning) "CPSC warning" else "Recall", recall.optString("number").ifEmpty { recall.optString("id") })
+        KeyValue(if (warning) "Warned" else "Recalled", longDate(recall.optString("date")))
         KeyValue("Product", recall.optString("product"))
         recall.optString("hazard").takeIf { it.isNotEmpty() }?.let { KeyValue("Hazard", it) }
-        recall.optString("remedy").takeIf { it.isNotEmpty() }?.let { KeyValue("Remedy", it) }
+        recall.optString("remedy").takeIf { it.isNotEmpty() }?.let { KeyValue(if (warning) "CPSC says" else "Remedy", it) }
         HorizontalDivider(color = Ink.border)
     }
 }

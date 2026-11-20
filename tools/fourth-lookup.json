@@ -1,0 +1,1499 @@
+{
+ "at": "2026-11-20T06:55:13.580Z",
+ "summary": {
+  "set": "fourth",
+  "cloudChecked": 51,
+  "errors": 0,
+  "calledLookup": 6,
+  "deviceHadRecall": 1,
+  "changedByLookup": 0,
+  "medianMs": 11110
+ },
+ "rows": [
+  {
+   "id": "336785506211",
+   "title": "LulyBoo Bassinet To-Go Portable Baby Bassinet w/ Canopy, Gray",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8133,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a portable LulyBoo Bassinet To-Go with a flat pad surrounded by a soft raised padded rim all the way around.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "377657141563",
+   "title": "Snuggle Me Organic Baby Lounger Infant Cushion with one Cover- baby nest pillow",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8713,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a Snuggle Me Organic baby lounger cushion with a raised padded rim all the way around a flat center pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "267692458483",
+   "title": "Eddie Bauer Infant Travel Bed Bassinet Changing Station Gray w/ Lime Green",
+   "label": "maybe",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 11110,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a folded Eddie Bauer travel bed bassinet and changing station bag, with no recall notice provided and no clear match to the listed product types.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "318870010168",
+   "title": "Comfy BabyNest Outer Space Exploration Portable Oval Baby Lounger, Pink/Blue",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10467,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and card sticker identify the item as a Comfy BabyNest portable oval baby lounger, which falls under the in-bed sleeper category.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "860036655312",
+   "title": "Comfy Baby Nest Outer Space Exploration Portable Oval Baby Lounger, White/Pink",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 12717,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and the label on the zippered bag identify the item as a Comfy Baby Nest portable oval baby lounger.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "358195671813",
+   "title": "Snuggle Me Infant Lounger Portable Baby Nest, Multiple Colors Available + funda",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7694,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show a Snuggle Me infant lounger baby nest, a soft flat cushion with a raised padded rim all the way around.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "820213996522",
+   "title": "DockATot Portable Oval Baby Lounger Pod, Pink/White (DockATot Model)",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 20205,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and photo show a DockATot baby lounger, which is a flat pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "227179946885",
+   "title": "Loevin Baby Lounger for Newborn Portable Bag A952",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 13037,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title identifies the item as a newborn baby lounger, and the photo shows a soft padded lounger folded into a zippered carry bag.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "407345760910",
+   "title": "MOONSEA Padded Baby Lounger Insert Gray White Stars Quilted Nest Pad",
+   "label": "yes",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 39838,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing is for a padded baby lounger insert pad shown folded up, and no recall notice was provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "168856310874",
+   "title": "Raggedy Ann & Andy Crib Bedding Set",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5453,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The crib bedding set photo shows a padded crib bumper with ties laid out across the top.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "920153716967",
+   "title": "Maclaren Triumph Stroller",
+   "label": "maybe",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "11222"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 12092,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "cannot_tell",
+   "evidence": "The listing shows a Maclaren single umbrella stroller, matching the recalled brand and kind, without a manufacture or sale date.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "11222",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "11222"
+   }
+  },
+  {
+   "id": "267830451092",
+   "title": "Glenna Jean Crib Bedding Set Florence",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6687,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo of the crib bedding set shows a thick padded crib bumper with ties along the bottom.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "237179418379",
+   "title": "Kwik Sew 3075 Nursery Crib Linens Comforter Fitted Sheet 28X52 Organizer Bumpers",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 12958,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing photo and title show a Kwik Sew 3075 paper sewing pattern rather than an actual crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "377329286567",
+   "title": "Pink Oval Baby Lounger",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 32053,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "MEAKI",
+      "product": "baby lounger",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a flat oval baby lounger cushion with a raised padded rim all the way around a flat center pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "920043265330",
+   "title": "Vintage Fisher-Price Deluxe Flutterbye Dreams Swing 6-Speed Lights/Sounds Infant",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 21249,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a vintage Fisher-Price Deluxe Flutterbye Dreams Swing, which is a different product line and frame design than the Fisher-Price Snuga Swings in the recall notice.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "267276068954",
+   "title": "Fisher-Price Motorized Baby Swing plus Baby Boppy, Car, & Blanket PICK-UP ONLY!!",
+   "label": "maybe",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "25009"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 13407,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "cannot_tell",
+   "evidence": "The listing advertises a Fisher-Price motorized baby swing and shows only the white plastic seat shell behind other items, without a model name or number.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "25009",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "25009"
+   }
+  },
+  {
+   "id": "336792228853",
+   "title": "1995 Graco Open Top Infant Swing 764AA Adjustable Speeds, Washable Cover, WORKS!",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "recall",
+    "recall": "00098"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6503,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "yes",
+   "evidence": "The listing sells a 1995 Graco infant swing made before November 1997, and the photo shows the older waist-belt-only and removable-tray restraint without a crotch strap.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "recall",
+    "card": "00098",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "recall",
+    "card": "00098"
+   }
+  },
+  {
+   "id": "137937708797",
+   "title": "Fisher Price Replacement Swing & Sounds Swing Unit",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 27001,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing sells only a replacement Fisher-Price motor and sound unit, not the recalled Snuga infant swing.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "336900366107",
+   "title": "Graco Infant Baby Swing Gray/White with Toy Bar Hanging Star Toys",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 17465,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing photo shows a modern Graco swing with harness strap slots and an overhead toy bar, rather than the recalled pre-November 1997 swings with a waist belt and hinged or removable tray.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "800705595563",
+   "title": "Graco Soothe 'n Sway Bluetooth 3-in-1 Baby Swing Lucca",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 11721,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a modern Bluetooth swing with a five-point harness and no tray, which is a different product from the pre-1998 A-frame swings with a waist belt and tray in the recall notice.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "407268215043",
+   "title": "Graco Simple Sway Infant Swing w/ Overhead Mobile, Music, vibration .. Plug-In",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7207,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a modern Graco Simple Sway swing with a five-point harness and no tray, unlike the pre-November 1997 tray-restraint swings in the recall notice.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "168869455156",
+   "title": "Graco DuetConnect LX Portable Infant Swing & Bouncer, Multiple Speeds, Redmond",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5766,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a newer Graco DuetConnect LX swing and bouncer with a harness, not a pre-November 1997 Graco swing with a waist belt and tray.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "800925397733",
+   "title": "Graco Simple Sway Baby Swing, Side‑to‑Side Motion, Infant Swing 6 Speeds Ivy",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6320,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a modern Graco Simple Sway swing with a 5-point harness and no tray, which is a different model and era from the recalled pre-1998 swings with a waist belt and tray.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "407272460606",
+   "title": "Graco Simple Sway 2in1 Baby Swing/bouncer for Infants and Toddlers Gray",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7174,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing is for a modern Graco Simple Sway 2-in-1 Swing rather than the older Graco swings made before November 1997 with a tray and waist-belt-only restraint.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "287717335389",
+   "title": "Graco Duet Soothe 2 in 1 Swing & Rocker, Music/Vibration very good condition.",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8458,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a Graco Duet Soothe Swing & Rocker, which is a newer model than the pre-November 1997 A-frame swings with a waist belt and tray described in the recall notice.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "137923117020",
+   "title": "Graco Floor2Table High Chair Gray/White Removable Tray Footrest MPN 2081360",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5339,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a Graco Floor2Table High Chair (MPN 2081360), which is a different product line and model than the recalled Graco Harmony High Chairs.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "820369982036",
+   "title": "Graco Easy-Entry Swyngomatic Baby Swing Reclining Seat Non-Stop Motor Brown",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "00098"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 17481,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "cannot_tell",
+   "evidence": "The listing shows a Graco Easy-Entry Swyngomatic baby swing box with a swing-up tray, matching the brand and product kind in the notice, but no manufacture date or actual restraint system is shown.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "00098",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "00098"
+   }
+  },
+  {
+   "id": "800932036496",
+   "title": "Graco High Chair w/ Removable Tray & Safety Harness, Brown/White",
+   "label": "maybe",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "10171"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 24566,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The low boxy brown seat and straight white tubular legs in the listing photo are a different Graco high chair model than the recalled Harmony high chair shown in the notice.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "860155691560",
+   "title": "graco baby electric swing and bouncer",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 38293,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Graco",
+      "product": "Simple Sway swing",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a modern electric Graco swing with a crotch-strap harness and no tray, unlike the recalled pre-1997 swings with waist-belt-only and tray restraints.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "237181005424",
+   "title": "Lambs & Ivy Disney Baby Winnie the Pooh Hugs 3pc Cotton Crib Bedding Set",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6796,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a 3-piece crib bedding set consisting of a quilt, fitted sheet, and crib skirt, with no padded crib bumper visible.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "267841807413",
+   "title": "Girls Crib Bedding Set Cotton Floral Gray White Pink Nursery Set",
+   "label": "maybe",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 17881,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a folded crib bedding set with no brand stated, no recall notice given, and no clearly visible padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "206676049944",
+   "title": "Disney Classic Pooh Crib Bedding Set 1994 Winnie the Pooh - HUGE LOT",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6689,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing photo of the crib bedding set shows a thick padded crib bumper across the top.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "128139117842",
+   "title": "Jungle Animals Crib Bedding Set, Green Multicolor (Green Blue Yellow ) Unisex",
+   "label": "maybe",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 21162,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Fisher-Price",
+      "product": "Rainforest crib bedding",
+      "model_number": ""
+     },
+     "found": [
+      "09098",
+      "07197"
+     ]
+    }
+   ],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a crib quilt and the title lists a crib bedding set without stating whether a padded crib bumper is included.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "398068685645",
+   "title": "Sweet Jojo Aviation Theme Appliqué Cotton Crib Baby Set Comforter Diaper Valance",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7673,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows and describes a Sweet Jojo crib comforter, window valance, and diaper stacker, with no padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "237129417193",
+   "title": "Glenna Jean Isabella Nursery Set",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 11156,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo of the nursery bedding set shows thick padded crib bumper panels with ribbon ties lining the inside rails of the crib.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "860120059030",
+   "title": "Rare 1996 Red Calliope Disney Classic Pooh ABC 7 Piece Crib Bedding Set USA Made",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 12583,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The 7-piece crib bedding set photo shows thick padded crib bumper panels, including the rolled bumper at the upper left and the arched headboard bumper at the top.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "377620590410",
+   "title": "Carters Baby Outfit Boy Preemie Romper Sleeper Dog Faces Sleep N Play Cotton",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6588,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a snap-front preemie sleeper with an all-over dog face print, whereas the recalled jumpsuits have a zipper with a satin ribbon pull, front embroidery, and sizes 0 to 9 months.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "377637168516",
+   "title": "Carters Sleepers Girl 3 Months Lot Rompers Outfits Sleep N Plays Bundle Cat Bird",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6658,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The sleepers in the photo do not have the 6-inch satin ribbon on a zipper pull or the teddy bear, bunny, or puppy embroidery described in the recall.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "366777451398",
+   "title": "Vintage Century Portable Play Yard Playpen Pack N Play Foldable w/ Mattress Pad",
+   "label": "maybe",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "86055"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 16177,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "cannot_tell",
+   "evidence": "The listing shows a vintage Century mesh-sided playpen, but does not state the model number or whether it has a drop-side rail.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "86055",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "86055"
+   }
+  },
+  {
+   "id": "366820432072",
+   "title": "Victoria Beckham Nursery Bedding Set Rabbit & Bee 30x30\" EUC",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 24322,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Target",
+      "product": "Victoria Beckham nursery bedding",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows two flat 30x30-inch baby blankets with no recall notice given and no crib bumper or sleeper present.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "206695908333",
+   "title": "Vintage Care Bears Baby Crib Bedding Set Of 2, Multicolor Care Bears Bears Theme",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5950,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a two-piece quilted Care Bears crib bumper set with fabric ties.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "227607648353",
+   "title": "Vintage Baby Looney Tunes Space Neighbors Crib Set Missing Quilt",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6118,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing photo shows a thick padded crib bumper with fabric ties as part of a Baby Looney Tunes crib set.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "287739595238",
+   "title": "Vintage 80s/90 Baby Bedding Crib Mattress Cover Sheet Blue Gingham Floral Cats",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5821,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing is for a ruffled cat-and-floral crib mattress sheet with no brand shown and no padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "3L15Tm6jq93obcvU9utEnk",
+   "title": "UPPAbaby 4moms MamaRoo Multi-Motion Baby Swing - Sage Green 1",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "22200"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6444,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing photo shows a MamaRoo Multi-Motion Baby Swing with a 5-point harness, which the recall notice explicitly excludes.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "r7UTDKSJA1B75RSzMY3EcC",
+   "title": "KidCo Convertible Crib Bed Rail 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7245,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a KidCo wooden convertible crib bed rail with an under-mattress frame and straps, and no recall notice was provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "kww2TFWokdbp8VdZRqhSjh",
+   "title": "Graco Simple Sway Baby Swing 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5589,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a modern Graco Simple Sway swing with a multi-point harness and no tray, unlike the recalled pre-November 1997 swings with a waist belt and tray.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "961MczUBWqVHS7DxuVnmCn",
+   "title": "Graco Duetsoothe 2-1 Swing and bouncer 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8312,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a modern Graco DuetSoothe swing and bouncer with a harness rather than a pre-November 1997 Graco swing with a waist belt and tray.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "msZpRjjwYQK13uNGh2zRmT",
+   "title": "Jool Baby Nova Signature Baby Swing – Gray, With Box 1",
+   "label": "maybe",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "24145"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 25851,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "cannot_tell",
+   "evidence": "The listing shows a gray Jool Baby Nova Signature infant swing with no visible manufacture date label and different hanging toys than the yellow moon, blue cloud, and pink star in the notice.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "24145",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "24145"
+   }
+  },
+  {
+   "id": "fEnBX11g3oGzj7eyoSWjF9",
+   "title": "Graco swing baby soother 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 31247,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Graco",
+      "product": "glider",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing photo shows a modern motorized Graco glider swing with a curved base and harness, rather than the pre-November 1997 top-frame swing with a waist belt and tray shown in Recall 00098.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "q3HaWddRugTmVGSNHvv9t5",
+   "title": "Graco baby swing and rocker 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 17174,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Graco",
+      "product": "DuetSoothe swing and rocker",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a modern Graco swing and rocker with an overhead motor, curved floor frame, and seat harness, which is a different model than the pre-1998 A-frame tray swing in the recall notice.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "2sTm6Mo7zWe2yxu5ipgcp9",
+   "title": "Jool baby Nova",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "24145"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 29160,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "cannot_tell",
+   "evidence": "The title names Jool baby Nova, matching the recalled brand and product line, but the listing photo is completely black and shows no product details or manufacture date.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "24145",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "24145"
+   }
+  }
+ ]
+}

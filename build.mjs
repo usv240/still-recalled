@@ -1,6 +1,7 @@
 // Bundle the extension's scripts. Usage: node build.mjs
 import { build } from 'esbuild';
 import { readFile, mkdir, cp } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 
 // Development-only App Check debug token, read from a gitignored file. Without it, cloud calls are refused.
 // RELEASE=1 leaves it out of every bundle: anything published (the web page, a packed extension) must never carry it.
@@ -55,6 +56,7 @@ await build({ outdir: 'web/build', bundle: true, logLevel: 'info', entryPoints: 
   loader: { '.woff2': 'file' }, assetNames: 'fonts/[name]-[hash]' });
 await mkdir('web/data', { recursive: true });
 await cp('extension/data/cards.json', 'web/data/cards.json');
+if (existsSync('extension/data/warnings.json')) await cp('extension/data/warnings.json', 'web/data/warnings.json');
 await cp('extension/data/meta.json', 'web/data/meta.json');
 await cp('extension/icons/icon-32.png', 'web/icon-32.png');
 
@@ -70,4 +72,5 @@ const { cards } = JSON.parse(await readFile('extension/data/cards.json', 'utf8')
 const CHUNK = 200;
 for (let i = 0; i * CHUNK < cards.length; i++) await write(`${assets}/cards/${String(i).padStart(3, '0')}.json`, JSON.stringify(cards.slice(i * CHUNK, (i + 1) * CHUNK)));
 await cp('extension/data/meta.json', `${assets}/meta.json`);
+if (existsSync('extension/data/warnings.json')) await cp('extension/data/warnings.json', `${assets}/warnings.json`);
 await cp('web/example/listing-26591.jpg', `${assets}/example.jpg`);

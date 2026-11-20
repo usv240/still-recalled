@@ -29,8 +29,19 @@ object Net {
         }
     }
 
+    /** The app's bundled files, set once at start (StillRecalledApp): CPSC warnings ship with the app. */
+    @Volatile var assets: android.content.res.AssetManager? = null
+    private var warnings: org.json.JSONObject? = null
+
+    /** A CPSC safety warning's full text, by id ("W27-081"). The recall API has no notice for a warning. */
+    private suspend fun warning(id: String): org.json.JSONObject? = withContext(Dispatchers.IO) {
+        val all = warnings ?: assets?.open("warnings.json")?.use { org.json.JSONObject(String(it.readBytes())) }?.also { warnings = it }
+        all?.optJSONObject(id)
+    }
+
     /** One recall notice by number, as the raw CPSC record, or null. */
     suspend fun notice(id: String): org.json.JSONObject? {
+        if (id.startsWith("W")) return warning(id)
         val list = JSONArray(String(get("$CPSC_API?format=json&RecallNumber=$id")))
         for (i in 0 until list.length()) if (list.getJSONObject(i).optString("RecallNumber") == id) return list.getJSONObject(i)
         return null

@@ -8,14 +8,20 @@ import com.google.firebase.ai.InferenceSource
 import com.google.firebase.ai.OnDeviceConfig
 import com.google.firebase.ai.OnDeviceModelStatus
 import com.google.firebase.ai.ai
+import com.google.firebase.ai.type.FunctionDeclaration
+import com.google.firebase.ai.type.FunctionResponsePart
 import com.google.firebase.ai.type.GenerativeBackend
 import com.google.firebase.ai.type.PublicPreviewAPI
 import com.google.firebase.ai.type.RequestOptions
 import com.google.firebase.ai.type.Schema
+import com.google.firebase.ai.type.Tool
 import com.google.firebase.ai.type.content
 import com.google.firebase.ai.type.generationConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.jsonObject
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -93,6 +99,84 @@ object Ai {
                     val onDevice = response.inferenceSource == InferenceSource.ON_DEVICE
                     android.util.Log.i("StillRecalled", "model call: ${if (onDevice) "on device" else name}, ${System.currentTimeMillis() - started} ms")
                     return Answer(parseJson(response.text ?: ""), onDevice, if (onDevice) "Gemini Nano" else name)
+                } catch (e: Throwable) {
+                    last = e
+                    if (!RETRYABLE.containsMatchIn(e.toString()) && e !is kotlinx.coroutines.TimeoutCancellationException) throw e
+                }
+            }
+            if (attempt < 2 && last != null && Regex("""\b429\b|RESOURCE_EXHAUSTED|quota""", RegexOption.IGNORE_CASE).containsMatchIn(last.toString())) delay(4000L shl attempt)
+            else break
+        }
+        throw last ?: IllegalStateException("no model answered")
+    }
+
+    /**
+     * A function the cloud model may call before it answers (Firebase AI Logic function calling). `declaration` is
+     * the shared rules' JSON declaration (name, description, parameters); `run` answers a call on this phone.
+     */
+    class Function(val declaration: JSONObject, val run: suspend (JSONObject) -> JSONObject)
+
+    private fun toolModel(prompt: Prompt, cloudModel: String, fn: Function): GenerativeModel {
+        val key = "TOOL|$cloudModel|${prompt.system.hashCode()}"
+        return synchronized(models) {
+            models.getOrPut(key) {
+                val params = fn.declaration.getJSONObject("parameters")
+                val props = params.getJSONObject("properties")
+                val required = params.optJSONArray("required") ?: JSONArray()
+                val req = (0 until required.length()).map { required.getString(it) }.toSet()
+                val map = LinkedHashMap<String, Schema>()
+                for (k in props.keys()) map[k] = Schema.string(props.getJSONObject(k).optString("description").ifEmpty { null })
+                ai.generativeModel(
+                    modelName = cloudModel,
+                    generationConfig = generationConfig {
+                        responseMimeType = "application/json"
+                        responseSchema = toSchema(prompt.schema)
+                        temperature = 0f
+                    },
+                    tools = listOf(Tool.functionDeclarations(listOf(FunctionDeclaration(
+                        fn.declaration.getString("name"), fn.declaration.getString("description"), map, map.keys.filter { it !in req })))),
+                    systemInstruction = content { text(prompt.system + "\n\n" + jsonInstruction(prompt.schema)) },
+                    requestOptions = options,
+                    onDeviceConfig = OnDeviceConfig(mode = InferenceMode.ONLY_IN_CLOUD),
+                )
+            }
+        }
+    }
+
+    /**
+     * One JSON answer from the cloud (ONLY_IN_CLOUD), which may first call `fn`. The call comes back to the phone,
+     * `fn.run` answers it here, and the model then gives its answer. At most two rounds of calls.
+     */
+    suspend fun jsonWithFunction(prompt: Prompt, parts: List<Part>, cloudModels: List<String>, fn: Function): Answer {
+        var last: Throwable? = null
+        for (attempt in 0..2) {
+            for (name in cloudModels) {
+                val started = System.currentTimeMillis()
+                try {
+                    val text = withTimeout(90_000) {
+                        val chat = toolModel(prompt, name, fn).startChat()
+                        var response = chat.sendMessage(content {
+                            for (p in parts) when (p) {
+                                is Text -> text(p.text)
+                                is Image -> image(p.bitmap)
+                            }
+                        })
+                        var round = 0
+                        while (response.functionCalls.isNotEmpty() && round < 3) {
+                            val answers = response.functionCalls.take(3).map { call ->
+                                val args = JSONObject()
+                                for ((k, v) in call.args) args.put(k, (v as? JsonPrimitive)?.content ?: v.toString())
+                                val result = if (round < 2) fn.run(args) else JSONObject().put("note", "No more lookups. Answer now.")
+                                FunctionResponsePart(call.name, Json.parseToJsonElement(result.toString()).jsonObject)
+                            }
+                            android.util.Log.i("StillRecalled", "function call: ${response.functionCalls.first().name}, answered on this phone")
+                            response = chat.sendMessage(content("function") { for (a in answers) part(a) })
+                            round++
+                        }
+                        response.text ?: ""
+                    }
+                    android.util.Log.i("StillRecalled", "model call: $name, ${System.currentTimeMillis() - started} ms")
+                    return Answer(parseJson(text), false, name)
                 } catch (e: Throwable) {
                     last = e
                     if (!RETRYABLE.containsMatchIn(e.toString()) && e !is kotlinx.coroutines.TimeoutCancellationException) throw e

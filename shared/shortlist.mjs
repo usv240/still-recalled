@@ -64,7 +64,8 @@ export function shortlist(index, listingText, limit = 3) {
       (kindHit ? 4 : 0) + (brandHit ? 3 : 0) + yearFit * 8 + (card.all ? 2 : 0);
     out.push({ card, strength, score, matched: { brand: brandHit, line: lineHits.map(l => l.join(' ')), kind: kindHit, codes: codeHits, year: yearFit } });
   }
-  // Strongest first; among equals, the newest recall.
-  out.sort((a, b) => b.score - a.score || (a.card.date < b.card.date ? 1 : -1));
+  // Strongest first; among equals, a recall before a CPSC warning for the same product (the recall has a remedy and
+  // photos), then the newest.
+  out.sort((a, b) => b.score - a.score || (a.card.warning ? 1 : 0) - (b.card.warning ? 1 : 0) || (a.card.date < b.card.date ? 1 : -1));
   return out.slice(0, limit);
 }

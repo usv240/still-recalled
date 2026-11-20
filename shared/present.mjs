@@ -47,6 +47,8 @@ export function productName(product) {
 
 /** The badge text on the listing: short, specific, never "safe". */
 export function badgeText(r) {
+  // A CPSC safety warning: the maker did not recall the product, so CPSC warned the public itself.
+  if (r.kind === 'recall' && r.recall && r.recall.warning) return r.level === 'likely' ? 'CPSC warning' : 'Possible CPSC warning';
   if (r.kind === 'recall') return r.level === 'likely' ? 'Recalled product' : 'Possible recall';
   if (r.kind === 'banned') return r.level === 'likely' ? (TYPE_COPY[r.banned.key] || {}).name || 'Sleep risk' : `Possible ${(TYPE_COPY[r.banned.key] || {}).short || 'sleep risk'}`;
   return '';
@@ -54,6 +56,12 @@ export function badgeText(r) {
 
 /** One sentence saying what was found, for the panel row and the top of the detail. */
 export function verdictLine(r) {
+  if (r.kind === 'recall' && r.recall.warning) {
+    const product = productName(r.recall.product);
+    return r.level === 'likely'
+      ? `Looks like the ${product}. CPSC warned people to stop using them in ${monthYear(r.recall.date)}; the seller behind them did not recall them.`
+      : `Same brand and kind as the ${product}, which CPSC warned people to stop using in ${monthYear(r.recall.date)}.`;
+  }
   if (r.kind === 'recall') {
     const product = productName(r.recall.product);
     return r.level === 'likely'
@@ -73,6 +81,11 @@ export function verdictLine(r) {
  * I buy it?". Advice, not a verdict on the listing, which the tool can be wrong about.
  */
 export function actionLine(r) {
+  if (r.kind === 'recall' && r.recall && r.recall.warning) {
+    return r.level === 'possible'
+      ? "Don't buy it until you know it isn't the product CPSC warned about."
+      : "Don't buy it. CPSC has told people to stop using this product.";
+  }
   if (r.kind === 'recall') {
     if (r.level === 'possible') return "Don't buy it until the seller's label shows it isn't one of the recalled units.";
     return r.recall && r.recall.all
@@ -98,6 +111,10 @@ export function noMatchLine(count, since) {
 
 /** A message the shopper can paste to the seller. Plain, polite, and asks for the one fact that settles it. */
 export function sellerQuestion(r) {
+  if (r.kind === 'recall' && r.recall.warning) {
+    return `Hi, before I buy: what brand is this, and could you send a photo of its tag or label? ` +
+      `CPSC has warned people to stop using a product like it (warning ${r.recall.number}, ${productName(r.recall.product)}).`;
+  }
   if (r.kind === 'recall') {
     return `Hi, before I buy: could you send a photo of the label showing the model number and manufacture date? ` +
       `I'd like to check it against a CPSC recall (${r.recall.id}, ${productName(r.recall.product)}).`;
@@ -125,7 +142,8 @@ const SALE_RULE = {
 /** Whether the card offers a report to CPSC: only a likely flag, and only where the sale itself is ruled out. */
 export function reportable(r) {
   if (r.level !== 'likely') return false;
-  if (r.kind === 'recall') return !!r.recall;
+  // A warning is not a recall: the report text's wording would not hold, so none is offered.
+  if (r.kind === 'recall') return !!r.recall && !r.recall.warning;
   return r.kind === 'banned' && !!SALE_RULE[r.banned && r.banned.key];
 }
 
@@ -182,6 +200,8 @@ function monthYear(isoDate) {
  * `how`: { words: true } | { device: true, cloud: { model } | null, cloudError? }.
  */
 export function present(listing, decision, how = {}) {
+  // The cloud's question to the device's field guide that led to this recall (lookup.mjs), if one did.
+  const asked = decision.lookedUp && decision.card ? (how.lookups || []).find(l => l.found.includes(decision.card.id)) : null;
   const base = {
     id: listing.id,
     listing: { title: listing.title, price: listing.price || '', image: listing.image || '', url: listing.url || '' },
@@ -204,14 +224,18 @@ export function present(listing, decision, how = {}) {
       deviceError: how.deviceError || "",
       cloudModel: (how.cloud && how.cloud.model) || '',
       cloudError: how.cloudError || '',
+      // What the cloud asked the device's field guide, and the recalls the device returned.
+      lookups: (how.lookups || []).slice(0, 3),
     },
+    // Said on the card when the listing's own words did not lead to the recall.
+    foundBy: asked ? `The listing's words didn't lead to this recall. Gemini in the cloud named the product (${clip([asked.asked.brand, asked.asked.product].filter(Boolean).join(' '), 70)}) and asked the recall field guide on this device, which had it.` : '',
     recall: null,
     banned: null,
     checkedAt: new Date().toISOString(),
   };
   if (base.kind === 'recall' && decision.card) {
     const c = decision.card;
-    base.recall = { id: c.id, date: c.date, product: c.product, title: c.title, hazard: c.hazard, remedy: c.remedy, url: c.url, image: c.image,
+    base.recall = { id: c.id, warning: !!c.warning, number: c.warning ? c.id.replace(/^W/, '') : c.id, date: c.date, product: c.product, title: c.title, hazard: c.hazard, remedy: c.remedy, url: c.url, image: c.image,
       // For the card's "which units" line and the label check.
       tell: c.tell || '', codes: (c.codes || []).slice(0, 14), from: c.from || 0, to: c.to || 0, all: !!c.all };
   }

@@ -1,0 +1,1685 @@
+{
+ "at": "2026-11-20T06:52:00.871Z",
+ "summary": {
+  "set": "third",
+  "cloudChecked": 58,
+  "errors": 0,
+  "calledLookup": 5,
+  "deviceHadRecall": 1,
+  "changedByLookup": 1,
+  "medianMs": 9803
+ },
+ "rows": [
+  {
+   "id": "137197169559",
+   "title": "Baby Delight Snuggle Nest Bassinet ; Portable Infant Bed 0-5 months Organic",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 11809,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a complete Baby Delight Snuggle Nest portable bassinet with a rigid frame and mesh sides, and no recall notice was given.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "307280068610",
+   "title": "4moms mamaRoo Infant Baby Swing/Bouncer w/ Music, Gray Seat, White Base",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "recall",
+    "recall": "22200"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 15991,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "yes",
+   "evidence": "The listing sells a 4moms MamaRoo baby swing with a 3-point harness visible on the seat, matching the recalled versions.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "recall",
+    "card": "22200",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "recall",
+    "card": "22200"
+   }
+  },
+  {
+   "id": "365409491872",
+   "title": "Nest And Nod Crib Bedding Set Reversible 3 Piece",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 17782,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a crib bedding set with a quilt, fitted sheet, and crib skirt, with no padded crib bumper visible and no recall notice provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "407167987325",
+   "title": "4moms mamaRoo sleep Bassinet White/Gray Oval w/ Stand, Basket, Sound/2 sheets",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6109,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a 4moms mamaRoo Sleep Bassinet, which is a different product from the MamaRoo infant swings and RockaRoo rockers in the recall notice.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "336578698471",
+   "title": "4moms Mamaroo Sleep Bassinet Calms and Soothes - White awesome condition",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9246,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows a 4moms MamaRoo Sleep Bassinet, whereas the recall notice covers only MamaRoo baby swings and RockaRoo baby rockers.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "137759217447",
+   "title": "MINI Crib Bedding - “Liz and Roo Nursery Rhyme Toile” bedding for Mini Crib",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9814,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a Liz and Roo mini crib bedding set with a sheet, top rail cover, skirt, and pillows, and no padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "920083172872",
+   "title": "Vintage 90s Classic Pooh Disney Baby Crib Bedding 3 pcs Sheet Skirt Blanket READ",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5565,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a 3-piece Winnie the Pooh crib sheet, skirt, and blanket set with no crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "820347403303",
+   "title": "Early 2000s Looney Tunes Crib Bedding Set Quilt Pad Sheet Tie-On",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9074,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title includes a tie-on pad and the photo shows a padded crib bumper lining the inside rails of the crib.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "800891130630",
+   "title": "Vtg 1994 Disney Classic WINNIE THE POOH Crib Bedding Sheet & Skirt HUNNY POTS",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 4952,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show only a crib sheet and a crib skirt, with no padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "206690454998",
+   "title": "Early 2000s Disney Winnie the Pooh Classic Crib Bedding Set 4 Piece Set",
+   "label": "yes",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 30740,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing is a 4-piece Disney Winnie the Pooh crib bedding set showing a padded crib bumper at the top, not the recalled 23-piece doll play set.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "287709174422",
+   "title": "Waverly Crib Bedding Set Baby Multicolor Floral Elephant Boho 7pc Nursery Set",
+   "label": "maybe",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 22462,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing is for a 7-piece Waverly crib bedding set showing pillows, a quilt, a blanket, and folded nursery items, with no recall notice given and no padded crib bumper clearly shown.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "227567509869",
+   "title": "Vintage Disney Babies Dundee Crib Bedding Set Mickey Minnie Donald Wall Decor 90",
+   "label": "maybe",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 17836,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The crib bedding set photo shows a quilted, padded crib bumper with mint trim folded on the right.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "366769666059",
+   "title": "Vintage 90s y2k 13 Piece Pink Jungle Animal Crib Set Cotton Outer Poly Filled",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 14046,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The package label for the 13-piece crib set lists a bumper among the included pieces and depicts a padded bumper inside the crib.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "267793491223",
+   "title": "DockATot Deluxe+ Dock Infant Lounger, Portable lavender",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8658,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show a DockATot Deluxe+ infant lounger, a flat soft pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "800802235601",
+   "title": "Disney Lot Of Lion King Baby Simba Bedding Nursery Set Lamps,Crib Sheet Mobile",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 11830,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The bottom left of the listing photo shows thick padded crib bumper panels with fabric ties included in the nursery bedding set.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "800837030016",
+   "title": "Snuggle Me Baby Lounger Replacement Storage Carry Bag Ivory Zip Clear Window",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 4113,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and photo show only an empty Snuggle Me replacement storage carry bag, not the baby lounger itself.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "267597017115",
+   "title": "Purple Owl 7 Piece Crib Bed Set Comforter Sheets Curtains Nest Baby Girl Nursery",
+   "label": "maybe",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 71066,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a crib comforter, sheet, curtains, and folded flat fabric pieces rather than a clearly visible padded crib bumper or cushioned in-bed sleeper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "117523592076",
+   "title": "Dockatot Deluxe+ Baby Lounger Leopard Print Arch Toy Bar & 2 Replacement Covers",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8766,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and photo show a DockATot Deluxe+ baby lounger with a flat pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "257830153005",
+   "title": "DockATot Deluxe+ Baby Lounger Green Botanical Palm Leaf Infant 0-8M Tropical",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7715,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing is for a DockATot Deluxe+ baby lounger, which is a flat cushion with a raised padded rim around a central pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "188830066652",
+   "title": "Baby Delight Snuggle Nest Dream Portable Infant Lounger Cover",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7629,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and photo show only a replacement fabric cover for the Baby Delight Snuggle Nest Dream, not the complete sleeper, and no recall notice is given.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "307238082410",
+   "title": "SnuggleMe Organic Snuggle Me Baby Lounger Cover Only Gumdrop Dusty Rose Pink",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5060,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title states 'Cover Only' and the photo shows a flat fabric replacement cover rather than a baby lounger.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "197560677831",
+   "title": "LulyBoo Toddler Baby Lounger Portable Plush Foldable Elephant Backpack EUC",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 19334,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a foldable LulyBoo baby lounger with a flat white pad surrounded by a raised plush rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "377568327669",
+   "title": "Mamibaby Ultra-Soft Breathable Reversible Cotton Newborn Baby Nest Lounger B",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "recall",
+    "recall": "24340"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 16662,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "yes",
+   "evidence": "The listing sells a Mamibaby baby nest lounger in a leaf print with a raised padded rim around a flat sleeping pad, matching the recalled Mamibaby loungers and the in-bed sleeper category.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "recall",
+    "card": "24340",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "recall",
+    "card": "24340"
+   }
+  },
+  {
+   "id": "127541222693",
+   "title": "Snuggle Me Infant Lounger - Birch - 100% Organic Cotton Cover 0-9months",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7809,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show a Snuggle Me Infant Lounger, a flat cushion with a raised padded rim all the way around the center.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "137935196951",
+   "title": "Magic Sleepsuit Merlin Blue Fleece Zip Wearable Blanket Sleeper 3-6M",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "recall",
+    "recall": "26315"
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 4838,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing is for a Baby Merlin's Magic Sleepsuit wearable fleece blanket, which does not match any of the listed product types, and no recall notice was given.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "198795066490",
+   "title": "Dock A Tot Deluxe Plus Dock Baby Lounger 0-8 Months Chevron White And Tan",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8086,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a DockATot Deluxe Plus Dock infant lounger consisting of a flat pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "335579675615",
+   "title": "Brolex Newborn Infant Lounger Removable Pillow Cover",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5453,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and photo show only a removable fabric cover for an infant lounger rather than the lounger itself.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "407321578569",
+   "title": "newborn baby lounger nest",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6526,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show a soft baby lounger nest with a raised padded rim surrounding a flat pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "147525150524",
+   "title": "2 Brolex Newborn Infant Lounger Removable Pillow Covers BABY GIRL",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6232,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show only two flat removable fabric covers for an infant lounger, without the lounger cushion itself.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "297985245081",
+   "title": "Baby Lounger for 0-12 Months",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 25748,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Wendiway",
+      "product": "Baby Lounger",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show a Wendiway baby lounger consisting of a flat soft cushion with a raised padded rim all the way around it.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "307231637077",
+   "title": "Newborn Toys And Loungers Bundle Includes Tummy Time Mats And More",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10017,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The bundle includes a white deer-print infant lounger with a flat center pad and a raised padded rim all the way around.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "178244049790",
+   "title": "Snuggle Me Organic Baby Lounger Rose Pink Infant Newborn with Extra Covers",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 13754,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and photo show a Snuggle Me Organic baby lounger, which is a soft flat cushion with a raised padded rim around the baby area.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "840110990897",
+   "title": "PORTABLE BABY LOUNGER Newborn lounger pod with cover in 10x11\" zipped bag",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 12424,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and assembly diagram on the bag show a portable baby lounger pod with a flat sponge cushion surrounded by a raised padded bumper.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "287483709943",
+   "title": "DockATot Deluxe+ Baby Lounger Mrs. Mighetto Cover Limited Edition Pre-Owned",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 12142,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a DockATot Deluxe+ baby lounger, a soft flat pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "800782433997",
+   "title": "luxurylittle Portable Braided Baby Lounger Nest w/ Star Pillow Blue/Gray/White",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9595,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a portable baby lounger nest with a raised braided padded rim surrounding a flat sleeping pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "318593445945",
+   "title": "Snuggle Me Organic Infant Lounger & Cover",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8303,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show a Snuggle Me Organic infant lounger with a raised padded rim around a flat center pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "287171391840",
+   "title": "Macari Baby Portable Infant Bed for Co-sleeping and Travel",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6777,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title lists an infant bed for co-sleeping and the photo shows a flat pad enclosed by a raised padded rim.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "395414153448",
+   "title": "Baby Lounger for Newborn Cover,Baby Nest Cover",
+   "label": "yes",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 20171,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title states it is a baby lounger or nest cover, while the photo shows a stuffed lounger inside a clear bag with no visible brand.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "267815490133",
+   "title": "Infant Baby Bath Support Seat Recliner Fold Out Leg Green White Newborn Lounger",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 17460,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Summer Infant",
+      "product": "Clean Rinse Baby Bather",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a green and white plastic infant bath support seat, not one of the listed product types, and no recall notice was given.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "960084293915",
+   "title": "Eddie Bauer Infant Travel Bed Bassinet Changing Station w/ washable insert",
+   "label": "maybe",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 14105,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a folded Eddie Bauer infant travel bed and changing station bag, and no recall notice was provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "m97253536757",
+   "title": "Baby Nest",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5282,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title says Baby Nest and the photo shows a soft flat pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "m10345915666",
+   "title": "AsMedic Baby Nest Best Lounger with Pillow. Color Stripe, Breathable Portable.",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10137,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The title and packaging photo show an AsMedic baby nest lounger with a flat pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "m45028036097",
+   "title": "Baby Lounger",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10628,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "JINXIA",
+      "product": "Baby Lounger",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show a packaged JINXIA baby lounger consisting of a flat pad with a raised padded rim all the way around.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "m44822498661",
+   "title": "Portable Baby Lounger",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5303,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a soft portable baby lounger with a raised padded rim all the way around a flat pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "m91352264193",
+   "title": "SOLD New Snuggle Me Organic Infant Lounger – Natural",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 8960,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing title and photo show an infant lounger consisting of a flat center pad surrounded by a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "m26089362284",
+   "title": "Organic Baby Lounger Pillow + Cover - Snuggle Me",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9854,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing sells a Snuggle Me Organic Baby Lounger pillow and cover, a soft cushion with a raised padded rim.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "m35072743070",
+   "title": "Organic Infant Lounger + Cover & Storage Case - Snuggle Me",
+   "label": "yes",
+   "saved": {
+    "final": "likely",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 10433,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing and photo show a Snuggle Me infant lounger cushion with a raised padded rim all the way around a flat center pad.",
+   "withLookup": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "likely",
+    "kind": "banned",
+    "card": null
+   }
+  },
+  {
+   "id": "m12707912894",
+   "title": "Bundle crib bumper - BreathableBaby",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 13122,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a thin perforated mesh BreathableBaby crib liner rather than thick padded panels, and no recall notice was provided.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "m16805457141",
+   "title": "Mesh Crib Bumper - BreathableBaby",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7857,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a BreathableBaby thin see-through mesh crib liner rather than a thick padded or braided crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "m87185533362",
+   "title": "crib bumper - BreathableBaby",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7660,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a BreathableBaby thin see-through mesh crib liner rather than a thick padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "m71375442085",
+   "title": "**New** Vintage lAnimal Crackers Wall Hanging Crib Toys Bumper Fabric Panel",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9851,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows an uncut, unpadded craft fabric panel with printed sewing instructions rather than a padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "m36727273568",
+   "title": "Crib Bedding - Caden Lane",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9154,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The listing shows a Caden Lane crib bedding set with a top rail cover, fitted sheet, ruffled skirt, and blanket, and no padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "m47622167779",
+   "title": "Brand New Hiccapop Sleep Bumpers – Toddler Bed Rails - Boppy",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 6985,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows boxed Hiccapop Sleep Bumpers foam toddler bed rails for ages 2 to 6 years, not a crib bumper or infant sleeper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "m97782196823",
+   "title": "Crib bumper - BreathableBaby",
+   "label": "no",
+   "saved": {
+    "final": "possible",
+    "kind": "banned",
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 9803,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "BreathableBaby",
+      "product": "Breathable Mesh Crib Liner",
+      "model_number": ""
+     },
+     "found": []
+    }
+   ],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "Although titled as a crib bumper, the photo shows a BreathableBaby Breathable Mesh Crib Liner made of thin mesh fabric.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "qfTnmKtHgCD9wzMSWGMmbm",
+   "title": "Uppababy Vista V2 Stroller with Bassinet Pink 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 7089,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no",
+   "evidence": "The listing shows an UPPAbaby Vista V2 stroller with a leatherette bumper bar, whereas the recall notice only covers 2015 VISTA strollers with a foam bumper bar.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "phACQP5hNDc2jKMav4Uifq",
+   "title": "Paw Patrol 2 Piece Crib Mattress Set 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 5752,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "no_recall_given",
+   "evidence": "The photo shows a Paw Patrol fitted crib sheet and a folded flat sheet or pillowcase, with no padded crib bumper.",
+   "withLookup": {
+    "level": "none",
+    "kind": null,
+    "card": null,
+    "lookedUp": false
+   },
+   "without": {
+    "level": "none",
+    "kind": null,
+    "card": null
+   }
+  },
+  {
+   "id": "ses67H2rXWuuVrFyNgomCv",
+   "title": "Pottery Barn Kids Sloan Acrylic Crib + Toddler Bed Kit & Mattress 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 14147,
+   "photo": true,
+   "lookups": [],
+   "recall_id": "",
+   "matches": "cannot_tell",
+   "evidence": "The listing includes a crib mattress with a Pottery Barn Kids crib, but does not show the mattress label, model name, or manufacture date.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "08296",
+    "lookedUp": false
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "08296"
+   }
+  },
+  {
+   "id": "tUpsU2ZVph4eCWT5SWn7YE",
+   "title": "Uppababy Stroller with Bassinet and Car Seat white 1",
+   "label": "no",
+   "saved": {
+    "final": "none",
+    "kind": null,
+    "recall": null
+   },
+   "model": "gemini-4-hydrogen",
+   "ms": 25190,
+   "photo": true,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "UPPAbaby",
+      "product": "Vista stroller",
+      "model_number": ""
+     },
+     "found": [
+      "15196"
+     ]
+    }
+   ],
+   "recall_id": "15196",
+   "matches": "cannot_tell",
+   "evidence": "The photo shows an UPPAbaby Vista-style stroller with a gray frame and foam bumper bar matching Recall 15196, but no model or serial number is shown.",
+   "withLookup": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "15196",
+    "lookedUp": true
+   },
+   "without": {
+    "level": "possible",
+    "kind": "recall",
+    "card": "22215"
+   }
+  }
+ ]
+}
