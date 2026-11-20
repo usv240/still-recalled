@@ -8,7 +8,7 @@ import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer, INFANT } from '../../shared/triage.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
 import { noticeFromCpsc, noticeFromCard } from '../../shared/notice.mjs';
-import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal } from '../../shared/confirm.mjs';
+import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal, capForStandIn } from '../../shared/confirm.mjs';
 import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse, applyDeviceLookup } from '../../shared/lookup.mjs';
 import { present, productName, ownerView } from '../../shared/present.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
@@ -115,8 +115,10 @@ globalThis.SR = {
    * The presented result. `cloud` is the cloud's answer, or null when the cloud did not run. `lookedUp`: the cards
    * the phone returned to the cloud's lookups.
    */
-  finish(listing, device, cloud, hints, how, lookedUp) {
-    const decision = cloud ? decideFinal(device, cloud, hints, lookedUp || []) : device.level === 'none' ? device : decideFinal(device, null, hints);
+  finish(listing, device, cloud, hints, how, lookedUp, standIn) {
+    let decision = cloud ? decideFinal(device, cloud, hints, lookedUp || []) : device.level === 'none' ? device : decideFinal(device, null, hints);
+    // `standIn`: the recall API did not answer, so the cloud read the phone's own card in place of the notice.
+    if (cloud && standIn) decision = capForStandIn(decision);
     return out(present(listing, decision, how));
   },
 

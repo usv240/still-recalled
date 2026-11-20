@@ -152,7 +152,7 @@ const hero = tryRun && `<!doctype html><meta charset="utf-8"><style>${base}
   <li><b>Gemini in the cloud checks what it flags or can't settle,</b>against the full CPSC recall notice and its photo.</li>
   <li><b>Every CPSC recall since 1973,</b>plus padded crib bumpers and inclined sleepers, which federal law bans from sale, and infant loungers.</li>
 </ul>
-<p class="small">The real Chrome extension on the practice listings at still-recalled.web.app/try: ${practice.caught} of ${practice.recalled} recalled products flagged, ${practice.falseAlarms} of ${practice.ordinary} ordinary ones flagged, in ${tryRun.seconds} s.</p>
+<p class="small">The real Chrome extension on the practice listings at still-recalled.web.app/try: ${practice.caught} of ${practice.recalled} recalled products flagged, ${practice.falseAlarms} of ${practice.ordinary} ordinary ones flagged, in ${tryRun.seconds} s${tryRun.note ? ` ${tryRun.note}` : ''}.</p>
 </div><div class="frame"><img src="${shot('try-grid.png')}"></div></div></div>`;
 const labelSlide = tryRun && tryRun.labelText && `<!doctype html><meta charset="utf-8"><style>${base}
 .cols { display: grid; grid-template-columns: 1fr 520px; gap: 64px; margin-top: 40px; align-items: start; }

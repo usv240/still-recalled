@@ -201,7 +201,10 @@ export function ownerView(r) {
 function ownerWords(text) {
   const s = String(text || '')
     .replace(/\bthe listing(?:['’]s)? (?:photo|image|picture)\b/gi, 'your photo')
+    .replace(/\bthe seller['’]s (?:photo|image|picture)s?\b/gi, 'your photo')
     .replace(/\bthe listing(?:['’]s)? (?:title|description|text|words|wording)\b/gi, 'what you entered')
+    .replace(/\bthe listing['’]s\b/gi, 'its')
+    .replace(/\bthe (?:item|product) for sale\b/gi, 'your item')
     .replace(/\bthe listing\b/gi, 'what you entered')
     .replace(/\bthis listing\b/gi, 'this item');
   return s.replace(/(^|[.!?]\s+)([a-z])/g, (m, a, b) => a + b.toUpperCase());
@@ -224,7 +227,7 @@ function ownerAdvice(r) {
           c.remedy ? `If yours is recalled, the recall's remedy: ${c.remedy} The notice says how to claim it.` : ''].filter(Boolean) };
     }
     return { heading, action: "Don't sell it or give it away: it looks like a recalled product.",
-      lines: ['Stop using it. CPSC says it is illegal to sell any recalled product.',
+      lines: ["Stop using it unless the recall's fix has already been done. CPSC says it is illegal to sell any recalled product.",
         c.remedy ? `The recall's remedy: ${c.remedy} The notice says how to claim it.` : 'The notice says what the maker offers and how to claim it.',
         c.all ? '' : c.tell ? `Which units are recalled: ${c.tell}` : ''].filter(Boolean) };
   }

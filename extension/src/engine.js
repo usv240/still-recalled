@@ -11,7 +11,7 @@ import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer } from '../../shared/triage.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
 import { fetchNotice, noticeFromCpsc, noticeFromCard } from '../../shared/notice.mjs';
-import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal } from '../../shared/confirm.mjs';
+import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal, capForStandIn } from '../../shared/confirm.mjs';
 import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse, applyDeviceLookup } from '../../shared/lookup.mjs';
 import { present } from '../../shared/present.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
@@ -67,20 +67,27 @@ export async function refreshRecalls({ cloud = true, fetchImpl = fetch } = {}) {
   // URL it has seen with its earlier answer (on 2026-11-19 it left out that morning's four recalls), so each request
   // is a new URL.
   const end = new Date(Date.now() + 2 * 864e5).toISOString().slice(0, 10);
-  const res = await fetchImpl(`${CPSC_API}?format=json&RecallDateStart=${daysBefore(newest, 7)}&RecallDateEnd=${end}&_=${Date.now()}`, { signal: AbortSignal.timeout(30000), cache: 'no-store' });
-  if (!res.ok) throw new Error(`recall API ${res.status}`);
   const ids = new Set(known.map(c => c.id));
-  const records = (await res.json()).filter(r => r && r.RecallNumber && !ids.has(String(r.RecallNumber).trim()));
+  // The recall API and the warnings file are two sources: one failing must not stop the other.
+  let records = [], recallError = null;
+  try {
+    const res = await fetchImpl(`${CPSC_API}?format=json&RecallDateStart=${daysBefore(newest, 7)}&RecallDateEnd=${end}&_=${Date.now()}`, { signal: AbortSignal.timeout(30000), cache: 'no-store' });
+    if (!res.ok) throw new Error(`recall API ${res.status}`);
+    records = (await res.json()).filter(r => r && r.RecallNumber && !ids.has(String(r.RecallNumber).trim()));
+  } catch (e) { recallError = e; }
   const settings = await liveSettings();
   const cloudOn = cloud && hasCloudAccess && settings.cloudCheck && settings.liveRecalls;
   const spots = cloudOn ? await writeSpots(records, settings) : new Map();
   const cards = liveCardsFromCpsc(records, spots, known);
   // CPSC's safety warnings published since the build, from CPSC's warnings file. Without them, the recalls stand.
-  let warned = { cards: [], found: 0, written: 0 };
-  try { warned = await newWarnings(known, { cloudOn, settings, fetchImpl }); } catch { /* CPSC's file unreachable */ }
+  let warned = { cards: [], found: 0, written: 0 }, warningsError = '';
+  try { warned = await newWarnings(known, { cloudOn, settings, fetchImpl }); } catch (e) { warningsError = String(e).slice(0, 160); }
+  // Nothing new from either source, and the recall API failed: the caller is told CPSC could not be reached.
+  if (recallError && !warned.cards.length) throw recallError;
   liveCards = [...cards, ...warned.cards, ...liveCards];
   indexPromise = null;
-  return { cards: [...cards, ...warned.cards], found: records.length + warned.found, written: spots.size + warned.written, warnings: warned.cards.length, newest: cards[0] ? cards[0].date : newest };
+  return { cards: [...cards, ...warned.cards], found: records.length + warned.found, written: spots.size + warned.written, warnings: warned.cards.length, newest: cards[0] ? cards[0].date : newest,
+    ...(recallError ? { recallError: String(recallError).slice(0, 160) } : {}), ...(warningsError ? { warningsError } : {}) };
 }
 
 /** Gemini in the cloud writes each new notice's field-guide entry. Returns Map of notice number -> entry. */
@@ -294,7 +301,7 @@ export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
     // Each notice's remedy in full, for the card: the recall card keeps only its first 140 characters.
     const remedies = notice && notice.remedy ? { [inHand.id]: notice.remedy } : {};
     const onCall = async (_name, args) => {
-      const found = lookupCards(await index(), args, { exclude: inHand ? inHand.id : '' });
+      const found = lookupCards(await index(), args, { exclude: wordsCard ? wordsCard.id : '' });
       const notices = await Promise.all(found.map(c => noticeFor(c.card.id).catch(() => null)));
       lookups.push({ asked: lookupArgs(args), found: found.map(c => c.card.id) });
       lookedUp.push(...found.map(c => c.card));
@@ -303,7 +310,9 @@ export async function confirmInCloud(stage, { imageUrl = u => u } = {}) {
       return lookupResponse(found, notices);
     };
     const { answer, model } = await cloudJson({ system: CONFIRM_SYSTEM_LOOKUP, schema: CONFIRM_SCHEMA_LOOKUP, parts: confirmParts({ listing, notice: wordsCard ? notice : null, listingPhoto: photo, recallPhoto, seen: !wordsCard && device.seen && notice && how.seen ? { brand: how.seen.brand, id: device.seen.id, notice } : null }), tool: LOOKUP_TOOL, onCall });
-    return present(listing, decideFinal(device, answer, hints, lookedUp), { ...how, cloud: { model, answer }, remedies, ...(lookups.length ? { lookups } : {}) });
+    let decision = decideFinal(device, answer, hints, lookedUp);
+    if (notice && notice.fromCard) decision = capForStandIn(decision);
+    return present(listing, decision, { ...how, cloud: { model, answer }, remedies, ...(lookups.length ? { lookups } : {}) });
   } catch (e) {
     const cloudError = String(e).slice(0, 400);
     // The cloud check failed. A listing that skipped the built-in model's look because the cloud was going to check
@@ -352,6 +361,8 @@ const livePage = new Map();   // tabId -> pageKey
 function enqueue(tabId, pageKey, listings, { cloud = true, thorough = false } = {}) {
   livePage.set(tabId, pageKey);
   // `thorough` (a setting, off by default): every baby product gets the cloud's look, as on the web page.
+  const again = new Set(listings.map(l => l.id));
+  for (let i = queue.length - 1; i >= 0; i--) if (queue[i].tabId === tabId && again.has(queue[i].listing.id)) queue.splice(i, 1);
   listings.forEach((listing, i) => queue.push({ tabId, pageKey, listing, order: listing.order ?? i, cloud, thorough: !!thorough && cloud }));
   pump();
 }
@@ -371,6 +382,7 @@ async function pump() {
       const status = await deviceStatus();
       const send = result => {
         result.order = job.order;
+        if (job.thorough) result.thorough = true;
         chrome.runtime.sendMessage({ type: 'sr:engine-result', tabId: job.tabId, pageKey: job.pageKey, result }).catch(() => {});
       };
       const failed = e => send({ id: job.listing.id, listing: job.listing, level: 'error', kind: null, error: String(e).slice(0, 160) });

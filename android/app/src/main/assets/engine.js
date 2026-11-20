@@ -512,6 +512,9 @@ ${LOOKUP_SYSTEM}`;
     required: [...CONFIRM_SCHEMA.required, "recall_id"],
     properties: { ...CONFIRM_SCHEMA.properties, recall_id: { type: "string" } }
   };
+  function capForStandIn(decision) {
+    return decision && decision.kind === "recall" && decision.level === "likely" ? { ...decision, level: "possible", why: "matched against the short record on the device; the full recall notice could not be fetched" } : decision;
+  }
   function boxFrom(where) {
     if (!Array.isArray(where) || where.length !== 4 || where.some((n) => !Number.isFinite(n))) return null;
     const [y0, x0, y1, x1] = where.map((n) => Math.min(1e3, Math.max(0, n)) / 1e3);
@@ -556,7 +559,9 @@ ${LOOKUP_SYSTEM}`;
     }
     const agrees = cloud.matches_recall === "yes" || cloud.matches_recall === "cannot_tell";
     const pool = device.seen ? [...lookedUp, device.seen] : lookedUp;
-    const hit = cloud.recall_id ? pool.find((c) => c.id === String(cloud.recall_id).trim()) : null;
+    const said = String(cloud.recall_id || "").trim();
+    const numbers = said.split(/[^A-Za-z0-9-]+/).filter(Boolean);
+    const hit = said ? pool.find((c) => c.id === said) || pool.find((c) => numbers.includes(c.id)) : null;
     const found = agrees ? hit : null;
     const wordsCard = device.kind === "recall" && device.card && !device.seen ? device.card : null;
     if (wordsCard && !hit) {
@@ -722,7 +727,7 @@ ${LOOKUP_SYSTEM}`;
     return { verdict: ownerVerdict(r), evidence: ownerWords(r.evidence), foundBy: String(r.foundBy || "").replace(/The listing's words/g, "The words you gave"), ...ownerAdvice(r) };
   }
   function ownerWords(text) {
-    const s = String(text || "").replace(/\bthe listing(?:['’]s)? (?:photo|image|picture)\b/gi, "your photo").replace(/\bthe listing(?:['’]s)? (?:title|description|text|words|wording)\b/gi, "what you entered").replace(/\bthe listing\b/gi, "what you entered").replace(/\bthis listing\b/gi, "this item");
+    const s = String(text || "").replace(/\bthe listing(?:['’]s)? (?:photo|image|picture)\b/gi, "your photo").replace(/\bthe seller['’]s (?:photo|image|picture)s?\b/gi, "your photo").replace(/\bthe listing(?:['’]s)? (?:title|description|text|words|wording)\b/gi, "what you entered").replace(/\bthe listing['’]s\b/gi, "its").replace(/\bthe (?:item|product) for sale\b/gi, "your item").replace(/\bthe listing\b/gi, "what you entered").replace(/\bthis listing\b/gi, "this item");
     return s.replace(/(^|[.!?]\s+)([a-z])/g, (m, a, b) => a + b.toUpperCase());
   }
   function ownerAdvice(r) {
@@ -755,7 +760,7 @@ ${LOOKUP_SYSTEM}`;
         heading,
         action: "Don't sell it or give it away: it looks like a recalled product.",
         lines: [
-          "Stop using it. CPSC says it is illegal to sell any recalled product.",
+          "Stop using it unless the recall's fix has already been done. CPSC says it is illegal to sell any recalled product.",
           c.remedy ? `The recall's remedy: ${c.remedy} The notice says how to claim it.` : "The notice says what the maker offers and how to claim it.",
           c.all ? "" : c.tell ? `Which units are recalled: ${c.tell}` : ""
         ].filter(Boolean)
@@ -1245,8 +1250,9 @@ ${LOOKUP_SYSTEM}`;
      * The presented result. `cloud` is the cloud's answer, or null when the cloud did not run. `lookedUp`: the cards
      * the phone returned to the cloud's lookups.
      */
-    finish(listing, device, cloud, hints, how, lookedUp) {
-      const decision = cloud ? decideFinal(device, cloud, hints, lookedUp || []) : device.level === "none" ? device : decideFinal(device, null, hints);
+    finish(listing, device, cloud, hints, how, lookedUp, standIn) {
+      let decision = cloud ? decideFinal(device, cloud, hints, lookedUp || []) : device.level === "none" ? device : decideFinal(device, null, hints);
+      if (cloud && standIn) decision = capForStandIn(decision);
       return out(present(listing, decision, how));
     },
     /** The same result, said to someone who owns the item: { verdict, evidence, foundBy, action, heading, lines }. */

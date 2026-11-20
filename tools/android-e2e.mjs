@@ -35,7 +35,16 @@ async function waitFor(re, ms) {
 }
 function tapText(text) {
   adb('shell', 'uiautomator', 'dump', '/sdcard/ui.xml');
-  const xml = adb('shell', 'cat', '/sdcard/ui.xml');
+  let xml = adb('shell', 'cat', '/sdcard/ui.xml');
+  // A slow emulator can put Android's own "System UI isn't responding" dialog over the app: choose Wait, look again.
+  const wait = /isn(?:'|&apos;)t responding/.test(xml) && xml.match(/text="Wait"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"/);
+  if (wait) {
+    adb('shell', 'input', 'tap', String((+wait[1] + +wait[3]) >> 1), String((+wait[2] + +wait[4]) >> 1));
+    execFileSync(process.execPath, ['-e', 'setTimeout(() => {}, 2500)']);
+    adb('shell', 'uiautomator', 'dump', '/sdcard/ui.xml');
+    xml = adb('shell', 'cat', '/sdcard/ui.xml');
+    results.dialogsDismissed = (results.dialogsDismissed || 0) + 1;
+  }
   const m = xml.match(new RegExp(`text="${text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*bounds="\\[(\\d+),(\\d+)\\]\\[(\\d+),(\\d+)\\]"`));
   if (!m) return false;
   adb('shell', 'input', 'tap', String((+m[1] + +m[3]) >> 1), String((+m[2] + +m[4]) >> 1));

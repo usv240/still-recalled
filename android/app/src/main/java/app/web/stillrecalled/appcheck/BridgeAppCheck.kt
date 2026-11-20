@@ -65,6 +65,7 @@ internal object Bridge {
     private val waiting = HashMap<Int, (String?, Long, String?) -> Unit>()
     private val queued = ArrayList<Int>()
     private var loadingSince = 0L
+    private val sentAt = HashMap<Int, Long>()
 
     /** True once the site has handed over a token, so the app can tell the user the first one is still on its way. */
     val ready = kotlinx.coroutines.flow.MutableStateFlow(false)
@@ -83,16 +84,19 @@ internal object Bridge {
                 Log.w(TAG, "timed out")
                 it(null, 0, "timed out")
                 queued.remove(id)
-                // A page that is ready and silent is stuck: start over next time. A page still loading is a slow phone
-                // or network: let it finish, so the next request finds it ready. Starting over every 25 s meant a
-                // page that needed 30 s never loaded at all (seen on a busy emulator: every cloud call was refused).
+                val now = System.currentTimeMillis()
+                val sent = sentAt.remove(id)
+                // Start over only when the page is stuck: it has had this request for 15 s or more and said nothing,
+                // or it has been loading for 75 s. A page that became ready a few seconds ago is about to answer:
+                // let it, so the next request is quick. Starting over every 25 s meant a page that needed 30 s never
+                // delivered a token at all (seen on a busy emulator: every cloud call was refused).
                 // A page that could not load at all is reset at once by onReceivedError below.
-                if (reply != null || System.currentTimeMillis() - loadingSince > 75_000) reset()
+                if ((sent != null && now - sent >= 15_000) || (reply == null && now - loadingSince > 75_000)) reset()
             }
         }, 25_000)
     }
 
-    private fun send(proxy: JavaScriptReplyProxy, id: Int) = proxy.postMessage(JSONObject().put("type", "get").put("id", id).toString())
+    private fun send(proxy: JavaScriptReplyProxy, id: Int) { sentAt[id] = System.currentTimeMillis(); proxy.postMessage(JSONObject().put("type", "get").put("id", id).toString()) }
 
     private fun start(context: Context) {
         if (web != null) return
@@ -133,6 +137,7 @@ internal object Bridge {
                     val token = data.optString("token")
                     // Marked ready even when the request that asked has already given up: the next one will be quick.
                     if (token.isNotEmpty()) { Log.i(TAG, "token received"); ready.value = true }
+                    sentAt.remove(data.optInt("id"))
                     val cb = waiting.remove(data.optInt("id")) ?: return@addWebMessageListener
                     if (token.isNotEmpty()) cb(token, data.optLong("expireTimeMillis", System.currentTimeMillis() + 30 * 60_000), null)
                     else { Log.w(TAG, "refused: ${data.optString("error")}"); cb(null, 0, data.optString("error")); reset() }

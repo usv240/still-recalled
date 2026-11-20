@@ -9,7 +9,7 @@
 //
 // Results go to tools/eval-results-<mode>.json. Labels live in tools/eval-labels.json and are scored by
 // tools/eval-score.mjs, which never feeds anything back into the rules.
-import { checkListing, useCards } from '../extension/src/engine.js';
+import { lookOnDevice, confirmInCloud, useCards } from '../extension/src/engine.js';
 import { deviceStatus } from '../extension/src/ai.js';
 
 useCards('/extension/data/cards.json');
@@ -18,7 +18,7 @@ const log = line => { document.getElementById('log').textContent += line + '\n';
 const save = (name, data) => fetch(`/save-as?name=${name}`, { method: 'POST', body: JSON.stringify(data) });
 
 // `tag` names a later run of the same test ("-rerun"), so the first, published results are never overwritten.
-window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '', resume = false, tag = '' } = {}) => {
+window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '', resume = false, tag = '', thorough = false } = {}) => {
   const name = `${set}-results-${mode}${tag}`;
   const status = await deviceStatus();
   const modelReady = mode === 'hybrid' && status === 'available';
@@ -40,7 +40,10 @@ window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '',
     const start = performance.now();
     let r;
     try {
-      r = await checkListing(listing, { modelReady, cloud: mode === 'hybrid', imageUrl: proxied });
+      // The extension's own path: its queue asks for the words-first shortcut, and its "thorough" setting for the
+      // cloud's look at every baby product (engine.js pump).
+      const opts = { modelReady, cloud: mode === 'hybrid', imageUrl: proxied, wordsFirst: true, secondOpinion: thorough && mode === 'hybrid' };
+      r = await confirmInCloud(await lookOnDevice(listing, opts), opts);
     } catch (e) {
       r = { id: listing.id, level: 'error', error: String(e).slice(0, 200), how: {} };
     }

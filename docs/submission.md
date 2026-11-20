@@ -24,7 +24,8 @@ September 23, 2026). Its 2019 study had found one reason: sellers use generic na
 that keyword filters miss. The platforms screen the seller's words. Nothing checks what gets through for the buyer.
 
 **Still Recalled puts the warning on the listing itself:** in Chrome on eBay, Mercari and Craigslist search pages, on
-Android for any listing shared to it (Facebook Marketplace and OfferUp included), and on a web page for a screenshot.
+Android for a listing or screenshot shared to it from any app (which is how it reaches Facebook Marketplace and
+OfferUp), and on a web page for a screenshot.
 It then keeps watching what you bought, because recall notices reach the first owner and never the next one. And it
 works from the other side too: choose **I own it**, and the same check tells a seller, or a grandparent with a
 hand-me-down, not to pass it on and what the recall offers its owner.
@@ -38,11 +39,12 @@ and each can ask the other.
   unit. It did the same for 392 CPSC safety warnings, the notices CPSC issues when a seller will not recall a
   product (144 of them in 2026 alone). The recall API does not list those. Each recall and warning CPSC publishes
   later gets its card from the installed extension.
-- **The device screens every listing.** Word rules match the cards, and Gemini Nano looks at each baby product's
-  photo, one at a time, starting with the listings on screen. A parent's browsing is never sent anywhere to be
-  screened.
-- **The cloud confirms what the device flags or can't settle,** against the full notice and its photo. In five blind
-  tests, 77% of listings never left the laptop.
+- **The device screens every listing.** Word rules match the cards on every listing, and Gemini Nano looks at the
+  photo of each baby product the words leave open, one at a time, starting with the listings on screen. Nothing is
+  sent anywhere just to be screened.
+- **The cloud confirms what the device flags or can't settle,** against the full notice and its photo, and listings
+  whose own words name a risky type. In five blind tests, each on the engine of its day, 77% of listings never left
+  the laptop (79% in the newest).
 - **The cloud asks the device.** A seller writes "Inclined baby sleeper, pink, folds flat". The words name no
   product, so the device finds only a risky type. The cloud recognises a Rock 'n Play in the photo, but the field
   guide lives on the device. So the confirmation carries one function, `lookup_recalls`, through Firebase AI Logic
@@ -52,12 +54,14 @@ and each can ask the other.
   cloud's word alone: it is named on a type flag that already stands, or shown as "Possible recall".
 - **The device asks itself, and the cloud checks the answer.** Gemini Nano also says which brand it can read in a
   photo, and the device looks that brand up in its own field guide. I measured how far to trust that: on ten test
-  photos it said "Fisher-Price" for three different sleepers and was right once. So its answer is never shown. It
+  photos it gave a brand three times and was wrong each time, though on two real photos it read "Graco" correctly.
+  So its answer is never shown. It
   only sends the listing to the cloud with the recall attached as a question, and the cloud agrees, names another
   product, or drops it. On 23 real listings with
   the brand stripped from the title by code, the sellers' own photos kept, the word rules found no recall. Checked
-  one at a time, the two lookups named the right recall on 12, seven of them through the device's own lookup, and
-  named no wrong one.
+  one at a time, with Gemini's lightest cloud model doing the look as it does on a phone without Gemini Nano, the two
+  lookups named the right recall on 12 and no wrong one: seven through the device's own lookup (five of them one
+  Bumbo recall) and five through `lookup_recalls`.
 - **The device may raise an alarm alone, never reassure alone.** Asked "is this one of the recalled units?", Gemini
   Nano said yes 20 times where the cloud agreed once, so that answer is never acted on. A label reading that would
   point away from a recall is read again in the cloud; with the cloud off, the card says "Read once: not ruled out".
@@ -103,7 +107,7 @@ JSON schemas on both models.
 - **Android runs the extension's own rules, not a rewrite:** the engine is bundled into the app and run in Jetpack's
   JavaScript sandbox, and the function call is answered there. On the web page and the phone a parent checks one
   listing at a time, so every baby product gets the cloud's look; the extension offers the same as a setting, off by
-  default. Where the phone has no Gemini Nano, the device steps go to the cloud's lightest model: a check takes 8 to 17 s.
+  default. Where the phone has no Gemini Nano, the device steps go to the cloud's lightest model: a check took 8 to 17 s in one run, and 18 to 54 s in another when the cloud's main model was slow.
 - **App Check where there is no attestation provider.** Chrome extensions have none, and Play Integrity needs an app
   installed from Google Play. Both get tokens from a bridge page on the site that runs reCAPTCHA Enterprise. No debug
   token ships. The token vouches for that page, not for the APK, so on Android this protects the quota from scripts,
@@ -124,25 +128,32 @@ can. Each test was run with the engine of its day; within a test the three ways 
 labelled blind by AI reviewers (Claude) from the title, price and photo; a person has not yet checked those labels.
 Every label and every miss is in `docs/accuracy.md`.
 
-**The fifth test is this version's.** 178 listings from plain searches ("baby rocker", "baby swing", "toddler bed")
-in cities no earlier test used, collected and labelled after the engine was frozen, run once: 7 of 9 caught, 1 false
-alarm among 149, 21% sent to the cloud. Word rules alone raised 23 false alarms. The two misses show the extension's
+**The fifth test is this version's.** 178 listings from ten eBay searches and four cities no earlier test used. Eight
+searches are plain ("baby rocker", "baby swing", "toddler bed"); two name a hazard ("crib bedding set bumper",
+"newborn lounger pillow"), and six of the nine listings that should be flagged came from those two. Result: 7 of 9
+caught, 1 false alarm among 149, 21% sent to the cloud. Word rules alone raised 23 false alarms. How blind it was:
+the decision rules were finished before the labels were written and were not changed after; one reliability fix
+(what to do when CPSC's server times out) went in between the labelling and the run, and the queue shortcut and
+review fixes came after it, so they are covered by unit tests, not by this run. Each listing has one AI reviewer's
+label, and 35 of the 178 are marked low confidence. The two misses show the extension's
 limit: a listing titled only "Baby Rocker" whose photo is a Rock 'n Play, and a lounger sold as a "baby pillow".
 Gemini Nano saw nothing in either photo, so neither left the laptop. Checked one at a time, the way the web page and
 the phone do, both are flagged, and the rocker's card names the Rock 'n Play recall through `lookup_recalls`.
 I ran all 178 that way too: 9 of 9 caught, 3 soft false alarms, and 83% of listings sent to the cloud, against 21%.
-That is the trade the extension makes by default, and a setting lets a parent make the other one.
+That is the trade the extension makes by default, and a setting, tested end to end, lets a parent make the other one.
 
 **The earlier 597 again, on this version.** I ran the first two sets again (261 listings; the test computer could not finish the
 other two with Gemini Nano): 14 of 18 caught and 3 false alarms, against 15 and 3 on 0.11.0 and 12 and 4 in the first
 blind runs. That is not a blind result. In them the device's own lookup fired on 4 listings; the cloud took none up,
 and nothing was shown.
 
-**End to end, November 20, 2026.** The packed extension passed all 17 steps on the live practice page (a new Chrome
-profile, so without Gemini Nano), including four CPSC safety warnings fetched live. With Gemini Nano, in a development
+**End to end, November 20, 2026.** The packed extension passed all 18 steps on the live practice page (a new Chrome
+profile, so without Gemini Nano), including four CPSC safety warnings fetched live and the thorough setting turned on
+with the page open. With Gemini Nano, in a development
 build, all 8 recalled practice listings were flagged and the label was read on the device. The Android release APK
 passed all 10 checks and the 6 "I own it" checks on an Android 16 emulator, which has no Gemini Nano, so the phone's
-on-device path has not been run yet. "I own it" on the web page passed its 10 steps on a local build.
+on-device path has not been run yet. The shares were sent with adb, as text and as a photo, not from inside the
+Facebook or OfferUp apps. "I own it" on the web page passed its 10 steps on a local build.
 
 ### Challenges
 - **The built-in model agrees too easily.** Asked "same brand?", it said yes to almost anything, and asked which

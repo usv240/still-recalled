@@ -35,6 +35,8 @@ const isoDate = s => { const d = new Date(`${s} UTC`); return Number.isNaN(+d) ?
 export function warningRecords(csv) {
   const rows = parseCsv(String(csv || '').replace(/^﻿/, ''));
   const head = rows[0] || [];
+  // CPSC renamed a column: say so, rather than read the file as holding no warnings.
+  if (rows.length > 1 && !['Product Safety Warning Number', 'Product Safety Warning Date', 'Product Safety Warning Title'].every(h => head.includes(h))) throw new Error('warnings file: unexpected columns');
   return rows.slice(1).filter(r => r.length === head.length).map(r => Object.fromEntries(head.map((h, i) => [h, plain(r[i])]))).map(w => ({
     RecallNumber: `W${w['Product Safety Warning Number']}`,
     RecallDate: isoDate(w['Product Safety Warning Date']),

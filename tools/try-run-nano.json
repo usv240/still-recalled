@@ -124,6 +124,7 @@
       "device": false
     }
   ],
-  "labelText": "The label matches the recall | Model ST31D11A is one of the models in the notice. Don't buy it unless the seller shows the recall's fix was done. | Read on this device; the photo did not leave it. On the label: TANGO · ST31D11A · 09 20 2019.",
-  "labelSeconds": 9
+  "labelText": "The label matches the recall | Model ST31D11A is one of the models in the notice. Don't buy it unless the seller shows the recall's fix was done. | Read on this device; the photo did not leave it. On the label: TANGO \u00b7 ST31D11A \u00b7 09 20 2019.",
+  "labelSeconds": 9,
+  "note": "with Gemini Nano, on a computer busy with other programs"
 }

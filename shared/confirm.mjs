@@ -53,6 +53,17 @@ export const CONFIRM_SCHEMA_LOOKUP = {
 };
 
 /**
+ * The cloud judged the listing against a stand-in for the notice (notice.mjs noticeFromCard: the CPSC recall API did
+ * not answer). The stand-in holds less than the notice does (it can lack the models or versions a recall leaves
+ * out), so a recall match made on it is a soft flag at most.
+ */
+export function capForStandIn(decision) {
+  return decision && decision.kind === 'recall' && decision.level === 'likely'
+    ? { ...decision, level: 'possible', why: 'matched against the short record on the device; the full recall notice could not be fetched' }
+    : decision;
+}
+
+/**
  * The cloud's box as fractions of the photo, { x, y, w, h }, or null. Dropped when malformed, tiny, or nearly the
  * whole photo: an outline around everything shows the shopper nothing.
  */
@@ -135,7 +146,10 @@ export function decideFinal(device, cloud, hints, lookedUp = []) {
   // brand or product itself.
   const agrees = cloud.matches_recall === 'yes' || cloud.matches_recall === 'cannot_tell';
   const pool = device.seen ? [...lookedUp, device.seen] : lookedUp;
-  const hit = cloud.recall_id ? pool.find(c => c.id === String(cloud.recall_id).trim()) : null;
+  // The number as the cloud wrote it: "23088", or with words around it ("Recall 23088", "#23088").
+  const said = String(cloud.recall_id || '').trim();
+  const numbers = said.split(/[^A-Za-z0-9-]+/).filter(Boolean);
+  const hit = said ? pool.find(c => c.id === said) || pool.find(c => numbers.includes(c.id)) : null;
   const found = agrees ? hit : null;
   // The recall the listing's own words matched, checked by code.
   const wordsCard = device.kind === 'recall' && device.card && !device.seen ? device.card : null;

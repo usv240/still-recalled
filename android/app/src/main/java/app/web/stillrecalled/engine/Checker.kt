@@ -129,7 +129,9 @@ class Checker(private val cloudAllowed: () -> Boolean) {
             val lookups = JSONArray()
             val lookedUp = JSONArray()
             val fn = Ai.Function((prompts ?: Rules.obj("prompts").also { prompts = it }).getJSONObject("confirm").getJSONObject("tool")) { args ->
-                val found = Rules.obj("lookup", args, id)
+                // Only the recall the listing's words matched is left out of the answer; one the phone's own lookup
+                // guessed may be what the cloud is asking for.
+                val found = Rules.obj("lookup", args, if (seen != null) "" else id)
                 val ids = found.getJSONArray("ids")
                 val cards = found.getJSONArray("cards")
                 val notices = JSONArray()
@@ -144,7 +146,7 @@ class Checker(private val cloudAllowed: () -> Boolean) {
             if (lookups.length() > 0) how.put("lookups", lookups)
             how.put("remedies", remedies)
             step("look", "Looking closer", State.DONE, if (lookups.length() > 0) "The cloud asked this phone's field guide, then compared with the notice" else "Compared with the full recall notice")
-            Outcome(Rules.obj("finish", listing, device, cloud.json, hints, how, lookedUp), listing, photo, readOnDevice)
+            Outcome(Rules.obj("finish", listing, device, cloud.json, hints, how, lookedUp, id.isNotEmpty() && notice == null), listing, photo, readOnDevice)
         } catch (e: Throwable) {
             // The on-device flag stands, marked unconfirmed.
             how.put("cloudError", e.toString().take(400))

@@ -11,7 +11,7 @@ import { buildIndex } from '../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer } from '../shared/triage.mjs';
 import { decide } from '../shared/judge.mjs';
 import { fetchNotice as fetchRecall, noticeFromCpsc } from '../shared/notice.mjs';
-import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal } from '../shared/confirm.mjs';
+import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal, capForStandIn } from '../shared/confirm.mjs';
 import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse } from '../shared/lookup.mjs';
 
 const args = process.argv.slice(2);
@@ -44,11 +44,12 @@ export async function look(listing, t, image) {
 export async function confirm(listing, device, hints, image, seen = null) {
   const wordsCard = device.kind === 'recall' && device.card ? device.card : null;
   const inHand = wordsCard || device.seen || null;
-  const notice = inHand ? await fetchNotice(inHand.id).catch(() => null) : null;
+  const { noticeFromCard } = await import('../shared/notice.mjs');
+  const notice = inHand ? await fetchNotice(inHand.id).catch(() => noticeFromCard(inHand)) : null;
   const [listingPhoto, recallPhoto] = await Promise.all([photoPart(image), notice && notice.images[0] ? imagePart(notice.images[0]).catch(() => null) : null]);
   const lookups = [], lookedUp = [];
   const onCall = async (_n, a) => {
-    const found = lookupCards(index, a, { exclude: inHand ? inHand.id : '' });
+    const found = lookupCards(index, a, { exclude: wordsCard ? wordsCard.id : '' });
     const notices = await Promise.all(found.map(c => fetchNotice(c.card.id).catch(() => null)));
     lookups.push({ asked: lookupArgs(a), found: found.map(c => c.card.id) });
     lookedUp.push(...found.map(c => c.card));
@@ -56,7 +57,8 @@ export async function confirm(listing, device, hints, image, seen = null) {
   };
   const t0 = Date.now();
   const { answer, model } = await cloudJsonTool({ system: CONFIRM_SYSTEM_LOOKUP, schema: CONFIRM_SCHEMA_LOOKUP, parts: confirmParts({ listing, notice: wordsCard ? notice : null, listingPhoto, recallPhoto, seen: !wordsCard && device.seen && notice && seen ? { brand: seen.brand, id: device.seen.id, notice } : null }), tool: LOOKUP_TOOL, onCall });
-  const final = decideFinal(device, answer, hints, lookedUp);
+  let final = decideFinal(device, answer, hints, lookedUp);
+  if (notice && notice.fromCard) final = capForStandIn(final);
   return { final, answer, model, lookups, ms: Date.now() - t0, photo: !!listingPhoto };
 }
 

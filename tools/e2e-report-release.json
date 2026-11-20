@@ -1,11 +1,11 @@
 {
-  "at": "2026-11-20T18:38:37.475Z",
-  "version": "0.12.0",
+  "at": "2026-11-20T20:40:33.438Z",
+  "version": "0.12.1",
   "ext": "dist/still-recalled-extension",
   "builtInModelProfile": false,
   "url": "https://still-recalled.web.app/try/",
   "query": "baby lounger",
-  "passed": 17,
+  "passed": 18,
   "failed": 0,
   "steps": [
     {
@@ -21,7 +21,7 @@
     {
       "name": "recall list catches up with CPSC",
       "ok": true,
-      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 9 with field-guide entries from the cloud, 27 s"
+      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 9 with field-guide entries from the cloud, 12 s"
     },
     {
       "name": "search page loads",
@@ -31,7 +31,7 @@
     {
       "name": "engine checks the listings",
       "ok": true,
-      "detail": "17 of 17 checked in 39 s"
+      "detail": "17 of 17 checked in 45 s"
     },
     {
       "name": "a recall published after the build is flagged",
@@ -79,9 +79,14 @@
       "detail": "Ask the seller: yes; Report to CPSC: yes"
     },
     {
+      "name": "thorough setting: turned on, the open page's baby products get the cloud's look",
+      "ok": true,
+      "detail": "8 listings had been to the cloud, 10 after; 9 checked again; 8 flagged (8 before)"
+    },
+    {
       "name": "new recalls arrive from CPSC",
       "ok": true,
-      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 20 field-guide entries written in the cloud, 17 s"
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 20 field-guide entries written in the cloud, 14 s"
     },
     {
       "name": "new CPSC safety warnings arrive too",
@@ -98,7 +103,7 @@
     "added": 9,
     "written": 9,
     "total": 9,
-    "checkedAt": "2026-11-20T18:37:35.746Z",
+    "checkedAt": "2026-11-20T20:39:13.910Z",
     "hits": 0,
     "cards": [
       {
@@ -156,7 +161,7 @@
         "guide": true
       }
     ],
-    "ms": 26647
+    "ms": 11698
   },
   "cloudChecked": 8,
   "cloudErrors": [],
@@ -177,7 +182,7 @@
       "title": "Braided crib bumper, mint, fits a standard crib",
       "recall": "",
       "also": "",
-      "cloud": "gemini-4-hydrogen",
+      "cloud": "gemini-3.5-flash-lite",
       "device": false,
       "lookups": []
     },
@@ -244,27 +249,35 @@
       "lookups": []
     },
     {
-      "level": "likely",
-      "badge": "Recalled product",
+      "level": "possible",
+      "badge": "Possible recall",
       "title": "Graco baby swing, wind-up, still swings",
       "recall": "00098",
       "also": "",
-      "cloud": "gemini-4-hydrogen",
+      "cloud": "gemini-3.5-flash-lite",
       "device": false,
       "lookups": []
     }
   ],
+  "thorough": {
+    "cloudBefore": 8,
+    "cloudAfter": 10,
+    "recheckedListings": 9,
+    "flaggedBefore": 8,
+    "flaggedAfter": 8,
+    "newlyFlagged": []
+  },
   "live": {
     "out": {
       "added": 20,
       "written": 20,
       "total": 20,
-      "checkedAt": "2026-11-20T18:38:30.030Z",
+      "checkedAt": "2026-11-20T20:40:25.938Z",
       "hits": 1
     },
-    "ms": 17326,
+    "ms": 14094,
     "alert": {
-      "at": "2026-11-20T18:38:36.604Z",
+      "at": "2026-11-20T20:40:32.739Z",
       "badge": "Recalled product",
       "confirmed": true,
       "level": "likely",
@@ -284,7 +297,7 @@
         "number": "27086",
         "product": "Buzz Bicycles Cerana T2 E-Trike",
         "remedy": "Consumers should stop using the recalled tricycles immediately and contact Huffy for free replacement rear axle assemblies. The rear wheel axle assemblies will be sent directly to consumers or to a third-party who will repair the tricycle. Huffy Corporation will reimburse consumers up to $100 for charges incurred by the third-party repair.",
-        "tell": "You can identify the recalled e-trike by checking the model number E4004 printed on a label near the pedals on the bottom side of the frame's downtube.",
+        "tell": "You can identify recalled units by checking the model number E4004 printed on a label near the pedals on the bottom side of the frame's downtube.",
         "title": "Huffy Recalls Buzz Bicycles Cerana T2 E-Trikes Due to Risk of Serious Injury from Fall Hazard",
         "to": 2026,
         "url": "https://www.cpsc.gov/Recalls/2027/Huffy-Recalls-Buzz-Bicycles-Cerana-T2-E-Trikes-Due-to-Risk-of-Serious-Injury-from-Fall-Hazard",

@@ -177,6 +177,28 @@ try {
   }
   await page.screenshot({ path: path.join(out, 'page.png'), fullPage: false });
 
+  // The "thorough" setting (off by default): every baby product on the page gets the cloud's look. Turned on with the
+  // page already open and checked, it must act on that page: listings cleared without the cloud are checked again.
+  {
+    const viaCloud = st => Object.values((st && st.results) || {}).filter(r => r.how && r.how.cloudModel).length;
+    const before = viaCloud(await tabState());
+    const setThorough = on => worker.evaluate(async v => { const { settings = {} } = await chrome.storage.local.get('settings'); await chrome.storage.local.set({ settings: { ...settings, thorough: v } }); }, on);
+    await setThorough(true);
+    let st = null;
+    for (const t1 = Date.now(); Date.now() - t1 < 180000; await new Promise(r => setTimeout(r, 3000))) {
+      st = await tabState();
+      if (Date.now() - t1 > 9000 && st && !Object.keys(st.pending || {}).length && Object.keys(st.results || {}).length >= st.total) break;
+    }
+    const after = viaCloud(st);
+    const stamped = st ? Object.values(st.results).filter(r => r.thorough).length : 0;
+    const flaggedNow = st ? Object.values(st.results).filter(r => r.level === 'possible' || r.level === 'likely').length : 0;
+    step('thorough setting: turned on, the open page\'s baby products get the cloud\'s look', after > before && stamped > 0 && flaggedNow >= flagged.length,
+      `${before} listings had been to the cloud, ${after} after; ${stamped} checked again; ${flaggedNow} flagged (${flagged.length} before)`);
+    results.thorough = { cloudBefore: before, cloudAfter: after, recheckedListings: stamped, flaggedBefore: flagged.length, flaggedAfter: flaggedNow,
+      newlyFlagged: st ? Object.values(st.results).filter(r => (r.level === 'possible' || r.level === 'likely') && !flagged.some(f => f.id === r.id)).map(r => `${r.badge}: ${r.listing.title}`) : [] };
+    await setThorough(false);
+  }
+
   const extPage2 = await browser.newPage();
   await extPage2.goto(`chrome-extension://${id}/panel.html`, { waitUntil: 'domcontentloaded' }).catch(() => {});
   // Live recalls and the recall watch. The engine leaves out the bundled recalls from 2026-11-12 on, as if this

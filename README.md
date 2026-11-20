@@ -5,7 +5,7 @@ padded bumper panels with ties. Selling those has been against federal law since
 a baby. The title never says "bumper", so no keyword filter catches it, and nothing on the page warns the parent.
 
 **Still Recalled puts the warning on the listing.** It is a Chrome extension for eBay, Mercari and Craigslist search
-pages, an Android app that checks any listing shared to it (Facebook Marketplace and OfferUp included), and a web page
+pages, an Android app that checks a listing or screenshot shared to it from any app (which is how it reaches Facebook Marketplace and OfferUp), and a web page
 that checks a screenshot. **The cloud teaches the device once, the device screens every listing, and only what it
 flags goes to the cloud:** Gemini in the cloud wrote a spotter card for every CPSC recall since 1973, the word rules and Gemini Nano
 check each listing on your own computer or phone, and only what they flag, or can't settle from the words, goes to
@@ -21,8 +21,8 @@ install, then share any listing's screenshot to it) · [web page](https://still-
 **What it found on real listings.** In five blind tests on 775 used baby-gear listings from eBay, Mercari and
 Craigslist, 83 were recalled products, padded crib bumpers, infant loungers or inclined sleepers, asking $6,064 in
 total. Still Recalled flagged 65 of them ($5,022), with 12 false alarms among the 630 listings that were fine. Word
-rules alone raised 109. 77% of the listings never left the computer. The fifth test is this version's own: 178
-listings collected and labelled after the engine was frozen, run once: 7 of 9 caught, 1 false alarm among 149. It
+rules alone raised 109. 77% of the listings never left the computer (each test on the engine of its day). The fifth test is this version's
+own: 178 new listings, labelled by AI reviewers who could not see the product: 7 of 9 caught, 1 false alarm among 149. It
 knows every CPSC recall since 1973 and 392 CPSC safety warnings (the notices CPSC issues when a seller will not recall
 a product), and fetches each new recall and warning from CPSC twice a day.
 
@@ -135,15 +135,16 @@ on the cloud's word alone. It is named on a type flag that already stands, or sh
 **The device asks itself, and the cloud checks the answer** ([shared/lookup.mjs](shared/lookup.mjs), `deviceLookup`).
 The model that looks at a listing also says which brand it can read in the photo. When the listing's words don't
 already say it, the shortlist's code looks that brand up with the kind of product. Gemini Nano guesses here more than
-it reads: on ten test photos it said "Fisher-Price" for three different sleepers and was right once. So what the
+it reads: on ten test photos it gave a brand three times and was wrong each time. So what the
 lookup finds is never shown on the device's word: the listing goes to the cloud with the recall attached as "found by
 the device, unverified", and it is shown, as "Possible recall" at most, only if the cloud answers with that recall's
 number. If the cloud names another product, it calls `lookup_recalls` and that recall is shown instead. With the cloud
 off, nothing from this lookup is shown.
 - **The brand left out, real photos.** 23 real test listings whose words named a recalled product had those words
   stripped from the title by code; the sellers' own photos were kept. The word rules then find no recall. Checked one
-  at a time, the two lookups named the right recall on 12 of 23 (7 through the device's own lookup, all right; 5
-  through `lookup_recalls`), named no other recall, and none was a red recall (`node tools/masked-build.mjs`,
+  at a time, with Gemini's lightest cloud model doing the look (as on a phone without Gemini Nano), the two lookups
+  named the right recall on 12 of 23 (7 through the device's own lookup, 5 of those one Bumbo recall; 5 through
+  `lookup_recalls`), named no other recall, and none was a red recall (`node tools/masked-build.mjs`,
   `node tools/lookup-generic.mjs --masked`, `tools/lookup-masked.json`).
 - In the extension with Gemini Nano: the first seven of those listings were run through the extension's own
   pipeline. The right recall was named on 3 of 7: Gemini Nano read "Graco" on two swings, and its wrong guess for a
@@ -152,7 +153,7 @@ off, nothing from this lookup is shown.
 
 **Thorough mode.** The extension sends only what the device flags or can't settle. A setting, off by default, sends
 every baby product on a page for the cloud's look, as the web page and the Android app do for the one listing they
-check. The fifth test shows what the choice is: with the default, a listing titled only "Baby Rocker" whose photo is a
+check. Turned on with a page open, it checks that page again (an end-to-end step covers this). The fifth test shows what the choice is: with the default, a listing titled only "Baby Rocker" whose photo is a
 Rock 'n Play never left the laptop and was missed; checked the other way, its card names the recall.
 On that test's 178 listings: the extension's default caught 7 of 9 with 1 false alarm and sent 21% to the cloud;
 checked one at a time, 9 of 9 with 3 soft false alarms, and 83% sent (`node tools/single-run.mjs --for=fifth`,
@@ -219,7 +220,7 @@ Method, every miss and the limits are in [docs/accuracy.md](docs/accuracy.md).
 | Second, after fixes: eBay and Craigslist | 125 | 2 of 4 | 0 of 117 |
 | Third, after fixes: eBay, Mercari and Craigslist | 176 | 28 of 34 | 6 of 133 |
 | Fourth, with every recall since 1973: eBay and Craigslist | 160 | 18 of 22 | 1 of 116 |
-| Fifth, on release 0.12.0, plain searches: eBay and Craigslist | 178 | 7 of 9 | 1 of 149 |
+| Fifth, on release 0.12.0: eBay and Craigslist | 178 | 7 of 9 | 1 of 149 |
 
 - By kind: recall matches 7 of 9, infant loungers and nests 39 of 49, padded crib bumpers 19 of 24, inclined sleepers
   0 of 1.
@@ -244,7 +245,7 @@ Method, every miss and the limits are in [docs/accuracy.md](docs/accuracy.md).
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
 badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step, and saves
-its report to `tools/e2e-report-*.json`. On the practice listings, the packed release passes all 17 steps in a
+its report to `tools/e2e-report-*.json`. On the practice listings, the packed release passes all 18 steps in a
 new Chrome profile, which has no built-in model (words, then the cloud). With the built-in model, the development
 build looked at all 8 flagged listings on the computer first (`docs/accuracy.md` sections 17 and 18). The on-device step was run end to end with
 release 0.7.0 in a profile with Gemini Nano: all 12 steps of that version passed, Gemini Nano looked at the listings

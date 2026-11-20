@@ -31,7 +31,7 @@ try {
     await new Promise(r => setTimeout(r, 5000));
   }
   const t0 = Date.now();
-  await page.evaluate((o) => window.__eval(o), { mode, set, resume, tag });
+  await page.evaluate((o) => window.__eval(o), { mode, set, resume, tag, thorough: args.includes('--thorough') });
   console.log(`${set} ${mode}: finished in ${Math.round((Date.now() - t0) / 1000)} s -> tools/${set}-results-${mode}${tag}.json`);
 } finally {
   await browser.close();

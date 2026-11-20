@@ -29,6 +29,18 @@ async function getSettings() {
 }
 
 const tabKey = tabId => `tab:${tabId}`;
+
+// Turning "check every baby product in the cloud" on reads the open pages again, so it acts at once and not only on
+// the next page: onPage then re-queues the listings that were cleared without the cloud's look.
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== 'local' || !changes.settings) return;
+  const was = changes.settings.oldValue || {}, now = changes.settings.newValue || {};
+  const on = s => s.cloud !== false && s.thorough === true;
+  if (!on(now) || on(was)) return;
+  chrome.storage.session.get(null).then(all => {
+    for (const key of Object.keys(all).filter(k => k.startsWith('tab:'))) chrome.tabs.sendMessage(Number(key.slice(4)), { type: 'sr:rescan' }).catch(() => {});
+  });
+});
 // Cached results also carry how many live recalls they were checked against: when new recalls arrive, a listing
 // seen before is checked again, since it may be one of them.
 let liveStamp = 0;
@@ -73,11 +85,13 @@ async function onPage(tabId, page) {
     if (!prior || prior.pageKey !== pageKey) chrome.runtime.sendMessage({ type: 'sr:engine-forget', tabId }).catch(() => {});
     const now = Date.now();
     for (const l of page.listings) {
-      if (state.results[l.id] || state.pending[l.id]) continue;
-      const order = state.order++;
-      const cached = (await chrome.storage.local.get(cacheKey(page.site, l.id)))[cacheKey(page.site, l.id)];
       // With "check every baby product in the cloud" on, a listing that was cleared without the cloud's look is
       // checked again; one that got it, or was flagged, is not.
+      const had = state.results[l.id];
+      if (state.pending[l.id] || (had && !(thorough && had.level === 'none' && !had.thorough))) continue;
+      if (had) delete state.results[l.id];
+      const order = state.order++;
+      const cached = (await chrome.storage.local.get(cacheKey(page.site, l.id)))[cacheKey(page.site, l.id)];
       const redo = thorough && cached && cached.level === 'none' && !cached.thorough;
       if (cached && !redo && now - Date.parse(cached.checkedAt) < CACHE_DAYS * 864e5) {
         state.results[l.id] = { ...cached, order, cached: true };
@@ -105,11 +119,10 @@ async function onResult(tabId, pageKey, result) {
     return state;
   });
   if (!state) return;
-  // A result whose cloud check failed is shown but not kept: the next visit asks the cloud again.
-  if (result.level !== 'error' && !(result.how && result.how.cloudError)) {
+  // A result whose model call failed (the cloud, or the built-in model timing out) is shown but not kept for the
+  // week: the next visit checks the listing again.
+  if (result.level !== 'error' && !(result.how && (result.how.cloudError || result.how.deviceError))) {
     const { order, ...stored } = result;
-    const s = await getSettings();
-    if (s.cloud !== false && s.thorough === true) stored.thorough = true;
     chrome.storage.local.set({ [cacheKey(state.site, result.id)]: stored }).catch(() => {});
   }
   if (result.level === 'likely' || result.level === 'possible') sendToTab(tabId, [result]);
