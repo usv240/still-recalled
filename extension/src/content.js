@@ -1,7 +1,7 @@
 // Runs on marketplace pages: reads the listings, sends them to be checked, and puts a badge on each flagged one.
 // The badge and its popover live in a closed shadow root, so the page's styles and scripts cannot reach them.
 import { listingsOnPage, listingDetail, siteFor } from './extract.js';
-import { addFonts, buildBadge, attachBadge } from './ui/badge.js';
+import { addFonts, buildBadge, buildPending, attachBadge } from './ui/badge.js';
 
 const site = siteFor(location.hostname);
 let pageUrl = '';
@@ -9,6 +9,7 @@ const sent = new Set();          // listing ids already reported for this page
 const cards = new Map();         // id -> { el, inline }
 const results = new Map();       // id -> flagged result
 const hosts = new Map();         // id -> badge host element
+const pending = new Map();       // id -> the quiet pill on a listing still being checked
 let showBadges = true;
 
 const urlNow = () => location.href.split('#')[0];
@@ -24,6 +25,21 @@ function resetPage() {
   sent.clear(); cards.clear(); results.clear(); waitingSince.clear();
   for (const host of hosts.values()) host.remove();
   hosts.clear();
+  for (const host of pending.values()) host.remove();
+  pending.clear();
+}
+
+/** Where a listing's check is: "device" (the built-in model is looking), "cloud" (confirming a flag), "done". */
+function setStage(id, stage) {
+  const old = pending.get(id);
+  if (stage === 'done' || results.has(id) || !showBadges) { if (old) { old.remove(); pending.delete(id); } return; }
+  const card = cards.get(id);
+  if (!card || card.inline || !card.el.isConnected) return;
+  if (old && old.isConnected) { old.setStage(stage); return; }
+  addFonts(file => chrome.runtime.getURL(file));
+  const host = buildPending(stage);
+  attachBadge(host, card, { corner: site.site === 'craigslist' ? 'right' : 'left' });
+  pending.set(id, host);
 }
 
 // A listing is reported once, so it must not go before its photo: the models look at the photo. Craigslist draws its
@@ -116,6 +132,7 @@ function applyResults(list) {
   for (const r of list) {
     if (r.level !== 'likely' && r.level !== 'possible') continue;
     results.set(r.id, r);
+    setStage(r.id, 'done');
     ensureBadge(r.id);
   }
   if (site && site.site === 'practice') document.documentElement.dataset.srFlagged = String(results.size);
@@ -128,6 +145,7 @@ if (site && site.site === 'practice') document.documentElement.dataset.stillReca
 chrome.runtime.onMessage.addListener((msg, _sender, reply) => {
   if (!msg) return false;
   if (msg.type === 'sr:results') applyResults(msg.results);
+  if (msg.type === 'sr:stage') setStage(msg.id, msg.stage);
   if (msg.type === 'sr:reveal') { ensureBadge(msg.id); const host = hosts.get(msg.id); if (host) host.reveal(); }
   if (msg.type === 'sr:rescan') { resetPage(); scan(); }
   if (msg.type === 'sr:read-page') {
@@ -146,7 +164,7 @@ chrome.storage.local.get('settings').then(({ settings }) => { showBadges = !sett
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== 'local' || !changes.settings) return;
   showBadges = !changes.settings.newValue || changes.settings.newValue.badges !== false;
-  if (!showBadges) { for (const host of hosts.values()) host.remove(); hosts.clear(); }
+  if (!showBadges) { for (const host of hosts.values()) host.remove(); hosts.clear(); for (const host of pending.values()) host.remove(); pending.clear(); }
   else for (const id of results.keys()) ensureBadge(id);
 });
 

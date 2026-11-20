@@ -78,7 +78,7 @@
       const score = { code: 300, line: 200, brand: 100 }[strength] + codeHits.length * 10 + lineHits.length * 5 + (kindHit ? 4 : 0) + (brandHit ? 3 : 0) + yearFit * 8 + (card.all ? 2 : 0);
       out2.push({ card, strength, score, matched: { brand: brandHit, line: lineHits.map((l) => l.join(" ")), kind: kindHit, codes: codeHits, year: yearFit } });
     }
-    out2.sort((a, b) => b.score - a.score || (a.card.date < b.card.date ? 1 : -1));
+    out2.sort((a, b) => b.score - a.score || (a.card.warning ? 1 : 0) - (b.card.warning ? 1 : 0) || (a.card.date < b.card.date ? 1 : -1));
     return out2.slice(0, limit);
   }
 
@@ -87,7 +87,8 @@
     {
       key: "inclined_sleeper",
       label: "Inclined infant sleeper",
-      pattern: /\b(inclined?\s+sleeper|rock\s*'?n'?\s*play|rocking\s+sleeper|incline\s+bassinet|inclined\s+bassinet)\b/i,
+      // "inclined baby sleeper": sellers put a word between (a title in this form had no hint, 2026-11-20).
+      pattern: /\b(inclined?\s+(?:(?:baby|infant|newborn)\s+)?sleeper|rock\s*'?n'?\s*play|rocking\s+sleeper|incline\s+bassinet|inclined\s+bassinet)\b/i,
       looksLike: "a fabric sleeper or rocker on a frame where the baby rests on a slope, like a hammock",
       // Banned hazardous product regardless of manufacture date, from Nov 12, 2022 (sale and offer for sale included).
       basis: "Safe Sleep for Babies Act of 2021, Pub. L. 117-126 \xA72; 16 CFR 1310",
@@ -405,7 +406,12 @@ Which units: ${c.tell}` : ""}`;
   function lookupCards(index2, args, { exclude = "" } = {}) {
     const a = lookupArgs(args);
     if (!a.brand || !a.product) return [];
-    return shortlist(index2, `${a.brand} ${a.product} ${a.model_number}`, 4).filter((c) => c.card.id !== String(exclude)).slice(0, 2);
+    const spellings = [.../* @__PURE__ */ new Set([a.brand, a.brand.replace(/\s+II$/i, "2"), a.brand.replace(/[\s-]+/g, "")])];
+    for (const brand of spellings) {
+      const found = shortlist(index2, `${brand} ${a.product} ${a.model_number}`, 4).filter((c) => c.card.id !== String(exclude)).slice(0, 2);
+      if (found.length) return found;
+    }
+    return [];
   }
   function lookupResponse(candidates, notices = []) {
     if (!candidates.length) return { recalls: [], note: "The field guide has no recall for that brand and product. Answer from the listing alone." };

@@ -70,18 +70,18 @@ code { font-family: Geist, monospace; font-size: 16px; background: #f0f0f0; padd
 <div class="zones">
   <div class="zone laptop"><h2>On the laptop</h2><div class="steps">
     <div class="step"><span class="n">${c.listings}</span><span class="what">Word rules</span>
-      <span class="how">Every listing's title against the CPSC recall list (all 10,089 since 1973 in the current build). Parts, toys and doll items dropped. Instant.</span></div>
+      <span class="how">Every listing's title against the field guide the cloud wrote: 10,089 CPSC recalls since 1973 and 392 CPSC safety warnings. Parts, toys and doll items dropped. Instant.</span></div>
     <div class="step"><span class="n">${c.lookedAtOnDevice}</span><span class="what">Gemini Nano</span>
       <span class="how">Baby products only: title and photo. Is it the product, a part or a toy? Does it look like a lounger or a padded bumper?<br><code>ONLY_ON_DEVICE</code></span></div>
   </div></div>
   <div class="zone cloud"><h2>In the cloud</h2>
     <div class="step"><span class="n">${c.sentToCloud}</span><span class="what">Gemini</span>
       <span class="how">What Nano flagged or couldn't settle: title, photo, the full recall notice and its photo. Confirms, clears, or says what to check.<br><code>ONLY_IN_CLOUD</code></span>
-      <span class="how">Which models, and a switch that turns this step off, come from Firebase Remote Config.</span></div>
+      <span class="how"><b>It can ask the laptop.</b> When it recognises a product the listing doesn't name, it calls <code>lookup_recalls</code> (function calling); the laptop's field guide answers.</span></div>
   </div>
 </div>
 <div class="crosses">
-  <div><b>What goes to the cloud</b>A flagged listing's title, description and photo, with the recall notice it might match.</div>
+  <div><b>What goes to the cloud</b>A flagged listing's title, description, price and photo, with the recall notice it might match.</div>
   <div><b>What never leaves the laptop</b>The other listings, your searches and your browsing. No account, no tracking.</div>
 </div>
 <div class="foot"><span>${['', 'One test run', 'Two test runs', 'Three test runs', 'Four test runs'][runs.length]}, November 15 to 18, 2026: ${c.listings} real listings from eBay${third ? ', Mercari' : ''} and Craigslist. ${Math.round(c.shareSentToCloud * 100)}% went to the cloud.</span><span class="brand"><i></i>Still Recalled</span></div>

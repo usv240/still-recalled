@@ -586,6 +586,77 @@ release APK passed 8 of 8; the example now comes back "Recalled product", recall
 in a desktop Chrome with Gemini Nano, the example was read on the device and confirmed in the cloud as recall 26591:
 "Don't buy it. Every unit of this product is recalled."
 
+## 17. The cloud asks the device, CPSC warnings, and release 0.10.0 (2026-11-20)
+
+A third independent review (an AI judge, not a person) and a research pass on past winners and unmet needs led to
+this release. What changed, and what was measured.
+
+**Claims the review found still wrong in 0.9.2, and the fix.**
+- A label reading by the device alone could still be shown as "Model not listed in this recall" when the cloud
+  re-read was off or failed. It is now "Read once, on this device: not ruled out" (`shared/label.mjs`, `readOnce`),
+  on the extension, the web page and Android.
+- The extension's label check ignored the shopper's cloud switch. It now honours it: with the cloud off, the label
+  photo is read by the built-in model only and never leaves the computer.
+- "Only a possible match goes to the cloud" was wrong for the web page and the Android app, where a parent checks one
+  listing at a time and every baby product gets the cloud's look. Their text now says so.
+- "The words settle most listings at once": in the four tests Gemini Nano looked at 494 of 597 listings. The line is
+  gone.
+- Android's read step had no cloud fallback when the on-device call throws. It has one now.
+
+**The cloud asks the device (`shared/lookup.mjs`).** The cloud's confirmation call carries one function,
+`lookup_recalls(brand, product, model_number)`, through Firebase AI Logic function calling (the web SDK's chat with
+`tools`, and the Android SDK's `Tool.functionDeclarations`). When the cloud can name a product the listing's words do
+not state, it calls the function; the call is answered on the device by the shortlist's code over the field guide,
+with the full notice for each recall found; the cloud then judges the listing against it. A recall the cloud names
+counts only when it is one the device returned (`shared/confirm.mjs`, `decideFinal`).
+
+- *Does it find recalls the words miss?* `node tools/lookup-generic.mjs --runs=2`: ten made-up listings for recalled
+  baby products, titled without brand or product name ("Inclined baby sleeper, pink, folds flat", "Baby floor seat,
+  foam") and shown with each recall notice's own photo, the easy case for recognising a product. The word rules found
+  the recall on 0 of 20 checks. The cloud asked on 16; the result named the exact recall on 14 and an earlier notice
+  for the same product on 2 (Nap Nanny), so 8 of 10 listings on each pass. Without the function, 12 of the 20 were
+  flagged at all, by type only; a MamaRoo swing, a Bumbo seat and a Nap Nanny would have shown nothing. Not named: a
+  Tango Mini stroller and a CooCooBaby lounger, which the cloud did not recognise. The first pass, before a fix for
+  brand spellings ("Kids II" for "Kids2"), named 7 of 10. Results: `tools/lookup-generic.json`.
+- *Does it add false alarms?* `node tools/lookup-run.mjs --set=<set>` on every listing of the four test sets that the
+  hybrid run sent to the cloud (140): the function was called on 12, the device had a recall for 2, and no listing
+  changed between flagged and not flagged. One listing already flagged as a possible UPPAbaby recall named a different
+  UPPAbaby recall. Results: `tools/eval-lookup.json`, `fresh-lookup.json`, `third-lookup.json`, `fourth-lookup.json`.
+  The device's decision for each listing was rebuilt from the saved run (its level kept; what it pointed at taken from
+  the words), so this measures the function's effect on the cloud step, not a fresh hybrid run.
+- *It asked too often at first.* With the first wording, the cloud called the function on 19 of the first set's 21
+  listings, mostly for brands the title already named. Told that the device has already searched with the listing's
+  own words, it called on 0 of the 21.
+- *Limits.* It depends on the cloud model recognising the product; a seller's own photo is harder than a notice
+  photo, and that was not measured. A call adds a second round to the cloud step (a median of 16 s in the two-pass
+  run, made while other tests were running).
+
+**CPSC safety warnings (`scripts/build-warnings.mjs`).** CPSC's product safety warnings file held 393 notices on
+2026-11-20 (144 dated 2026). 392 became cards (189 for babies or children, by the spotter card's own field); 307 name
+a brand no recall card has. They are appended after the 10,089 recall cards, which are byte for byte as they were, and
+made the careful way cards for new notices are (a product line counts only together with its brand). When a recall
+and a warning both match, the recall is shown. `node tools/warnings-check.mjs`: the word match changed for 1 of the
+597 test listings (a Summer Infant bassinet, now matched by brand to a warning about its inclined sleeper), and the
+cloud cleared it. The warnings file gives no link for each warning, so the card links to CPSC's warnings page and
+shows the warning number. New warnings are not fetched live yet.
+
+**Where a check is.** While a page is checked, each listing carries a quiet pill: "Looking on this computer" while
+the built-in model looks at it, then "Checking in the cloud" for what the computer flagged. Hidden from screen
+readers (the side panel's progress line says it once), still when reduced motion is on.
+
+**Also:** the word rule for inclined sleepers now reads "inclined baby sleeper" (no listing in the 597 has that
+form); the practice page's Rock 'n Play is titled "Inclined baby sleeper, pink, folds flat".
+
+**0.10.0 results (2026-11-20).** 67 unit tests pass. The packed extension passed all 16 end-to-end steps on the live
+practice page in a new Chrome profile, without the built-in model (17 of 17 listings checked in 30 s, 8 of 8 recalled
+listings badged and confirmed, the unnamed sleeper matched to recall 23088 through `lookup_recalls`); report
+`tools/e2e-report-release.json`. In the Gemini Nano test profile, with the development build (reCAPTCHA refuses that
+automated profile's release tokens, section 13), the 17 listings took 183 s, all 8 flagged listings were looked at on
+the computer first, and the unnamed sleeper was matched the same way; `docs/gallery/src/try-run.json`. On the Android
+16 emulator (no Gemini Nano) the release APK passed 10 of 10: the example, four shared texts, a CPSC warning ("CPSC
+warning", 21 s), and a listing described without its product's name, where the cloud called the function and the
+phone answered ("Recalled product", 12 s); checks took 6 to 21 s.
+
 ## Reproduce
 
 ```

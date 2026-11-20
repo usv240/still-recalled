@@ -78,6 +78,31 @@ export function anchorFor(card) {
   return (best && best.parentElement) || card.el;
 }
 
+/**
+ * A quiet pill on a listing that is still being checked, so the wait shows where the check is: the built-in model
+ * looking at it on this computer, or the cloud comparing what the computer flagged with the recall notice. Not a
+ * warning and not a button: there is nothing to open yet. `stage`: "device" | "cloud".
+ */
+export function buildPending(stage) {
+  const host = document.createElement('still-recalled-badge');
+  const root = host.attachShadow({ mode: 'closed' });
+  root.append(h('style', {}, uiCss + contentCss));
+  const text = h('span', {});
+  // Hidden from screen readers: one pill per listing, changing as the page is checked, would be read out over and
+  // over. The side panel's progress line says the same once.
+  const pill = h('span', { class: 'badge is-pending', 'aria-hidden': 'true' }, h('span', { class: 'dot' }), text);
+  host.setStage = s => {
+    pill.dataset.stage = s;
+    text.textContent = s === 'cloud' ? 'Checking in the cloud' : 'Looking on this computer';
+    pill.title = s === 'cloud'
+      ? 'Still Recalled: flagged on this computer. Gemini in the cloud is comparing it with the recall notice.'
+      : 'Still Recalled: the built-in model is looking at this listing on this computer.';
+  };
+  host.setStage(stage);
+  root.append(pill);
+  return host;
+}
+
 /** A badge and its popover in a closed shadow root. `onOpenPanel` is called from the popover's panel link. */
 export function buildBadge(r, { onOpenPanel, onLabel = null, watch = null, shadowMode = 'closed' } = {}) {
   const host = document.createElement('still-recalled-badge');

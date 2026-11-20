@@ -47,7 +47,14 @@ export function lookupArgs(args) {
 export function lookupCards(index, args, { exclude = '' } = {}) {
   const a = lookupArgs(args);
   if (!a.brand || !a.product) return [];
-  return shortlist(index, `${a.brand} ${a.product} ${a.model_number}`, 4).filter(c => c.card.id !== String(exclude)).slice(0, 2);
+  // The cloud may spell a brand another way than the notice does ("Kids II" for "Kids2", "Fisher Price"): when the
+  // name as given finds nothing, try it with "II" as "2", and with its words run together.
+  const spellings = [...new Set([a.brand, a.brand.replace(/\s+II$/i, '2'), a.brand.replace(/[\s-]+/g, '')])];
+  for (const brand of spellings) {
+    const found = shortlist(index, `${brand} ${a.product} ${a.model_number}`, 4).filter(c => c.card.id !== String(exclude)).slice(0, 2);
+    if (found.length) return found;
+  }
+  return [];
 }
 
 /**

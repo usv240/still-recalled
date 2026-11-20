@@ -53,6 +53,7 @@ if (opt('title')) {
   const device = decide(wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe);
   console.log('words:', { candidate: t.candidate && `${t.candidate.card.id} ${t.candidate.strength}`, hints: t.hints.map(h => h.key), device: device.level, kind: device.kind });
   const r = await confirm(listing, { ...device, secondOpinion: true }, t.hints, opt('image'));
+  if (args.includes('--brief')) { console.log(`BRIEF ${r.model} ${r.ms} ms | lookups ${JSON.stringify(r.lookups)} | ${r.answer.matches_recall}/${r.answer.banned_type} | final ${r.final.level}/${r.final.kind || '-'} ${r.final.card ? r.final.card.id : ''} | ${r.answer.evidence.slice(0, 150)}`); process.exit(0); }
   console.log(JSON.stringify({ model: r.model, ms: r.ms, photo: r.photo, lookups: r.lookups, answer: r.answer, final: { level: r.final.level, kind: r.final.kind, card: r.final.card && r.final.card.id, lookedUp: !!r.final.lookedUp, why: r.final.why } }, null, 1));
 }
 

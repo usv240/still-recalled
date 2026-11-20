@@ -12,7 +12,9 @@ import { writeFile, mkdir, rm } from 'node:fs/promises';
 const RELEASE = 'https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-extension.zip';
 
 const listings = [
-  { id: 'rock-n-play', title: "Fisher-Price Rock 'n Play sleeper, pink, folds flat", price: 25, place: 'Tacoma', days: 2, img: 'rocknplay.jpg',
+  // Titled the way sellers often do, without the product's name: the words give only a type. The cloud names the
+  // product from the photo and asks the device's field guide for its recall (shared/lookup.mjs).
+  { id: 'inclined-sleeper', title: 'Inclined baby sleeper, pink, folds flat', price: 25, place: 'Tacoma', days: 2, img: 'rocknplay.jpg',
     text: 'Used for about four months. Gentle rocking, folds flat for travel. Clean, from a smoke-free home. Pickup only.', source: 'cpsc' },
   { id: 'xylophone', title: 'Kids xylophone with two mallets', price: 6, place: 'Seattle', days: 1, img: 'colorful-xylophone-kids.jpg',
     text: 'All the keys work. A few scratches on the frame.', source: 'cc0' },

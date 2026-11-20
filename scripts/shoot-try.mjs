@@ -45,9 +45,17 @@ try {
   const state = () => worker.evaluate(() => chrome.storage.session.get(null).then(all => Object.values(all).find(v => v && v.url && v.url.includes('/try/')) || null));
   const t0 = Date.now();
   let s = null;
+  // While the page is still being checked: the quiet pills that say where each listing's check is.
+  await page.evaluate(() => document.querySelector('.results-head').scrollIntoView({ block: 'start' }));
+  let midShots = 0;
   for (;;) {
     s = await state();
     const n = s ? Object.keys(s.results || {}).length : 0;
+    const pills = await page.$$eval('still-recalled-badge', els => els.length);
+    if (s && n < s.total && pills > 0 && midShots < 3 && n >= 9 + midShots * 2) {
+      await page.screenshot({ path: path.join(out, `try-checking-${++midShots}.png`) });
+      log(`mid-run screenshot ${midShots}: ${n} of ${s.total} checked, ${pills} pills or badges on the page`);
+    }
     if (s && n >= s.total) break;
     if (Date.now() - t0 > 300000) throw new Error(`only ${n} checked after 5 minutes`);
     await sleep(2000);
@@ -55,7 +63,7 @@ try {
   const results = Object.values(s.results);
   run.seconds = Math.round((Date.now() - t0) / 1000);
   run.flagged = results.filter(r => r.level === 'likely' || r.level === 'possible')
-    .map(r => ({ title: r.listing.title, badge: r.badge, device: !!(r.how && r.how.device), cloud: (r.how && r.how.cloudModel) || '', where: !!r.where }));
+    .map(r => ({ title: r.listing.title, badge: r.badge, recall: r.recall ? r.recall.id : '', device: !!(r.how && r.how.device), cloud: (r.how && r.how.cloudModel) || '', where: !!r.where, lookups: (r.how && r.how.lookups) || [] }));
   run.cleared = results.filter(r => r.level === 'none').map(r => ({ title: r.listing.title, device: !!(r.how && r.how.device) }));
   log(`${results.length} checked in ${run.seconds} s; flagged ${run.flagged.length}`);
 

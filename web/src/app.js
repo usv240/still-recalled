@@ -20,7 +20,8 @@ let meta = { count: 10089, since: '1973-01-01', built: '' };
 // Recalls CPSC published after this page's data was built: fetched from CPSC in the visitor's browser (the field-guide
 // entry for each written by Gemini through Firebase AI Logic), kept for six hours.
 let liveCards = [];
-const noticeCount = () => meta.count + liveCards.length;
+// Recall notices, the CPSC safety warnings bundled with them, and the recalls published since the build.
+const noticeCount = () => meta.count + (meta.warnings || 0) + liveCards.length;
 async function catchUp() {
   try {
     const saved = JSON.parse(localStorage.getItem('sr-live') || 'null');
@@ -231,13 +232,13 @@ function howList() {
     row('device', model === 'available'
       ? 'Your screenshot is read on this device by Chrome\'s built-in model.'
       : 'Your screenshot is read on your device when the browser has a built-in model (Chrome on a computer). On this browser, it\'s read by Gemini in the cloud.'),
-    row('search', `It's compared with ${noticeCount().toLocaleString('en-US')} recall notices in this page. Nothing is sent for this step.`),
+    row('search', `It's compared with ${noticeCount().toLocaleString('en-US')} CPSC recall notices and safety warnings, in this page. Nothing is sent for this step.`),
     row('cloud', 'A baby product, or a possible match, then goes to Gemini in the cloud for a closer look, with the full recall notice and its photo. Anything else stays here.'),
   ];
 }
 
 function dataLine() {
-  $('data-line').textContent = `Recall data: U.S. Consumer Product Safety Commission, ${noticeCount().toLocaleString('en-US')} notices since ${monthYear(meta.since)}${liveCards.length ? `, with ${liveCards.length} published since this page was built, checked with CPSC today` : meta.built ? `, updated ${longDate(meta.built.slice(0, 10))}` : ''}.`;
+  $('data-line').textContent = `Recall data: U.S. Consumer Product Safety Commission, ${(meta.count + liveCards.length).toLocaleString('en-US')} recall notices since ${monthYear(meta.since)}${meta.warnings ? ` and ${meta.warnings} safety warnings` : ''}${liveCards.length ? `, with ${liveCards.length} published since this page was built, checked with CPSC today` : meta.built ? `, updated ${longDate(meta.built.slice(0, 10))}` : ''}.`;
 }
 
 async function start() {

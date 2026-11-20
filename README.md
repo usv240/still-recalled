@@ -9,7 +9,8 @@ pages, an Android app that checks any listing shared to it (Facebook Marketplace
 that checks a screenshot. **The cloud teaches the device once, the device screens every listing, and only what it
 flags goes to the cloud:** Gemini in the cloud wrote a spotter card for every CPSC recall since 1973, the word rules and Gemini Nano
 check each listing on your own computer or phone, and only what they flag, or can't settle from the words, goes to
-Gemini in the cloud, through Firebase AI Logic hybrid inference.
+Gemini in the cloud, through Firebase AI Logic hybrid inference. **And the cloud can ask the device:** when it
+recognises a product the listing doesn't name, it calls a function that the device answers from its field guide.
 
 **Install:** [Chrome extension](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-extension.zip)
 (unzip, open `chrome://extensions`, turn on Developer mode, Load unpacked, choose the `still-recalled-extension` folder) ·
@@ -19,8 +20,8 @@ install, then share any listing's screenshot to it) · [web page](https://still-
 **What it found on real listings.** In four blind tests on 597 used baby-gear listings from eBay, Mercari and
 Craigslist, 74 were recalled products, padded crib bumpers or infant loungers, asking $5,527 in total. Still Recalled
 flagged 58 of them ($4,540), with 11 false alarms among the 481 listings that were fine. Word rules alone raised 86.
-77% of the listings never left the computer. It knows every CPSC recall since 1973, and fetches each new one from CPSC
-twice a day.
+77% of the listings never left the computer. It knows every CPSC recall since 1973 and 392 CPSC safety warnings (the
+notices CPSC issues when a seller will not recall a product), and fetches each new recall from CPSC twice a day.
 
 **And it keeps watching what you bought.** Recall notices reach the first owner, not the next one: Kids In Danger found
 that only 22% of the children's products recalled in 2022 that it could analyze were ever returned, replaced or
@@ -29,7 +30,8 @@ one matches.
 
 **Try it in a minute** on the practice listings at https://still-recalled.web.app/try: seventeen made-up listings,
 eight of them products the CPSC has recalled. With the extension installed, all eight get a badge and the nine ordinary
-ones don't. One, a Kidsview infant bouncer, was recalled on 2026-11-19, after this version's recall list was built: the
+ones don't. The first is titled "Inclined baby sleeper, pink, folds flat", the way sellers often write it: it comes
+back as the recalled Rock 'n Play, through the cloud's question to the device. One, a Kidsview infant bouncer, was recalled on 2026-11-19, after this version's recall list was built: the
 extension fetches it from CPSC on install.
 
 ## The problem
@@ -108,6 +110,28 @@ flags only ────── 3. Gemini in the cloud, via Firebase AI Logic ─�
 - **One engine:** both use the same engine, prompts and JSON schemas. Answers are structured JSON in both modes, so
   the on-device and cloud answers can be compared field by field.
 
+**The cloud asks the device** ([shared/lookup.mjs](shared/lookup.mjs)). Sellers often leave the product's name out, so
+the word rules find only a risky type, or nothing. The cloud model can often name the product from the photo, but the
+field guide of every recall lives on the device. So the cloud's confirmation carries one function, `lookup_recalls`,
+through Firebase AI Logic function calling (web SDK and Android SDK). The cloud names the brand and product; the call
+comes back to the device; the same shortlist code that matches listings answers it, with the notices it found; and the
+cloud judges the listing against them. A recall the cloud names counts only when it is one the device returned.
+- On ten made-up listings with generic titles and each recall notice's own photo, the word rules found the recall on
+  none. With the function, 8 of 10 came back with a recall of the right product, on each of two passes
+  (`node tools/lookup-generic.mjs`, `tools/lookup-generic.json`).
+- On the 140 real test listings that went to the cloud, the function was called on 12, the device had a recall for 2,
+  and no listing changed between flagged and not flagged (`node tools/lookup-run.mjs --set=third`,
+  `tools/*-lookup.json`).
+
+**CPSC safety warnings** ([scripts/build-warnings.mjs](scripts/build-warnings.mjs)). When a seller will not recall a
+hazardous product, CPSC warns the public itself. Those notices are not in the recall API: on 2026-11-20 CPSC's file
+held 393 of them, 144 dated 2026. Each gets a spotter card the way a recall does, and its own wording on the card
+("CPSC warning", not "Recalled product"). Adding them changed the word match of 1 of the 597 test listings, which the
+cloud cleared (`node tools/warnings-check.mjs`).
+
+**While a page is checked,** a quiet pill on each listing says where its check is: "Looking on this computer" (Gemini
+Nano), then "Checking in the cloud" for what the computer flagged.
+
 Three more places the device and the cloud work together:
 - **The cloud writes the device's field guide, once.** At build time, Gemini read all 10,089 CPSC recall notices since
   1973 and wrote a short spotter card for each ([data/spotter.jsonl](data/spotter.jsonl), by
@@ -116,9 +140,10 @@ Three more places the device and the cloud work together:
   the word rules and the built-in model use them on the shopper's computer with no cloud call. Matching stays in code.
 - **The cloud shows where.** Its answer includes a box around what decided it, and the card outlines that part of the
   seller's photo.
-- **The device can raise the alarm on a label, but not clear it.** The built-in model reads a label photo, so it stays
-  on the computer, and a match to a recalled model stands. A reading that would reassure the shopper is read again in
-  the cloud first. On 12 real label photos from CPSC notices, this read 8 recalled model numbers correctly and gave no
+- **The device can raise the alarm on a label, but not clear it.** The built-in model reads a label photo, and a match
+  to a recalled model stands on that reading alone. A reading that would reassure the shopper is read again in the
+  cloud first; with the cloud check off (the photo then stays on the computer), the card says "Read once, on this
+  device: not ruled out". On 12 real label photos from CPSC notices, this read 8 recalled model numbers correctly and gave no
   wrong answer; the built-in model alone misread one ("615573" as "S16578") and would have said it wasn't recalled.
 
 Where Firebase AI Logic is called:
@@ -162,8 +187,9 @@ reviewers from what a shopper sees: the title, the price and one photo. Method, 
 
 An end-to-end test loads the real extension into Chrome and runs it on a live search. It checks every hand-off, the
 badges, the toolbar count, that a badge click stays on the page, and that the card offers the next step, and saves
-its report to `tools/e2e-report-*.json`. On the practice listings, the packed 0.9.1 release passes all 15 steps in a
-new Chrome profile, which has no built-in model (words, then the cloud). The on-device step was run end to end with
+its report to `tools/e2e-report-*.json`. On the practice listings, the packed 0.10.0 release passes all 16 steps in a
+new Chrome profile, which has no built-in model (words, then the cloud). With the built-in model, the 0.10.0
+development build looked at all 8 flagged listings on the computer first (`docs/accuracy.md` section 17). The on-device step was run end to end with
 release 0.7.0 in a profile with Gemini Nano: all 12 steps of that version passed, Gemini Nano looked at the listings
 inside the installed extension, the cloud confirmed the flags, and the settings came from Firebase Remote Config. In
 that heavily automated profile reCAPTCHA later refused release tokens, so later on-device runs used the development
@@ -223,6 +249,7 @@ npm run build        # extension/build, web/build
 npm test             # unit tests
 npm run e2e          # the real extension in a separate Chrome profile, on a live eBay search
 node scripts/pack-extension.mjs    # release package in dist/ (no debug token, no developer pages)
+node scripts/build-warnings.mjs    # CPSC safety warnings: spotter cards written in the cloud, merged after the recall cards
 node tools/nano-profile.mjs        # a separate Chrome test profile with the built-in model (Chrome downloads it, ~4 GB)
 npm run e2e -- --profile=C:/tmp/sr-nano-profile    # the end-to-end test with the on-device step
 node tools/eval-run.mjs --set=third --mode=hybrid  # an accuracy test run in that profile
@@ -261,7 +288,7 @@ What protects the project's model quota:
 ## Data and credits
 
 - **Recall data:** the U.S. Consumer Product Safety Commission recall API (saferproducts.gov), all 10,089 notices
-  since 1973. Still Recalled is not affiliated with CPSC.
+  since 1973, and CPSC's product safety warnings file (392 warnings, read 2026-11-20). Still Recalled is not affiliated with CPSC.
 - **Example photo:** `web/example/recall-26591.jpg` is from CPSC recall notice 26591 (VEVOR baby loungers). The example
   listing around it, `web/example/listing-26591.jpg` (`scripts/make-example.mjs`), is made up.
 - **Font:** Geist, SIL Open Font License, © Vercel ([extension/fonts/Geist-LICENSE.txt](extension/fonts/Geist-LICENSE.txt)).

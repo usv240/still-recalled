@@ -279,8 +279,11 @@ async function pump() {
         chrome.runtime.sendMessage({ type: 'sr:engine-result', tabId: job.tabId, pageKey: job.pageKey, result }).catch(() => {});
       };
       const failed = e => send({ id: job.listing.id, listing: job.listing, level: 'error', kind: null, error: String(e).slice(0, 160) });
+      // Where this listing's check is, for the pill on the page: the built-in model, then the cloud.
+      const stageIs = s => chrome.runtime.sendMessage({ type: 'sr:engine-stage', tabId: job.tabId, id: job.listing.id, stage: s }).catch(() => {});
       let stage;
       try {
+        if (status === 'available' && rank(idx, job) !== 0) stageIs('device');
         stage = await lookOnDevice(job.listing, { modelReady: status === 'available', cloud: job.cloud });
       } catch (e) {
         failed(e);
@@ -289,6 +292,7 @@ async function pump() {
       if (stage.result) { send(stage.result); continue; }
       // The built-in model is one session, so it works through listings one at a time; cloud checks run alongside it,
       // up to CLOUD_AT_ONCE. When all cloud slots are busy, the queue waits for one.
+      stageIs('cloud');
       await cloudSlot();
       confirmInCloud(stage).then(send, failed).finally(releaseCloudSlot);
     }

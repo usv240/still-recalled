@@ -326,6 +326,7 @@ function settingsView() {
       h('div', {}, h('dt', {}, 'On-device model'), h('dd', {}, modelWord)),
       h('div', {}, h('dt', {}, 'Cloud check'), h('dd', {}, hasCloudAccess ? 'Available' : 'Off')),
       h('div', {}, h('dt', {}, 'Recall notices'), h('dd', {}, meta ? (meta.count + (live ? live.cards.length : 0)).toLocaleString('en-US') : '–')),
+      meta && meta.warnings ? h('div', {}, h('dt', {}, 'CPSC safety warnings'), h('dd', {}, meta.warnings.toLocaleString('en-US'))) : null,
       h('div', {}, h('dt', {}, 'Recalls since'), h('dd', {}, meta ? meta.since : '–')),
       h('div', {}, h('dt', {}, 'Added since this version'), h('dd', {}, String(live ? live.cards.length : 0))),
       h('div', {}, h('dt', {}, 'Last checked with CPSC'), h('dd', {}, live && live.checkedAt ? dayOf(live.checkedAt) : meta ? `${meta.built.slice(0, 10)} (this version)` : '–'))),

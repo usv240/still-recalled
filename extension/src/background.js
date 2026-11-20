@@ -104,6 +104,8 @@ async function onResult(tabId, pageKey, result) {
     chrome.storage.local.set({ [cacheKey(state.site, result.id)]: stored }).catch(() => {});
   }
   if (result.level === 'likely' || result.level === 'possible') sendToTab(tabId, [result]);
+  // Nothing to show: take the "still checking" pill off the listing.
+  else chrome.tabs.sendMessage(tabId, { type: 'sr:stage', id: result.id, stage: 'done' }).catch(() => {});
 }
 
 function sendToTab(tabId, results) {
@@ -119,6 +121,10 @@ chrome.runtime.onMessage.addListener((msg, sender, reply) => {
       return true;
     case 'sr:on-screen':
       if (tabId != null) chrome.runtime.sendMessage({ type: 'sr:engine-on-screen', tabId, ids: msg.ids }).catch(() => {});
+      return false;
+    case 'sr:engine-stage':
+      // Where a listing's check is (the built-in model, or the cloud): shown on the page, never stored.
+      chrome.tabs.sendMessage(msg.tabId, { type: 'sr:stage', id: msg.id, stage: msg.stage }).catch(() => {});
       return false;
     case 'sr:engine-result':
       onResult(msg.tabId, msg.pageKey, msg.result);

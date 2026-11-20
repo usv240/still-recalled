@@ -8,7 +8,8 @@ export const BANNED_TYPES = [
   {
     key: 'inclined_sleeper',
     label: 'Inclined infant sleeper',
-    pattern: /\b(inclined?\s+sleeper|rock\s*'?n'?\s*play|rocking\s+sleeper|incline\s+bassinet|inclined\s+bassinet)\b/i,
+    // "inclined baby sleeper": sellers put a word between (a title in this form had no hint, 2026-11-20).
+    pattern: /\b(inclined?\s+(?:(?:baby|infant|newborn)\s+)?sleeper|rock\s*'?n'?\s*play|rocking\s+sleeper|incline\s+bassinet|inclined\s+bassinet)\b/i,
     looksLike: 'a fabric sleeper or rocker on a frame where the baby rests on a slope, like a hammock',
     // Banned hazardous product regardless of manufacture date, from Nov 12, 2022 (sale and offer for sale included).
     basis: 'Safe Sleep for Babies Act of 2021, Pub. L. 117-126 §2; 16 CFR 1310',
