@@ -89,7 +89,7 @@ const foot = depth => `<footer class="foot">
 </footer>`;
 
 const card = l => `<li class="item">
-    <a class="photo" href="./item/${l.id}.html"><img src="img/${l.img}" alt="" width="400" height="300" loading="lazy"></a>
+    <a class="photo" tabindex="-1" aria-hidden="true" href="./item/${l.id}.html"><img src="img/${l.img}" alt="" width="400" height="300" loading="lazy"></a>
     <a class="title" href="./item/${l.id}.html">${esc(l.title)}</a>
     <p class="meta"><span class="price">$${l.price}</span> · ${esc(l.place)} · ${ago(l.days)}</p>
   </li>`;
@@ -101,19 +101,21 @@ ${bar('../')}
   <section class="intro" aria-labelledby="intro-title">
     <h1 id="intro-title">Try the extension on seventeen made-up listings</h1>
     <p class="lede">Eight of these are products the CPSC has recalled, written the way sellers write them: a nickname,
-    often no model number, never the year. With the extension on, each of the eight gets a badge. The Kidsview bouncer was
-    recalled on November 19, 2026, after this version's recall list was built: the extension fetches new recalls from CPSC
-    itself, so it is flagged a minute after install. Click it to see the recall, where the
-    problem is in the photo, and what to do. The Tango Mini stroller was recalled for four model numbers only:
-    open its listing, save the seller's label photo, and add it to the card to settle it.</p>
+    often no model number, never the year. With the extension on, each of the eight gets a badge. Click one to see the
+    recall, where the problem is in the photo, and what to do.</p>
     <ol class="steps">
-      <li><a class="btn" href="${RELEASE}">Download the extension</a> and unzip it.</li>
+      <li><a class="btn btn-primary" href="${RELEASE}">Download the extension</a> and unzip it.</li>
       <li>Copy <code>chrome://extensions</code> <button class="copy" type="button" data-copy="chrome://extensions">Copy</button>
       and paste it into the address bar. Switch on <b>Developer mode</b> (top right), click <b>Load unpacked</b>, and
       choose the <b>still-recalled-extension</b> folder (the one with manifest.json in it).</li>
       <li>Reload this page. Badges appear as listings are checked, the matched ones first.</li>
     </ol>
     <p class="status" id="sr-status" role="status">Extension not detected on this page yet. After installing it, reload this page.</p>
+    <div id="sr-preview" hidden></div>
+    <p class="note"><b>Two to look for.</b> The Kidsview bouncer was recalled on November 19, 2026, after this version's
+    recall list was built: the extension fetches new recalls from CPSC itself, so it is flagged a minute after install.
+    The Tango Mini stroller was recalled for four model numbers only: open its listing, save the seller's label photo, and
+    add it to the card to settle it.</p>
     <p class="note">Chrome's built-in model (Gemini Nano) does the first look on your computer when Chrome has it. Without it the
     extension still works: the listing's words decide what the cloud looks at. No Chrome? <a href="../">Check a screenshot on the web page</a>.</p>
   </section>
@@ -143,6 +145,7 @@ const show = () => {
 new MutationObserver(show).observe(root, { attributes: true, attributeFilter: ['data-still-recalled', 'data-sr-flagged'] });
 show();
 </script>
+<script type="module" src="../build/try-preview.js"></script>
 </body>
 </html>
 `;

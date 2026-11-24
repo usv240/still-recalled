@@ -1021,6 +1021,38 @@ or OfferUp apps.
 - **Not run on this version:** anything with Gemini Nano. The computer had under 2 GB free, and Gemini Nano needs
   about 5. The last run with it is 0.12.0's (section 19).
 
+## 21. A design review, and release 0.13.0 (2026-11-24)
+
+Three separate reviews: the website and extension by design heuristics, the same pages by an automated detector, and
+the Android app as a native design review. No accuracy rule changed in this release. What changed is how the product
+behaves around a check:
+- **Cost:** the web page asked Gemini to write field-guide entries for new recalls on every first visit (about 13
+  cloud calls before the visitor did anything). There, new recalls are now matched by their words. The extension and
+  the Android app, which keep their entries for days, still have Gemini write them.
+- **Dark theme** on the website, the extension's side panel and welcome page, and the Android app, from the system
+  setting. Badges on a marketplace page stay light, like the page around them. Text contrast was measured in both:
+  no pair under 4.5:1 (lowest 5.8:1 light, 6.0:1 dark).
+- **Errors by cause** on the web page and the phone: not a picture, offline, cloud busy or slow, App Check. The
+  failed step stays marked, "Try again" re-runs the same input, and typing the product, which works offline, is
+  offered.
+- **Screen readers:** one status line instead of re-reading the whole panel or result; headings, step states, live
+  regions and a labelled switch on Android; visible focus on the web page's screenshot picker; the badge says whether
+  its card is open.
+- **A bug on Android:** once an item was watched, a second "Watch for recalls" button stayed on screen, and tapping it
+  removed the watch. Now the card says "Watching this for recalls", with a separate "Stop watching".
+- **The practice page** can show the badges from a recorded run of the extension, labelled as a recording with its
+  date and version, for anyone who can't install it.
+
+**0.13.0 results (2026-11-24).** 87 unit tests pass.
+- **Extension, release build (no debug token) loaded in a new Chrome profile (no built-in model):** all 18 end-to-end
+  steps on the live practice page (`tools/e2e-report-dev.json`, named for the unpacked folder it ran from). All 8 recalled listings flagged, the recall published after the build among them; the cloud asked the device's
+  field guide for the unnamed sleeper and the device returned 23088; no engine errors. That run wrote
+  `web/try/recorded.json`, the practice page's preview.
+- **Android, release APK, Android 16 emulator (no Gemini Nano):** all 10 checks, the token 31 s after launch, checks
+  with a model call 9.0 to 18.8 s; all 6 "I own it" checks. In dark mode, the result screen and the watch card were
+  checked on screen, and after "Watch for recalls" was tapped no second watch button was left.
+- **Not run on this version:** anything with Gemini Nano.
+
 ## Reproduce
 
 ```

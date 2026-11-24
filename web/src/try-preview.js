@@ -22,7 +22,8 @@ async function start() {
   const show = () => {
     addFonts(p => `../${p}`);
     for (const r of rec.results) {
-      const link = document.querySelector(`.item a.title[href$="/${r.listing.id}.html"]`);
+      const slug = r.id || (r.listing.url || "").split("/").pop().replace(/\.html$/, "");
+      const link = document.querySelector(`.item a.title[href$="/${slug}.html"]`);
       const card = link && link.closest('li');
       if (!card) continue;
       const host = buildBadge(r, { onOpenPanel: null });
