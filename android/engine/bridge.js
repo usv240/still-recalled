@@ -15,6 +15,7 @@ import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../.
 import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, labelCopy, readOnce } from '../../shared/label.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
+import { fitsNotice, entryId } from '../../shared/fieldguide.mjs';
 
 const out = v => JSON.stringify(v === undefined ? null : v);
 let base = [];
@@ -148,6 +149,10 @@ globalThis.SR = {
     return out((records || []).filter(r => r && r.RecallNumber && !ids.has(String(r.RecallNumber).trim())));
   },
   noticeText(record) { return out(noticeText(record)); },
+  /** Whether a shared field-guide entry fits the notice this phone fetched (shared/fieldguide.mjs): '' when it fits. */
+  fitsNotice(spot, record) { return out(fitsNotice(spot, record)); },
+  /** The notice number as a shared field-guide document id, or '' when it can't be one. */
+  entryId(recallNumber) { return out(entryId(recallNumber)); },
   liveCards(records, spots) { return out(liveCardsFromCpsc(records, new Map(Object.entries(spots || {})), [...live, ...base])); },
   /** Watched listings whose words could be one of the new recalls: { listingId: recallId }. */
   watchHits(listings, newIds) {

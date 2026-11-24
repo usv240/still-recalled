@@ -1063,10 +1063,10 @@ ${LOOKUP_SYSTEM}`;
   function judgeLabel(reading, card) {
     const read = (reading && reading.readable !== false && Array.isArray(reading.model_numbers) ? reading.model_numbers : []).map((m) => String(m).trim()).filter((m) => bare(m).length >= 3).slice(0, 8);
     const listed = (card.codes || []).slice(0, 14);
-    const year2 = reading && Number.isInteger(reading.year) && reading.year >= 1960 && reading.year <= 2035 ? reading.year : 0;
-    const yearOut = !!(year2 && card.from && card.to && (year2 < card.from - 1 || year2 > card.to));
-    const base2 = { model: "", listed, year: year2, yearOut, from: card.from || 0, to: card.to || 0 };
-    if (!read.length && !year2) return { ...base2, state: "unreadable" };
+    const year3 = reading && Number.isInteger(reading.year) && reading.year >= 1960 && reading.year <= 2035 ? reading.year : 0;
+    const yearOut = !!(year3 && card.from && card.to && (year3 < card.from - 1 || year3 > card.to));
+    const base2 = { model: "", listed, year: year3, yearOut, from: card.from || 0, to: card.to || 0 };
+    if (!read.length && !year3) return { ...base2, state: "unreadable" };
     const hit = read.find((m) => listed.some((c) => sameModel(m, c)));
     if (hit) return { ...base2, state: "recalled", model: hit };
     if (read.length && listed.length) {
@@ -1188,6 +1188,37 @@ ${LOOKUP_SYSTEM}`;
     names2(r.Retailers) ? `Sold at: ${clip2(names2(r.Retailers), 400)}` : "",
     (r.Images || []).length ? `Photo captions: ${clip2((r.Images || []).map((i) => i.Caption).filter(Boolean).join("; "), 400)}` : ""
   ].filter(Boolean).join("\n");
+
+  // shared/fieldguide.mjs
+  var MAX = { list: 12, item: 80, kind: 60, tell: 400, model: 40 };
+  function entryId(recallNumber) {
+    const id = String(recallNumber || "").trim();
+    return /^[A-Za-z0-9-]{2,20}$/.test(id) ? id : "";
+  }
+  var fold = (s) => String(s || "").toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/['’`]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+  var strings = (list, n, len) => Array.isArray(list) && list.length <= n && list.every((x) => typeof x === "string" && x.length <= len);
+  var year2 = (y) => Number.isInteger(y) && (y === 0 || y >= 1950 && y <= (/* @__PURE__ */ new Date()).getFullYear() + 1);
+  function validEntry(spot) {
+    if (!spot || typeof spot !== "object" || Array.isArray(spot)) return false;
+    const keys = ["brands", "lines", "kind", "other_names", "models", "sold_from", "sold_to", "all_units", "tell", "for_children"];
+    if (Object.keys(spot).some((k) => !keys.includes(k)) || keys.some((k) => !(k in spot))) return false;
+    return strings(spot.brands, MAX.list, MAX.item) && strings(spot.lines, MAX.list, MAX.item) && strings(spot.other_names, MAX.list, MAX.item) && strings(spot.models, MAX.list, MAX.model) && typeof spot.kind === "string" && spot.kind.length <= MAX.kind && typeof spot.tell === "string" && spot.tell.length <= MAX.tell && typeof spot.all_units === "boolean" && typeof spot.for_children === "boolean" && year2(spot.sold_from) && year2(spot.sold_to) && (!spot.sold_from || !spot.sold_to || spot.sold_from <= spot.sold_to);
+  }
+  function fitsNotice(spot, record) {
+    if (!validEntry(spot)) return "shape";
+    const text = ` ${fold(noticeText(record))} `;
+    const squeezed = text.replace(/ /g, "");
+    const inNotice = (s) => {
+      const f = fold(s);
+      return !!f && (text.includes(` ${f} `) || squeezed.includes(f.replace(/ /g, "")));
+    };
+    for (const b of spot.brands) if (!inNotice(b)) return `brand not in notice: ${b.slice(0, 40)}`;
+    for (const l of spot.lines) if (!inNotice(l)) return `line not in notice: ${l.slice(0, 40)}`;
+    for (const m of spot.models) if (!inNotice(m)) return `model not in notice: ${m.slice(0, 40)}`;
+    const named = [...record.Manufacturers || [], ...record.Importers || [], ...record.Distributors || []].map((x) => x && x.Name).filter(Boolean);
+    if (!spot.brands.length && !spot.lines.length && named.length) return "names nothing, but the notice names a firm";
+    return "";
+  }
 
   // android/engine/bridge.js
   var out = (v) => JSON.stringify(v === void 0 ? null : v);
@@ -1335,6 +1366,14 @@ ${LOOKUP_SYSTEM}`;
     },
     noticeText(record) {
       return out(noticeText(record));
+    },
+    /** Whether a shared field-guide entry fits the notice this phone fetched (shared/fieldguide.mjs): '' when it fits. */
+    fitsNotice(spot, record) {
+      return out(fitsNotice(spot, record));
+    },
+    /** The notice number as a shared field-guide document id, or '' when it can't be one. */
+    entryId(recallNumber) {
+      return out(entryId(recallNumber));
     },
     liveCards(records, spots) {
       return out(liveCardsFromCpsc(records, new Map(Object.entries(spots || {})), [...live, ...base]));

@@ -21,3 +21,4 @@ tools/scratch/
 .impeccable/
 web/fonts/
 tools/android-a11y-out/*.png
+firestore-debug.log

@@ -34,23 +34,40 @@ object LiveRecalls {
         val records = Net.recallsSince(Rules.str("newest"))
         val unknown = Rules.arr("unknown", records)
         val spots = JSONObject()
+        var written = 0
+        var shared = 0
         if (store.cloudCheck && settings.cloudCheck && settings.liveRecalls && unknown.length() > 0) {
             val prompt = Rules.obj("prompts").getJSONObject("spotter").let { Ai.Prompt(it.getString("system"), it.getJSONObject("schema")) }
             val models = (listOf(LiveSettings.FIELD_GUIDE_MODEL) + settings.models).distinct()
+            val todo = (0 until minOf(unknown.length(), MAX_WRITTEN)).map { unknown.getJSONObject(it) }
+            // The shared field guide first: an entry another device wrote, used when it fits the notice this phone
+            // fetched itself (the rules engine checks). Gemini writes only the rest, and each one that fits is shared.
+            val ids = todo.map { Rules.str("entryId", it.optString("RecallNumber")) }
+            val fromShared = FieldGuide.read(ids.filter { it.isNotEmpty() })
+            val left = todo.filterIndexed { i, r ->
+                val s = fromShared[ids[i]]
+                if (s != null && Rules.str("fitsNotice", s, r).isEmpty()) { spots.put(r.optString("RecallNumber").trim(), s); shared++; false } else true
+            }
             val gate = Semaphore(4)
             coroutineScope {
-                (0 until minOf(unknown.length(), MAX_WRITTEN)).map { i ->
+                left.map { r ->
                     async {
                         gate.withPermit {
-                            val r = unknown.getJSONObject(i)
                             try {
-                                val ans = Ai.json(prompt, listOf(Ai.Text(Rules.str("noticeText", r))), Ai.Mode.CLOUD_ONLY, models)
-                                synchronized(spots) { spots.put(r.optString("RecallNumber").trim(), ans.json) }
+                                // The server prompt template first; the prompt built into the app when it can't run.
+                                val text = Rules.str("noticeText", r)
+                                val ans = (if (settings.fieldGuideTemplate.isNotEmpty()) try { Ai.template(settings.fieldGuideTemplate, mapOf("notice" to text)) } catch (_: Throwable) { null } else null)
+                                    ?: Ai.json(prompt, listOf(Ai.Text(text)), Ai.Mode.CLOUD_ONLY, models)
+                                val id = r.optString("RecallNumber").trim()
+                                synchronized(spots) { spots.put(id, ans.json); written++ }
+                                val docId = Rules.str("entryId", id)
+                                if (docId.isNotEmpty() && Rules.str("fitsNotice", ans.json, r).isEmpty()) FieldGuide.share(docId, ans.json, ans.model)
                             } catch (_: Throwable) { /* this notice keeps the plain-code card */ }
                         }
                     }
                 }.awaitAll()
             }
+            android.util.Log.i("StillRecalled", "field guide: ${todo.size} new notices, $shared from the shared guide, $written written here")
         }
         val cards = Rules.arr("liveCards", unknown, spots)
         if (cards.length() == 0) return@withLock Outcome(0, 0, emptyList())

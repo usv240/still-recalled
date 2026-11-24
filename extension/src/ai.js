@@ -1,8 +1,11 @@
 // All model calls go through Firebase AI Logic. This file is the only place the SDK is touched.
 import { initializeApp } from 'firebase/app';
 import { initializeAppCheck, CustomProvider, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
-import { getAI, getGenerativeModel, AgentPlatformBackend, InferenceMode } from 'firebase/ai';
+import { getAI, getGenerativeModel, getTemplateGenerativeModel, AgentPlatformBackend, InferenceMode } from 'firebase/ai';
 import { getRemoteConfig, fetchAndActivate, getValue } from 'firebase/remote-config';
+import { initializeAuth, indexedDBLocalPersistence, signInAnonymously } from 'firebase/auth/web-extension';
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore/lite';
+import { COLLECTION, ENTRY_VERSION, entryId, entryDoc } from '../../shared/fieldguide.mjs';
 import { firebaseConfig, recaptchaSiteKey, appCheckBridgeUrl } from './firebase-config.js';
 
 // Cloud models used to confirm or clear what the on-device model flagged, in order of preference.
@@ -39,6 +42,56 @@ initializeAppCheck(app, {
 const ai = getAI(app, { backend: new AgentPlatformBackend('global') });
 export const hasCloudAccess = !!debugToken || hasDocument;
 
+// The shared field guide (shared/fieldguide.mjs): one entry per new CPSC notice in Cloud Firestore, written by the
+// first device that sees the notice and read by every other. Firebase Authentication signs each device in
+// anonymously (no account, no personal data), so the security rules can require a signed-in caller and record which
+// anonymous id wrote an entry; App Check is enforced on Firestore as on AI Logic. firebase/auth/web-extension is the
+// build of Auth with no remote code, which a Chrome extension needs; it works the same on the web page.
+let userPromise = null;
+const signedIn = () => (userPromise ||= (async () => {
+  const auth = initializeAuth(app, { persistence: indexedDBLocalPersistence });
+  return auth.currentUser || (await signInAnonymously(auth)).user;
+})().catch(e => { userPromise = null; throw e; }));
+const db = getFirestore(app);
+
+/** Shared entries for these notice numbers, as Map of number -> { spot, model }. Missing or unreadable ones are left out. */
+export async function sharedEntries(ids) {
+  const found = new Map();
+  if (!hasCloudAccess || !ids.length) return found;
+  try {
+    await signedIn();
+    await Promise.all(ids.map(async id => {
+      if (!entryId(id)) return;
+      const snap = await getDoc(doc(db, COLLECTION, entryId(id))).catch(() => null);
+      const d = snap && snap.exists() ? snap.data() : null;
+      if (d && d.v === ENTRY_VERSION && d.spot) found.set(id, { spot: d.spot, model: d.model || '' });
+    }));
+  } catch { /* no sign-in or no Firestore: every entry is written here, as before */ }
+  return found;
+}
+
+/**
+ * A field-guide entry from the server prompt template (Firebase AI Logic server prompt templates): the prompt and its
+ * JSON schema live in Firebase, locked, and this device sends only the notice's text. Fixing the prompt is a new
+ * template version named in Remote Config, with no new build; and no copy of the app can rewrite the prompt that
+ * fills the shared field guide. Resolves to { answer, model }; throws when the template can't run, and the caller
+ * writes the entry with the prompt built into this build instead.
+ */
+export async function templateJson(templateId, inputs) {
+  const r = await getTemplateGenerativeModel(ai, { timeout: CLOUD_TIMEOUT_MS }).generateContent({ templateId, templateVariables: inputs });
+  return { answer: JSON.parse(r.response.text()), model: `template ${templateId}` };
+}
+
+/** Stores an entry this device wrote, for every other device. The first entry for a notice stands; a later one is refused. */
+export async function shareEntry(id, spot, model) {
+  if (!hasCloudAccess || !entryId(id)) return false;
+  try {
+    const user = await signedIn();
+    await setDoc(doc(db, COLLECTION, entryId(id)), { ...entryDoc(spot, { model, uid: user.uid }), at: serverTimestamp() });
+    return true;
+  } catch { return false; }
+}
+
 /**
  * Settings that can change without a new build, from Firebase Remote Config: which cloud models to use and in what
  * order, how many cloud checks run at once, and a switch that turns the cloud step off (the on-device flags then stand,
@@ -48,7 +101,7 @@ export const hasCloudAccess = !!debugToken || hasDocument;
  * the fallback when Remote Config cannot be reached.
  * Resolves to { models, cloudCheck, cloudAtOnce, liveRecalls, from: 'remote' | 'cached' | 'defaults' }.
  */
-const DEFAULTS = { cloud_models: CLOUD_MODELS.join(','), cloud_check: true, cloud_at_once: 8, live_recalls: true };
+const DEFAULTS = { cloud_models: CLOUD_MODELS.join(','), cloud_check: true, cloud_at_once: 8, live_recalls: true, field_guide_template: 'field-guide-v1' };
 let live = null;
 let liveAt = 0;
 // The hidden page can stay open for days, so the values are read again every 10 minutes. Remote Config itself goes to
@@ -68,6 +121,9 @@ export function liveSettings() {
         cloudAtOnce: Math.max(1, Math.min(20, Math.round(atOnce) || DEFAULTS.cloud_at_once)),
         // Off: new recalls still arrive from CPSC, but the cloud does not write their field-guide entries.
         liveRecalls: rc ? getValue(rc, 'live_recalls').asBoolean() : true,
+        // The server prompt template that writes field-guide entries (prompts/field-guide-v1.prompt); empty: the
+        // prompt built into this build writes them.
+        fieldGuideTemplate: ((rc ? getValue(rc, 'field_guide_template').asString() : DEFAULTS.field_guide_template).match(/^[a-z0-9-]{1,63}$/) || [''])[0],
         from,
       };
     };
@@ -252,9 +308,9 @@ export async function cloudJson({ system, schema, parts, models = null, retries 
  * Firebase AI Logic hybrid inference: the browser's built-in model when this device has it, Gemini in the cloud
  * when it doesn't (phones, other browsers). Same prompt, same schema either way.
  */
-export function hybridModel({ system, schema, model = CLOUD_MODEL }) {
+export function hybridModel({ system, schema, model = CLOUD_MODEL, mode = InferenceMode.PREFER_ON_DEVICE }) {
   return getGenerativeModel(ai, {
-    mode: InferenceMode.PREFER_ON_DEVICE,
+    mode,
     onDeviceParams: {
       createOptions: {
         ...TEXT_AND_IMAGE,
@@ -272,12 +328,12 @@ export function hybridModel({ system, schema, model = CLOUD_MODEL }) {
 }
 
 /** One JSON answer through hybrid inference. Returns { answer, source: 'on_device' | 'in_cloud', model }. */
-export async function hybridJson({ system, schema, parts, models = null }) {
+export async function hybridJson({ system, schema, parts, models = null, mode = InferenceMode.PREFER_ON_DEVICE }) {
   models ||= (await liveSettings()).models;
   let last;
   for (const model of models) {
     try {
-      const r = await hybridModel({ system, schema, model }).generateContent(parts);
+      const r = await hybridModel({ system, schema, model, mode }).generateContent(parts);
       const source = r.response.inferenceSource || 'in_cloud';
       return { answer: JSON.parse(r.response.text()), source, model: source === 'on_device' ? 'built-in' : model };
     } catch (e) {

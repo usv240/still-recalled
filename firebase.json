@@ -48,5 +48,13 @@
         ]
       }
     ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "auth": {
+    "providers": {
+      "anonymous": true
+    }
   }
 }

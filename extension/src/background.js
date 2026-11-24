@@ -233,14 +233,14 @@ function refreshRecalls() {
     const { live = { cards: [] } } = await chrome.storage.local.get('live');
     const known = new Set(live.cards.map(c => c.id));
     const added = out.cards.filter(c => !known.has(c.id));
-    const next = { cards: [...added, ...live.cards], checkedAt: new Date().toISOString(), added: added.length, written: out.written };
+    const next = { cards: [...added, ...live.cards], checkedAt: new Date().toISOString(), added: added.length, written: out.written, shared: out.shared || 0 };
     await chrome.storage.local.set({ live: next });
     if (added.length) {
       liveStamp = next.cards.length;
       await recheckOpenPages();
     }
     const hits = added.length ? await checkWatch(added.map(c => c.id), settings) : [];
-    return { added: added.length, written: out.written, total: next.cards.length, checkedAt: next.checkedAt, hits: hits.length };
+    return { added: added.length, written: out.written, shared: out.shared || 0, total: next.cards.length, checkedAt: next.checkedAt, hits: hits.length };
   })().finally(() => { refreshing = null; });
 }
 

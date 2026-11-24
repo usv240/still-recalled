@@ -13,9 +13,11 @@ import kotlinx.coroutines.withTimeoutOrNull
  *   cloud_models   cloud Gemini models, in order of preference
  *   cloud_check    off: nothing is sent to the cloud; flags stand, marked unconfirmed
  *   live_recalls   off: new recalls still arrive from CPSC, but the cloud does not write their field-guide entries
+ *   field_guide_template  the server prompt template that writes field-guide entries (prompts/field-guide-v1.prompt);
+ *                  empty: the prompt built into the app writes them
  */
 object LiveSettings {
-    data class Values(val models: List<String>, val cloudCheck: Boolean, val liveRecalls: Boolean, val from: String)
+    data class Values(val models: List<String>, val cloudCheck: Boolean, val liveRecalls: Boolean, val fieldGuideTemplate: String, val from: String)
 
     val DEFAULT_MODELS = listOf("gemini-4-hydrogen", "gemini-3.5-flash-lite")
     /** The model that wrote the field guide's other 10,089 entries (scripts/build-spotter.mjs). */
@@ -38,6 +40,7 @@ object LiveSettings {
                 "cloud_models" to DEFAULT_MODELS.joinToString(","),
                 "cloud_check" to true,
                 "live_recalls" to true,
+                "field_guide_template" to "field-guide-v1",
             )).await()
             if (withTimeoutOrNull(6000) { rc.fetchAndActivate().await() } != null) "remote" else "cached"
         } catch (e: Throwable) {
@@ -48,6 +51,7 @@ object LiveSettings {
             models = models.ifEmpty { DEFAULT_MODELS },
             cloudCheck = rc.getBoolean("cloud_check"),
             liveRecalls = rc.getBoolean("live_recalls"),
+            fieldGuideTemplate = rc.getString("field_guide_template").takeIf { Regex("^[a-z0-9-]{1,63}$").matches(it) } ?: "",
             from = if (from == "cached" && rc.info.lastFetchStatus != com.google.firebase.remoteconfig.FirebaseRemoteConfig.LAST_FETCH_STATUS_SUCCESS) "defaults" else from,
         ).also { cached = it; cachedAt = System.currentTimeMillis() }
     }

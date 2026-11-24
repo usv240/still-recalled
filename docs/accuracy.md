@@ -1159,6 +1159,55 @@ run above used 0.13.1.
   known.
 - **A screen reader run by a person** (TalkBack) is still not done.
 
+## 24. The shared field guide, label photos cloud first, and Firebase's agent skills (2026-11-24)
+
+**The shared field guide** (Cloud Firestore, anonymous Firebase Authentication, a server prompt template; README, "The
+shared field guide").
+
+Measured on the builder's Pixel with a development build, App Check enforced on Firestore and AI Logic. CPSC had 9
+notices newer than the app's recall list.
+
+| Run | New notices | Read from the shared guide | Written by Gemini on this device | Gemini calls |
+|---|---|---|---|---|
+| First device (empty guide) | 9 | 0 | 9, through the template `field-guide-v1` (1.1 to 1.6 s each) | 9 |
+| The same phone again, a fresh install | 9 | 9 | 0 | 0 |
+| Again, after App Check was enforced on Firestore | 9 | 9 | 0 | 0 |
+| The web page, local development build | 9 | 9 | 0 (the page writes none) | 0 |
+
+- **The 9 entries passed the security rules**, and each one fits its notice by the code check (`fitsNotice`): every
+  brand, line and model number in the entry is in the notice.
+- **One test call to the template**, on recall 26591, gave an entry of the right shape that fits the notice: brand VEVOR,
+  every unit recalled, the print names from the notice.
+- **The rules**: 7 tests on the Firestore emulator (`npm run test:rules`). They cover a write by a signed-in device and
+  a read by another; nothing without sign-in; the first entry stands (no overwrite, update or delete, even by its
+  writer); no listing; the writer's id must be the caller's, with the server's time; 9 wrong shapes refused; every
+  other path closed.
+- **The code check**: 5 unit tests (`tests/fieldguide.test.mjs`). They cover a planted brand, a planted model number,
+  and an entry emptied to hide a branded recall: each is refused.
+- **What it changes for cost:** a new recall's entry is paid for once, not once per device. Before this, every phone
+  and extension wrote its own entry: one Gemini call per new notice on each device (up to 60 in one refresh).
+
+**Label photos, cloud first** (`PREFER_IN_CLOUD`, Android and web). Gemini Nano misread one recalled model
+number on 12 real label photos from CPSC notices (2026-11-18), and a reassuring reading went to the cloud anyway. So a label is now read by
+Gemini in the cloud first; with no signal, Firebase AI Logic gives it to Gemini Nano on the device, and that reading can
+raise the alarm but not clear it. Not measured with the network off yet.
+
+**Firebase agent skills.** Firebase's official agent skills (github.com/firebase/agent-skills, 14 skills) were installed
+for Claude Code. The Firestore, rules-authoring, Authentication and AI Logic skills guided this work. Following them:
+- Firestore was set up in the US, with default-deny rules, a data model written at the top of the rules file, a
+  validator function for the document, and tests.
+- Anonymous Authentication was turned on through `firebase.json`.
+- The template was created with the AI Logic REST API and locked.
+
+**Sixth test set, collected, not yet run.** 180 listings collected on 2026-11-24 with searches and cities no earlier
+set used. It is aimed at infant sleep products that sellers list without a brand: eBay, used condition, 10 each for
+"newborn sleeper", "portable crib", "baby hammock", "moses basket", "baby cradle", "travel bassinet", "mini crib",
+"infant sleep positioner", "baby sleep pod" and "crib mattress", plus Craigslist in Minneapolis, Philadelphia, Dallas and
+San Diego (`tools/collect-sixth.sh`, `tools/sixth-listings.json`). About half of the Craigslist listings are not baby
+products (bike racks, pet playpens); they stay in, as false-alarm tests. Three AI reviewers label it blind
+(`tools/sixth-label-brief.txt`). The run that would score the "no-brand sleep product goes to the cloud" rule on it
+(about 80 Gemini calls, and Gemini Nano on the PC) waits for the builder's go-ahead.
+
 ## Reproduce
 
 ```

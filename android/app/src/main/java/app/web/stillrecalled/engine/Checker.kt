@@ -169,16 +169,20 @@ class Checker(private val cloudAllowed: () -> Boolean) {
     data class LabelOutcome(val reading: JSONObject, val source: String, val copy: JSONObject)
 
     /**
-     * Settle a possible recall with a photo of the label. The phone can raise the alarm on its own, but not clear it: a
-     * reading that matches a recalled model stands; anything that would reassure is read again in the cloud, and if the
-     * two readings disagree, or a number is one character off a recalled one, the card says so (shared/label.mjs).
+     * Settle a possible recall with a photo of the label. With the cloud on, Gemini in the cloud reads it first
+     * (PREFER_IN_CLOUD): small model numbers are what Gemini Nano was measured to misread, and a reassuring reading
+     * would go to the cloud anyway. When the cloud can't be reached (no signal at a yard sale), Firebase AI Logic hands
+     * the photo to Gemini Nano on the phone, and the phone's reading can raise the alarm on its own but not clear it:
+     * a reading that matches a recalled model stands; anything that would reassure is read again in the cloud when it
+     * comes back, and if the two readings disagree, or a number is one character off a recalled one, the card says so
+     * (shared/label.mjs). With the cloud off, only the phone reads it.
      */
     suspend fun readLabel(photo: Bitmap, recall: JSONObject, owner: Boolean = false): LabelOutcome {
         val settings = LiveSettings.get()
         val cloudOn = cloudAllowed() && settings.cloudCheck
         val parts = listOf(Ai.Text("Read the label in this photo."), Ai.Image(Net.scaled(photo, 1280)!!))
         val first = try {
-            Ai.json(prompt("label"), parts, mode(cloudOn), deviceStepModels(settings.models))
+            Ai.json(prompt("label"), parts, if (cloudOn) Ai.Mode.CLOUD_FIRST else Ai.Mode.DEVICE_ONLY, if (cloudOn) settings.models else deviceStepModels(settings.models))
         } catch (e: Throwable) {
             if (!cloudOn) throw e
             val c = Ai.json(prompt("label"), parts, Ai.Mode.CLOUD_ONLY, settings.models)

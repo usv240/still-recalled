@@ -202,6 +202,28 @@ extensions have no attestation provider of their own, so the extension's hidden 
 extension's ID, which the `key` in the manifest fixes, and only that extension may frame it. So anyone who installs
 the extension, judges included, gets the cloud check with App Check still enforced.
 
+**The shared field guide: Cloud Firestore, Firebase Authentication, a server prompt template.** CPSC publishes new
+recalls every week, after the build. Each needs a field-guide entry, and Gemini in the cloud writes it. Without
+sharing, every phone and extension would pay for the same entry again.
+- **The first device to see a new notice writes the entry** through a locked server prompt template
+  ([prompts/field-guide-v1.prompt](prompts/field-guide-v1.prompt)). The prompt lives in Firebase, so no copy of the app
+  can change what fills the shared guide, and Remote Config names the template version.
+- **It stores the entry in Firestore** under the notice's number ([shared/fieldguide.mjs](shared/fieldguide.mjs),
+  [FieldGuide.kt](android/app/src/main/java/app/web/stillrecalled/data/FieldGuide.kt)). Every other device reads it
+  instead of calling Gemini. The web page, which writes no entries, reads them too.
+- **Firebase Authentication signs each device in anonymously**: no account and no personal data. The security rules
+  ([firestore.rules](firestore.rules)) then allow an entry to be written once, by a signed-in caller, in the field
+  guide's exact shape. No overwrite, no delete, no listing.
+- **App Check is enforced on Firestore** as on AI Logic. The rules are tested on the Firestore emulator
+  (`npm run test:rules`, 7 tests).
+- **A shared entry is never trusted as it is.** Each device checks it against the notice it fetched from CPSC itself:
+  every brand, product line and model number must appear in the notice (`fitsNotice`). An entry only puts a recall on
+  the shortlist; the cloud still reads the official notice before anything is flagged.
+- **A shopper who switched the cloud off sends nothing**, Firestore included.
+- **Labels are read cloud first** (`PREFER_IN_CLOUD`). A photo of a label goes to Gemini in the cloud first, because
+  small model numbers are what Gemini Nano was measured to misread. With no signal, the SDK hands it to Gemini Nano on
+  the device; that reading can warn but never reassure.
+
 ## How well it works
 
 Five tests, each on listings collected after the fixes the test before it led to, labelled blind by separate AI

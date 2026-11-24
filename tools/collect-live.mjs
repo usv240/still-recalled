@@ -26,7 +26,7 @@ const searches = [
 ];
 
 const seen = new Set();
-for (const f of ['tools/eval-listings.json', 'tools/live-listings.json', 'tools/fresh-listings.json', 'tools/third-listings.json', 'tools/fourth-listings.json', 'tools/fifth-listings.json'].filter(f => path.resolve(f) !== outFile)) {
+for (const f of ['tools/eval-listings.json', 'tools/live-listings.json', 'tools/fresh-listings.json', 'tools/third-listings.json', 'tools/fourth-listings.json', 'tools/fifth-listings.json', 'tools/sixth-listings.json'].filter(f => path.resolve(f) !== outFile)) {
   if (!existsSync(f)) continue;
   for (const list of Object.values(JSON.parse(readFileSync(f, 'utf8')))) for (const l of list) seen.add(l.id);
 }
@@ -39,6 +39,8 @@ const browser = await puppeteer.launch({
 });
 const out = existsSync(outFile) ? JSON.parse(readFileSync(outFile, 'utf8')) : {};
 for (const k of Object.keys(out)) if (!out[k].length) delete out[k];
+// Each eBay search runs in its own process, so listings an earlier run saved to this file count as seen too.
+for (const list of Object.values(out)) for (const l of list) seen.add(l.id);
 // eBay answers an automated browser with an error page after a search or two. When it does, the collector stops for
 // that site; the remaining searches were read in a normal browser instead.
 const blocked = new Set();

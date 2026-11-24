@@ -29,7 +29,11 @@ import org.json.JSONObject
  * Every model call in the app goes through Firebase AI Logic, here. Three ways of running, each where it fits:
  *
  *   ON_DEVICE_FIRST  PREFER_ON_DEVICE: Gemini Nano on this phone (through AICore) when the phone has it, Gemini in
- *                    the cloud when it doesn't. Reading a screenshot, looking at a listing, reading a label.
+ *                    the cloud when it doesn't. Reading a screenshot, looking at a listing.
+ *   CLOUD_FIRST      PREFER_IN_CLOUD: Gemini in the cloud, and Gemini Nano on this phone when the cloud can't be
+ *                    reached (a yard sale with no signal). Reading a label: small model numbers are what Gemini Nano
+ *                    was measured to misread, and the cloud would read any reassuring label again anyway, so the
+ *                    cloud goes first; the phone's own reading, when it is all there is, can warn but not reassure.
  *   DEVICE_ONLY      ONLY_ON_DEVICE: when the cloud check is switched off. Nothing leaves the phone.
  *   CLOUD_ONLY       ONLY_IN_CLOUD: the confirmation against the full recall notice and two photos, a judgment the
  *                    on-device model was measured to get wrong, and writing field-guide entries for new recalls.
@@ -40,7 +44,7 @@ import org.json.JSONObject
  */
 @OptIn(PublicPreviewAPI::class)
 object Ai {
-    enum class Mode { ON_DEVICE_FIRST, DEVICE_ONLY, CLOUD_ONLY }
+    enum class Mode { ON_DEVICE_FIRST, CLOUD_FIRST, DEVICE_ONLY, CLOUD_ONLY }
 
     sealed interface Part
     data class Text(val text: String) : Part
@@ -68,6 +72,7 @@ object Ai {
                     requestOptions = options,
                     onDeviceConfig = when (mode) {
                         Mode.ON_DEVICE_FIRST -> OnDeviceConfig(mode = InferenceMode.PREFER_ON_DEVICE, maxOutputTokens = 400, temperature = 0f)
+                        Mode.CLOUD_FIRST -> OnDeviceConfig(mode = InferenceMode.PREFER_IN_CLOUD, maxOutputTokens = 400, temperature = 0f)
                         Mode.DEVICE_ONLY -> OnDeviceConfig(mode = InferenceMode.ONLY_ON_DEVICE, maxOutputTokens = 400, temperature = 0f)
                         Mode.CLOUD_ONLY -> OnDeviceConfig(mode = InferenceMode.ONLY_IN_CLOUD)
                     },
@@ -109,6 +114,18 @@ object Ai {
             else break
         }
         throw last ?: IllegalStateException("no model answered")
+    }
+
+    /**
+     * One JSON answer from a server prompt template (Firebase AI Logic server prompt templates): the prompt and its
+     * schema live in Firebase, locked, and the phone sends only `inputs`. Cloud only; throws when the template can't
+     * run, and the caller uses the prompt built into the app instead.
+     */
+    suspend fun template(templateId: String, inputs: Map<String, Any>): Answer {
+        val started = System.currentTimeMillis()
+        val response = withTimeout(60_000) { ai.templateGenerativeModel(options).generateContent(templateId, inputs) }
+        android.util.Log.i("StillRecalled", "model call: template $templateId, ${System.currentTimeMillis() - started} ms")
+        return Answer(parseJson(response.text ?: ""), false, "template $templateId")
     }
 
     /**

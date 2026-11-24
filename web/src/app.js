@@ -30,7 +30,8 @@ async function catchUp() {
     if (saved && Date.now() - saved.at < 6 * 3600e3 && saved.built === meta.built) { liveCards = saved.cards; setLiveCards(liveCards); return; }
   } catch { /* no storage: fetch again */ }
   try {
-    liveCards = (await refreshRecalls({ cloud: false })).cards;
+    // The page writes no field-guide entries (cloud: false), but reads the ones other devices shared.
+    liveCards = (await refreshRecalls({ cloud: false, shared: true })).cards;
     try { localStorage.setItem('sr-live', JSON.stringify({ at: Date.now(), built: meta.built, cards: liveCards })); } catch { /* fine */ }
   } catch { /* CPSC unreachable: the built data stands */ }
 }

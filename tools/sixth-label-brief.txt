@@ -1,0 +1,34 @@
+You are labelling part of a test set for an accuracy test. Work blind: your labels are the "truth" a product's answers will be scored against, so they must come only from the listing itself and the U.S. CPSC's own records, never from the product's own logic or outputs.
+
+The product (Still Recalled) warns shoppers when a secondhand listing (eBay, Craigslist) looks like a CPSC-recalled product, a product CPSC issued a safety warning about, or an infant sleep product type that is risky or no longer allowed to be sold.
+
+DO NOT open or read anything in c:\Hackathons\#BuildHybridAI 2026\still-recalled except the one file you are told to write and data\raw\cpsc-warnings.csv. In particular never read: shared/, extension/, android/, tests/, docs/, tools/ (any file there, including earlier label or result files). Do not run any of the project's code. Do not look up what the product would answer.
+
+What you may use:
+- Your part of the listings: C:\tmp\sixth\part-<X>.json (an array of { id, site, title, price, photo }). This is exactly what a shopper sees on a search page: the title, the price and one photo.
+- The photos: each listing's `photo` is a local JPEG path (C:\tmp\sixth\photos\<id>.jpg). Look at every photo with the Read tool. To save effort you may tile several photos into one image with ffmpeg (it is installed), as long as you can tell which photo is which.
+- CPSC recalls: C:\tmp\sixth\recalls.tsv, one line for each of the 10,089 CPSC recall notices from 1973 to 2026-11-18: recall number, date, title, product names, maker or importer, first 500 characters of the description (tab separated). Search it by brand, product line and kind of product (grep or a small script is fine). For a recall's full details: curl "https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallNumber=<number>".
+- CPSC safety warnings (issued when a seller will not recall): c:\Hackathons\#BuildHybridAI 2026\still-recalled\data\raw\cpsc-warnings.csv. Search it the same way. A warning counts like a recall; write its number in recall_ids with a "W" in front (for example "W27-081").
+- Note for shell commands: this machine's Bash output passes through a filter that can drop words. Prefix commands whose exact output you need with `rtk proxy ` (for example `rtk proxy grep -i "boppy" C:/tmp/sixth/recalls.tsv`), or read files with the Read tool.
+
+Label every listing in your part with:
+- item: "product" (the real, full-size item for use with a real baby or person), "part" (a part, cover, insert-only, replacement piece, accessory), "toy" (a doll-size or toy version), "clothing" (pajamas, sleepers worn as clothing, sleep sacks), or "other" (patterns, decor, unrelated).
+- recall_ids: the CPSC recall numbers (and "W" warning numbers) that this listing is, or could be. Empty if none.
+- recall_match: "yes" (the listing shows it IS the recalled product: the brand plus the specific model or line, or an unmistakable photo; or the brand and kind of product when the notice recalls every unit), "possible" (same brand and same kind of product as a recall, but the listing doesn't show which model or year, so a shopper should check the label), "no".
+- type: one of these risky infant sleep types, only when item is "product":
+    inclined_sleeper: an infant sleep product with an incline over 10 degrees (e.g. Rock 'n Play-style sleepers)
+    crib_bumper: a padded crib bumper, including crib bedding sets that include padded bumpers (look at the photo). A thin breathable mesh liner is NOT a padded bumper; label it type null with a note.
+    drop_side_crib: a full-size crib whose side rail slides down (not doll cribs, not hospital/medical cribs)
+    in_bed_sleeper: infant loungers, nests, pods, in-bed sleepers, padded positioners (e.g. DockATot, Snuggle Me, Boppy Newborn Lounger, "baby nest")
+  Bassinets, bedside sleepers, play yards, swings, rockers and bouncers are not these types (they can still be recalls). Use null when none applies.
+- should_warn: "yes" (recall_match yes, or clearly one of the types), "maybe" (recall_match possible, or you genuinely can't tell from the title and photo whether it is one of the types, e.g. a bedding set whose photo doesn't show whether bumpers are included), "no".
+- note: one short sentence with the visible evidence (what in the title or photo decided it).
+- confidence: "high" or "low".
+
+Be careful with recall_match "yes": check the notice's own words (which models, which years, whether every unit is recalled) before you choose it. An old or generic product of the same brand is "possible", not "yes", unless the notice covers every unit of that product.
+
+Write the result to c:\Hackathons\#BuildHybridAI 2026\still-recalled\tools\sixth-labels-<X>.json as:
+{"labeller": "blind AI review (Claude), title + one photo + every CPSC recall since 1973 and CPSC's safety warnings", "labelled_at": "<ISO time>", "labels": {"<listing id>": {"item": ..., "recall_ids": [...], "recall_match": ..., "type": ..., "should_warn": ..., "note": ..., "confidence": ...}}}
+Label every listing in your part; the file must hold one entry for each id. Write the JSON with the Write tool (not a shell heredoc) and check it parses.
+
+Then reply with: the counts of should_warn yes / maybe / no, the list of yes and maybe listings (id, title, reason), any listings you found hard, and any problems (missing photos and so on). Keep the reply under 500 words.

@@ -5,7 +5,7 @@
 //   2. on-device model (photo + title)  only listings that could matter: a recall candidate, banned-type words, a
 //                                       bedding set, or any infant product. Nothing leaves the device here.
 //   3. cloud model                      only listings step 2 flagged, with the full recall notice and both photos
-import { deviceStatus, deviceModel, imagePart, cloudJson, hybridJson, hasCloudAccess, liveSettings } from './ai.js';
+import { deviceStatus, deviceModel, imagePart, cloudJson, hybridJson, hasCloudAccess, liveSettings, sharedEntries, shareEntry, templateJson, InferenceMode } from './ai.js';
 import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, readOnce } from '../../shared/label.mjs';
 import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer } from '../../shared/triage.mjs';
@@ -16,6 +16,7 @@ import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse, applyDeviceLookup
 import { present } from '../../shared/present.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
+import { fitsNotice, validEntry } from '../../shared/fieldguide.mjs';
 import { WARNINGS_CSV, warningRecords, warningNotice } from '../../shared/warnings.mjs';
 
 let indexPromise = null, basePromise = null;
@@ -58,7 +59,7 @@ const daysBefore = (date, n) => new Date(Date.parse(date) - n * 864e5).toISOStri
  * the plain-code rules: brand, model numbers and product name, without the field guide.
  * Resolves to { cards, found, written, newest }: `cards` are the new ones only.
  */
-export async function refreshRecalls({ cloud = true, fetchImpl = fetch } = {}) {
+export async function refreshRecalls({ cloud = true, shared = cloud, fetchImpl = fetch } = {}) {
   const base = await baseCards();
   const known = [...liveCards, ...base];
   // Warnings come from another CPSC file at build time: they say nothing about how new the recall list is.
@@ -77,34 +78,56 @@ export async function refreshRecalls({ cloud = true, fetchImpl = fetch } = {}) {
   } catch (e) { recallError = e; }
   const settings = await liveSettings();
   const cloudOn = cloud && hasCloudAccess && settings.cloudCheck && settings.liveRecalls;
-  const spots = cloudOn ? await writeSpots(records, settings) : new Map();
+  // `shared`: read the shared field guide even when this device writes no entries (the web page): entries other
+  // devices wrote cost it no model call. A shopper who switched the cloud off gets neither: nothing is sent.
+  const readShared = shared && hasCloudAccess && settings.cloudCheck;
+  const spots = cloudOn || readShared ? await writeSpots(records, settings, { write: cloudOn }) : new Map();
   const cards = liveCardsFromCpsc(records, spots, known);
   // CPSC's safety warnings published since the build, from CPSC's warnings file. Without them, the recalls stand.
   let warned = { cards: [], found: 0, written: 0 }, warningsError = '';
-  try { warned = await newWarnings(known, { cloudOn, settings, fetchImpl }); } catch (e) { warningsError = String(e).slice(0, 160); }
+  try { warned = await newWarnings(known, { cloudOn, readShared, settings, fetchImpl }); } catch (e) { warningsError = String(e).slice(0, 160); }
   // Nothing new from either source, and the recall API failed: the caller is told CPSC could not be reached.
   if (recallError && !warned.cards.length) throw recallError;
   liveCards = [...cards, ...warned.cards, ...liveCards];
   indexPromise = null;
-  return { cards: [...cards, ...warned.cards], found: records.length + warned.found, written: spots.size + warned.written, warnings: warned.cards.length, newest: cards[0] ? cards[0].date : newest,
+  return { cards: [...cards, ...warned.cards], found: records.length + warned.found, written: (spots.written || 0) + warned.written, shared: (spots.shared || 0) + (warned.shared || 0), warnings: warned.cards.length, newest: cards[0] ? cards[0].date : newest,
     ...(recallError ? { recallError: String(recallError).slice(0, 160) } : {}), ...(warningsError ? { warningsError } : {}) };
 }
 
-/** Gemini in the cloud writes each new notice's field-guide entry. Returns Map of notice number -> entry. */
-async function writeSpots(records, settings) {
+/**
+ * Each new notice's field-guide entry. The shared field guide first (shared/fieldguide.mjs): an entry another device
+ * wrote is used when it fits the notice this device fetched itself. For the rest, Gemini in the cloud writes the entry,
+ * and an entry that fits is shared for the devices after this one. Returns Map of notice number -> entry, with
+ * `.shared` (entries read) and `.written` (entries Gemini wrote here) on the map.
+ */
+async function writeSpots(records, settings, { write = true } = {}) {
   const spots = new Map();
   const todo = records.slice(0, LIVE_MAX);
+  const shared = await sharedEntries(todo.map(r => String(r.RecallNumber).trim()));
+  let read = 0, written = 0;
+  for (let i = todo.length - 1; i >= 0; i--) {
+    const id = String(todo[i].RecallNumber).trim();
+    const s = shared.get(id);
+    if (s && !fitsNotice(s.spot, todo[i])) { spots.set(id, s.spot); read++; todo.splice(i, 1); }
+  }
+  if (!write) return Object.assign(spots, { shared: read, written: 0 });
   await Promise.all(Array.from({ length: Math.min(4, todo.length) }, async () => {
     while (todo.length) {
       const r = todo.shift();
+      const id = String(r.RecallNumber).trim();
       try {
-        // The model that wrote the other entries first, so new entries read like them.
-        const { answer } = await cloudJson({ system: SPOTTER_SYSTEM, schema: SPOTTER_SCHEMA, parts: [noticeText(r)], models: [...new Set([FIELD_GUIDE_MODEL, ...settings.models])] });
-        spots.set(String(r.RecallNumber).trim(), answer);
+        // The server prompt template first; the prompt built into this build when it can't run. Either way the model
+        // that wrote the other entries goes first, so new entries read like them.
+        const viaTemplate = settings.fieldGuideTemplate ? await templateJson(settings.fieldGuideTemplate, { notice: noticeText(r) }).catch(() => null) : null;
+        const { answer, model } = viaTemplate && validEntry(viaTemplate.answer) ? viaTemplate
+          : await cloudJson({ system: SPOTTER_SYSTEM, schema: SPOTTER_SCHEMA, parts: [noticeText(r)], models: [...new Set([FIELD_GUIDE_MODEL, ...settings.models])] });
+        spots.set(id, answer);
+        written++;
+        if (!fitsNotice(answer, r)) shareEntry(id, answer, model || FIELD_GUIDE_MODEL);
       } catch { /* this notice keeps the plain-code card */ }
     }
   }));
-  return spots;
+  return Object.assign(spots, { shared: read, written });
 }
 
 /**
@@ -114,7 +137,7 @@ async function writeSpots(records, settings) {
  * cloud check reads in place of a recall notice. Only the extension can do this: CPSC's file has no CORS header, so a
  * web page cannot read it, and there the bundled warnings stand.
  */
-async function newWarnings(known, { cloudOn, settings, fetchImpl }) {
+async function newWarnings(known, { cloudOn, readShared, settings, fetchImpl }) {
   const none = { cards: [], found: 0, written: 0 };
   if (!(globalThis.chrome && chrome.runtime && chrome.runtime.id)) return none;
   const have = known.filter(c => c.warning);
@@ -128,10 +151,10 @@ async function newWarnings(known, { cloudOn, settings, fetchImpl }) {
   // would never be fetched. The cloud writes field-guide entries for the first LIVE_MAX; the rest get plain-code cards.
   const records = warningRecords(await res.text()).filter(r => r.RecallDate >= daysBefore(newest, 7) && !ids.has(r.RecallNumber));
   if (!records.length) return none;
-  const spots = cloudOn ? await writeSpots(records, settings) : new Map();
+  const spots = cloudOn || readShared ? await writeSpots(records, settings, { write: cloudOn }) : new Map();
   const byId = new Map(records.map(r => [r.RecallNumber, r]));
   const cards = liveCardsFromCpsc(records, spots, known).map(c => ({ ...c, warning: true, notice: warningNotice(byId.get(c.id)) }));
-  return { cards, found: records.length, written: spots.size };
+  return { cards, found: records.length, written: spots.written || 0, shared: spots.shared || 0 };
 }
 
 /**
@@ -243,13 +266,14 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
 
 /**
  * Settle a possible recall with a photo of the product's label (a JPEG data URL). `recall` is the result's recall
- * ({ codes, from, to }). Firebase AI Logic hybrid inference reads the label: the built-in model when this device has
- * it, so the photo stays on the device.
+ * ({ codes, from, to }). Firebase AI Logic hybrid inference reads the label, cloud first (PREFER_IN_CLOUD): on 12
+ * real label photos from CPSC notices (2026-11-18), the built-in model misread one recalled model number (615573 as
+ * S16578), which alone would have said "not among the listed models"; the cloud read it correctly. And a reassuring
+ * reading went to the cloud anyway. When the cloud can't be reached (no signal), the SDK hands the photo to the
+ * built-in model, and with the cloud switched off only the built-in model reads it.
  *
  * The device can raise the alarm on its own, but not clear it. A "recalled" reading stands. Any other reading, which
- * would reassure the shopper, is read again by Gemini in the cloud first, and the cloud's reading decides. On 12 real
- * label photos from CPSC notices (2026-11-18), the built-in model misread one recalled model number (615573 as
- * S16578), which alone would have said "not among the listed models"; the cloud read it correctly.
+ * would reassure the shopper, is read again by Gemini in the cloud first, and the cloud's reading decides.
  * Resolves to { reading, source: 'on_device' | 'in_cloud' | 'device_then_cloud', verdict }.
  */
 export async function readLabel(dataUrl, recall, { cloud = true } = {}) {
@@ -261,7 +285,7 @@ export async function readLabel(dataUrl, recall, { cloud = true } = {}) {
   const cloudOn = cloud && hasCloudAccess && (await liveSettings()).cloudCheck;
   let reading, source;
   try {
-    if (cloudOn) ({ answer: reading, source } = await hybridJson({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA, parts }));
+    if (cloudOn) ({ answer: reading, source } = await hybridJson({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA, parts, mode: InferenceMode.PREFER_IN_CLOUD }));
     else {
       const r = await deviceModel({ system: LABEL_SYSTEM, schema: LABEL_SCHEMA }).generateContent(parts);
       reading = JSON.parse(r.response.text());

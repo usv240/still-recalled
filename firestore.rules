@@ -1,0 +1,88 @@
+rules_version = '2';
+
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: fieldGuide
+// Document ID: a CPSC recall number or "W" warning number, ^[A-Za-z0-9-]{2,20}$ (for example "26591", "W26-742")
+// Fields (all required, all immutable: a document is written once and never changed or deleted):
+//   - v: int (== 1) - the entry format's version
+//   - spot: map - the field-guide entry Gemini wrote for that notice (shared/spotter.mjs SPOTTER_SCHEMA):
+//       brands, lines, other_names: list (at most 12 items)
+//       models: list (at most 12 items)
+//       kind: string (at most 60 characters)
+//       tell: string (at most 400 characters)
+//       sold_from, sold_to: int (0, or a year from 1950 to 2030)
+//       all_units, for_children: bool
+//   - model: string (at most 60 characters) - which Gemini model wrote it
+//   - by: string - the writer's anonymous Firebase Auth uid (must be the caller's own)
+//   - at: timestamp - set by the server (request.time)
+//
+// Every client also checks a shared entry against the notice it fetched from CPSC itself (shared/fieldguide.mjs,
+// fitsNotice) before using it. These rules keep the shape right; that check keeps the content honest.
+// App Check is enforced on Firestore for this project, so only the app, the extension and the web page can call it.
+//
+// ===============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isShortList(l) {
+      return l is list && l.size() <= 12;
+    }
+
+    function isYear(y) {
+      return y is int && (y == 0 || (y >= 1950 && y <= 2030));
+    }
+
+    function isValidSpot(s) {
+      return s is map
+        && s.keys().hasAll(['brands', 'lines', 'kind', 'other_names', 'models', 'sold_from', 'sold_to', 'all_units', 'tell', 'for_children'])
+        && s.keys().hasOnly(['brands', 'lines', 'kind', 'other_names', 'models', 'sold_from', 'sold_to', 'all_units', 'tell', 'for_children'])
+        && isShortList(s.brands) && isShortList(s.lines) && isShortList(s.other_names) && isShortList(s.models)
+        && s.kind is string && s.kind.size() <= 60
+        && s.tell is string && s.tell.size() <= 400
+        && isYear(s.sold_from) && isYear(s.sold_to)
+        && s.all_units is bool && s.for_children is bool;
+    }
+
+    // Validator Function Pattern: the whole document as it would be after the write.
+    function isValidEntry(id, d) {
+      return id.matches('^[A-Za-z0-9-]{2,20}$')
+        && d.keys().hasAll(['v', 'spot', 'model', 'by', 'at'])
+        && d.keys().hasOnly(['v', 'spot', 'model', 'by', 'at'])
+        && d.v == 1
+        && isValidSpot(d.spot)
+        && d.model is string && d.model.size() <= 60
+        && d.by == request.auth.uid
+        && d.at == request.time;
+    }
+
+    // ===============================================================
+    // The shared field guide
+    // ===============================================================
+
+    match /fieldGuide/{id} {
+      // One entry at a time, by its recall number: no listing or querying of the collection.
+      allow get: if isAuthenticated();
+      allow list: if false;
+      // Written once, by a signed-in device, in the right shape. The first entry for a notice stands.
+      allow create: if isAuthenticated() && isValidEntry(id, request.resource.data);
+      allow update, delete: if false;
+    }
+
+    // Everything else: no access.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

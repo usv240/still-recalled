@@ -85,6 +85,10 @@ dependencies {
     // Only development builds carry the debug provider.
     debugImplementation("com.google.firebase:firebase-appcheck-debug:20.1.0")
     implementation("com.google.firebase:firebase-config:24.0.1")
+    // The shared field guide (FieldGuide.kt): Cloud Firestore, with anonymous Firebase Authentication. Versions as in
+    // Firebase BoM 35.2.0, which pairs them with the AI Logic, App Check and Remote Config versions above.
+    implementation("com.google.firebase:firebase-firestore:27.2.0")
+    implementation("com.google.firebase:firebase-auth:25.0.0")
 
     // The shared rules engine runs in Jetpack's JavaScript sandbox.
     implementation("androidx.javascriptengine:javascriptengine:1.1.1")
