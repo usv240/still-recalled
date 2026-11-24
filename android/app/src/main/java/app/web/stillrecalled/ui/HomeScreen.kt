@@ -84,6 +84,14 @@ fun HomeScreen(m: AppModel) {
                 LinkButton("Try it with an example photo", { m.checkExample() })
                 Muted("a made-up listing", Modifier.align(Alignment.CenterVertically))
             }
+            // In person, at a yard sale or a thrift store: the camera instead of a screenshot (Gemini Live).
+            if (!m.owner) {
+                @OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+                FlowRow(verticalArrangement = Arrangement.Center, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    LinkButton("Yard-sale mode", { m.yardSale() })
+                    Muted("point your camera at baby gear", Modifier.align(Alignment.CenterVertically))
+                }
+            }
         }
 
         ModelCard(m)

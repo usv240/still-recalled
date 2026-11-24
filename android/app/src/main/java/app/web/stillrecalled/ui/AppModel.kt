@@ -60,6 +60,8 @@ class AppModel(app: Application, private val saved: SavedStateHandle) : AndroidV
     // The check.
     sealed interface Screen
     data object Home : Screen
+    /** Yard-sale mode: the camera and Gemini Live (YardSaleScreen.kt). */
+    data object YardSale : Screen
     data class Checking(val photo: Bitmap?, val text: String?, val example: Boolean) : Screen
     var screen by mutableStateOf<Screen>(Home)
         private set
@@ -307,6 +309,11 @@ class AppModel(app: Application, private val saved: SavedStateHandle) : AndroidV
         val bmp = getApplication<Application>().assets.open("example.jpg").use { BitmapFactory.decodeStream(it) }
         check(bmp, null, example = true)
     }
+
+    fun yardSale() { job?.cancel(); screen = YardSale }
+    /** Development builds only: yard-sale mode with these words in place of the camera and microphone (a test that
+     *  sends no picture or sound from the phone). */
+    var yardSaleDevText by mutableStateOf<String?>(null)
 
     fun home() { job?.cancel(); screen = Home; outcome = null; error = null; noMatch = null; fromShare = false; forgetResult() }
 

@@ -117,6 +117,32 @@ object Ai {
     }
 
     /**
+     * A Gemini Live session for yard-sale mode (Firebase AI Logic's Live API): the camera's frames and the microphone
+     * in, speech and its transcript out, and `tool` as a function the phone answers. The Agent Platform's Live models
+     * are regional, so this backend is in `location`. App Check goes with the connection as it does with every call.
+     */
+    suspend fun liveSession(model: String, location: String, system: String, tool: JSONObject): com.google.firebase.ai.type.LiveSession {
+        val params = tool.getJSONObject("parameters")
+        val props = params.getJSONObject("properties")
+        val required = params.optJSONArray("required") ?: JSONArray()
+        val req = (0 until required.length()).map { required.getString(it) }.toSet()
+        val map = LinkedHashMap<String, Schema>()
+        for (k in props.keys()) map[k] = Schema.string(props.getJSONObject(k).optString("description").ifEmpty { null })
+        val live = Firebase.ai(backend = GenerativeBackend.agentPlatform(location)).liveModel(
+            modelName = model,
+            generationConfig = com.google.firebase.ai.type.liveGenerationConfig {
+                responseModality = com.google.firebase.ai.type.ResponseModality.AUDIO
+                outputAudioTranscription = com.google.firebase.ai.type.AudioTranscriptionConfig()
+                inputAudioTranscription = com.google.firebase.ai.type.AudioTranscriptionConfig()
+                temperature = 0.3f
+            },
+            tools = listOf(Tool.functionDeclarations(listOf(FunctionDeclaration(tool.getString("name"), tool.getString("description"), map, map.keys.filter { it !in req })))),
+            systemInstruction = content { text(system) },
+        )
+        return withTimeout(30_000) { live.connect() }
+    }
+
+    /**
      * One JSON answer from a server prompt template (Firebase AI Logic server prompt templates): the prompt and its
      * schema live in Firebase, locked, and the phone sends only `inputs`. Cloud only; throws when the template can't
      * run, and the caller uses the prompt built into the app instead.

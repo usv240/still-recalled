@@ -54,6 +54,7 @@ import app.web.stillrecalled.ui.Ink
 import app.web.stillrecalled.ui.Mark
 import app.web.stillrecalled.ui.StillRecalledTheme
 import app.web.stillrecalled.ui.WatchScreen
+import app.web.stillrecalled.ui.YardSaleScreen
 import app.web.stillrecalled.ui.loadBitmapAsync
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -82,6 +83,7 @@ class MainActivity : ComponentActivity() {
         if (intent.getBooleanExtra(OPEN_WATCH, false)) { model.selectTab(1); return }
         // Testing only, in debug builds: replay the arrival of the recalls published since the build.
         if (BuildConfig.DEBUG && intent.getBooleanExtra("dev_forget_live", false)) model.forgetLive()
+        if (BuildConfig.DEBUG) intent.getStringExtra("dev_yard_text")?.let { model.yardSaleDevText = it; model.yardSale(); return }
         if (intent.action != Intent.ACTION_SEND) return
         val type = intent.type ?: ""
         if (type.startsWith("image/")) {
@@ -160,6 +162,7 @@ private fun App(m: AppModel, tab: Int, setTab: (Int) -> Unit, backToSharer: () -
                         2 -> AboutScreen(m)
                         else -> when (val s = m.screen) {
                             is AppModel.Checking -> CheckScreen(m, s)
+                            AppModel.YardSale -> YardSaleScreen(m)
                             else -> HomeScreen(m)
                         }
                     }

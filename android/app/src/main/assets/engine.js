@@ -1220,6 +1220,36 @@ ${LOOKUP_SYSTEM}`;
     return "";
   }
 
+  // shared/live.mjs
+  var LIVE_TOOL = {
+    ...LOOKUP_TOOL,
+    // The brand is optional here: an unbranded lounger or bumper is still checked against the banned types.
+    parameters: { ...LOOKUP_TOOL.parameters, required: ["product"] },
+    description: "Search the recall field guide kept on the shopper's phone (every U.S. CPSC recall since 1973, and the infant sleep product types banned from sale) for one product you can see. Returns the matching recall notices, or none, and any banned type the words name."
+  };
+  var LIVE_SYSTEM = [
+    "You help a parent at a yard sale or thrift store check baby and children's products for U.S. CPSC recalls. You see their phone's camera and hear them.",
+    "Call lookup_recalls once for each baby or children's product in view, before you say anything about it: the kind of product always, the brand and product line when you can read or recognise them (leave the brand empty otherwise), and a model number if you can read one. Do not call it again for the same product.",
+    "Say only what lookup_recalls returned. If it returned a recall, say the brand and product, that it may be recalled, and what the notice says about which units, in one or two short sentences, and suggest checking the label. If it returned a banned type, say that type cannot legally be sold. If it returned nothing, say no recall was found in the list for it, which does not mean it is safe.",
+    "Never say a product is safe or not recalled. Never name a recall number or product that lookup_recalls did not return.",
+    "When you cannot read a brand, say what kind of product it is and ask the parent to show you the label or the brand.",
+    "Speak in short, plain sentences. Do not describe people or anything that is not a product for sale."
+  ].join("\n");
+  var LIVE_OPENING = "I am at a yard sale. Look at what my camera shows and check the baby products you can name.";
+  function liveLookup(index2, args) {
+    const a = lookupArgs(args);
+    const words = `${a.brand} ${a.product} ${a.model_number}`.trim();
+    const found = notTheProduct(words) ? [] : lookupCards(index2, a);
+    const types = notTheProduct(words) ? [] : bannedHints(words).map((t) => ({ key: t.key, label: t.label, basis: t.basis }));
+    const response = { ...lookupResponse(found), banned_types: types.map((t) => `${t.label}: cannot legally be sold (${t.basis})`) };
+    if (!found.length && types.length) response.note = "No recall notice for that brand and product, but its kind is banned from sale.";
+    return {
+      asked: a,
+      response,
+      shown: { recalls: found.map(({ card, strength }) => ({ card, strength })), types }
+    };
+  }
+
   // android/engine/bridge.js
   var out = (v) => JSON.stringify(v === void 0 ? null : v);
   var base = [];
@@ -1366,6 +1396,15 @@ ${LOOKUP_SYSTEM}`;
     },
     noticeText(record) {
       return out(noticeText(record));
+    },
+    // ---- Yard-sale mode (shared/live.mjs) ---------------------------------------------------------------------------
+    /** The Live session's instructions, its one function, and the first thing the parent says. */
+    liveSpec() {
+      return out({ system: LIVE_SYSTEM, tool: LIVE_TOOL, opening: LIVE_OPENING });
+    },
+    /** Gemini Live's lookup_recalls call, answered from this phone's field guide: { asked, response, shown }. */
+    liveLookup(args) {
+      return out(liveLookup(index(), args));
     },
     /** Whether a shared field-guide entry fits the notice this phone fetched (shared/fieldguide.mjs): '' when it fits. */
     fitsNotice(spot, record) {

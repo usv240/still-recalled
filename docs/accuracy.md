@@ -1204,9 +1204,33 @@ set used. It is aimed at infant sleep products that sellers list without a brand
 "newborn sleeper", "portable crib", "baby hammock", "moses basket", "baby cradle", "travel bassinet", "mini crib",
 "infant sleep positioner", "baby sleep pod" and "crib mattress", plus Craigslist in Minneapolis, Philadelphia, Dallas and
 San Diego (`tools/collect-sixth.sh`, `tools/sixth-listings.json`). About half of the Craigslist listings are not baby
-products (bike racks, pet playpens); they stay in, as false-alarm tests. Three AI reviewers label it blind
-(`tools/sixth-label-brief.txt`). The run that would score the "no-brand sleep product goes to the cloud" rule on it
-(about 80 Gemini calls, and Gemini Nano on the PC) waits for the builder's go-ahead.
+products (bike racks, pet playpens); they stay in, as false-alarm tests. Three AI reviewers (Claude) labelled it blind,
+60 listings each (`tools/sixth-label-brief.txt`, `tools/sixth-labels-a.json`, `-b.json`, `-c.json`): **7 must be
+flagged, 16 can't be settled from the listing alone, 157 must not be flagged.** Of the 7, five are unbranded loungers,
+nests or hammocks, the kind the planned rule is for. The run that would score the "no-brand sleep product goes to the
+cloud" rule on it (about 80 Gemini calls, and Gemini Nano on the PC) waits for the builder's go-ahead.
+
+**Yard-sale mode (Android; Gemini Live with function calling).** At a yard sale or a thrift store, the parent points
+the phone's camera at the baby gear. Gemini Live (Firebase AI Logic's Live API, `gemini-live-2.5-flash-native-audio`
+on the Agent Platform in us-central1) watches one frame a second and listens. For each baby product it calls
+`lookup_recalls`, and the phone answers from its own field guide and the banned-type rules (`shared/live.mjs`, run in
+the app's rules engine). The rows on screen come from that answer, not from the model. "Check this one closely" sends
+the frame through the full check, with Gemini Nano on the phone first. A session is capped at two minutes (Remote
+Config `yard_sale_minutes`), and Remote Config can switch the mode off or change the model.
+- **The Live flow, tested from the PC** (`tools/scratch/live-probe.mjs`): the same endpoint, App Check, prompt,
+  function and lookup code, with words in place of the camera ("a pink Fisher-Price Rock n Play sleeper, and next to it
+  a padded crib bumper set with no brand on it"). Gemini called `lookup_recalls` within 0.7 s. The lookup answered:
+  - Rock 'n Play: recalls 23088 and 19105, and the banned inclined-sleeper type;
+  - bumper set: the banned crib-bumper type.
+  Gemini then said only that, in about 4 s.
+- **A fix it found.** In the first run Gemini warned about the bumper set without asking the lookup, because the
+  function then required a brand. The brand is now optional, and the prompt asks for a lookup for every product before
+  anything is said about it.
+- **The web page has no yard-sale mode.** Firebase AI Logic's web SDK sends no App Check token on the Live
+  connection, so App Check refuses it (tested: "Firebase App Check token is invalid"). The Android SDK sends it.
+- **Not yet run on a phone:** the phone dropped off wireless debugging before the test. 5 unit tests cover the lookup
+  (`tests/yardsale.test.mjs`). Only a development build has the words-only test switch (`dev_yard_text`), which sends no
+  picture or sound.
 
 ## Reproduce
 

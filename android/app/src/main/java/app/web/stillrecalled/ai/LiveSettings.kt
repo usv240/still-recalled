@@ -15,13 +15,19 @@ import kotlinx.coroutines.withTimeoutOrNull
  *   live_recalls   off: new recalls still arrive from CPSC, but the cloud does not write their field-guide entries
  *   field_guide_template  the server prompt template that writes field-guide entries (prompts/field-guide-v1.prompt);
  *                  empty: the prompt built into the app writes them
+ *   yard_sale, yard_sale_model, yard_sale_location, yard_sale_minutes   yard-sale mode (Gemini Live): on or off, the
+ *                  Live model and its location, and how many minutes a session may last
  */
 object LiveSettings {
-    data class Values(val models: List<String>, val cloudCheck: Boolean, val liveRecalls: Boolean, val fieldGuideTemplate: String, val from: String)
+    data class Values(val models: List<String>, val cloudCheck: Boolean, val liveRecalls: Boolean, val fieldGuideTemplate: String,
+        val yardSale: Boolean, val yardSaleModel: String, val yardSaleLocation: String, val yardSaleMinutes: Int, val from: String)
 
     val DEFAULT_MODELS = listOf("gemini-4-hydrogen", "gemini-3.5-flash-lite")
     /** The model that wrote the field guide's other 10,089 entries (scripts/build-spotter.mjs). */
     const val FIELD_GUIDE_MODEL = "gemini-3.5-flash-lite"
+    /** Gemini Live on the Agent Platform: its Live models are regional (not in "global"). */
+    const val LIVE_MODEL = "gemini-live-2.5-flash-native-audio"
+    const val LIVE_LOCATION = "us-central1"
 
     private val lock = Mutex()
     private var cached: Values? = null
@@ -41,6 +47,10 @@ object LiveSettings {
                 "cloud_check" to true,
                 "live_recalls" to true,
                 "field_guide_template" to "field-guide-v1",
+                "yard_sale" to true,
+                "yard_sale_model" to LIVE_MODEL,
+                "yard_sale_location" to LIVE_LOCATION,
+                "yard_sale_minutes" to 2L,
             )).await()
             if (withTimeoutOrNull(6000) { rc.fetchAndActivate().await() } != null) "remote" else "cached"
         } catch (e: Throwable) {
@@ -52,6 +62,10 @@ object LiveSettings {
             cloudCheck = rc.getBoolean("cloud_check"),
             liveRecalls = rc.getBoolean("live_recalls"),
             fieldGuideTemplate = rc.getString("field_guide_template").takeIf { Regex("^[a-z0-9-]{1,63}$").matches(it) } ?: "",
+            yardSale = rc.getBoolean("yard_sale"),
+            yardSaleModel = rc.getString("yard_sale_model").takeIf { Regex("^gemini-[a-z0-9.-]+$").matches(it) } ?: LIVE_MODEL,
+            yardSaleLocation = rc.getString("yard_sale_location").takeIf { Regex("^[a-z0-9-]{2,30}$").matches(it) } ?: LIVE_LOCATION,
+            yardSaleMinutes = rc.getLong("yard_sale_minutes").toInt().coerceIn(1, 5),
             from = if (from == "cached" && rc.info.lastFetchStatus != com.google.firebase.remoteconfig.FirebaseRemoteConfig.LAST_FETCH_STATUS_SUCCESS) "defaults" else from,
         ).also { cached = it; cachedAt = System.currentTimeMillis() }
     }

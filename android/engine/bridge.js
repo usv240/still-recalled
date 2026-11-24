@@ -16,6 +16,7 @@ import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, labelCopy, read
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
 import { fitsNotice, entryId } from '../../shared/fieldguide.mjs';
+import { LIVE_SYSTEM, LIVE_TOOL, LIVE_OPENING, liveLookup } from '../../shared/live.mjs';
 
 const out = v => JSON.stringify(v === undefined ? null : v);
 let base = [];
@@ -149,6 +150,11 @@ globalThis.SR = {
     return out((records || []).filter(r => r && r.RecallNumber && !ids.has(String(r.RecallNumber).trim())));
   },
   noticeText(record) { return out(noticeText(record)); },
+  // ---- Yard-sale mode (shared/live.mjs) ---------------------------------------------------------------------------
+  /** The Live session's instructions, its one function, and the first thing the parent says. */
+  liveSpec() { return out({ system: LIVE_SYSTEM, tool: LIVE_TOOL, opening: LIVE_OPENING }); },
+  /** Gemini Live's lookup_recalls call, answered from this phone's field guide: { asked, response, shown }. */
+  liveLookup(args) { return out(liveLookup(index(), args)); },
   /** Whether a shared field-guide entry fits the notice this phone fetched (shared/fieldguide.mjs): '' when it fits. */
   fitsNotice(spot, record) { return out(fitsNotice(spot, record)); },
   /** The notice number as a shared field-guide document id, or '' when it can't be one. */
