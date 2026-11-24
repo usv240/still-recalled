@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-24T20:46:12.088Z",
+  "apk": "android/app/build/outputs/apk/release/app-release.apk",
+  "device": "phone",
+  "density": 3,
+  "width": 1344,
+  "results": [
+    {
+      "screen": "start screen, text 115% 1",
+      "tappable": 8,
+      "problems": []
+    },
+    {
+      "screen": "start screen, text 115% 2",
+      "tappable": 9,
+      "problems": []
+    },
+    {
+      "screen": "watching, text 115% 1",
+      "tappable": 4,
+      "problems": []
+    },
+    {
+      "screen": "how it works, text 115% 1",
+      "tappable": 3,
+      "problems": []
+    },
+    {
+      "screen": "how it works, text 115% 2",
+      "tappable": 5,
+      "problems": []
+    },
+    {
+      "screen": "no match, text 115% 1",
+      "tappable": 5,
+      "problems": []
+    },
+    {
+      "screen": "no match, text 115% 2",
+      "tappable": 4,
+      "problems": []
+    },
+    {
+      "screen": "words that name no product, text 115%",
+      "problems": []
+    },
+    {
+      "screen": "nothing to match, text 115% 1",
+      "tappable": 3,
+      "problems": []
+    },
+    {
+      "screen": "model calls, text 115%",
+      "problems": []
+    }
+  ]
+}

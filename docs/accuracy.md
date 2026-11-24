@@ -1102,6 +1102,63 @@ the same view from the Android engine).
 - **Still not tested:** a screen reader run by a person (TalkBack, VoiceOver or NVDA), Safari and iPhone, and anything
   with Gemini Nano.
 
+## 23. The Android app on a real phone, with Gemini Nano (2026-11-24)
+
+The builder's own Pixel on Android 17, over Wi-Fi debugging, with Gemini Nano already on the phone (AICore reports
+`nano-v4-full`). The release APK of 0.13.1, the same file as the GitHub release, so App Check went through the
+reCAPTCHA bridge as it does for anyone who installs it. `node tools/android-e2e.mjs --nano`,
+`tools/android-e2e-out/report-nano.json`. The report keeps the phone's family and Android version only, and no names of
+the owner's own apps.
+
+**17 of 17 steps passed.**
+- The App Check token arrived **3 s** after launch (32 s on the emulator).
+- **Every check that reached a model was read by Gemini Nano on the phone**, in about 1 s (0.95 to 1.0 s for shared
+  text; 2.2 s and then 1.2 s for the example photo, a look at the picture and then at its words). Gemini in the cloud
+  then compared the listing with the recall notice: **5.1 to 14.5 s**. A whole check took **6.5 to 15.8 s**, against
+  8.8 to 47.9 s on the emulator, where the cloud did both steps.
+- The checks gave the same results as on the emulator:
+  - the example lounger was named as recall 26591;
+  - the Rock 'n Play was named;
+  - the Graco swing was flagged as a possible recall;
+  - the Aila+Aiden lounger got the CPSC warning;
+  - the listing that names no brand ("the rock and play one") was flagged by type, and the cloud asked the phone's
+    field guide and got 23088;
+  - the wooden blocks got no match, with no model call;
+  - the Kidsview bouncer, recalled after the build, was flagged;
+  - words that name no product got "We couldn't tell what the product is", with no model call.
+- Also passed on the phone:
+  - the log kept no listing words and no cloud answers;
+  - Back after a share returned to the app the phone had open before;
+  - the result came back after Android closed the app.
+- Billed: 6 cloud calls in the app's log, one for each check that reached a model. The nickname check's question to the
+  field guide is part of its one call.
+
+**Accessibility on the same phone** (`node tools/android-a11y.mjs`, `tools/android-a11y-out/report-phone.json`): the
+start, watching, how-it-works, no-match and nothing-to-match screens at the owner's own text size (115 percent):
+**10 screen views, 0 problems, 0 model calls**.
+
+**What the test tools needed for a real phone.**
+- **The phone has a second user** (a work profile). Android refuses an install or a reset that does not name the main
+  user, so the tools now pass `--user 0`.
+- **Over Wi-Fi the phone is listed twice** (its address and its network name), so the tools use one of the two, or the
+  one `ANDROID_SERIAL` names.
+- **Its log rolls over within seconds**, so the tools now record the app's own log lines as the run happens, instead of
+  reading the log back at the end.
+- **The tools no longer change a real phone's settings.**
+  - The first accessibility run set the phone's text size to 100 percent for the run and set it back afterwards.
+  - The tool now checks a real phone at the size its owner chose, and leaves the setting alone. Only with
+    `--large-text` does it also check 200 percent.
+  - On an emulator it still checks both 100 and 200 percent.
+
+**Gemini Nano download.** The app already offered "Download Gemini Nano" when the phone can get it. It now logs why a
+download failed, and gets the model ready as soon as the download ends. These changes come in the next release; the
+run above used 0.13.1.
+
+**Not shown by this:**
+- **One phone, with one owner.** How Gemini Nano reads listings on other phones, and on a slow mobile connection, is not
+  known.
+- **A screen reader run by a person** (TalkBack) is still not done.
+
 ## Reproduce
 
 ```

@@ -143,12 +143,19 @@ class AppModel(app: Application, private val saved: SavedStateHandle) : AndroidV
                         is DownloadStatus.DownloadStarted -> total = s.bytesToDownload
                         is DownloadStatus.DownloadInProgress -> if (total > 0) download = s.totalBytesDownloaded.toFloat() / total
                         is DownloadStatus.DownloadCompleted -> download = 1f
-                        is DownloadStatus.DownloadFailed -> { download = null; downloadFailed = true }
+                        is DownloadStatus.DownloadFailed -> {
+                            download = null; downloadFailed = true
+                            android.util.Log.w("StillRecalled", "on-device model download failed: ${s.exception.message?.take(160)}")
+                        }
                     }
                 }
-            } catch (_: Throwable) { download = null; downloadFailed = true }
+            } catch (e: Throwable) {
+                download = null; downloadFailed = true
+                android.util.Log.w("StillRecalled", "on-device model download failed: ${e.javaClass.simpleName}: ${e.message?.take(160)}")
+            }
             model = Ai.deviceStatus()
-            if (model == "available") modelName = Ai.deviceModelName()
+            if (model == "available") { modelName = Ai.deviceModelName(); Ai.warmUp() }
+            android.util.Log.i("StillRecalled", "on-device model after download: $model")
         }
     }
 

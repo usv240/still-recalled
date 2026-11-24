@@ -118,7 +118,7 @@ and reach, and a setting lets the parent choose.
 
 Tests on the shipped builds: 90 unit tests; the packed extension, 18 of 18 end-to-end steps on the live practice
 page (version 0.13.0); the Android app, 10 of 10 checks on an emulator, plus a result that survives Android closing
-the app. Accessibility, checked by tools rather than by eye: axe-core with the WCAG 2.2 AA rules on 40 views of the
+the app, and 17 of 17 steps on a real Pixel with Gemini Nano reading each listing on the phone. Accessibility, checked by tools rather than by eye: axe-core with the WCAG 2.2 AA rules on 40 views of the
 web page and the extension, 0 violations; on Android, every tappable element at normal and 200 percent text, 48 dp or
 larger and named for screen readers, 0 problems.
 
@@ -126,8 +126,8 @@ larger and named for screen readers, 0 problems.
 - **No person has checked the test labels, and no parent has used it yet.** The labels are by AI reviewers (Claude)
   who could not see the product. Each listing in the newest test has one reviewer's label.
 - **The newest test is small:** 9 listings to flag, 6 of them from two searches that name a hazard.
-- **Android has not run on Gemini Nano.** The emulator has none, so its device steps ran in the cloud (8 to 17 s a
-  check; up to 54 s when the cloud was slow).
+- **Android with Gemini Nano has run on one phone only**, the builder's own Pixel: 17 of 17 steps. Gemini Nano read
+  each listing on the phone in about 1 s, and a whole check took 6.5 to 15.8 s.
 - **Gemini Nano is slow and varies.** About 5 to 11 s a listing, and its answer for the same listing can differ between
   runs.
 - **Sideload only** until the Chrome Web Store and Google Play listings are done.

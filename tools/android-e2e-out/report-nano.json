@@ -1,0 +1,269 @@
+{
+  "at": "2026-11-24T20:39:56.957Z",
+  "apk": "android/app/build/outputs/apk/release/app-release.apk",
+  "build": "release",
+  "steps": [
+    {
+      "name": "device connected",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "App Check token from the reCAPTCHA bridge",
+      "ok": true,
+      "detail": "3 s after launch"
+    },
+    {
+      "name": "Gemini Nano available on this phone",
+      "ok": true,
+      "detail": "available (nano-v4-full)"
+    },
+    {
+      "name": "recall list catches up with CPSC (background worker)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "example photo: VEVOR lounger, recall 26591",
+      "ok": true,
+      "detail": "likely / Recalled product in 12.2 s (on device 2190 ms, on device 1169 ms, gemini-4-hydrogen 8182 ms)"
+    },
+    {
+      "name": "the example photo was read by Gemini Nano on the phone",
+      "ok": true,
+      "detail": "read on device: true"
+    },
+    {
+      "name": "shared text: Rock n Play",
+      "ok": true,
+      "detail": "likely / Recalled product in 6.5 s (on device 966 ms, gemini-4-hydrogen 5091 ms)"
+    },
+    {
+      "name": "shared text: Graco swing",
+      "ok": true,
+      "detail": "possible / Possible recall in 15.8 s (on device 949 ms, gemini-4-hydrogen 14491 ms)"
+    },
+    {
+      "name": "shared text: a product CPSC warned about (Aila+Aiden lounger)",
+      "ok": true,
+      "detail": "likely / CPSC warning in 12.7 s (on device 969 ms, gemini-4-hydrogen 11591 ms)"
+    },
+    {
+      "name": "shared text: no brand, only a nickname (the cloud asks the phone)",
+      "ok": true,
+      "detail": "likely / Inclined infant sleeper in 8.3 s (on device 1007 ms, gemini-4-hydrogen 7203 ms)"
+    },
+    {
+      "name": "shared text: wooden blocks",
+      "ok": true,
+      "detail": "none / no match in 0.0 s (no model call)"
+    },
+    {
+      "name": "shared text: recall published after the build (Kidsview, 2026-11-19)",
+      "ok": true,
+      "detail": "possible / Possible recall in 14.8 s (on device 976 ms, gemini-4-hydrogen 13452 ms)"
+    },
+    {
+      "name": "the log keeps no listing words or cloud answers",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Back after a share leaves the app",
+      "ok": true,
+      "detail": "another app was on top (its name is not kept)"
+    },
+    {
+      "name": "the result survives Android closing the app",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "shared text: words that name no product",
+      "ok": true,
+      "detail": "none / no match in 0.1 s (no model call)"
+    },
+    {
+      "name": "words that name no product: \"We couldn't tell what the product is\"",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "checks": [
+    {
+      "name": "example photo: VEVOR lounger, recall 26591",
+      "ms": 12175,
+      "level": "likely",
+      "badge": "Recalled product",
+      "readOnDevice": "true",
+      "how": {
+        "device": true,
+        "deviceLevel": "possible",
+        "candidate": "26591 brand",
+        "judgedInCloud": false,
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
+      },
+      "calls": [
+        "on device 2190 ms",
+        "on device 1169 ms",
+        "gemini-4-hydrogen 8182 ms"
+      ]
+    },
+    {
+      "name": "shared text: Rock n Play",
+      "ms": 6503,
+      "level": "likely",
+      "badge": "Recalled product",
+      "readOnDevice": "null",
+      "how": {
+        "device": true,
+        "deviceLevel": "possible",
+        "candidate": "23088 line",
+        "judgedInCloud": false,
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
+      },
+      "calls": [
+        "on device 966 ms",
+        "gemini-4-hydrogen 5091 ms"
+      ]
+    },
+    {
+      "name": "shared text: Graco swing",
+      "ms": 15785,
+      "level": "possible",
+      "badge": "Possible recall",
+      "readOnDevice": "null",
+      "how": {
+        "device": true,
+        "deviceLevel": "possible",
+        "candidate": "00098 brand",
+        "judgedInCloud": false,
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
+      },
+      "calls": [
+        "on device 949 ms",
+        "gemini-4-hydrogen 14491 ms"
+      ]
+    },
+    {
+      "name": "shared text: a product CPSC warned about (Aila+Aiden lounger)",
+      "ms": 12666,
+      "level": "likely",
+      "badge": "CPSC warning",
+      "readOnDevice": "null",
+      "how": {
+        "device": true,
+        "deviceLevel": "possible",
+        "candidate": "W26-742 brand",
+        "judgedInCloud": false,
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
+      },
+      "calls": [
+        "on device 969 ms",
+        "gemini-4-hydrogen 11591 ms"
+      ]
+    },
+    {
+      "name": "shared text: no brand, only a nickname (the cloud asks the phone)",
+      "ms": 8267,
+      "level": "likely",
+      "badge": "Inclined infant sleeper",
+      "readOnDevice": "null",
+      "how": {
+        "device": true,
+        "deviceLevel": "likely",
+        "candidate": "",
+        "judgedInCloud": false,
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": [
+          {
+            "found": [
+              "23088",
+              "19105"
+            ]
+          }
+        ]
+      },
+      "calls": [
+        "on device 1007 ms",
+        "gemini-4-hydrogen 7203 ms"
+      ]
+    },
+    {
+      "name": "shared text: wooden blocks",
+      "ms": 48,
+      "level": "none",
+      "badge": "",
+      "readOnDevice": "null",
+      "how": {
+        "device": false,
+        "deviceLevel": "words",
+        "candidate": "",
+        "judgedInCloud": false,
+        "cloudModel": "",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
+      },
+      "calls": []
+    },
+    {
+      "name": "shared text: recall published after the build (Kidsview, 2026-11-19)",
+      "ms": 14759,
+      "level": "possible",
+      "badge": "Possible recall",
+      "readOnDevice": "null",
+      "how": {
+        "device": true,
+        "deviceLevel": "possible",
+        "candidate": "27092 brand",
+        "judgedInCloud": false,
+        "cloudModel": "gemini-4-hydrogen",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
+      },
+      "calls": [
+        "on device 976 ms",
+        "gemini-4-hydrogen 13452 ms"
+      ]
+    },
+    {
+      "name": "shared text: words that name no product",
+      "ms": 77,
+      "level": "none",
+      "badge": "",
+      "readOnDevice": "null",
+      "how": {
+        "device": false,
+        "deviceLevel": "words",
+        "candidate": "",
+        "judgedInCloud": false,
+        "cloudModel": "",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
+      },
+      "calls": []
+    }
+  ],
+  "device": {
+    "model": "available (nano-v4-full)",
+    "phone": "Google Pixel, Android 17"
+  },
+  "emulator": false
+}

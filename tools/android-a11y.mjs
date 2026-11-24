@@ -5,7 +5,7 @@
 // no model is called.
 //
 //   node tools/android-a11y.mjs [--apk=android/app/build/outputs/apk/release/app-release.apk]
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 
@@ -16,6 +16,11 @@ const PKG = 'app.web.stillrecalled';
 const out = path.resolve('tools/android-a11y-out');
 mkdirSync(out, { recursive: true });
 const adb = (...a) => execFileSync(ADB, a, { encoding: 'utf8', env: { ...process.env, MSYS_NO_PATHCONV: '1' }, maxBuffer: 64 << 20 });
+// A phone on wireless debugging can be listed twice (its address and its mDNS name): use one. ANDROID_SERIAL chooses.
+if (!process.env.ANDROID_SERIAL) {
+  const listed = adb('devices').split('\n').slice(1).filter(l => /\tdevice\b/.test(l)).map(l => l.split('\t')[0]);
+  if (listed.length > 1) { process.env.ANDROID_SERIAL = listed[0]; console.log(`several devices listed; using ${listed[0]} (set ANDROID_SERIAL to choose)`); }
+}
 const shot = name => writeFileSync(path.join(out, `${name}.png`), execFileSync(ADB, ['exec-out', 'screencap', '-p'], { maxBuffer: 64 << 20 }));
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 function dump() {
@@ -86,19 +91,31 @@ async function auditScrolled(screen, pages = 4) {
     if (xml === last) break;
     last = xml;
     audit(`${screen} ${i + 1}`);
-    adb('shell', 'input', 'swipe', '540', '1700', '540', '700', '400');
+    adb('shell', 'input', 'swipe', String(width >> 1), String(height * 0.7 | 0), String(width >> 1), String(height * 0.3 | 0), '400');
     await sleep(900);
   }
 }
 
-try { adb('install', '-r', apk); } catch { adb('uninstall', PKG); adb('install', apk); }
-adb('shell', 'pm', 'grant', PKG, 'android.permission.POST_NOTIFICATIONS');
+// A phone with a second user (Private Space, a work profile) refuses installs for every user: install for the owner.
+try { adb('install', '-r', '--user', '0', apk); } catch { adb('shell', 'pm', 'uninstall', '--user', '0', PKG); adb('install', '--user', '0', apk); }
+adb('shell', 'pm', 'grant', '--user', '0', PKG, 'android.permission.POST_NOTIFICATIONS');
 const before = adb('shell', 'settings', 'get', 'system', 'font_scale').trim();
+// Text size is a setting of the whole phone. An emulator is checked at 100 and 200 percent, and set back. Someone's
+// own phone is checked at the size its owner chose, and the setting is not touched, unless --large-text asks for
+// 200 percent too.
+const emulator = adb('shell', 'getprop', 'ro.kernel.qemu').trim() === '1';
+const own = before === 'null' ? '1.0' : before;
+const scales = emulator ? ['1.0', '2.0'] : args.includes('--large-text') ? [own, '2.0'] : [own];
+if (!emulator) console.log(`a phone, not an emulator: checked at its own text size (${Math.round(+own * 100)}%)${args.includes('--large-text') ? ' and at 200%' : ''}`);
+// A real phone's log rolls over within seconds: the app's own lines are streamed for the whole run.
+let logText = '';
+const logcat = spawn(ADB, ['logcat', '-v', 'brief', '-s', 'StillRecalled:V'], { env: { ...process.env, MSYS_NO_PATHCONV: '1' } });
+logcat.stdout.on('data', d => { logText += d.toString(); });
 try {
-  for (const scale of ['1.0', '2.0']) {
-    adb('shell', 'settings', 'put', 'system', 'font_scale', scale);
+  for (const scale of scales) {
+    if (scale !== before) adb('shell', 'settings', 'put', 'system', 'font_scale', scale);
     adb('shell', 'am', 'force-stop', PKG);
-    adb('logcat', '-c');
+    logText = '';
     adb('shell', 'am', 'start', '-n', `${PKG}/.MainActivity`);
     await sleep(6000);
     const tag = `text ${Math.round(+scale * 100)}%`;
@@ -116,7 +133,7 @@ try {
     results.push({ screen: `words that name no product, ${tag}`, problems: /Watch for recalls/.test(vague) ? ['offers Watch for recalls with nothing to watch'] : [] });
     console.log(`${/Watch for recalls/.test(vague) ? 'FAIL' : 'ok  '} words that name no product, ${tag}: no watch offered`);
     await auditScrolled(`nothing to match, ${tag}`, 2);
-    const callLines = adb('logcat', '-d').split('\n').filter(l => /model call:/.test(l));
+    const callLines = logText.split('\n').filter(l => /model call:/.test(l));
     const calls = callLines.length;
     if (calls) console.log(callLines.map(l => '       ' + l.trim().slice(0, 160)).join('\n'));
     results.push({ screen: `model calls, ${tag}`, problems: calls ? [`${calls} model calls`] : [] });
@@ -124,9 +141,10 @@ try {
     tap('← Check another'); await sleep(1000);
   }
 } finally {
-  adb('shell', 'settings', 'put', 'system', 'font_scale', before === 'null' ? '1.0' : before);
+  if (adb('shell', 'settings', 'get', 'system', 'font_scale').trim() !== before) adb('shell', 'settings', 'put', 'system', 'font_scale', own);
+  logcat.kill();
 }
 const failed = results.filter(r => r.problems.length).length;
-writeFileSync(path.join(out, 'report.json'), JSON.stringify({ at: new Date().toISOString(), apk, density, width, results }, null, 2));
+writeFileSync(path.join(out, emulator ? 'report.json' : 'report-phone.json'), JSON.stringify({ at: new Date().toISOString(), apk, device: emulator ? 'emulator' : 'phone', density, width, results }, null, 2));
 console.log(JSON.stringify({ screens: results.length, failed }));
 process.exit(failed ? 1 : 0);
