@@ -5,6 +5,20 @@ listings and the label check; `scripts/record-phone.mjs`: the web page at phone 
 reports, a neural voice and burned-in captions. The Android scenes are screen recordings from a phone or the emulator
 (`adb shell screenrecord`). To narrate it yourself, record over the same words.
 
+**Android with Gemini Nano, on a real phone (2026-11-24).** `node tools/android-record.mjs` recorded two clips on the
+builder's Pixel. Both were cropped below the status bar and checked frame by frame: only Still Recalled is on screen.
+They are kept outside the repo, in `E:/still-recalled-video/`:
+- **`android-nano-example-clean.mp4`, 130 s:**
+  - the start screen says "Gemini Nano is ready on this phone";
+  - the example photo is read on the phone and named as recall 26591;
+  - "How it was checked" shows "Read on this phone · Gemini Nano" and "Looked at on this phone · Gemini Nano".
+  - The cloud's half of the check took about 45 s on this take: cut the wait.
+- **`android-nano-shared-clean.mp4`, 46 s:** a Rock 'n Play listing arrives through the share menu. The result comes 11 s
+  later, naming recall 23088, with "Looked at on this phone · Gemini Nano".
+
+With these clips, scene 18 can use its Gemini Nano wording ("looked at on this phone"), because the screen shows it.
+They show a shared text listing, not a Facebook Marketplace screenshot.
+
 Pace: 389 words in 176 seconds, a little over two words a second. No scene asks for more than 2.7.
 
 | Time | Seconds | Picture | Words |
