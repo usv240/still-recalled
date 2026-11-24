@@ -132,7 +132,7 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
         }
 
         if (!flagged) {
-            Box(Modifier.semantics { liveRegion = LiveRegionMode.Polite }) { NoMatch(r, owner) }
+            Box(Modifier.semantics { liveRegion = LiveRegionMode.Polite }) { NoMatch(m.noMatch) }
         } else {
             Column(Modifier.semantics { liveRegion = LiveRegionMode.Polite }, verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Pill(r.optString("badge"), level)
@@ -161,8 +161,13 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
                 recall.optBoolean("warning") -> "Find warning ${recall.optString("number")} on CPSC's warnings page ↗"
                 else -> "Read the CPSC recall notice ↗"
             }, { ctx.open(src) })
+            // A type flag that also points to a recall: its notice too, as on the extension's card.
+            r.optJSONObject("also")?.takeIf { !it.optBoolean("warning") && it.optString("url").startsWith("https://") }?.let { a ->
+                LinkButton("CPSC recall ${a.optString("number")} ↗", { ctx.open(a.optString("url")) })
+            }
         }
-        WatchCard(m, o, flagged)
+        // Nothing to watch when the words named no product.
+        if (m.noMatch?.optBoolean("vague") != true) WatchCard(m, o, flagged)
         HowChecked(r, o)
     }
 }
@@ -177,25 +182,19 @@ private fun OwnerCard(owner: JSONObject) {
 }
 
 @Composable
-private fun NoMatch(r: JSONObject, owner: JSONObject? = null) {
+private fun NoMatch(v: JSONObject?) {
     val ctx = LocalContext.current
-    if (owner != null) {
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Pill("No match found", "none")
-            Text(owner.optString("action"), style = MaterialTheme.typography.headlineSmall)
-            OwnerCard(owner)
-            LinkButton("Search SaferProducts.gov ↗", { ctx.open("https://www.saferproducts.gov/") })
-        }
-        return
-    }
+    // The shared rules' words (shared/present.mjs noMatchView), the same as the web page's.
+    v ?: return
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Pill("No match found", "none")
-        Text(if (Regex("part or (a )?toy").containsMatchIn(r.optString("why"))) "This looks like a part or a toy version, not the product itself."
-            else "No recall found for what we could read. That doesn't mean it's safe: every CPSC recall notice since 1973 was searched, and only what the listing shows can be matched.", style = MaterialTheme.typography.headlineSmall)
+        Pill(v.optString("pill"), "none")
+        Text(v.optString("line"), style = MaterialTheme.typography.headlineSmall)
         SectionCard {
-            Heading("Before you buy")
-            Text("A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.", style = MaterialTheme.typography.bodyMedium)
-            LinkButton("Search SaferProducts.gov ↗", { ctx.open("https://www.saferproducts.gov/") })
+            Heading(v.optString("heading"))
+            val lines = v.optJSONArray("lines")
+            if (lines != null) for (i in 0 until lines.length()) Text(lines.getString(i), style = MaterialTheme.typography.bodyMedium)
+            if (!v.optBoolean("vague")) LinkButton("Search SaferProducts.gov ↗", { ctx.open("https://www.saferproducts.gov/") })
+            if (v.optBoolean("safeSleep")) LinkButton("CPSC safe sleep guidance ↗", { ctx.open("https://www.cpsc.gov/SafeSleep") })
         }
     }
 }
@@ -344,9 +343,15 @@ private fun WatchCard(m: AppModel, o: Checker.Outcome, flagged: Boolean) {
     val key = m.watchKey(o)
     val on = list.any { it.key == key }
     val ctx = LocalContext.current
-    var denied by remember { mutableStateOf(false) }
-    val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted -> denied = !granted; m.toggleWatch(o) }
-    val notesOff = on && (denied || !androidx.core.app.NotificationManagerCompat.from(ctx).areNotificationsEnabled())
+    // Read again each time the app comes back to the front: after "Open notification settings", the note goes away
+    // on its own once alerts are on.
+    var allowed by remember { mutableStateOf(androidx.core.app.NotificationManagerCompat.from(ctx).areNotificationsEnabled()) }
+    androidx.lifecycle.compose.LifecycleResumeEffect(Unit) {
+        allowed = androidx.core.app.NotificationManagerCompat.from(ctx).areNotificationsEnabled()
+        onPauseOrDispose {}
+    }
+    val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted -> allowed = granted; m.toggleWatch(o) }
+    val notesOff = on && !allowed
     SectionCard {
         Heading(if (flagged) "Bought it anyway, or already own one?" else "Buying it, or already own one?")
         Guide("Recall notices reach the first owner, not the next one. Watch it, and Still Recalled checks it against every new CPSC recall, twice a day, and tells you if one matches. The watch list stays on this phone.")

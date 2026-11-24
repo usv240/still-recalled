@@ -687,6 +687,50 @@ ${LOOKUP_SYSTEM}`;
     }
     return "";
   }
+  function noMatchLine(count, since, input = "listing") {
+    const what = input === "typed" ? "the words you typed" : "what the listing shows";
+    return `No recall found for what we could read. That doesn't mean it's safe: ${count} recall notices since ${since} were searched, and only ${what} can be matched.`;
+  }
+  var FILLER = new Set(`a an the this that these those one ones it its is are was be my your our their his her i me we you
+  and or but for with of to in on at by from as so if not no yes ok okay hi hello hey thanks thank please
+  used new like good great nice excellent perfect condition works working clean cheap free price priced obo firm cash
+  pickup pick up only must go sale selling sell sold item items thing things stuff listing post here there what how much
+  any some all very really just still check see look this one`.split(/\s+/));
+  function namesNothing(text) {
+    const words = (String(text || "").toLowerCase().match(/[a-z][a-z'&+-]*/g) || []).map((w) => w.replace(/['&+-]+$/, "")).filter((w) => w.length > 1 && !FILLER.has(w));
+    return words.length === 0;
+  }
+  var grouped = (n) => String(Math.max(0, Math.round(Number(n) || 0))).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  function noMatchView(r, listing, { input = "listing", audience = "buyer", count = 0, since = "" } = {}) {
+    const title = listing && listing.title || "";
+    const partOrToy = r.why === "part or toy" || /part or a toy/.test(r.why || "");
+    const vague = !partOrToy && input === "typed" && namesNothing(title);
+    const owner = audience === "owner" ? ownerView(r) : null;
+    const safeSleep = INFANT.test(title);
+    if (vague) {
+      return {
+        vague,
+        safeSleep: false,
+        pill: "Nothing to match",
+        line: "We couldn't tell what the product is. Type its brand and name, like \u201CGraco Pack 'n Play\u201D, or check a screenshot of the listing.",
+        heading: "What helps",
+        lines: ["The brand and the product name are enough. A model number, if you have one, settles most recalls."]
+      };
+    }
+    const line = partOrToy ? "This looks like a part or a toy version, not the product itself." : owner ? owner.action : noMatchLine(grouped(count), monthYear(since || "1973-01-01"), input);
+    if (owner) return { vague, safeSleep, pill: "No match found", line, heading: owner.heading, lines: owner.lines };
+    return {
+      vague,
+      safeSleep,
+      pill: "No match found",
+      line,
+      heading: "Before you buy",
+      lines: [
+        "A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.",
+        safeSleep ? "For anything a baby sleeps in: a firm, flat surface with nothing else in it." : ""
+      ].filter(Boolean)
+    };
+  }
   function sellerQuestion(r) {
     if (r.kind === "recall" && r.lookedUp) {
       return `Hi, before I buy: what brand and model is this? Could you send a photo of its label? It looks like a product CPSC ${r.recall.warning ? "warned about" : "recalled"} (${r.recall.warning ? "warning" : "recall"} ${r.recall.number}, ${productName(r.recall.product)}).`;
@@ -1258,6 +1302,13 @@ ${LOOKUP_SYSTEM}`;
     /** The same result, said to someone who owns the item: { verdict, evidence, foundBy, action, heading, lines }. */
     ownerView(result) {
       return out(ownerView(result));
+    },
+    /**
+     * What a no-match result says (shared/present.mjs noMatchView), with the count of notices this phone searched.
+     * `input`: 'listing' for a screenshot or photo, 'typed' for typed or shared text.
+     */
+    noMatchView(result, listing, input, owner) {
+      return out(noMatchView(result, listing, { input, audience: owner ? "owner" : "buyer", count: live.length + base.length, since: "1973-01-01" }));
     },
     judgeLabel(reading, recall) {
       return out(judgeLabel(reading, recall));

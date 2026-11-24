@@ -116,8 +116,11 @@ Nano saw nothing in the photo, so the listing never left the laptop. Checked one
 the phone do, all 9 are caught, with 3 soft false alarms and 83% sent to the cloud. That is the trade between privacy
 and reach, and a setting lets the parent choose.
 
-Tests on the shipped builds: 87 unit tests; the packed extension, 18 of 18 end-to-end steps on the live practice
-page; the Android app, 10 of 10 checks on an emulator.
+Tests on the shipped builds: 90 unit tests; the packed extension, 18 of 18 end-to-end steps on the live practice
+page (version 0.13.0); the Android app, 10 of 10 checks on an emulator, plus a result that survives Android closing
+the app. Accessibility, checked by tools rather than by eye: axe-core with the WCAG 2.2 AA rules on 40 views of the
+web page and the extension, 0 violations; on Android, every tappable element at normal and 200 percent text, 48 dp or
+larger and named for screen readers, 0 problems.
 
 ### Limits, as measured
 - **No person has checked the test labels, and no parent has used it yet.** The labels are by AI reviewers (Claude)

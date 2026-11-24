@@ -136,3 +136,28 @@ h1, h2, h3, p { margin: 0; }
 }
 
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* The no-model note, said on every scan: one line, its reason on demand. */
+.notice.notice-line { display: block; padding-top: 10px; padding-bottom: 10px; }
+.notice-line > p { margin-top: 0; }
+.notice-line > summary { cursor: pointer; font-size: 13px; line-height: 20px; color: var(--muted); list-style-position: inside; min-height: 24px; }
+.notice-line > summary:focus-visible { outline: 2px solid var(--focus, var(--text)); outline-offset: 2px; border-radius: 4px; }
+.notice-line[open] > summary { margin-bottom: 6px; }
+
+/* "No matches": what the answer rests on. */
+.checked { display: grid; gap: 8px; }
+.checked-list { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 13px; line-height: 20px; }
+
+/* Zoomed to 200 percent the panel is about 180 CSS pixels wide: nothing may push it sideways. */
+.view, .head, .row-text, .row-line1, .row-line2, .listing-head, .listing-meta, .kv, .progress-label { min-width: 0; }
+.head h1, .listing-head h1, .row-title, .where, .setting-desc, .notice p { overflow-wrap: anywhere; }
+.listing-meta, .progress-label, .bar-actions { flex-wrap: wrap; }
+@media (max-width: 300px) {
+  .bar { padding: 0 4px 0 12px; }
+  .brand { font-size: 13px; }
+  #watching { padding: 0 8px; }
+  /* The bell alone on screen; screen readers still hear "Watch list". */
+  #watching > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #view { padding-left: 12px; padding-right: 12px; }
+  .detail-card { padding: 12px; }
+}

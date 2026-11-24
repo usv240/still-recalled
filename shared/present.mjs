@@ -5,6 +5,7 @@
 // what a listing is. The risk lines state each type's own rule and CPSC's guidance, checked against primary sources on
 // 2026-11-15 (docs/research/sources.md).
 import { clip } from './text.mjs';
+import { INFANT } from './triage.mjs';
 
 export const SAFE_SLEEP_URL = 'https://www.cpsc.gov/SafeSleep';
 
@@ -135,6 +136,55 @@ export function actionLine(r) {
 export function noMatchLine(count, since, input = 'listing') {
   const what = input === 'typed' ? 'the words you typed' : 'what the listing shows';
   return `No recall found for what we could read. That doesn't mean it's safe: ${count} recall notices since ${since} were searched, and only ${what} can be matched.`;
+}
+
+// Words that never name a product: greetings, sale talk, condition, pronouns.
+const FILLER = new Set(`a an the this that these those one ones it its is are was be my your our their his her i me we you
+  and or but for with of to in on at by from as so if not no yes ok okay hi hello hey thanks thank please
+  used new like good great nice excellent perfect condition works working clean cheap free price priced obo firm cash
+  pickup pick up only must go sale selling sell sold item items thing things stuff listing post here there what how much
+  any some all very really just still check see look this one`.split(/\s+/));
+
+/** Typed or shared words that name no product ("this one", "hi", "$40 obo"): nothing a recall could be matched to. */
+export function namesNothing(text) {
+  const words = (String(text || '').toLowerCase().match(/[a-z][a-z'&+-]*/g) || [])
+    .map(w => w.replace(/['&+-]+$/, ''))
+    .filter(w => w.length > 1 && !FILLER.has(w));
+  return words.length === 0;
+}
+
+/** "10,089", without Intl: the Android sandbox runs this file and may have no locale data. */
+const grouped = n => String(Math.max(0, Math.round(Number(n) || 0))).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+/**
+ * Everything a no-match result says, for the web page and the Android app alike, so the two cannot drift:
+ * { pill, line, heading, lines, safeSleep, vague }. `input`: 'listing' (a screenshot or photo) or 'typed'.
+ * `count` and `since` (an ISO date) describe the recall list that was searched.
+ */
+export function noMatchView(r, listing, { input = 'listing', audience = 'buyer', count = 0, since = '' } = {}) {
+  const title = (listing && listing.title) || '';
+  const partOrToy = r.why === 'part or toy' || /part or a toy/.test(r.why || '');
+  const vague = !partOrToy && input === 'typed' && namesNothing(title);
+  const owner = audience === 'owner' ? ownerView(r) : null;
+  const safeSleep = INFANT.test(title);
+  if (vague) {
+    return {
+      vague, safeSleep: false, pill: 'Nothing to match',
+      line: "We couldn't tell what the product is. Type its brand and name, like “Graco Pack 'n Play”, or check a screenshot of the listing.",
+      heading: 'What helps', lines: ['The brand and the product name are enough. A model number, if you have one, settles most recalls.'],
+    };
+  }
+  const line = partOrToy ? 'This looks like a part or a toy version, not the product itself.'
+    : owner ? owner.action
+    : noMatchLine(grouped(count), monthYear(since || '1973-01-01'), input);
+  if (owner) return { vague, safeSleep, pill: 'No match found', line, heading: owner.heading, lines: owner.lines };
+  return {
+    vague, safeSleep, pill: 'No match found', line, heading: 'Before you buy',
+    lines: [
+      'A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.',
+      safeSleep ? 'For anything a baby sleeps in: a firm, flat surface with nothing else in it.' : '',
+    ].filter(Boolean),
+  };
 }
 
 /** A message the shopper can paste to the seller. Plain, polite, and asks for the one fact that settles it. */

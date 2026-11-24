@@ -1,0 +1,327 @@
+{
+  "at": "2026-11-24T17:12:11.505Z",
+  "axe": "4.10.3",
+  "blockedRequests": 8,
+  "report": [
+    {
+      "name": "web page",
+      "scheme": "light",
+      "width": 390,
+      "passes": 45,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "web page",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 45,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "web page",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 45,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "web page",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 45,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "practice page",
+      "scheme": "light",
+      "width": 390,
+      "passes": 38,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "practice page",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 38,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "practice page",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 38,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "practice page",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 38,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "privacy page",
+      "scheme": "light",
+      "width": 390,
+      "passes": 23,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "privacy page",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 23,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "privacy page",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 23,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "privacy page",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 23,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: flagged list",
+      "scheme": "light",
+      "width": 390,
+      "passes": 36,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: flagged list",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 36,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: flagged list",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 36,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: flagged list",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 36,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: recall card",
+      "scheme": "light",
+      "width": 390,
+      "passes": 36,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: recall card",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 36,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: recall card",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 36,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: recall card",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 36,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: type card",
+      "scheme": "light",
+      "width": 390,
+      "passes": 34,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: type card",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 34,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: type card",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 34,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: type card",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 34,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: no matches",
+      "scheme": "light",
+      "width": 390,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: no matches",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: no matches",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: no matches",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: still checking",
+      "scheme": "light",
+      "width": 390,
+      "passes": 38,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: still checking",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 38,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: still checking",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 38,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: still checking",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 38,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: settings",
+      "scheme": "light",
+      "width": 390,
+      "passes": 37,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: settings",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 37,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: settings",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 37,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "panel: settings",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 37,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "extension welcome",
+      "scheme": "light",
+      "width": 390,
+      "passes": 28,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "extension welcome",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 28,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "extension welcome",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 28,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "extension welcome",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 28,
+      "incomplete": 0,
+      "violations": []
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import app.web.stillrecalled.StillRecalledApp
 import app.web.stillrecalled.ai.Ai
@@ -17,7 +18,9 @@ import app.web.stillrecalled.engine.Checker
 import app.web.stillrecalled.engine.Rules
 import com.google.firebase.ai.DownloadStatus
 import com.google.firebase.ai.type.PublicPreviewAPI
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -25,7 +28,7 @@ import org.json.JSONObject
 
 /** The app's state: the engine, the on-device model, the check in progress and the watch list. */
 @OptIn(PublicPreviewAPI::class)
-class AppModel(app: Application) : AndroidViewModel(app) {
+class AppModel(app: Application, private val saved: SavedStateHandle) : AndroidViewModel(app) {
     val store = (app as StillRecalledApp).store
     private val checker = Checker { store.cloudCheck }
 
@@ -46,8 +49,13 @@ class AppModel(app: Application) : AndroidViewModel(app) {
     var settings by mutableStateOf<LiveSettings.Values?>(null)
         private set
 
-    /** The bottom tab. Here, not in the activity, so turning the phone keeps it. */
-    var tab by mutableStateOf(0)
+    /** The bottom tab. Here, not in the activity, so turning the phone keeps it; saved, so Android closing the app does too. */
+    var tab by mutableStateOf(saved.get<Int>("tab") ?: 0)
+        private set
+    fun selectTab(t: Int) { tab = t; saved["tab"] = t }
+
+    /** The check came from another app's share menu: Back from its result returns to that app. */
+    var fromShare by mutableStateOf(false)
 
     // The check.
     sealed interface Screen
@@ -57,11 +65,15 @@ class AppModel(app: Application) : AndroidViewModel(app) {
         private set
     val steps = mutableStateListOf<Checker.Step>()
     var outcome by mutableStateOf<Checker.Outcome?>(null)
+        private set
+    /** For a no-match result: what it says (shared/present.mjs noMatchView), the same words as the web page. */
+    var noMatch by mutableStateOf<JSONObject?>(null)
+        private set
 
     /** Who is checking: a buyer, or the item's owner. The check is the same; the words after it are not. */
     var owner by mutableStateOf(store.owner)
         private set
-    fun chooseOwner(v: Boolean) { owner = v; store.owner = v }
+    fun chooseOwner(v: Boolean) { owner = v; store.owner = v; viewModelScope.launch { refreshViews() } }
     /** The result said to the owner (shared/present.mjs ownerView): { verdict, foundBy, action, heading, lines }. */
     var ownerInfo by mutableStateOf<org.json.JSONObject?>(null)
         private set
@@ -110,6 +122,9 @@ class AppModel(app: Application) : AndroidViewModel(app) {
             android.util.Log.i("StillRecalled", "on-device model: $model${if (modelName.isNotEmpty()) " ($modelName)" else ""}; device ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}, Android ${android.os.Build.VERSION.RELEASE}")
         }
         viewModelScope.launch { settings = LiveSettings.get() }
+        // Android closed the app in the background (the user was in Messenger sending the seller question): the
+        // result comes back as it was.
+        if (saved.get<Boolean>("result") == true) viewModelScope.launch { restore() }
         // Recalls that arrive in the background show up in the recent list too.
         viewModelScope.launch {
             store.live.collect { if (engine == "ready") { Rules.call("setLive", store.liveCards()); recent = Rules.arr("recentInfant", 6) } }
@@ -166,8 +181,9 @@ class AppModel(app: Application) : AndroidViewModel(app) {
                     val i = steps.indexOfFirst { it.key == s.key }
                     if (i >= 0) steps[i] = s
                 }
-                outcome?.let { o -> ownerInfo = try { Rules.obj("ownerView", o.result) } catch (_: Throwable) { null } }
-                outcome?.let { o -> android.util.Log.i("StillRecalled", "check done in ${System.currentTimeMillis() - t0} ms: ${o.result.optString("level")} / ${o.result.optString("badge")}; read on device: ${o.readOnDevice}; how: ${o.result.optJSONObject("how")}") }
+                refreshViews()
+                outcome?.let { o -> android.util.Log.i("StillRecalled", "check done in ${System.currentTimeMillis() - t0} ms: ${o.result.optString("level")} / ${o.result.optString("badge")}; read on device: ${o.readOnDevice}; how: ${logHow(o.result)}") }
+                outcome?.let { persist(it, Checking(photo, text, example)) }
             } catch (e: Checker.NothingFound) {
                 stopSteps()
                 error = "No product in this image. Try a screenshot that shows the listing's title and photo, or type what it is."
@@ -190,6 +206,74 @@ class AppModel(app: Application) : AndroidViewModel(app) {
                 android.util.Log.e("StillRecalled", "check failed: ${e.javaClass.simpleName}")
             }
         }
+    }
+
+    /** The owner's words and the no-match words for the current result, from the shared rules. */
+    private suspend fun refreshViews() {
+        val o = outcome ?: run { ownerInfo = null; noMatch = null; return }
+        ownerInfo = try { Rules.obj("ownerView", o.result) } catch (_: Throwable) { null }
+        val level = o.result.optString("level")
+        noMatch = if (level == "likely" || level == "possible") null else try {
+            Rules.obj("noMatchView", o.result, o.listing, if ((screen as? Checking)?.photo != null) "listing" else "typed", owner)
+        } catch (_: Throwable) { null }
+    }
+
+    /**
+     * What logcat gets: where each step ran and which recalls were in play, by number. Not the cloud's answer, the
+     * listing's words, or what the cloud asked the field guide for: those say what someone was shopping for.
+     */
+    private fun logHow(r: JSONObject): JSONObject {
+        val h = r.optJSONObject("how") ?: JSONObject()
+        val lookups = JSONArray()
+        h.optJSONArray("lookups")?.let { a -> for (i in 0 until a.length()) lookups.put(JSONObject().put("found", a.optJSONObject(i)?.optJSONArray("found") ?: JSONArray())) }
+        return JSONObject().put("device", h.optBoolean("device")).put("deviceLevel", h.optString("deviceLevel"))
+            .put("candidate", h.optString("candidate")).put("judgedInCloud", h.optBoolean("judgedInCloud"))
+            .put("cloudModel", h.optString("cloudModel")).put("cloudFailed", h.optString("cloudError").isNotEmpty())
+            .put("deviceFailed", h.optString("deviceError").isNotEmpty()).put("lookups", lookups)
+    }
+
+    // ---- Keeping the result --------------------------------------------------------------------------------------------
+    // In the app's own cache, so it never leaves the phone and Android may clear it. The saved-state flag says it belongs
+    // to this visit, so a fresh launch tomorrow starts clean.
+    private val lastFile get() = java.io.File(getApplication<Application>().cacheDir, "last-result.json")
+    private val lastPhoto get() = java.io.File(getApplication<Application>().cacheDir, "last-result.jpg")
+
+    private fun persist(o: Checker.Outcome, c: Checking) {
+        saved["result"] = true
+        val json = JSONObject().put("result", o.result).put("listing", o.listing).put("text", c.text ?: JSONObject.NULL)
+            .put("example", c.example).put("readOnDevice", o.readOnDevice ?: JSONObject.NULL)
+        label?.let { json.put("label", JSONObject().put("reading", it.reading).put("source", it.source).put("copy", it.copy)) }
+        val photo = c.photo
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                if (photo != null) lastPhoto.outputStream().use { photo.compress(Bitmap.CompressFormat.JPEG, 85, it) } else lastPhoto.delete()
+                lastFile.writeText(json.toString())
+            } catch (_: Throwable) { /* only a convenience */ }
+        }
+    }
+
+    private suspend fun restore() {
+        val back = withContext(Dispatchers.IO) {
+            try {
+                val j = JSONObject(lastFile.readText())
+                val photo = if (lastPhoto.exists()) BitmapFactory.decodeFile(lastPhoto.path) else null
+                j to photo
+            } catch (_: Throwable) { null }
+        } ?: run { saved["result"] = false; return }
+        val (j, photo) = back
+        val text = if (j.isNull("text")) null else j.optString("text")
+        screen = Checking(photo, text, j.optBoolean("example"))
+        steps.clear()
+        outcome = Checker.Outcome(j.getJSONObject("result"), j.getJSONObject("listing"), photo, if (j.isNull("readOnDevice")) null else j.optBoolean("readOnDevice"))
+        j.optJSONObject("label")?.let { l -> label = Checker.LabelOutcome(l.getJSONObject("reading"), l.optString("source"), l.getJSONObject("copy")) }
+        if (engine != "ready") try { Rules.start(getApplication(), store.liveCards()); engine = "ready" } catch (_: Throwable) {}
+        refreshViews()
+        android.util.Log.i("StillRecalled", "result restored after the app was closed")
+    }
+
+    private fun forgetResult() {
+        saved["result"] = false
+        viewModelScope.launch(Dispatchers.IO) { lastFile.delete(); lastPhoto.delete() }
     }
 
     /** After a failure, a step still marked as running would keep spinning above the error. */
@@ -217,7 +301,7 @@ class AppModel(app: Application) : AndroidViewModel(app) {
         check(bmp, null, example = true)
     }
 
-    fun home() { job?.cancel(); screen = Home; outcome = null; error = null }
+    fun home() { job?.cancel(); screen = Home; outcome = null; error = null; noMatch = null; fromShare = false; forgetResult() }
 
     fun readLabel(photo: Bitmap) {
         val recall = outcome?.result?.optJSONObject("recall") ?: return
@@ -226,7 +310,10 @@ class AppModel(app: Application) : AndroidViewModel(app) {
             .put("more", recall.optBoolean("more"))
         labelBusy = true; labelError = null
         viewModelScope.launch {
-            try { label = checker.readLabel(photo, r, owner) } catch (e: Throwable) {
+            try {
+                label = checker.readLabel(photo, r, owner)
+                outcome?.let { o -> (screen as? Checking)?.let { persist(o, it) } }
+            } catch (e: Throwable) {
                 labelError = if (!online()) "No internet connection, and this phone can't read the label on its own. Connect and try again."
                     else "The label couldn't be read right now. Try again in a moment."
             }

@@ -100,6 +100,37 @@ try {
   await check('shared text: wooden blocks', () => share('Wooden building blocks, painted'), lv => lv === 'none');
   await check('shared text: recall published after the build (Kidsview, 2026-11-19)', () => share('Kidsview baby bouncer with toy bar, khaki'), (lv, _b, how) => lv !== 'none');
 
+  // What logcat holds about a check: where each step ran and recall numbers, never the shopper's words or the
+  // cloud's answer.
+  const said = JSON.stringify(results.checks.map(c => c.how));
+  step('the log keeps no listing words or cloud answers', results.checks.length > 0 && !/"(answer|asked|cloud|seen|deviceError|cloudError)"|Kidsview|bouncer|lounger|Rock n Play/i.test(said));
+
+  // Back from a shared check returns to the app that shared it (here the launcher), with the result kept.
+  await sleep(1500);
+  adb('shell', 'input', 'keyevent', '4');
+  await sleep(2000);
+  const resumed = () => (adb('shell', 'dumpsys', 'activity', 'activities').match(/(?:mResumedActivity|topResumedActivity)[^\n]*/) || [''])[0];
+  step('Back after a share leaves the app', !resumed().includes(PKG), resumed().trim().slice(0, 120));
+
+  // Android closes the app in the background (low memory, or the user was away in Messenger): the result comes back.
+  adb('logcat', '-c');
+  adb('shell', 'am', 'kill', PKG);
+  await sleep(1500);
+  // pidof exits with an error when no process has the name: that is the state wanted here.
+  const killed = (() => { try { return !adb('shell', 'pidof', PKG).trim(); } catch { return true; } })();
+  adb('shell', 'am', 'start', '-n', `${PKG}/.MainActivity`);
+  const back = await waitFor(/result restored after the app was closed/, 30000);
+  await sleep(1500);
+  const screen = () => { adb('shell', 'uiautomator', 'dump', '/sdcard/ui.xml'); return adb('shell', 'cat', '/sdcard/ui.xml'); };
+  step('the result survives Android closing the app', killed && !!back && /Kidsview/i.test(screen()));
+  tapText('← Check another');
+  await sleep(1500);
+
+  // Typed or shared words that name no product say so, not "no recall found". No model call.
+  await check('shared text: words that name no product', () => share('this one, like new, pick up only'), lv => lv === 'none');
+  await sleep(1500);
+  step('words that name no product: "We couldn\'t tell what the product is"', /tell what the product is/.test(screen()));
+
   if (args.includes('--watch')) {
     adb('shell', 'am', 'start', '-n', `${PKG}/.MainActivity`, '--ez', 'dev_forget_live', 'true');
     await sleep(3000);

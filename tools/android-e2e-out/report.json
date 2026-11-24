@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-24T14:26:43.121Z",
+  "at": "2026-11-24T17:03:48.067Z",
   "apk": "android/app/build/outputs/apk/release/app-release.apk",
   "build": "release",
   "steps": [
@@ -11,7 +11,7 @@
     {
       "name": "App Check token from the reCAPTCHA bridge",
       "ok": true,
-      "detail": "31 s after launch"
+      "detail": "32 s after launch"
     },
     {
       "name": "recall list catches up with CPSC (background worker)",
@@ -21,27 +21,27 @@
     {
       "name": "example photo: VEVOR lounger, recall 26591",
       "ok": true,
-      "detail": "likely / Recalled product in 18.8 s (gemini-3.5-flash-lite 1901 ms, gemini-3.5-flash-lite 2080 ms, gemini-4-hydrogen 9496 ms)"
+      "detail": "likely / Recalled product in 47.9 s (gemini-3.5-flash-lite 1976 ms, gemini-3.5-flash-lite 1522 ms, gemini-3.5-flash-lite 1589 ms)"
     },
     {
       "name": "shared text: Rock n Play",
       "ok": true,
-      "detail": "likely / Recalled product in 9.5 s (gemini-3.5-flash-lite 1628 ms, gemini-4-hydrogen 7004 ms)"
+      "detail": "likely / Recalled product in 27.1 s (gemini-3.5-flash-lite 1343 ms, gemini-4-hydrogen 24847 ms)"
     },
     {
       "name": "shared text: Graco swing",
       "ok": true,
-      "detail": "possible / Possible recall in 15.8 s (gemini-3.5-flash-lite 2136 ms, gemini-4-hydrogen 12846 ms)"
+      "detail": "possible / Possible recall in 44.3 s (gemini-3.5-flash-lite 1453 ms, gemini-3.5-flash-lite 2105 ms)"
     },
     {
       "name": "shared text: a product CPSC warned about (Aila+Aiden lounger)",
       "ok": true,
-      "detail": "likely / CPSC warning in 10.9 s (gemini-3.5-flash-lite 1097 ms, gemini-4-hydrogen 9407 ms)"
+      "detail": "likely / CPSC warning in 9.6 s (gemini-3.5-flash-lite 1178 ms, gemini-4-hydrogen 8093 ms)"
     },
     {
       "name": "shared text: no brand, only a nickname (the cloud asks the phone)",
       "ok": true,
-      "detail": "likely / Inclined infant sleeper in 9.0 s (gemini-3.5-flash-lite 1192 ms, gemini-4-hydrogen 7619 ms)"
+      "detail": "likely / Inclined infant sleeper in 8.8 s (gemini-3.5-flash-lite 1067 ms, gemini-4-hydrogen 7382 ms)"
     },
     {
       "name": "shared text: wooden blocks",
@@ -51,13 +51,48 @@
     {
       "name": "shared text: recall published after the build (Kidsview, 2026-11-19)",
       "ok": true,
-      "detail": "possible / Possible recall in 12.4 s (gemini-3.5-flash-lite 1218 ms, gemini-4-hydrogen 10643 ms)"
+      "detail": "possible / Possible recall in 44.1 s (gemini-3.5-flash-lite 1560 ms, gemini-3.5-flash-lite 1852 ms)"
+    },
+    {
+      "name": "the log keeps no listing words or cloud answers",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Back after a share leaves the app",
+      "ok": true,
+      "detail": "topResumedActivity=ActivityRecord{202887802 u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t2}"
+    },
+    {
+      "name": "run",
+      "ok": false,
+      "detail": "Error: Command failed: C:\\Users\\ujwal\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe shell pidof app.web.stillrecalled"
+    },
+    {
+      "name": "the app process is gone before relaunch",
+      "ok": true,
+      "detail": "run by tools/scratch/e2e-tail.mjs from the point the full run stopped (its pidof call threw on the killed process, the state being tested; fixed in tools/android-e2e.mjs since)"
+    },
+    {
+      "name": "the result survives Android closing the app",
+      "ok": true,
+      "detail": "log: result restored; title on screen; run by tools/scratch/e2e-tail.mjs from the point the full run stopped (its pidof call threw on the killed process, the state being tested; fixed in tools/android-e2e.mjs since)"
+    },
+    {
+      "name": "shared text: words that name no product",
+      "ok": true,
+      "detail": "none, 0 model calls; run by tools/scratch/e2e-tail.mjs from the point the full run stopped (its pidof call threw on the killed process, the state being tested; fixed in tools/android-e2e.mjs since)"
+    },
+    {
+      "name": "words that name no product: \"We couldn't tell what the product is\"",
+      "ok": true,
+      "detail": "run by tools/scratch/e2e-tail.mjs from the point the full run stopped (its pidof call threw on the killed process, the state being tested; fixed in tools/android-e2e.mjs since)"
     }
   ],
   "checks": [
     {
       "name": "example photo: VEVOR lounger, recall 26591",
-      "ms": 18770,
+      "ms": 47896,
       "level": "likely",
       "badge": "Recalled product",
       "readOnDevice": "false",
@@ -65,24 +100,21 @@
         "device": false,
         "deviceLevel": "possible",
         "candidate": "26591 brand",
-        "deviceUnit": "",
-        "cloudMatch": "yes",
         "judgedInCloud": true,
-        "deviceError": "",
-        "cloudModel": "gemini-4-hydrogen",
-        "cloudError": "",
-        "lookups": [],
-        "seen": null
+        "cloudModel": "gemini-3.5-flash-lite",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 1901 ms",
-        "gemini-3.5-flash-lite 2080 ms",
-        "gemini-4-hydrogen 9496 ms"
+        "gemini-3.5-flash-lite 1976 ms",
+        "gemini-3.5-flash-lite 1522 ms",
+        "gemini-3.5-flash-lite 1589 ms"
       ]
     },
     {
       "name": "shared text: Rock n Play",
-      "ms": 9470,
+      "ms": 27074,
       "level": "likely",
       "badge": "Recalled product",
       "readOnDevice": "null",
@@ -90,23 +122,20 @@
         "device": false,
         "deviceLevel": "possible",
         "candidate": "23088 line",
-        "deviceUnit": "",
-        "cloudMatch": "yes",
         "judgedInCloud": true,
-        "deviceError": "",
         "cloudModel": "gemini-4-hydrogen",
-        "cloudError": "",
-        "lookups": [],
-        "seen": null
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 1628 ms",
-        "gemini-4-hydrogen 7004 ms"
+        "gemini-3.5-flash-lite 1343 ms",
+        "gemini-4-hydrogen 24847 ms"
       ]
     },
     {
       "name": "shared text: Graco swing",
-      "ms": 15783,
+      "ms": 44341,
       "level": "possible",
       "badge": "Possible recall",
       "readOnDevice": "null",
@@ -114,23 +143,20 @@
         "device": false,
         "deviceLevel": "possible",
         "candidate": "00098 brand",
-        "deviceUnit": "",
-        "cloudMatch": "cannot_tell",
         "judgedInCloud": true,
-        "deviceError": "",
-        "cloudModel": "gemini-4-hydrogen",
-        "cloudError": "",
-        "lookups": [],
-        "seen": null
+        "cloudModel": "gemini-3.5-flash-lite",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 2136 ms",
-        "gemini-4-hydrogen 12846 ms"
+        "gemini-3.5-flash-lite 1453 ms",
+        "gemini-3.5-flash-lite 2105 ms"
       ]
     },
     {
       "name": "shared text: a product CPSC warned about (Aila+Aiden lounger)",
-      "ms": 10872,
+      "ms": 9622,
       "level": "likely",
       "badge": "CPSC warning",
       "readOnDevice": "null",
@@ -138,23 +164,20 @@
         "device": false,
         "deviceLevel": "possible",
         "candidate": "W26-742 brand",
-        "deviceUnit": "",
-        "cloudMatch": "yes",
         "judgedInCloud": true,
-        "deviceError": "",
         "cloudModel": "gemini-4-hydrogen",
-        "cloudError": "",
-        "lookups": [],
-        "seen": null
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 1097 ms",
-        "gemini-4-hydrogen 9407 ms"
+        "gemini-3.5-flash-lite 1178 ms",
+        "gemini-4-hydrogen 8093 ms"
       ]
     },
     {
       "name": "shared text: no brand, only a nickname (the cloud asks the phone)",
-      "ms": 9030,
+      "ms": 8769,
       "level": "likely",
       "badge": "Inclined infant sleeper",
       "readOnDevice": "null",
@@ -162,35 +185,27 @@
         "device": false,
         "deviceLevel": "likely",
         "candidate": "",
-        "deviceUnit": "",
-        "cloudMatch": "yes",
         "judgedInCloud": true,
-        "deviceError": "",
         "cloudModel": "gemini-4-hydrogen",
-        "cloudError": "",
+        "cloudFailed": false,
+        "deviceFailed": false,
         "lookups": [
           {
-            "asked": {
-              "brand": "Fisher-Price",
-              "product": "Rock 'n Play Sleeper",
-              "model_number": ""
-            },
             "found": [
               "23088",
               "19105"
             ]
           }
-        ],
-        "seen": null
+        ]
       },
       "calls": [
-        "gemini-3.5-flash-lite 1192 ms",
-        "gemini-4-hydrogen 7619 ms"
+        "gemini-3.5-flash-lite 1067 ms",
+        "gemini-4-hydrogen 7382 ms"
       ]
     },
     {
       "name": "shared text: wooden blocks",
-      "ms": 99,
+      "ms": 130,
       "level": "none",
       "badge": "",
       "readOnDevice": "null",
@@ -198,20 +213,17 @@
         "device": false,
         "deviceLevel": "words",
         "candidate": "",
-        "deviceUnit": "",
-        "cloudMatch": "",
         "judgedInCloud": false,
-        "deviceError": "",
         "cloudModel": "",
-        "cloudError": "",
-        "lookups": [],
-        "seen": null
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
       },
       "calls": []
     },
     {
       "name": "shared text: recall published after the build (Kidsview, 2026-11-19)",
-      "ms": 12447,
+      "ms": 44102,
       "level": "possible",
       "badge": "Possible recall",
       "readOnDevice": "null",
@@ -219,18 +231,15 @@
         "device": false,
         "deviceLevel": "possible",
         "candidate": "27092 brand",
-        "deviceUnit": "",
-        "cloudMatch": "cannot_tell",
         "judgedInCloud": true,
-        "deviceError": "",
-        "cloudModel": "gemini-4-hydrogen",
-        "cloudError": "",
-        "lookups": [],
-        "seen": null
+        "cloudModel": "gemini-3.5-flash-lite",
+        "cloudFailed": false,
+        "deviceFailed": false,
+        "lookups": []
       },
       "calls": [
-        "gemini-3.5-flash-lite 1218 ms",
-        "gemini-4-hydrogen 10643 ms"
+        "gemini-3.5-flash-lite 1560 ms",
+        "gemini-3.5-flash-lite 1852 ms"
       ]
     }
   ],
@@ -238,5 +247,5 @@
     "model": "unavailable",
     "phone": "Google sdk_gphone64_x86_64, Android 16"
   },
-  "dialogsDismissed": 1
+  "version": "0.13.1"
 }

@@ -92,3 +92,15 @@ test('the example listing (made up, VEVOR lounger) is matched by its words to re
   assert.equal(t.candidate?.card?.id, '26591');
   assert.equal(t.candidate.card.all, true);
 });
+
+test('the no-match view on the phone counts the notices it searched, and says when typed words name nothing', () => {
+  const listing = call(`SR.listingFromText(${lit('this one')})`);
+  const t = call(`SR.triage(${lit(listing)})`);
+  const r = call(`SR.wordsOnly(${lit(listing)}, ${lit(t)})`);
+  const v = call(`SR.noMatchView(${lit(r)}, ${lit(listing)}, 'typed', false)`);
+  assert.equal(v.vague, true);
+  const shelf = call(`SR.listingFromText(${lit('Oak bookshelf, five shelves')})`);
+  const r2 = call(`SR.wordsOnly(${lit(shelf)}, ${lit(call(`SR.triage(${lit(shelf)})`))})`);
+  const v2 = call(`SR.noMatchView(${lit(r2)}, ${lit(shelf)}, 'typed', false)`);
+  assert.match(v2.line, /\d{2},\d{3} recall notices since January 1973/);
+});

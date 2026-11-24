@@ -98,6 +98,12 @@ h1, h2, h3, p { margin: 0; }
 
 /* Recent recalls, shown before a check. */
 .recent { display: grid; gap: 12px; }
+.idle { display: grid; gap: 32px; }
+.sample { margin: 0; display: grid; gap: 8px; }
+.sample-label { font: 600 15px/22px var(--font); }
+.sample-card { display: grid; gap: 10px; justify-items: start; padding: 16px; border-radius: 12px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+.sample-card .result-head { justify-self: stretch; padding-bottom: 12px; }
+.sample-action { font-size: 14px; line-height: 20px; padding-left: 10px; border-left: 3px solid var(--likely); }
 .recent h2 { font: 600 15px/22px var(--font); }
 .rows { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; margin: 0 -8px; padding: 0; list-style: none; }
 .rows li { min-width: 0; }

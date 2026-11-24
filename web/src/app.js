@@ -6,7 +6,7 @@ import { useCards, triageListing, checkListing, readLabel, refreshRecalls, setLi
 import { hybridJson, cloudJson, hybridModel, imagePart, deviceStatus, hasCloudAccess } from '../../extension/src/ai.js';
 import { SYSTEM, SCHEMA } from '../../shared/judge.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
-import { productName, noMatchLine, ownerView } from '../../shared/present.mjs';
+import { productName, noMatchView } from '../../shared/present.mjs';
 import { detailView } from '../../extension/src/ui/detail.js';
 import { h, safeUrl } from '../../extension/src/ui/dom.js';
 import { icon, mark } from '../../extension/src/ui/icons.js';
@@ -228,25 +228,20 @@ function showResult(r, listing, { example }) {
   if (r.level === 'possible' || r.level === 'likely') {
     body = detailView(r, { compact: false, onLabel: readLabel, audience });
   } else {
+    // Shared with the Android app (shared/present.mjs noMatchView), so the two say the same thing.
+    const v = noMatchView(r, listing, { input: listing.image ? 'listing' : 'typed', audience, count: noticeCount(), since: meta.since });
     body = h('div', { class: 'detail' },
       h('div', { class: 'verdict' },
-        h('span', { class: 'pill is-none' }, 'No match found'),
-        h('p', { class: 'verdict-line' }, r.why === 'part or toy' || /part or a toy/.test(r.why)
-          ? 'This looks like a part or a toy version, not the product itself.'
-          : audience === 'owner' ? ownerView(r).action : noMatchLine(noticeCount().toLocaleString('en-US'), monthYear(meta.since), listing.image ? 'listing' : 'typed'))),
-      audience === 'owner'
-        ? h('section', { class: 'check' }, h('h2', {}, ownerView(r).heading), ...ownerView(r).lines.map(l => h('p', {}, l)))
-        : h('section', { class: 'check' },
-        h('h2', {}, 'Before you buy'),
-        h('p', {}, 'A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.'),
-        INFANT.test(listing.title) ? h('p', {}, 'For anything a baby sleeps in: a firm, flat surface with nothing else in it.') : null),
-      h('div', { class: 'links' },
+        h('span', { class: 'pill is-none' }, v.pill),
+        h('p', { class: 'verdict-line' }, v.line)),
+      h('section', { class: 'check' }, h('h2', {}, v.heading), ...v.lines.map(l => h('p', {}, l))),
+      v.vague ? null : h('div', { class: 'links' },
         h('a', { class: 'link', href: 'https://www.saferproducts.gov/', target: '_blank', rel: 'noopener' }, 'Search SaferProducts.gov', icon('external', { size: 14 })),
-        INFANT.test(listing.title) ? h('a', { class: 'link', href: 'https://www.cpsc.gov/SafeSleep', target: '_blank', rel: 'noopener' }, 'CPSC safe sleep guidance', icon('external', { size: 14 })) : null),
+        v.safeSleep ? h('a', { class: 'link', href: 'https://www.cpsc.gov/SafeSleep', target: '_blank', rel: 'noopener' }, 'CPSC safe sleep guidance', icon('external', { size: 14 })) : null),
     );
   }
   $('side').replaceChildren(h('div', { class: 'card result' }, head, body, h('div', { class: 'result-foot' }, again)));
-  say(r.level === 'likely' || r.level === 'possible' ? `Result: ${r.badge}. ${r.verdict || ''}` : 'Result: no match found. Details below.');
+  say(r.level === 'likely' || r.level === 'possible' ? `Result: ${r.badge}. ${r.verdict || ''}` : `Result: ${noMatchView(r, listing, { input: listing.image ? 'listing' : 'typed' }).vague ? "we couldn't tell what the product is" : 'no match found'}. Details below.`);
 }
 
 /**
@@ -277,9 +272,42 @@ function reset() {
   $('title').scrollIntoView({ block: 'start' });
 }
 
-// ---- The side column before a check: real recent recalls of baby products ----------------------------------------
+// ---- The side column before a check: what a match looks like, then real recent recalls of baby products ----------
+// The sample is a result the Chrome extension really produced on the practice page (tools/e2e.mjs records it in
+// try/recorded.json), shown as it was, with its date: no model call, nothing invented.
+let sampleCache;
+async function sampleView() {
+  if (sampleCache === undefined) {
+    const rec = await fetch('try/recorded.json', { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null), () => null);
+    const rs = (rec && Array.isArray(rec.results)) ? rec.results : [];
+    const r = rs.find(x => x.level === 'likely' && x.kind === 'recall' && x.recall && x.recall.all) || rs.find(x => x.level === 'likely');
+    sampleCache = r ? { r, at: rec.at, version: rec.version } : null;
+  }
+  if (!sampleCache) return null;
+  const { r, at } = sampleCache;
+  const img = safeUrl(r.listing.image);
+  return h('figure', { class: 'sample' },
+    h('p', { class: 'sample-label' }, 'What a match looks like'),
+    h('div', { class: 'sample-card' },
+      h('div', { class: 'result-head' },
+        img ? h('img', { class: 'thumb', src: img, alt: '', loading: 'lazy' }) : null,
+        h('div', { class: 'result-title' }, h('p', { class: 'muted small' }, 'A practice listing'), h('p', { class: 'strong clamp2' }, r.listing.title))),
+      h('span', { class: `pill is-${r.level}` }, r.badge),
+      h('p', { class: 'verdict-line' }, r.verdict),
+      r.action ? h('p', { class: 'sample-action' }, r.action) : null),
+    h('figcaption', { class: 'muted small' },
+      `Recorded from the Chrome extension on the `, h('a', { class: 'link', href: 'try/' }, 'practice page'),
+      `, ${new Date(at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}. Every result links to the CPSC notice it came from.`));
+}
+
 let recentCache = null;
 async function recentView() {
+  const sample = await sampleView();
+  const recent = await recentList();
+  return sample ? h('div', { class: 'idle' }, sample, recent) : recent;
+}
+
+async function recentList() {
   if (!recentCache) {
     const res = await fetch('data/cards.json').catch(() => null);
     if (!res || !res.ok) {

@@ -156,9 +156,22 @@ function listView() {
   }
 
   if (done) {
+    // What was checked, counted from this page's own results, so "no matches" says what it rests on.
+    const ok = results.filter(r => r.level !== 'error');
+    const looked = ok.filter(r => r.how && r.how.device).length;
+    const cloud = ok.filter(r => r.how && (r.how.cloudModel || r.how.judgedInCloud)).length;
+    if (!flagged.length && ok.length) {
+      parts.push(h('div', { class: 'checked' },
+        h('h2', { class: 'group-head' }, 'What was checked'),
+        h('ul', { class: 'checked-list' },
+          h('li', {}, `${plural(ok.length, 'listing', 'listings')}: title and description, against every CPSC recall since 1973 and CPSC's safety warnings`),
+          looked ? h('li', {}, `${plural(looked, 'photo', 'photos')} looked at on this computer`) : null,
+          cloud ? h('li', {}, `${plural(cloud, 'listing', 'listings')} double-checked in the cloud`) : null,
+          h('li', {}, 'Four infant sleep product types CPSC bans or warns against'))));
+    }
     parts.push(h('p', { class: 'note' },
       h('strong', {}, 'No match does not mean safe. '),
-      'Still Recalled checks every U.S. CPSC recall since 1973, new ones twice a day, and four infant sleep product types. Whether a unit is recalled usually depends on the model number on its label.'));
+      'New recalls arrive twice a day. Whether a unit is recalled usually depends on the model number on its label.'));
   }
   if (!flagged.length && !done) parts.push(skeletonRows(2));
   return h('section', { class: 'view' }, ...parts);
@@ -313,8 +326,10 @@ function modelNotice() {
     return h('div', { class: 'notice' },
       h('p', {}, 'Photos are checked by Chrome’s built-in AI model, which is not on this computer yet. Until it is, listings are matched by their words.'), btn);
   }
-  return h('div', { class: 'notice' },
-    h('p', {}, `This computer cannot run Chrome’s built-in AI model, so photos are not checked here. Listings are matched by their words${settings.cloud && hasCloudAccess ? ', and flagged ones are checked in the cloud' : ''}.`));
+  // Said on every scan, so one line; the reason opens on demand.
+  return h('details', { class: 'notice notice-line' },
+    h('summary', {}, `Matching by words${settings.cloud && hasCloudAccess ? ', cloud double-check on' : ''}`),
+    h('p', {}, `This computer can’t run Chrome’s built-in AI model, so photos aren’t looked at here. Listings are matched by their words${settings.cloud && hasCloudAccess ? ', and flagged ones are checked in the cloud' : ''}. Settings shows what each part does.`));
 }
 
 function settingsView() {

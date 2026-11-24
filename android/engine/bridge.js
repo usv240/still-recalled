@@ -10,7 +10,7 @@ import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
 import { noticeFromCpsc, noticeFromCard } from '../../shared/notice.mjs';
 import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal, capForStandIn } from '../../shared/confirm.mjs';
 import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse, applyDeviceLookup } from '../../shared/lookup.mjs';
-import { present, productName, ownerView } from '../../shared/present.mjs';
+import { present, productName, ownerView, noMatchView } from '../../shared/present.mjs';
 import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../../shared/read.mjs';
 import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, labelCopy, readOnce } from '../../shared/label.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
@@ -124,6 +124,14 @@ globalThis.SR = {
 
   /** The same result, said to someone who owns the item: { verdict, evidence, foundBy, action, heading, lines }. */
   ownerView(result) { return out(ownerView(result)); },
+  /**
+   * What a no-match result says (shared/present.mjs noMatchView), with the count of notices this phone searched.
+   * `input`: 'listing' for a screenshot or photo, 'typed' for typed or shared text.
+   */
+  noMatchView(result, listing, input, owner) {
+    // "since": where the recall list's query starts, as the web page's data/meta.json says it.
+    return out(noMatchView(result, listing, { input, audience: owner ? 'owner' : 'buyer', count: live.length + base.length, since: '1973-01-01' }));
+  },
 
   judgeLabel(reading, recall) { return out(judgeLabel(reading, recall)); },
   settleReadings(device, cloud, recall) { return out(settleReadings(device, cloud, recall)); },

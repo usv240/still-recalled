@@ -18,7 +18,7 @@ a { color: inherit; }
 
 .status { display: grid; grid-template-columns: 12px minmax(0, 1fr); gap: 16px; padding: 20px; border-radius: var(--radius-card); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
 .status > div { display: grid; gap: 6px; justify-items: start; }
-.status h3 { font: 600 16px/24px var(--font); }
+.status h2 { font: 600 16px/24px var(--font); padding: 0; border: 0; margin: 0; letter-spacing: 0; }
 .status p { font-size: 15px; line-height: 24px; color: var(--muted); text-wrap: pretty; }
 .status .btn { margin-top: 8px; }
 .status-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; background: var(--ok); }

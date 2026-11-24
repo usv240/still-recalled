@@ -2,9 +2,9 @@
 :host { all: initial; }
 
 .badge {
-  display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px 0 8px;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px 0 8px;
   border: 0; border-radius: var(--radius-control); cursor: pointer;
-  font: 500 12px/1 var(--font); letter-spacing: 0; white-space: nowrap;
+  font: 600 13px/1 var(--font); letter-spacing: 0; white-space: nowrap;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   transition: transform 160ms var(--ease-out);
 }

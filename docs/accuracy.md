@@ -1053,6 +1053,55 @@ behaves around a check:
   checked on screen, and after "Watch for recalls" was tapped no second watch button was left.
 - **Not run on this version:** anything with Gemini Nano.
 
+## 22. The rest of the design review, and release 0.13.1 (2026-11-24)
+
+The items the three reviews left open, and two kinds of testing that had never been done. No accuracy rule changed.
+- **The result survives Android closing the app.** A shopper sends the seller question from Messenger and comes back;
+  if Android closed the app meanwhile, the result used to be gone. It is now kept in the app's own cache and comes
+  back on return. A fresh launch the next day still starts clean.
+- **Logcat no longer holds the cloud's answer.** The line written after each check now holds where each step ran and
+  recall numbers only: not the listing's words, the cloud's reasoning, or what the cloud asked the field guide for.
+- **Words that name no product** ("this one, like new, pick up only") get "We couldn't tell what the product is", with
+  an example of what to type, instead of "No recall found". No model is called, and no watch is offered.
+- **One no-match view for the web page and the phone** (`shared/present.mjs noMatchView`): the same words, the same
+  count of notices searched, and the safe-sleep line only for things a baby sleeps in.
+- **Android:** Back from a result that came from another app's share menu goes back to that app. On a tablet, an open
+  foldable or a phone on its side, the tabs move to a rail at the side. "Alerts are off" updates when the user comes
+  back from the notification settings. A type flag that also points to a recall links that recall's notice, as the
+  extension's card does.
+- **Web page:** a sample match beside the form before anything is added: a result the extension produced on the
+  practice page, shown with its date.
+- **Extension:** "No matches on this page" lists what was checked (how many listings, against what, how many photos
+  were looked at, how many went to the cloud). The no-model notice is one line that opens on demand. The side panel
+  zoomed to 200 percent (about 180 CSS pixels wide) no longer overflows: the card goes to one column and buttons wrap.
+  Badge text went from 12 to 13 px.
+
+**New: automated accessibility checks.**
+- `node tools/a11y.mjs` runs axe-core (the engine behind Lighthouse's accessibility score) with the WCAG 2.2 A and AA
+  rules on the web page, the practice and privacy pages, six views of the extension's side panel and its welcome page,
+  light and dark, at 390 and 1280 px: 40 page views. The first run found one problem (a heading level skipped on the
+  welcome page), now fixed; the run after it found **0 violations** (`tools/a11y-report.json`). Every Google and
+  Firebase request is blocked during the run, so no model is called.
+- `node tools/android-a11y.mjs` goes through the Android app's start, watching, how-it-works and no-match screens at
+  normal text size and at 200 percent, scrolling through each, and checks every tappable element: at least 48 by 48 dp,
+  a name a screen reader can say, nothing past the screen's edge. **29 screen views, 0 problems, 0 model calls**
+  (`tools/android-a11y-out/report.json`). It does not cover the flagged-result screen, which needs the cloud.
+
+**0.13.1 results (2026-11-24).** 90 unit tests pass (three new: the no-product words, the shared no-match view, and
+the same view from the Android engine).
+- **Android, release APK, Android 16 emulator (no Gemini Nano):** the 10 checks of 0.13.0 again, the token 32 s after
+  launch, checks with a model call 8.8 to 47.9 s (the emulator was slow: 8 minutes to boot). New and passing: the log
+  keeps no listing words or cloud answers; Back after a share leaves the app; the result survives Android killing the
+  app; words that name no product get the new message with no model call. The full run stopped at the kill step
+  because the test script's own process check threw once the process was gone (the state being tested); that is fixed,
+  and the four checks after it were run from the same point by a short script. `tools/android-e2e-out/report.json`
+  records both. In landscape the side rail showed, and at 200 percent text the screens read without clipping.
+- **Extension:** unit tests and the panel views in a browser (no overflow at 180 or 360 px, `tools/a11y.mjs` above).
+  The 18-step end-to-end run, which calls the cloud, was not repeated for this release: no checking code changed in
+  the extension, only how the panel shows results.
+- **Still not tested:** a screen reader run by a person (TalkBack, VoiceOver or NVDA), Safari and iPhone, and anything
+  with Gemini Nano.
+
 ## Reproduce
 
 ```
@@ -1070,6 +1119,7 @@ node tools/masked-build.mjs && node tools/lookup-generic.mjs --masked   # real l
 node tools/lookup-generic.mjs               # the ten made-up generic-title listings, one at a time
 bash tools/rerun-all.sh -r5 && node tools/run-compare.mjs --a=-rerun --b=-r5   # the earlier sets again, and two runs compared
 node tools/web-owner.mjs; node tools/android-owner.mjs                  # "I own it", web page and Android
+node tools/a11y.mjs; node tools/android-a11y.mjs                      # accessibility: axe-core on every web view; Android targets, names, 200% text
 npm run e2e -- "crib bedding set"           # or --url=<a Craigslist or Mercari search>
 node tools/label-run.mjs                    # the label check on 12 CPSC label photos (--cloud: the cloud alone)
 node tools/cards-compare.mjs <old release folder> extension/data/cards.json   # word rules: old cards and code against new

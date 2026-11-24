@@ -26,6 +26,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -61,7 +68,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) handle(intent)
-        setContent { StillRecalledTheme { App(model, model.tab) { model.tab = it } } }
+        setContent { StillRecalledTheme { App(model, model.tab, { model.selectTab(it) }) { moveTaskToBack(true) } } }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -72,23 +79,23 @@ class MainActivity : ComponentActivity() {
     /** From Android's share menu: a screenshot, a photo, or a listing's link and title from another app. */
     private fun handle(intent: Intent?) {
         intent ?: return
-        if (intent.getBooleanExtra(OPEN_WATCH, false)) { model.tab = 1; return }
+        if (intent.getBooleanExtra(OPEN_WATCH, false)) { model.selectTab(1); return }
         // Testing only, in debug builds: replay the arrival of the recalls published since the build.
         if (BuildConfig.DEBUG && intent.getBooleanExtra("dev_forget_live", false)) model.forgetLive()
         if (intent.action != Intent.ACTION_SEND) return
         val type = intent.type ?: ""
         if (type.startsWith("image/")) {
             val uri = IntentCompat.getParcelableExtra(intent, Intent.EXTRA_STREAM, Uri::class.java) ?: return
-            model.tab = 0
-            lifecycleScope.launch { loadBitmapAsync(uri)?.let { model.check(it, null) } ?: model.imageFailed() }
+            model.selectTab(0)
+            lifecycleScope.launch { loadBitmapAsync(uri)?.let { model.check(it, null); model.fromShare = true } ?: model.imageFailed() }
         } else {
             val text = listOfNotNull(intent.getStringExtra(Intent.EXTRA_SUBJECT), intent.getStringExtra(Intent.EXTRA_TEXT)).joinToString(" ").trim()
             // Marketplace apps often share only a link, or a stock line around it ("Check out this item on
             // Marketplace"). Neither says what the product is, and the app can't open a Facebook link, so checking
             // it would only ever say "no match". Ask for a screenshot instead.
             val words = productWords(text)
-            model.tab = 0
-            if (words.split(' ').count { it.length > 2 } >= 2) model.check(null, words)
+            model.selectTab(0)
+            if (words.split(' ').count { it.length > 2 } >= 2) { model.check(null, words); model.fromShare = true }
             else model.shareOnlyLink()
         }
     }
@@ -103,38 +110,58 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun App(m: AppModel, tab: Int, setTab: (Int) -> Unit) {
+private fun App(m: AppModel, tab: Int, setTab: (Int) -> Unit, backToSharer: () -> Unit) {
     val watch by m.store.watch.collectAsState()
     val unseen = watch.any { it.alert != null && !it.alert.optBoolean("seen") }
-    BackHandler(enabled = tab != 0 || m.screen != AppModel.Home) { if (tab != 0) setTab(0) else m.home() }
+    // Back from a result that came from another app's share menu goes back to that app, as share targets do; the
+    // result stays here for when the user returns.
+    BackHandler(enabled = tab != 0 || m.screen != AppModel.Home) {
+        when {
+            tab != 0 -> setTab(0)
+            m.fromShare -> { m.fromShare = false; backToSharer() }
+            else -> m.home()
+        }
+    }
+    // A tablet, a foldable open, or a phone on its side: the tabs move to a rail at the side, and the column stays
+    // a readable width in the middle.
+    val wide = LocalConfiguration.current.screenWidthDp >= 600
+    val tabs = listOf(Triple("Check", Icons.search, false), Triple("Watching", Icons.bell, unseen), Triple("How it works", Icons.info, false))
+    @Composable
+    fun TabIcon(i: Int) {
+        val (_, icon, dot) = tabs[i]
+        BadgedBox(badge = { if (dot) Badge(containerColor = Ink.likely, modifier = Modifier.semantics { contentDescription = "New recall match" }) }) { Icon(icon, null) }
+    }
     Scaffold(
         containerColor = Ink.ground,
         bottomBar = {
-            NavigationBar(containerColor = Ink.surface, tonalElevation = 0.dp) {
+            if (!wide) NavigationBar(containerColor = Ink.surface, tonalElevation = 0.dp) {
                 val colors = NavigationBarItemDefaults.colors(selectedTextColor = Ink.text, selectedIconColor = Ink.onPrimary, unselectedIconColor = Ink.muted, indicatorColor = Ink.primary, unselectedTextColor = Ink.muted)
-                NavigationBarItem(tab == 0, { setTab(0) }, icon = { Icon(Icons.search, null) }, label = { Text("Check") }, colors = colors)
-                NavigationBarItem(tab == 1, { setTab(1) }, icon = {
-                    BadgedBox(badge = { if (unseen) Badge(containerColor = Ink.likely, modifier = Modifier.semantics { contentDescription = "New recall match" }) }) { Icon(Icons.bell, null) }
-                }, label = { Text("Watching") }, colors = colors)
-                NavigationBarItem(tab == 2, { setTab(2) }, icon = { Icon(Icons.info, null) }, label = { Text("How it works") }, colors = colors)
+                tabs.forEachIndexed { i, t -> NavigationBarItem(tab == i, { setTab(i) }, icon = { TabIcon(i) }, label = { Text(t.first) }, colors = colors) }
             }
         },
     ) { pad ->
-        Box(Modifier.fillMaxSize().padding(pad), contentAlignment = Alignment.TopCenter) {
-            androidx.compose.foundation.layout.Column(
-                Modifier.widthIn(max = 640.dp).fillMaxWidth().verticalScroll(key(tab, m.screen) { rememberScrollState() }).padding(horizontal = 20.dp, vertical = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp),
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.padding(top = 4.dp)) {
-                    Mark(22.dp)
-                    Text("Still Recalled", style = MaterialTheme.typography.titleMedium)
-                }
-                when (tab) {
-                    1 -> WatchScreen(m) { m.watchOwnHint(); setTab(0) }
-                    2 -> AboutScreen(m)
-                    else -> when (val s = m.screen) {
-                        is AppModel.Checking -> CheckScreen(m, s)
-                        else -> HomeScreen(m)
+        Row(Modifier.fillMaxSize().padding(pad)) {
+            if (wide) NavigationRail(containerColor = Ink.surface, modifier = Modifier.fillMaxHeight()) {
+                val colors = NavigationRailItemDefaults.colors(selectedTextColor = Ink.text, selectedIconColor = Ink.onPrimary, unselectedIconColor = Ink.muted, indicatorColor = Ink.primary, unselectedTextColor = Ink.muted)
+                Spacer(Modifier.height(12.dp))
+                tabs.forEachIndexed { i, t -> NavigationRailItem(tab == i, { setTab(i) }, icon = { TabIcon(i) }, label = { Text(t.first) }, colors = colors) }
+            }
+            Box(Modifier.weight(1f).fillMaxHeight(), contentAlignment = Alignment.TopCenter) {
+                androidx.compose.foundation.layout.Column(
+                    Modifier.widthIn(max = 640.dp).fillMaxWidth().verticalScroll(key(tab, m.screen) { rememberScrollState() }).padding(horizontal = 20.dp, vertical = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(20.dp),
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.padding(top = 4.dp)) {
+                        Mark(22.dp)
+                        Text("Still Recalled", style = MaterialTheme.typography.titleMedium)
+                    }
+                    when (tab) {
+                        1 -> WatchScreen(m) { m.watchOwnHint(); setTab(0) }
+                        2 -> AboutScreen(m)
+                        else -> when (val s = m.screen) {
+                            is AppModel.Checking -> CheckScreen(m, s)
+                            else -> HomeScreen(m)
+                        }
                     }
                 }
             }
