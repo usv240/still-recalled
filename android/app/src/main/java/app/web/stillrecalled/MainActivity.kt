@@ -47,17 +47,21 @@ import app.web.stillrecalled.ui.Ink
 import app.web.stillrecalled.ui.Mark
 import app.web.stillrecalled.ui.StillRecalledTheme
 import app.web.stillrecalled.ui.WatchScreen
-import app.web.stillrecalled.ui.loadBitmap
+import app.web.stillrecalled.ui.loadBitmapAsync
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.key
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 
 class MainActivity : ComponentActivity() {
     private val model: AppModel by viewModels()
-    private var tab by mutableStateOf(0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) handle(intent)
-        setContent { StillRecalledTheme { App(model, tab) { tab = it } } }
+        setContent { StillRecalledTheme { App(model, model.tab) { model.tab = it } } }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -68,21 +72,22 @@ class MainActivity : ComponentActivity() {
     /** From Android's share menu: a screenshot, a photo, or a listing's link and title from another app. */
     private fun handle(intent: Intent?) {
         intent ?: return
-        if (intent.getBooleanExtra(OPEN_WATCH, false)) { tab = 1; return }
+        if (intent.getBooleanExtra(OPEN_WATCH, false)) { model.tab = 1; return }
         // Testing only, in debug builds: replay the arrival of the recalls published since the build.
         if (BuildConfig.DEBUG && intent.getBooleanExtra("dev_forget_live", false)) model.forgetLive()
         if (intent.action != Intent.ACTION_SEND) return
         val type = intent.type ?: ""
         if (type.startsWith("image/")) {
             val uri = IntentCompat.getParcelableExtra(intent, Intent.EXTRA_STREAM, Uri::class.java) ?: return
-            loadBitmap(uri)?.let { tab = 0; model.check(it, null) }
+            model.tab = 0
+            lifecycleScope.launch { loadBitmapAsync(uri)?.let { model.check(it, null) } ?: model.imageFailed() }
         } else {
             val text = listOfNotNull(intent.getStringExtra(Intent.EXTRA_SUBJECT), intent.getStringExtra(Intent.EXTRA_TEXT)).joinToString(" ").trim()
             // Marketplace apps often share only a link, or a stock line around it ("Check out this item on
             // Marketplace"). Neither says what the product is, and the app can't open a Facebook link, so checking
             // it would only ever say "no match". Ask for a screenshot instead.
             val words = productWords(text)
-            tab = 0
+            model.tab = 0
             if (words.split(' ').count { it.length > 2 } >= 2) model.check(null, words)
             else model.shareOnlyLink()
         }
@@ -106,10 +111,10 @@ private fun App(m: AppModel, tab: Int, setTab: (Int) -> Unit) {
         containerColor = Ink.ground,
         bottomBar = {
             NavigationBar(containerColor = Ink.surface, tonalElevation = 0.dp) {
-                val colors = NavigationBarItemDefaults.colors(selectedTextColor = Ink.text, selectedIconColor = Ink.text, unselectedIconColor = Ink.muted, indicatorColor = Ink.raised, unselectedTextColor = Ink.muted)
+                val colors = NavigationBarItemDefaults.colors(selectedTextColor = Ink.text, selectedIconColor = Ink.onPrimary, unselectedIconColor = Ink.muted, indicatorColor = Ink.primary, unselectedTextColor = Ink.muted)
                 NavigationBarItem(tab == 0, { setTab(0) }, icon = { Icon(Icons.search, null) }, label = { Text("Check") }, colors = colors)
                 NavigationBarItem(tab == 1, { setTab(1) }, icon = {
-                    BadgedBox(badge = { if (unseen) Badge(containerColor = Ink.likely) }) { Icon(Icons.bell, null) }
+                    BadgedBox(badge = { if (unseen) Badge(containerColor = Ink.likely, modifier = Modifier.semantics { contentDescription = "New recall match" }) }) { Icon(Icons.bell, null) }
                 }, label = { Text("Watching") }, colors = colors)
                 NavigationBarItem(tab == 2, { setTab(2) }, icon = { Icon(Icons.info, null) }, label = { Text("How it works") }, colors = colors)
             }
@@ -117,7 +122,7 @@ private fun App(m: AppModel, tab: Int, setTab: (Int) -> Unit) {
     ) { pad ->
         Box(Modifier.fillMaxSize().padding(pad), contentAlignment = Alignment.TopCenter) {
             androidx.compose.foundation.layout.Column(
-                Modifier.widthIn(max = 640.dp).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 16.dp),
+                Modifier.widthIn(max = 640.dp).fillMaxWidth().verticalScroll(key(tab, m.screen) { rememberScrollState() }).padding(horizontal = 20.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.padding(top = 4.dp)) {

@@ -17,8 +17,10 @@ if (/Android/i.test(navigator.userAgent)) document.getElementById('android-cta')
 const $ = id => document.getElementById(id);
 const INFANT = /\b(bab(y|ies)|infants?|newborns?|toddlers?|cribs?|bassinets?|cradles?|nursery|high\s*chairs?|strollers?|car\s*seats?|loungers?|bedside\s*sleepers?|play\s*yards?|pacifiers?|teethers?)\b/i;
 let meta = { count: 10089, since: '1973-01-01', built: '' };
-// Recalls CPSC published after this page's data was built: fetched from CPSC in the visitor's browser (the field-guide
-// entry for each written by Gemini through Firebase AI Logic), kept for six hours.
+// Recalls CPSC published after this page's data was built: fetched from CPSC in the visitor's browser and matched by
+// their words, kept for six hours. The page does not ask Gemini to write their field-guide entries: that would be a
+// dozen cloud calls on every first visit, before the visitor has checked anything. The extension and the Android app,
+// which keep their entries for days, still have Gemini write them.
 let liveCards = [];
 // Recall notices, the CPSC safety warnings bundled with them, and the recalls published since the build.
 const noticeCount = () => meta.count + (meta.warnings || 0) + liveCards.length;
@@ -28,7 +30,7 @@ async function catchUp() {
     if (saved && Date.now() - saved.at < 6 * 3600e3 && saved.built === meta.built) { liveCards = saved.cards; setLiveCards(liveCards); return; }
   } catch { /* no storage: fetch again */ }
   try {
-    liveCards = (await refreshRecalls({ cloud: true })).cards;
+    liveCards = (await refreshRecalls({ cloud: false })).cards;
     try { localStorage.setItem('sr-live', JSON.stringify({ at: Date.now(), built: meta.built, cards: liveCards })); } catch { /* fine */ }
   } catch { /* CPSC unreachable: the built data stands */ }
 }
@@ -38,7 +40,7 @@ let audience = 'buyer';
 try { if (localStorage.getItem('sr-audience') === 'owner') audience = 'owner'; } catch { /* no storage */ }
 const WHO = {
   buyer: { title: 'Check a secondhand listing before you buy', add: 'Add a screenshot', hint: 'or drop or paste an image here',
-    lede: 'Add a screenshot of the listing. Still Recalled compares it with U.S. recall notices and flags baby sleep products that put infants at risk.' },
+    lede: 'Add a screenshot of the listing. Still Recalled compares it with every U.S. recall notice and flags recalled baby gear and the infant sleep products linked to deaths.' },
   owner: { title: 'Check what you own before you sell it or pass it on', add: 'Add a photo of it', hint: 'the item, its label, or your draft listing',
     lede: 'Selling it, giving it away, or using a hand-me-down? Add a photo. Still Recalled compares it with U.S. recall notices and safety warnings, and says what to do with it.' },
 };
@@ -52,7 +54,8 @@ const longDate = d => new Date(`${d}T12:00:00`).toLocaleDateString('en-US', { mo
 // ---- Input ---------------------------------------------------------------------------------------------------------
 function inputView() {
   const file = h('input', { type: 'file', accept: 'image/*', id: 'file', class: 'visually-hidden' });
-  file.addEventListener('change', () => { if (file.files[0]) run({ file: file.files[0] }); file.value = ''; });
+  file.addEventListener('change', () => { if (file.files[0]) take(file.files[0]); file.value = ''; });
+  const take = f => (isPicture(f) ? run({ file: f }) : showError(NOT_A_PICTURE, { type: true }));
 
   const addLabel = h('span', { class: 'btn btn-primary drop-btn' }, WHO[audience].add);
   const addHint = h('span', { class: 'drop-hint' }, WHO[audience].hint);
@@ -80,8 +83,8 @@ function inputView() {
   for (const type of ['dragleave', 'drop']) drop.addEventListener(type, () => delete drop.dataset.over);
   drop.addEventListener('drop', e => {
     e.preventDefault();
-    const f = [...e.dataTransfer.files].find(x => x.type.startsWith('image/'));
-    if (f) run({ file: f });
+    const f = [...e.dataTransfer.files][0];
+    if (f) take(f);
   });
 
   const text = h('input', { type: 'text', id: 'text', class: 'field', autocomplete: 'off', enterkeyhint: 'search',
@@ -92,10 +95,12 @@ function inputView() {
   );
   form.addEventListener('submit', e => { e.preventDefault(); if (text.value.trim()) run({ text: text.value }); });
 
-  const example = h('button', { class: 'link', type: 'button' }, 'Try it with an example photo');
+  // What a match looks like, one press away: the product's signature should not hide in a small link.
+  const example = h('button', { class: 'btn btn-secondary', type: 'button' }, 'See an example match');
   example.addEventListener('click', runExample);
 
-  return h('div', { class: 'input' }, seg, file, drop, form, h('p', { class: 'example' }, example, h('span', { class: 'muted' }, ' (a made-up listing with the photo from a CPSC recall notice)')));
+  return h('div', { class: 'input' }, seg, file, drop, form,
+    h('div', { class: 'example' }, example, h('span', { class: 'muted' }, 'A made-up listing with the photo from a real CPSC recall notice.')));
 }
 
 addEventListener('paste', e => {
@@ -113,6 +118,12 @@ async function runExample() {
 }
 
 // ---- The check -----------------------------------------------------------------------------------------------------
+// Chrome opens PNG, JPEG, WebP, GIF, BMP and AVIF. An iPhone's HEIC photo, a PDF or a text file can't be read here.
+const isPicture = f => /^image\/(png|jpe?g|webp|gif|bmp|avif)$/i.test(f.type || '') || (!f.type && /\.(png|jpe?g|webp|gif|bmp|avif)$/i.test(f.name || ''));
+const NOT_A_PICTURE = "That file isn't a picture this page can open. Add a PNG or JPG screenshot of the listing. On an iPhone, a screenshot works; a HEIC photo doesn't.";
+// Read by screen readers once per change: the start of a check, its result, or what went wrong. The cards themselves
+// are not live regions, so the long result is not read out in full each time it appears.
+const say = text => { const s = $('status'); if (s) { s.textContent = ''; setTimeout(() => { s.textContent = text; }, 50); } };
 const STEPS = [
   { key: 'read', label: 'Reading the screenshot' },
   { key: 'words', label: `Searching recall notices` },
@@ -140,9 +151,12 @@ function setStep(key, state, detail = '') {
 
 const withArticle = name => `${/^[aeiou]/i.test(name) ? 'an' : 'a'} ${name}`;
 
+let last = null;   // what was last checked, so "Try again" runs the same thing again
 async function run({ file, text, example = null }) {
   if (running) return;
   running = true;
+  last = { file, text, example };
+  say('Checking. This takes a few seconds.');
   const imageUrl = file ? URL.createObjectURL(file) : '';
   const side = $('side');
   side.replaceChildren(h('div', { class: 'card' }, stepsView(imageUrl, text)));
@@ -155,7 +169,7 @@ async function run({ file, text, example = null }) {
     let listing, readSource = '';
     if (file) {
       setStep('read', 'active', model === 'available' ? 'On this device' : 'In the cloud: this browser has no built-in model');
-      const photo = await imagePart(imageUrl, 1024);
+      const photo = await imagePart(imageUrl, 1024).catch(() => { throw Object.assign(new Error('not a picture'), { notPicture: true }); });
       const readParts = ['Read this image.', photo];
       // The built-in model can fail on a photo it can't take; Gemini in the cloud reads it instead, as on Android.
       const { answer, source } = await hybridJson({ system: READ_SYSTEM, schema: READ_SCHEMA, parts: readParts })
@@ -186,9 +200,16 @@ async function run({ file, text, example = null }) {
     showResult(r, listing, { readSource, example });
   } catch (e) {
     console.error(e);
+    // The step that was running stops where it failed, and stays on screen above the message.
+    const at = document.querySelector('.step[data-state="active"]');
+    if (at) setStep(at.dataset.step, 'skipped', 'Stopped here');
+    const said = String(e);
     // A refused App Check token holds off further tries until the page reloads, so offer a reload, not a retry.
-    if (/app ?check|attestation|40[13]|permission/i.test(String(e))) showError('The cloud check could not verify this browser, so this listing could not be checked. Reload the page and try again.', { reload: true });
-    else showError('Something went wrong while checking. Try again in a moment.');
+    if (e.notPicture) showError(NOT_A_PICTURE, { type: true, keep: true });
+    else if (/app ?check|attestation|40[13]|permission/i.test(said)) showError('The cloud check could not verify this browser, so this listing could not be checked. Reload the page and try again.', { reload: true, keep: true });
+    else if (!navigator.onLine || /Failed to fetch|NetworkError|network/i.test(said)) showError("You're offline, so the cloud couldn't be reached. Typing the brand and product still works: matching against every recall runs on this page.", { type: true, keep: true });
+    else if (/\b(429|503)\b|quota|overloaded|RESOURCE_EXHAUSTED|timed? ?out|timeout|abort/i.test(said)) showError('The cloud is busy right now. Try again in a minute, or type the brand and product instead.', { retry: true, type: true, keep: true });
+    else showError('Something went wrong while checking. Try again, or type the brand and product instead.', { retry: true, type: true, keep: true });
   } finally {
     running = false;
   }
@@ -212,26 +233,42 @@ function showResult(r, listing, { example }) {
         h('span', { class: 'pill is-none' }, 'No match found'),
         h('p', { class: 'verdict-line' }, r.why === 'part or toy' || /part or a toy/.test(r.why)
           ? 'This looks like a part or a toy version, not the product itself.'
-          : audience === 'owner' ? ownerView(r).action : noMatchLine(noticeCount().toLocaleString('en-US'), monthYear(meta.since)))),
+          : audience === 'owner' ? ownerView(r).action : noMatchLine(noticeCount().toLocaleString('en-US'), monthYear(meta.since), listing.image ? 'listing' : 'typed'))),
       audience === 'owner'
-        ? h('section', { class: 'check' }, h('h3', {}, ownerView(r).heading), ...ownerView(r).lines.map(l => h('p', {}, l)))
+        ? h('section', { class: 'check' }, h('h2', {}, ownerView(r).heading), ...ownerView(r).lines.map(l => h('p', {}, l)))
         : h('section', { class: 'check' },
-        h('h3', {}, 'Before you buy'),
-        h('p', {}, 'No match isn\'t the same as safe. A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.'),
+        h('h2', {}, 'Before you buy'),
+        h('p', {}, 'A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.'),
         INFANT.test(listing.title) ? h('p', {}, 'For anything a baby sleeps in: a firm, flat surface with nothing else in it.') : null),
       h('div', { class: 'links' },
         h('a', { class: 'link', href: 'https://www.saferproducts.gov/', target: '_blank', rel: 'noopener' }, 'Search SaferProducts.gov', icon('external', { size: 14 })),
-        h('a', { class: 'link', href: 'https://www.cpsc.gov/SafeSleep', target: '_blank', rel: 'noopener' }, 'CPSC safe sleep guidance', icon('external', { size: 14 }))),
+        INFANT.test(listing.title) ? h('a', { class: 'link', href: 'https://www.cpsc.gov/SafeSleep', target: '_blank', rel: 'noopener' }, 'CPSC safe sleep guidance', icon('external', { size: 14 })) : null),
     );
   }
   $('side').replaceChildren(h('div', { class: 'card result' }, head, body, h('div', { class: 'result-foot' }, again)));
+  say(r.level === 'likely' || r.level === 'possible' ? `Result: ${r.badge}. ${r.verdict || ''}` : 'Result: no match found. Details below.');
 }
 
-function showError(message, { reload = false } = {}) {
+/**
+ * What went wrong, and what to do next. `retry` runs the same check again; `type` moves to the typing field, which
+ * works offline; `keep` leaves the steps on screen, with the one that failed marked, above the message.
+ */
+function showError(message, { reload = false, retry = false, type = false, keep = false } = {}) {
   running = false;
-  const again = h('button', { class: 'btn btn-secondary', type: 'button' }, reload ? 'Reload the page' : 'Try again');
-  again.addEventListener('click', reload ? () => location.reload() : reset);
-  $('side').replaceChildren(h('div', { class: 'card' }, h('div', { class: 'error' }, icon('alert', { size: 18 }), h('p', {}, message)), again));
+  const actions = [];
+  if (reload) actions.push(button('Reload the page', () => location.reload(), true));
+  if (retry && last) actions.push(button('Try again', () => run(last), true));
+  if (type) actions.push(button('Type it instead', () => { reset(); setTimeout(() => $('text') && $('text').focus(), 0); }, !reload && !retry));
+  if (!actions.length) actions.push(button('Start over', reset, true));
+  const box = h('div', { class: 'error-box' }, h('div', { class: 'error' }, icon('alert', { size: 18 }), h('p', {}, message)), h('div', { class: 'error-actions' }, ...actions));
+  const working = keep ? $('side').querySelector('.working') : null;
+  $('side').replaceChildren(h('div', { class: 'card' }, ...(working ? [working] : []), box));
+  say(message);
+}
+function button(label, onClick, primary) {
+  const b = h('button', { class: `btn ${primary ? 'btn-primary' : 'btn-secondary'}`, type: 'button' }, label);
+  b.addEventListener('click', onClick);
+  return b;
 }
 
 function reset() {
@@ -244,7 +281,12 @@ function reset() {
 let recentCache = null;
 async function recentView() {
   if (!recentCache) {
-    const { cards: built } = await (await fetch('data/cards.json')).json();
+    const res = await fetch('data/cards.json').catch(() => null);
+    if (!res || !res.ok) {
+      return h('div', { class: 'recent' }, h('h2', {}, 'Recently recalled baby products'),
+        h('p', { class: 'muted' }, "The recall list couldn't be loaded, so this page may be offline. Reload to try again."));
+    }
+    const { cards: built } = await res.json();
     const cards = [...liveCards, ...built];
     recentCache = cards.filter(c => INFANT.test(`${c.product} ${c.title}`) && safeUrl(c.image)).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
   }
@@ -267,7 +309,7 @@ function howList() {
     row('device', model === 'available'
       ? 'Your screenshot is read on this device by Chrome\'s built-in model.'
       : 'Your screenshot is read on your device when the browser has a built-in model (Chrome on a computer). On this browser, it\'s read by Gemini in the cloud.'),
-    row('search', `It's compared with ${noticeCount().toLocaleString('en-US')} CPSC recall notices and safety warnings, in this page. Nothing is sent for this step.`),
+    row('search', `It's compared with ${noticeCount().toLocaleString('en-US')} CPSC recall notices and safety warnings, on this page. Nothing is sent for this step.`),
     row('cloud', 'A baby product, or a possible match, then goes to Gemini in the cloud for a closer look, with the full recall notice and its photo. Anything else stays here.'),
   ];
 }
@@ -294,6 +336,8 @@ async function start() {
     dataLine();
   }
 
-  if (!hasCloudAccess) $('lede').after(h('p', { class: 'notice' }, 'This copy of the page has no cloud access, so it can only check what it can read on this device.'));
+  if (!hasCloudAccess) $('lede').after(h('p', { class: 'notice' }, model === 'available'
+    ? 'This copy of the page has no cloud access, so it checks only on this device.'
+    : 'This copy of the page has no cloud access, and this browser has no built-in model, so screenshots can\'t be read here. Type the brand and product instead.'));
 }
 start();

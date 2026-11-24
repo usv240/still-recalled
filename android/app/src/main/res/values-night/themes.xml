@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark: the window behind the first frame matches Ink.ground in the dark palette, so there is no white flash. -->
+    <style name="Theme.StillRecalled" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/ground</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <color name="ground">#0E0E0F</color>
+    <color name="mark">#F0606A</color>
+</resources>

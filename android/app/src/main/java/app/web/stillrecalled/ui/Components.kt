@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -46,6 +47,10 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -75,7 +80,7 @@ fun Pill(text: String, level: String) {
     val (bg, fg, line) = when (level) {
         "likely" -> Triple(Ink.likelyBg, Ink.likelyInk, Color.Transparent)
         "possible" -> Triple(Ink.possibleBg, Ink.possibleInk, Ink.possibleLine)
-        "ok" -> Triple(Color(0xFFEAF6EC), Ink.ok, Color.Transparent)
+        "ok" -> Triple(Ink.okBg, Ink.ok, Color.Transparent)
         else -> Triple(Ink.raised, Ink.text, Color.Transparent)
     }
     Text(text, style = MaterialTheme.typography.labelMedium, color = fg,
@@ -88,34 +93,49 @@ fun SectionCard(modifier: Modifier = Modifier, tone: Color = Ink.surface, conten
 }
 
 @Composable
-fun Heading(text: String) = Text(text, style = MaterialTheme.typography.titleMedium)
+fun Heading(text: String) = Text(text, style = MaterialTheme.typography.titleMedium, modifier = Modifier.semantics { heading() })
 
 @Composable
 fun Muted(text: String, modifier: Modifier = Modifier) = Text(text, style = MaterialTheme.typography.bodySmall, color = Ink.muted, modifier = modifier)
 
+/** Guidance the person has to read to act (what a button does, what to do next): full size, not small grey print. */
+@Composable
+fun Guide(text: String, modifier: Modifier = Modifier) = Text(text, style = MaterialTheme.typography.bodyMedium, color = Ink.muted, modifier = modifier)
+
+/**
+ * The words TalkBack reads for a label that carries a symbol ("Read the notice ↗", "← Check another", "✓ Watching"):
+ * the symbol is drawn for sighted readers and dropped from speech, where it would be read as "north east arrow".
+ */
+private val GLYPHS = Regex("[←→↗↻✓–]|^\\+ ")
+private val SPACES = Regex("\\s+")
+fun Modifier.spoken(label: String): Modifier {
+    val said = label.replace(GLYPHS, "").replace(SPACES, " ").trim()
+    return if (said == label) this else semantics { contentDescription = said }
+}
+
 @Composable
 fun Primary(text: String, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true) =
-    Button(onClick, modifier.height(48.dp), enabled = enabled, shape = Control, colors = ButtonDefaults.buttonColors(containerColor = Ink.primary, contentColor = Color.White),
-        contentPadding = PaddingValues(horizontal = 18.dp)) { Text(text, style = MaterialTheme.typography.labelLarge) }
+    Button(onClick, modifier.heightIn(min = 48.dp), enabled = enabled, shape = Control, colors = ButtonDefaults.buttonColors(containerColor = Ink.primary, contentColor = Ink.onPrimary),
+        contentPadding = PaddingValues(horizontal = 18.dp, vertical = 12.dp)) { Text(text, style = MaterialTheme.typography.labelLarge, textAlign = TextAlign.Center, modifier = Modifier.spoken(text)) }
 
 @Composable
 fun Secondary(text: String, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true) =
-    OutlinedButton(onClick, modifier.height(44.dp), enabled = enabled, shape = Control, border = BorderStroke(1.dp, Ink.control),
-        colors = ButtonDefaults.outlinedButtonColors(containerColor = Ink.surface, contentColor = Ink.text), contentPadding = PaddingValues(horizontal = 16.dp)) {
-        Text(text, style = MaterialTheme.typography.labelLarge)
+    OutlinedButton(onClick, modifier.heightIn(min = 48.dp), enabled = enabled, shape = Control, border = BorderStroke(1.dp, Ink.control),
+        colors = ButtonDefaults.outlinedButtonColors(containerColor = Ink.surface, contentColor = Ink.text), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)) {
+        Text(text, style = MaterialTheme.typography.labelLarge, textAlign = TextAlign.Center, modifier = Modifier.spoken(text))
     }
 
 @Composable
 fun LinkButton(text: String, onClick: () -> Unit, color: Color = Ink.text) =
-    TextButton(onClick, contentPadding = PaddingValues(horizontal = 0.dp, vertical = 4.dp)) {
-        Text(text, style = MaterialTheme.typography.labelLarge, color = color, fontWeight = FontWeight.Medium)
+    TextButton(onClick, modifier = Modifier.heightIn(min = 48.dp), contentPadding = PaddingValues(horizontal = 0.dp, vertical = 4.dp)) {
+        Text(text, style = MaterialTheme.typography.labelLarge, color = color, fontWeight = FontWeight.Medium, modifier = Modifier.spoken(text))
     }
 
 /** A photo shown whole in a square frame, with an optional outline around `where` ({x, y, w, h} as fractions). */
 @Composable
-fun FramedBitmap(bitmap: Bitmap, where: JSONObject?, modifier: Modifier = Modifier) {
+fun FramedBitmap(bitmap: Bitmap, where: JSONObject?, modifier: Modifier = Modifier, description: String = "The listing photo") {
     BoxWithConstraints(modifier.aspectRatio(1f).clip(Control).background(Ink.raised)) {
-        Image(bitmap.asImageBitmap(), contentDescription = "The listing photo", contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize())
+        Image(bitmap.asImageBitmap(), contentDescription = description, contentScale = ContentScale.Fit, modifier = Modifier.fillMaxSize())
         if (where != null) {
             val shape = bitmap.width.toFloat() / bitmap.height
             val w = if (shape > 1f) 1f else shape
@@ -174,6 +194,9 @@ fun Context.open(url: String) {
 
 fun Context.shareText(text: String, title: String) =
     startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, text), title))
+
+/** [loadBitmap] off the main thread: a photo from a cloud-backed gallery can take seconds to arrive. */
+suspend fun Context.loadBitmapAsync(uri: Uri): Bitmap? = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { loadBitmap(uri) }
 
 /** A picked or shared image, decoded no larger than about 2048 px on its long side. */
 fun Context.loadBitmap(uri: Uri): Bitmap? = try {

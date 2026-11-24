@@ -46,6 +46,15 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import app.web.stillrecalled.engine.Checker
 import org.json.JSONObject
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.style.TextOverflow
+import kotlinx.coroutines.launch
 import java.io.File
 
 @Composable
@@ -53,14 +62,18 @@ fun CheckScreen(m: AppModel, s: AppModel.Checking) {
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         LinkButton("← Check another", { m.home() }, Ink.muted)
         val o = m.outcome
-        if (o == null) {
-            Progress(m, s)
-        } else {
-            AnimatedVisibility(visible = true, enter = fadeIn(tween(220))) { Result(m, o, s.example) }
-        }
-        m.error?.let { e ->
-            SectionCard(tone = Ink.likelyBg) { Text(e, color = Ink.likelyInk) }
-            Secondary("Try again", { m.check(s.photo, s.text, s.example) })
+        val e = m.error
+        when {
+            // The error comes first and the steps stop: nothing keeps spinning above a failed check.
+            e != null -> {
+                SectionCard(Modifier.semantics { liveRegion = LiveRegionMode.Assertive }, tone = Ink.likelyBg) {
+                    Text(e, color = Ink.likelyInk, style = MaterialTheme.typography.bodyLarge)
+                }
+                Primary("Try again", { m.check(s.photo, s.text, s.example) }, Modifier.fillMaxWidth())
+                Progress(m, s)
+            }
+            o == null -> Progress(m, s)
+            else -> AnimatedVisibility(visible = true, enter = fadeIn(tween(220))) { Result(m, o, s.example) }
         }
     }
 }
@@ -71,7 +84,7 @@ private fun Progress(m: AppModel, s: AppModel.Checking) {
         if (s.photo != null) {
             Image(s.photo.asImageBitmap(), "Your screenshot", contentScale = ContentScale.Fit,
                 modifier = Modifier.fillMaxWidth().heightIn(max = 280.dp).clip(Control).background(Ink.raised))
-        } else Text("“${s.text}”", style = MaterialTheme.typography.titleMedium)
+        } else Text("“${s.text}”", style = MaterialTheme.typography.titleMedium, maxLines = 4, overflow = TextOverflow.Ellipsis)
         Gap(4.dp)
         for (st in m.steps) StepRow(st)
     }
@@ -79,8 +92,13 @@ private fun Progress(m: AppModel, s: AppModel.Checking) {
 
 @Composable
 private fun StepRow(st: Checker.Step) {
-    Row(Modifier.fillMaxWidth().padding(vertical = 6.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Box(Modifier.size(22.dp), contentAlignment = Alignment.Center) {
+    val said = when (st.state) {
+        Checker.State.ACTIVE -> "in progress"; Checker.State.DONE -> "done"
+        Checker.State.SKIPPED -> "skipped"; Checker.State.WAITING -> "waiting"
+    }
+    Row(Modifier.fillMaxWidth().padding(vertical = 6.dp).semantics(mergeDescendants = true) { stateDescription = said },
+        horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Box(Modifier.size(22.dp).clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
             when (st.state) {
                 Checker.State.ACTIVE -> CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp, color = Ink.text)
                 Checker.State.DONE -> Text("✓", color = Ink.text, style = MaterialTheme.typography.titleSmall)
@@ -109,14 +127,14 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
             Thumb(null, o.photo, 56.dp)
             Column(Modifier.weight(1f)) {
                 Muted(if (example) "Example photo" else if (owner != null) "Your item" else "You checked")
-                Text(o.listing.optString("title"), style = MaterialTheme.typography.titleMedium, maxLines = 3)
+                Text(o.listing.optString("title"), style = MaterialTheme.typography.titleMedium, maxLines = 3, overflow = TextOverflow.Ellipsis)
             }
         }
 
         if (!flagged) {
-            NoMatch(r, owner)
+            Box(Modifier.semantics { liveRegion = LiveRegionMode.Polite }) { NoMatch(r, owner) }
         } else {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(Modifier.semantics { liveRegion = LiveRegionMode.Polite }, verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Pill(r.optString("badge"), level)
                 Text(owner?.optString("verdict")?.takeIf { it.isNotEmpty() } ?: r.optString("verdict"), style = MaterialTheme.typography.headlineSmall)
                 // What to do, in one line: a flag that only names a product leaves "so can I buy it?" open.
@@ -192,7 +210,7 @@ private fun Photos(r: JSONObject, o: Checker.Outcome, owner: Boolean = false) {
             // A shared link or typed text has no photo: the notice photo alone, at the same size.
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 if (photo != null) {
-                    FramedBitmap(photo, where)
+                    FramedBitmap(photo, where, description = if (owner) "Your photo of the item" else "The listing photo")
                     val mine = if (owner) "Your item" else "This listing"
                     Muted(if (where != null) "$mine. Outlined: what the cloud check matched." else mine)
                 } else {
@@ -235,7 +253,7 @@ private fun BeforeYouBuy(r: JSONObject) {
         Text(r.optString("question"), style = MaterialTheme.typography.bodyMedium, fontStyle = FontStyle.Italic,
             modifier = Modifier.fillMaxWidth().background(Ink.ground, Control).padding(12.dp))
         Primary("Copy and send the question", { ctx.copy("Question for the seller", r.optString("question")); ctx.shareText(r.optString("question"), "Send the question to the seller") }, Modifier.fillMaxWidth())
-        Muted("Copies the question and opens Android's share menu. Pick Messenger or the app you found it in, or paste it into the seller chat.")
+        Guide("Copies the question and opens Android's share menu. Pick Messenger or the app you found it in, or paste it into the seller chat.")
     }
 }
 
@@ -244,23 +262,42 @@ private fun LabelCheck(m: AppModel) {
     val ctx = LocalContext.current
     val file = remember { File(ctx.cacheDir, "label.jpg") }
     val uri = remember { FileProvider.getUriForFile(ctx, "${ctx.packageName}.files", file) }
-    val camera = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { ok -> if (ok) ctx.loadBitmap(uri)?.let { m.readLabel(it) } }
-    val pick = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { u: Uri? -> u?.let { ctx.loadBitmap(it) }?.let { m.readLabel(it) } }
+    val scope = rememberCoroutineScope()
+    val camera = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { ok ->
+        if (ok) scope.launch { ctx.loadBitmapAsync(uri)?.let { m.readLabel(it) } ?: m.labelImageFailed() }
+    }
+    val pick = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { u: Uri? ->
+        if (u != null) scope.launch { ctx.loadBitmapAsync(u)?.let { m.readLabel(it) } ?: m.labelImageFailed() }
+    }
     SectionCard {
         Heading("Settle it with the label")
         Text(if (m.owner) "Take a photo of the label on your item. Its model number and date are read and compared with the notice."
             else "Have the item in front of you, or a photo of its label from the seller? Its model number and date are read and compared with the notice.", style = MaterialTheme.typography.bodyMedium)
-        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            Secondary(if (m.labelBusy) "Reading the label…" else "Take a photo", { camera.launch(uri) }, Modifier.weight(1f), enabled = !m.labelBusy)
-            Secondary("Choose a photo", { pick.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }, Modifier.weight(1f), enabled = !m.labelBusy)
+        if (m.labelBusy) {
+            // Busy, said in full-contrast text with a spinner, not as two greyed-out buttons.
+            Row(Modifier.semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite }, verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp, color = Ink.text)
+                Text("Reading the label…", style = MaterialTheme.typography.bodyMedium)
+            }
+        } else {
+            // Side by side at normal sizes; one above the other when large text would split the labels.
+            val oneColumn = LocalDensity.current.fontScale > 1.3f
+            if (oneColumn) Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Secondary("Take a photo", { camera.launch(uri) }, Modifier.fillMaxWidth())
+                Secondary("Choose a photo", { pick.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }, Modifier.fillMaxWidth())
+            } else Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                Secondary("Take a photo", { camera.launch(uri) }, Modifier.weight(1f))
+                Secondary("Choose a photo", { pick.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }, Modifier.weight(1f))
+            }
         }
-        m.labelError?.let { Muted(it) }
+        m.labelError?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Ink.likelyInk, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) }
         m.label?.let { l ->
             val tone = l.copy.optString("tone")
             val (bg, fg) = when (tone) { "likely" -> Ink.likelyBg to Ink.likelyInk; "possible" -> Ink.possibleBg to Ink.possibleInk; else -> Ink.raised to Ink.text }
-            Column(Modifier.fillMaxWidth().clip(Control).background(bg).padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Column(Modifier.fillMaxWidth().clip(Control).background(bg).padding(12.dp).semantics { liveRegion = LiveRegionMode.Polite }, verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(l.copy.optString("title"), style = MaterialTheme.typography.titleSmall, color = fg)
-                Text(l.copy.optString("text"), style = MaterialTheme.typography.bodySmall, color = fg)
+                Text(l.copy.optString("text"), style = MaterialTheme.typography.bodyMedium, color = fg)
                 val read = listOf(l.reading.optString("brand")) + (0 until (l.reading.optJSONArray("model_numbers")?.length() ?: 0)).take(3).map { l.reading.getJSONArray("model_numbers").getString(it) } + listOf(l.reading.optString("manufacture_date"))
                 Muted(when (l.source) {
                     "on_device" -> "Read on this phone; the photo did not leave it."
@@ -282,7 +319,7 @@ private fun Report(r: JSONObject) {
         Text(if (r.optString("kind") == "recall") "CPSC asks shoppers who find a recalled product for sale online to report it at SaferProducts.gov, with the listing's link and a screenshot. Its e-commerce team has such listings taken down."
             else "CPSC's e-commerce team looks for banned products listed for sale and has the listings taken down. You can report this one at SaferProducts.gov.", style = MaterialTheme.typography.bodyMedium)
         Secondary("Report to CPSC", { ctx.copy("Report to CPSC", report); ctx.open("https://www.saferproducts.gov/IncidentReporting") }, Modifier.fillMaxWidth())
-        Muted("Copies the report and opens the CPSC form. Paste it into the description.")
+        Guide("Copies the report and opens the CPSC form. Paste it into the description.")
     }
 }
 
@@ -312,18 +349,27 @@ private fun WatchCard(m: AppModel, o: Checker.Outcome, flagged: Boolean) {
     val notesOff = on && (denied || !androidx.core.app.NotificationManagerCompat.from(ctx).areNotificationsEnabled())
     SectionCard {
         Heading(if (flagged) "Bought it anyway, or already own one?" else "Buying it, or already own one?")
-        Muted("Recall notices reach the first owner, not the next one. Watch it, and Still Recalled checks it against every new CPSC recall, twice a day, and tells you if one matches. The watch list stays on this phone.")
-        if (on) Secondary("✓ Watching for recalls", { m.toggleWatch(o) }, Modifier.fillMaxWidth())
-        // Watching without notifications would never reach the user: say so, with the way to turn them on.
-        if (notesOff) {
-            Text("Alerts are off, so you won't hear about a recall. Turn on notifications for Still Recalled.", style = MaterialTheme.typography.bodyMedium, color = Ink.likelyInk)
-            LinkButton("Open notification settings", {
-                ctx.startActivity(android.content.Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, ctx.packageName))
-            })
+        Guide("Recall notices reach the first owner, not the next one. Watch it, and Still Recalled checks it against every new CPSC recall, twice a day, and tells you if one matches. The watch list stays on this phone.")
+        if (!on) {
+            Primary("Watch for recalls", {
+                if (Build.VERSION.SDK_INT >= 33) ask.launch(Manifest.permission.POST_NOTIFICATIONS) else m.toggleWatch(o)
+            }, Modifier.fillMaxWidth())
+        } else {
+            // Watching is a state, said as one; stopping is its own quieter action, so a second tap can't undo it.
+            Row(Modifier.semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite }, verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Dot(Ink.ok, 10.dp)
+                Text("Watching this for recalls", style = MaterialTheme.typography.titleSmall)
+            }
+            // Watching without notifications would never reach the user: say so, with the way to turn them on.
+            if (notesOff) {
+                Text("Alerts are off, so you won't hear about a recall. Turn on notifications for Still Recalled.", style = MaterialTheme.typography.bodyMedium, color = Ink.likelyInk)
+                LinkButton("Open notification settings", {
+                    ctx.startActivity(android.content.Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, ctx.packageName))
+                })
+            }
+            LinkButton("Stop watching", { m.toggleWatch(o) }, Ink.muted)
         }
-        else Primary("Watch for recalls", {
-            if (Build.VERSION.SDK_INT >= 33) ask.launch(Manifest.permission.POST_NOTIFICATIONS) else m.toggleWatch(o)
-        }, Modifier.fillMaxWidth())
     }
 }
 

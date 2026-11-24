@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Still Recalled: check a secondhand listing</title>
-<meta name="description" content="Add a screenshot of a secondhand listing. Still Recalled compares it with U.S. recall notices and flags baby sleep products that put infants at risk.">
-<meta name="theme-color" content="#f8f8f8">
+<meta name="description" content="Add a screenshot of a secondhand listing. Still Recalled compares it with every U.S. recall notice and flags recalled baby gear and the infant sleep products linked to deaths.">
+<meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0e0f" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
 <link rel="stylesheet" href="build/style.css">
 </head>
@@ -17,12 +19,13 @@
 <main class="page">
   <section class="tool" aria-labelledby="title">
     <h1 id="title">Check a secondhand listing before you buy</h1>
-    <p class="lede" id="lede">Add a screenshot of the listing. Still Recalled compares it with U.S. recall notices and flags baby sleep products that put infants at risk.</p>
+    <p class="lede" id="lede">Add a screenshot of the listing. Still Recalled compares it with every U.S. recall notice and flags recalled baby gear and the infant sleep products linked to deaths.</p>
     <p class="android-cta" id="android-cta" hidden>On Android? <a class="link" href="#android">Get the app</a> and share listings to it, from Facebook Marketplace too.</p>
     <div id="input"></div>
     <ol class="how-list" id="how" aria-label="How it checks"></ol>
   </section>
-  <section class="side" id="side" aria-live="polite"></section>
+  <section class="side" id="side" aria-label="Result"></section>
+  <p class="visually-hidden" id="status" role="status"></p>
 </main>
 <section class="extension" id="android" aria-labelledby="android-title">
   <h2 id="android-title">Shopping on an Android phone?</h2>

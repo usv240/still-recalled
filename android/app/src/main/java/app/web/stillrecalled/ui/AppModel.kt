@@ -38,10 +38,16 @@ class AppModel(app: Application) : AndroidViewModel(app) {
         private set
     var download by mutableStateOf<Float?>(null)
         private set
+    /** Set when Gemini Nano's download stopped, so the start screen can say so and offer it again. */
+    var downloadFailed by mutableStateOf(false)
+        private set
     var recent by mutableStateOf(JSONArray())
         private set
     var settings by mutableStateOf<LiveSettings.Values?>(null)
         private set
+
+    /** The bottom tab. Here, not in the activity, so turning the phone keeps it. */
+    var tab by mutableStateOf(0)
 
     // The check.
     sealed interface Screen
@@ -115,16 +121,17 @@ class AppModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             var total = 0L
             download = 0f
+            downloadFailed = false
             try {
                 flow.collect { s ->
                     when (s) {
                         is DownloadStatus.DownloadStarted -> total = s.bytesToDownload
                         is DownloadStatus.DownloadInProgress -> if (total > 0) download = s.totalBytesDownloaded.toFloat() / total
                         is DownloadStatus.DownloadCompleted -> download = 1f
-                        is DownloadStatus.DownloadFailed -> download = null
+                        is DownloadStatus.DownloadFailed -> { download = null; downloadFailed = true }
                     }
                 }
-            } catch (_: Throwable) { download = null }
+            } catch (_: Throwable) { download = null; downloadFailed = true }
             model = Ai.deviceStatus()
             if (model == "available") modelName = Ai.deviceModelName()
         }
@@ -147,9 +154,11 @@ class AppModel(app: Application) : AndroidViewModel(app) {
             try {
                 if (engine != "ready") Rules.start(getApplication(), store.liveCards())
                 if (needToken) {
-                    kotlinx.coroutines.withTimeoutOrNull(60_000) { app.web.stillrecalled.appcheck.Bridge.ready.first { it } }
+                    val got = kotlinx.coroutines.withTimeoutOrNull(60_000) { app.web.stillrecalled.appcheck.Bridge.ready.first { it } }
                     val i = steps.indexOfFirst { it.key == "secure" }
-                    if (i >= 0) steps[i] = steps[i].copy(state = Checker.State.DONE)
+                    // Not connected after a minute: the check goes on, and the cloud steps say they couldn't run.
+                    if (i >= 0) steps[i] = if (got == true) steps[i].copy(state = Checker.State.DONE)
+                        else steps[i].copy(state = Checker.State.SKIPPED, detail = "Not connected yet: the cloud steps may not run")
                 }
                 val t0 = System.currentTimeMillis()
                 ownerInfo = null
@@ -160,15 +169,48 @@ class AppModel(app: Application) : AndroidViewModel(app) {
                 outcome?.let { o -> ownerInfo = try { Rules.obj("ownerView", o.result) } catch (_: Throwable) { null } }
                 outcome?.let { o -> android.util.Log.i("StillRecalled", "check done in ${System.currentTimeMillis() - t0} ms: ${o.result.optString("level")} / ${o.result.optString("badge")}; read on device: ${o.readOnDevice}; how: ${o.result.optJSONObject("how")}") }
             } catch (e: Checker.NothingFound) {
+                stopSteps()
                 error = "No product in this image. Try a screenshot that shows the listing's title and photo, or type what it is."
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
             } catch (e: Throwable) {
-                error = if (Regex("app ?check|attestation|40[13]", RegexOption.IGNORE_CASE).containsMatchIn(e.toString()))
-                    "The cloud check couldn't verify this app just now, so this listing couldn't be checked. Try again in a moment."
-                else "Something went wrong while checking. Try again in a moment."
-                android.util.Log.e("StillRecalled", "check failed", e)
+                stopSteps()
+                val said = e.toString()
+                error = when {
+                    !online() -> "No internet connection. Connect and try again, or type the brand and product name: matching the words against every recall works offline."
+                    Regex("app ?check|attestation|40[13]", RegexOption.IGNORE_CASE).containsMatchIn(said) ->
+                        "The cloud check couldn't verify this app just now, so this listing couldn't be checked. Try again in a moment."
+                    Regex("timed? ?out|timeout", RegexOption.IGNORE_CASE).containsMatchIn(said) ->
+                        "The cloud took too long to answer. Try again in a moment, or type the brand and product name."
+                    Regex("\\b(429|503)\\b|quota|overloaded|RESOURCE_EXHAUSTED", RegexOption.IGNORE_CASE).containsMatchIn(said) ->
+                        "The cloud model is busy right now. Try again in a minute."
+                    else -> "Something went wrong while checking. Try again in a moment, or type the brand and product name."
+                }
+                // A category, never the listing: enough to tell failures apart in logcat.
+                android.util.Log.e("StillRecalled", "check failed: ${e.javaClass.simpleName}")
             }
         }
     }
+
+    /** After a failure, a step still marked as running would keep spinning above the error. */
+    private fun stopSteps() {
+        for (i in steps.indices) if (steps[i].state == Checker.State.ACTIVE) steps[i] = steps[i].copy(state = Checker.State.SKIPPED)
+    }
+
+    private fun online(): Boolean {
+        val cm = getApplication<Application>().getSystemService(android.net.ConnectivityManager::class.java) ?: return true
+        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
+        return caps.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
+    /** A picked or shared image that could not be opened: say so on the start screen instead of doing nothing. */
+    fun imageFailed() {
+        home()
+        shareNote = "This image couldn't be opened. Try another screenshot, or type the brand and product name."
+    }
+
+    /** A label photo that could not be opened. */
+    fun labelImageFailed() { labelError = "This photo couldn't be opened. Try taking it again." }
 
     fun checkExample() {
         val bmp = getApplication<Application>().assets.open("example.jpg").use { BitmapFactory.decodeStream(it) }
@@ -184,7 +226,10 @@ class AppModel(app: Application) : AndroidViewModel(app) {
             .put("more", recall.optBoolean("more"))
         labelBusy = true; labelError = null
         viewModelScope.launch {
-            try { label = checker.readLabel(photo, r, owner) } catch (e: Throwable) { labelError = "The label couldn't be read right now. Try again in a moment." }
+            try { label = checker.readLabel(photo, r, owner) } catch (e: Throwable) {
+                labelError = if (!online()) "No internet connection, and this phone can't read the label on its own. Connect and try again."
+                    else "The label couldn't be read right now. Try again in a moment."
+            }
             labelBusy = false
         }
     }

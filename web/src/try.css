@@ -16,17 +16,20 @@ code { font: 500 13px/1 ui-monospace, SFMono-Regular, Consolas, monospace; backg
 
 .intro { padding: 24px 0 40px; border-bottom: 1px solid var(--border); display: grid; gap: 16px; }
 .intro h1 { font: 600 clamp(28px, 4vw, 40px)/1.1 var(--font); letter-spacing: -0.025em; text-wrap: balance; max-width: 22ch; }
-.lede { font-size: 17px; line-height: 26px; max-width: 60ch; text-wrap: pretty; }
+.lede { font-size: 17px; line-height: 26px; max-width: 52ch; text-wrap: pretty; }
 .steps { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 10px; max-width: 70ch; }
 .steps li { padding-left: 4px; }
-.steps .btn { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; margin-right: 4px; text-decoration: none; }
+.steps .btn { display: inline-flex; align-items: center; height: 44px; padding: 0 14px; margin-right: 4px; text-decoration: none; }
 .steps .copy { font: 500 12px/1 var(--font); height: 24px; padding: 0 8px; margin: 0 2px; border: 0; border-radius: 6px; background: var(--surface); color: var(--text); box-shadow: inset 0 0 0 1px var(--border); cursor: pointer; transition: transform 160ms var(--ease-out); }
 .steps .copy:active { transform: scale(0.96); }
+@media (prefers-reduced-motion: reduce) { .steps .copy, .steps .btn { transition: none; } .steps .copy:active, .steps .btn:active { transform: none; } }
 /* Whether the extension is on the page: muted until its content script marks the page, then plain ink. */
 .status { font-size: 14px; line-height: 21px; color: var(--muted); max-width: 70ch; padding: 10px 12px; border-radius: var(--radius-control); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
 .status.is-on { color: var(--text); font-weight: 500; box-shadow: inset 3px 0 0 var(--likely), inset 0 0 0 1px var(--border); }
-.note { font-size: 14px; line-height: 21px; color: var(--muted); max-width: 70ch; }
+.note { font-size: 14px; line-height: 21px; color: var(--muted); max-width: 60ch; }
 .note a { color: var(--text); }
+.preview { display: grid; gap: 10px; justify-items: start; }
+.preview .btn { height: 44px; }
 
 .results-head { display: flex; justify-content: space-between; align-items: baseline; padding: 32px 0 16px; }
 .results-head h2 { font: 600 20px/1.2 var(--font); }
@@ -35,7 +38,7 @@ code { font: 500 13px/1 ui-monospace, SFMono-Regular, Consolas, monospace; backg
 @media (min-width: 1000px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; } }
 .item { display: grid; gap: 8px; align-content: start; }
 .photo { display: block; aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
-.photo img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
+.photo img { width: 100%; height: 100%; object-fit: contain; display: block; background: var(--photo-bg); }
 .title { font-weight: 500; line-height: 21px; text-decoration: none; }
 .title:hover { text-decoration: underline; text-underline-offset: 3px; }
 .meta { font-size: 13px; line-height: 20px; color: var(--muted); }
@@ -45,7 +48,7 @@ code { font: 500 13px/1 ui-monospace, SFMono-Regular, Consolas, monospace; backg
 .back { font-size: 14px; color: var(--muted); }
 .listing { display: grid; gap: 24px; margin-top: 16px; }
 @media (min-width: 860px) { .listing { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: start; } }
-.big { width: 100%; border-radius: 12px; background: #fff; box-shadow: inset 0 0 0 1px var(--border); }
+.big { width: 100%; border-radius: 12px; background: var(--photo-bg); box-shadow: inset 0 0 0 1px var(--border); }
 .listing h1 { font: 600 clamp(24px, 3vw, 32px)/1.15 var(--font); letter-spacing: -0.02em; text-wrap: balance; }
 .big-price { font-size: 22px; line-height: 1.2; margin: 12px 0 4px; }
 .label-photo { margin: 24px 0 0; display: grid; gap: 8px; max-width: 420px; }
@@ -55,4 +58,4 @@ code { font: 500 13px/1 ui-monospace, SFMono-Regular, Consolas, monospace; backg
 .desc { margin-top: 20px; font-size: 16px; line-height: 25px; max-width: 52ch; }
 
 .foot { padding-top: 24px; padding-bottom: 40px; border-top: 1px solid var(--border); font-size: 13px; line-height: 20px; color: var(--muted); }
-.foot p { max-width: 90ch; }
+.foot p { max-width: 64ch; }

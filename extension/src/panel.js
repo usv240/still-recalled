@@ -13,6 +13,14 @@ const SITE_NAMES = { ebay: 'eBay', mercari: 'Mercari', craigslist: 'Craigslist',
 const DEFAULTS = { cloud: true, badges: true, thorough: false };
 
 const $view = document.getElementById('view');
+const $status = document.getElementById('status');
+let spoken = '';
+/** One line for screen readers, said only when it changes: how many listings need a look, and when the page is done. */
+function announce(text) {
+  if (!$status || !text || text === spoken) return;
+  spoken = text;
+  $status.textContent = text;
+}
 document.getElementById('mark').append(mark(18));
 const settingsBtn = document.getElementById('settings');
 settingsBtn.append(icon('settings'));
@@ -117,6 +125,9 @@ function listView() {
   const done = pending === 0;
 
   const parts = [headBlock({ flagged, checked, done })];
+  announce(done
+    ? (flagged.length ? `Done. ${plural(flagged.length, 'listing needs', 'listings need')} a look.` : `Done. No matches among ${plural(checked, 'listing', 'listings')}.`)
+    : flagged.length ? `${plural(flagged.length, 'listing needs', 'listings need')} a look so far.` : '');
 
   if (!done) {
     parts.push(h('div', { class: 'progress', role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': state.total, 'aria-valuenow': checked, 'aria-label': 'Listings checked' },
@@ -129,8 +140,8 @@ function listView() {
 
   const likely = flagged.filter(r => r.level === 'likely');
   const possible = flagged.filter(r => r.level === 'possible');
-  if (likely.length) parts.push(group('Likely', likely));
-  if (possible.length) parts.push(group('Worth checking', possible));
+  if (likely.length) parts.push(group('Likely match', likely));
+  if (possible.length) parts.push(group('Possible match', possible));
 
   if (errors.length) {
     parts.push(h('div', { class: 'notice' },
@@ -310,6 +321,7 @@ function settingsView() {
   const toggle = (key, title, desc) => {
     const input = h('input', { type: 'checkbox', role: 'switch', class: 'switch', id: `set-${key}`, 'aria-describedby': `desc-${key}` });
     input.checked = DEFAULTS[key] ? settings[key] !== false : settings[key] === true;
+    if (key === 'thorough' && settings.cloud === false) { input.disabled = true; input.checked = false; }
     input.addEventListener('change', () => chrome.storage.local.set({ settings: { ...settings, [key]: input.checked } }));
     return h('div', { class: 'setting' },
       h('label', { class: 'setting-title', for: `set-${key}` }, title), input,
@@ -321,16 +333,16 @@ function settingsView() {
     h('div', { class: 'head' }, h('h1', {}, 'Settings')),
     h('div', {},
       toggle('cloud', 'Cloud double-check', 'Listings this computer flags or can\'t settle (bedding sets, possible parts): their title, description, price and photo go to Google Gemini through Firebase, with the recall notice. Everything else stays on this computer.'),
-      toggle('thorough', 'Check every baby product in the cloud', 'Off: only what this computer flags goes to the cloud. On: every baby product on the page gets a look from Gemini, as on the web page and the phone. That catches a recalled product whose seller left its name out and that this computer\'s model did not recognise, and it sends more of what you browse. Needs the cloud double-check.'),
+      toggle('thorough', 'Check every baby product in the cloud', 'Off: only what this computer flags goes to the cloud. On: every baby product on the page gets a look from Gemini, as on the web page and the phone. That catches a recalled product whose seller left its name out and that this computer\'s model did not recognize, and it sends more of what you browse. Needs the cloud double-check.'),
       toggle('badges', 'Badges on listings', 'Show a badge on flagged listings on eBay, Mercari and Craigslist.')),
     h('dl', { class: 'kv' },
       h('div', {}, h('dt', {}, 'On-device model'), h('dd', {}, modelWord)),
       h('div', {}, h('dt', {}, 'Cloud check'), h('dd', {}, hasCloudAccess ? 'Available' : 'Off')),
       h('div', {}, h('dt', {}, 'Recall notices'), h('dd', {}, meta ? (meta.count + (live ? live.cards.length : 0)).toLocaleString('en-US') : '–')),
       meta && meta.warnings ? h('div', {}, h('dt', {}, 'CPSC safety warnings'), h('dd', {}, meta.warnings.toLocaleString('en-US'))) : null,
-      h('div', {}, h('dt', {}, 'Recalls since'), h('dd', {}, meta ? meta.since : '–')),
+      h('div', {}, h('dt', {}, 'Recalls since'), h('dd', {}, meta ? dayOf(meta.since) : '–')),
       h('div', {}, h('dt', {}, 'Added since this version'), h('dd', {}, String(live ? live.cards.length : 0))),
-      h('div', {}, h('dt', {}, 'Last checked with CPSC'), h('dd', {}, live && live.checkedAt ? dayOf(live.checkedAt) : meta ? `${meta.built.slice(0, 10)} (this version)` : '–'))),
+      h('div', {}, h('dt', {}, 'Last checked with CPSC'), h('dd', {}, live && live.checkedAt ? dayOf(live.checkedAt) : meta ? `${dayOf(meta.built.slice(0, 10))} (this version)` : '–'))),
     h('button', { class: 'btn btn-secondary', type: 'button', style: { justifySelf: 'start' }, onclick: recheck }, icon('refresh'), 'Check this page again'));
 }
 

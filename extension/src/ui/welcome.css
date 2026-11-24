@@ -21,16 +21,16 @@ a { color: inherit; }
 .status h3 { font: 600 16px/24px var(--font); }
 .status p { font-size: 15px; line-height: 24px; color: var(--muted); text-wrap: pretty; }
 .status .btn { margin-top: 8px; }
-.status-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; background: #1a7f37; }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; background: var(--ok); }
 .status-dot.is-wait { background: var(--possible); }
 .status-dot.is-off { background: var(--control); }
 .meter { width: 100%; max-width: 320px; height: 4px; margin-top: 8px; border-radius: 2px; background: var(--raised); overflow: hidden; }
 .meter-fill { height: 100%; background: var(--text); transform: scaleX(0); transform-origin: left; transition: transform 300ms var(--ease-out); }
 
-h2 { font: 600 13px/20px var(--font); letter-spacing: 0.02em; color: var(--muted); padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+h2 { font: 600 22px/28px var(--font); letter-spacing: -0.01em; color: var(--text); padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
 .how-steps { list-style: none; padding: 0; display: grid; }
 .how-steps li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
-.how-steps .n { font: 600 28px/1 var(--font); font-variant-numeric: tabular-nums; color: var(--likely); }
+.how-steps .n { font: 600 28px/1 var(--font); font-variant-numeric: tabular-nums; color: var(--muted); }
 .how-steps h3 { font: 600 17px/26px var(--font); }
 .how-steps p { font-size: 16px; line-height: 26px; color: var(--muted); text-wrap: pretty; max-width: 60ch; }
 

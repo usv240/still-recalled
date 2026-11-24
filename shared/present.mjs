@@ -132,8 +132,9 @@ export function actionLine(r) {
 }
 
 /** What the shopper reads when nothing matched: never an all-clear. */
-export function noMatchLine(count, since) {
-  return `No recall found for what we could read. That doesn't mean it's safe: ${count} recall notices since ${since} were searched, and only what the listing shows can be matched.`;
+export function noMatchLine(count, since, input = 'listing') {
+  const what = input === 'typed' ? 'the words you typed' : 'what the listing shows';
+  return `No recall found for what we could read. That doesn't mean it's safe: ${count} recall notices since ${since} were searched, and only ${what} can be matched.`;
 }
 
 /** A message the shopper can paste to the seller. Plain, polite, and asks for the one fact that settles it. */

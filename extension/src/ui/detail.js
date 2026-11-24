@@ -10,6 +10,8 @@ const DEFAULT_CHECK = {
   banned: 'Check the photos and the description for what the product is. A name in the title is not enough to rule it out.',
 };
 
+const longDay = iso => (/^\d{4}-\d{2}-\d{2}$/.test(iso || '') ? new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : iso);
+
 export function levelClass(r) {
   return r.level === 'likely' ? 'is-likely' : 'is-possible';
 }
@@ -119,7 +121,7 @@ function labelSection(r, onLabel, owner = false) {
     }
   });
   return h('section', { class: 'check label-check' },
-    h('h3', {}, 'Settle it with the label'),
+    h('h2', {}, 'Settle it with the label'),
     h('p', {}, owner ? 'Take a photo of the label on your item. Its model number and date are read and compared with the notice.'
       : 'Have a photo of the label, from the seller or of the item itself? Its model number and date are read and compared with the notice.'),
     input, button, out);
@@ -192,9 +194,9 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
     await copyWithFeedback(askBtn, r.question, label);
     if (askUrl) window.open(askUrl, '_blank', 'noopener');
   });
-  if (owner) root.append(h('section', { class: 'check' }, h('h3', {}, owner.heading), ...owner.lines.map(l => h('p', {}, l))));
+  if (owner) root.append(h('section', { class: 'check' }, h('h2', {}, owner.heading), ...owner.lines.map(l => h('p', {}, l))));
   else root.append(h('section', { class: 'check' },
-    h('h3', {}, 'Before you buy'),
+    h('h2', {}, 'Before you buy'),
     // The cloud's own line names the notice's models and label; without it, the type's advice or a plain default.
     h('p', {}, r.recall && r.recall.all ? `${r.recall.warning ? "CPSC's warning covers every unit of this product" : 'Every unit of this product is recalled'}, whatever its model number or date. Check that it is this product: the brand and the photos.`
       : r.check || (r.banned && r.banned.advice) || DEFAULT_CHECK[r.kind] || ''),
@@ -223,7 +225,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
       if (!isPractice(r)) window.open(CPSC_REPORT_URL, '_blank', 'noopener');
     });
     root.append(h('section', { class: 'report' },
-      h('h3', {}, 'Report the listing'),
+      h('h2', {}, 'Report the listing'),
       h('p', {}, r.kind === 'recall'
         ? 'CPSC asks shoppers who find a recalled product for sale online to report it at SaferProducts.gov, with the listing\'s link and a screenshot. Its e-commerce team has such listings taken down.'
         : 'CPSC\'s e-commerce team looks for recalled and banned products listed for sale and has the listings taken down. You can report this one at SaferProducts.gov, with its link and a screenshot.'),
@@ -239,7 +241,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
   if (!compact && r.kind === 'recall' && r.recall) {
     root.append(h('dl', { class: 'facts' },
       h('div', {}, h('dt', {}, r.recall.warning ? 'CPSC warning' : 'Recall'), h('dd', { class: 'num' }, r.recall.number || r.recall.id)),
-      h('div', {}, h('dt', {}, r.recall.warning ? 'Warned' : 'Recalled'), h('dd', { class: 'num' }, r.recall.date)),
+      h('div', {}, h('dt', {}, r.recall.warning ? 'Warned' : 'Recalled'), h('dd', { class: 'num' }, longDay(r.recall.date))),
       h('div', {}, h('dt', {}, 'Product'), h('dd', {}, r.recall.product)),
       r.recall.hazard ? h('div', {}, h('dt', {}, 'Hazard'), h('dd', {}, r.recall.hazard)) : null,
       r.recall.remedy ? h('div', {}, h('dt', {}, r.recall.warning ? 'CPSC says' : 'Remedy'), h('dd', {}, r.recall.remedy)) : null,
@@ -267,7 +269,7 @@ function watchSection(watch) {
   watch.get().then(show, () => {});
   btn.addEventListener('click', async () => { const next = !on; show(next); try { await watch.set(next); } catch { show(!next); } });
   return h('section', { class: 'watch' },
-    h('h3', {}, 'Bought it, or already own one?'),
+    h('h2', {}, 'Bought it, or already own one?'),
     h('p', {}, 'Recall notices reach the first owner, not the next one. Watch this listing and Still Recalled checks it against every new CPSC recall, on this computer.'),
     btn);
 }

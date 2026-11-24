@@ -1,5 +1,12 @@
 package app.web.stillrecalled.ui
 
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +46,7 @@ fun WatchScreen(m: AppModel, onAdd: () -> Unit) {
     val added = live.optJSONArray("cards")?.length() ?: 0
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text(if (alerts > 0) "$alerts watched ${if (alerts == 1) "listing matches" else "listings match"} a new recall" else "Watching for recalls", style = MaterialTheme.typography.displaySmall)
+            Text(if (alerts > 0) "$alerts watched ${if (alerts == 1) "listing matches" else "listings match"} a new recall" else "Watching for recalls", style = MaterialTheme.typography.displaySmall, modifier = Modifier.semantics { heading() })
             Muted(buildString {
                 append(if (live.has("checkedAt")) "Recall list checked with CPSC ${DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(Date(live.getLong("checkedAt")))}" else "Recall list from this version")
                 if (added > 0) append(" · $added ${if (added == 1) "recall" else "recalls"} added since this version")
@@ -60,7 +67,7 @@ fun WatchScreen(m: AppModel, onAdd: () -> Unit) {
         Secondary("+ Watch something you own", onAdd, Modifier.fillMaxWidth())
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             LinkButton(if (m.refreshing) "Checking with CPSC…" else "↻ Check for new recalls now", { m.refreshNow() })
-            m.refreshNote?.let { if (!m.refreshing) Muted(it) }
+            m.refreshNote?.let { if (!m.refreshing) Muted(it, Modifier.semantics { liveRegion = LiveRegionMode.Polite }) }
         }
         Muted("New recalls are fetched from CPSC twice a day. Gemini writes each new notice's field-guide entry once, in the cloud; from then on this phone matches your watched listings against it on its own. A watched listing goes to the cloud only if it could match a new recall.")
     }
@@ -74,7 +81,7 @@ private fun WatchRow(m: AppModel, w: Store.Watched) {
     Row(Modifier.fillMaxWidth().padding(vertical = 14.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Thumb(w.listing.optString("image"), photo)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text(w.listing.optString("title"), style = MaterialTheme.typography.titleSmall, maxLines = 2)
+            Text(w.listing.optString("title"), style = MaterialTheme.typography.titleSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
             if (a == null) {
                 Muted("Watching since ${DateFormat.getDateInstance().format(Date(w.addedAt))} · no recall yet")
             } else {
@@ -85,12 +92,12 @@ private fun WatchRow(m: AppModel, w: Store.Watched) {
                     verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Pill(a.optString("badge").ifEmpty { "Possible recall" }, a.optString("level"))
                     val fg = if (likely) Ink.likelyInk else Ink.possibleInk
-                    Text("CPSC recalled the ${r.optString("product")} on ${longDate(r.optString("date"))}. ${r.optString("hazard")}", style = MaterialTheme.typography.bodySmall, color = fg)
-                    r.optString("tell").takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = Ink.text) }
+                    Text("CPSC recalled the ${r.optString("product")} on ${longDate(r.optString("date"))}. ${r.optString("hazard")}", style = MaterialTheme.typography.bodyMedium, color = fg)
+                    r.optString("tell").takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Ink.text) }
                     // What to do with something already in the house.
                     Text(if (likely) "What to do: stop using it, and follow the remedy in the recall notice (often a refund, repair or replacement from the maker)."
                         else "What to do: check its label against the units the notice lists. If it matches, stop using it and follow the notice's remedy.",
-                        style = MaterialTheme.typography.bodySmall, color = Ink.text)
+                        style = MaterialTheme.typography.bodyMedium, color = Ink.text)
                     LinkButton("Read the recall notice ↗", { ctx.open(r.optString("url")) }, fg)
                 }
             }
@@ -105,7 +112,7 @@ fun AboutScreen(m: AppModel) {
     var cloud by remember { mutableStateOf(m.store.cloudCheck) }
     val s = m.settings
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
-        Text("How it works", style = MaterialTheme.typography.displaySmall)
+        Text("How it works", style = MaterialTheme.typography.displaySmall, modifier = Modifier.semantics { heading() })
         SectionCard {
             Heading("On this phone")
             Text("Every check starts here: the recall list (every CPSC recall since 1973) is matched by the same rules the Chrome extension runs, in a sealed JavaScript sandbox. When the phone has Gemini Nano, the screenshot is read and the listing looked at here too.", style = MaterialTheme.typography.bodyMedium)
@@ -114,12 +121,13 @@ fun AboutScreen(m: AppModel) {
             Heading("In the cloud")
             Text("A baby product, or a listing that may match, goes to Gemini through Firebase AI Logic, with the full recall notice, to confirm or clear it. Anything else stays on the phone. On a phone without Gemini Nano, the screenshot is read in the cloud too.", style = MaterialTheme.typography.bodyMedium)
         }
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().toggleable(cloud, role = Role.Switch) { cloud = it; m.store.cloudCheck = it }.padding(vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Column(Modifier.weight(1f)) {
                 Text("Cloud double-check", style = MaterialTheme.typography.titleSmall)
                 Muted("Off: nothing leaves the phone. Flags stand, marked unconfirmed, and the label check can only raise an alarm.")
             }
-            Switch(cloud, { cloud = it; m.store.cloudCheck = it }, colors = SwitchDefaults.colors(checkedTrackColor = Ink.primary))
+            Switch(cloud, onCheckedChange = null, colors = SwitchDefaults.colors(checkedTrackColor = Ink.primary, checkedThumbColor = Ink.onPrimary))
         }
         Column {
             HorizontalDivider(color = Ink.border)

@@ -51,7 +51,7 @@ await build({ ...common, outdir: 'tools', format: 'esm', entryPoints: {
 } });
 
 // The web page (web/, served as-is by Firebase Hosting). It reuses the extension's engine, prompts and detail view.
-await build({ ...common, outdir: 'web/build', format: 'esm', entryPoints: { app: 'web/src/app.js', bridge: 'web/src/bridge.js' } });
+await build({ ...common, outdir: 'web/build', format: 'esm', entryPoints: { app: 'web/src/app.js', bridge: 'web/src/bridge.js', 'try-preview': 'web/src/try-preview.js' } });
 await build({ outdir: 'web/build', bundle: true, logLevel: 'info', entryPoints: { style: 'web/src/app.css', try: 'web/src/try.css' },
   loader: { '.woff2': 'file' }, assetNames: 'fonts/[name]-[hash]' });
 await mkdir('web/data', { recursive: true });
@@ -59,6 +59,9 @@ await cp('extension/data/cards.json', 'web/data/cards.json');
 if (existsSync('extension/data/warnings.json')) await cp('extension/data/warnings.json', 'web/data/warnings.json');
 await cp('extension/data/meta.json', 'web/data/meta.json');
 await cp('extension/icons/icon-32.png', 'web/icon-32.png');
+// The practice page's recorded badges live in a shadow root, which needs the font declared under its own file names.
+await mkdir('web/fonts', { recursive: true });
+for (const f of ['Geist-Regular.woff2', 'Geist-Medium.woff2', 'Geist-SemiBold.woff2', 'Geist-LICENSE.txt']) await cp(`extension/fonts/${f}`, `web/fonts/${f}`);
 
 // The Android app's assets: the rules engine (android/engine/bridge.js and the shared modules it imports, one script
 // for Jetpack's JavaScript sandbox), the recall cards in chunks (the sandbox caps the size of one evaluation), the data

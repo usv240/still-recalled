@@ -21,9 +21,61 @@
   --radius-chip: 4px;
   --font: "Geist", "SR Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Used where a colour was written out before, so light and dark can differ. */
+  --on-primary: #ffffff;
+  --primary-hover: #2b2b2b;
+  --primary-done: #1f1f1f;
+  --control-hover: #a3a3a3;
+  --placeholder: #737373;
+  --selection: #dbe6f7;
+  --ok: #1a7f37;
+  --photo-bg: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.14);
+  --shadow-soft: rgba(0, 0, 0, 0.06);
+  --control-edge: #8a8a8a;      /* 3.4:1 on white: the edge of a control that has no label inside it */
+  color-scheme: light;
+}
+
+/* Dark: from the system setting, for the side panel, the welcome page and the website. The chrome stays achromatic;
+   the two warning hues are lifted so they keep their contrast on a dark surface, and each still has words beside it.
+   Photos keep a white mat, as on paper. Badges on a marketplace page (:host, in their shadow root) stay light, so they
+   read as part of the page they sit on, which is light on eBay, Mercari and Craigslist. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #0e0e0f;
+    --surface: #18181a;
+    --raised: #252528;
+    --active: #2c2c30;
+    --border: #2e2e32;
+    --rule: #222225;
+    --control: #46464b;
+    --text: #ededed;
+    --muted: #a8a8ad;           /* 7.4:1 on the dark surface */
+    --primary: #ededed;
+    --focus: #7eb0ff;
+    --likely: #f0606a;  --likely-bg: #3a1719;  --likely-ink: #ffb8b2;
+    --possible: #e8a04a; --possible-bg: #2e2411; --possible-line: #6a4f16; --possible-ink: #f6cd7a;
+    --on-primary: #0e0e0f;
+    --primary-hover: #d4d4d4;
+    --primary-done: #d4d4d4;
+    --control-hover: #6b6b70;
+    --placeholder: #8e8e93;
+    --selection: #2b4a7a;
+    --ok: #5ccb7b;
+    --photo-bg: #f4f4f4;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --shadow-soft: rgba(0, 0, 0, 0.3);
+    --control-edge: #7c7c82;
+    color-scheme: dark;
+  }
 }
 
 .num { font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .icon-btn, .link { transition: none; }
+  .btn:active, .icon-btn:active { transform: none; }
+}
 .icon { flex: none; }
 
 /* Status pill: a pale tint with dark text of the same hue. */
@@ -47,21 +99,22 @@
   transition: transform 160ms var(--ease-out), background-color 150ms ease;
 }
 .btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
 .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--control); }
-.btn[data-state="done"] { background: #1f1f1f; }
+.btn[data-state="done"] { background: var(--primary-done); }
 @media (hover: hover) and (pointer: fine) {
-  .btn-primary:hover { background: #2b2b2b; }
+  .btn-primary:hover { background: var(--primary-hover); }
   .btn-secondary:hover { background: var(--ground); }
 }
 
 .link {
   display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none;
-  font: 500 13px/20px var(--font); color: var(--text); cursor: pointer;
+  font: 500 13px/20px var(--font); color: var(--text); cursor: pointer; min-height: 24px;
   text-decoration: underline; text-decoration-color: var(--control); text-underline-offset: 3px;
   transition: text-decoration-color 150ms ease;
 }
 @media (hover: hover) and (pointer: fine) { .link:hover { text-decoration-color: currentColor; } }
+:is(p, li) > .link { font-size: inherit; line-height: inherit; }
 
 .icon-btn {
   display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 0;
@@ -125,7 +178,7 @@
 .risk-text { font-size: 13px; line-height: 20px; text-wrap: pretty; }
 
 .check, .report, .watch { display: grid; gap: 10px; justify-items: start; }
-.check h3, .report h3, .watch h3 { margin: 0; font: 600 13px/20px var(--font); }
+.check :is(h2, h3), .report :is(h2, h3), .watch :is(h2, h3) { margin: 0; font: 600 13px/20px var(--font); }
 .check > p, .report > p, .watch > p { text-wrap: pretty; }
 .report, .watch { padding-top: 14px; border-top: 1px solid var(--rule); }
 .hint { margin-top: -4px; font-size: 12px; line-height: 16px; color: var(--muted); }

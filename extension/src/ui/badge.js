@@ -166,7 +166,9 @@ export function buildBadge(r, { onOpenPanel, onLabel = null, watch = null, shado
   // Light dismiss: a press outside the badge and the card, or Escape, closes it.
   const outside = e => { if (!e.composedPath().includes(host)) pop.hidePopover(); };
   const escape = e => { if (e.key === 'Escape') { pop.hidePopover(); badge.focus(); } };
+  badge.setAttribute('aria-expanded', 'false');
   pop.addEventListener('toggle', e => {
+    badge.setAttribute('aria-expanded', String(e.newState === 'open'));
     if (e.newState === 'open') {
       addEventListener('scroll', follow, { passive: true, capture: true });
       addEventListener('resize', follow);

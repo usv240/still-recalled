@@ -140,6 +140,12 @@ try {
   await page.bringToFront();
   step('settings come from Remote Config', !!(engine && engine.settings && engine.settings.from !== 'defaults'),
     engine && engine.settings ? `${engine.settings.from}: ${engine.settings.models.join(', ')}; cloud ${engine.settings.cloudCheck ? 'on' : 'off'}; ${engine.settings.cloudAtOnce} at once` : JSON.stringify(engine).slice(0, 160));
+  // The practice page's run, kept whole for the page's "show the badges without installing" preview (web/src/try-preview.js).
+  if (/still-recalled\.web\.app\/try/.test(urlArg) && flagged.length) {
+    const version = JSON.parse(readFileSync('extension/manifest.json', 'utf8')).version;
+    writeFileSync('web/try/recorded.json', JSON.stringify({ at: new Date().toISOString(), version, results: flagged.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)) }));
+    log('wrote web/try/recorded.json for the practice page preview');
+  }
   results.flagged = flagged.map(r => ({ level: r.level, badge: r.badge, title: r.listing.title, recall: r.recall ? r.recall.id : '', also: r.also ? r.also.id : '', cloud: r.how.cloudModel, device: r.how.device, lookups: r.how.lookups || [] }));
   // The practice page's inclined sleeper is titled without its product's name. Its recall can only come from the cloud
   // naming the product in the photo and asking this device's field guide (shared/lookup.mjs, function calling).

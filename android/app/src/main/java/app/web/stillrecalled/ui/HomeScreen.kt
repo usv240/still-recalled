@@ -29,25 +29,43 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.semantics.heading
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextOverflow
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Composable
 fun HomeScreen(m: AppModel) {
     val ctx = LocalContext.current
+    val scope = rememberCoroutineScope()
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        uri?.let { ctx.loadBitmap(it) }?.let { m.check(it, null) }
+        if (uri != null) scope.launch { ctx.loadBitmapAsync(uri)?.let { m.check(it, null) } ?: m.imageFailed() }
     }
     var typed by rememberSaveable { mutableStateOf("") }
 
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
+        // First, so someone who just shared a link from Marketplace sees why nothing was checked, and what to do.
+        m.shareNote?.let { note ->
+            SectionCard(Modifier.semantics { liveRegion = LiveRegionMode.Polite }, tone = Ink.possibleBg) {
+                Text(note, style = MaterialTheme.typography.bodyMedium, color = Ink.possibleInk)
+                Primary(if (m.owner) "Choose a photo of it" else "Choose a screenshot", { pick.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }, Modifier.fillMaxWidth())
+                LinkButton("Dismiss", { m.dismissShareNote() }, Ink.possibleInk)
+            }
+        }
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            // Two choices, side by side: who is checking.
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            // Two choices, side by side: who is checking. They wrap at large font sizes.
+            @OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 androidx.compose.material3.FilterChip(selected = !m.owner, onClick = { m.chooseOwner(false) }, label = { Text("I'm buying it") })
                 androidx.compose.material3.FilterChip(selected = m.owner, onClick = { m.chooseOwner(true) }, label = { Text("I own it") })
             }
-            Text(if (m.owner) "Check what you own before you sell it or pass it on" else "Check a secondhand listing before you buy it", style = MaterialTheme.typography.displaySmall)
+            Text(if (m.owner) "Check what you own before you sell it or pass it on" else "Check a secondhand listing before you buy it", style = MaterialTheme.typography.displaySmall, modifier = Modifier.semantics { heading() })
             Text("Share a listing or a screenshot from Facebook Marketplace, OfferUp, eBay or any app to Still Recalled. It's checked against every U.S. CPSC recall since 1973 and the infant sleep products linked to deaths.",
                 style = MaterialTheme.typography.bodyLarge, color = Ink.muted)
         }
@@ -61,16 +79,10 @@ fun HomeScreen(m: AppModel) {
                 keyboardActions = KeyboardActions(onSearch = { if (typed.isNotBlank()) m.check(null, typed) }),
                 shape = Control, colors = OutlinedTextFieldDefaults.colors(focusedContainerColor = Ink.surface, unfocusedContainerColor = Ink.surface, focusedBorderColor = Ink.primary),
             )
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            @OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+            FlowRow(verticalArrangement = Arrangement.Center, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 LinkButton("Try it with an example photo", { m.checkExample() })
-                Muted("  a made-up listing")
-            }
-        }
-
-        m.shareNote?.let { note ->
-            SectionCard(tone = Ink.possibleBg) {
-                Text(note, style = MaterialTheme.typography.bodyMedium, color = Ink.possibleInk)
-                LinkButton("OK", { m.dismissShareNote() }, Ink.possibleInk)
+                Muted("a made-up listing", Modifier.align(Alignment.CenterVertically))
             }
         }
 
@@ -103,7 +115,8 @@ fun ModelCard(m: AppModel) {
             "checking" -> ""
             else -> "Firebase AI Logic runs the same check on Gemini in the cloud instead. On a phone with Gemini Nano, it runs here."
         })
-        if (m.model == "downloadable" && m.download == null) Secondary("Download Gemini Nano", { m.startDownload() })
+        if (m.downloadFailed && m.download == null) Text("The download stopped. Check the connection and free space, then try again.", style = MaterialTheme.typography.bodyMedium, color = Ink.possibleInk)
+        if (m.model == "downloadable" && m.download == null) Secondary(if (m.downloadFailed) "Try the download again" else "Download Gemini Nano", { m.startDownload() })
         m.download?.let { p ->
             LinearProgressIndicator(progress = { p }, modifier = Modifier.fillMaxWidth(), color = Ink.text, trackColor = Ink.raised)
             Muted("Downloading ${(p * 100).toInt()}%")
@@ -123,7 +136,7 @@ private fun RecentList(m: AppModel) {
             Row(Modifier.fillMaxWidth().clickable { ctx.open(c.optString("url")) }.padding(vertical = 12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
                 Thumb(c.optString("image"))
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                    Text(c.optString("product"), style = MaterialTheme.typography.titleSmall, maxLines = 2)
+                    Text(c.optString("product"), style = MaterialTheme.typography.titleSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                         Muted("Recalled ${longDate(c.optString("date"))}")
                         if (c.optBoolean("live")) Text("New since this version", style = MaterialTheme.typography.labelSmall, color = Ink.likelyInk,

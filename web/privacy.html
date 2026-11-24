@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Still Recalled: privacy</title>
 <meta name="description" content="What the Still Recalled Chrome extension and web page do with your data.">
-<meta name="theme-color" content="#f8f8f8">
+<meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0e0f" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
 <link rel="stylesheet" href="build/style.css">
 <style>
@@ -33,7 +35,7 @@ Listings these steps clear never leave it. Your searches and the rest of your br
 <p>When a listing is flagged on your computer, or your computer can't settle it (a bedding set that may hide a bumper,
 a possible part, or a product whose photo suggests a recalled brand its title doesn't name), its title, description,
 price and photo are sent, with the CPSC recall notice it might match, to Gemini through Google's Firebase AI Logic, so
-a larger model can confirm or clear it. In our tests this was about one listing in four. On the web page and in the
+a larger model can confirm the match or rule it out. In our tests this was about one listing in four. On the web page and in the
 Android app, which check one listing at a time, the screenshot or text you add is read on your device when it has a
 built-in model, otherwise by Gemini in the cloud, and every baby product you check gets the cloud's look.</p>
 <p>You can turn the cloud check off in the extension's side panel settings. A second setting, off unless you turn it
