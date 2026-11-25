@@ -1,0 +1,381 @@
+{
+ "reviewer": "AI reviewer (Claude), 2026-11-25",
+ "note": "Reviewed against the CPSC recall text (saferproducts.gov recall API and the local cards.json). Every listing photo was downloaded and viewed, including the ones marked no. 'yes' means the listing is the whole product of the recalled product line, even when the listed unit is a later generation or a model number outside the recall. Three groups rest on a line-definition judgment and are easy to re-score if a narrower definition is wanted: Baby Jogger City Mini GT2/GT3 (all-terrain variants of the City Mini line, scored yes), Jool Baby Nova Signature and Nova Nature (variants of the Nova swing, scored yes), and the Graco Day2Dream playards and Dream On Me Lacy bassinets (scored unclear). Parts, accessories, and listings matched only on a shared word are scored no.",
+ "answers": {
+  "m800609180277": {
+   "agrees": "yes",
+   "why": "Whole Baby Jogger stroller, City Mini family (photo: complete 3-wheel stroller with the Baby Jogger logo). It is the later GT2 all-terrain variant, so it is outside the recalled 2007-2009 item numbers, but the line name and product type match.",
+   "photo_checked": true
+  },
+  "m800609244759": {
+   "agrees": "yes",
+   "why": "Whole Baby Jogger stroller, City Mini family (photo: complete 3-wheel stroller with the Baby Jogger logo). It is the later GT2 all-terrain variant, so it is outside the recalled 2007-2009 item numbers, but the line name and product type match.",
+   "photo_checked": true
+  },
+  "m840148868146": {
+   "agrees": "yes",
+   "why": "Whole Baby Jogger stroller, City Mini family (photo: complete stroller with the Baby Jogger logo). It is the later GT3 all-terrain variant, outside the recalled 2007-2009 item numbers, but the line name and product type match.",
+   "photo_checked": true
+  },
+  "m920178798332": {
+   "agrees": "no",
+   "why": "Photo shows only a carrycot/pram bassinet that attaches to several Baby Jogger strollers. Accessory, not the stroller.",
+   "photo_checked": true
+  },
+  "m800637228146": {
+   "agrees": "yes",
+   "why": "Whole Baby Jogger City Mini GT2 Double stroller (photo: complete side-by-side double with the Baby Jogger logo). The recall covers City Mini single and double strollers; this is the later GT2 variant, outside the recalled item numbers.",
+   "photo_checked": true
+  },
+  "m227620395286": {
+   "agrees": "no",
+   "why": "Weather shield / rain cover in its box. Accessory, not the stroller.",
+   "photo_checked": true
+  },
+  "m880149565333": {
+   "agrees": "no",
+   "why": "Child snack tray only. Accessory, not the stroller.",
+   "photo_checked": true
+  },
+  "m128213352732": {
+   "agrees": "yes",
+   "why": "Sealed retail box printed 'baby jogger city mini GT2 lightweight all-terrain stroller', so the whole stroller. Later GT2 variant of the City Mini line, outside the recalled 2007-2009 item numbers.",
+   "photo_checked": true
+  },
+  "m237158416728": {
+   "agrees": "yes",
+   "why": "Whole Baby Jogger City Mini GT2 stroller (photo: complete 3-wheel stroller, Baby Jogger logo on the frame). Later GT2 variant of the City Mini line, outside the recalled item numbers.",
+   "photo_checked": true
+  },
+  "m287706208966": {
+   "agrees": "no",
+   "why": "RockaRoo fabric seat cover only. Replacement part, not the rocker.",
+   "photo_checked": true
+  },
+  "m377624616018": {
+   "agrees": "no",
+   "why": "Newborn insert only. Accessory, not the swing or rocker.",
+   "photo_checked": true
+  },
+  "m277354102637": {
+   "agrees": "no",
+   "why": "RockaRoo AC power adapter only. Part, not the rocker.",
+   "photo_checked": true
+  },
+  "m198821278403": {
+   "agrees": "no",
+   "why": "Newborn insert only. Accessory, not the swing or rocker.",
+   "photo_checked": true
+  },
+  "m880144753201": {
+   "agrees": "no",
+   "why": "Newborn insert only. Accessory, not the swing or rocker.",
+   "photo_checked": true
+  },
+  "m407299463837": {
+   "agrees": "no",
+   "why": "Newborn insert only. Accessory, not the swing or rocker.",
+   "photo_checked": true
+  },
+  "m960192964217": {
+   "agrees": "no",
+   "why": "Newborn insert only. Accessory, not the swing or rocker.",
+   "photo_checked": true
+  },
+  "m287705417345": {
+   "agrees": "no",
+   "why": "RockaRoo rocking mechanism parts only. Replacement part, not the rocker.",
+   "photo_checked": true
+  },
+  "m287705408054": {
+   "agrees": "no",
+   "why": "RockaRoo motor only. Replacement part, not the rocker.",
+   "photo_checked": true
+  },
+  "m316308691289": {
+   "agrees": "no",
+   "why": "Auxiliary audio cord only. Part, not the swing or rocker.",
+   "photo_checked": true
+  },
+  "m147693703365": {
+   "agrees": "no",
+   "why": "Fisher-Price Rainforest cradle swing. The recall is for Rainforest portable play yards made by Simplicity: different product type that only shares the word Rainforest.",
+   "photo_checked": true
+  },
+  "m336872133584": {
+   "agrees": "no",
+   "why": "Fisher-Price Rainforest cradle swing. The recall is for Rainforest portable play yards made by Simplicity: different product type that only shares the word Rainforest.",
+   "photo_checked": true
+  },
+  "m366834506292": {
+   "agrees": "no",
+   "why": "Third-party power adapter for a Snugapuppy swing. A part for a different product; the recall is the tissue box toy sold with SnugaPuppy activity centers.",
+   "photo_checked": true
+  },
+  "m820300223652": {
+   "agrees": "no",
+   "why": "Box of a Fisher-Price Rainforest Open-Top Cradle Swing. The recall is for Rainforest portable play yards: different product type that only shares the word Rainforest.",
+   "photo_checked": true
+  },
+  "m266810424233": {
+   "agrees": "no",
+   "why": "Loose toy keys from a Snugapuppy cradle swing. Not the activity center or its tissue box toy.",
+   "photo_checked": true
+  },
+  "m317484071884": {
+   "agrees": "yes",
+   "why": "Retail box printed Fisher-Price 'Lift & Lock Swing', showing the red seat with yellow T-shaped restraint and blue ropes described in the recall. Whole swing, same line.",
+   "photo_checked": true
+  },
+  "m407357936635": {
+   "agrees": "no",
+   "why": "Third-party power adapter for a Snugapuppy swing. A part for a different product; the recall is the tissue box toy sold with SnugaPuppy activity centers.",
+   "photo_checked": true
+  },
+  "m366532232711": {
+   "agrees": "no",
+   "why": "Third-party power adapter for a Snugapuppy swing. A part for a different product; the recall is the tissue box toy sold with SnugaPuppy activity centers.",
+   "photo_checked": true
+  },
+  "m287485918753": {
+   "agrees": "no",
+   "why": "Fisher-Price Rainforest cradle swing. The recall is for Rainforest portable play yards made by Simplicity: different product type that only shares the word Rainforest.",
+   "photo_checked": true
+  },
+  "m335622902796": {
+   "agrees": "no",
+   "why": "Motor gear holder part from a Snugapuppy swing. A part for a different product.",
+   "photo_checked": true
+  },
+  "m177199753429": {
+   "agrees": "yes",
+   "why": "Retail box printed Fisher-Price 'Lift & Lock Swing' (1996), red seat with yellow restraint shield as described in the recall. Whole swing, same line.",
+   "photo_checked": true
+  },
+  "m880058954530": {
+   "agrees": "yes",
+   "why": "Photo shows the swing itself with its box: red seat, yellow T-shaped restraint with the Fisher-Price logo, blue rope, as described in the recall. Whole swing, same line.",
+   "photo_checked": true
+  },
+  "m227029833113": {
+   "agrees": "yes",
+   "why": "Retail box printed Fisher-Price 'Lift & Lock Swing', showing the red seat with yellow T-shaped restraint and blue ropes described in the recall. Whole swing, same line.",
+   "photo_checked": true
+  },
+  "m287610783044": {
+   "agrees": "no",
+   "why": "Small Little People toy swing piece. The recall is the Little People Builders' Load 'n Go Wagon: different product.",
+   "photo_checked": true
+  },
+  "m397204152707": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m327394023735": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m236443378026": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m327394019681": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m237177248122": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m327290554172": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m327068692245": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m137920232955": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m327406689850": {
+   "agrees": "no",
+   "why": "Bumbo Multi Seat floor/booster seat (Bumbo name moulded on the base in the photos where it is visible). The recall is the Fisher-Price 3-in-1 High Chair P5369: different brand and product line that only shares '3-in-1'.",
+   "photo_checked": true
+  },
+  "m168861830840": {
+   "agrees": "no",
+   "why": "Bumbo seat tray only. Part, and a different brand from the recalled Fisher-Price 3-in-1 High Chair.",
+   "photo_checked": true
+  },
+  "m820379104153": {
+   "agrees": "yes",
+   "why": "Whole Britax B-Agile stroller (photo: complete 3-wheel stroller, 'Britax' on the seat side and 'B-AGILE' on the frame). Same line and product type as the recall.",
+   "photo_checked": true
+  },
+  "m117494693063": {
+   "agrees": "no",
+   "why": "Pair of car seat adapter / receiver mounts only. Part, not the stroller.",
+   "photo_checked": true
+  },
+  "m147693717832": {
+   "agrees": "no",
+   "why": "Child snack tray only. Accessory, not the stroller.",
+   "photo_checked": true
+  },
+  "m840031765938": {
+   "agrees": "no",
+   "why": "Stroller travel bag only. Accessory, not the stroller.",
+   "photo_checked": true
+  },
+  "m377354531222": {
+   "agrees": "no",
+   "why": "Child snack tray only. Accessory, not the stroller.",
+   "photo_checked": true
+  },
+  "m800696207593": {
+   "agrees": "yes",
+   "why": "Whole Britax B-Agile single stroller (photo: complete 3-wheel stroller with a Britax label on the seat). Same line and product type as the recall.",
+   "photo_checked": true
+  },
+  "m117467482231": {
+   "agrees": "no",
+   "why": "Rain cover in its box. Accessory, not the stroller.",
+   "photo_checked": true
+  },
+  "m168781247697": {
+   "agrees": "no",
+   "why": "Child snack tray only. Accessory, not the stroller.",
+   "photo_checked": true
+  },
+  "m287187312599": {
+   "agrees": "yes",
+   "why": "Whole Britax B-Agile stroller (photo: complete 3-wheel stroller, 'B-AGILE' on the frame). Same line and product type as the recall.",
+   "photo_checked": true
+  },
+  "m920153073428": {
+   "agrees": "no",
+   "why": "Britax Willow Brook S+ travel system. The recall is for CYBEX strollers; the only shared word is the colour name Onyx. Different brand and line.",
+   "photo_checked": true
+  },
+  "m225981859381": {
+   "agrees": "yes",
+   "why": "Whole stroller titled Britax B-Agile (photo: complete 3-wheel stroller with child tray; the small frame label is not readable, but nothing contradicts the title). Same line and product type as the recall.",
+   "photo_checked": true
+  },
+  "m277692667276": {
+   "agrees": "yes",
+   "why": "Whole Britax B-Agile stroller (photo: complete stroller with Britax badge); the title gives model U341782, one of the recalled model numbers.",
+   "photo_checked": true
+  },
+  "m116423335334": {
+   "agrees": "no",
+   "why": "Head support cushion pad only. Replacement part, not the stroller.",
+   "photo_checked": true
+  },
+  "m136639797373": {
+   "agrees": "yes",
+   "why": "Whole Jool Baby Nova swing (photo: gray swing, 'NOVA' on the seat, 'Jool' on the base, moon/cloud/star toys, matching the recall description).",
+   "photo_checked": true
+  },
+  "m128153012587": {
+   "agrees": "yes",
+   "why": "Whole Jool Baby Nova swing (photo: complete gray swing with 'Joolbaby' on the base). Newer Nova design than the recalled gray units, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m158305818874": {
+   "agrees": "yes",
+   "why": "Whole Jool Baby Nova swing, unassembled with its box printed 'Joolbaby NOVA Nature Baby Swing'. Nova Nature variant in oatmeal, not the recalled gray model number, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m168855266527": {
+   "agrees": "yes",
+   "why": "Whole Jool Baby Nova swing, unassembled with its box printed 'Joolbaby NOVA Signature Baby Swing'. Nova Signature variant in sage, not the recalled gray model number, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m206549791798": {
+   "agrees": "yes",
+   "why": "Whole Jool Baby Nova swing (photo: complete gray swing, 'NOVA' on the seat, 'Joolbaby' on the base, box printed 'NOVA Baby Swing'). Listed as the 2024 version, so after the recalled production dates, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m206518554507": {
+   "agrees": "yes",
+   "why": "Whole Jool Baby Nova swing (photo: complete gray swing, 'NOVA' on the seat, 'Joolbaby' on the base, box printed 'NOVA Baby Swing'). Listed as the 2024 version, so after the recalled production dates, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m168693342009": {
+   "agrees": "yes",
+   "why": "Whole Jool Baby Nova swing (photo: complete oatmeal swing with 'Joolbaby' on the base). Nova Signature variant, not the recalled gray model number, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m168721447576": {
+   "agrees": "yes",
+   "why": "Whole Jool Baby Nova swing (photo: complete gray swing with 'Joolbaby' on the base). Newer Nova design than the recalled gray units, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m168838804709": {
+   "agrees": "yes",
+   "why": "Retail box printed 'Joolbaby NOVA Nature Baby Swing', so the whole swing. Nova Nature variant in slate, not the recalled gray model number, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m198437603811": {
+   "agrees": "yes",
+   "why": "Retail box printed 'Joolbaby NOVA Baby Swing', so the whole swing. Oatmeal colour, not the recalled gray model number, but the same line and product type.",
+   "photo_checked": true
+  },
+  "m168866792196": {
+   "agrees": "no",
+   "why": "Graco Pack 'n Play Travel Dome Lux playard. The recall is for Simplicity 3-in-1 and 4-in-1 convertible bassinets: different brand and line.",
+   "photo_checked": true
+  },
+  "m840083564919": {
+   "agrees": "unclear",
+   "why": "Whole Graco Pack 'n Play Day2Dream playard, so the line name matches. But the recall covers only the inclined sleeper accessory sold with the Day2Dream Playard with Bedside Sleeper, and the photo shows the version with a flat travel bassinet. Line matches, recalled item type does not clearly match.",
+   "photo_checked": true
+  },
+  "m147634458361": {
+   "agrees": "unclear",
+   "why": "Whole Graco Pack 'n Play Day2Dream playard, so the line name matches. But the recall covers only the inclined sleeper accessory sold with the Day2Dream Playard with Bedside Sleeper, and the photo shows the version with a flat travel bassinet. Line matches, recalled item type does not clearly match.",
+   "photo_checked": true
+  },
+  "m407358567068": {
+   "agrees": "no",
+   "why": "Graco Pack 'n Play playard with Winnie the Pooh fabric. The recall is a Disney Winnie-the-Pooh 23-piece doll play set: different product.",
+   "photo_checked": true
+  },
+  "m187833604225": {
+   "agrees": "unclear",
+   "why": "Whole Dream On Me 2-in-1 bassinet and cradle, so brand and product type match. But this is the separately named Lacy model (441/442 series, full double canopy), while the recall names the '2-in-1 Bassinet to Cradle' models 439-x with a half canopy. Cannot confirm it is the same line.",
+   "photo_checked": true
+  },
+  "m287330089480": {
+   "agrees": "unclear",
+   "why": "Whole Dream On Me 2-in-1 bassinet and cradle, so brand and product type match. But this is the separately named Lacy model (441/442 series, full double canopy), while the recall names the '2-in-1 Bassinet to Cradle' models 439-x with a half canopy. Cannot confirm it is the same line.",
+   "photo_checked": true
+  },
+  "m960212488777": {
+   "agrees": "no",
+   "why": "OHFLY 4-in-1 bedside bassinet. The recall is for Simplicity 3-in-1 and 4-in-1 convertible bassinets: different brand that only shares '4-in-1'.",
+   "photo_checked": true
+  },
+  "m357690516410": {
+   "agrees": "unclear",
+   "why": "Whole Dream On Me 2-in-1 bassinet and cradle, so brand and product type match. But this is the separately named Lacy model (441/442 series, full double canopy), while the recall names the '2-in-1 Bassinet to Cradle' models 439-x with a half canopy. Cannot confirm it is the same line.",
+   "photo_checked": true
+  },
+  "m286694636194": {
+   "agrees": "unclear",
+   "why": "Whole Dream On Me 2-in-1 bassinet and cradle, so brand and product type match. But this is the separately named Lacy model (441/442 series, full double canopy), while the recall names the '2-in-1 Bassinet to Cradle' models 439-x with a half canopy. Cannot confirm it is the same line.",
+   "photo_checked": true
+  }
+ }
+}

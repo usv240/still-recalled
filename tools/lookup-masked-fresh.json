@@ -1,0 +1,802 @@
+{
+ "at": "2026-11-25T18:20:16.524Z",
+ "note": "Real listings whose naming words were stripped by code; the sellers' own photos.",
+ "summary": {
+  "listings": 34,
+  "runs": 1,
+  "checked": 34,
+  "wordsFoundRecall": 0,
+  "cloudAsked": 33,
+  "deviceReturnedTheRecall": 28,
+  "namedRightRecall": 13,
+  "namedAnotherNotice": 2,
+  "flaggedWithoutLookup": 0,
+  "redRecallOnTheCloudsWordAlone": 0,
+  "medianMs": 16570,
+  "lookGaveABrand": 19,
+  "deviceLookupFoundARecall": 0,
+  "deviceLookupFoundTheRightRecall": 0
+ },
+ "rows": [
+  {
+   "recall": "22200",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "title": "Multi-Motion Baby Swing Classic Grey Plush Insert",
+   "words": "nothing",
+   "brandGiven": "4moms",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 61394,
+   "photo": true,
+   "asked": [
+    "4moms / MamaRoo"
+   ],
+   "returned": [
+    "22200"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "22200",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "title": "Baby Swing Gray Seat, Bluetooth Music, Toy Bar Balls, Adapter",
+   "words": "nothing",
+   "brandGiven": "4moms",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 33851,
+   "photo": true,
+   "asked": [
+    "4moms / MamaRoo"
+   ],
+   "returned": [
+    "22200"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 22200",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "22200",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "title": "Baby Swing Multi-Motion",
+   "words": "nothing",
+   "brandGiven": "4moms",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 19256,
+   "photo": true,
+   "asked": [
+    "4moms / MamaRoo"
+   ],
+   "returned": [
+    "22200"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "08097",
+   "product": "Boppy® Slipcovers",
+   "title": "Boppy Nursing Pillow Slipcover Pink Floral Embroidery Jungle Animal Print",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 6566,
+   "photo": true,
+   "asked": [],
+   "returned": [],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "15088",
+   "product": "2-in-1 Bassinet to Cradle",
+   "title": "On Lacy Blue White Mesh Canopy 1\" Mattress Pad",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 24398,
+   "photo": true,
+   "asked": [
+    "Dream On Me / Lacy bassinet"
+   ],
+   "returned": [],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "13092",
+   "product": "Bugaboo Cameleon and Bugaboo Donkey Model Strollers",
+   "title": "3 Stroller With Winter And Summer Accessories",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 16332,
+   "photo": true,
+   "asked": [
+    "Bugaboo / Cameleon"
+   ],
+   "returned": [
+    "13092"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 13092",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "13092",
+   "product": "Bugaboo Cameleon and Bugaboo Donkey Model Strollers",
+   "title": "3 Stroller - Special Edition - Elements",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 21967,
+   "photo": true,
+   "asked": [
+    "Bugaboo / Cameleon 3 stroller"
+   ],
+   "returned": [
+    "13092"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 13092",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "17088",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "title": "Gear Rare Four-Wheel Stroller",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 16570,
+   "photo": true,
+   "asked": [
+    "BOB / stroller"
+   ],
+   "returned": [
+    "12006",
+    "00103a"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 12006",
+   "named": true,
+   "right": false,
+   "sameProductOtherNotice": true,
+   "red": false
+  },
+  {
+   "recall": "09334",
+   "product": "Baby Jogger City Mini Strollers",
+   "title": "GT Double Stroller Black Folding Adjustable Handlebar",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 38907,
+   "photo": true,
+   "asked": [
+    "Baby Jogger / City Mini GT Double stroller"
+   ],
+   "returned": [
+    "09334"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "09334",
+   "product": "Baby Jogger City Mini Strollers",
+   "title": "GT2 All-Terrain Stroller, opulent Black (NEW)",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 19289,
+   "photo": true,
+   "asked": [
+    "Baby Jogger / City Mini GT2 stroller"
+   ],
+   "returned": [
+    "09334"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "09334",
+   "product": "Baby Jogger City Mini Strollers",
+   "title": "GT2 All-Terrain Stroller, opulent Black (Open Box)",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 16924,
+   "photo": true,
+   "asked": [
+    "Baby Jogger / City Mini GT2 stroller"
+   ],
+   "returned": [
+    "09334"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "09334",
+   "product": "Baby Jogger City Mini Strollers",
+   "title": "GT3 All-Terrain Stroller - Brand new",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 35309,
+   "photo": true,
+   "asked": [
+    "Baby Jogger / City Mini GT3 stroller"
+   ],
+   "returned": [
+    "09334"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "09334",
+   "product": "Baby Jogger City Mini Strollers",
+   "title": "GT2 Double Stroller, Jet Black (New)",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 16232,
+   "photo": true,
+   "asked": [
+    "Baby Jogger / City Mini GT2 Double Stroller"
+   ],
+   "returned": [
+    "09334"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "09334",
+   "product": "Baby Jogger City Mini Strollers",
+   "title": "GT2 New In Box, Sealed. Cant get better then that!",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 24400,
+   "photo": true,
+   "asked": [
+    "Baby Jogger / City Mini GT2 stroller"
+   ],
+   "returned": [
+    "09334"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "09334",
+   "product": "Baby Jogger City Mini Strollers",
+   "title": "GT2 Compact Fold All Terrain Stroller USED ONCE",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 26623,
+   "photo": true,
+   "asked": [
+    "Baby Jogger / City Mini GT2 stroller"
+   ],
+   "returned": [
+    "09334"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "00168",
+   "product": "Fisher-Price \"Lift & Lock Swings\" and \"Get Up & Go Walkers\"",
+   "title": "Vintage 1991 & Swing For Infant-Toddlers",
+   "words": "nothing",
+   "brandGiven": "Fisher-Price",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 11926,
+   "photo": true,
+   "asked": [
+    "Fisher-Price / Lift & Lock Swing"
+   ],
+   "returned": [
+    "00168",
+    "25009"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 00168",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "00168",
+   "product": "Fisher-Price \"Lift & Lock Swings\" and \"Get Up & Go Walkers\"",
+   "title": "Vintage 1996 & Swing For Ages 9 Months To 3 Years New",
+   "words": "nothing",
+   "brandGiven": "Fisher-Price",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 11177,
+   "photo": true,
+   "asked": [
+    "Fisher-Price / Lift & Lock Swing"
+   ],
+   "returned": [
+    "00168",
+    "25009"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 00168",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "00168",
+   "product": "Fisher-Price \"Lift & Lock Swings\" and \"Get Up & Go Walkers\"",
+   "title": "Vintage 1991 & Swing For Infant-Toddlers",
+   "words": "nothing",
+   "brandGiven": "Fisher-Price",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 22205,
+   "photo": true,
+   "asked": [
+    "Fisher-Price / Lift & Lock Swing"
+   ],
+   "returned": [
+    "00168",
+    "25009"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 00168",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "00168",
+   "product": "Fisher-Price \"Lift & Lock Swings\" and \"Get Up & Go Walkers\"",
+   "title": "Vintage 1991 & Swing For Infant-Toddlers Nice",
+   "words": "nothing",
+   "brandGiven": "Fisher-Price",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 12692,
+   "photo": true,
+   "asked": [
+    "Fisher-Price / Lift & Lock Swing"
+   ],
+   "returned": [
+    "00168",
+    "25009"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 00168",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "17088",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "title": "3 Wheel Baby Stroller Gray Charcoal Silver Frame Folding Jogger",
+   "words": "nothing",
+   "brandGiven": "Britax",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 9415,
+   "photo": true,
+   "asked": [
+    "Britax / B-Agile stroller"
+   ],
+   "returned": [
+    "17088",
+    "14098"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 17088",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "17088",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "title": "Single Lightweight Stroller, Black, Folding w/ Basket",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 12855,
+   "photo": true,
+   "asked": [
+    "Britax / B-Agile stroller"
+   ],
+   "returned": [
+    "17088",
+    "14098"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 17088",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "17088",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "title": "Black 3-Wheel One-Hand Push Single Pushchair Rubber Tires",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 12941,
+   "photo": true,
+   "asked": [
+    "Britax / B-Agile stroller"
+   ],
+   "returned": [
+    "17088",
+    "14098"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 17088",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "17088",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "title": "stroller",
+   "words": "nothing",
+   "brandGiven": "",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 13770,
+   "photo": true,
+   "asked": [
+    "Britax / B-Agile stroller"
+   ],
+   "returned": [
+    "17088",
+    "14098"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 17088",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "14098",
+   "product": "B-Agile, B-Agile Double and BOB Motion strollers",
+   "title": "Stroller Black Baby Chair, Easy Locking & Pull-to-Folding",
+   "words": "nothing",
+   "brandGiven": "Britax",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 10678,
+   "photo": true,
+   "asked": [
+    "Britax / B-Agile stroller"
+   ],
+   "returned": [
+    "17088",
+    "14098"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 17088",
+   "named": true,
+   "right": false,
+   "sameProductOtherNotice": true,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Swing for Newborns - Electric Motorized Infant Swing, Bluetoot...",
+   "words": "nothing",
+   "brandGiven": "Jook",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 13320,
+   "photo": true,
+   "asked": [
+    "Jool Baby / Nova swing"
+   ],
+   "returned": [
+    "24145"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 24145",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Swing for Infants – Bluetooth Music, Remote (Gray)",
+   "words": "nothing",
+   "brandGiven": "Joolbaby",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 9783,
+   "photo": true,
+   "asked": [
+    "Jool Baby / infant swing"
+   ],
+   "returned": [],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Nature Swing for Infants - Oatmeal",
+   "words": "nothing",
+   "brandGiven": "Joolbaby",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 13955,
+   "photo": true,
+   "asked": [
+    "Jool Baby / Nova Nature Baby Swing"
+   ],
+   "returned": [
+    "24145"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Swing for Infants – Bluetooth Music Remote - Sage",
+   "words": "nothing",
+   "brandGiven": "Joolbaby",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 22235,
+   "photo": true,
+   "asked": [
+    "Jool Baby / Nova Baby Swing"
+   ],
+   "returned": [
+    "24145"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Motorized Infant Swing - Gray (2024 version)",
+   "words": "nothing",
+   "brandGiven": "Joolbaby",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 28795,
+   "photo": true,
+   "asked": [
+    "Jool Baby / Nova Baby Swing"
+   ],
+   "returned": [
+    "24145"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Motorized Infant Swing - Gray (2024 version)",
+   "words": "nothing",
+   "brandGiven": "Joolbaby",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 24815,
+   "photo": true,
+   "asked": [
+    "Joolbaby / Nova Baby Swing"
+   ],
+   "returned": [
+    "24145"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Signature Swing Oatmeal",
+   "words": "nothing",
+   "brandGiven": "Joovy",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 11209,
+   "photo": true,
+   "asked": [
+    "Jool Baby / Signature Swing"
+   ],
+   "returned": [],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Signature Swing Gray NIB",
+   "words": "nothing",
+   "brandGiven": "Joolbaby",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 10149,
+   "photo": true,
+   "asked": [
+    "Jool Baby / Signature Swing"
+   ],
+   "returned": [],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Nature Swing for Infants w/ Bluetooth - Slate",
+   "words": "nothing",
+   "brandGiven": "Joolbaby",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 12391,
+   "photo": true,
+   "asked": [
+    "Jool Baby / Nova Baby Swing"
+   ],
+   "returned": [
+    "24145"
+   ],
+   "without": "none",
+   "withLookup": "possible recall 24145",
+   "named": true,
+   "right": true,
+   "sameProductOtherNotice": false,
+   "red": false
+  },
+  {
+   "recall": "24145",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "title": "Swing Electric Motorized, Oatmeal model",
+   "words": "nothing",
+   "brandGiven": "Joolbaby",
+   "deviceFound": "",
+   "model": "gemini-4-hydrogen",
+   "ms": 26897,
+   "photo": true,
+   "asked": [
+    "Jool Baby / Nova Baby Swing"
+   ],
+   "returned": [
+    "24145"
+   ],
+   "without": "none",
+   "withLookup": "none",
+   "named": false,
+   "right": false,
+   "sameProductOtherNotice": false,
+   "red": false
+  }
+ ]
+}

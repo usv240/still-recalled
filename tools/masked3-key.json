@@ -1,0 +1,1217 @@
+{
+ "at": "2026-11-25T17:56:25.997Z",
+ "note": "Real listings whose words named a recalled product and whose blind label agrees; the naming words were stripped by code. Photos are the sellers' own.",
+ "listings": 78,
+ "skipped": [],
+ "key": {
+  "m800609180277": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT2 All-Terrain Stroller, opulent Black (NEW)",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m800609244759": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT2 All-Terrain Stroller, opulent Black (Open Box)",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m840148868146": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT3 All-Terrain Stroller - Brand new",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m128185523328": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT Double Stroller Black Folding Adjustable Handlebar",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m920178798332": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "BABY JOGGER Carrycot Pram City Mini 2 GT2 Elite 2 Single Stroller Black Grey NEW",
+   "removed": [
+    "BABY",
+    "JOGGER",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m800637228146": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT2 Double Stroller, Jet Black (New)",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m227620395286": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT Weather Shield Rain Cover New Open Box",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m880149565333": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger Snack Tray City Mini, City Mini GT, City Elite, Summit x3 child tray",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini,",
+    "City",
+    "Mini",
+    "City"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m128213352732": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT2 New In Box, Sealed. Cant get better then that!",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m237158416728": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT2 Compact Fold All Terrain Stroller 2019-Black USED ONCE",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini",
+    "2019-Black"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m287706208966": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4Moms RockaRoo Fabric Seat Insert OEM Machine Washable Zipper Snap Replacement",
+   "removed": [
+    "4Moms",
+    "RockaRoo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m377624616018": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4Moms Rockaroo and Mamaroo Infant Insert, Machine Washable, Soft, Plush Fabric,",
+   "removed": [
+    "4Moms",
+    "Rockaroo",
+    "Mamaroo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m277354102637": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4moms ROCKAROO POWER A/C ADAPTER CHARGER",
+   "removed": [
+    "4moms",
+    "ROCKAROO"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m198821278403": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4moms Newborn Insert Compatible With MamaRoo RockaRoo Neck & Head Support",
+   "removed": [
+    "4moms",
+    "MamaRoo",
+    "RockaRoo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m880144753201": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4moms Mamaroo Rockaroo Cool Mesh Reversible Newborn Insert Blue Grey",
+   "removed": [
+    "4moms",
+    "Mamaroo",
+    "Rockaroo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m407299463837": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "NEW 4moms Mamaroo Rockaroo Cool Mesh Reversible Newborn Insert Gray Mint Dot",
+   "removed": [
+    "4moms",
+    "Mamaroo",
+    "Rockaroo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m960192964217": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4Moms Rockaroo and Mamaroo Infant Insert, Machine Washable, Soft, Plush Fabric,",
+   "removed": [
+    "4Moms",
+    "Rockaroo",
+    "Mamaroo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m287705417345": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4Moms Rockaroo Rocking Rocker Mechanism Replacement 4m-012-01 Pulley Belt Base",
+   "removed": [
+    "4Moms",
+    "Rockaroo",
+    "4m-012-01"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m287705408054": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4Moms Rockaroo Rocking Motor Replacement 4m-012-01",
+   "removed": [
+    "4Moms",
+    "Rockaroo",
+    "4m-012-01"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m316308691289": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Genuine 4Moms RockaRoo Mamaroo Swing Replacement Auxiliary MP3 Music Cord OEM",
+   "removed": [
+    "4Moms",
+    "RockaRoo",
+    "Mamaroo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m147693703365": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage Fisher Price Rainforest Cradle Swing Battery/Adapter - No Sound",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Rainforest"
+   ],
+   "recall": "09098",
+   "strength": "line",
+   "product": "Rainforest™ Portable Play Yards manufactured by Simplicity Inc. and SFCA Inc.",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m336872133584": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage Fisher Price Rainforest Cradle Swing Battery Or Adapter Cord Swing",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Rainforest"
+   ],
+   "recall": "09098",
+   "strength": "line",
+   "product": "Rainforest™ Portable Play Yards manufactured by Simplicity Inc. and SFCA Inc.",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m366834506292": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Snugapuppy Charger Replacement for Fisher Price/Ingenuity Swing, 6V AC Power",
+   "removed": [
+    "Snugapuppy",
+    "Fisher",
+    "Price/Ingenuity"
+   ],
+   "recall": "25216",
+   "strength": "line",
+   "product": "Tissue Box Toy sold with Fisher-Price 3-in-1 SnugaPuppy Activity Centers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m820300223652": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "New In Box Fisher Price Open- Top Rainforest Cradle Swing VHTF 2007",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Rainforest"
+   ],
+   "recall": "09098",
+   "strength": "line",
+   "product": "Rainforest™ Portable Play Yards manufactured by Simplicity Inc. and SFCA Inc.",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m266810424233": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Fisher Price Snugapuppy Toy Cradle N Swing And Koala Bear Plastic Keys Mattel",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Snugapuppy"
+   ],
+   "recall": "25216",
+   "strength": "line",
+   "product": "Tissue Box Toy sold with Fisher-Price 3-in-1 SnugaPuppy Activity Centers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m317484071884": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage 1991 Fisher Price Lift & Lock Swing For Infant-Toddlers 9m-3y",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Lift",
+    "Lock",
+    "9m-3y"
+   ],
+   "recall": "00168",
+   "strength": "line",
+   "product": "Fisher-Price \"Lift & Lock Swings\" and \"Get Up & Go Walkers\"",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m407357936635": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Snugapuppy Swing Cord for Fisher Price Swing, 6V Wall Plug for Baby,6.7Ft",
+   "removed": [
+    "Snugapuppy",
+    "Fisher",
+    "Price"
+   ],
+   "recall": "25216",
+   "strength": "line",
+   "product": "Tissue Box Toy sold with Fisher-Price 3-in-1 SnugaPuppy Activity Centers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m366532232711": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Snugapuppy Swing Cord for Fisher Price Swing, 6V Wall Plug for Baby,6.7Ft Pow...",
+   "removed": [
+    "Snugapuppy",
+    "Fisher",
+    "Price"
+   ],
+   "recall": "25216",
+   "strength": "line",
+   "product": "Tissue Box Toy sold with Fisher-Price 3-in-1 SnugaPuppy Activity Centers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m287485918753": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage Fisher Price Rainforest Cradle Swing Battery Or Adapter Cord Swing",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Rainforest"
+   ],
+   "recall": "09098",
+   "strength": "line",
+   "product": "Rainforest™ Portable Play Yards manufactured by Simplicity Inc. and SFCA Inc.",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m335622902796": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Fisher Price Snugapuppy Rotating Head Motor Gear Holder Puppy Butterfly",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Snugapuppy"
+   ],
+   "recall": "25216",
+   "strength": "line",
+   "product": "Tissue Box Toy sold with Fisher-Price 3-in-1 SnugaPuppy Activity Centers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m177199753429": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage 1996 Fisher-Price Lift & Lock Swing For Ages 9 Months To 3 Years New",
+   "removed": [
+    "Fisher-Price",
+    "Lift",
+    "Lock"
+   ],
+   "recall": "00168",
+   "strength": "line",
+   "product": "Fisher-Price \"Lift & Lock Swings\" and \"Get Up & Go Walkers\"",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m880058954530": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage 1991 Fisher Price Lift & Lock Swing For Infant-Toddlers 9m-3y",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Lift",
+    "Lock",
+    "9m-3y"
+   ],
+   "recall": "00168",
+   "strength": "line",
+   "product": "Fisher-Price \"Lift & Lock Swings\" and \"Get Up & Go Walkers\"",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m227029833113": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage 1991 Fisher Price Lift & Lock Swing For Infant-Toddlers 9m-3y Nice",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Lift",
+    "Lock",
+    "9m-3y"
+   ],
+   "recall": "00168",
+   "strength": "line",
+   "product": "Fisher-Price \"Lift & Lock Swings\" and \"Get Up & Go Walkers\"",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m287610783044": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "1993 Fisher-Price Little People Single Baby swing",
+   "removed": [
+    "Fisher-Price",
+    "Little",
+    "People"
+   ],
+   "recall": "11287",
+   "strength": "line",
+   "product": "Little People® Builders' Load 'n Go Wagon",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m397204152707": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Toddler Multi Seat 3-in-1 Booster High Chair and Tray, Breige/White Sand",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "High",
+    "Chair",
+    "Bumbo"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m327394023735": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Baby Toddler Adjustable 3-in-1 Booster Seat/High Chair & Tray, Blue",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "Seat/High",
+    "Chair"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m236443378026": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Toddler Multi Seat 3-in-1 Booster High Chair and Tray, Breige/Sonoran Rose",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "High",
+    "Chair",
+    "Bumbo"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m327394019681": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Baby Toddler 3-in-1 Booster Seat/High Chair & Tray, /dessert Mirage",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "Seat/High",
+    "Chair"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m237177248122": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Baby Toddler Adjustable 3-in-1 Booster Seat/High Chair W/ Removable Tray",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "Seat/High",
+    "Chair"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m327290554172": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Baby Toddler Adjustable 3-in-1 Booster Seat/High Chair & Tray, Agave",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "Seat/High",
+    "Chair"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m327068692245": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Baby Toddler Adjustable 3-in-1 Booster Seat/High Chair & Tray,",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "Seat/High",
+    "Chair"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m137920232955": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Baby Toddler Adjustable 3-in-1 Booster Seat/High Chair W/ Removable Tray",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "Seat/High",
+    "Chair"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m327406689850": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Baby Toddler Adjustable 3-in-1 Booster Seat/High Chair & Tray, /Rose Pink",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "Seat/High",
+    "Chair"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m168861830840": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bumbo Baby Toddler Adjustable 3-in-1 Booster Seat High Chair Tray Replacement",
+   "removed": [
+    "3-in-1",
+    "Booster",
+    "High",
+    "Chair",
+    "Bumbo"
+   ],
+   "recall": "09160",
+   "strength": "line",
+   "product": "3-in-1 High Chairs",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m820379104153": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B-Agile 3 Wheel Baby Stroller Gray Charcoal Silver Frame Folding Jogger",
+   "removed": [
+    "Britax",
+    "B-Agile"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m117494693063": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B‑Safe Agile Free Stroller Adapter Set Left & Right Infant Car Seat Mount",
+   "removed": [
+    "Britax",
+    "Agile"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m147693717832": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B-AGILE/B-FREE Child Stroller Snack Tray with a Cup Holder, S08218700",
+   "removed": [
+    "Britax",
+    "B-AGILE/B-FREE",
+    "S08218700"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m840031765938": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax - B-Agile B-Free and Pathway Stroller TravelBag w Shoulder Strap",
+   "removed": [
+    "Britax",
+    "B-Agile"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m377354531222": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B-Agile Child Tray Snack Cup Holder Stroller Accessory New Sealed",
+   "removed": [
+    "Britax",
+    "B-Agile"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m800696207593": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B-Agile Single Lightweight Stroller, Black, Folding w/ Basket",
+   "removed": [
+    "Britax",
+    "B-Agile"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m117467482231": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "New Britax B-Agile Stroller Rain Cover S923900 Shield Vents B-Free Pathway",
+   "removed": [
+    "Britax",
+    "B-Agile",
+    "S923900"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m168781247697": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B-Agile Child Snack Tray with Adapters (Single Stroller)",
+   "removed": [
+    "Britax",
+    "B-Agile"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m287187312599": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B-Agile Black 3-Wheel One-Hand Push Single Pushchair Rubber Tires",
+   "removed": [
+    "Britax",
+    "B-Agile"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m920153073428": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax Willow Brook S+ Travel System Infant Seat & Stroller, Basket, Onyx",
+   "removed": [
+    "Onyx"
+   ],
+   "recall": "10123",
+   "strength": "line",
+   "product": "CYBEX Strollers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m225981859381": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "britax b-agile stroller",
+   "removed": [
+    "britax",
+    "b-agile"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m277692667276": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B-Agile Stroller U341782 Black Baby Chair, Easy Locking & Pull-to-Folding",
+   "removed": [
+    "Britax",
+    "B-Agile",
+    "U341782"
+   ],
+   "recall": "14098",
+   "strength": "code",
+   "product": "B-Agile, B-Agile Double and BOB Motion strollers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m116423335334": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Britax B-agile Infant Double Stroller Head Support Cushion Pad Replacement",
+   "removed": [
+    "Britax",
+    "B-agile",
+    "Double"
+   ],
+   "recall": "14098",
+   "strength": "line",
+   "product": "B-Agile, B-Agile Double and BOB Motion strollers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m136639797373": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Jool Baby Nova Swing for Newborns - Electric Motorized Infant Swing, Bluetoot...",
+   "removed": [
+    "Jool",
+    "Baby",
+    "Nova"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m128153012587": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Jool Baby Nova Baby Swing for Infants – Bluetooth Music, Remote (Gray)",
+   "removed": [
+    "Jool",
+    "Baby",
+    "Nova",
+    "Baby"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m158305818874": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Jool Baby Nova Nature Baby Swing for Infants - Oatmeal - GR-NOVA-2-OT #NO1588",
+   "removed": [
+    "Jool",
+    "Baby",
+    "Nova",
+    "Baby",
+    "GR-NOVA-2-OT",
+    "#NO1588"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m168855266527": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Jool Baby Nova Baby Swing for Infants – Bluetooth Music Remote - Sage #OB1601",
+   "removed": [
+    "Jool",
+    "Baby",
+    "Nova",
+    "Baby",
+    "#OB1601"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m206549791798": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "JOOL BABY Nova Motorized Infant Baby Swing - Gray (2024 version)",
+   "removed": [
+    "JOOL",
+    "BABY",
+    "Nova",
+    "Baby"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m206518554507": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "JOOL BABY Nova Motorized Infant Baby Swing - Gray (2024 version)",
+   "removed": [
+    "JOOL",
+    "BABY",
+    "Nova",
+    "Baby"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m168693342009": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Jool Baby Nova Signature Baby Swing Oatmeal",
+   "removed": [
+    "Jool",
+    "Baby",
+    "Nova",
+    "Baby"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m168721447576": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Jool Baby Nova Signature Baby Swing Gray NIB",
+   "removed": [
+    "Jool",
+    "Baby",
+    "Nova",
+    "Baby"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m168838804709": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Jool Baby Nova Nature Baby Swing for Infants w/ Bluetooth - Slate #DB1595",
+   "removed": [
+    "Jool",
+    "Baby",
+    "Nova",
+    "Baby",
+    "#DB1595"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m198437603811": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Jool Nova Baby Swing Electric Motorized, Oatmeal model GER-6002-OAT #ND0765",
+   "removed": [
+    "Jool",
+    "Nova",
+    "Baby",
+    "GER-6002-OAT",
+    "#ND0765"
+   ],
+   "recall": "24145",
+   "strength": "line",
+   "product": "Jool Baby Nova Baby Infant Swings",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m168866792196": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Graco Pack 'n Play Travel Dome Lux Playard 4-in-1 Playpen with Bassinet #DB3745",
+   "removed": [
+    "4-in-1",
+    "#DB3745"
+   ],
+   "recall": "08381",
+   "strength": "line",
+   "product": "Simplicity 3-in-1 and 4-in-1 convertible bassinets",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m840083564919": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Graco Day2Dream Pack 'N Play Playard, Lo",
+   "removed": [
+    "Graco",
+    "Day2Dream"
+   ],
+   "recall": "21052",
+   "strength": "line",
+   "product": "Inclined sleeper accessory included with the Graco Pack 'n Play Day2Dream Playard with Bedside Sleeper, Graco Pack 'n P…",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m147634458361": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Graco Pack 'n Play Day2Dream Travel Bassinet Playard Features Portable Bassinet",
+   "removed": [
+    "Graco",
+    "Day2Dream"
+   ],
+   "recall": "21052",
+   "strength": "line",
+   "product": "Inclined sleeper accessory included with the Graco Pack 'n Play Day2Dream Playard with Bedside Sleeper, Graco Pack 'n P…",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m407358567068": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage Graco Pack ’n Play Disney Winnie the Pooh Edition",
+   "removed": [
+    "Disney",
+    "Winnie",
+    "Pooh"
+   ],
+   "recall": "08022",
+   "strength": "line",
+   "product": "Disney™ Deluxe Winnie-the-Pooh 23-Piece Play Sets",
+   "allUnits": true,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m187833604225": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Dream On Me Lacy Portable 2-in-1 Bassinet Cradle in Blue and White,",
+   "removed": [
+    "Dream",
+    "Me",
+    "2-in-1",
+    "Bassinet",
+    "Cradle"
+   ],
+   "recall": "15088",
+   "strength": "line",
+   "product": "2-in-1 Bassinet to Cradle",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m287679194274": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Dream On Me Lacy 2-in-1 Bassinet Cradle Blue White Mesh Canopy 1\" Mattress Pad",
+   "removed": [
+    "Dream",
+    "Me",
+    "2-in-1",
+    "Bassinet",
+    "Cradle"
+   ],
+   "recall": "15088",
+   "strength": "line",
+   "product": "2-in-1 Bassinet to Cradle",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m406540418307": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "3 in 1 Bedside Sleeper Baby Bassinet, Portable Crib with Storage Basket & Wheels",
+   "removed": [
+    "Crib"
+   ],
+   "recall": "11005",
+   "strength": "line",
+   "product": "Alexander Designs Ltd. brand drop-side cribs",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m287330089480": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Dream on Me Lacy Portable 2-In-1 Bassinet & Cradle with Full Canopy, Storage Bas",
+   "removed": [
+    "Dream",
+    "Me",
+    "2-In-1",
+    "Bassinet",
+    "Cradle"
+   ],
+   "recall": "15088",
+   "strength": "line",
+   "product": "2-in-1 Bassinet to Cradle",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m960212488777": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "OHFLY 4-in-1 Portable Bedside Bassinet Crib Twin-Friendly S-FD01 - Gray #DB6542",
+   "removed": [
+    "4-in-1",
+    "S-FD01",
+    "#DB6542"
+   ],
+   "recall": "08381",
+   "strength": "line",
+   "product": "Simplicity 3-in-1 and 4-in-1 convertible bassinets",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m357690516410": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "🔥NEW🔥 Dream On Me Lacy Portable 2-in-1 Bassinet & Cradle in Pink and White",
+   "removed": [
+    "Dream",
+    "Me",
+    "2-in-1",
+    "Bassinet",
+    "Cradle"
+   ],
+   "recall": "15088",
+   "strength": "line",
+   "product": "2-in-1 Bassinet to Cradle",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m286694636194": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "NEW Dream On Me Lacy Portable 2 in 1 Bassinet and Cradle in Pink and White",
+   "removed": [
+    "Dream",
+    "Me",
+    "Bassinet",
+    "Cradle"
+   ],
+   "recall": "15088",
+   "strength": "line",
+   "product": "2-in-1 Bassinet to Cradle",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  }
+ }
+}

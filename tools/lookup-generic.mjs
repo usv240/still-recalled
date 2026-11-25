@@ -30,12 +30,15 @@ const index = buildIndex(cards);
 const runs = Number((process.argv.find(a => a.startsWith('--runs=')) || '--runs=1').slice(7));
 // --masked: the real listings whose naming words were stripped by code (tools/masked-build.mjs), with the
 // sellers' own photos, in place of the ten made-up ones.
-const masked = process.argv.includes('--masked');
-const key = masked ? JSON.parse(readFileSync('tools/masked-key.json', 'utf8')).key : null;
+// --masked=masked2: another brand-stripped set (tools/masked2-*.json, fresh listings).
+const maskArg = process.argv.find(a => a.startsWith('--masked'));
+const masked = !!maskArg;
+const mname = maskArg && maskArg.includes('=') ? maskArg.split('=')[1] : 'masked';
+const key = masked ? JSON.parse(readFileSync(`tools/${mname}-key.json`, 'utf8')).key : null;
 const SET = masked
-  ? JSON.parse(readFileSync('tools/masked-listings.json', 'utf8')).masked.map(l => ({ recall: key[l.id].recall, title: l.title, text: '', image: l.image }))
+  ? JSON.parse(readFileSync(`tools/${mname}-listings.json`, 'utf8')).masked.map(l => ({ recall: key[l.id].recall, title: l.title, text: '', image: l.image }))
   : LISTINGS;
-const outFile = masked ? 'tools/lookup-masked.json' : 'tools/lookup-generic.json';
+const outFile = masked ? `tools/lookup-${mname}.json` : 'tools/lookup-generic.json';
 const rows = [];
 for (let run = 0; run < runs; run++) {
   for (const l of SET) {

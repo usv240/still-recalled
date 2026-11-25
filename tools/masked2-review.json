@@ -1,0 +1,211 @@
+{
+ "reviewer": "AI reviewer (Claude), 2026-11-25",
+ "note": "Conservative review. yes = listing is the whole product of the recalled product line (models or dates may differ). Recall scope read from the CPSC recall API (cpsc.gov pages returned 403). Photos viewed for every yes and unclear. Passport listings marked unclear: modern Baby Trend Passport travel systems share the name with the 2003 recalled Passport stroller but are a much later design.",
+ "answers": {
+  "m820369690055": {
+   "agrees": "no",
+   "why": "Graco Pooh baby swing; recall is Disney Pooh 23-piece play sets",
+   "photo_checked": false
+  },
+  "m198402794003": {
+   "agrees": "no",
+   "why": "Graco glider swing; recall is Graco Brougham strollers",
+   "photo_checked": false
+  },
+  "m840118953908": {
+   "agrees": "no",
+   "why": "Graco Pooh baby swing; recall is a Pooh spinning top toy",
+   "photo_checked": false
+  },
+  "m236460677683": {
+   "agrees": "no",
+   "why": "Replacement toy bar arm, a part of the MamaRoo swing",
+   "photo_checked": false
+  },
+  "m267821064836": {
+   "agrees": "yes",
+   "why": "Photo shows a complete 4moms MamaRoo swing with plush insert",
+   "photo_checked": true
+  },
+  "m237193192678": {
+   "agrees": "yes",
+   "why": "Photo shows a complete MamaRoo 4-style swing with toy bar",
+   "photo_checked": true
+  },
+  "m307291526641": {
+   "agrees": "yes",
+   "why": "Photo shows a complete MamaRoo multi-motion swing seat",
+   "photo_checked": true
+  },
+  "m128123009717": {
+   "agrees": "no",
+   "why": "Whole Boppy Luxe pillow in package; recall is separately sold velvet/boa slipcovers",
+   "photo_checked": true
+  },
+  "m206664876095": {
+   "agrees": "yes",
+   "why": "Boppy Luxe nursing pillow slipcover; recall covers Boppy Luxe slipcovers (velvet/boa colorways only)",
+   "photo_checked": true
+  },
+  "m147438425719": {
+   "agrees": "no",
+   "why": "Healthy Care booster seat; recall covers Healthy Care high chairs, a different product type",
+   "photo_checked": false
+  },
+  "m820386098116": {
+   "agrees": "no",
+   "why": "Healthy Care booster seat; recall covers high chairs, not boosters",
+   "photo_checked": false
+  },
+  "m287699452592": {
+   "agrees": "no",
+   "why": "Replacement booster tray, a part; recall is high chairs",
+   "photo_checked": false
+  },
+  "m307175957251": {
+   "agrees": "no",
+   "why": "Healthy Care booster seat BMD93; recall covers high chairs",
+   "photo_checked": false
+  },
+  "m336886103211": {
+   "agrees": "no",
+   "why": "Rainforest bouncer; recall is Rainforest portable play yards",
+   "photo_checked": false
+  },
+  "m137763374921": {
+   "agrees": "no",
+   "why": "Seat cover only for a travel swing; recall is infant toys with inflatable balls",
+   "photo_checked": false
+  },
+  "m298487218993": {
+   "agrees": "no",
+   "why": "Booster tray and toy attachment, a part; recall is play yards",
+   "photo_checked": false
+  },
+  "m137956904332": {
+   "agrees": "no",
+   "why": "Rainforest bouncer; recall is Rainforest portable play yards",
+   "photo_checked": false
+  },
+  "m236992304235": {
+   "agrees": "no",
+   "why": "B. Toys whale rocking toy; recall is Tropitone Echo swivel patio rocker chairs",
+   "photo_checked": false
+  },
+  "m407214579378": {
+   "agrees": "no",
+   "why": "B. Toys Echo whale rocking toy; recall is Tropitone Echo swivel rocker chairs",
+   "photo_checked": false
+  },
+  "m267766833848": {
+   "agrees": "no",
+   "why": "RH rocking animal; recall is RH children's bath wraps",
+   "photo_checked": false
+  },
+  "m860114203620": {
+   "agrees": "no",
+   "why": "Generic bedside bassinet; recall is Alexander Designs drop-side cribs",
+   "photo_checked": false
+  },
+  "m206724680953": {
+   "agrees": "no",
+   "why": "Third-party bassinet mattress pad cover; recall is 4moms breeze playard sheets",
+   "photo_checked": false
+  },
+  "m406540418307": {
+   "agrees": "no",
+   "why": "Generic bedside bassinet; recall is Alexander Designs drop-side cribs",
+   "photo_checked": false
+  },
+  "m287679194274": {
+   "agrees": "yes",
+   "why": "Dream On Me Lacy 2-in-1 bassinet/cradle with rocking legs and half canopy matches the recalled 2-in-1 Bassinet to Cradle",
+   "photo_checked": true
+  },
+  "m237069642382": {
+   "agrees": "yes",
+   "why": "Photo shows a complete Bugaboo Cameleon stroller",
+   "photo_checked": true
+  },
+  "m115879428271": {
+   "agrees": "yes",
+   "why": "Photo shows a complete Bugaboo Cameleon stroller",
+   "photo_checked": true
+  },
+  "m336326061362": {
+   "agrees": "no",
+   "why": "Wheel reflector accessory for UPPAbaby strollers",
+   "photo_checked": false
+  },
+  "m186437875237": {
+   "agrees": "yes",
+   "why": "Photo shows a complete BOB Motion four-wheel stroller",
+   "photo_checked": true
+  },
+  "m168386195873": {
+   "agrees": "no",
+   "why": "Photo shows only quick-release locks and skewers, parts, not the stroller",
+   "photo_checked": true
+  },
+  "m168825329614": {
+   "agrees": "no",
+   "why": "Thule Urban Glide; recall is Mountain Buggy Urban, shares only a word",
+   "photo_checked": false
+  },
+  "m377606819762": {
+   "agrees": "no",
+   "why": "Thule Urban Glide; recall is Mountain Buggy Urban, shares only a word",
+   "photo_checked": false
+  },
+  "m800659274925": {
+   "agrees": "no",
+   "why": "Replacement tires, parts",
+   "photo_checked": false
+  },
+  "m920158154674": {
+   "agrees": "no",
+   "why": "Baby Trend Tango; recall is Zooper strollers, different brand and line",
+   "photo_checked": false
+  },
+  "m147614855000": {
+   "agrees": "unclear",
+   "why": "Baby Trend Passport Switch modular travel system (2020s); recall is the 2003 Passport stroller model 1514; same name, unclear it is the same line",
+   "photo_checked": true
+  },
+  "m336781767290": {
+   "agrees": "unclear",
+   "why": "Passport Switch bundle with car seat and playard; recall is the 2003 Passport stroller; same name, unclear it is the same line",
+   "photo_checked": true
+  },
+  "m168694455219": {
+   "agrees": "unclear",
+   "why": "Modern Passport Carriage travel system; recall is the 2003 Passport stroller; same name, unclear it is the same line",
+   "photo_checked": true
+  },
+  "m187430466624": {
+   "agrees": "unclear",
+   "why": "Modern Passport Seasons 3-wheel travel system; recall is the 2003 Passport stroller; same name, unclear it is the same line",
+   "photo_checked": true
+  },
+  "m235060066735": {
+   "agrees": "no",
+   "why": "Baby Trend Tango travel system; recall is Zooper strollers",
+   "photo_checked": false
+  },
+  "m800189313361": {
+   "agrees": "no",
+   "why": "Baby Trend Xcel-R8 in Liberty Grey; recall is Kolcraft Jeep Liberty strollers",
+   "photo_checked": false
+  },
+  "m358830692432": {
+   "agrees": "no",
+   "why": "Baby Trend Tango travel system; recall is Zooper strollers",
+   "photo_checked": false
+  },
+  "m128185523328": {
+   "agrees": "yes",
+   "why": "Photo shows a complete Baby Jogger City Mini GT double stroller; recall covers City Mini single and double strollers",
+   "photo_checked": true
+  }
+ }
+}

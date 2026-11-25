@@ -1,0 +1,618 @@
+{
+ "at": "2026-11-25T17:36:08.998Z",
+ "note": "Real listings whose words named a recalled product and whose blind label agrees; the naming words were stripped by code. Photos are the sellers' own.",
+ "listings": 41,
+ "skipped": [
+  {
+   "id": "178440452366",
+   "title": "4 In 1 Baby Bassinets Bedside Sleeper, Twins Bassinet for Baby, Bassinet Sleeper",
+   "left": "4 In 1 Baby Bassinets Bedside Sleeper, Twins Bassinet for Baby, Bassinet Sleeper"
+  },
+  {
+   "id": "318654118074",
+   "title": "4 in 1 Portable Pack & Play Foldable Baby Bassinet with Mattress Carrying Bag",
+   "left": "4 in 1 Portable Pack & Play Foldable Baby Bassinet with Mattress Carrying Bag"
+  },
+  {
+   "id": "147471867669",
+   "title": "4 in 1 Portable Baby Nursery Center w/ Detachable Bassinet Changing Table",
+   "left": "4 in 1 Portable Baby Nursery Center w/ Detachable Bassinet Changing Table"
+  },
+  {
+   "id": "318654124631",
+   "title": "4 in 1 Portable Pack & Play Foldable Baby Bassinet w/ Mattress Carrying Bag",
+   "left": "4 in 1 Portable Pack & Play Foldable Baby Bassinet w/ Mattress Carrying Bag"
+  }
+ ],
+ "key": {
+  "m820369690055": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage 2005 Graco Disney Winnie the Pooh Baby Swing",
+   "removed": [
+    "Disney",
+    "Winnie",
+    "Pooh",
+    "Graco"
+   ],
+   "recall": "08022",
+   "strength": "line",
+   "product": "Disney™ Deluxe Winnie-the-Pooh 23-Piece Play Sets",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m198402794003": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Graco 2-1 Glider Elite Gliding Swing",
+   "removed": [
+    "Graco",
+    "Elite"
+   ],
+   "recall": "90157",
+   "strength": "line",
+   "product": "Graco Brougham strollers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m840118953908": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vintage Graco Winnie The Pooh Open Top Automatic Plaid Baby Swing Easy Entry",
+   "removed": [
+    "Winnie",
+    "Pooh",
+    "Graco"
+   ],
+   "recall": "08070",
+   "strength": "line",
+   "product": "Winnie-the-Pooh Spinning Top",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m236460677683": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Mobile Toy Bar Plastic Arm 4moms mamaRoo Swing Replacement OEM Swing Parts",
+   "removed": [
+    "4moms",
+    "mamaRoo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m267821064836": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4moms MamaRoo Multi-Motion Baby Swing Classic Grey Plush Insert",
+   "removed": [
+    "4moms",
+    "MamaRoo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m237193192678": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4moms mamaRoo Baby Swing Gray Seat, Bluetooth Music, Toy Bar Balls, Adapter",
+   "removed": [
+    "4moms",
+    "mamaRoo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m307291526641": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "4moms MamaRoo Baby Swing Multi-Motion",
+   "removed": [
+    "4moms",
+    "MamaRoo"
+   ],
+   "recall": "22200",
+   "strength": "line",
+   "product": "4moms MamaRoo Baby Swing, versions 1.0 through 4.0 and RockaRoo Baby Rockers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m128123009717": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Boppy Luxe U-Shape Feeding & Infant Support Pillow, Removable Cover, Monkey",
+   "removed": [
+    "Luxe"
+   ],
+   "recall": "08097",
+   "strength": "line",
+   "product": "Boppy® Slipcovers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m206664876095": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Boppy Luxe Nursing Pillow Slipcover Pink Floral Embroidery Jungle Animal Print",
+   "removed": [
+    "Luxe"
+   ],
+   "recall": "08097",
+   "strength": "line",
+   "product": "Boppy® Slipcovers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m147438425719": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Fisher-Price Toddler Booster Seat Healthy Care Deluxe Blue Adjustable Baby Chair",
+   "removed": [
+    "Fisher-Price",
+    "Healthy",
+    "Care"
+   ],
+   "recall": "10361",
+   "strength": "line",
+   "product": "Healthy Care, Easy Clean and Close to Me High Chairs",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m820386098116": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Fisher-Price Healthy Care Booster Seat w/ Removable Tray, Green/Blue/White",
+   "removed": [
+    "Fisher-Price",
+    "Healthy",
+    "Care"
+   ],
+   "recall": "10361",
+   "strength": "line",
+   "product": "Healthy Care, Easy Clean and Close to Me High Chairs",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m287699452592": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Fisher Price Healthy Care Deluxe Booster Seat Replacement Feeding Tray with Lid",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Healthy",
+    "Care"
+   ],
+   "recall": "10361",
+   "strength": "line",
+   "product": "Healthy Care, Easy Clean and Close to Me High Chairs",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m307175957251": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "New Fisher Price Healthy Care Booster Seat, Model BMD93",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Healthy",
+    "Care",
+    "BMD93"
+   ],
+   "recall": "10361",
+   "strength": "line",
+   "product": "Healthy Care, Easy Clean and Close to Me High Chairs",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m336886103211": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "VTG Fisher Price Rainforest Bouncer Vibrating Baby Seat Bouncy Chair Soother",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Rainforest"
+   ],
+   "recall": "09098",
+   "strength": "line",
+   "product": "Rainforest™ Portable Play Yards manufactured by Simplicity Inc. and SFCA Inc.",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m137763374921": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Vtg Fisher Price Ocean Wonders Aquarium Take Along Travel Swing Seat Cover Only",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Ocean",
+    "Wonders"
+   ],
+   "recall": "10362",
+   "strength": "line",
+   "product": "Baby Playzone™ Crawl & Cruise Playground™, Baby Playzone™ Crawl & Slide Arcade™, Baby Gymtastics™ Play Wall, Ocean Wond…",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m298487218993": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Fisher Price Rainforest Booster Seat Tray & Toy Attachment Replacement Green",
+   "removed": [
+    "Fisher",
+    "Price",
+    "Rainforest"
+   ],
+   "recall": "09098",
+   "strength": "line",
+   "product": "Rainforest™ Portable Play Yards manufactured by Simplicity Inc. and SFCA Inc.",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m137956904332": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "VINTAGE FISHER PRICE RAINFOREST BABY BOUNCER VIBRATING TESTED BOUNCY CHAIR SOOTH",
+   "removed": [
+    "FISHER",
+    "PRICE",
+    "RAINFOREST"
+   ],
+   "recall": "09098",
+   "strength": "line",
+   "product": "Rainforest™ Portable Play Yards manufactured by Simplicity Inc. and SFCA Inc.",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m236992304235": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "B. Toys Rocking Plush Rodeo Wooden Rocker Chair Echo Whale Baby Toddler Sound",
+   "removed": [
+    "Echo"
+   ],
+   "recall": "00166b",
+   "strength": "line",
+   "product": "Echo swivel rocker chairs",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m407214579378": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "B. toys Echo Plush Whale Rocker Wooden Baby Toddler Rocking Animal Toy EUC",
+   "removed": [
+    "Echo"
+   ],
+   "recall": "00166b",
+   "strength": "line",
+   "product": "Echo swivel rocker chairs",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m267766833848": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Restoration Hardware (RH Baby & Child) Furry White Rabbit Rocking Animal Rocker",
+   "removed": [
+    "Restoration",
+    "Hardware",
+    "Animal"
+   ],
+   "recall": "21102",
+   "strength": "line",
+   "product": "Animal, Heathered Plush and Luxe Sherpa Children's Bath Wraps",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m860114203620": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "3-in-1 Portable Bedside Bassinet Adjustable Stroller Crib Wheels Mosquito Net",
+   "removed": [
+    "3-in-1",
+    "Crib"
+   ],
+   "recall": "11005",
+   "strength": "line",
+   "product": "Alexander Designs Ltd. brand drop-side cribs",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m206724680953": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bassinet Mattress Pad Cover, Fits 23” x 28” 4moms Breeze Plus Bassin",
+   "removed": [
+    "4moms",
+    "Breeze"
+   ],
+   "recall": "13115",
+   "strength": "line",
+   "product": "4moms® breeze™ Cotton Jersey Playard Sheets",
+   "allUnits": true,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m406540418307": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "3 in 1 Bedside Sleeper Baby Bassinet, Portable Crib with Storage Basket & Wheels",
+   "removed": [
+    "Crib"
+   ],
+   "recall": "11005",
+   "strength": "line",
+   "product": "Alexander Designs Ltd. brand drop-side cribs",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m287679194274": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Dream On Me Lacy 2-in-1 Bassinet Cradle Blue White Mesh Canopy 1\" Mattress Pad",
+   "removed": [
+    "Dream",
+    "Me",
+    "2-in-1",
+    "Bassinet",
+    "Cradle"
+   ],
+   "recall": "15088",
+   "strength": "line",
+   "product": "2-in-1 Bassinet to Cradle",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m237069642382": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bugaboo Cameleon 3 Stroller With Winter And Summer Accessories",
+   "removed": [
+    "Bugaboo",
+    "Cameleon"
+   ],
+   "recall": "13092",
+   "strength": "line",
+   "product": "Bugaboo Cameleon and Bugaboo Donkey Model Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m115879428271": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Bugaboo Cameleon 3 Stroller - Special Edition - Elements",
+   "removed": [
+    "Bugaboo",
+    "Cameleon"
+   ],
+   "recall": "13092",
+   "strength": "line",
+   "product": "Bugaboo Cameleon and Bugaboo Donkey Model Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m336326061362": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "UPPAbaby Wheel Reflectors for Vista and Vista V2 Stroller / Stroll Safely",
+   "removed": [
+    "UPPAbaby",
+    "Vista",
+    "Vista"
+   ],
+   "recall": "15196",
+   "strength": "line",
+   "product": "UPPAbaby 2015 CRUZ, 2015 VISTA strollers and 2015 RumbleSeat",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m186437875237": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "BOB Gear MOTION Rare Four-Wheel Stroller",
+   "removed": [
+    "BOB",
+    "MOTION"
+   ],
+   "recall": "17088",
+   "strength": "line",
+   "product": "Britax B-Agile and BOB Motion Strollers with Click & Go receivers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m168386195873": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "BOB Ironman All Terrain Jogging Stroller - 2 SETS QUICK RELEASE LOCKS",
+   "removed": [
+    "Ironman",
+    "Stroller"
+   ],
+   "recall": "11143",
+   "strength": "line",
+   "product": "B.O.B.® single and double strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m168825329614": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Thule Urban Glide 2 Jogging Stroller - Cinder",
+   "removed": [
+    "Urban"
+   ],
+   "recall": "06148",
+   "strength": "line",
+   "product": "Mountain Buggy Urban Single and Urban Double, Breeze Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m377606819762": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Thule Urban Glide 2 Jogging Stroller",
+   "removed": [
+    "Urban"
+   ],
+   "recall": "06148",
+   "strength": "line",
+   "product": "Mountain Buggy Urban Single and Urban Double, Breeze Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m800659274925": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Three 16-Inch Tire Replacements for Jogging Strollers Like BOB Ironman & Bike Tr",
+   "removed": [
+    "Strollers",
+    "Ironman"
+   ],
+   "recall": "11143",
+   "strength": "line",
+   "product": "B.O.B.® single and double strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m920158154674": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Trend Tango Lightweight Stroller Black UPF 50+ Canopy Console",
+   "removed": [
+    "Tango"
+   ],
+   "recall": "11225",
+   "strength": "line",
+   "product": "Strollers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m147614855000": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Trend Passport Switch 6-in-1 Modular Stroller Travel w/ Infant Car Seat NEW",
+   "removed": [
+    "Baby",
+    "Trend",
+    "Passport"
+   ],
+   "recall": "04136",
+   "strength": "line",
+   "product": "Passport Stroller",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m336781767290": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Trend Travel Systems Passport Switch Modular System Bassinet Car Seat Lil",
+   "removed": [
+    "Baby",
+    "Trend",
+    "Passport"
+   ],
+   "recall": "04136",
+   "strength": "line",
+   "product": "Passport Stroller",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m168694455219": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Trend Passport Carriage Travel System, Silver Sky",
+   "removed": [
+    "Baby",
+    "Trend",
+    "Passport"
+   ],
+   "recall": "04136",
+   "strength": "line",
+   "product": "Passport Stroller",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m187430466624": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Trend Passport Seasons All-Terrain Travel System Madrid Green",
+   "removed": [
+    "Baby",
+    "Trend",
+    "Passport"
+   ],
+   "recall": "04136",
+   "strength": "line",
+   "product": "Passport Stroller",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  },
+  "m235060066735": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Trend Tango Lightweight Infant Car Seat Stroller Travel System, Veridian",
+   "removed": [
+    "Tango"
+   ],
+   "recall": "11225",
+   "strength": "line",
+   "product": "Strollers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m800189313361": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Trend Xcel-R8 Plus Jogging Stroller with LED Lights, Liberty Grey, EZ Fold",
+   "removed": [
+    "Liberty"
+   ],
+   "recall": "13221",
+   "strength": "line",
+   "product": "Jeep Liberty Strollers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m358830692432": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Trend Tango 3 Wheel Stroller Travel System w/ EZ-Lift Plus Infant Car Seat",
+   "removed": [
+    "Tango"
+   ],
+   "recall": "11225",
+   "strength": "line",
+   "product": "Strollers",
+   "allUnits": false,
+   "wordsNow": "a baby product, no recall or type"
+  },
+  "m128185523328": {
+   "set": "fresh eBay",
+   "label": "none (words key)",
+   "original": "Baby Jogger City Mini GT Double Stroller Black Folding Adjustable Handlebar",
+   "removed": [
+    "Baby",
+    "Jogger",
+    "City",
+    "Mini"
+   ],
+   "recall": "09334",
+   "strength": "line",
+   "product": "Baby Jogger City Mini Strollers",
+   "allUnits": false,
+   "wordsNow": "nothing: no model looks"
+  }
+ }
+}

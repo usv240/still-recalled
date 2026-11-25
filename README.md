@@ -164,6 +164,11 @@ off, nothing from this lookup is shown.
   named the right recall on 12 of 23 (7 through the device's own lookup, 5 of those one Bumbo recall; 5 through
   `lookup_recalls`), named no other recall, and none was a red recall (`node tools/masked-build.mjs`,
   `node tools/lookup-generic.mjs --masked`, `tools/lookup-masked.json`).
+- **A second, fresh set of 34** (2026-11-25, nine recalls; `docs/accuracy.md`, section 33): the cloud named the
+  product from the photo and asked the device on 33, the device's field guide answered with the right recall on 28,
+  and the card showed it on 13, always as amber. The other 14 the device answered were later versions of a recalled
+  line (a City Mini GT2, a "2024 version" swing) that the cloud judged outside the notice. One listing was shown a
+  notice that does not cover it, as amber. None was red; without the lookups, none of the 34 is flagged.
 - In the extension with Gemini Nano: the first seven of those listings were run through the extension's own
   pipeline. The right recall was named on 3 of 7: Gemini Nano read "Graco" on two swings, and its wrong guess for a
   MamaRoo still sent that listing to the cloud, which named it. Across both small sets Gemini Nano's brand was right 2

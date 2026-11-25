@@ -1591,6 +1591,48 @@ through the extension's own pipeline on release 0.17.0's engine, in Chrome with 
 - Both the answer key and the tool are AI here (the reviewer is Claude, the tool is Gemini), so agreement between
   them is not ground truth. A person's check of the census labels (`tools/label-review.html`) is the next step.
 
+## 33. The brand left out, on 34 fresh listings (2026-11-25)
+
+The brand-stripped test in section 19 had 23 listings, 5 of them one Bumbo recall. This is a second, fresh set: 34
+real eBay listings collected on 2026-11-25 that are in no earlier test (22 searches for recalled product lines, 1,967
+listings read). The word rules matched 116 of them to a recall by product line; an AI reviewer (Claude) looked at each
+photo and kept the 34 that are that product line and the whole item, not a part, a cover or a look-alike name
+(`tools/masked2-review.json`, `tools/masked3-review.json`). Code then stripped the brand, line and model words from
+each title (`node tools/masked-build.mjs --from=...`), leaving titles like "Swing for Infants, Bluetooth Music,
+Remote (Gray)". The sellers' photos were kept. Nine recalls: Jool Baby Nova swing 10, Baby Jogger City Mini 7,
+Britax B-Agile and BOB Motion 6, Fisher-Price Lift & Lock swing 4, 4moms MamaRoo 3, Bugaboo Cameleon 2, and one each
+of a Boppy slipcover and a Dream On Me bassinet. Each was checked one at a time, as the web page and the Android app
+check a listing (`node tools/lookup-generic.mjs --masked=masked-fresh`, `tools/lookup-masked-fresh.json`), with
+Gemini in the cloud doing the look. About 70 cloud calls, no errors.
+
+| Step | Of 34 |
+|---|---|
+| The word rules find a recall | 0 |
+| The cloud named the product from the photo and called `lookup_recalls` | 33 |
+| The device's field guide answered with the right recall | 28 |
+| The card showed the right recall, as amber "Possible recall" | 13 |
+| The card showed another notice | 2 |
+| Flagged in all (none red) | 15, against 0 with the lookups taken away |
+
+- **The 14 where the device answered with the right recall and the cloud did not show it** are all later versions of a
+  recalled line: 7 City Mini GT, GT2 and GT3 strollers (the notice covers City Minis sold 2007 to 2009), 5 Jool Nova
+  swings in other colours or marked "2024 version" (the notice covers the gray model made 2022 to 2023), and 2
+  MamaRoo swings (the notice covers versions 1.0 to 4.0). The cloud read the notice the device sent and judged the
+  listing outside it. The answer key here says "same product line", not "covered by the recall", so it cannot say
+  whether those 14 are misses or correct. On the lines whose listings were plainly inside the notice, the right recall
+  was shown on Lift & Lock 4 of 4, Cameleon 2 of 2 and B-Agile 4 of 5.
+- **The 6 where the field guide did not answer with it:** the cloud made no call for a Boppy slipcover; asked for
+  "Lacy bassinet" and "Signature Swing" (twice), names the notices do not use; asked for a plain "infant swing"; and
+  for a BOB Motion asked "BOB stroller", which brought back earlier BOB notices.
+- **The 2 other notices:** a B-Agile with a 2014 model number was shown the 2017 notice for the same stroller; the BOB
+  Motion was shown a 2011 BOB notice that does not cover it. Both amber, saying to check the label. That second one
+  is the only wrong notice named in either brand-stripped test.
+- **The device's own lookup** (a brand read in the photo) found a recall on none of the 34, though a brand was read
+  on 19. That is by design, and this set shows the cost: a brand with a kind of product counts only for notices that
+  name no product line, because "4moms swing" would otherwise flag everything 4moms makes, and every recall in this
+  set names a line. Here the cloud's question did the work.
+- **Both sets together, 57 listings:** the right recall named on 25, another notice on 2, flagged 30, none red.
+
 ## Reproduce
 
 ```
