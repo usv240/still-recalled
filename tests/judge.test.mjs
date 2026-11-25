@@ -21,12 +21,16 @@ test('only a matching model number warns on-device; brand and line matches are s
   assert.equal(decide(answer(), cand('brand'), []).level, 'possible');
 });
 
-test('a different kind of product is never flagged, whatever the brand', () => {
-  assert.equal(decide(answer({ same_kind_as_recalled: false }), cand('code'), []).level, 'none');
+test('a different kind of product is not flagged on brand or line; a listed model number stays a soft flag', () => {
+  assert.equal(decide(answer({ same_kind_as_recalled: false }), cand('line'), []).level, 'none');
+  assert.equal(decide(answer({ same_kind_as_recalled: false }), cand('brand'), []).level, 'none');
+  // The device alone never clears an exact model-number match (0.16.1).
+  assert.equal(decide(answer({ same_kind_as_recalled: false }), cand('code'), []).level, 'possible');
 });
 
-test('parts and toy versions are never flagged', () => {
-  assert.equal(decide(answer({ what_is_for_sale: 'part_or_accessory' }), cand('code'), []).level, 'none');
+test('parts and toy versions are not flagged, except a listed model number, which stays soft', () => {
+  assert.equal(decide(answer({ what_is_for_sale: 'part_or_accessory', same_kind_as_recalled: false }), cand('line'), []).level, 'none');
+  assert.equal(decide(answer({ what_is_for_sale: 'part_or_accessory', same_kind_as_recalled: false }), cand('code'), []).level, 'possible');
   assert.equal(decide(answer({ what_is_for_sale: 'toy_or_doll_version', banned_type: 'crib_bumper' }), null, bannedHints('crib bumper')).level, 'none');
 });
 
@@ -51,5 +55,7 @@ test('no answer the model can give means "safe"', () => {
   // The banned-type descriptions mention words like "clearly"; what matters is the allowed answers.
   const allowed = Object.values(SCHEMA.properties).flatMap(p => p.enum || []);
   assert.ok(!allowed.some(v => ['safe', 'clear', 'cleared', 'ok', 'approved', 'not_recalled'].includes(v)), allowed.join(','));
-  assert.deepEqual([...new Set(['code', 'line', 'brand'].map(s => decide(answer({ same_kind_as_recalled: false }), cand(s), []).level))], ['none']);
+  assert.deepEqual([...new Set(['line', 'brand'].map(s => decide(answer({ same_kind_as_recalled: false }), cand(s), []).level))], ['none']);
+  // An exact model number is never cleared by the model on the device alone (0.16.1).
+  assert.equal(decide(answer({ same_kind_as_recalled: false }), cand('code'), []).level, 'possible');
 });

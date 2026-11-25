@@ -65,6 +65,19 @@ export function fitsNotice(spot, record) {
   return '';
 }
 
+/**
+ * A shared entry as this device uses it, after fitsNotice: it may name the product and its models, but it may not make
+ * the card less cautious than the notice itself. Its reassuring fields are not taken from another device (0.16.1; the
+ * seventh review): "which units" goes (the card then says to check the notice), and "every unit is recalled" is kept
+ * from the entry or from the notice's own words ("all units", "every"), whichever says so. An entry can therefore add
+ * a match and a warning, never remove one.
+ */
+export function cautiousEntry(spot, record) {
+  const text = ` ${fold(noticeText(record))} `;
+  const saysAll = /\b(all (units|models|sizes|colors|colours|styles|versions)|entire|every)\b/.test(text);
+  return { ...spot, tell: '', all_units: !!spot.all_units || saysAll };
+}
+
 /** The document a device stores: the entry, which model wrote it, and who (an anonymous Firebase Auth id). */
 export function entryDoc(spot, { model = '', uid = '' } = {}) {
   return { v: ENTRY_VERSION, spot, model: String(model).slice(0, 60), by: uid };

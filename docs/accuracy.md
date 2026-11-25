@@ -1409,8 +1409,9 @@ the 2011 crib line. Three cloud calls. 116 unit tests (`tests/i18n.test.mjs`, `t
 The tests above measure Still Recalled. This measures the problem. On 2026-11-25, 12 eBay searches for the four sleep
 types (`node tools/census.mjs --site=ebay`, `tools/census-ebay.json`), reading the first page of results of each (about
 120 listings; one search, "baby bedding set bumper", returned nothing and is not counted): 1,077 listings. The word
-rules flagged 392 by their titles (`node tools/census-score.mjs`); an AI reviewer (Claude) then labelled each of the
-392 from its title and looked at the photo of 70, including a random 44 of those it called "yes" (none changed)
+rules flagged 443 by their titles (`node tools/census-score.mjs`): 392 named a sleep type and 51 only a recalled
+product line (these 51 were left out: on these searches they were toys sharing a line's words, "Little People Play 'n
+Go", "Rock & Play Piano"). An AI reviewer (Claude) then labelled each of the 392 from its title and looked at the photo of 70, including a random 44 of those it called "yes" (none changed)
 (`tools/census-ebay-labels.json`).
 
 | What was for sale | Listings | Asking, in all |
@@ -1424,8 +1425,8 @@ rules flagged 392 by their titles (`node tools/census-score.mjs`); an AI reviewe
   sleep.
 - **What eBay's filters do catch:** no recalled Boppy lounger was among the 200, only covers for one; the only
   inclined-sleeper matches were 1980s toy playsets; one padded bumper got through. The named, recalled product is
-  filtered. **What gets through:** 111 of the 200 carry no lounger brand at all, 58 are Snuggle Me loungers, 29 are
-  DockATot. A lounger with no brand, under a generic title, is the case the hybrid's photo check and the unnamed-sleep
+  filtered. **What gets through:** 58 are Snuggle Me loungers, 45 DockATot (also written "Dock A Tot"), 2 Snuggle
+  Nest, 5 other named brands, and about 90 have no brand word in the title (a count by a word list, so a rough one). A lounger with no brand, under a generic title, is the case the hybrid's photo check and the unnamed-sleep
   rule are for (section 25).
 - **How to read it.** It is a floor and a snapshot: the first page of each search, on one day, with listings the
   reviewer could not settle (10) left out. Condition: 19 new, 11 used, 170 not stated; many are new products shipped
@@ -1434,6 +1435,32 @@ rules flagged 392 by their titles (`node tools/census-score.mjs`); an AI reviewe
   is counted on words alone.
 - No listing was reported or contacted. Reporting them (eBay's "Report this item", or SaferProducts.gov) is the
   builder's decision.
+
+## 30. A seventh review of 0.16.0, and release 0.16.1 (2026-11-25)
+
+The seventh AI review (Claude, not a person) scored 0.16.0 at 4.5, 4.0, 3.5 and 4.5, recomputed every headline number
+(all matched except the census brand counts and two test lines, corrected above and in the submission), and found:
+
+- **The device could clear an exact model-number match on its own.** When the listing gives a model number the recall
+  lists and Gemini Nano said "not the same product" or "a part", the match was dropped and never reached the cloud.
+  Now it stays a soft "Possible recall" and goes to the cloud (`shared/judge.mjs`). In every test so far, 2 listings had
+  an exact model-number match and Gemini Nano agreed on both, so no test result changes.
+- **A shared field-guide entry could make a card less cautious.** `fitsNotice` checks the names, models and years an
+  entry gives, but not its "which units" wording or its "every unit" flag, and the first entry for a notice stands. Now
+  a device uses a shared entry only to add a match: the "which units" line is dropped (the card says to read the
+  notice) and "every unit is recalled" is kept from the entry or from the notice's own words (`cautiousEntry`).
+- **A saved check is a snapshot.** Reopened, it now says when it was made and offers "Check it again against today's
+  list". The log says it keeps the newest 500.
+- **Spanish matching missed accented words** ("cojín", "moisés": JavaScript's word boundary does not see accented
+  letters) and a padded crib set named "con protectores acolchados". Fixed, with tests. Two Spanish lines were reworded
+  where they could be misread ("Para cada sueño", "Solo.").
+- **A label's year against the build's years** now says "Dated outside the years we have for this recall" and to check
+  the notice, not "Dated outside this recall": the years come from a model's summary of the notice.
+- The CSV guard also blocks a leading tab or carriage return.
+- **Noted, not changed:** the test reviewers and the agent that built the engine are the same model family (Claude),
+  which is one more reason a person should check the labels. Word-rule recall matches on toys sharing a line's words
+  (a "Rock & Play Piano") still reach the device's look and the cloud, which clear them; they are never shown on words
+  alone.
 
 ## Reproduce
 

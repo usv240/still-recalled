@@ -148,7 +148,7 @@
   var L = "(?<![a-z\xE0-\xFF])";
   var R = "(?![a-z\xE0-\xFF])";
   var ES = {
-    crib_bumper: new RegExp(`${L}(chichoneras?|protector(es)?\\s+(acolchad[oa]s?\\s+)?(de|para)\\s+(la\\s+)?cuna|protector(es)?\\s+trenzad[oa]s?|trenzad[oa]s?\\s+(de|para)\\s+cuna)${R}`, "i"),
+    crib_bumper: new RegExp(`${L}(chichoneras?|protector(es)?\\s+acolchad[oa]s?|protector(es)?\\s+(acolchad[oa]s?\\s+)?(de|para)\\s+(la\\s+)?cuna|protector(es)?\\s+trenzad[oa]s?|trenzad[oa]s?\\s+(de|para)\\s+cuna)${R}`, "i"),
     inclined_sleeper: new RegExp(`${L}((mecedora|dormidor|cuna|moises|mois\xE9s)\\s+inclinad[oa]|inclinad[oa]\\s+para\\s+beb[e\xE9])${R}`, "i"),
     in_bed_sleeper: new RegExp(`${L}(nido\\s+(de\\s+|para\\s+)?(beb[e\xE9]s?|reci[e\xE9]n\\s+nacidos?)|cama\\s+nido|reductor\\s+de\\s+cuna|colch[o\xF3]n\\s+nido)${R}`, "i"),
     drop_side_crib: new RegExp(`${L}(cuna\\s+de\\s+(lado|baranda)\\s+(abatible|corrediz[oa]|deslizable))${R}`, "i")
@@ -366,6 +366,18 @@ Which units: ${c.tell}` : ""}`;
   }
   function decide(answer, candidate, hints, maybe = []) {
     const none = { level: "none", kind: null, card: null, banned: null, why: "", askCloud: maybe.length > 0, maybe: maybe[0] || null };
+    const codeMatch = candidate && candidate.strength === "code" && !answer.same_kind_as_recalled ? candidate : null;
+    if (codeMatch) {
+      return {
+        level: "possible",
+        kind: "recall",
+        card: codeMatch.card,
+        banned: null,
+        strength: "code",
+        disputed: true,
+        why: "the listing gives a model number this recall lists; the model on this device was not sure it is the same product"
+      };
+    }
     if (answer.what_is_for_sale === "part_or_accessory" || answer.what_is_for_sale === "toy_or_doll_version") {
       return { ...none, askCloud: hints.length > 0, maybe: hints[0] || none.maybe, why: "the listing is a part or a toy version, not the product" };
     }
@@ -812,10 +824,10 @@ ${LOOKUP_SYSTEM}`;
   );
   var abc = () => tr(
     "Every sleep: baby alone, on their back, in a crib, bassinet or play yard with only a fitted sheet.",
-    "Para cada sue\xF1o: el beb\xE9 solo, boca arriba, en una cuna, mois\xE9s o corral con solo una s\xE1bana ajustable."
+    "Cada vez que duerma, de d\xEDa o de noche: el beb\xE9 solito, boca arriba, en una cuna, mois\xE9s o corral, con nada m\xE1s que una s\xE1bana ajustable."
   );
   function sleepLine(text, part = false, r = null) {
-    const t = String(text || "");
+    const t = String(text || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const key = r && r.kind === "banned" && r.banned ? r.banned.key : "";
     if (part && SLEEP_PART.test(t) && SLEEP_PLACE.test(t)) {
       return tr(
@@ -833,10 +845,11 @@ ${LOOKUP_SYSTEM}`;
     }
     if (key === "crib_bumper" || BEDDING_SET.test(t)) return tr(`Quilts, comforters, pillows and bumpers from crib sets are for decoration only. ${abc()}`, `Las colchas, edredones, almohadas y protectores de los juegos de cuna son solo de decoraci\xF3n. ${abc()}`);
     if (SLEEP_PLACE.test(t)) return abc();
-    if (SITTING.test(t)) return tr("Not for sleep. If your baby falls asleep in it, move them to their crib or bassinet, on their back.", "No es para dormir. Si su beb\xE9 se duerme en \xE9l, p\xE1selo a su cuna o mois\xE9s, boca arriba.");
+    if (SITTING.test(t)) return tr("Not for sleep. If your baby falls asleep in it, move them to their crib or bassinet, on their back.", "No es para dormir. Si su beb\xE9 se queda dormido ah\xED, p\xE1selo a su cuna o mois\xE9s, boca arriba.");
     return "";
   }
   function oldCribLine(text) {
+    text = String(text || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return /\b(cribs?|cunas?)\b/i.test(text) && !/\b(mini|portable|travel)\b/i.test(text) ? tr(
       "A crib made before June 28, 2011 likely doesn't meet today's crib standard. Check the date on its label, and that it has every part.",
       "Una cuna fabricada antes del 28 de junio de 2011 probablemente no cumple la norma de cunas actual. Revise la fecha en la etiqueta y que tenga todas sus piezas."
@@ -873,7 +886,8 @@ ${LOOKUP_SYSTEM}`;
       };
     }
     const line = partOrToy ? tr("This looks like a part or a toy version, not the product itself.", "Parece ser una pieza o una versi\xF3n de juguete, no el producto en s\xED.") : owner ? owner.action : noMatchLine(grouped(count), monthYear(since || "1973-01-01"), input);
-    const extra = [sleep, CAR_SEAT.test(title) ? carSeatLine() : "", oldCribLine(title)].filter(Boolean);
+    const plain = String(title).normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const extra = [sleep, CAR_SEAT.test(plain) ? carSeatLine() : "", oldCribLine(title)].filter(Boolean);
     const pill = tr("No match found", "Sin coincidencias");
     if (owner) return { vague, safeSleep, pill, line, heading: owner.heading, lines: [...owner.lines, ...extra] };
     return {
@@ -1345,11 +1359,11 @@ ${LOOKUP_SYSTEM}`;
         };
       case "year_out":
         return {
-          tone: "plain",
-          title: tr("Dated outside this recall", "Fecha fuera de este retiro"),
+          tone: "possible",
+          title: tr("Dated outside the years we have for this recall", "Fecha fuera de los a\xF1os que tenemos para este retiro"),
           text: tr(
-            `The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.`,
-            `La etiqueta tiene fecha de ${v.year}. El aviso cubre unidades vendidas ${years(v)}. No se pudo leer un n\xFAmero de modelo para comparar.`
+            `The label is dated ${v.year}. Our summary of the notice gives units sold ${years(v)}, and no model number could be read to compare. Check the dates in the notice itself before you rely on this.`,
+            `La etiqueta tiene fecha de ${v.year}. Nuestro resumen del aviso da unidades vendidas ${years(v)}, y no se pudo leer un n\xFAmero de modelo para comparar. Revise las fechas en el aviso mismo antes de fiarse.`
           )
         };
       case "no_models":
@@ -1449,6 +1463,11 @@ ${LOOKUP_SYSTEM}`;
     for (const y of [spot.sold_from, spot.sold_to]) if (y && !text.includes(` ${y} `)) return `year not in notice: ${y}`;
     for (const n of String(spot.tell).match(/[A-Za-z]*\d[\w-]*/g) || []) if (!inNotice(n)) return `number in tell not in notice: ${n.slice(0, 20)}`;
     return "";
+  }
+  function cautiousEntry(spot, record) {
+    const text = ` ${fold(noticeText(record))} `;
+    const saysAll = /\b(all (units|models|sizes|colors|colours|styles|versions)|entire|every)\b/.test(text);
+    return { ...spot, tell: "", all_units: !!spot.all_units || saysAll };
   }
 
   // shared/live.mjs
@@ -1655,6 +1674,10 @@ ${LOOKUP_SYSTEM}`;
     /** Whether a shared field-guide entry fits the notice this phone fetched (shared/fieldguide.mjs): '' when it fits. */
     fitsNotice(spot, record) {
       return out(fitsNotice(spot, record));
+    },
+    /** A shared entry as the phone uses it: it may add a match and a warning, never make the card less cautious. */
+    cautiousEntry(spot, record) {
+      return out(cautiousEntry(spot, record));
     },
     /** The notice number as a shared field-guide document id, or '' when it can't be one. */
     entryId(recallNumber) {

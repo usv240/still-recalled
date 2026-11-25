@@ -197,11 +197,12 @@ export const CAR_SEAT = /\b(car\s*seats?|infant\s*seats?|booster\s*seats?|booste
 export const carSeatLine = () => tr("Car seat recalls are kept by NHTSA, not CPSC, so they aren't checked here. Look up the seat's model and date at nhtsa.gov/recalls.",
   'Los retiros de asientos de auto los lleva la NHTSA, no la CPSC, así que aquí no se revisan. Busque el modelo y la fecha del asiento en nhtsa.gov/recalls.');
 const abc = () => tr('Every sleep: baby alone, on their back, in a crib, bassinet or play yard with only a fitted sheet.',
-  'Para cada sueño: el bebé solo, boca arriba, en una cuna, moisés o corral con solo una sábana ajustable.');
+  'Cada vez que duerma, de día o de noche: el bebé solito, boca arriba, en una cuna, moisés o corral, con nada más que una sábana ajustable.');
 
 /** The safe-sleep line for a product, or ''. `part`: the listing was taken for a part (a play-yard pad, a mattress). */
 export function sleepLine(text, part = false, r = null) {
-  const t = String(text || '');
+  // Accents removed first: \b does not see "í" or "é" as letters, so "cojín" and "moisés" would never match.
+  const t = String(text || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   const key = r && r.kind === 'banned' && r.banned ? r.banned.key : '';
   if (part && SLEEP_PART.test(t) && SLEEP_PLACE.test(t)) {
     return tr('This looks like a part, so a recall may not cover it. Use only the mattress or pad that came with the crib, bassinet or play yard: extra padding can suffocate a baby.',
@@ -215,12 +216,13 @@ export function sleepLine(text, part = false, r = null) {
   }
   if (key === 'crib_bumper' || BEDDING_SET.test(t)) return tr(`Quilts, comforters, pillows and bumpers from crib sets are for decoration only. ${abc()}`, `Las colchas, edredones, almohadas y protectores de los juegos de cuna son solo de decoración. ${abc()}`);
   if (SLEEP_PLACE.test(t)) return abc();
-  if (SITTING.test(t)) return tr('Not for sleep. If your baby falls asleep in it, move them to their crib or bassinet, on their back.', 'No es para dormir. Si su bebé se duerme en él, páselo a su cuna o moisés, boca arriba.');
+  if (SITTING.test(t)) return tr('Not for sleep. If your baby falls asleep in it, move them to their crib or bassinet, on their back.', 'No es para dormir. Si su bebé se queda dormido ahí, páselo a su cuna o moisés, boca arriba.');
   return '';
 }
 
 /** Any full-size crib made before June 28, 2011 very likely does not meet today's standard (CPSC Crib Information Center). */
 function oldCribLine(text) {
+  text = String(text || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   return /\b(cribs?|cunas?)\b/i.test(text) && !/\b(mini|portable|travel)\b/i.test(text)
     ? tr("A crib made before June 28, 2011 likely doesn't meet today's crib standard. Check the date on its label, and that it has every part.",
       'Una cuna fabricada antes del 28 de junio de 2011 probablemente no cumple la norma de cunas actual. Revise la fecha en la etiqueta y que tenga todas sus piezas.')
@@ -268,7 +270,8 @@ export function noMatchView(r, listing, { input = 'listing', audience = 'buyer',
   const line = partOrToy ? tr('This looks like a part or a toy version, not the product itself.', 'Parece ser una pieza o una versión de juguete, no el producto en sí.')
     : owner ? owner.action
     : noMatchLine(grouped(count), monthYear(since || '1973-01-01'), input);
-  const extra = [sleep, CAR_SEAT.test(title) ? carSeatLine() : '', oldCribLine(title)].filter(Boolean);
+  const plain = String(title).normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const extra = [sleep, CAR_SEAT.test(plain) ? carSeatLine() : '', oldCribLine(title)].filter(Boolean);
   const pill = tr('No match found', 'Sin coincidencias');
   if (owner) return { vague, safeSleep, pill, line, heading: owner.heading, lines: [...owner.lines, ...extra] };
   return {

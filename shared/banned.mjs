@@ -90,7 +90,7 @@ export function mayContain(listingText) {
 // Added 2026-11-25; not yet measured on a test set.
 const L = '(?<![a-z\u00e0-\u00ff])', R = '(?![a-z\u00e0-\u00ff])';
 const ES = {
-  crib_bumper: new RegExp(`${L}(chichoneras?|protector(es)?\\s+(acolchad[oa]s?\\s+)?(de|para)\\s+(la\\s+)?cuna|protector(es)?\\s+trenzad[oa]s?|trenzad[oa]s?\\s+(de|para)\\s+cuna)${R}`, 'i'),
+  crib_bumper: new RegExp(`${L}(chichoneras?|protector(es)?\\s+acolchad[oa]s?|protector(es)?\\s+(acolchad[oa]s?\\s+)?(de|para)\\s+(la\\s+)?cuna|protector(es)?\\s+trenzad[oa]s?|trenzad[oa]s?\\s+(de|para)\\s+cuna)${R}`, 'i'),
   inclined_sleeper: new RegExp(`${L}((mecedora|dormidor|cuna|moises|mois\u00e9s)\\s+inclinad[oa]|inclinad[oa]\\s+para\\s+beb[e\u00e9])${R}`, 'i'),
   in_bed_sleeper: new RegExp(`${L}(nido\\s+(de\\s+|para\\s+)?(beb[e\u00e9]s?|reci[e\u00e9]n\\s+nacidos?)|cama\\s+nido|reductor\\s+de\\s+cuna|colch[o\u00f3]n\\s+nido)${R}`, 'i'),
   drop_side_crib: new RegExp(`${L}(cuna\\s+de\\s+(lado|baranda)\\s+(abatible|corrediz[oa]|deslizable))${R}`, 'i'),

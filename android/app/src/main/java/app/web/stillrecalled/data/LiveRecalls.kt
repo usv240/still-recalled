@@ -46,7 +46,8 @@ object LiveRecalls {
             val fromShared = FieldGuide.read(ids.filter { it.isNotEmpty() })
             val left = todo.filterIndexed { i, r ->
                 val s = fromShared[ids[i]]
-                if (s != null && Rules.str("fitsNotice", s, r).isEmpty()) { spots.put(r.optString("RecallNumber").trim(), s); shared++; false } else true
+                // A shared entry may add a match and a warning, never make the card less cautious (shared/fieldguide.mjs).
+                if (s != null && Rules.str("fitsNotice", s, r).isEmpty()) { spots.put(r.optString("RecallNumber").trim(), Rules.obj("cautiousEntry", s, r)); shared++; false } else true
             }
             val gate = Semaphore(4)
             coroutineScope {

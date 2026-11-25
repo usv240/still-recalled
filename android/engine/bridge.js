@@ -15,7 +15,7 @@ import { READ_SYSTEM, READ_SCHEMA, listingFromRead, listingFromText } from '../.
 import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, labelCopy, readOnce } from '../../shared/label.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
-import { fitsNotice, entryId } from '../../shared/fieldguide.mjs';
+import { fitsNotice, entryId, cautiousEntry } from '../../shared/fieldguide.mjs';
 import { LIVE_SYSTEM, LIVE_TOOL, LIVE_OPENING, liveLookup } from '../../shared/live.mjs';
 import { setLang } from '../../shared/i18n.mjs';
 
@@ -160,6 +160,8 @@ globalThis.SR = {
   liveLookup(args) { return out(liveLookup(index(), args)); },
   /** Whether a shared field-guide entry fits the notice this phone fetched (shared/fieldguide.mjs): '' when it fits. */
   fitsNotice(spot, record) { return out(fitsNotice(spot, record)); },
+  /** A shared entry as the phone uses it: it may add a match and a warning, never make the card less cautious. */
+  cautiousEntry(spot, record) { return out(cautiousEntry(spot, record)); },
   /** The notice number as a shared field-guide document id, or '' when it can't be one. */
   entryId(recallNumber) { return out(entryId(recallNumber)); },
   liveCards(records, spots) { return out(liveCardsFromCpsc(records, new Map(Object.entries(spots || {})), [...live, ...base])); },

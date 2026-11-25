@@ -39,3 +39,13 @@ test('English stays the default', () => {
   const a = present(lounger, { level: 'likely', kind: 'banned', banned: { key: 'in_bed_sleeper', label: 'x' } });
   assert.equal(a.badge, 'Infant lounger or nest');
 });
+
+test('accented Spanish words match (0.16.1)', async () => {
+  const { buildIndex } = await import('../shared/shortlist.mjs');
+  const { triage } = await import('../shared/triage.mjs');
+  const { readFileSync } = await import('node:fs');
+  const idx = buildIndex(JSON.parse(readFileSync(new URL('../extension/data/cards.json', import.meta.url), 'utf8')).cards);
+  assert.match(sleepLine('Cojín para bebé'), /Not for sleep/);
+  assert.match(sleepLine('Moisés para bebé'), /alone, on their back/);
+  assert.deepEqual(triage(idx, { title: 'Juego de cuna con protectores acolchados' }).hints.map(h => h.key), ['crib_bumper']);
+});

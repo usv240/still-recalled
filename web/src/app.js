@@ -306,7 +306,10 @@ function showResult(r, listing, { example, id = '', reopened = null }) {
   }
   const saved = id || reopened ? h('p', { class: 'muted small' }, tr('Saved on this device, in ', 'Guardado en este dispositivo, en '), linkButton(tr('your checks', 'sus revisiones'), () => showLog()),
     tr('. Come back when the seller sends the label photo.', '. Vuelva cuando el vendedor le mande la foto de la etiqueta.')) : null;
-  $('side').replaceChildren(h('div', { class: 'card result' }, head, body, h('div', { class: 'result-foot' }, again, saved)));
+  // A reopened check is as of the day it was made: new recalls since then are not in it. One press checks it again.
+  const recheck = reopened ? button(tr('Check it again against today\'s list', 'Revisarlo otra vez con la lista de hoy'), () => run({ text: listing.title }), false) : null;
+  const asOf = reopened ? h('p', { class: 'muted small' }, tr(`This result is from ${when(reopened.at)}. Recalls published since then are not in it.`, `Este resultado es del ${when(reopened.at)}. Los retiros publicados después no están incluidos.`)) : null;
+  $('side').replaceChildren(h('div', { class: 'card result' }, head, asOf, body, h('div', { class: 'result-foot' }, again, recheck, saved)));
   say(r.level === 'likely' || r.level === 'possible' ? `${tr('Result', 'Resultado')}: ${r.badge}. ${r.verdict || ''}` : `${tr('Result', 'Resultado')}: ${noMatchView(r, listing, { input: listing.image ? 'listing' : 'typed' }).vague ? tr("we couldn't tell what the product is", 'no pudimos saber qué producto es') : tr('no match found', 'sin coincidencias')}. ${tr('Details below.', 'Detalles abajo.')}`);
 }
 
@@ -387,7 +390,7 @@ async function showLog(note = '') {
   $('side').replaceChildren(h('div', { class: 'card log-card' },
     h('h2', {}, tr('Your checks', 'Sus revisiones')),
     note ? h('p', {}, note) : null,
-    h('p', { class: 'muted small' }, tr('Kept in this browser only, never sent anywhere. A shop can name each intake batch; new checks get the name.', 'Se guardan solo en este navegador y nunca se envían. Una tienda puede nombrar cada lote de entrada; las revisiones nuevas llevan ese nombre.')),
+    h('p', { class: 'muted small' }, tr('Kept in this browser only, never sent anywhere, the newest 500. Download the CSV to keep more. A shop can name each intake batch; new checks get the name.', 'Se guardan solo en este navegador y nunca se envían; las 500 más recientes. Descargue el CSV para guardar más. Una tienda puede nombrar cada lote de entrada; las revisiones nuevas llevan ese nombre.')),
     h('label', { for: 'batch', class: 'field-label' }, tr('Batch or consignor (optional)', 'Lote o consignador (opcional)')), batchField,
     h('div', { class: 'log-actions' }, csv, print, back, clear),
     table,

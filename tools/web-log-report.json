@@ -1,5 +1,5 @@
 {
- "at": "2026-11-25T05:48:28.694Z",
+ "at": "2026-11-25T06:36:49.877Z",
  "url": "http://localhost:8766/web/index.html",
  "passed": 12,
  "failed": 0,
@@ -17,12 +17,12 @@
   {
    "name": "English: \"Your checks\" lists the check on the start page",
    "ok": true,
-   "detail": "Your checks Saved on this device only. Waiting on a seller's label photo? Open the check and add it. Boppy newborn lounger Recalled product today, 12:47 AM All "
+   "detail": "Your checks Saved on this device only. Waiting on a seller's label photo? Open the check and add it. Boppy newborn lounger Recalled product today, 1:36 AM All c"
   },
   {
    "name": "English: the saved check opens again, with its result",
    "ok": true,
-   "detail": "Checked today, 12:47 AM Boppy newborn lounger Recalled product Looks like the Boppy Original Newborn Loungers, Boppy Preferred Newborn Loungers and Pottery Barn"
+   "detail": "Checked today, 1:36 AM Boppy newborn lounger This result is from today, 1:36 AM. Recalls published since then are not in it. Recalled product Looks like the Bop"
   },
   {
    "name": "English: the log shows the check in a table",
@@ -32,7 +32,7 @@
   {
    "name": "English: the CSV downloads with a header and the check",
    "ok": true,
-   "detail": "2026-11-25,00:47,,buyer,Boppy newborn lounger,Recalled product,recall 21198,https://www.cpsc.gov/Recalls/2021/The-Boppy-Company-Recalls-Over-3-Million-Original-Newborn-Loungers-Boppy-Preferred-Newborn-Loungers-and-Pottery-Barn-Kids-Boppy-Ne"
+   "detail": "2026-11-25,01:36,,buyer,Boppy newborn lounger,Recalled product,recall 21198,https://www.cpsc.gov/Recalls/2021/The-Boppy-Company-Recalls-Over-3-Million-Original-Newborn-Loungers-Boppy-Preferred-Newborn-Loungers-and-Pottery-Barn-Kids-Boppy-Ne"
   },
   {
    "name": "Spanish: ?lang=es turns the page to Spanish",
@@ -52,7 +52,7 @@
   {
    "name": "Spanish: its card carries the safe-sleep line in Spanish",
    "ok": true,
-   "detail": "Para cada sueño: el bebé solo, boca arriba, en una cuna, moisés o corral con solo una sábana ajustable."
+   "detail": ""
   },
   {
    "name": "Spanish: a no-match result in Spanish, with the 2011 crib line",

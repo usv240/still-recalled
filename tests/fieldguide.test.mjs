@@ -61,3 +61,12 @@ test('fitsNotice: a planted year or model number in the tell is refused (0.14.1)
   // A tell that names other model numbers would send a shopper away from a recalled unit.
   assert.match(fitsNotice({ ...spot, tell: 'Only model KV-9900 is recalled.' }, record), /number in tell/);
 });
+
+test('a shared entry can add caution, never remove it (0.16.1)', async () => {
+  const { cautiousEntry } = await import('../shared/fieldguide.mjs');
+  // A planted "which units" line is dropped; "every unit" is kept from the entry or from the notice's own words.
+  const planted = cautiousEntry({ ...spot, all_units: false, tell: 'Only units sold at warehouse clubs.' }, record);
+  assert.equal(planted.tell, '');
+  assert.equal(cautiousEntry({ ...spot, all_units: true }, record).all_units, true);
+  assert.equal(cautiousEntry({ ...spot, all_units: false }, { ...record, Description: 'This recall involves all units of the bouncer.' }).all_units, true);
+});

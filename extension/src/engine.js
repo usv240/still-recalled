@@ -17,7 +17,7 @@ import { LOOKUP_TOOL, lookupArgs, lookupCards, lookupResponse, applyDeviceLookup
 import { present } from '../../shared/present.mjs';
 import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
-import { fitsNotice, validEntry } from '../../shared/fieldguide.mjs';
+import { fitsNotice, validEntry, cautiousEntry } from '../../shared/fieldguide.mjs';
 import { WARNINGS_CSV, warningRecords, warningNotice } from '../../shared/warnings.mjs';
 
 let indexPromise = null, basePromise = null;
@@ -116,7 +116,7 @@ async function writeSpots(records, settings, { write = true } = {}) {
   for (let i = todo.length - 1; i >= 0; i--) {
     const id = String(todo[i].RecallNumber).trim();
     const s = shared.get(id);
-    if (s && !fitsNotice(s.spot, todo[i])) { spots.set(id, s.spot); read++; todo.splice(i, 1); }
+    if (s && !fitsNotice(s.spot, todo[i])) { spots.set(id, cautiousEntry(s.spot, todo[i])); read++; todo.splice(i, 1); }
   }
   if (!write) return Object.assign(spots, { shared: read, written: 0 });
   await Promise.all(Array.from({ length: Math.min(4, todo.length) }, async () => {

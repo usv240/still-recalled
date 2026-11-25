@@ -27,7 +27,7 @@ export async function allChecks() {
   try { return ((await tx('readonly', s => s.getAll())) || []).sort((a, b) => b.at.localeCompare(a.at)); } catch { return []; }
 }
 
-/** Saves one check; returns its id, or '' when it could not be saved. Keeps the newest 500. */
+/** Saves one check; returns its id, or '' when it could not be saved. Keeps the newest 500 (the log page says so). */
 export async function saveCheck(entry) {
   try {
     const id = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
@@ -74,7 +74,7 @@ export const batch = {
 const cell = v => {
   const s = String(v ?? '').replace(/\r?\n/g, ' ');
   // A leading =, +, - or @ would run as a formula in a spreadsheet.
-  const safe = /^[=+\-@]/.test(s) ? `'${s}` : s;
+  const safe = /^[=+\-@\t\r]/.test(s) ? `'${s}` : s;
   return /[",]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
 };
 

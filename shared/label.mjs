@@ -149,9 +149,9 @@ export function labelCopy(v, { owner = false } = {}) {
         text: tr(`The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.`,
           `La etiqueta dice ${v.model}. El aviso enumera ${some(v.listed)}.${v.year && v.from ? ` Cubre unidades vendidas ${years(v)}; esta tiene fecha de ${v.year}.` : ''} Algunos avisos retiran también por fecha o número de serie, y puede haber otros retiros: revise el aviso antes de fiarse.`) };
     case 'year_out':
-      return { tone: 'plain', title: tr('Dated outside this recall', 'Fecha fuera de este retiro'),
-        text: tr(`The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.`,
-          `La etiqueta tiene fecha de ${v.year}. El aviso cubre unidades vendidas ${years(v)}. No se pudo leer un número de modelo para comparar.`) };
+      return { tone: 'possible', title: tr('Dated outside the years we have for this recall', 'Fecha fuera de los años que tenemos para este retiro'),
+        text: tr(`The label is dated ${v.year}. Our summary of the notice gives units sold ${years(v)}, and no model number could be read to compare. Check the dates in the notice itself before you rely on this.`,
+          `La etiqueta tiene fecha de ${v.year}. Nuestro resumen del aviso da unidades vendidas ${years(v)}, y no se pudo leer un número de modelo para comparar. Revise las fechas en el aviso mismo antes de fiarse.`) };
     case 'no_models':
       return { tone: 'possible', title: tr('The notice lists no model numbers', 'El aviso no enumera números de modelo'),
         text: tr(`The label reads ${v.model}${v.year ? `, dated ${v.year}` : ''}, but this notice doesn't recall by model number. Read "which units" in the notice.`,

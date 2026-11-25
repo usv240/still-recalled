@@ -111,7 +111,7 @@ JSON schemas on both models.
   from Google Play. Both get tokens from a page on the site that runs reCAPTCHA Enterprise. No debug token ships.
 
 ### The numbers
-Five blind tests, November 15 to 20, 2026: 775 used baby-gear listings from eBay, Mercari and Craigslist, collected
+Five blind tests, November 15 to 20, 2026, labelled by AI reviewers (Claude), not yet by a person: 775 used baby-gear listings from eBay, Mercari and Craigslist, collected
 after the rules they test were written. 83 should be flagged. The same engine, run three ways:
 
 | Run as | Caught (of 83) | False alarms (of 630) |
@@ -130,9 +130,9 @@ sixth test, 180 new listings aimed at exactly those, run once: 6 of 7 caught, 1 
 sent to the cloud. Two of the 7 are one Craigslist post listed twice; counted once, 5 of 6. The rule sent 35 listings
 to the cloud and flagged the 3 that should be flagged, and none of the 28 that should not. Without it, 3 of 7.
 
-Tests on the shipped builds: 116 unit tests; the web page's saved checks, log and Spanish, 12 of 12 steps; the packed extension, 18 of 18 end-to-end steps on the live practice
-page (version 0.13.0); the Android app, 15 of 15 checks on an emulator with the 0.16.0 release build, plus a result that survives Android closing
-the app, and 17 of 17 steps on a real Pixel with Gemini Nano reading each listing on the phone. Accessibility, checked by tools rather than by eye: axe-core with the WCAG 2.2 AA rules on 40 views of the
+Tests: 118 unit tests; the web page's saved checks, log and Spanish, 12 of 12 steps on the development build; the packed extension, 18 of 18 end-to-end steps on the live practice
+page (the packed release, version 0.12.1; version 0.13.0 as a development build); the Android app, 15 of 15 checks on an emulator with the 0.16.0 release build (one of them a result that survives Android closing
+the app), and 17 of 17 steps on a real Pixel with Gemini Nano reading each listing on the phone. Accessibility, checked by tools rather than by eye: axe-core with the WCAG 2.2 AA rules on 40 views of the
 web page and the extension, 0 violations; on Android, every tappable element at normal and 200 percent text, 48 dp or
 larger and named for screen readers, 0 problems.
 
@@ -140,7 +140,7 @@ larger and named for screen readers, 0 problems.
 On November 25, 2026, the first results page of 12 eBay searches (1,077 listings) held 200 infant loungers, nests and
 padded crib bumpers for sale, asking $12,152 in all, though eBay's own policy bans them. An AI reviewer (Claude)
 labelled every flagged listing and checked 70 photos. eBay's filters caught the recalled, named product (no recalled
-Boppy lounger was there, only covers); 111 of the 200 had no brand at all. A generic lounger under a generic title is
+Boppy lounger was there, only covers); about 90 of the 200 had no brand word in the title. A generic lounger under a generic title is
 exactly what Still Recalled's photo check is built to catch. Method in `docs/accuracy.md`, section 29.
 
 ### Five AI persona walkthroughs (not real users)

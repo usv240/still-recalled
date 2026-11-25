@@ -62,6 +62,14 @@ export function decide(answer, candidate, hints, maybe = []) {
   // `maybe`: banned types the listing may contain without naming them (mayContain). If nothing else flags it,
   // the shopper sees nothing yet, but the listing goes to the cloud for a look at the photo.
   const none = { level: 'none', kind: null, card: null, banned: null, why: '', askCloud: maybe.length > 0, maybe: maybe[0] || null };
+  // A model number in the listing that the recall lists was matched by code. The built-in model may disagree (it
+  // calls the listing a part, or another kind of product), but its word alone never clears that match: it stays a
+  // soft flag, and the cloud reads the full notice (0.16.1; the seventh review found the device clearing it alone).
+  const codeMatch = candidate && candidate.strength === 'code' && !answer.same_kind_as_recalled ? candidate : null;
+  if (codeMatch) {
+    return { level: 'possible', kind: 'recall', card: codeMatch.card, banned: null, strength: 'code', disputed: true,
+      why: 'the listing gives a model number this recall lists; the model on this device was not sure it is the same product' };
+  }
   if (answer.what_is_for_sale === 'part_or_accessory' || answer.what_is_for_sale === 'toy_or_doll_version') {
     // The words name a risky type but the built-in model calls the listing a part or a toy: the two disagree, so the
     // cloud looks at the photo to settle it. ("DockATot Deluxe+ Lounger Cover" whose photo shows the whole lounger was
