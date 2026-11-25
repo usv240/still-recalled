@@ -1555,6 +1555,42 @@ this document cites from a scratch folder are now in `tools/` (`sixth-rule.mjs`,
 
 Unit tests: 121.
 
+## 32. The hybrid on the census (2026-11-25)
+
+Sections 29 and 31 count the problem. This runs Still Recalled on it. Two fixed random samples were drawn by code
+from the census listings (seeded, so they can be drawn again): 70 of the 252 an AI reviewer counted (55 eBay, 15
+Craigslist; listings posted twice counted once), and 30 of the 202 it ruled out (25 eBay, 5 Craigslist). Each went
+through the extension's own pipeline on release 0.17.0's engine, in Chrome with Gemini Nano
+(`node tools/eval-run.mjs --set=census-sample --mode=hybrid`, then `--set=census-sample-no`; scored by
+`node tools/census-hybrid-score.mjs`). About 100 cloud calls in all, no errors.
+
+| | Listings | Word rules alone | Hybrid |
+|---|---|---|---|
+| Counted by the reviewer (should be flagged) | 70 | 70 flagged, all amber | **69 flagged: 66 red, 3 amber** |
+| of those, no brand word in the title | 28 | 28 | **28 flagged: 25 red, 3 amber** |
+| Ruled out by the reviewer (should not be flagged) | 30 | 30 flagged, 29 amber and 1 red | **6 flagged: 5 amber, 1 red; 24 cleared** |
+
+- **How to read it.** Every census listing was picked by the word rules, so the words flag all 100 and cannot tell
+  the 70 from the 30. The hybrid's work here is the cloud's look at the photo: it confirmed 66 of the 70 as red
+  ("Infant lounger or nest"), and cleared 24 of the 30 that only share the words (covers, bed rails, bouncer seats,
+  toys). This measures the confirming step. It does not measure finding products whose titles don't name them; the
+  sixth test (section 25) and the brand-stripped tests (sections 19 and 33) do.
+- **Where each ran.** A title that names a risky type goes straight to the cloud, so Gemini Nano looked at only 8 of
+  the 100 here (the listings matched by a recall line, not a type). On an ordinary search most listings stay on the
+  device (77% across the five tests); a search for "baby lounger" is the opposite case, and the write-up says so.
+- **The one miss:** an OXO Tot Nest booster seat, named in a 2015 recall. The words matched the product line, and the
+  cloud did not confirm it.
+- **The six still flagged among the 30:**
+  - four amber "padded crib bumper" flags where the words say bumper and the photo could not rule it out: a
+    Spanish-titled crib bumper, a fabric panel set, a quilting pattern book, and a toddler bed rail;
+  - one amber "possible recall" on a UTV fan wiring kit whose title carries a vehicle model a harness recall lists
+    (the 0.16.1 rule that a model-number match is never dropped below amber; it says to check the label);
+  - one red: a "Baby Lounger & Changing Mat". The reviewer called it a changing pad; the hybrid called it a lounger
+    and described a raised rim that the photo, a flat padded mat, does not show. Counted as a false alarm.
+- **In money:** the 70 asked $3,950 in all; the 69 flagged asked $3,920.
+- Both the answer key and the tool are AI here (the reviewer is Claude, the tool is Gemini), so agreement between
+  them is not ground truth. A person's check of the census labels (`tools/label-review.html`) is the next step.
+
 ## Reproduce
 
 ```

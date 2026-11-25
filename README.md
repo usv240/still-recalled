@@ -37,7 +37,10 @@ nests and padded crib bumpers for sale, asking $12,152, though eBay's policy ban
 out; about 90 of the 200 had no brand word in the title. Those are what the photo check is for. The same day,
 four searches for the same products on Craigslist in the 30 largest U.S. metro areas (1,261 listings) found 53 more: 49
 loungers and nests, 2 padded bumpers and 2 booster seats named in a recall, asking $2,199 (section 31). **253 listings
-on two sites in one day, $14,351 asked**, counted by AI reviewers; a person checking them is next.
+on two sites in one day, $14,351 asked**, counted by AI reviewers; a person checking them is next. Run on a random 70
+of them, Still Recalled flagged 69 (66 as a red "Infant lounger or nest"), all 28 with no brand in the title among
+them; of a random 30 listings that only share the words (covers, bed rails, toys), which word rules flag every time,
+it cleared 24 (section 32).
 
 **And it keeps watching what you bought.** Recall notices reach the first owner, not the next one: Kids In Danger found
 that only 22% of the children's products recalled in 2022 that it could analyze were ever returned, replaced or
