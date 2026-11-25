@@ -1404,6 +1404,37 @@ saved and opens again with its result, the log and CSV work, `?lang=es` turns th
 trenzado" is flagged as a padded crib bumper in Spanish with the safe-sleep line, and a no-match crib in Spanish carries
 the 2011 crib line. Three cloud calls. 116 unit tests (`tests/i18n.test.mjs`, `tests/log.test.mjs` new).
 
+## 29. A census: what is for sale on eBay right now (2026-11-25)
+
+The tests above measure Still Recalled. This measures the problem. On 2026-11-25, 12 eBay searches for the four sleep
+types (`node tools/census.mjs --site=ebay`, `tools/census-ebay.json`), reading the first page of results of each (about
+120 listings; one search, "baby bedding set bumper", returned nothing and is not counted): 1,077 listings. The word
+rules flagged 392 by their titles (`node tools/census-score.mjs`); an AI reviewer (Claude) then labelled each of the
+392 from its title and looked at the photo of 70, including a random 44 of those it called "yes" (none changed)
+(`tools/census-ebay-labels.json`).
+
+| What was for sale | Listings | Asking, in all |
+|---|---|---|
+| Infant loungers and nests a baby lies in | 199 | |
+| Padded crib bumpers | 1 | |
+| **Together** | **200** | **$12,152** |
+
+- **eBay's own policy** lists infant loungers, nests and positioners, inclined sleepers and crib bumpers among the
+  products it does not allow (eBay product safety policy; docs/research/sources.md). CPSC says loungers are never for
+  sleep.
+- **What eBay's filters do catch:** no recalled Boppy lounger was among the 200, only covers for one; the only
+  inclined-sleeper matches were 1980s toy playsets; one padded bumper got through. The named, recalled product is
+  filtered. **What gets through:** 111 of the 200 carry no lounger brand at all, 58 are Snuggle Me loungers, 29 are
+  DockATot. A lounger with no brand, under a generic title, is the case the hybrid's photo check and the unnamed-sleep
+  rule are for (section 25).
+- **How to read it.** It is a floor and a snapshot: the first page of each search, on one day, with listings the
+  reviewer could not settle (10) left out. Condition: 19 new, 11 used, 170 not stated; many are new products shipped
+  by sellers, so this is not only resale. The labels are an AI reviewer's, not a person's. Precision of the word rules
+  on these hazard searches was 200 of 392 (covers, patterns and bed rails share the words), which is why nothing here
+  is counted on words alone.
+- No listing was reported or contacted. Reporting them (eBay's "Report this item", or SaferProducts.gov) is the
+  builder's decision.
+
 ## Reproduce
 
 ```
@@ -1420,6 +1451,7 @@ node tools/single-run.mjs --for=fifth       # the fifth set checked one listing 
 node tools/eval-run.mjs --set=sixth --mode=hybrid && node tools/eval-score.mjs --set=sixth   # the unnamed-sleep rule's test
 node tools/recall-mirror.mjs <folder>       # the recall mirror, as the daily job makes it
 node tools/web-log.mjs                      # saved checks, the intake log and Spanish on the web page
+node tools/census.mjs --site=ebay --out=tools/census-ebay.json && node tools/census-score.mjs tools/census-ebay.json   # the census
 node scripts/make-card.mjs                  # the printable card's QR codes (web/card.html)
 node tools/masked-build.mjs && node tools/lookup-generic.mjs --masked   # real listings with the brand stripped from the title
 node tools/lookup-generic.mjs               # the ten made-up generic-title listings, one at a time

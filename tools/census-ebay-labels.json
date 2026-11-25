@@ -1,0 +1,2758 @@
+{
+ "labeller": "AI reviewer (Claude), 2026-11-25, titles for all, photos for a sample",
+ "labels": {
+  "188957402106": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toy or playset, not an infant sleeper"
+  },
+  "206578468935": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "empty toy box only"
+  },
+  "257857483834": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toy or playset, not an infant sleeper"
+  },
+  "197901213839": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "toy or playset, not an infant sleeper"
+  },
+  "317470600326": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toy or playset, not an infant sleeper"
+  },
+  "398377153680": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "toy guitar sharing the name"
+  },
+  "165010427337": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "1984 Mattel toy rocker, not a sleeper"
+  },
+  "117526470051": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "toy or playset, not an infant sleeper"
+  },
+  "960222344916": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "padded crib bumper for sale"
+  },
+  "178554518136": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler bed rail, not a crib bumper"
+  },
+  "284051754664": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "353648069671": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows mesh crib liner, not padded bumper"
+  },
+  "257854387117": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler bed rail, not a crib bumper"
+  },
+  "900094744977": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler bed rail, not a crib bumper"
+  },
+  "960008242515": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler bed rail, not a crib bumper"
+  },
+  "396123013892": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler bed rail, not a crib bumper"
+  },
+  "278075190163": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "sewing pattern or leaflet only"
+  },
+  "358525625142": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler bed rail, not a crib bumper"
+  },
+  "820212169049": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "257857161530": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "334534285394": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "126158584986": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "137672843182": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "223972874618": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "297738559905": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cutter fabric panels to sew, not finished"
+  },
+  "198727987224": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler bed rail, not a crib bumper"
+  },
+  "115831737857": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cutter fabric panels to sew, not finished"
+  },
+  "315504111186": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "175044084225": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "128055200049": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "335079651308": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "335598598981": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler bed rail, not a crib bumper"
+  },
+  "266340994862": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "205675836585": {
+   "type": "crib_bumper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "sewing pattern or leaflet only"
+  },
+  "267848111787": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "168458761470": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "860167939616": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "187122851381": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "377669784998": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800334257578": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "236391667274": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "257350981517": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "baby lounger pillow a baby lies in"
+  },
+  "127992496143": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "168628371043": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "357648919902": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "137323300153": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "168862917739": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "318632678715": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "398307361699": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "206669507013": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800411224743": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "860129823049": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "366791936292": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "820389560310": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "236991745178": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "137947628409": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "168458769229": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "327464209559": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "366648895543": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "327464207473": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "128212780915": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "prone comfort cushion, not clearly a nest"
+  },
+  "800652944033": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800411228146": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "800855226332": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "287671499174": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "820393887120": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "840153358868": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "920094122095": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800798529064": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant swing, not a lounger"
+  },
+  "318627387732": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "800788268981": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "168399536404": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "800652948676": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "168880011459": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "237202768070": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307207714062": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800652912566": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "407376816693": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "317528985198": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "920011021190": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "128142894847": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "880074129124": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "168884684974": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "840155025291": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "800652774799": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "307298023150": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "820359234696": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "336915583779": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "820108435734": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "840134970335": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "307225398257": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "baby lounger pillow a baby lies in"
+  },
+  "198436388111": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "920153519756": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307238082410": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "800124388383": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "baby lounger pillow a baby lies in"
+  },
+  "366836220783": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "117523592076": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "205721049610": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "377018484843": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "336906815892": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "chair or rocker frame, not a lounger"
+  },
+  "940100131245": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "168884684639": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "206682382011": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "298738504296": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "117421352382": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "205853670930": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "960146584088": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "198410542761": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "900099516247": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "860143443029": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "toddler-size lounger, not clearly infant"
+  },
+  "168702991069": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "287650220300": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307252104507": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows full Snuggle Me lounger"
+  },
+  "820370783823": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "158315375879": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "860086749801": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "168698733527": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "920139876169": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "186359123940": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "photo: boxed Pharmedoc lounger with cotton cover"
+  },
+  "960236980623": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "377618109720": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "920117018430": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "168885059023": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "117442862163": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "398447813380": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "407360995490": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "840129733942": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "257844718972": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "287257265217": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "287739866901": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "327463942448": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "117521451801": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "287755869778": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "234640549642": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307296225469": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "227574725344": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "358876441960": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "168665516982": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "197560677831": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "188830066652": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "800684384785": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "800822569458": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant swing, not a lounger"
+  },
+  "820356731005": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "227251206747": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "860112123254": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "389636174446": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "267777209598": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "136875430254": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "147537227625": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "365140133542": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800790960916": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "168825041845": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "318515697901": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "860157274397": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "920037179959": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "267553522292": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "377398057716": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "377568327669": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800855226310": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "158076309272": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "336904268105": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "407179508331": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "137487669044": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "168877132313": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "407321578569": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "940098578552": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "920115657025": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "168797488603": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "336849681028": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "920160121314": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "128110507878": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "820108430305": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "800855226334": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "318265956223": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "168646052440": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "366825619895": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "189057973341": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "307082183422": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "307261625695": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "234548322703": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307125003152": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "158219058804": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800910185016": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "287672428301": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "168547646387": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "188069398329": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "298597601666": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "820201301306": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "257844241468": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "168304906319": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows Boppy slipcover only"
+  },
+  "377667403516": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "800855226336": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307237271067": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "860152616088": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "137946345080": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "800855226319": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "226891782456": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "820212169451": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800855226309": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "880126407748": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "335579675615": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "960194096364": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "398217986196": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "800901148713": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "257191991361": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "206573283973": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "234640556777": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "128207153128": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307244964292": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "257819971549": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "366718587157": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "137946345049": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "820268074170": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant lounger or nest itself"
+  },
+  "287369237846": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "198555855865": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "298740840040": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "287369237842": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "257860547211": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "920108710393": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "157660697026": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307231637077": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows nest lounger in bundle"
+  },
+  "267822253677": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "840010792659": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "287727448584": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "stroller seat inlay, not a lounger"
+  },
+  "287754321411": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "video monitor sharing the brand name"
+  },
+  "206718313259": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Baby Delight Snuggle Nest in-bed sleeper"
+  },
+  "168874448358": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Baby Delight Snuggle Nest in-bed sleeper"
+  },
+  "178050035366": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "136855039245": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "closet dividers, not a product for sleep"
+  },
+  "147612996451": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "bunting bag, not a lounger"
+  },
+  "398426428436": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "206606539784": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307296209202": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "128191152955": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "replacement sheet only"
+  },
+  "267639019213": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "358300308127": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "newborn photography prop"
+  },
+  "287451154820": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "820357936233": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "video monitor sharing the brand name"
+  },
+  "267628964169": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "bird nest figurine"
+  },
+  "407345760910": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "single component only, not complete lounger"
+  },
+  "287145155204": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "closet dividers, not a product for sleep"
+  },
+  "267618938087": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "video monitor sharing the brand name"
+  },
+  "336713647172": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "newborn photography prop"
+  },
+  "800855226315": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "116439180202": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "greeting card"
+  },
+  "407363105542": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "287037278868": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "video monitor sharing the brand name"
+  },
+  "880137294906": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "147694353219": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "227626272017": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "147694353390": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "880150704836": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "198772155214": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "188914908075": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "137940172217": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "117533677850": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "960196110533": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "206516367037": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "playmat, not a lounger"
+  },
+  "920153019729": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "137622307266": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "365646614846": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "386172395588": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "820240756053": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "307258181094": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "147592723189": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "147692814921": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "198808077345": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "bag or tote only"
+  },
+  "287483709943": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": true,
+   "why": "photo shows full Deluxe+ dock in case"
+  },
+  "206697315633": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "840059636224": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "267793491223": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "800864825331": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "880150285915": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "336872385029": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "toddler-size lounger, not clearly infant"
+  },
+  "267843709457": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "820104836599": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "406979924121": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "photo: DockATot KIND cardboard bassinet, not lounger"
+  },
+  "206704056606": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "206644196483": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "960130199130": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "227567201551": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "237086365212": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "267845166368": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "227630255239": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "880017544014": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": true,
+   "why": "photo shows DockATot Deluxe lounger"
+  },
+  "327378721559": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "820357887587": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "860174954474": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "198790731163": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "257775721734": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "257846775598": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "bag or tote only"
+  },
+  "168798875174": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "wearable sleep bag, not a lounger"
+  },
+  "147594250253": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "940031076045": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "bag or tote only"
+  },
+  "127974990551": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "257849296593": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "bag or tote only"
+  },
+  "389669773644": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "playmat, not a lounger"
+  },
+  "800881820782": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "single component only, not complete lounger"
+  },
+  "960147556314": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "adult pregnancy or nursing wedge pillow"
+  },
+  "820299972689": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "327470832622": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "147118556088": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "198775593835": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "wearable sleep bag, not a lounger"
+  },
+  "227455502253": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "257830153005": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "257849439442": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "137729739299": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "860129230297": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "900047317306": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "198784234147": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "178549290586": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "198790694419": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "327470887215": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "405839691652": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "playmat, not a lounger"
+  },
+  "800692725955": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "407139982328": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "860095193014": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "toddler-size lounger, not clearly infant"
+  },
+  "237113203589": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "336884067266": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "407216753445": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "820213996522": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "198759407113": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "wearable sleep bag, not a lounger"
+  },
+  "800666474097": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "single component only, not complete lounger"
+  },
+  "318750486489": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "800877859939": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "318559664230": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "117485503623": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "298401111463": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "860020516502": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "117506649346": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "205787482237": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "327303785889": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "377547969127": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "158225766691": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "398152659505": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "336529770366": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "407323336786": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "840108361085": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "bag or tote only"
+  },
+  "287752843362": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "366419917308": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "335838909461": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "accessory only, not the lounger"
+  },
+  "197039097197": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "317073739202": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe infant lounger"
+  },
+  "227603412767": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows full Deluxe+ dock in case"
+  },
+  "298536810606": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "bedside sleeper listing, product unclear"
+  },
+  "257640339624": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "234548322700": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "820155979468": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  },
+  "287740405071": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "model train track sleepers"
+  },
+  "325407633744": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo: child lounge seat, not infant sleeper"
+  },
+  "860150872043": {
+   "type": "inclined_sleeper",
+   "is_it": "no",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "model train track sleepers"
+  },
+  "227615987330": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "117372169154": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "900102941787": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "168845991359": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "168884685137": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "infant rocker seat, not the lounger"
+  },
+  "198584959061": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "177926192660": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "177594197889": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "198366647179": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "377433849409": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "198760624307": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "147521498452": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "358812926175": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "206688391461": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "206536947256": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "407363131217": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "327328969280": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "178530166349": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "178132656394": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "287468745585": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "820301171992": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "156730417633": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "178244049790": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "900062516345": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "137434063105": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "397587472184": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "infant lounger or nest itself"
+  },
+  "158143425426": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "336693800187": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "398136146133": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "toddler-size lounger, not clearly infant"
+  },
+  "405938661991": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "376777375196": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "toddler-size lounger, not clearly infant"
+  },
+  "377500469905": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "377545191167": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "377604501329": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "227534778959": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "227534821031": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "396934760492": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "227534804034": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "227591567507": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "960221636785": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Me infant lounger"
+  },
+  "357111201499": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cover or slipcover only"
+  }
+ },
+ "photo_sample": {
+  "checked": 70,
+  "changed": 10,
+  "random_yes_sample": {
+   "checked": 44,
+   "changed": 0
+  },
+  "note": "44 random title-yes items, plus both crib bumper yes items, all 19 title-unclear items and 5 no items were checked by photo"
+ }
+}

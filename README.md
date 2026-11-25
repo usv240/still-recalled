@@ -30,6 +30,11 @@ not see the product: 6 of 7 caught (5 of 6 counting a Craigslist post listed twi
 knows every CPSC recall since 1973 and 392 CPSC safety warnings (the notices CPSC issues when a seller will not recall
 a product), and fetches each new recall and warning from CPSC twice a day.
 
+**The problem, counted.** On November 25, 2026, the first results page of 12 eBay searches held 200 infant loungers,
+nests and padded crib bumpers for sale, asking $12,152, though eBay's policy bans them (an AI reviewer's count of
+1,077 listings, with photos checked for 70; `docs/accuracy.md`, section 29). The recalled, named product was filtered
+out; 111 of the 200 had no brand at all. Those are what the photo check is for.
+
 **And it keeps watching what you bought.** Recall notices reach the first owner, not the next one: Kids In Danger found
 that only 22% of the children's products recalled in 2022 that it could analyze were ever returned, replaced or
 repaired. Watch a listing and Still Recalled checks it against every new recall on your computer, and notifies you if
