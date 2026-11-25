@@ -41,7 +41,7 @@ let audience = 'buyer';
 try { if (localStorage.getItem('sr-audience') === 'owner') audience = 'owner'; } catch { /* no storage */ }
 const WHO = {
   buyer: { title: 'Check a secondhand listing before you buy', add: 'Add a screenshot', hint: 'or drop or paste an image here',
-    lede: 'Add a screenshot of the listing. Still Recalled compares it with every U.S. recall notice and flags recalled baby gear and the infant sleep products linked to deaths.' },
+    lede: 'Add a screenshot of the listing. Still Recalled compares it with every CPSC recall notice and flags recalled baby gear and the infant sleep products linked to deaths.' },
   owner: { title: 'Check what you own before you sell it or pass it on', add: 'Add a photo of it', hint: 'the item, its label, or your draft listing',
     lede: 'Selling it, giving it away, or using a hand-me-down? Add a photo. Still Recalled compares it with U.S. recall notices and safety warnings, and says what to do with it.' },
 };

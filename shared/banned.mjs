@@ -64,6 +64,8 @@ const FOR_DOLLS = /\b(dolls?|doll\s*house|dollhouse|american\s+girl|bitty\s+baby
 
 // Listings for a piece of a product, not the product. A recalled swing's power adapter is not a recalled swing.
 // "Cup holder" alone is not enough: "Stroller w/ Canopy & Cup Holder" sells the stroller.
+// "repuesto" (replacement part) and "solo la funda" (cover only) in Spanish titles.
+const PART_ONLY_ES = /(?<![a-z\u00e0-\u00ff])(repuestos?|solo\s+(la\s+)?(funda|tela|base))(?![a-z\u00e0-\u00ff])/i;
 const PART_ONLY = /\b(replacement\s+(part|parts|seat|pad|cover|leg|arm|piece|strap|straps|tray|canopy|wheel|wheels|battery|basket|fabric|cup\s*holder)|(ac|dc|ac\/dc|ac\s+dc)\s+adapter|power\s+(supply|adapter|cord)|adapter\s+for|charger\s+for|parts?\s+only|manual\s+only|instruction\s+manual|feet\s+caps?|leg\s+pin|cup\s*holder\s+(for|only|attachment))\b/i;
 
 // Listings that often contain a banned item without naming it: multi-piece crib bedding sets usually include a bumper.
@@ -84,15 +86,27 @@ export function mayContain(listingText) {
   return MAY_CONTAIN.filter(m => m.pattern.test(text)).map(m => BANNED_TYPES.find(t => t.key === m.key));
 }
 
+// Spanish names for the same types, as U.S. sellers write them on Craigslist, OfferUp and Facebook Marketplace.
+// Added 2026-11-25; not yet measured on a test set.
+const L = '(?<![a-z\u00e0-\u00ff])', R = '(?![a-z\u00e0-\u00ff])';
+const ES = {
+  crib_bumper: new RegExp(`${L}(chichoneras?|protector(es)?\\s+(acolchad[oa]s?\\s+)?(de|para)\\s+(la\\s+)?cuna|protector(es)?\\s+trenzad[oa]s?|trenzad[oa]s?\\s+(de|para)\\s+cuna)${R}`, 'i'),
+  inclined_sleeper: new RegExp(`${L}((mecedora|dormidor|cuna|moises|mois\u00e9s)\\s+inclinad[oa]|inclinad[oa]\\s+para\\s+beb[e\u00e9])${R}`, 'i'),
+  in_bed_sleeper: new RegExp(`${L}(nido\\s+(de\\s+|para\\s+)?(beb[e\u00e9]s?|reci[e\u00e9]n\\s+nacidos?)|cama\\s+nido|reductor\\s+de\\s+cuna|colch[o\u00f3]n\\s+nido)${R}`, 'i'),
+  drop_side_crib: new RegExp(`${L}(cuna\\s+de\\s+(lado|baranda)\\s+(abatible|corrediz[oa]|deslizable))${R}`, 'i'),
+};
+/** The Spanish pattern for a type, or null. */
+export const spanishPattern = key => ES[key] || null;
+
 /** Banned types whose words appear in the listing text. Doll items never count. */
 export function bannedHints(listingText) {
   const text = listingText || '';
   if (FOR_DOLLS.test(text)) return [];
-  return BANNED_TYPES.filter(t => t.pattern.test(text) && !(t.exclude && t.exclude.test(text)));
+  return BANNED_TYPES.filter(t => (t.pattern.test(text) || (ES[t.key] && ES[t.key].test(text))) && !(t.exclude && t.exclude.test(text)));
 }
 
 /** True when the wording says the listing is a toy version or a spare part, so no recall or ban applies to it. */
 export function notTheProduct(listingText) {
   const text = listingText || '';
-  return FOR_DOLLS.test(text) || PART_ONLY.test(text);
+  return FOR_DOLLS.test(text) || PART_ONLY.test(text) || PART_ONLY_ES.test(text);
 }

@@ -65,10 +65,10 @@ class RecallWorker(context: Context, params: WorkerParameters) : CoroutineWorker
             val open = PendingIntent.getActivity(context, key.hashCode(),
                 Intent(context, MainActivity::class.java).putExtra(MainActivity.OPEN_WATCH, true).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-            val body = "${title.take(80)} may be the ${recall.optString("product").take(80)} CPSC recalled${if (day.isNotEmpty()) " on $day" else ""}."
+            val body = "Stop using it until you check the label. It may be the ${recall.optString("product").take(80)} CPSC recalled${if (day.isNotEmpty()) " on $day" else ""}."
             val n = NotificationCompat.Builder(context, CHANNEL)
                 .setSmallIcon(R.drawable.ic_notify)
-                .setContentTitle("Something you're watching may be recalled")
+                .setContentTitle("Recall: ${title.take(60)}")
                 .setContentText(body)
                 .setStyle(NotificationCompat.BigTextStyle().bigText("$body ${recall.optString("hazard")}"))
                 .setColor(0xFFC4242A.toInt())

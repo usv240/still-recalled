@@ -134,6 +134,7 @@
     }
   ];
   var FOR_DOLLS = /\b(dolls?|doll\s*house|dollhouse|american\s+girl|bitty\s+baby|reborn|barbie|plush\s+(toys?|animals?|dolls?)|stuffed|(sewing|quilt|craft)\s+patterns?|patterns?\s+(cut|uncut)|(simplicity|butterick|mccall'?s?|vogue)\s+(patterns?|house|\d{3,4}))\b/i;
+  var PART_ONLY_ES = /(?<![a-z\u00e0-\u00ff])(repuestos?|solo\s+(la\s+)?(funda|tela|base))(?![a-z\u00e0-\u00ff])/i;
   var PART_ONLY = /\b(replacement\s+(part|parts|seat|pad|cover|leg|arm|piece|strap|straps|tray|canopy|wheel|wheels|battery|basket|fabric|cup\s*holder)|(ac|dc|ac\/dc|ac\s+dc)\s+adapter|power\s+(supply|adapter|cord)|adapter\s+for|charger\s+for|parts?\s+only|manual\s+only|instruction\s+manual|feet\s+caps?|leg\s+pin|cup\s*holder\s+(for|only|attachment))\b/i;
   var MAY_CONTAIN = [
     { key: "crib_bumper", pattern: /\b((crib|nursery|cot|baby)\s+(bedding\s+)?set|(crib|nursery|cot|baby)\s+(\w+\s+){0,2}bedding|\d+\s*-?\s*(pc|pcs|piece)\s+(crib|nursery|baby|bedding)|(crib|nursery|baby)\s+\d+\s*-?\s*(pc|pcs|piece))\b/i },
@@ -144,19 +145,29 @@
     if (FOR_DOLLS.test(text)) return [];
     return MAY_CONTAIN.filter((m) => m.pattern.test(text)).map((m) => BANNED_TYPES.find((t) => t.key === m.key));
   }
+  var L = "(?<![a-z\xE0-\xFF])";
+  var R = "(?![a-z\xE0-\xFF])";
+  var ES = {
+    crib_bumper: new RegExp(`${L}(chichoneras?|protector(es)?\\s+(acolchad[oa]s?\\s+)?(de|para)\\s+(la\\s+)?cuna|protector(es)?\\s+trenzad[oa]s?|trenzad[oa]s?\\s+(de|para)\\s+cuna)${R}`, "i"),
+    inclined_sleeper: new RegExp(`${L}((mecedora|dormidor|cuna|moises|mois\xE9s)\\s+inclinad[oa]|inclinad[oa]\\s+para\\s+beb[e\xE9])${R}`, "i"),
+    in_bed_sleeper: new RegExp(`${L}(nido\\s+(de\\s+|para\\s+)?(beb[e\xE9]s?|reci[e\xE9]n\\s+nacidos?)|cama\\s+nido|reductor\\s+de\\s+cuna|colch[o\xF3]n\\s+nido)${R}`, "i"),
+    drop_side_crib: new RegExp(`${L}(cuna\\s+de\\s+(lado|baranda)\\s+(abatible|corrediz[oa]|deslizable))${R}`, "i")
+  };
   function bannedHints(listingText) {
     const text = listingText || "";
     if (FOR_DOLLS.test(text)) return [];
-    return BANNED_TYPES.filter((t) => t.pattern.test(text) && !(t.exclude && t.exclude.test(text)));
+    return BANNED_TYPES.filter((t) => (t.pattern.test(text) || ES[t.key] && ES[t.key].test(text)) && !(t.exclude && t.exclude.test(text)));
   }
   function notTheProduct(listingText) {
     const text = listingText || "";
-    return FOR_DOLLS.test(text) || PART_ONLY.test(text);
+    return FOR_DOLLS.test(text) || PART_ONLY.test(text) || PART_ONLY_ES.test(text);
   }
 
   // shared/triage.mjs
+  var INFANT_ES = /(?<![a-z\u00e0-\u00ff])(beb[e\u00e9]s?|reci[e\u00e9]n\s+nacid[oa]s?|cunas?|mois[e\u00e9]s|columpios?|mecedor(a|as|es)?|corral(ito|itos|es)?|nidos?\s+(de|para)\s+beb|chichoneras?|portabeb[e\u00e9]s?|hamacas?\s+(de|para)\s+beb)(?![a-z\u00e0-\u00ff])/i;
   var INFANT = /\b(babys?|babies|infants?|newborns?|toddlers?|cribs?|cots?|bassinets?|cradles?|sleepers?|nests?|loungers?|swings?|bouncers?|rockers?|bumpers?|play\s*yards?|playards?|pack\s*'?n\s*'?play|nursery|co-?sleep\w*)\b/i;
   var SLEEPISH = /\b(rockers?|sleepers?|nappers?|loungers?|nests?|pods?|pillows?|cushions?|positioners?|bassinets?|cradles?|swings?|bouncers?|hammocks?|docks?)\b/i;
+  var SLEEPISH_ES = /(?<![a-zà-ÿ])(mecedor(a|as|es)?|mois[eé]s|cunas?|columpios?|hamacas?|nidos?|almohadas?|coj[ií]n(es)?|dormidor(es)?)(?![a-zà-ÿ])/i;
   var brandSets = /* @__PURE__ */ new WeakMap();
   function brands(idx2) {
     let b = brandSets.get(idx2);
@@ -183,8 +194,8 @@
     const candidate = partOrToy ? null : shortlist(idx2, text)[0] || null;
     const hints = partOrToy ? [] : bannedHints(text);
     const maybe = partOrToy ? [] : mayContain(listing.title);
-    const needsEyes = !partOrToy && (!!candidate || hints.length > 0 || maybe.length > 0 || INFANT.test(listing.title));
-    const unnamedSleep = needsEyes && !candidate && !hints.length && !maybe.length && SLEEPISH.test(listing.title) && !namesKnownBrand(idx2, listing.title);
+    const needsEyes = !partOrToy && (!!candidate || hints.length > 0 || maybe.length > 0 || INFANT.test(listing.title) || INFANT_ES.test(listing.title));
+    const unnamedSleep = needsEyes && !candidate && !hints.length && !maybe.length && (SLEEPISH.test(listing.title) || SLEEPISH_ES.test(listing.title)) && !namesKnownBrand(idx2, listing.title);
     return { partOrToy, candidate, hints, maybe, needsEyes, unnamedSleep };
   }
   function wordsOnlyAnswer(candidate) {
@@ -638,7 +649,7 @@ ${LOOKUP_SYSTEM}`;
       name: "Padded crib bumper",
       short: "crib bumper",
       risk: "Selling a padded crib bumper has been against federal law since November 2022. CPSC lists bumpers among the soft items that can suffocate a baby; its advice is nothing but a fitted sheet in a crib.",
-      advice: "A thin, breathable mesh liner is a different product from a padded bumper. Ask which this is before you buy.",
+      advice: "Mesh liners aren't covered by the sales ban, but safe-sleep advice is still nothing in a crib but a fitted sheet, so you don't need either. Ask which this is before you buy.",
       ask: "Hi, before I buy: is this a padded bumper or a thin mesh liner? Could you send a photo of the label?"
     },
     in_bed_sleeper: {
@@ -706,11 +717,11 @@ ${LOOKUP_SYSTEM}`;
       return r.recall && r.recall.all ? "Don't buy it. Every unit of this product is recalled." : "Don't buy it unless the seller's label shows it isn't one of the recalled units.";
     }
     if (r.kind === "banned") {
-      if (r.level === "possible") return "Ask the seller what it is before you buy.";
+      if (r.level === "possible") return r.banned && r.banned.key === "in_bed_sleeper" ? "Ask the seller what it is. If it's a soft padded nest or cushion for a baby to lie in, skip it, whatever it's called." : "Ask the seller what it is before you buy.";
       return {
         crib_bumper: "Skip this one. CPSC's advice: nothing in a crib but a fitted sheet.",
         inclined_sleeper: "Skip this one, and never use an inclined sleeper for sleep.",
-        in_bed_sleeper: "Never use it for sleep, not even for a nap.",
+        in_bed_sleeper: "Skip this one. Babies fall asleep in loungers, and infants have died in them, even during naps.",
         drop_side_crib: "Skip this one: drop-side cribs don't meet today's crib standard."
       }[r.banned && r.banned.key] || "Never use it for sleep.";
     }
@@ -718,7 +729,34 @@ ${LOOKUP_SYSTEM}`;
   }
   function noMatchLine(count, since, input = "listing") {
     const what = input === "typed" ? "the words you typed" : "what the listing shows";
-    return `No recall found for what we could read. That doesn't mean it's safe: ${count} recall notices since ${since} were searched, and only ${what} can be matched.`;
+    return `No recall found for what we could read. That doesn't mean it's safe. We searched ${count} recall notices since ${since}, and can only match ${what}.`;
+  }
+  var SLEEP_PLACE = /\b(cribs?|cots?|bassinets?|cradles?|moses|play\s*yards?|playards?|pack\s*'?n\s*'?play|playpens?|bed(ding)?|mattress(es)?|sleep\w*|co-?sleep\w*|cunas?|moises|corral(ito)?s?)\b/i;
+  var SITTING = /\b(swings?|bouncers?|rockers?|car\s*seats?|infant\s*seats?|carriers?|slings?|strollers?|columpios?|mecedor(a|es)?)\b/i;
+  var LOUNGE = /\b(loungers?|nests?|nids?|pods?|pillows?|cushions?|positioners?|docks?|inclined|nido|almohadas?|cojin(es)?)\b/i;
+  var BEDDING_SET = /\b(bedding|quilts?|comforters?|blankets?|crib\s*sets?)\b/i;
+  var SLEEP_PART = /\b(pads?|mattress(es)?|inserts?|sheets?)\b/i;
+  var CAR_SEAT = /\b(car\s*seats?|infant\s*seats?|booster\s*seats?|boosters?|silla\s+(de\s+)?(auto|carro))\b/i;
+  var CAR_SEAT_LINE = "Car seat recalls are kept by NHTSA, not CPSC, so they aren't checked here. Look up the seat's model and date at nhtsa.gov/recalls.";
+  var ABC = "Every sleep: baby alone, on their back, in a crib, bassinet or play yard with only a fitted sheet.";
+  function sleepLine(text, part = false, r = null) {
+    const t = String(text || "");
+    const key = r && r.kind === "banned" && r.banned ? r.banned.key : "";
+    if (part && SLEEP_PART.test(t) && SLEEP_PLACE.test(t)) {
+      return "This looks like a part, so a recall may not cover it. Use only the mattress or pad that came with the crib, bassinet or play yard: extra padding can suffocate a baby.";
+    }
+    if (part) return "";
+    if (key === "inclined_sleeper" || /\b(inclined|rock\s*'?n\s*'?play)\b/i.test(t)) return `Babies should sleep flat, never in an inclined sleeper, recalled or not. ${ABC}`;
+    if (key === "in_bed_sleeper" || LOUNGE.test(t) && /\b(baby|babies|infant|newborn|bebes?|bebés?)\b/i.test(t)) {
+      return "Not for sleep, recalled or not. If your baby gets sleepy, move them to their crib or bassinet, on their back.";
+    }
+    if (key === "crib_bumper" || BEDDING_SET.test(t)) return `Quilts, comforters, pillows and bumpers from crib sets are for decoration only. ${ABC}`;
+    if (SLEEP_PLACE.test(t)) return ABC;
+    if (SITTING.test(t)) return "Not for sleep. If your baby falls asleep in it, move them to their crib or bassinet, on their back.";
+    return "";
+  }
+  function oldCribLine(text) {
+    return /\bcribs?\b/i.test(text) && !/\b(mini|portable|travel)\b/i.test(text) ? "A crib made before June 28, 2011 likely doesn't meet today's crib standard. Check the date on its label, and that it has every part." : "";
   }
   var FILLER = new Set(`a an the this that these those one ones it its is are was be my your our their his her i me we you
   and or but for with of to in on at by from as so if not no yes ok okay hi hello hey thanks thank please
@@ -735,7 +773,8 @@ ${LOOKUP_SYSTEM}`;
     const partOrToy = r.why === "part or toy" || /part or a toy/.test(r.why || "");
     const vague = !partOrToy && input === "typed" && namesNothing(title);
     const owner = audience === "owner" ? ownerView(r) : null;
-    const safeSleep = INFANT.test(title);
+    const sleep = sleepLine(title, partOrToy);
+    const safeSleep = !!sleep || INFANT.test(title);
     if (vague) {
       return {
         vague,
@@ -747,7 +786,8 @@ ${LOOKUP_SYSTEM}`;
       };
     }
     const line = partOrToy ? "This looks like a part or a toy version, not the product itself." : owner ? owner.action : noMatchLine(grouped(count), monthYear(since || "1973-01-01"), input);
-    if (owner) return { vague, safeSleep, pill: "No match found", line, heading: owner.heading, lines: owner.lines };
+    const extra = [sleep, CAR_SEAT.test(title) ? CAR_SEAT_LINE : "", oldCribLine(title)].filter(Boolean);
+    if (owner) return { vague, safeSleep, pill: "No match found", line, heading: owner.heading, lines: [...owner.lines, ...extra] };
     return {
       vague,
       safeSleep,
@@ -756,7 +796,7 @@ ${LOOKUP_SYSTEM}`;
       heading: "Before you buy",
       lines: [
         "A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.",
-        safeSleep ? "For anything a baby sleeps in: a firm, flat surface with nothing else in it." : ""
+        ...extra
       ].filter(Boolean)
     };
   }
@@ -784,7 +824,7 @@ ${LOOKUP_SYSTEM}`;
   };
   var OWNER_ADVICE = {
     inclined_sleeper: "Many inclined sleepers are also recalled: look for the brand and model on its label.",
-    crib_bumper: "A thin, breathable mesh liner is a different product from a padded bumper. Check which one yours is.",
+    crib_bumper: "Mesh liners aren't covered by the sales ban, but safe-sleep advice is still nothing in a crib but a fitted sheet. Check which one yours is.",
     in_bed_sleeper: "Several loungers have been recalled: look for the brand and model on its label.",
     drop_side_crib: "Check whether a side of the crib slides down, and the manufacture date on its label."
   };
@@ -974,6 +1014,7 @@ ${LOOKUP_SYSTEM}`;
       base2.verdict = verdictLine(base2);
       base2.action = actionLine(base2);
       base2.question = sellerQuestion(base2);
+      base2.sleep = sleepLine(`${listing.title || ""} ${base2.recall ? base2.recall.product : ""}`, false, base2);
       base2.messageUrl = sellerMessageUrl(base2);
       base2.report = cpscReport(base2);
     }
@@ -1254,6 +1295,12 @@ ${LOOKUP_SYSTEM}`;
   }
 
   // shared/live.mjs
+  var TYPE_SAY = {
+    inclined_sleeper: { name: "an inclined sleeper", say: "don't buy it. Selling one has been against federal law since November 2022, and babies have died in them." },
+    crib_bumper: { name: "a padded crib bumper", say: "don't buy it. Selling one has been against federal law since November 2022; a crib needs nothing but a fitted sheet." },
+    in_bed_sleeper: { name: "an infant lounger or nest", say: "skip it. They are never for sleep, babies fall asleep in them, and infants have died in them." },
+    drop_side_crib: { name: "a drop-side crib", say: "don't buy it. Drop-side cribs don't meet the federal crib standard." }
+  };
   var LIVE_TOOL = {
     ...LOOKUP_TOOL,
     // The brand is optional here: an unbranded lounger or bumper is still checked against the banned types.
@@ -1263,7 +1310,7 @@ ${LOOKUP_SYSTEM}`;
   var LIVE_SYSTEM = [
     "You help a parent at a yard sale or thrift store check baby and children's products for U.S. CPSC recalls. You see their phone's camera and hear them.",
     "Call lookup_recalls once for each baby or children's product in view, before you say anything about it: the kind of product always, the brand and product line when you can read or recognise them (leave the brand empty otherwise), and a model number if you can read one. Do not call it again for the same product.",
-    "Say only what lookup_recalls returned. If it returned a recall, say the brand and product, that it may be recalled, and what the notice says about which units, in one or two short sentences, and suggest checking the label. If it returned a banned type, say that type cannot legally be sold. If it returned nothing, say no recall was found in the list for it, which does not mean it is safe.",
+    'Say only what lookup_recalls returned, using its "say" lines. If it returned a recall that covers every unit, say: if this is that product, do not buy it, every unit is recalled. If it returned a recall that covers some units, say the brand and product may be recalled and which units the notice names, and suggest checking the label. If it returned a sleep type, say its "say" line as given. If it returned nothing, say no recall was found in the list for it, which does not mean it is safe, and say its "sleep" line if it has one.',
     "Never say a product is safe or not recalled. Never name a recall number or product that lookup_recalls did not return.",
     "When you cannot read a brand, say what kind of product it is and ask the parent to show you the label or the brand.",
     "Speak in short, plain sentences. Do not describe people or anything that is not a product for sale."
@@ -1274,12 +1321,16 @@ ${LOOKUP_SYSTEM}`;
     const words = `${a.brand} ${a.product} ${a.model_number}`.trim();
     const found = notTheProduct(words) ? [] : lookupCards(index2, a);
     const types = notTheProduct(words) ? [] : bannedHints(words).map((t) => ({ key: t.key, label: t.label, basis: t.basis }));
-    const response = { ...lookupResponse(found), banned_types: types.map((t) => `${t.label}: cannot legally be sold (${t.basis})`) };
-    if (!found.length && types.length) response.note = "No recall notice for that brand and product, but its kind is banned from sale.";
+    const say = [
+      ...found.filter((f) => f.card.all).map((f) => `If this is the ${productName(f.card.product)}: don't buy it. Every unit is recalled.`),
+      ...types.map((t) => TYPE_SAY[t.key] ? `If this is ${TYPE_SAY[t.key].name}: ${TYPE_SAY[t.key].say}` : "")
+    ].filter(Boolean);
+    const response = { ...lookupResponse(found), sleep_types: types.map((t) => t.label), say, sleep: sleepLine(words) };
+    if (!found.length && types.length) response.note = "No recall notice for that brand and product, but its kind is a sleep risk: say its line.";
     return {
       asked: a,
       response,
-      shown: { recalls: found.map(({ card, strength }) => ({ card, strength })), types }
+      shown: { recalls: found.map(({ card, strength }) => ({ card, strength })), types: types.map((t) => ({ ...t, say: TYPE_SAY[t.key] ? `If this is ${TYPE_SAY[t.key].name}: ${TYPE_SAY[t.key].say}` : "" })), sleep: sleepLine(words) }
     };
   }
 

@@ -1324,6 +1324,59 @@ idea, with the demo video as the one Stage One item still open. Its numbers matc
   178 rows (7.2 s over the 156 Gemini Nano looked at); the warning count, 392 in the docs, is right: CPSC's warnings file
   has 393 lines once quoted line breaks are joined, and one of them is the header row (392 records, 392 cards).
 
+## 27. Five AI persona walkthroughs, and release 0.15.0 (2026-11-25)
+
+No parent has used Still Recalled yet. As a stand-in that is clearly not one, five AI agents (Claude) each played a
+realistic U.S. user and walked through the real screens: the live site at phone and laptop size, the extension and
+Android screenshots, and every sentence a user can read. They ran no check and called no model. **These are AI
+persona walkthroughs, not user research**: they find problems worth fixing, and say nothing about how many real people
+would use it. The reports are kept outside the repository.
+
+| Persona (played by Claude) | Where they shop | Would use / recommend (their own 1 to 5) |
+|---|---|---|
+| First-time parent, Columbus, iPhone, Facebook Marketplace | web page | 3 / 4 |
+| Grandfather, 67, Tucson, Android at large text, yard sales | Android app, yard-sale mode | 3 / 2 |
+| Consignment shop owner, Atlanta, eBay and Mercari | "I own it", extension | 3 / 3 |
+| Father of twins, San Antonio, Spanish at home, Craigslist | extension, web page | 2 to 4 / 2 |
+| Safe-sleep nurse educator, Milwaukee children's hospital | every result's wording | recommend 2 |
+
+**What 0.15.0 changes because of them:**
+- **Safe sleep on every sleep-related result** (`shared/present.mjs`, `sleepLine`). Three of the five found the same
+  gap: a result about a product read as the whole answer. Now a crib, bassinet or play yard says "Every sleep: baby
+  alone, on their back, in a crib, bassinet or play yard with only a fitted sheet" (AAP 2022, CPSC Safe Sleep); a swing,
+  bouncer or car seat says it is not for sleep and to move a sleeping baby; a lounger says "not for sleep, recalled or
+  not"; an inclined product says babies sleep flat; a crib bedding set says quilts and comforters are decoration only.
+  The line shows on recall cards too (a recalled lounger's card said only "recalled"), on no-match results, and to
+  owners.
+- **The lounger result says "Skip this one"**, as bumpers and inclined sleepers already did. It said only "Never use it
+  for sleep", which a tired parent can read as "fine for awake time"; babies fall asleep in them.
+- **The mesh-liner line no longer reads as "mesh is fine"**: mesh liners are outside the sales ban, but safe-sleep
+  advice is still nothing in a crib but a fitted sheet.
+- **A play-yard pad or mattress taken for "a part"** now says to use only the one that came with it, since extra padding
+  can suffocate a baby. It was cleared with "a part, not the product itself".
+- **Car seats** get a line on a no-match result: their recalls are kept by NHTSA, not CPSC (nhtsa.gov/recalls). A crib
+  gets the June 28, 2011 standard line. The home page now says "every CPSC recall notice", not "every U.S. recall".
+- **Spanish titles get checked.** An English-only word list meant "Protector para cuna trenzado" (a braided crib
+  bumper) or "Mecedora para bebé" got no look at all, and silence reads as "nothing found". `shared/triage.mjs` and
+  `shared/banned.mjs` now know the Spanish names for baby gear and the four sleep types. 1 of the 1,072 listings in the
+  earlier test sets is touched (it already counted as baby gear in English), so their results stand. Not yet measured
+  on real Spanish listings; 3 unit tests (`tests/spanish.test.mjs`). The screens are still English.
+- **Yard-sale mode is firm, on condition.** For a Rock 'n Play it showed "Possible recall" and "May be banned to sell",
+  while the typed check said "Don't buy it". Now an every-unit recall reads "Don't buy it: if this is the Rock 'n Play
+  Sleepers, every unit is recalled", and a sleep type reads, for example, "If this is an inclined sleeper: don't buy it".
+  Gemini Live is told the same lines. A lounger is no longer called illegal to sell: the voice said "cannot legally be
+  sold" for every type, and loungers are not banned as a class.
+- **Smaller:** the recall notification starts with "Recall:" and the item's name, and says to stop using it until the
+  label is checked; the extension's welcome page says labels are read in the cloud first; the cloud switch's words
+  match its position; the "new" pill wraps at large text; the site has a link preview for Facebook groups and texts.
+
+**What they asked for that is next, not done:** Spanish screens; a saved last result, so the label check still works
+when the seller replies hours later; an intake log with export and batch photos for consignment shops; a seller mode in
+the extension; a quiet yard-sale mode with the microphone optional; a printable "never buy secondhand" card with a QR
+code for WIC offices, crib programs and grandparents; a named maintainer and the web page as the only route offered to
+families until the app is in the Play Store; and a human-checked label set, which the nurse persona put first for any
+hospital to recommend it.
+
 ## Reproduce
 
 ```

@@ -144,6 +144,8 @@ private fun Result(m: AppModel, o: Checker.Outcome, example: Boolean) {
                         Text(it, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(start = 10.dp))
                     }
                 }
+                // Safe sleep, on every result about something a baby sleeps, sits or lies in.
+                r.optString("sleep").takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodyLarge) }
                 if (r.optBoolean("confirmed") && r.optString("evidence").isNotEmpty()) Text(owner?.optString("evidence")?.takeIf { it.isNotEmpty() } ?: r.optString("evidence"), style = MaterialTheme.typography.bodyMedium, color = Ink.muted)
                 // The listing's words did not name the product: the cloud did, and asked the phone's field guide.
                 (owner?.optString("foundBy")?.takeIf { it.isNotEmpty() } ?: r.optString("foundBy")).takeIf { it.isNotEmpty() }?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Ink.muted) }

@@ -5,12 +5,15 @@ import { bannedHints, notTheProduct, mayContain } from './banned.mjs';
 import { uniqueTokens } from './text.mjs';
 
 // Infant products get a photo check even without a recall candidate: a lounger listed as "baby bed" has no telling words.
+// The same in Spanish, with letter boundaries that work for accented words (bebé, moisés).
+export const INFANT_ES = /(?<![a-z\u00e0-\u00ff])(beb[e\u00e9]s?|reci[e\u00e9]n\s+nacid[oa]s?|cunas?|mois[e\u00e9]s|columpios?|mecedor(a|as|es)?|corral(ito|itos|es)?|nidos?\s+(de|para)\s+beb|chichoneras?|portabeb[e\u00e9]s?|hamacas?\s+(de|para)\s+beb)(?![a-z\u00e0-\u00ff])/i;
 export const INFANT = /\b(babys?|babies|infants?|newborns?|toddlers?|cribs?|cots?|bassinets?|cradles?|sleepers?|nests?|loungers?|swings?|bouncers?|rockers?|bumpers?|play\s*yards?|playards?|pack\s*'?n\s*'?play|nursery|co-?sleep\w*)\b/i;
 
 // Kinds of baby product a seller can list with no brand and no telling word, where the shape is the hazard: an
 // inclined sleeper sold as "baby rocker", a lounger sold as "baby pillow". Measured on the fifth blind test: both
 // listings the extension missed were these, and Gemini Nano saw nothing to flag in either photo.
 export const SLEEPISH = /\b(rockers?|sleepers?|nappers?|loungers?|nests?|pods?|pillows?|cushions?|positioners?|bassinets?|cradles?|swings?|bouncers?|hammocks?|docks?)\b/i;
+const SLEEPISH_ES = /(?<![a-zà-ÿ])(mecedor(a|as|es)?|mois[eé]s|cunas?|columpios?|hamacas?|nidos?|almohadas?|coj[ií]n(es)?|dormidor(es)?)(?![a-zà-ÿ])/i;
 
 // Every brand any recall or warning card names (one-word brands, and longer ones whole).
 const brandSets = new WeakMap();
@@ -43,8 +46,8 @@ export function triage(idx, listing) {
   const candidate = partOrToy ? null : shortlist(idx, text)[0] || null;
   const hints = partOrToy ? [] : bannedHints(text);
   const maybe = partOrToy ? [] : mayContain(listing.title);
-  const needsEyes = !partOrToy && (!!candidate || hints.length > 0 || maybe.length > 0 || INFANT.test(listing.title));
-  const unnamedSleep = needsEyes && !candidate && !hints.length && !maybe.length && SLEEPISH.test(listing.title) && !namesKnownBrand(idx, listing.title);
+  const needsEyes = !partOrToy && (!!candidate || hints.length > 0 || maybe.length > 0 || INFANT.test(listing.title) || INFANT_ES.test(listing.title));
+  const unnamedSleep = needsEyes && !candidate && !hints.length && !maybe.length && (SLEEPISH.test(listing.title) || SLEEPISH_ES.test(listing.title)) && !namesKnownBrand(idx, listing.title);
   return { partOrToy, candidate, hints, maybe, needsEyes, unnamedSleep };
 }
 

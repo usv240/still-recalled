@@ -33,6 +33,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -299,27 +300,29 @@ private fun FoundRow(f: JSONObject) {
     val types = shown.optJSONArray("types")
     for (i in 0 until (recalls?.length() ?: 0)) {
         val card = recalls!!.getJSONObject(i).getJSONObject("card")
-        SectionCard {
+        val all = card.optBoolean("all") && !card.optBoolean("warning")
+        SectionCard(tone = if (all) Ink.likelyBg else Ink.surface) {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Pill(if (card.optBoolean("warning")) "CPSC warning" else "Possible recall", "possible")
-                Text(card.optString("product").ifEmpty { card.optString("title") }, style = MaterialTheme.typography.titleSmall)
-                Muted("${if (card.optBoolean("warning")) "Warning" else "Recall"} ${card.optString("id")}, ${card.optString("date")}. ${if (card.optBoolean("all")) "Every unit is recalled." else "Check the label for the model number."}")
+                Pill(if (card.optBoolean("warning")) "CPSC warning" else if (all) "Don't buy it" else "Possible recall", if (all) "likely" else "possible")
+                val product = card.optString("product").ifEmpty { card.optString("title") }
+                Text(if (all) "If this is the $product: every unit is recalled." else product, style = MaterialTheme.typography.titleSmall, color = if (all) Ink.likelyInk else Color.Unspecified)
+                Muted("${if (card.optBoolean("warning")) "Warning" else "Recall"} ${card.optString("id")}, ${card.optString("date").take(10)}. ${if (all) "Check the brand on it; other makers sell look-alikes." else "Check the label for the model number."}")
             }
         }
     }
-    // The type comes from the words Gemini Live used for what it saw, not from a check of the item, so it is a soft
-    // flag here ("may be"), like every other flag that rests on a model's description alone. "Check this one closely"
-    // runs the full check on the frame.
+    // The type comes from the words Gemini Live used for what it saw, not from a check of the item, so the words say
+    // "if this is", and the advice is firm: what to do if it is. "Check this one closely" runs the full check.
     for (i in 0 until (types?.length() ?: 0)) {
         val t = types!!.getJSONObject(i)
-        SectionCard {
+        SectionCard(tone = Ink.likelyBg) {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Pill("May be banned to sell", "possible")
-                Text(t.optString("label"), style = MaterialTheme.typography.titleSmall)
-                Muted("${t.optString("basis")} Gemini described it this way; tap \"Check this one closely\" to check it properly.")
+                Pill("Don't buy it", "likely")
+                Text(t.optString("say").ifEmpty { t.optString("label") }, style = MaterialTheme.typography.titleSmall, color = Ink.likelyInk)
+                Muted("Gemini described what it saw; tap \"Check this one closely\" for the full check.")
             }
         }
     }
+    shown.optString("sleep").takeIf { it.isNotEmpty() }?.let { Muted(it) }
     if ((recalls?.length() ?: 0) == 0 && (types?.length() ?: 0) == 0) SectionCard {
         Text("No recall found for it in the list. That does not mean it has none.", style = MaterialTheme.typography.bodyMedium)
     }

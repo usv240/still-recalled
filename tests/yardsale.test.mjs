@@ -19,13 +19,25 @@ test('a product Gemini names in the camera finds its recall on the device', () =
   assert.ok(r.response.recalls.some(x => x.recall_id === '23088'));
   // Its kind is banned too, and the screen says so.
   assert.ok(r.shown.types.some(t => t.key === 'inclined_sleeper'));
-  assert.ok(r.response.banned_types.length > 0);
+  assert.ok(r.response.sleep_types.length > 0);
+  // Firm, on condition: every unit is recalled, and the type is against federal law to sell.
+  assert.ok(r.response.say.some(l => /^If this is the .*: don't buy it\. Every unit is recalled\./.test(l)));
+  assert.ok(r.response.say.some(l => /inclined sleeper: don't buy it/.test(l)));
 });
 
 test('a banned kind with no recall still warns', () => {
   const r = liveLookup(index, { brand: 'Unknown', product: 'padded crib bumper set' });
   assert.ok(r.shown.types.some(t => t.key === 'crib_bumper'));
-  assert.match(r.response.note || '', /banned from sale/);
+  assert.match(r.response.note || '', /sleep risk/);
+  assert.ok(r.response.say.some(l => /crib bumper: don't buy it/.test(l)));
+});
+
+test('a lounger is never called illegal to sell, and gets the safe-sleep line (0.15.0)', () => {
+  const r = liveLookup(index, { brand: '', product: 'baby lounger nest' });
+  assert.ok(r.shown.types.some(t => t.key === 'in_bed_sleeper'));
+  assert.doesNotMatch(JSON.stringify(r.response), /cannot legally|against federal law/i);
+  assert.ok(r.response.say.some(l => /lounger or nest: skip it/.test(l)));
+  assert.match(r.response.sleep, /Not for sleep/);
 });
 
 test('nothing named: nothing found, and the response never says safe', () => {

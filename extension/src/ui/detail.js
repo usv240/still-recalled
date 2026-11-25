@@ -155,6 +155,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
     statusPill(r),
     h('p', { class: 'verdict-line' }, owner ? owner.verdict : r.verdict),
     (owner ? owner.action : r.action) ? h('p', { class: `action-line ${levelClass(r)}` }, owner ? owner.action : r.action) : null,
+    r.sleep ? h('p', { class: 'evidence sleep-line' }, r.sleep) : null,
     r.confirmed && r.evidence ? h('p', { class: 'evidence' }, owner ? owner.evidence : r.evidence) : null,
     r.foundBy ? h('p', { class: 'evidence found-by' }, owner ? owner.foundBy : r.foundBy) : null,
   ));

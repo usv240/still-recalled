@@ -66,7 +66,7 @@ fun HomeScreen(m: AppModel) {
                 androidx.compose.material3.FilterChip(selected = m.owner, onClick = { m.chooseOwner(true) }, label = { Text("I own it") })
             }
             Text(if (m.owner) "Check what you own before you sell it or pass it on" else "Check a secondhand listing before you buy it", style = MaterialTheme.typography.displaySmall, modifier = Modifier.semantics { heading() })
-            Text("Share a listing or a screenshot from Facebook Marketplace, OfferUp, eBay or any app to Still Recalled. It's checked against every U.S. CPSC recall since 1973 and the infant sleep products linked to deaths.",
+            Text("Share a listing or a screenshot from Facebook Marketplace, OfferUp, eBay or any app to Still Recalled. It's checked against every CPSC recall since 1973 and the infant sleep products linked to deaths.",
                 style = MaterialTheme.typography.bodyLarge, color = Ink.muted)
         }
 
@@ -145,9 +145,10 @@ private fun RecentList(m: AppModel) {
                 Thumb(c.optString("image"))
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                     Text(c.optString("product"), style = MaterialTheme.typography.titleSmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                    @OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Muted("Recalled ${longDate(c.optString("date"))}")
-                        if (c.optBoolean("live")) Text("New since this version", style = MaterialTheme.typography.labelSmall, color = Ink.likelyInk,
+                        if (c.optBoolean("live")) Text("Just added", style = MaterialTheme.typography.labelSmall, color = Ink.likelyInk,
                             modifier = Modifier.background(Ink.likelyBg, Chip).padding(horizontal = 6.dp, vertical = 2.dp))
                     }
                 }

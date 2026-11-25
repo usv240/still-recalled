@@ -125,7 +125,7 @@ fun AboutScreen(m: AppModel) {
             verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Column(Modifier.weight(1f)) {
                 Text("Cloud double-check", style = MaterialTheme.typography.titleSmall)
-                Muted("Off: nothing leaves the phone. Flags stand, marked unconfirmed, and the label check can only raise an alarm.")
+                Muted(if (cloud) "On: flagged and unsettled listings get Gemini's closer look in the cloud. Turn it off and nothing leaves the phone." else "Off: nothing leaves the phone. Flags stand, marked unconfirmed, and the label check can only raise an alarm.")
             }
             Switch(cloud, onCheckedChange = null, colors = SwitchDefaults.colors(checkedTrackColor = Ink.primary, checkedThumbColor = Ink.onPrimary))
         }
