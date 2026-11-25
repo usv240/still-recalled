@@ -55,6 +55,13 @@ export function fitsNotice(spot, record) {
   for (const m of spot.models) if (!inNotice(m)) return `model not in notice: ${m.slice(0, 40)}`;
   const named = [...(record.Manufacturers || []), ...(record.Importers || []), ...(record.Distributors || [])].map(x => x && x.Name).filter(Boolean);
   if (!spot.brands.length && !spot.lines.length && named.length) return 'names nothing, but the notice names a firm';
+  // The years sold: a year the notice never states could drop a real match (a listing from 2019 against an entry
+  // that says 2001 to 2002). 0 (unknown) filters nothing, so it always fits.
+  for (const y of [spot.sold_from, spot.sold_to]) if (y && !text.includes(` ${y} `)) return `year not in notice: ${y}`;
+  // The shopper reads the tell ("which units are recalled") on the card. It is a paraphrase, so its words can differ
+  // from the notice's, but every number and code in it (a year, a date code, a model number) must be the notice's own:
+  // those are what a wrong tell would change to send a shopper away from a recalled unit.
+  for (const n of String(spot.tell).match(/[A-Za-z]*\d[\w-]*/g) || []) if (!inNotice(n)) return `number in tell not in notice: ${n.slice(0, 20)}`;
   return '';
 }
 

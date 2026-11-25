@@ -24,7 +24,7 @@
 <header class="bar"><a class="brand" href="./">Still Recalled</a></header>
 <main class="policy">
 <h1>Privacy</h1>
-<p class="muted">Updated November 16, 2026. This covers the Still Recalled Chrome extension and the web page at still-recalled.web.app.</p>
+<p class="muted">Updated November 25, 2026. This covers the Still Recalled Chrome extension, the web page at still-recalled.web.app and the Android app.</p>
 
 <h2>What stays on your computer</h2>
 <p>The extension reads the listings on eBay, Mercari and Craigslist search pages you open. Every listing is first
@@ -42,19 +42,31 @@ built-in model, otherwise by Gemini in the cloud, and every baby product you che
 on, sends every baby product on a page for the cloud's look, as the web page does. Google processes these requests under
 <a class="link" href="https://firebase.google.com/terms/data-processing-terms" target="_blank" rel="noopener">Firebase's data processing terms</a>.</p>
 
+<h2>Yard-sale mode (Android app)</h2>
+<p>Yard-sale mode is off until you start it. While it runs, your phone's camera (about one frame a second) and
+microphone go to Gemini Live through Firebase AI Logic, so it can name the baby products in view and answer you. The
+recall list on your phone answers every lookup. A session stops on its own after a few minutes, or when you tap Done.
+Point it at the products, not at people.</p>
+
 <h2>What is not collected</h2>
 <ul>
-  <li>No account and no sign-in.</li>
+  <li>No account to make. Each copy of the app signs in to Firebase anonymously: a random id, with no name, email or
+  other personal information, used only so the shared recall guide below knows a real copy of the app wrote an entry.</li>
   <li>No analytics, advertising or tracking, and no data sold or shared.</li>
   <li>No personal information: names, addresses, payment details or messages.</li>
 </ul>
 
 <h2>What is stored</h2>
 <p>The extension keeps its results for each page in your browser for 7 days, so a page you return to isn't checked
-again, and keeps your settings. If you choose <em>Watch for recalls</em> on a listing, its title, price, photo address and link are kept in your browser so it can be checked against new recalls; you can stop watching it in the side panel. Nothing is stored on a server. Removing the extension removes them.</p>
+again, and keeps your settings. If you choose <em>Watch for recalls</em> on a listing, its title, price, photo address and link are kept in your browser so it can be checked against new recalls; you can stop watching it in the side panel. Removing the extension removes them. Your listings, photos, searches and watch list are not stored on a server.</p>
+<p>One thing is stored on a server, and it is about recalls, not about you: the shared recall guide. The first copy of
+the app to see a new CPSC recall stores the short summary Gemini wrote for it in Google's Cloud Firestore, with that
+copy's anonymous id, so other copies can use it without asking Gemini again.</p>
 
 <h2>New recalls</h2>
-<p>Twice a day the extension asks the U.S. Consumer Product Safety Commission's public recall API for recalls published since its list was built, and reads CPSC's public file of safety warnings. The requests contain no information about you. Gemini, through Firebase, reads each new recall notice (a public government document) to write a short summary used for matching. Your watch list is checked on your computer; a watched listing is sent to the cloud only if your computer flags it against a new recall, as described above.</p>
+<p>Twice a day the extension asks the U.S. Consumer Product Safety Commission's public recall API for recalls published since its list was built, and reads CPSC's public file of safety warnings. The requests contain no information about you. Gemini, through Firebase, reads each new recall notice (a public government document) to write a short summary used for matching, or uses the one another copy already wrote (see above). When CPSC's
+service can't be reached, the same public records are read from a copy of them on GitHub, through jsDelivr or
+GitHub's own file server. Your watch list is checked on your computer; a watched listing is sent to the cloud only if your computer flags it against a new recall, as described above.</p>
 
 <h2>Verification</h2>
 <p>To protect the project's model quota, Google's reCAPTCHA Enterprise and Firebase App Check confirm that requests come

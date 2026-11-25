@@ -72,8 +72,11 @@ the cloud off, a label reading that points away from a recall says "Read once: n
 
 ### Every flag ends in something to do
 - **Ask the seller** copies the one question that settles it.
-- **Settle it with the label:** add a photo of the label. Gemini Nano reads it on the device, and code compares it
-  with the notice.
+- **Settle it with the label:** add a photo of the label. Gemini reads it in the cloud first (small print is what
+  Gemini Nano misread in testing), Gemini Nano on the device when there is no signal, and code compares it with the
+  notice.
+- **Yard-sale mode (Android):** point the camera at a table of baby gear. Gemini Live names each product and asks the
+  phone's recall list, and the screen shows only what the list returned.
 - **Report to CPSC** copies a ready report for SaferProducts.gov, offered only where the sale itself is ruled out.
 - **Watch for recalls** checks what you bought against every new recall, on the device, and notifies you. Recall
   notices reach the first owner, never the next one.
@@ -89,12 +92,19 @@ JSON schemas on both models.
 | Word rules | code, on the device | Every listing, against 10,089 recalls and 392 warnings |
 | Gemini Nano | `ONLY_ON_DEVICE` | Baby products the words leave open: title and photo |
 | Gemini, to confirm | `ONLY_IN_CLOUD`, with function calling | What the device flagged or couldn't settle, with the full notice; may call `lookup_recalls`, answered on the device |
-| Screenshot or label photo | `PREFER_ON_DEVICE` | Read on the device when it has Gemini Nano, in the cloud otherwise; the result shows `inferenceSource` |
-| New recalls and warnings | `ONLY_IN_CLOUD` | Each notice CPSC publishes after the build, to write its spotter card |
+| Screenshot | `PREFER_ON_DEVICE` | Read on the device when it has Gemini Nano, in the cloud otherwise; the result shows `inferenceSource` |
+| Label photo | `PREFER_IN_CLOUD` | Read in the cloud first; on the device when there is no signal, and then it can warn but never reassure |
+| New recalls and warnings | Server prompt template, then `ONLY_IN_CLOUD` | Each notice CPSC publishes after the build: the first device writes its field-guide entry through a locked template, and every other device reads it from Firestore |
+| Yard-sale mode (Android) | Live API, with function calling | The camera and microphone; every `lookup_recalls` is answered on the phone |
 
 - **Most listings never leave the laptop:** 77% across the five tests. Nothing is sent just to be screened.
 - **Firebase Remote Config** holds the cloud model list and a switch for the cloud steps, so a retired preview model
   is replaced on every install within about an hour, with no update.
+- **A shared field guide in Cloud Firestore,** with Firebase Authentication (anonymous) and security rules: each new
+  recall's entry is written once and read by every device. Each device checks a shared entry against the notice it
+  fetched from CPSC itself (names, model numbers, years) before using it.
+- **A backup for every service:** three cloud models in turn, three Live locations, and a daily mirror of CPSC's recall
+  list on two CDNs (`docs/backups.md`).
 - **Android runs the extension's own rules, not a rewrite:** the engine is bundled into the app and run in Jetpack's
   JavaScript sandbox, and the function call is answered there.
 - **App Check where there is no attestation provider.** A Chrome extension has none, and Play Integrity needs an app
@@ -110,13 +120,17 @@ after the rules they test were written. 83 should be flagged. The same engine, r
 | Gemini Nano only | 51 | 64 |
 | **Hybrid** | **65** | **12** |
 
-The newest test, 178 listings on this version: 7 of 9 caught, 1 false alarm among 149, and 21% of listings sent to
-the cloud. Its two misses show the extension's limit. One was a Rock 'n Play listed only as "Baby Rocker": Gemini
-Nano saw nothing in the photo, so the listing never left the laptop. Checked one at a time, the way the web page and
-the phone do, all 9 are caught, with 3 soft false alarms and 83% sent to the cloud. That is the trade between privacy
-and reach, and a setting lets the parent choose.
+The fifth test (178 listings, release 0.12.0): 7 of 9 caught, 1 false alarm among 149, and 21% of listings sent to
+the cloud. Its two misses showed the extension's limit: a Rock 'n Play listed only as "Baby Rocker", and a lounger sold
+as a "baby pillow". Gemini Nano saw nothing in either photo, so neither left the laptop. Checked one at a time, the way
+the web page and the phone do, all 9 were caught.
 
-Tests on the shipped builds: 90 unit tests; the packed extension, 18 of 18 end-to-end steps on the live practice
+So 0.14.0 sends a sleep product with no brand and no telling word to the cloud even when Gemini Nano sees nothing. A
+sixth test, 180 new listings aimed at exactly those, run once: 6 of 7 caught, 1 false alarm among 157, 30% of listings
+sent to the cloud. Two of the 7 are one Craigslist post listed twice; counted once, 5 of 6. The rule sent 35 listings
+to the cloud and flagged the 3 that should be flagged, and none of the 28 that should not. Without it, 3 of 7.
+
+Tests on the shipped builds: 108 unit tests; the packed extension, 18 of 18 end-to-end steps on the live practice
 page (version 0.13.0); the Android app, 10 of 10 checks on an emulator, plus a result that survives Android closing
 the app, and 17 of 17 steps on a real Pixel with Gemini Nano reading each listing on the phone. Accessibility, checked by tools rather than by eye: axe-core with the WCAG 2.2 AA rules on 40 views of the
 web page and the extension, 0 violations; on Android, every tappable element at normal and 200 percent text, 48 dp or
@@ -125,7 +139,8 @@ larger and named for screen readers, 0 problems.
 ### Limits, as measured
 - **No person has checked the test labels, and no parent has used it yet.** The labels are by AI reviewers (Claude)
   who could not see the product. Each listing in the newest test has one reviewer's label.
-- **The newest test is small:** 9 listings to flag, 6 of them from two searches that name a hazard.
+- **The newest tests are small:** 9 listings to flag in the fifth, 7 in the sixth (6 distinct), and the sixth's
+  searches were aimed at the rule it tests.
 - **Android with Gemini Nano has run on one phone only**, the builder's own Pixel: 17 of 17 steps. Gemini Nano read
   each listing on the phone in about 1 s, and a whole check took 6.5 to 15.8 s.
 - **Gemini Nano is slow and varies.** About 5 to 11 s a listing, and its answer for the same listing can differ between
@@ -140,9 +155,10 @@ comes from SafeState, my earlier project, a gate that lets a marketplace block r
 Recalled works from the buyer's side, today.
 
 ### Built with
-Firebase AI Logic (web and Android; `ONLY_ON_DEVICE`, `PREFER_ON_DEVICE`, `ONLY_IN_CLOUD`, function calling), Gemini,
-Gemini Nano (Chrome built-in AI; AICore on Android), Firebase Remote Config, Firebase App Check with reCAPTCHA
-Enterprise, Firebase Hosting, Chrome Extensions MV3, Kotlin, Jetpack Compose, Jetpack JavaScriptEngine, WorkManager,
+Firebase AI Logic (web and Android; `ONLY_ON_DEVICE`, `PREFER_ON_DEVICE`, `PREFER_IN_CLOUD`, `ONLY_IN_CLOUD`, function
+calling, server prompt templates, Live API), Gemini, Gemini Live, Gemini Nano (Chrome built-in AI; AICore on Android),
+Cloud Firestore, Firebase Authentication, Firebase Remote Config, Firebase App Check with reCAPTCHA Enterprise,
+Firebase Hosting, GitHub Actions, CameraX, Chrome Extensions MV3, Kotlin, Jetpack Compose, Jetpack JavaScriptEngine, WorkManager,
 CPSC Recall API, CPSC product safety warnings.
 
 ### Sources
@@ -155,7 +171,7 @@ NBC News, "Grieving parents demand online listings for Rock 'n Plays be removed 
 ## Gallery (in this order)
 1. `docs/gallery/1-extension.png`: the extension on the practice listings, one card open.
 2. `docs/gallery/2-android.png`: the Android app: a shared listing matched, and a watched one matched to a new recall.
-3. `docs/gallery/3-label-check.png`: the label check, read on the device.
+3. `docs/gallery/3-label-check.png`: the label check: the model number read from the label and compared with the notice by code.
 4. `docs/gallery/4-new-recalls.png`: a recall published after the build, matched that day, and the watch list.
 5. `docs/gallery/5-hybrid.png`: where each step runs.
 6. `docs/gallery/6-results.png`: the five tests.

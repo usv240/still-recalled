@@ -76,7 +76,7 @@ export function decide(answer, candidate, hints, maybe = []) {
       brand: 'same brand and kind of product; the listing does not state the model',
     }[candidate.strength];
     // Only a matching model number is strong enough to warn on-device. The rest wait for the cloud check.
-    return { level: candidate.strength === 'code' ? 'likely' : 'possible', kind: 'recall', card: candidate.card, banned: null, why };
+    return { level: candidate.strength === 'code' ? 'likely' : 'possible', kind: 'recall', card: candidate.card, banned: null, strength: candidate.strength, why };
   }
 
   const seen = BANNED_TYPES.find(t => t.key === answer.banned_type) || null;

@@ -307,13 +307,16 @@ private fun FoundRow(f: JSONObject) {
             }
         }
     }
+    // The type comes from the words Gemini Live used for what it saw, not from a check of the item, so it is a soft
+    // flag here ("may be"), like every other flag that rests on a model's description alone. "Check this one closely"
+    // runs the full check on the frame.
     for (i in 0 until (types?.length() ?: 0)) {
         val t = types!!.getJSONObject(i)
-        SectionCard(tone = Ink.likelyBg) {
+        SectionCard {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Pill("Banned to sell", "likely")
-                Text(t.optString("label"), style = MaterialTheme.typography.titleSmall, color = Ink.likelyInk)
-                Muted(t.optString("basis"))
+                Pill("May be banned to sell", "possible")
+                Text(t.optString("label"), style = MaterialTheme.typography.titleSmall)
+                Muted("${t.optString("basis")} Gemini described it this way; tap \"Check this one closely\" to check it properly.")
             }
         }
     }

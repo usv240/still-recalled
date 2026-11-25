@@ -364,7 +364,7 @@ Which units: ${c.tell}` : ""}`;
         line: "the listing names this recalled product line",
         brand: "same brand and kind of product; the listing does not state the model"
       }[candidate.strength];
-      return { level: candidate.strength === "code" ? "likely" : "possible", kind: "recall", card: candidate.card, banned: null, why };
+      return { level: candidate.strength === "code" ? "likely" : "possible", kind: "recall", card: candidate.card, banned: null, strength: candidate.strength, why };
     }
     const seen = BANNED_TYPES.find((t) => t.key === answer.banned_type) || null;
     if (hints.length && seen) {
@@ -571,6 +571,13 @@ ${LOOKUP_SYSTEM}`;
     return parts;
   }
   function decideFinal(device, cloud, hints, lookedUp = []) {
+    const r = decideWithCloud(device, cloud, hints, lookedUp);
+    if (cloud && r.level === "none" && device.kind === "recall" && device.strength === "code" && device.card && !device.seen) {
+      return { ...r, level: "possible", kind: "recall", card: device.card, why: "the listing gives a model number this recall lists; the cloud check did not confirm it, so check the label" };
+    }
+    return r;
+  }
+  function decideWithCloud(device, cloud, hints, lookedUp) {
     if (!cloud) {
       const { seen, ...rest } = device;
       return { ...rest, confirmed: false };
@@ -1241,6 +1248,8 @@ ${LOOKUP_SYSTEM}`;
     for (const m of spot.models) if (!inNotice(m)) return `model not in notice: ${m.slice(0, 40)}`;
     const named = [...record.Manufacturers || [], ...record.Importers || [], ...record.Distributors || []].map((x) => x && x.Name).filter(Boolean);
     if (!spot.brands.length && !spot.lines.length && named.length) return "names nothing, but the notice names a firm";
+    for (const y of [spot.sold_from, spot.sold_to]) if (y && !text.includes(` ${y} `)) return `year not in notice: ${y}`;
+    for (const n of String(spot.tell).match(/[A-Za-z]*\d[\w-]*/g) || []) if (!inNotice(n)) return `number in tell not in notice: ${n.slice(0, 20)}`;
     return "";
   }
 

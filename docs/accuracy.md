@@ -1277,6 +1277,10 @@ listings when the session running it restarted, and went on from there with `--r
 - **A bookkeeping bug.** The results file's `unnamedSleep` column came out false on every row: `present()` dropped the
   field. The numbers above come from the triage code and the device's answer instead
   (`tools/scratch/sixth-rule.mjs`). Fixed for later runs.
+- **A duplicate, found by the seventh review.** Two of the 7 are the same Craigslist post listed twice (same title,
+  price and photo: "Brand New in a Package Newborn Baby Nest", ids `3QsxrpnbkwhLoXdzkrFawL` and
+  `mBK4CPDPmCgSpktyKYkWp4`). Counted once: 5 of 6 caught. Five other titles appear twice or more in the set (each a
+  "no"), and the fifth set has three such titles.
 - **What weakens it.** Seven listings that must be flagged is few; each is 14 points. The labels are AI labels, not a
   parent's. The searches were aimed at the rule's own kind of listing (section 24), so the share of listings it fires
   on is higher here than on a page a shopper would browse.
@@ -1290,6 +1294,35 @@ listings when the session running it restarted, and went on from there with `--r
 - Gemini Live in three locations in turn (us-central1, us-east4, us-east5), and a new session when the server says
   the current one is ending.
 - Git bundles of both repositories and a copy of the Android release key on a second local drive.
+
+## 26. A seventh review, and release 0.14.1 (2026-11-25)
+
+A seventh independent review (an AI judge, Claude, not a person) read 0.14.0 from the repository alone, recomputed the
+headline numbers from the result files and scored it 4.5 for technology, 4.0 for design, 3.5 for impact and 4.5 for the
+idea, with the demo video as the one Stage One item still open. Its numbers matched except where listed below. What
+0.14.1 changes from it:
+
+- **An exact model-number match stays a soft flag when the cloud says no** (`shared/confirm.mjs`, `decideFinal`). A
+  model number in the listing that the recall lists is matched by code; the cloud's "no", or its "part or accessory",
+  used to clear it. Now it can weaken it to "Possible recall, check the label", never to nothing. A brand-only match the
+  cloud rules out is still cleared. Test: `tests/round-six.test.mjs`.
+- **A shared field-guide entry must fit the notice in its years and in the numbers of its "which units" line**
+  (`shared/fieldguide.mjs`, `fitsNotice`). A planted entry with years the notice never states could have dropped a real
+  match for a listing that gives its year; one with other model numbers in its "which units" line could have sent a
+  shopper away from a recalled unit. Checked against 264 real entries Gemini wrote at build time with their CPSC
+  notices (`tools/scratch/fits-real.mjs`): 256 fit, the same as before but one. A third check tried, that an "all
+  units" entry come from a notice saying "all units", turned away 117 honest entries and was dropped: that claim can
+  only make a card more cautious. Test: `tests/fieldguide.test.mjs`.
+- **Yard-sale mode shows a banned type as "May be banned to sell"**, not the red "Banned to sell": the type comes from
+  the words Gemini Live used for what it saw, and only the full check ("Check this one closely") looks at the item.
+- **The docs caught up with 0.14.0:** the label photo is read in the cloud first (README, submission, video plan); the
+  sixth test, with the duplicate above, is in the README and the submission; 108 unit tests; the privacy policy covers
+  the anonymous sign-in, the shared guide in Firestore, the recall mirror and yard-sale mode's camera and microphone;
+  the submission lists Firestore, Authentication, server prompt templates and the Live API; the video plan crops
+  marketplace logos (the rules forbid third-party logos in the video).
+- **Two small mismatches it found, left as they are and explained here:** the fifth test's "median 7.0 s" is over all
+  178 rows (7.2 s over the 156 Gemini Nano looked at); the warning count, 392 in the docs, is right: CPSC's warnings file
+  has 393 lines once quoted line breaks are joined, and one of them is the header row (392 records, 392 cards).
 
 ## Reproduce
 

@@ -120,6 +120,17 @@ export function confirmParts({ listing, notice, listingPhoto, recallPhoto, seen 
  * `device.seen`: the recall card the device's own lookup found from a brand read in the photo, if any.
  */
 export function decideFinal(device, cloud, hints, lookedUp = []) {
+  const r = decideWithCloud(device, cloud, hints, lookedUp);
+  // A model number in the listing that the recall lists was matched by code, not by a model. The cloud may weaken it
+  // (a photo that shows another model), but its "no" alone never removes it: the card stays a soft flag that says to
+  // check the label. Nothing in Still Recalled reassures on one model's word.
+  if (cloud && r.level === 'none' && device.kind === 'recall' && device.strength === 'code' && device.card && !device.seen) {
+    return { ...r, level: 'possible', kind: 'recall', card: device.card, why: 'the listing gives a model number this recall lists; the cloud check did not confirm it, so check the label' };
+  }
+  return r;
+}
+
+function decideWithCloud(device, cloud, hints, lookedUp) {
   if (!cloud) {
     // The device's own lookup is a guess for the cloud to check (the built-in model often gives a brand it did not
     // read). Unchecked, it is not shown: the decision is what the device had without it.

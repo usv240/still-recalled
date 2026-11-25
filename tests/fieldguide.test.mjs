@@ -53,3 +53,11 @@ test('entryDoc: the stored document', () => {
   assert.equal(d.v, 1);
   assert.equal(d.by, 'abc');
 });
+
+test('fitsNotice: a planted year or model number in the tell is refused (0.14.1)', () => {
+  // Years the notice never states could drop a real match for a listing that gives its year.
+  assert.match(fitsNotice({ ...spot, sold_from: 2001, sold_to: 2002 }, record), /year not in notice/);
+  assert.equal(fitsNotice({ ...spot, sold_from: 0, sold_to: 0 }, record), '');
+  // A tell that names other model numbers would send a shopper away from a recalled unit.
+  assert.match(fitsNotice({ ...spot, tell: 'Only model KV-9900 is recalled.' }, record), /number in tell/);
+});

@@ -85,3 +85,17 @@ test('a warnings file with renamed columns is an error, not "no warnings"', () =
   assert.throws(() => warningRecords('"Warning Number","Date","Title"\n27-099,"November 19, 2026","X"\n'), /unexpected columns/);
   assert.equal(warningRecords('').length, 0);
 });
+
+test('a model number the recall lists stays a soft flag when the cloud says no (0.14.1)', () => {
+  const card = { id: '27092', brands: [['kidsview']], codes: ['KV-2201'] };
+  const device = { level: 'likely', kind: 'recall', card, banned: null, strength: 'code', why: 'model number' };
+  for (const cloud of [{ what_is_for_sale: 'the_product', matches_recall: 'no', banned_type: 'none' },
+                       { what_is_for_sale: 'part_or_accessory', matches_recall: 'no', banned_type: 'none' }]) {
+    const r = decideFinal(device, cloud, []);
+    assert.equal(r.level, 'possible');
+    assert.equal(r.card.id, '27092');
+  }
+  // A brand-only match the cloud rules out is still cleared, as before.
+  const brandOnly = { ...device, level: 'possible', strength: 'brand' };
+  assert.equal(decideFinal(brandOnly, { what_is_for_sale: 'the_product', matches_recall: 'no', banned_type: 'none' }, []).level, 'none');
+});

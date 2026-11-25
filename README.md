@@ -24,8 +24,9 @@ The same two files are also on the site, in case GitHub is down:
 **What it found on real listings.** In five blind tests on 775 used baby-gear listings from eBay, Mercari and
 Craigslist, 83 were recalled products, padded crib bumpers, infant loungers or inclined sleepers, asking $6,063 in
 total. Still Recalled flagged 65 of them ($5,022), with 12 false alarms among the 630 listings that were fine. Word
-rules alone raised 109. 77% of the listings never left the computer (each test on the engine of its day). The fifth test is this version's
-own: 178 new listings, labelled by AI reviewers who could not see the product: 7 of 9 caught, 1 false alarm among 149. It
+rules alone raised 109. 77% of the listings never left the computer (each test on the engine of its day). A sixth test
+was this version's own: 180 new listings aimed at sleep products sold with no brand, labelled by AI reviewers who could
+not see the product: 6 of 7 caught (5 of 6 counting a Craigslist post listed twice only once), 1 false alarm among 157. It
 knows every CPSC recall since 1973 and 392 CPSC safety warnings (the notices CPSC issues when a seller will not recall
 a product), and fetches each new recall and warning from CPSC twice a day.
 
@@ -75,7 +76,8 @@ Clicking the badge opens a card that shows:
   listing's link and opens the SaferProducts.gov form. CPSC asks shoppers who find a recalled product for sale online
   to report it there, and its e-commerce team has such listings taken down;
 - **Settle it with the label**, on a possible recall: add a photo of the product's label (from the seller, or of the
-  item in front of you). The built-in model reads the model number and date, and code compares them with the notice.
+  item in front of you). Gemini reads the model number and date, in the cloud first (small print is what Gemini Nano
+  was measured to misread) and on the device when there is no signal, and code compares them with the notice.
 
 The side panel lists every flag on the page. The toolbar icon shows how many there are.
 
@@ -186,11 +188,12 @@ Three more places the device and the cloud work together:
   the word rules and the built-in model use them on the shopper's computer with no cloud call. Matching stays in code.
 - **The cloud shows where.** Its answer includes a box around what decided it, and the card outlines that part of the
   seller's photo.
-- **The device can raise the alarm on a label, but not clear it.** The built-in model reads a label photo, and a match
-  to a recalled model stands on that reading alone. A reading that would reassure the shopper is read again in the
-  cloud first; with the cloud check off (the photo then stays on the computer), the card says "Read once, on this
-  device: not ruled out". On 12 real label photos from CPSC notices, this read 8 recalled model numbers correctly and gave no
-  wrong answer; the built-in model alone misread one ("615573" as "S16578") and would have said it wasn't recalled.
+- **Labels are read in the cloud first; the device can raise the alarm, but not clear it.** Firebase AI Logic hybrid
+  inference with `PREFER_IN_CLOUD`: a label photo goes to Gemini in the cloud, and to Gemini Nano on the device only
+  when the cloud can't be reached or the cloud check is off. A device reading can warn on its own; a reading that
+  would reassure says "Read once, on this device: not ruled out". On 12 real label photos from CPSC notices, Gemini Nano
+  alone misread one recalled model number ("615573" as "S16578") and would have said it wasn't recalled, which is why
+  the cloud reads first.
 
 Where Firebase AI Logic is called:
 - [extension/src/ai.js](extension/src/ai.js): `deviceModel`, `cloudJson`, `hybridModel` and `hybridJson`. The cloud side
@@ -260,6 +263,7 @@ Method, every miss and the limits are in [docs/accuracy.md](docs/accuracy.md).
 | Third, after fixes: eBay, Mercari and Craigslist | 176 | 28 of 34 | 6 of 133 |
 | Fourth, with every recall since 1973: eBay and Craigslist | 160 | 18 of 22 | 1 of 116 |
 | Fifth, on release 0.12.0: eBay and Craigslist | 178 | 7 of 9 | 1 of 149 |
+| Sixth, on release 0.14.0: unbranded sleep products, eBay and Craigslist | 180 | 6 of 7 (one post listed twice) | 1 of 157 |
 
 - By kind: recall matches 7 of 9, infant loungers and nests 39 of 49, padded crib bumpers 19 of 24, inclined sleepers
   0 of 1.
