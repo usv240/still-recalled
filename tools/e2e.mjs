@@ -247,7 +247,8 @@ try {
 const failed = results.steps.filter(s => !s.ok).length;
 // Kept per run kind: the packed release or the development build, with or without the built-in model.
 const manifest = JSON.parse(readFileSync(path.join(extDir, 'manifest.json'), 'utf8'));
-const kind = `${/dist|still-recalled-extension/.test(extDir) ? 'release' : 'dev'}${keptProfile ? '-nano' : ''}`;
+const where = urlArg ? `-${(new URL(urlArg).hostname.split(".").slice(-2, -1)[0] || "site").replace("web", "try")}` : "";
+const kind = `${/dist|still-recalled-extension/.test(extDir) ? "release" : "dev"}${keptProfile ? "-nano" : ""}${where}`;
 writeFileSync(path.resolve(`tools/e2e-report-${kind}.json`), JSON.stringify({ at: new Date().toISOString(), version: manifest.version, ext: extDir, builtInModelProfile: !!keptProfile, url: urlArg || null, query, passed: results.steps.length - failed, failed, ...results }, null, 2));
 console.log(JSON.stringify({ passed: results.steps.length - failed, failed }, null, 0));
 process.exit(failed ? 1 : 0);

@@ -21,11 +21,11 @@ no keyword filter catches it.
 **Still Recalled puts the warning on the listing.** It badges that set **Padded crib bumper**, outlines the bumper in
 the seller's photo, and says what to do: **Skip this one. CPSC's advice: nothing in a crib but a fitted sheet.** It
 works in Chrome on Facebook Marketplace, eBay, Mercari and Craigslist search pages, on Android for a listing or
-screenshot shared from any app (OfferUp and Facebook's own app included), and on a web page for a screenshot. Resale
+screenshot shared from another app or the share menu, and on a web page for a screenshot. Resale
 shops get an intake log and a page on what federal law says they can't sell.
 
-**On 775 real listings it had never seen, sellers were asking $6,063 for baby gear that should have been flagged.
-Still Recalled flagged $5,022 of it,** and raised 12 false alarms among 630 ordinary listings. Keyword rules alone
+**On 775 real listings it had never seen, in five blind tests (each on the engine of its day), sellers were asking
+$6,063 for baby gear that should have been flagged. Still Recalled flagged $5,022 of it,** and raised 12 false alarms among 630 ordinary listings. Keyword rules alone
 raised 109.
 
 ### Try it in a minute
@@ -66,8 +66,10 @@ time. So its answer is never shown. It only sends the listing to the cloud as a 
 is never more than "Possible recall". On 23 real listings with the brand stripped from the title, the two lookups
 named the right recall on 12 and a wrong one on none.
 
-**The rule all four taught me: the device may raise an alarm alone, but never reassure alone.** A small model that
-says "looks fine" is the dangerous case, so anything that would reassure a parent is checked again in the cloud. With
+**The rule all four taught me: where it matters most, the device may raise an alarm alone, but not reassure alone.**
+A small model that says "looks fine" is the dangerous case. So an exact model-number match, an infant sleep product
+with no brand named, and a label reading all go to the cloud before anything sounds reassuring. (On ordinary word
+matches the device does clear listings itself: that is how 109 false alarms became 12.) With
 the cloud off, a label reading that points away from a recall says "Read once: not ruled out". The app never says
 "safe".
 
@@ -98,7 +100,7 @@ JSON schemas on both models.
 | New recalls and warnings | Server prompt template, then `ONLY_IN_CLOUD` | Each notice CPSC publishes after the build: the first device writes its field-guide entry through a locked template, and every other device reads it from Firestore |
 | Yard-sale mode (Android) | Live API, with function calling | The camera and microphone; every `lookup_recalls` is answered on the phone |
 
-- **Most listings never leave the laptop:** 77% across the five tests. Nothing is sent just to be screened.
+- **Most listings never leave the laptop:** 77% across the five tests. Listings that aren't baby products are never sent.
 - **Firebase Remote Config** holds the cloud model list and a switch for the cloud steps, so a retired preview model
   is replaced on every install within about an hour, with no update.
 - **A shared field guide in Cloud Firestore,** with Firebase Authentication (anonymous) and security rules: each new
@@ -131,14 +133,14 @@ sixth test, 180 new listings aimed at exactly those, run once: 6 of 7 caught, 1 
 sent to the cloud. Two of the 7 are one Craigslist post listed twice; counted once, 5 of 6. The rule sent 35 listings
 to the cloud and flagged the 3 that should be flagged, and none of the 28 that should not. Without it, 3 of 7.
 
-Tests: 118 unit tests; the web page's saved checks, log and Spanish, 12 of 12 steps on the development build; the packed extension, 18 of 18 end-to-end steps on the live practice
+Tests: 121 unit tests; the web page's saved checks, log and Spanish, 12 of 12 steps on the development build; the packed extension, 18 of 18 end-to-end steps on the live practice
 page (the packed release, version 0.12.1; version 0.13.0 as a development build); the Android app, 15 of 15 checks on an emulator with the 0.16.0 release build (one of them a result that survives Android closing
 the app), and 17 of 17 steps on a real Pixel with Gemini Nano reading each listing on the phone. Accessibility, checked by tools rather than by eye: axe-core with the WCAG 2.2 AA rules on 40 views of the
 web page and the extension, 0 violations; on Android, every tappable element at normal and 200 percent text, 48 dp or
 larger and named for screen readers, 0 problems.
 
 ### The problem, counted
-On November 25, 2026, the first results page of 12 eBay searches (1,077 listings) held 200 infant loungers, nests and
+On November 25, 2026, the first results page of 11 eBay searches (1,077 listings; a twelfth returned nothing) held 200 infant loungers, nests and
 padded crib bumpers for sale, asking $12,152 in all, though eBay's own policy bans them. An AI reviewer (Claude)
 labelled every flagged listing and checked 70 photos. eBay's filters caught the recalled, named product (no recalled
 Boppy lounger was there, only covers); about 90 of the 200 had no brand word in the title. A generic lounger under a generic title is
@@ -157,7 +159,7 @@ owner, a father of twins whose family speaks Spanish at home, and a hospital saf
 became 0.15.0: the safe-sleep basics (alone, on the back, in a crib) on every sleep-related result, a lounger result
 that says "skip this one", Spanish titles checked, car seats pointed to NHTSA, and yard-sale mode firm about a
 Rock 'n Play. Then what they asked for next (0.16.0): a printable card with a QR code for WIC offices and crib
-programs, Spanish, saved checks for when the seller's label photo arrives, and an intake log for resale shops. Details
+programs, Spanish (an AI translation, labelled as one), saved checks for when the seller's label photo arrives, and an intake log for resale shops. Details
 in `docs/accuracy.md`, sections 27 and 28.
 
 ### Limits, as measured
@@ -174,7 +176,9 @@ in `docs/accuracy.md`, sections 27 and 28.
 Every label, every miss and the method are in `docs/accuracy.md`.
 
 ### Built during the submission period
-I built all of Still Recalled during the submission period, starting November 14, 2026. It reuses no code. The idea
+I built all of Still Recalled during the submission period, starting November 14, 2026. It reuses no code. I wrote it
+with Claude Code (Claude Opus) as my coding agent, using Firebase's agent skills; the test labels, reviews, personas
+and Spanish translation are also Claude's, and are labelled as such. The idea
 comes from SafeState, my earlier project, a gate that lets a marketplace block recalled units at resale; Still
 Recalled works from the buyer's side, today.
 
@@ -183,7 +187,7 @@ Firebase AI Logic (web and Android; `ONLY_ON_DEVICE`, `PREFER_ON_DEVICE`, `PREFE
 calling, server prompt templates, Live API), Gemini, Gemini Live, Gemini Nano (Chrome built-in AI; AICore on Android),
 Cloud Firestore, Firebase Authentication, Firebase Remote Config, Firebase App Check with reCAPTCHA Enterprise,
 Firebase Hosting, GitHub Actions, CameraX, Chrome Extensions MV3, Kotlin, Jetpack Compose, Jetpack JavaScriptEngine, WorkManager,
-CPSC Recall API, CPSC product safety warnings.
+CPSC Recall API, CPSC product safety warnings. Built with Claude Code (Claude Opus) and Firebase agent skills.
 
 ### Sources
 NBC News, "Grieving parents demand online listings for Rock 'n Plays be removed before more babies die", April 21,
@@ -200,6 +204,7 @@ NBC News, "Grieving parents demand online listings for Rock 'n Plays be removed 
 5. `docs/gallery/5-hybrid.png`: where each step runs.
 6. `docs/gallery/6-results.png`: the five tests.
 7. `docs/gallery/7-web-page.png`: the web page on a phone.
+8. `docs/gallery/8-census.png`: the problem, counted: 253 listings on eBay and Craigslist in one day (AI-labelled; `scripts/make-census-image.mjs`).
 
 ---
 

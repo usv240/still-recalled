@@ -1,0 +1,413 @@
+{
+  "at": "2026-11-25T15:36:18.210Z",
+  "version": "0.17.0",
+  "ext": "dist/still-recalled-extension",
+  "builtInModelProfile": false,
+  "url": "https://www.facebook.com/marketplace/charlotte/search?query=baby%20lounger",
+  "query": "baby lounger",
+  "passed": 16,
+  "failed": 0,
+  "steps": [
+    {
+      "name": "extension installs",
+      "ok": true,
+      "detail": "hpjnflbbhaokhgcoikhndmjapdiilkaa"
+    },
+    {
+      "name": "service worker starts",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "recall list catches up with CPSC",
+      "ok": true,
+      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 0 with field-guide entries from the cloud, 5 s"
+    },
+    {
+      "name": "search page loads",
+      "ok": true,
+      "detail": "Facebook (15 item links)"
+    },
+    {
+      "name": "engine checks the listings",
+      "ok": true,
+      "detail": "15 of 15 checked in 48 s"
+    },
+    {
+      "name": "no engine errors",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "cloud double-check runs",
+      "ok": true,
+      "detail": "14 confirmed in the cloud, 0 cloud errors "
+    },
+    {
+      "name": "settings come from Remote Config",
+      "ok": true,
+      "detail": "remote: gemini-4-hydrogen, gemini-3.5-flash-lite; cloud on; 8 at once"
+    },
+    {
+      "name": "badges appear on flagged listings",
+      "ok": true,
+      "detail": "14 badges for 14 flagged"
+    },
+    {
+      "name": "toolbar count matches",
+      "ok": true,
+      "detail": "toolbar \"14\", flagged 14"
+    },
+    {
+      "name": "badge click stays on the page",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "card offers the next step",
+      "ok": true,
+      "detail": "Ask the seller: yes; Report to CPSC: no (only on likely flags the law rules out)"
+    },
+    {
+      "name": "thorough setting: turned on, the open page's baby products get the cloud's look",
+      "ok": true,
+      "detail": "14 listings had been to the cloud, 15 after; 1 checked again; 15 flagged (14 before)"
+    },
+    {
+      "name": "new recalls arrive from CPSC",
+      "ok": true,
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 6 s"
+    },
+    {
+      "name": "new CPSC safety warnings arrive too",
+      "ok": true,
+      "detail": "4 warnings (W27-079, W27-089, W27-080, W27-081)"
+    },
+    {
+      "name": "watched listing raises an alert",
+      "ok": true,
+      "detail": "likely / Recalled product: recall 27086, confirmed in the cloud"
+    }
+  ],
+  "catchUp": {
+    "added": 9,
+    "written": 0,
+    "shared": 9,
+    "total": 9,
+    "checkedAt": "2026-11-25T15:34:50.236Z",
+    "hits": 0,
+    "cards": [
+      {
+        "id": "27099",
+        "date": "2026-11-19",
+        "product": "Xentrawave XT016 and XT026 Adult Portable Bed Rails",
+        "guide": false
+      },
+      {
+        "id": "27091",
+        "date": "2026-11-19",
+        "product": "Model Year 2024-2026 Vanderhall Brawley GTS electric recreational off highway vehicles",
+        "guide": false
+      },
+      {
+        "id": "27094",
+        "date": "2026-11-19",
+        "product": "Qpancy Children’s Pajama Sets",
+        "guide": false
+      },
+      {
+        "id": "27097",
+        "date": "2026-11-19",
+        "product": "Ororo PD10K-Pro Rechargeable Lithium-Ion Battery Packs",
+        "guide": false
+      },
+      {
+        "id": "27092",
+        "date": "2026-11-19",
+        "product": "Kidsview Infant Bouncer",
+        "guide": false
+      },
+      {
+        "id": "27090",
+        "date": "2026-11-19",
+        "product": "Custom Leather Craft (CLC) Lighted Portfolio, Johnson Level & Tool (Johnson Level) Digital Angle Locator, Digital Calip…",
+        "guide": false
+      },
+      {
+        "id": "27093",
+        "date": "2026-11-19",
+        "product": "Fidlock Hermetic Dry Bags",
+        "guide": false
+      },
+      {
+        "id": "27098",
+        "date": "2026-11-19",
+        "product": "Cipton Bike Helmets",
+        "guide": false
+      },
+      {
+        "id": "27096",
+        "date": "2026-11-19",
+        "product": "CHE-US Magnetic Robot Toys",
+        "guide": false
+      }
+    ],
+    "ms": 5370
+  },
+  "cloudChecked": 14,
+  "cloudErrors": [],
+  "flagged": [
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Breathable Baby Lounger Nest",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "LOEVIN Baby Nest Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "possible",
+      "badge": "Possible recall",
+      "title": "Baby lounger",
+      "recall": "21198",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "Boppy",
+            "model_number": "",
+            "product": "Newborn Lounger"
+          },
+          "found": [
+            "21198"
+          ]
+        }
+      ]
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Freejoy Baby Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Nest Sleeper /Docking Station - Tropical Leaf Print",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle Me Organic Newborn Baby Infant Lounger & Travel Bag - Natural",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "Snuggle Me",
+            "model_number": "",
+            "product": "Lounger Curve"
+          },
+          "found": []
+        }
+      ]
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Sleepyhead Deluxe Plus Infant Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "DockATot",
+            "model_number": "",
+            "product": "Deluxe+ lounger"
+          },
+          "found": []
+        }
+      ]
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Just listed, Infant Loungers",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "possible",
+      "badge": "Possible lounger",
+      "title": "Bedside Bassinet and Infant Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "possible",
+      "badge": "Possible lounger",
+      "title": "Docatot lounger dupe",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby nest lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "possible",
+      "badge": "Possible lounger",
+      "title": "Baby Loungers, Baby Bassinets for newborn",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "biliboo",
+            "model_number": "",
+            "product": "baby lounger"
+          },
+          "found": []
+        }
+      ]
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Infant lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    }
+  ],
+  "thorough": {
+    "cloudBefore": 14,
+    "cloudAfter": 15,
+    "recheckedListings": 1,
+    "flaggedBefore": 14,
+    "flaggedAfter": 15,
+    "newlyFlagged": [
+      "Possible lounger: Baby items"
+    ]
+  },
+  "live": {
+    "out": {
+      "added": 20,
+      "written": 0,
+      "shared": 20,
+      "total": 20,
+      "checkedAt": "2026-11-25T15:36:12.180Z",
+      "hits": 1
+    },
+    "ms": 6362,
+    "alert": {
+      "at": "2026-11-25T15:36:17.529Z",
+      "badge": "Recalled product",
+      "confirmed": true,
+      "level": "likely",
+      "recall": {
+        "all": false,
+        "codes": [
+          "E4004",
+          "500-WATT",
+          "48-VOLT"
+        ],
+        "date": "2026-11-12",
+        "from": 2024,
+        "hazard": "The recalled tricycles’ rear wheels can become loose or separate from the rear frame, posing a risk of serious injury from a fall hazard.",
+        "id": "27086",
+        "image": "https://www.cpsc.gov/s3fs-public/Huffy1.jpg?VersionId=QLL20sS7WlVoNJa5y3bJY3doTHAPJyhs",
+        "more": false,
+        "number": "27086",
+        "product": "Buzz Bicycles Cerana T2 E-Trike",
+        "remedy": "Consumers should stop using the recalled tricycles immediately and contact Huffy for free replacement rear axle assemblies. The rear wheel axle assemblies will be sent directly to consumers or to a third-party who will repair the tricycle. Huffy Corporation will reimburse consumers up to $100 for charges incurred by the third-party repair.",
+        "tell": "",
+        "title": "Huffy Recalls Buzz Bicycles Cerana T2 E-Trikes Due to Risk of Serious Injury from Fall Hazard",
+        "to": 2026,
+        "url": "https://www.cpsc.gov/Recalls/2027/Huffy-Recalls-Buzz-Bicycles-Cerana-T2-E-Trikes-Due-to-Risk-of-Serious-Injury-from-Fall-Hazard",
+        "warning": false
+      },
+      "seen": false,
+      "verdict": "Looks like the Buzz Bicycles Cerana T2 E-Trike, recalled November 2026."
+    },
+    "ids": [
+      "27099",
+      "27091",
+      "27094",
+      "27097",
+      "27092",
+      "27090",
+      "27093",
+      "27098",
+      "27096",
+      "27083",
+      "27084",
+      "27085",
+      "27086",
+      "27087",
+      "27088",
+      "27082",
+      "W27-079",
+      "W27-089",
+      "W27-080",
+      "W27-081"
+    ],
+    "guide": 0
+  }
+}

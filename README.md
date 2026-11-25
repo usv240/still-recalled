@@ -31,7 +31,7 @@ not see the product: 6 of 7 caught (5 of 6 counting a Craigslist post listed twi
 knows every CPSC recall since 1973 and 392 CPSC safety warnings (the notices CPSC issues when a seller will not recall
 a product), and fetches each new recall and warning from CPSC twice a day.
 
-**The problem, counted.** On November 25, 2026, the first results page of 12 eBay searches held 200 infant loungers,
+**The problem, counted.** On November 25, 2026, the first results page of 11 eBay searches (a twelfth returned nothing) held 200 infant loungers,
 nests and padded crib bumpers for sale, asking $12,152, though eBay's policy bans them (an AI reviewer's count of
 1,077 listings, with photos checked for 70; `docs/accuracy.md`, section 29). The recalled, named product was filtered
 out; about 90 of the 200 had no brand word in the title. Those are what the photo check is for. The same day,
@@ -120,9 +120,10 @@ flags only ────── 3. Gemini in the cloud, via Firebase AI Logic ─�
                     is this the recalled product? cannot tell? what should the buyer check?
 ```
 
-- **Extension:** step 2 uses `InferenceMode.ONLY_ON_DEVICE`. A shopper's browsing is never sent to the cloud just to
-  be screened. Step 3 gets the listings flagged on the computer, and the ones the words can't settle without a closer
-  look at the photo: bedding sets that may hide a bumper, and "parts" whose words name a risky type. A crib bedding
+- **Extension:** step 2 uses `InferenceMode.ONLY_ON_DEVICE`. Listings that aren't baby products are never sent to
+  the cloud. Step 3 gets the listings flagged on the computer, and the ones the words can't settle without a closer
+  look at the photo: bedding sets that may hide a bumper, "parts" whose words name a risky type, and infant sleep
+  products that name no known brand, even when the computer cleared them. A crib bedding
   search therefore sends most of its page; a lounger search, few.
 - **Web page:** steps 1 and 2 use `InferenceMode.PREFER_ON_DEVICE`. The same code runs on the built-in model in
   desktop Chrome and falls back to Gemini on phones. The page shows which one was used.
@@ -400,7 +401,9 @@ What protects the project's model quota:
 
 ## Privacy
 
-- Listings that the word rules and the built-in model clear stay on the computer.
+- Listings that the word rules and the built-in model clear stay on the computer. One exception: an infant sleep product that names no known brand (a "baby nest", a "lounger") goes to the cloud for a
+  look at its photo even when the computer cleared it, because a generic title is how those are sold (0.14.0; about one
+  listing in five in the sixth test).
 - A flagged listing's title, description, price and photo are sent to Gemini through Firebase AI Logic, with the recall
   notice, for the double check. You can turn the cloud check off in the side panel's settings. A second setting, off
   by default, sends every baby product on a page for the cloud's look.
@@ -416,7 +419,9 @@ What protects the project's model quota:
   listing around it, `web/example/listing-26591.jpg` (`scripts/make-example.mjs`), is made up.
 - **Font:** Geist, SIL Open Font License, © Vercel ([extension/fonts/Geist-LICENSE.txt](extension/fonts/Geist-LICENSE.txt)).
 - **Origins:** Still Recalled was built during the #BuildHybridAI submission period, from November 14, 2026, and
-  reuses no code. The idea comes from my earlier project, [SafeState](https://safestate.vercel.app). SafeState gives
+  reuses no code. It was written with Claude Code (Claude Opus) as the coding agent, using Firebase's agent skills; the
+  test labels, reviews, personas and Spanish translation are also Claude's, and are labelled as such wherever they
+  appear. The idea comes from my earlier project, [SafeState](https://safestate.vercel.app). SafeState gives
   marketplaces a gate that blocks recalled units at the moment of resale, but only once a marketplace adopts it.
   Still Recalled works from the buyer's side, today, on listings no one has screened. It adds the infant sleep
   products that are dangerous even when no recall names them.

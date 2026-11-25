@@ -1217,7 +1217,7 @@ on the Agent Platform in us-central1) watches one frame a second and listens. Fo
 the app's rules engine). The rows on screen come from that answer, not from the model. "Check this one closely" sends
 the frame through the full check, with Gemini Nano on the phone first. A session is capped at two minutes (Remote
 Config `yard_sale_minutes`), and Remote Config can switch the mode off or change the model.
-- **The Live flow, tested from the PC** (`tools/scratch/live-probe.mjs`): the same endpoint, App Check, prompt,
+- **The Live flow, tested from the PC** (`tools/live-probe.mjs`): the same endpoint, App Check, prompt,
   function and lookup code, with words in place of the camera ("a pink Fisher-Price Rock n Play sleeper, and next to it
   a padded crib bumper set with no brand on it"). Gemini called `lookup_recalls` within 0.7 s. The lookup answered:
   - Rock 'n Play: recalls 23088 and 19105, and the banned inclined-sleeper type;
@@ -1276,7 +1276,7 @@ listings when the session running it restarted, and went on from there with `--r
   one). About 60 billed Gemini calls in all.
 - **A bookkeeping bug.** The results file's `unnamedSleep` column came out false on every row: `present()` dropped the
   field. The numbers above come from the triage code and the device's answer instead
-  (`tools/scratch/sixth-rule.mjs`). Fixed for later runs.
+  (`tools/sixth-rule.mjs`). Fixed for later runs.
 - **A duplicate, found by the seventh review.** Two of the 7 are the same Craigslist post listed twice (same title,
   price and photo: "Brand New in a Package Newborn Baby Nest", ids `3QsxrpnbkwhLoXdzkrFawL` and
   `mBK4CPDPmCgSpktyKYkWp4`). Counted once: 5 of 6 caught. Five other titles appear twice or more in the set (each a
@@ -1310,7 +1310,7 @@ idea, with the demo video as the one Stage One item still open. Its numbers matc
   (`shared/fieldguide.mjs`, `fitsNotice`). A planted entry with years the notice never states could have dropped a real
   match for a listing that gives its year; one with other model numbers in its "which units" line could have sent a
   shopper away from a recalled unit. Checked against 264 real entries Gemini wrote at build time with their CPSC
-  notices (`tools/scratch/fits-real.mjs`): 256 fit, the same as before but one. A third check tried, that an "all
+  notices (`tools/fits-real.mjs`): 256 fit, the same as before but one. A third check tried, that an "all
   units" entry come from a notice saying "all units", turned away 117 honest entries and was dropped: that claim can
   only make a card more cautious. Test: `tests/fieldguide.test.mjs`.
 - **Yard-sale mode shows a banned type as "May be banned to sell"**, not the red "Banned to sell": the type comes from
@@ -1436,9 +1436,9 @@ Go", "Rock & Play Piano"). An AI reviewer (Claude) then labelled each of the 392
 - No listing was reported or contacted. Reporting them (eBay's "Report this item", or SaferProducts.gov) is the
   builder's decision.
 
-## 30. A seventh review of 0.16.0, and release 0.16.1 (2026-11-25)
+## 30. An eighth review, of 0.16.0, and release 0.16.1 (2026-11-25)
 
-The seventh AI review (Claude, not a person) scored 0.16.0 at 4.5, 4.0, 3.5 and 4.5, recomputed every headline number
+The eighth AI review (Claude, not a person) scored 0.16.0 at 4.5, 4.0, 3.5 and 4.5, recomputed every headline number
 (all matched except the census brand counts and two test lines, corrected above and in the submission), and found:
 
 - **The device could clear an exact model-number match on its own.** When the listing gives a model number the recall
@@ -1479,9 +1479,11 @@ Tested on public Marketplace pages, logged out, in a throwaway Chrome profile. N
 - `node tools/e2e.mjs --headful --ext=dist/still-recalled-extension --url=<Marketplace search>` (the packed 0.17.0
   release): **16 of 16** on a Charlotte "baby lounger" search: 15 of 15 listings checked in 54 s, 14 confirmed in the
   cloud with no errors, 14 badges, toolbar count 14, badge click stays on the page, the card offers "Ask the seller".
-  The same release on eBay: 16 of 16 (60 listings, 44 flagged).
+  The same release on eBay: 16 of 16 (60 listings, 44 flagged); on the practice listings at /try: 18 of 18. Each run
+  is kept: `tools/e2e-report-release-facebook.json`, `tools/e2e-report-release.json` (eBay),
+  `tools/e2e-report-release-try.json`.
 - Development-build runs before that: one where Facebook's logged-out sign-in box covered the card (the test now closes
-  it; a signed-in shopper never sees it), and one with 2 cloud calls over the 40 s limit, which also left the
+  it; signed in, Facebook does not show that box, but no signed-in run has been made), and one with 2 cloud calls over the 40 s limit, which also left the
   "thorough setting" step with nothing new to send. Those are cloud slowness on that run, not reader faults.
 
 **The card points to the marketplace's own rules** (`sitePolicy` in `extension/src/ui/detail.js`). For a likely flag,
@@ -1518,8 +1520,10 @@ mostly generic "baby lounger" titles that the photo settled either way (`tools/c
   alone, and why the extension sends such listings to the device's model and the cloud.
 - Unlike eBay, Craigslist doesn't ban loungers by name, and private sellers' listings are mostly used items. Selling a
   recalled product or a padded crib bumper is unlawful on any site (sources.md, section 2).
-- **eBay and Craigslist together, one day:** 253 listings, $14,351 asked. It is a floor: the first page of each
-  search, labelled by AI reviewers, not yet by a person.
+- **eBay and Craigslist together, one day:** 253 listings, $14,351 asked. Its coverage is a floor (the first page of
+  each search, four product words), but the count itself rests on AI labels, mostly from titles: 29 of Craigslist's 56
+  "yes" were not photo-checked, and 3 of the 21 that were changed. A person checking them is next
+  (`tools/label-review.html`).
 - No listing was reported or contacted.
 
 **A page for resale shops** (`web/shops.html`, English and Spanish), for consignment sales, thrift stores and kids'
@@ -1535,6 +1539,21 @@ has been sent.
 now also holds the sixth test and both censuses (392 eBay and 80 Craigslist listings the word rules flagged), with the
 photo, the AI's answer and its reason. Keys 1 to 4 answer and move on. `node tools/review-agreement.mjs` prints how
 often the person agreed with the AI, for each set reviewed: the number to publish beside the AI-labelled ones.
+
+**A ninth AI review (Claude, not a person) of 0.17.0** scored it the same as 0.16.0 (4.5, 4.0, 3.5, 4.5) and
+recomputed every census and test number (all matched). It found these wordings too broad, now corrected in the README,
+the submission, the privacy page and the video script:
+- "cleared listings never leave the computer": since 0.14.0 the unnamed-sleep rule sends unbranded infant sleep
+  products for the cloud's look even when the device cleared them; the privacy page now says so;
+- "never reassure alone": true for exact model-number matches, unbranded sleep products and label readings, not for
+  ordinary word matches, which the device clears itself;
+- the Android app "shared from Facebook's and OfferUp's apps": no test shares from inside those apps;
+- the 775-listing headline is five tests on the engine of each day, now said wherever it appears;
+- the unit test count (121), the review numbering (section 30 is the eighth), and the eBay census's 11 searches with
+  results (of 12 run).
+It also noted that Claude Code wrote the code; the submission's "Built with" and the README now say so. The scripts
+this document cites from a scratch folder are now in `tools/` (`sixth-rule.mjs`, `fits-real.mjs`,
+`live-probe.mjs`). Still open, and the builder's to do: the video, a person's label check, and a real user.
 
 Unit tests: 121.
 

@@ -96,7 +96,7 @@ questions in the thread yourself. Keep it as useful without the link as with it.
 
 > Hi [name],
 >
-> On November 25, 2026, I counted what is for sale. The first results pages of 12 eBay searches held 200 infant
+> On November 25, 2026, I counted what is for sale. The first results pages of 11 eBay searches held 200 infant
 > loungers, nests and padded crib bumpers, asking $12,152 in all, though eBay's policy bans them. Four searches for the same products on
 > Craigslist in the 30 largest U.S. metro areas found 53 more, asking $2,199: 253 listings on two sites in one day. An AI reviewer labelled them from the titles and checked a
 > sample of photos; the method and the data are public:
