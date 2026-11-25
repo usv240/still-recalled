@@ -1,13 +1,13 @@
 {
-  "at": "2026-11-24T17:12:11.505Z",
+  "at": "2026-11-25T18:29:59.580Z",
   "axe": "4.10.3",
-  "blockedRequests": 8,
+  "blockedRequests": 18,
   "report": [
     {
       "name": "web page",
       "scheme": "light",
       "width": 390,
-      "passes": 45,
+      "passes": 46,
       "incomplete": 0,
       "violations": []
     },
@@ -15,7 +15,7 @@
       "name": "web page",
       "scheme": "light",
       "width": 1280,
-      "passes": 45,
+      "passes": 46,
       "incomplete": 0,
       "violations": []
     },
@@ -23,7 +23,7 @@
       "name": "web page",
       "scheme": "dark",
       "width": 390,
-      "passes": 45,
+      "passes": 46,
       "incomplete": 0,
       "violations": []
     },
@@ -31,7 +31,7 @@
       "name": "web page",
       "scheme": "dark",
       "width": 1280,
-      "passes": 45,
+      "passes": 46,
       "incomplete": 0,
       "violations": []
     },
@@ -96,6 +96,134 @@
       "scheme": "dark",
       "width": 1280,
       "passes": 23,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "shops page",
+      "scheme": "light",
+      "width": 390,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "shops page",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "shops page",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "shops page",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "shops page, Spanish",
+      "scheme": "light",
+      "width": 390,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "shops page, Spanish",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "shops page, Spanish",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "shops page, Spanish",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 33,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "printable card",
+      "scheme": "light",
+      "width": 390,
+      "passes": 30,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "printable card",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 30,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "printable card",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 30,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "printable card",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 30,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "intake log",
+      "scheme": "light",
+      "width": 390,
+      "passes": 43,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "intake log",
+      "scheme": "light",
+      "width": 1280,
+      "passes": 43,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "intake log",
+      "scheme": "dark",
+      "width": 390,
+      "passes": 43,
+      "incomplete": 0,
+      "violations": []
+    },
+    {
+      "name": "intake log",
+      "scheme": "dark",
+      "width": 1280,
+      "passes": 43,
       "incomplete": 0,
       "violations": []
     },

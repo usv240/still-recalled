@@ -1633,6 +1633,11 @@ Gemini in the cloud doing the look. About 70 cloud calls, no errors.
   set names a line. Here the cloud's question did the work.
 - **Both sets together, 57 listings:** the right recall named on 25, another notice on 2, flagged 30, none red.
 
+**Accessibility, with the new pages.** `node tools/a11y.mjs` now also checks the shops page in English and Spanish,
+the printable card and the intake log: 56 page views (light and dark, 390 and 1280 px). The first run found the shops
+page had no main landmark and the card's buttons sat outside any landmark; both fixed, and the run is now 56 views,
+0 violations (`tools/a11y-report.json`).
+
 ## Reproduce
 
 ```
