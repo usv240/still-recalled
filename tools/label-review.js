@@ -21,7 +21,24 @@ const CHOICES = [
 ];
 const proxied = u => (u ? `/img?u=${encodeURIComponent(u)}` : '');
 
-const SETS = ['eval', 'fresh', 'third', 'fourth', 'fifth'];
+const SETS = ['eval', 'fresh', 'third', 'fourth', 'fifth', 'sixth'];
+
+// The census sets (docs/accuracy.md, sections 29 and 31): every listing the word rules flagged, with the AI reviewer's
+// yes / no / unclear. A person's answers save to tools/census-<site>-review.json.
+async function loadCensus(set) {
+  const site = set.replace('census-', '');
+  const [flagged, labelled, review] = await Promise.all([
+    fetch(`/tools/census-${site}-flagged.json`).then(r => r.json()),
+    fetch(`/tools/census-${site}-labels.json`).then(r => r.json()),
+    fetch(`/tools/${set}-review.json`).then(r => r.json()).catch(() => ({ answers: {} })),
+  ]);
+  const warn = { yes: 'yes', unclear: 'maybe', no: 'no' };
+  const order = { yes: 0, maybe: 1, no: 2 };
+  return flagged.flagged.filter(f => labelled.labels[f.id]).map(f => {
+    const a = labelled.labels[f.id];
+    return { ...f, search: f.city || '', set, review, lab: { should_warn: warn[a.is_it] || 'maybe', type: a.type, item: '', note: a.why + (a.photo_checked ? ' (photo checked)' : '') } };
+  }).sort((x, y) => order[x.lab.should_warn] - order[y.lab.should_warn]);
+}
 
 async function loadQuick() {
   const parts = await Promise.all(SETS.map(async set => {
@@ -44,6 +61,7 @@ async function load(set) {
     third: ['third-labels-a.json', 'third-labels-b.json', 'third-labels-c.json'],
     fourth: ['fourth-labels-a.json', 'fourth-labels-b.json', 'fourth-labels-c.json'],
     fifth: ['fifth-labels-a.json', 'fifth-labels-b.json', 'fifth-labels-c.json'],
+    sixth: ['sixth-labels-a.json', 'sixth-labels-b.json', 'sixth-labels-c.json'],
   }[set];
   const [listings, ...labelSets] = await Promise.all([
     fetch(`/tools/${set}-listings.json`).then(r => r.json()),
@@ -59,7 +77,7 @@ async function load(set) {
 
 async function render() {
   const set = $('#set').value;
-  const items = set === 'quick' ? await loadQuick()
+  const items = set === 'quick' ? await loadQuick() : set.startsWith('census-') ? await loadCensus(set)
     : await load(set).then(({ all, labels, review }) => all.map(l => ({ ...l, set, lab: labels[l.id], review })));
   const list = $('#list');
   list.replaceChildren();
@@ -88,7 +106,7 @@ async function render() {
       el('img', { src: proxied(l.image), alt: '', loading: 'lazy' }),
       el('div', {},
         el('div', { class: 'title' }, l.title),
-        el('div', { class: 'meta' }, [l.price, l.search, ''].filter(Boolean).join(' · '), el('a', { href: l.url, target: '_blank', rel: 'noopener' }, 'listing')),
+        el('div', { class: 'meta' }, [l.price, l.search].filter(Boolean).join(' · '), ' · ', el('a', { href: l.url, target: '_blank', rel: 'noopener' }, 'listing')),
         el('div', { class: 'label' },
           el('span', { class: `chip ${lab.should_warn}` }, lab.should_warn === 'yes' ? 'Must flag' : lab.should_warn === 'maybe' ? 'Unclear' : 'Must not flag'),
           [lab.item, lab.type, (lab.recall_ids || []).length ? `recall ${lab.recall_ids.join(', ')}` : null].filter(Boolean).join(' · '),

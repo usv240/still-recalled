@@ -1531,6 +1531,11 @@ and the shops page, so what real users say can be read and checked by anyone. An
 holds short messages for consignment sales, safe-sleep and home-visiting programs, a parent forum and reporters. None
 has been sent.
 
+**A person can check every AI label in one place.** `tools/label-review.html` (served by `node tools/collector.mjs`)
+now also holds the sixth test and both censuses (392 eBay and 80 Craigslist listings the word rules flagged), with the
+photo, the AI's answer and its reason. Keys 1 to 4 answer and move on. `node tools/review-agreement.mjs` prints how
+often the person agreed with the AI, for each set reviewed: the number to publish beside the AI-labelled ones.
+
 Unit tests: 121.
 
 ## Reproduce
