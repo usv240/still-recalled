@@ -74,8 +74,11 @@ The facts used below, with sources: the census in `docs/accuracy.md` (sections 2
 
 ## 4. A parent community post
 
-Post only where the rules allow it (see the notes under each community below), from your own account, and answer
-questions in the thread yourself. Keep it as useful without the link as with it.
+Most large parenting subreddits ban self-promotion: r/NewParents ("No Self-Promotion/Advertising/Surveys/Product
+Testing") and r/beyondthebump ("No Advertisements, AI Content, Market Research, or Spam"); r/BabyBumps allows it only
+with moderator permission. These rules were read from a third-party digest, since Reddit blocked automated reading, so
+check each sidebar yourself. The way in is to **message the moderators first** with the post below and ask whether it
+fits. Post from your own account and answer questions in the thread yourself.
 
 **Title:** I built a free check for recalled baby gear on Marketplace and eBay. Would you try it on a real listing?
 
@@ -111,4 +114,34 @@ questions in the thread yourself. Keep it as useful without the link as with it.
 
 ## Who to contact
 
-[Filled in from the research below: each organization, why it fits, and the contact route on its own site.]
+Researched 2026-11-25 by an AI agent (Claude) from each organization's own site. "Confirmed" means the contact route
+was read on the organization's official page. Named staff contacts are kept out of this public file; they are in
+outreach-contacts-private.md, beside the repository on the builder's computer.
+
+**Start here (the strongest fits):**
+
+| Who | Why it fits | Contact route |
+|---|---|---|
+| Just Between Friends (kids' consignment sales, U.S.-wide) | Refuses recalled items and inclined sleepers at intake, and has a full-time Safety & Recall Specialist. Policy: https://safety.jbfsale.com/ | Web form, https://www.jbfsale.com/contact-us/ (confirmed); local sales, https://www.jbfsale.com/locations/ |
+| NARTS, the resale trade association | Tells members they "can be held responsible for selling items that have been recalled" (https://www.narts.org/product-safety-in-resale). One message reaches the whole industry. | https://www.narts.org/contact (confirmed) |
+| Rhea Lana's (consignment events) | "We cannot accept recalled items"; also refuses drop-side cribs and bumpers. Its "Recall Finder" is only a link to cpsc.gov. | rhealana@rhealana.com, https://www.rhealana.com/about/contact-us (confirmed) |
+| Once Upon A Child (Winmark) | "Unable to buy ... recalled items" (https://onceuponachild.com/sell-to-us/) | winmark.information@winmarkcorporation.com, https://winmarkcorporation.com/contact-us/ (confirmed) |
+| Cribs for Kids | National safe-sleep nonprofit with over 2,000 partners; the card fits its classes. | https://cribsforkids.org/become-a-partner/ (confirmed) |
+| National WIC Association, Center for Innovative Practices in WIC | Collects technology tools for WIC staff; has a "Share Your Project" form. | cipwic@nwica.org; https://survey.alchemer.com/s3/8096153/CIPWIC-Share-Your-Project (confirmed) |
+| Consumer Reports, product safety | Its September 23, 2026 report found banned or recalled baby products on all four marketplaces, and its petition asks Meta to "give sellers safety information when they post an item". | tips@cro.consumer.org, https://www.consumerreports.org/consumer-protection/submit-a-tip-to-consumer-reports/ (confirmed) |
+| Nurse-Family Partnership (now Changent) | Nurse home visits to first-time, low-income families. | networkmanagement@changent.org, https://changent.org/contact/ (confirmed) |
+
+**Also worth a message:** Safe Kids Worldwide, info@safekids.org, subject "Programs Inquiry"; National Healthy Start
+Association, info@nationalhealthystart.org; Reese's Purpose (it took over Kids In Danger's recall alerts when KID
+closed in December 2024); Consumer Federation of America; ProPublica tips, https://www.propublica.org/tips/.
+
+**CPSC:** there is no public channel for tool or data partners, and no way to report marketplace listings in bulk.
+The closest are CommunityOutreach@cpsc.gov and the Neighborhood Safety Network, nsn@cpsc.gov. Single listings are
+reported at https://www.saferproducts.gov/IncidentReporting.
+
+**Lead with what's different.** A free Chrome extension, Kids' Recall, checks children's products against CPSC data,
+but on Amazon only. Still Recalled covers secondhand marketplaces, flags banned sleep products whatever their brand,
+reads a label's model number, and gives shops an intake log.
+
+**Not confirmed:** Kid to Kid's corporate email (its contact page hides it), individual Once Upon A Child stores'
+rules, and every subreddit rule's exact wording.
