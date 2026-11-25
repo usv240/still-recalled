@@ -1377,6 +1377,33 @@ code for WIC offices, crib programs and grandparents; a named maintainer and the
 families until the app is in the Play Store; and a human-checked label set, which the nurse persona put first for any
 hospital to recommend it.
 
+## 28. What the personas asked for next, and release 0.16.0 (2026-11-25)
+
+Four requests from the AI persona walkthroughs in section 27, built:
+
+- **A printable card** (`web/card.html`, `?lang=es` for Spanish; PDFs in `web/card/`). One US Letter page for WIC
+  offices, crib programs, clinics and grandparents: the four kinds of baby sleep products never to buy secondhand
+  (inclined sleepers, padded crib bumpers, loungers and nests, cribs made before June 28, 2011 and drop-side cribs),
+  the safe-sleep basics, car seats to NHTSA, and a QR code to the check (`?from=card`). Four of the five personas asked
+  for something like it. Its claims are the ones the result cards already make, with their sources on the card.
+- **Spanish** (`shared/i18n.mjs`). Every result, the result card, the label check and the web page read in Spanish when
+  the visitor chooses it, the link says `?lang=es`, or the browser is set to Spanish. On Android, results follow the
+  phone's language; the app's own screens are still English. Seller questions are in Spanish only when the listing
+  itself is in Spanish, since the seller reads them; reports to CPSC stay in English, for CPSC's English form. The
+  Spanish was written by an AI (Claude) and has not been reviewed by a native speaker; the page says so. Lines that
+  come from Gemini's check of a listing, and CPSC's own notices, stay in English.
+- **Saved checks** (`web/src/log.js`). Every check on the web page is kept in the browser, with a small copy of the
+  picture. "Your checks" on the start page opens one again, label check included, when the seller's label photo
+  arrives hours later. Nothing is sent anywhere.
+- **An intake log for resale shops.** The same saved checks, as a table: an optional batch or consignor name stamped
+  on new checks, several photos at once (checked one after another), a CSV download, and a print view. A label check
+  done later is written into the check's row.
+
+**Tested:** `node tools/web-log.mjs` on the development build, 12 of 12 steps (`tools/web-log-report.json`): a check is
+saved and opens again with its result, the log and CSV work, `?lang=es` turns the page to Spanish, "Protector para cuna
+trenzado" is flagged as a padded crib bumper in Spanish with the safe-sleep line, and a no-match crib in Spanish carries
+the 2011 crib line. Three cloud calls. 116 unit tests (`tests/i18n.test.mjs`, `tests/log.test.mjs` new).
+
 ## Reproduce
 
 ```
@@ -1392,6 +1419,8 @@ bash tools/collect-fifth.sh                 # how the fifth set was collected (e
 node tools/single-run.mjs --for=fifth       # the fifth set checked one listing at a time, as the web page does
 node tools/eval-run.mjs --set=sixth --mode=hybrid && node tools/eval-score.mjs --set=sixth   # the unnamed-sleep rule's test
 node tools/recall-mirror.mjs <folder>       # the recall mirror, as the daily job makes it
+node tools/web-log.mjs                      # saved checks, the intake log and Spanish on the web page
+node scripts/make-card.mjs                  # the printable card's QR codes (web/card.html)
 node tools/masked-build.mjs && node tools/lookup-generic.mjs --masked   # real listings with the brand stripped from the title
 node tools/lookup-generic.mjs               # the ten made-up generic-title listings, one at a time
 bash tools/rerun-all.sh -r5 && node tools/run-compare.mjs --a=-rerun --b=-r5   # the earlier sets again, and two runs compared

@@ -40,6 +40,8 @@ object Rules {
             cardCount = iso.evaluateJavaScriptAsync("SR.addCards($chunk)").await().toInt()
         }
         iso.evaluateJavaScriptAsync("SR.setLive($liveCards)").await()
+        // Results in Spanish on a phone set to Spanish (the app's own screens are still English).
+        iso.evaluateJavaScriptAsync("SR.setLanguage(\"${java.util.Locale.getDefault().language}\")").await()
         sandbox = box
         isolate = iso
     }

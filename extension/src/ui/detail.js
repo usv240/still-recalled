@@ -4,13 +4,14 @@ import { h, copyWithFeedback, safeUrl } from './dom.js';
 import { icon } from './icons.js';
 import { CPSC_REPORT_URL, isPractice, ownerView } from '../../../shared/present.mjs';
 import { judgeLabel, labelCopy } from '../../../shared/label.mjs';
+import { tr, shortDateOf } from '../../../shared/i18n.mjs';
 
 const DEFAULT_CHECK = {
-  recall: 'Ask for a photo of the label. The model number and manufacture date decide whether this unit is one of the recalled ones.',
-  banned: 'Check the photos and the description for what the product is. A name in the title is not enough to rule it out.',
+  get recall() { return tr('Ask for a photo of the label. The model number and manufacture date decide whether this unit is one of the recalled ones.', 'Pida una foto de la etiqueta. El número de modelo y la fecha de fabricación deciden si esta unidad es una de las retiradas.'); },
+  get banned() { return tr('Check the photos and the description for what the product is. A name in the title is not enough to rule it out.', 'Revise las fotos y la descripción para ver qué producto es. Un nombre en el título no basta para descartarlo.'); },
 };
 
-const longDay = iso => (/^\d{4}-\d{2}-\d{2}$/.test(iso || '') ? new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : iso);
+const longDay = iso => (/^\d{4}-\d{2}-\d{2}$/.test(iso || '') ? shortDateOf(iso) : iso);
 
 export function levelClass(r) {
   return r.level === 'likely' ? 'is-likely' : 'is-possible';
@@ -53,7 +54,7 @@ function photo(src, caption, fallbackHref, { where = null, wide = false } = {}) 
     const frame = h('div', { class: 'ph-frame' }, img);
     // Some marketplaces block outside images; fall back to a link to the source.
     img.addEventListener('error', () => {
-      frame.replaceWith(h('a', { class: 'ph-missing', href: safeUrl(fallbackHref) || url, target: '_blank', rel: 'noopener' }, 'Photo on the notice'));
+      frame.replaceWith(h('a', { class: 'ph-missing', href: safeUrl(fallbackHref) || url, target: '_blank', rel: 'noopener' }, tr('Photo on the notice', 'Foto del aviso')));
     }, { once: true });
     if (where) {
       const mark = h('span', { class: 'ph-outline', 'aria-hidden': 'true' });
@@ -70,7 +71,7 @@ function photo(src, caption, fallbackHref, { where = null, wide = false } = {}) 
     }
     box.append(frame);
   } else {
-    box.append(h('span', { class: 'ph-missing' }, 'No photo'));
+    box.append(h('span', { class: 'ph-missing' }, tr('No photo', 'Sin foto')));
   }
   box.append(h('span', { class: 'ph-cap' }, caption));
   return box;
@@ -93,7 +94,7 @@ async function labelPhoto(file) {
  */
 function labelSection(r, onLabel, owner = false) {
   const input = h('input', { type: 'file', accept: 'image/*', class: 'visually-hidden', tabindex: '-1', 'aria-hidden': 'true' });
-  const text = h('span', {}, 'Add a label photo');
+  const text = h('span', {}, tr('Add a label photo', 'Agregar foto de la etiqueta'));
   const button = h('button', { class: 'btn btn-secondary', type: 'button' }, icon('tag'), text);
   const out = h('div', { class: 'label-out', 'aria-live': 'polite' });
   button.addEventListener('click', () => input.click());
@@ -102,40 +103,43 @@ function labelSection(r, onLabel, owner = false) {
     input.value = '';
     if (!file) return;
     button.disabled = true;
-    text.textContent = 'Reading the label…';
+    text.textContent = tr('Reading the label…', 'Leyendo la etiqueta…');
     try {
       const recall = { codes: r.recall.codes || [], more: !!r.recall.more, from: r.recall.from || 0, to: r.recall.to || 0 };
       const { reading, source, verdict } = await onLabel(await labelPhoto(file), recall);
       const copy = labelCopy(verdict || judgeLabel(reading, recall), { owner });
+      // Kept with the check in the web page's log (web/src/log.js), so a shop's record shows the label too.
+      root.dispatchEvent(new CustomEvent('sr-label', { bubbles: true, detail: { title: copy.title, read: [reading.brand, ...(reading.model_numbers || []).slice(0, 3), reading.manufacture_date].filter(Boolean).join(' · ') } }));
       const read = [reading.brand, ...(reading.model_numbers || []).slice(0, 3), reading.manufacture_date].filter(Boolean).join(' · ');
       out.replaceChildren(h('div', { class: `label-result is-${copy.tone}` },
         h('p', { class: 'label-title' }, copy.title),
         h('p', {}, copy.text),
-        h('p', { class: 'hint' }, `${{ on_device: 'Read on this device; the photo did not leave it.', device_then_cloud: 'Read on this device, then read again in the cloud before ruling it out.' }[source] || 'Read in the cloud.'}${read ? ` On the label: ${read}.` : ''}`)));
-      text.textContent = 'Try another photo';
+        h('p', { class: 'hint' }, `${{ on_device: tr('Read on this device; the photo did not leave it.', 'Leída en este dispositivo; la foto no salió de él.'), device_then_cloud: tr('Read on this device, then read again in the cloud before ruling it out.', 'Leída en este dispositivo y luego otra vez en la nube antes de descartarlo.') }[source] || tr('Read in the cloud.', 'Leída en la nube.')}${read ? tr(` On the label: ${read}.`, ` En la etiqueta: ${read}.`) : ''}`)));
+      text.textContent = tr('Try another photo', 'Probar con otra foto');
     } catch {
-      out.replaceChildren(h('p', { class: 'hint' }, 'The label could not be read right now. Try again in a moment.'));
-      text.textContent = 'Add a label photo';
+      out.replaceChildren(h('p', { class: 'hint' }, tr('The label could not be read right now. Try again in a moment.', 'No se pudo leer la etiqueta ahora. Inténtelo de nuevo en un momento.')));
+      text.textContent = tr('Add a label photo', 'Agregar foto de la etiqueta');
     } finally {
       button.disabled = false;
     }
   });
-  return h('section', { class: 'check label-check' },
-    h('h2', {}, 'Settle it with the label'),
-    h('p', {}, owner ? 'Take a photo of the label on your item. Its model number and date are read and compared with the notice.'
-      : 'Have a photo of the label, from the seller or of the item itself? Its model number and date are read and compared with the notice.'),
+  const root = h('section', { class: 'check label-check' },
+    h('h2', {}, tr('Settle it with the label', 'Resuélvalo con la etiqueta')),
+    h('p', {}, owner ? tr('Take a photo of the label on your item. Its model number and date are read and compared with the notice.', 'Tome una foto de la etiqueta de su artículo. Se leen el número de modelo y la fecha y se comparan con el aviso.')
+      : tr('Have a photo of the label, from the seller or of the item itself? Its model number and date are read and compared with the notice.', '¿Tiene una foto de la etiqueta, del vendedor o del artículo? Se leen el número de modelo y la fecha y se comparan con el aviso.')),
     input, button, out);
+  return root;
 }
 
 function howLine(r) {
   const device = r.how && r.how.device;
   const cloud = r.how && r.how.cloudModel;
-  if (r.how && r.how.judgedInCloud) return cloud ? 'Looked at in the cloud, then confirmed against the full notice.' : 'Looked at in the cloud.';
-  if (device && cloud) return 'Checked on this device, then confirmed in the cloud against the full notice.';
-  if (device && r.how.cloudError) return 'Checked on this device. The cloud double-check could not run.';
-  if (device) return 'Checked on this device.';
-  if (cloud) return 'Matched by its words, then confirmed in the cloud.';
-  return 'Matched by its words only.';
+  if (r.how && r.how.judgedInCloud) return cloud ? tr('Looked at in the cloud, then confirmed against the full notice.', 'Revisado en la nube y luego confirmado con el aviso completo.') : tr('Looked at in the cloud.', 'Revisado en la nube.');
+  if (device && cloud) return tr('Checked on this device, then confirmed in the cloud against the full notice.', 'Revisado en este dispositivo y luego confirmado en la nube con el aviso completo.');
+  if (device && r.how.cloudError) return tr('Checked on this device. The cloud double-check could not run.', 'Revisado en este dispositivo. La segunda revisión en la nube no se pudo hacer.');
+  if (device) return tr('Checked on this device.', 'Revisado en este dispositivo.');
+  if (cloud) return tr('Matched by its words, then confirmed in the cloud.', 'Encontrado por sus palabras y luego confirmado en la nube.');
+  return tr('Matched by its words only.', 'Encontrado solo por sus palabras.');
 }
 
 /**
@@ -149,7 +153,7 @@ function howLine(r) {
 export function detailView(r, { compact = false, onOpenPanel = null, onLabel = null, watch = null, audience = 'buyer' } = {}) {
   const root = h('div', { class: `detail ${compact ? 'is-compact' : ''}` });
   const owner = audience === 'owner' ? ownerView(r) : null;
-  const mine = owner ? 'Your item' : 'This listing';
+  const mine = owner ? tr('Your item', 'Su artículo') : tr('This listing', 'Este anuncio');
 
   root.append(h('div', { class: 'verdict' },
     statusPill(r),
@@ -166,17 +170,17 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
     // A CPSC warning comes without a photo: the hazard, in CPSC's words, stands beside the listing instead.
     root.append(r.recall.image
       ? h('div', { class: 'pair' },
-        photo(r.listing.image, where ? `${mine}. Outlined: what the cloud check matched.` : mine, r.listing.url, { where }),
-        photo(r.recall.image, 'Recall notice', r.recall.url))
+        photo(r.listing.image, where ? tr(`${mine}. Outlined: what the cloud check matched.`, `${mine}. Marcado: lo que coincidió en la revisión en la nube.`) : mine, r.listing.url, { where }),
+        photo(r.recall.image, tr('Recall notice', 'Aviso de retiro'), r.recall.url))
       : h('div', { class: 'pair is-single' },
-        photo(r.listing.image, where ? `${mine}. Outlined: what the cloud check matched.` : mine, r.listing.url, { where }),
+        photo(r.listing.image, where ? tr(`${mine}. Outlined: what the cloud check matched.`, `${mine}. Marcado: lo que coincidió en la revisión en la nube.`) : mine, r.listing.url, { where }),
         h('div', { class: 'risk' }, h('p', { class: 'risk-text' }, r.recall.hazard || r.recall.title))));
     // Which units the notice recalls, in one sentence written from the notice.
-    if (r.recall.tell && r.recall.tell !== r.check) root.append(h('p', { class: 'tell' }, h('b', {}, 'Which units: '), r.recall.tell));
+    if (r.recall.tell && r.recall.tell !== r.check) root.append(h('p', { class: 'tell' }, h('b', {}, tr('Which units: ', 'Qué unidades: ')), r.recall.tell));
   } else if (r.kind === 'banned' && r.banned && where) {
     // The photo large, with the part that matters outlined: a bumper among the bedding is easy to miss.
     root.append(h('div', { class: 'spot' },
-      photo(r.listing.image, `Outlined by the cloud check: what it saw as ${/^[aeiou]/i.test(r.banned.name) ? 'an' : 'a'} ${r.banned.name.toLowerCase()}.`, r.listing.url, { where, wide: true }),
+      photo(r.listing.image, tr(`Outlined by the cloud check: what it saw as ${/^[aeiou]/i.test(r.banned.name) ? 'an' : 'a'} ${r.banned.name.toLowerCase()}.`, `Marcado por la revisión en la nube: lo que vio como ${r.banned.name.toLowerCase()}.`), r.listing.url, { where, wide: true }),
       h('div', { class: 'risk' }, h('p', { class: 'risk-text' }, r.banned.risk)),
     ));
   } else if (r.kind === 'banned' && r.banned) {
@@ -189,7 +193,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
   // Ask the seller: copy the question first (the page must still have focus to write the clipboard), then open the
   // seller's message box on eBay, or the listing elsewhere, where the message button is.
   const askUrl = safeUrl(r.messageUrl);
-  const label = h('span', {}, askUrl ? 'Ask the seller' : 'Copy question for seller');
+  const label = h('span', {}, askUrl ? tr('Ask the seller', 'Preguntar al vendedor') : tr('Copy question for seller', 'Copiar pregunta para el vendedor'));
   const askBtn = h('button', { class: 'btn btn-primary', type: 'button' }, icon(askUrl ? 'message' : 'copy'), label);
   askBtn.addEventListener('click', async () => {
     await copyWithFeedback(askBtn, r.question, label);
@@ -197,16 +201,17 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
   });
   if (owner) root.append(h('section', { class: 'check' }, h('h2', {}, owner.heading), ...owner.lines.map(l => h('p', {}, l))));
   else root.append(h('section', { class: 'check' },
-    h('h2', {}, 'Before you buy'),
+    h('h2', {}, tr('Before you buy', 'Antes de comprar')),
     // The cloud's own line names the notice's models and label; without it, the type's advice or a plain default.
-    h('p', {}, r.recall && r.recall.all ? `${r.recall.warning ? "CPSC's warning covers every unit of this product" : 'Every unit of this product is recalled'}, whatever its model number or date. Check that it is this product: the brand and the photos.`
+    h('p', {}, r.recall && r.recall.all ? tr(`${r.recall.warning ? "CPSC's warning covers every unit of this product" : 'Every unit of this product is recalled'}, whatever its model number or date. Check that it is this product: the brand and the photos.`,
+      `${r.recall.warning ? 'La advertencia de la CPSC cubre todas las unidades de este producto' : 'Todas las unidades de este producto fueron retiradas del mercado'}, sin importar el número de modelo o la fecha. Revise que sea este producto: la marca y las fotos.`)
       : r.check || (r.banned && r.banned.advice) || DEFAULT_CHECK[r.kind] || ''),
     h('blockquote', { class: 'question' }, r.question),
     askBtn,
-    isPractice(r) ? h('p', { class: 'hint' }, 'Practice listing: the question is copied, but there is no seller to message.')
+    isPractice(r) ? h('p', { class: 'hint' }, tr('Practice listing: the question is copied, but there is no seller to message.', 'Anuncio de práctica: la pregunta se copia, pero no hay vendedor a quien escribir.'))
     : askUrl ? h('p', { class: 'hint' }, /m2mOpen/.test(askUrl)
-      ? 'Copies the question and opens eBay\'s message box for this seller.'
-      : 'Copies the question and opens the listing, where the seller\'s message button is.') : null,
+      ? tr('Copies the question and opens eBay\'s message box for this seller.', 'Copia la pregunta y abre los mensajes de eBay para este vendedor.')
+      : tr('Copies the question and opens the listing, where the seller\'s message button is.', 'Copia la pregunta y abre el anuncio, donde está el botón para escribir al vendedor.')) : null,
   ));
 
   // Settle it with the label: the one fact a "possible recall" is missing. Not offered when the notice recalls every
@@ -218,7 +223,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
   // The last step: a report to CPSC, which asks shoppers to report recalled products for sale online at
   // SaferProducts.gov with the listing's link. Offered only for likely flags whose sale the law rules out.
   if (r.report && !owner) {
-    const repLabel = h('span', {}, 'Report to CPSC');
+    const repLabel = h('span', {}, tr('Report to CPSC', 'Reportar a la CPSC'));
     const repBtn = h('button', { class: 'btn btn-secondary', type: 'button' }, icon('flag'), repLabel);
     repBtn.addEventListener('click', async () => {
       await copyWithFeedback(repBtn, r.report, repLabel);
@@ -226,14 +231,14 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
       if (!isPractice(r)) window.open(CPSC_REPORT_URL, '_blank', 'noopener');
     });
     root.append(h('section', { class: 'report' },
-      h('h2', {}, 'Report the listing'),
+      h('h2', {}, tr('Report the listing', 'Reportar el anuncio')),
       h('p', {}, r.kind === 'recall'
-        ? 'CPSC asks shoppers who find a recalled product for sale online to report it at SaferProducts.gov, with the listing\'s link and a screenshot. Its e-commerce team has such listings taken down.'
-        : 'CPSC\'s e-commerce team looks for recalled and banned products listed for sale and has the listings taken down. You can report this one at SaferProducts.gov, with its link and a screenshot.'),
-      compact ? null : h('details', { class: 'report-text' }, h('summary', {}, 'The report text'), h('pre', {}, r.report)),
+        ? tr('CPSC asks shoppers who find a recalled product for sale online to report it at SaferProducts.gov, with the listing\'s link and a screenshot. Its e-commerce team has such listings taken down.', 'La CPSC pide a quien encuentre a la venta en internet un producto retirado del mercado que lo reporte en SaferProducts.gov, con el enlace del anuncio y una captura de pantalla. Su equipo de comercio electrónico hace que quiten esos anuncios.')
+        : tr('CPSC\'s e-commerce team looks for recalled and banned products listed for sale and has the listings taken down. You can report this one at SaferProducts.gov, with its link and a screenshot.', 'El equipo de comercio electrónico de la CPSC busca productos retirados o prohibidos que estén a la venta y hace que quiten los anuncios. Puede reportar este en SaferProducts.gov, con su enlace y una captura de pantalla.')),
+      compact ? null : h('details', { class: 'report-text' }, h('summary', {}, tr('The report text', 'El texto del reporte (en inglés)')), h('pre', {}, r.report)),
       repBtn,
-      h('p', { class: 'hint' }, isPractice(r) ? 'Practice listing: the report is copied so you can see it, and the CPSC form is not opened.'
-        : 'Copies the report, with the listing link, and opens the CPSC form. Paste it into the description.'),
+      h('p', { class: 'hint' }, isPractice(r) ? tr('Practice listing: the report is copied so you can see it, and the CPSC form is not opened.', 'Anuncio de práctica: el reporte se copia para que lo vea, y no se abre el formulario de la CPSC.')
+        : tr('Copies the report, with the listing link, and opens the CPSC form. Paste it into the description.', 'Copia el reporte, con el enlace del anuncio, y abre el formulario de la CPSC. Péguelo en la descripción.')),
     ));
   }
 
@@ -241,20 +246,20 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
 
   if (!compact && r.kind === 'recall' && r.recall) {
     root.append(h('dl', { class: 'facts' },
-      h('div', {}, h('dt', {}, r.recall.warning ? 'CPSC warning' : 'Recall'), h('dd', { class: 'num' }, r.recall.number || r.recall.id)),
-      h('div', {}, h('dt', {}, r.recall.warning ? 'Warned' : 'Recalled'), h('dd', { class: 'num' }, longDay(r.recall.date))),
-      h('div', {}, h('dt', {}, 'Product'), h('dd', {}, r.recall.product)),
-      r.recall.hazard ? h('div', {}, h('dt', {}, 'Hazard'), h('dd', {}, r.recall.hazard)) : null,
-      r.recall.remedy ? h('div', {}, h('dt', {}, r.recall.warning ? 'CPSC says' : 'Remedy'), h('dd', {}, r.recall.remedy)) : null,
+      h('div', {}, h('dt', {}, r.recall.warning ? tr('CPSC warning', 'Advertencia de la CPSC') : tr('Recall', 'Retiro')), h('dd', { class: 'num' }, r.recall.number || r.recall.id)),
+      h('div', {}, h('dt', {}, r.recall.warning ? tr('Warned', 'Fecha de advertencia') : tr('Recalled', 'Fecha de retiro')), h('dd', { class: 'num' }, longDay(r.recall.date))),
+      h('div', {}, h('dt', {}, tr('Product', 'Producto')), h('dd', {}, r.recall.product)),
+      r.recall.hazard ? h('div', {}, h('dt', {}, tr('Hazard', 'Peligro')), h('dd', {}, r.recall.hazard)) : null,
+      r.recall.remedy ? h('div', {}, h('dt', {}, r.recall.warning ? tr('CPSC says', 'La CPSC dice') : tr('What owners get', 'Qué reciben los dueños')), h('dd', {}, r.recall.remedy)) : null,
     ));
   }
 
   const source = r.kind === 'recall' ? safeUrl(r.recall && r.recall.url) : safeUrl(r.banned && r.banned.source);
   root.append(h('div', { class: 'links' },
     source ? h('a', { class: 'link', href: source, target: '_blank', rel: 'noopener' },
-      r.kind === 'recall' ? (r.recall.warning ? `Find warning ${r.recall.number} on CPSC's warnings page` : 'Read the CPSC recall notice') : 'CPSC safe sleep guidance', icon('external', { size: 14 })) : null,
-    r.also && !r.also.warning && safeUrl(r.also.url) ? h('a', { class: 'link', href: safeUrl(r.also.url), target: '_blank', rel: 'noopener' }, `CPSC recall ${r.also.number}`, icon('external', { size: 14 })) : null,
-    onOpenPanel ? h('button', { class: 'link', type: 'button', onclick: onOpenPanel }, 'More in the side panel', icon('panel', { size: 14 })) : null,
+      r.kind === 'recall' ? (r.recall.warning ? tr(`Find warning ${r.recall.number} on CPSC's warnings page`, `Buscar la advertencia ${r.recall.number} en la página de la CPSC`) : tr('Read the CPSC recall notice', 'Leer el aviso de retiro de la CPSC (en inglés)')) : tr('CPSC safe sleep guidance', 'Guía de sueño seguro de la CPSC'), icon('external', { size: 14 })) : null,
+    r.also && !r.also.warning && safeUrl(r.also.url) ? h('a', { class: 'link', href: safeUrl(r.also.url), target: '_blank', rel: 'noopener' }, tr(`CPSC recall ${r.also.number}`, `Retiro ${r.also.number} de la CPSC`), icon('external', { size: 14 })) : null,
+    onOpenPanel ? h('button', { class: 'link', type: 'button', onclick: onOpenPanel }, tr('More in the side panel', 'Más en el panel lateral'), icon('panel', { size: 14 })) : null,
   ));
 
   root.append(h('p', { class: 'how' }, howLine(r)));
@@ -263,14 +268,14 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
 
 /** "Watch for recalls" on a listing's own page: a recall announced after the purchase still reaches the buyer. */
 function watchSection(watch) {
-  const label = h('span', {}, 'Watch for recalls');
+  const label = h('span', {}, tr('Watch for recalls', 'Vigilar retiros'));
   const btn = h('button', { class: 'btn btn-secondary', type: 'button', 'aria-pressed': 'false' }, icon('bell', { size: 16 }), label);
   let on = false;
-  const show = v => { on = v; btn.setAttribute('aria-pressed', String(v)); label.textContent = v ? 'Watching for recalls' : 'Watch for recalls'; };
+  const show = v => { on = v; btn.setAttribute('aria-pressed', String(v)); label.textContent = v ? tr('Watching for recalls', 'Vigilando retiros') : tr('Watch for recalls', 'Vigilar retiros'); };
   watch.get().then(show, () => {});
   btn.addEventListener('click', async () => { const next = !on; show(next); try { await watch.set(next); } catch { show(!next); } });
   return h('section', { class: 'watch' },
-    h('h2', {}, 'Bought it, or already own one?'),
-    h('p', {}, 'Recall notices reach the first owner, not the next one. Watch this listing and Still Recalled checks it against every new CPSC recall, on this computer.'),
+    h('h2', {}, tr('Bought it, or already own one?', '¿Lo compró, o ya tiene uno?')),
+    h('p', {}, tr('Recall notices reach the first owner, not the next one. Watch this listing and Still Recalled checks it against every new CPSC recall, on this computer.', 'Los avisos de retiro le llegan al primer dueño, no al siguiente. Vigile este anuncio y Still Recalled lo compara con cada nuevo retiro de la CPSC, en esta computadora.')),
     btn);
 }

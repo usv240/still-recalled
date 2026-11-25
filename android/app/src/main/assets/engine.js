@@ -635,9 +635,29 @@ ${LOOKUP_SYSTEM}`;
     return { ...base2, level: "none", why: "the cloud check did not confirm the flag" };
   }
 
+  // shared/i18n.mjs
+  var lang = "en";
+  try {
+    if (typeof navigator !== "undefined" && /^es\b/i.test(navigator.language || "")) lang = "es";
+  } catch {
+  }
+  var getLang = () => lang;
+  function setLang(l) {
+    lang = l === "es" ? "es" : "en";
+  }
+  var tr = (en, es) => lang === "es" && es ? es : en;
+  var MONTHS_ES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  var MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function monthYearOf(iso) {
+    const m = /^(\d{4})-(\d{2})/.exec(String(iso || ""));
+    if (!m) return String(iso || "");
+    const i = Number(m[2]) - 1;
+    return lang === "es" ? `${MONTHS_ES[i]} de ${m[1]}` : `${MONTHS_EN[i]} ${m[1]}`;
+  }
+
   // shared/present.mjs
   var SAFE_SLEEP_URL = "https://www.cpsc.gov/SafeSleep";
-  var TYPE_COPY = {
+  var TYPE_COPY_EN = {
     inclined_sleeper: {
       name: "Inclined infant sleeper",
       short: "inclined sleeper",
@@ -667,6 +687,43 @@ ${LOOKUP_SYSTEM}`;
       ask: "Hi, before I buy: does one side of the crib slide down? What is the manufacture date on its label?"
     }
   };
+  var TYPE_COPY_ES = {
+    inclined_sleeper: {
+      name: "Dormidor inclinado para beb\xE9",
+      short: "dormidor inclinado",
+      a: "un dormidor inclinado para beb\xE9",
+      risk: "Vender un dormidor inclinado para beb\xE9 es ilegal en EE. UU. desde noviembre de 2022. La CPSC dice que los productos con m\xE1s de 10\xB0 de inclinaci\xF3n nunca deben usarse para que duerma un beb\xE9; solo en un modelo retirado del mercado se reportaron unas 100 muertes.",
+      advice: "Nunca lo use para dormir. Muchos dormidores inclinados tambi\xE9n han sido retirados del mercado, as\xED que pida la marca y el modelo.",
+      ask: "Hola, antes de comprarlo: \xBFqu\xE9 marca y modelo es, y qu\xE9 fecha de fabricaci\xF3n dice la etiqueta?"
+    },
+    crib_bumper: {
+      name: "Protector acolchado para cuna",
+      short: "protector de cuna",
+      a: "un protector acolchado para cuna",
+      risk: "Vender un protector acolchado para cuna es ilegal en EE. UU. desde noviembre de 2022. La CPSC incluye los protectores entre los objetos blandos que pueden asfixiar a un beb\xE9; su consejo es no poner nada en la cuna m\xE1s que una s\xE1bana ajustable.",
+      advice: "Los protectores de malla no est\xE1n prohibidos para la venta, pero el consejo de sue\xF1o seguro sigue siendo no poner nada en la cuna m\xE1s que una s\xE1bana ajustable, as\xED que no necesita ninguno. Pregunte cu\xE1l es antes de comprar.",
+      ask: "Hola, antes de comprarlo: \xBFes un protector acolchado o uno de malla delgada? \xBFMe puede mandar una foto de la etiqueta?"
+    },
+    in_bed_sleeper: {
+      name: "Nido o coj\xEDn para beb\xE9",
+      short: "nido para beb\xE9",
+      a: "un nido o coj\xEDn para beb\xE9",
+      risk: "Muchos beb\xE9s peque\xF1os no pueden levantar la cabeza para apartarse del acolchado. La CPSC dice que estos nunca son para dormir, eBay y Facebook Marketplace no los permiten, y muchos han sido retirados del mercado.",
+      advice: "Nunca lo use para dormir, ni siquiera para una siesta. Varios nidos han sido retirados del mercado, as\xED que pida la marca y el modelo.",
+      ask: "Hola, antes de comprarlo: \xBFqu\xE9 marca y modelo es? \xBFMe puede mandar una foto de la etiqueta?"
+    },
+    drop_side_crib: {
+      name: "Cuna de baranda corrediza",
+      short: "cuna de baranda corrediza",
+      a: "una cuna de baranda corrediza",
+      risk: "Las cunas de baranda corrediza no cumplen la norma federal de cunas vigente desde junio de 2011, y la CPSC dice que las cunas m\xE1s antiguas muy probablemente no se pueden vender legalmente.",
+      advice: "Pregunte si un lado de la cuna se desliza hacia abajo, y la fecha de fabricaci\xF3n de la etiqueta.",
+      ask: "Hola, antes de comprarla: \xBFuno de los lados de la cuna se desliza hacia abajo? \xBFQu\xE9 fecha de fabricaci\xF3n dice la etiqueta?"
+    }
+  };
+  var TYPE_COPY = new Proxy(TYPE_COPY_EN, {
+    get: (en, k) => getLang() === "es" && TYPE_COPY_ES[k] ? TYPE_COPY_ES[k] : en[k]
+  });
   function productName(product) {
     return clip(String(product || "").replace(/^all\s+(models\s+of\s+|units\s+of\s+)?/i, "").replace(/^the\s+/i, ""), 90);
   }
@@ -681,24 +738,33 @@ ${LOOKUP_SYSTEM}`;
     return `${words}\u2026 (the notice has the rest)`;
   }
   function badgeText(r) {
-    if (r.kind === "recall" && r.recall && r.recall.warning) return r.level === "likely" ? "CPSC warning" : "Possible CPSC warning";
-    if (r.kind === "recall") return r.level === "likely" ? "Recalled product" : "Possible recall";
-    if (r.kind === "banned") return r.level === "likely" ? (TYPE_COPY[r.banned.key] || {}).name || "Sleep risk" : `Possible ${(TYPE_COPY[r.banned.key] || {}).short || "sleep risk"}`;
+    if (r.kind === "recall" && r.recall && r.recall.warning) return r.level === "likely" ? tr("CPSC warning", "Advertencia de la CPSC") : tr("Possible CPSC warning", "Posible advertencia de la CPSC");
+    if (r.kind === "recall") return r.level === "likely" ? tr("Recalled product", "Retirado del mercado") : tr("Possible recall", "Posible retiro");
+    if (r.kind === "banned") return r.level === "likely" ? (TYPE_COPY[r.banned.key] || {}).name || tr("Sleep risk", "Riesgo al dormir") : tr(`Possible ${(TYPE_COPY[r.banned.key] || {}).short || "sleep risk"}`, `Posible ${(TYPE_COPY[r.banned.key] || {}).short || "riesgo al dormir"}`);
     return "";
   }
   function verdictLine(r) {
+    const p = r.recall ? productName(r.recall.product) : "", when = r.recall ? monthYear(r.recall.date) : "";
     if (r.kind === "recall" && r.lookedUp) {
-      return `Looks like the ${productName(r.recall.product)}, ${r.recall.warning ? "which CPSC warned people to stop using in" : "recalled"} ${monthYear(r.recall.date)}. The listing's words don't name this product, so check the brand before you buy.`;
+      return tr(
+        `Looks like the ${p}, ${r.recall.warning ? "which CPSC warned people to stop using in" : "recalled"} ${when}. The listing's words don't name this product, so check the brand before you buy.`,
+        `Parece ser \xAB${p}\xBB, ${r.recall.warning ? "que la CPSC pidi\xF3 dejar de usar en" : "retirado del mercado en"} ${when}. El anuncio no nombra este producto, as\xED que revise la marca antes de comprar.`
+      );
     }
     if (r.kind === "recall" && r.recall.warning) {
-      const product = productName(r.recall.product);
-      return r.level === "likely" ? `Looks like the ${product}. CPSC warned people to stop using them in ${monthYear(r.recall.date)}; the seller behind them did not recall them.` : `Same brand and kind as the ${product}, which CPSC warned people to stop using in ${monthYear(r.recall.date)}.`;
+      return r.level === "likely" ? tr(
+        `Looks like the ${p}. CPSC warned people to stop using them in ${when}; the seller behind them did not recall them.`,
+        `Parece ser \xAB${p}\xBB. La CPSC pidi\xF3 dejar de usarlos en ${when}; quien los vend\xEDa no los retir\xF3 del mercado.`
+      ) : tr(`Same brand and kind as the ${p}, which CPSC warned people to stop using in ${when}.`, `Misma marca y tipo que \xAB${p}\xBB, que la CPSC pidi\xF3 dejar de usar en ${when}.`);
     }
     if (r.kind === "recall") {
-      const product = productName(r.recall.product);
-      return r.level === "likely" ? `Looks like the ${product}, recalled ${monthYear(r.recall.date)}.` : `Same brand and kind as the ${product}, recalled ${monthYear(r.recall.date)}. The listing doesn't show which model.`;
+      return r.level === "likely" ? tr(`Looks like the ${p}, recalled ${when}.`, `Parece ser \xAB${p}\xBB, retirado del mercado en ${when}.`) : tr(`Same brand and kind as the ${p}, recalled ${when}. The listing doesn't show which model.`, `Misma marca y tipo que \xAB${p}\xBB, retirado del mercado en ${when}. El anuncio no muestra el modelo.`);
     }
     if (r.kind === "banned") {
+      if (getLang() === "es") {
+        const a2 = (TYPE_COPY[r.banned.key] || {}).a || "un producto de riesgo para dormir";
+        return r.level === "likely" ? `Parece ser ${a2}.` : `Puede ser o incluir ${a2}.`;
+      }
       const name = (TYPE_COPY[r.banned.key] || { name: "infant sleep product" }).name.toLowerCase();
       const a = /^[aeiou]/.test(name) ? "an" : "a";
       return r.level === "likely" ? `This looks like ${a} ${name}.` : `This may be or include ${a} ${name}.`;
@@ -707,29 +773,32 @@ ${LOOKUP_SYSTEM}`;
   }
   function actionLine(r) {
     if (r.kind === "recall" && r.lookedUp) {
-      return r.recall && r.recall.all ? "Don't buy it until you know it isn't this product: every unit of it is recalled." : "Don't buy it until the seller shows the brand and the label, and it isn't one of the recalled units.";
+      return r.recall && r.recall.all ? tr("Don't buy it until you know it isn't this product: every unit of it is recalled.", "No lo compre hasta saber que no es este producto: todas sus unidades fueron retiradas del mercado.") : tr("Don't buy it until the seller shows the brand and the label, and it isn't one of the recalled units.", "No lo compre hasta que el vendedor muestre la marca y la etiqueta, y no sea una de las unidades retiradas.");
     }
     if (r.kind === "recall" && r.recall && r.recall.warning) {
-      return r.level === "possible" ? "Don't buy it until you know it isn't the product CPSC warned about." : "Don't buy it. CPSC has told people to stop using this product.";
+      return r.level === "possible" ? tr("Don't buy it until you know it isn't the product CPSC warned about.", "No lo compre hasta saber que no es el producto sobre el que advirti\xF3 la CPSC.") : tr("Don't buy it. CPSC has told people to stop using this product.", "No lo compre. La CPSC pidi\xF3 dejar de usar este producto.");
     }
     if (r.kind === "recall") {
-      if (r.level === "possible") return "Don't buy it until the seller's label shows it isn't one of the recalled units.";
-      return r.recall && r.recall.all ? "Don't buy it. Every unit of this product is recalled." : "Don't buy it unless the seller's label shows it isn't one of the recalled units.";
+      if (r.level === "possible") return tr("Don't buy it until the seller's label shows it isn't one of the recalled units.", "No lo compre hasta que la etiqueta muestre que no es una de las unidades retiradas.");
+      return r.recall && r.recall.all ? tr("Don't buy it. Every unit of this product is recalled.", "No lo compre. Todas las unidades de este producto fueron retiradas del mercado.") : tr("Don't buy it unless the seller's label shows it isn't one of the recalled units.", "No lo compre a menos que la etiqueta muestre que no es una de las unidades retiradas.");
     }
     if (r.kind === "banned") {
-      if (r.level === "possible") return r.banned && r.banned.key === "in_bed_sleeper" ? "Ask the seller what it is. If it's a soft padded nest or cushion for a baby to lie in, skip it, whatever it's called." : "Ask the seller what it is before you buy.";
+      if (r.level === "possible") return r.banned && r.banned.key === "in_bed_sleeper" ? tr("Ask the seller what it is. If it's a soft padded nest or cushion for a baby to lie in, skip it, whatever it's called.", "Preg\xFAntele al vendedor qu\xE9 es. Si es un nido o coj\xEDn acolchado para acostar a un beb\xE9, no lo compre, se llame como se llame.") : tr("Ask the seller what it is before you buy.", "Preg\xFAntele al vendedor qu\xE9 es antes de comprarlo.");
       return {
-        crib_bumper: "Skip this one. CPSC's advice: nothing in a crib but a fitted sheet.",
-        inclined_sleeper: "Skip this one, and never use an inclined sleeper for sleep.",
-        in_bed_sleeper: "Skip this one. Babies fall asleep in loungers, and infants have died in them, even during naps.",
-        drop_side_crib: "Skip this one: drop-side cribs don't meet today's crib standard."
-      }[r.banned && r.banned.key] || "Never use it for sleep.";
+        crib_bumper: tr("Skip this one. CPSC's advice: nothing in a crib but a fitted sheet.", "No lo compre. El consejo de la CPSC: nada en la cuna m\xE1s que una s\xE1bana ajustable."),
+        inclined_sleeper: tr("Skip this one, and never use an inclined sleeper for sleep.", "No lo compre, y nunca use un dormidor inclinado para dormir."),
+        in_bed_sleeper: tr("Skip this one. Babies fall asleep in loungers, and infants have died in them, even during naps.", "No lo compre. Los beb\xE9s se duermen en los nidos, y algunos han muerto en ellos, incluso durante siestas."),
+        drop_side_crib: tr("Skip this one: drop-side cribs don't meet today's crib standard.", "No la compre: las cunas de baranda corrediza no cumplen la norma de cunas actual.")
+      }[r.banned && r.banned.key] || tr("Never use it for sleep.", "Nunca lo use para dormir.");
     }
     return "";
   }
   function noMatchLine(count, since, input = "listing") {
-    const what = input === "typed" ? "the words you typed" : "what the listing shows";
-    return `No recall found for what we could read. That doesn't mean it's safe. We searched ${count} recall notices since ${since}, and can only match ${what}.`;
+    const what = input === "typed" ? tr("the words you typed", "las palabras que escribi\xF3") : tr("what the listing shows", "lo que muestra el anuncio");
+    return tr(
+      `No recall found for what we could read. That doesn't mean it's safe. We searched ${count} recall notices since ${since}, and can only match ${what}.`,
+      `No encontramos un retiro del mercado para lo que pudimos leer. Eso no quiere decir que sea seguro. Buscamos en ${count} avisos de retiro desde ${since}, y solo podemos comparar ${what}.`
+    );
   }
   var SLEEP_PLACE = /\b(cribs?|cots?|bassinets?|cradles?|moses|play\s*yards?|playards?|pack\s*'?n\s*'?play|playpens?|bed(ding)?|mattress(es)?|sleep\w*|co-?sleep\w*|cunas?|moises|corral(ito)?s?)\b/i;
   var SITTING = /\b(swings?|bouncers?|rockers?|car\s*seats?|infant\s*seats?|carriers?|slings?|strollers?|columpios?|mecedor(a|es)?)\b/i;
@@ -737,26 +806,41 @@ ${LOOKUP_SYSTEM}`;
   var BEDDING_SET = /\b(bedding|quilts?|comforters?|blankets?|crib\s*sets?)\b/i;
   var SLEEP_PART = /\b(pads?|mattress(es)?|inserts?|sheets?)\b/i;
   var CAR_SEAT = /\b(car\s*seats?|infant\s*seats?|booster\s*seats?|boosters?|silla\s+(de\s+)?(auto|carro))\b/i;
-  var CAR_SEAT_LINE = "Car seat recalls are kept by NHTSA, not CPSC, so they aren't checked here. Look up the seat's model and date at nhtsa.gov/recalls.";
-  var ABC = "Every sleep: baby alone, on their back, in a crib, bassinet or play yard with only a fitted sheet.";
+  var carSeatLine = () => tr(
+    "Car seat recalls are kept by NHTSA, not CPSC, so they aren't checked here. Look up the seat's model and date at nhtsa.gov/recalls.",
+    "Los retiros de asientos de auto los lleva la NHTSA, no la CPSC, as\xED que aqu\xED no se revisan. Busque el modelo y la fecha del asiento en nhtsa.gov/recalls."
+  );
+  var abc = () => tr(
+    "Every sleep: baby alone, on their back, in a crib, bassinet or play yard with only a fitted sheet.",
+    "Para cada sue\xF1o: el beb\xE9 solo, boca arriba, en una cuna, mois\xE9s o corral con solo una s\xE1bana ajustable."
+  );
   function sleepLine(text, part = false, r = null) {
     const t = String(text || "");
     const key = r && r.kind === "banned" && r.banned ? r.banned.key : "";
     if (part && SLEEP_PART.test(t) && SLEEP_PLACE.test(t)) {
-      return "This looks like a part, so a recall may not cover it. Use only the mattress or pad that came with the crib, bassinet or play yard: extra padding can suffocate a baby.";
+      return tr(
+        "This looks like a part, so a recall may not cover it. Use only the mattress or pad that came with the crib, bassinet or play yard: extra padding can suffocate a baby.",
+        "Parece ser una pieza, as\xED que un retiro puede no cubrirla. Use solo el colch\xF3n o la almohadilla que vino con la cuna, el mois\xE9s o el corral: el acolchado extra puede asfixiar a un beb\xE9."
+      );
     }
     if (part) return "";
-    if (key === "inclined_sleeper" || /\b(inclined|rock\s*'?n\s*'?play)\b/i.test(t)) return `Babies should sleep flat, never in an inclined sleeper, recalled or not. ${ABC}`;
+    if (key === "inclined_sleeper" || /\b(inclined|rock\s*'?n\s*'?play)\b/i.test(t)) return tr(`Babies should sleep flat, never in an inclined sleeper, recalled or not. ${abc()}`, `Los beb\xE9s deben dormir sobre una superficie plana, nunca en un dormidor inclinado, est\xE9 retirado del mercado o no. ${abc()}`);
     if (key === "in_bed_sleeper" || LOUNGE.test(t) && /\b(baby|babies|infant|newborn|bebes?|bebés?)\b/i.test(t)) {
-      return "Not for sleep, recalled or not. If your baby gets sleepy, move them to their crib or bassinet, on their back.";
+      return tr(
+        "Not for sleep, recalled or not. If your baby gets sleepy, move them to their crib or bassinet, on their back.",
+        "No es para dormir, est\xE9 retirado del mercado o no. Si su beb\xE9 se duerme, p\xE1selo a su cuna o mois\xE9s, boca arriba."
+      );
     }
-    if (key === "crib_bumper" || BEDDING_SET.test(t)) return `Quilts, comforters, pillows and bumpers from crib sets are for decoration only. ${ABC}`;
-    if (SLEEP_PLACE.test(t)) return ABC;
-    if (SITTING.test(t)) return "Not for sleep. If your baby falls asleep in it, move them to their crib or bassinet, on their back.";
+    if (key === "crib_bumper" || BEDDING_SET.test(t)) return tr(`Quilts, comforters, pillows and bumpers from crib sets are for decoration only. ${abc()}`, `Las colchas, edredones, almohadas y protectores de los juegos de cuna son solo de decoraci\xF3n. ${abc()}`);
+    if (SLEEP_PLACE.test(t)) return abc();
+    if (SITTING.test(t)) return tr("Not for sleep. If your baby falls asleep in it, move them to their crib or bassinet, on their back.", "No es para dormir. Si su beb\xE9 se duerme en \xE9l, p\xE1selo a su cuna o mois\xE9s, boca arriba.");
     return "";
   }
   function oldCribLine(text) {
-    return /\bcribs?\b/i.test(text) && !/\b(mini|portable|travel)\b/i.test(text) ? "A crib made before June 28, 2011 likely doesn't meet today's crib standard. Check the date on its label, and that it has every part." : "";
+    return /\b(cribs?|cunas?)\b/i.test(text) && !/\b(mini|portable|travel)\b/i.test(text) ? tr(
+      "A crib made before June 28, 2011 likely doesn't meet today's crib standard. Check the date on its label, and that it has every part.",
+      "Una cuna fabricada antes del 28 de junio de 2011 probablemente no cumple la norma de cunas actual. Revise la fecha en la etiqueta y que tenga todas sus piezas."
+    ) : "";
   }
   var FILLER = new Set(`a an the this that these those one ones it its is are was be my your our their his her i me we you
   and or but for with of to in on at by from as so if not no yes ok okay hi hello hey thanks thank please
@@ -774,119 +858,159 @@ ${LOOKUP_SYSTEM}`;
     const vague = !partOrToy && input === "typed" && namesNothing(title);
     const owner = audience === "owner" ? ownerView(r) : null;
     const sleep = sleepLine(title, partOrToy);
-    const safeSleep = !!sleep || INFANT.test(title);
+    const safeSleep = !!sleep || INFANT.test(title) || INFANT_ES.test(title);
     if (vague) {
       return {
         vague,
         safeSleep: false,
-        pill: "Nothing to match",
-        line: "We couldn't tell what the product is. Type its brand and name, like \u201CGraco Pack 'n Play\u201D, or check a screenshot of the listing.",
-        heading: "What helps",
-        lines: ["The brand and the product name are enough. A model number, if you have one, settles most recalls."]
+        pill: tr("Nothing to match", "Nada que comparar"),
+        line: tr(
+          "We couldn't tell what the product is. Type its brand and name, like \u201CGraco Pack 'n Play\u201D, or check a screenshot of the listing.",
+          "No pudimos saber qu\xE9 producto es. Escriba la marca y el nombre, como \u201CGraco Pack 'n Play\u201D, o revise una captura de pantalla del anuncio."
+        ),
+        heading: tr("What helps", "Qu\xE9 ayuda"),
+        lines: [tr("The brand and the product name are enough. A model number, if you have one, settles most recalls.", "La marca y el nombre del producto bastan. Un n\xFAmero de modelo, si lo tiene, resuelve la mayor\xEDa de los retiros.")]
       };
     }
-    const line = partOrToy ? "This looks like a part or a toy version, not the product itself." : owner ? owner.action : noMatchLine(grouped(count), monthYear(since || "1973-01-01"), input);
-    const extra = [sleep, CAR_SEAT.test(title) ? CAR_SEAT_LINE : "", oldCribLine(title)].filter(Boolean);
-    if (owner) return { vague, safeSleep, pill: "No match found", line, heading: owner.heading, lines: [...owner.lines, ...extra] };
+    const line = partOrToy ? tr("This looks like a part or a toy version, not the product itself.", "Parece ser una pieza o una versi\xF3n de juguete, no el producto en s\xED.") : owner ? owner.action : noMatchLine(grouped(count), monthYear(since || "1973-01-01"), input);
+    const extra = [sleep, CAR_SEAT.test(title) ? carSeatLine() : "", oldCribLine(title)].filter(Boolean);
+    const pill = tr("No match found", "Sin coincidencias");
+    if (owner) return { vague, safeSleep, pill, line, heading: owner.heading, lines: [...owner.lines, ...extra] };
     return {
       vague,
       safeSleep,
-      pill: "No match found",
+      pill,
       line,
-      heading: "Before you buy",
+      heading: tr("Before you buy", "Antes de comprar"),
       lines: [
-        "A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.",
+        tr(
+          "A listing rarely shows the model number, and many recalls cover only some models. Ask the seller for a photo of the label, then search the model number on SaferProducts.gov.",
+          "Un anuncio rara vez muestra el n\xFAmero de modelo, y muchos retiros cubren solo algunos modelos. P\xEDdale al vendedor una foto de la etiqueta y busque el n\xFAmero de modelo en SaferProducts.gov."
+        ),
         ...extra
       ].filter(Boolean)
     };
   }
   function sellerQuestion(r) {
+    const es = getLang() === "es" && INFANT_ES.test(`${r.listing && r.listing.title || ""}`);
+    const q = (en, sp) => es ? sp : en;
+    const p = r.recall ? productName(r.recall.product) : "";
     if (r.kind === "recall" && r.lookedUp) {
-      return `Hi, before I buy: what brand and model is this? Could you send a photo of its label? It looks like a product CPSC ${r.recall.warning ? "warned about" : "recalled"} (${r.recall.warning ? "warning" : "recall"} ${r.recall.number}, ${productName(r.recall.product)}).`;
+      return q(
+        `Hi, before I buy: what brand and model is this? Could you send a photo of its label? It looks like a product CPSC ${r.recall.warning ? "warned about" : "recalled"} (${r.recall.warning ? "warning" : "recall"} ${r.recall.number}, ${p}).`,
+        `Hola, antes de comprarlo: \xBFqu\xE9 marca y modelo es? \xBFMe puede mandar una foto de la etiqueta? Se parece a un producto que la CPSC ${r.recall.warning ? "pidi\xF3 dejar de usar" : "retir\xF3 del mercado"} (${r.recall.warning ? "advertencia" : "retiro"} ${r.recall.number}, ${p}).`
+      );
     }
     if (r.kind === "recall" && r.recall.warning) {
-      return `Hi, before I buy: what brand is this, and could you send a photo of its tag or label? CPSC has warned people to stop using a product like it (warning ${r.recall.number}, ${productName(r.recall.product)}).`;
+      return q(
+        `Hi, before I buy: what brand is this, and could you send a photo of its tag or label? CPSC has warned people to stop using a product like it (warning ${r.recall.number}, ${p}).`,
+        `Hola, antes de comprarlo: \xBFqu\xE9 marca es, y me puede mandar una foto de la etiqueta? La CPSC pidi\xF3 dejar de usar un producto como este (advertencia ${r.recall.number}, ${p}).`
+      );
     }
     if (r.kind === "recall") {
-      return `Hi, before I buy: could you send a photo of the label showing the model number and manufacture date? I'd like to check it against a CPSC recall (${r.recall.id}, ${productName(r.recall.product)}).`;
+      return q(
+        `Hi, before I buy: could you send a photo of the label showing the model number and manufacture date? I'd like to check it against a CPSC recall (${r.recall.id}, ${p}).`,
+        `Hola, antes de comprarlo: \xBFme puede mandar una foto de la etiqueta con el n\xFAmero de modelo y la fecha de fabricaci\xF3n? Quiero compararla con un retiro de la CPSC (${r.recall.id}, ${p}).`
+      );
     }
     if (r.kind === "banned" && r.banned.key === "crib_bumper" && r.level === "possible") {
-      return "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?";
+      return q(
+        "Hi, before I buy: does this set include padded crib bumpers? Could you list every piece that comes with it?",
+        "Hola, antes de comprarlo: \xBFeste juego incluye protectores acolchados para cuna? \xBFMe puede decir todas las piezas que trae?"
+      );
     }
-    if (r.kind === "banned") return (TYPE_COPY[r.banned.key] || {}).ask || "";
+    if (r.kind === "banned") return es ? (TYPE_COPY_ES[r.banned.key] || {}).ask || "" : (TYPE_COPY_EN[r.banned.key] || {}).ask || "";
     return "";
   }
-  var OWNER_TYPE = {
+  var OWNER_TYPE_EN = {
     inclined_sleeper: "Selling an inclined infant sleeper has been against federal law since November 2022, whatever its age. CPSC says never to use one for sleep.",
     crib_bumper: "Selling a padded crib bumper has been against federal law since November 2022, whatever its age. CPSC's advice is nothing in a crib but a fitted sheet.",
     in_bed_sleeper: "eBay and Facebook Marketplace don't allow loungers and nests, many have been recalled, and CPSC says never to use one for sleep.",
     drop_side_crib: "CPSC says cribs made before June 28, 2011, drop-sides included, are very likely illegal to sell."
   };
-  var OWNER_ADVICE = {
+  var OWNER_ADVICE_EN = {
     inclined_sleeper: "Many inclined sleepers are also recalled: look for the brand and model on its label.",
     crib_bumper: "Mesh liners aren't covered by the sales ban, but safe-sleep advice is still nothing in a crib but a fitted sheet. Check which one yours is.",
     in_bed_sleeper: "Several loungers have been recalled: look for the brand and model on its label.",
     drop_side_crib: "Check whether a side of the crib slides down, and the manufacture date on its label."
   };
+  var OWNER_TYPE_ES = {
+    inclined_sleeper: "Vender un dormidor inclinado para beb\xE9 es ilegal en EE. UU. desde noviembre de 2022, sin importar su antig\xFCedad. La CPSC dice que nunca se use para dormir.",
+    crib_bumper: "Vender un protector acolchado para cuna es ilegal en EE. UU. desde noviembre de 2022, sin importar su antig\xFCedad. El consejo de la CPSC es no poner nada en la cuna m\xE1s que una s\xE1bana ajustable.",
+    in_bed_sleeper: "eBay y Facebook Marketplace no permiten nidos ni cojines para beb\xE9, muchos han sido retirados del mercado, y la CPSC dice que nunca se usen para dormir.",
+    drop_side_crib: "La CPSC dice que las cunas fabricadas antes del 28 de junio de 2011, incluidas las de baranda corrediza, muy probablemente no se pueden vender legalmente."
+  };
+  var OWNER_ADVICE_ES = {
+    inclined_sleeper: "Muchos dormidores inclinados tambi\xE9n han sido retirados del mercado: busque la marca y el modelo en su etiqueta.",
+    crib_bumper: "Los protectores de malla no est\xE1n prohibidos para la venta, pero el consejo de sue\xF1o seguro sigue siendo no poner nada en la cuna m\xE1s que una s\xE1bana ajustable. Revise cu\xE1l es el suyo.",
+    in_bed_sleeper: "Varios nidos han sido retirados del mercado: busque la marca y el modelo en su etiqueta.",
+    drop_side_crib: "Revise si un lado de la cuna se desliza hacia abajo, y la fecha de fabricaci\xF3n en la etiqueta."
+  };
+  var OWNER_TYPE = new Proxy(OWNER_TYPE_EN, { get: (en, k) => getLang() === "es" ? OWNER_TYPE_ES[k] : en[k] });
+  var OWNER_ADVICE = new Proxy(OWNER_ADVICE_EN, { get: (en, k) => getLang() === "es" ? OWNER_ADVICE_ES[k] : en[k] });
   function ownerVerdict(r) {
     if (r.kind !== "recall" || !r.recall) return r.verdict || "";
     const product = productName(r.recall.product);
     const when = monthYear(r.recall.date);
-    if (r.lookedUp) return `Looks like the ${product}, ${r.recall.warning ? "which CPSC warned people to stop using in" : "recalled"} ${when}. Check the brand on yours.`;
+    if (r.lookedUp) return tr(
+      `Looks like the ${product}, ${r.recall.warning ? "which CPSC warned people to stop using in" : "recalled"} ${when}. Check the brand on yours.`,
+      `Parece ser \xAB${product}\xBB, ${r.recall.warning ? "que la CPSC pidi\xF3 dejar de usar en" : "retirado del mercado en"} ${when}. Revise la marca del suyo.`
+    );
     if (r.recall.warning) return r.verdict || "";
-    return r.level === "likely" ? `Looks like the ${product}, recalled ${when}.` : `Same brand and kind as the ${product}, recalled ${when}. Its label shows which model you have.`;
+    return r.level === "likely" ? tr(`Looks like the ${product}, recalled ${when}.`, `Parece ser \xAB${product}\xBB, retirado del mercado en ${when}.`) : tr(`Same brand and kind as the ${product}, recalled ${when}. Its label shows which model you have.`, `Misma marca y tipo que \xAB${product}\xBB, retirado del mercado en ${when}. Su etiqueta muestra qu\xE9 modelo tiene.`);
   }
   function ownerView(r) {
-    return { verdict: ownerVerdict(r), evidence: ownerWords(r.evidence), foundBy: String(r.foundBy || "").replace(/The listing's words/g, "The words you gave"), ...ownerAdvice(r) };
+    return { verdict: ownerVerdict(r), evidence: ownerWords(r.evidence), foundBy: String(r.foundBy || "").replace(/The listing's words/g, "The words you gave").replace(/Las palabras del anuncio/g, "Las palabras que usted dio"), ...ownerAdvice(r) };
   }
   function ownerWords(text) {
     const s = String(text || "").replace(/\bthe listing(?:['’]s)? (?:photo|image|picture)\b/gi, "your photo").replace(/\bthe seller['’]s (?:photo|image|picture)s?\b/gi, "your photo").replace(/\bthe listing(?:['’]s)? (?:title|description|text|words|wording)\b/gi, "what you entered").replace(/\bthe listing['’]s\b/gi, "its").replace(/\bthe (?:item|product) for sale\b/gi, "your item").replace(/\bthe listing\b/gi, "what you entered").replace(/\bthis listing\b/gi, "this item");
     return s.replace(/(^|[.!?]\s+)([a-z])/g, (m, a, b) => a + b.toUpperCase());
   }
   function ownerAdvice(r) {
-    const heading = "Before you sell it or give it away";
+    const heading = tr("Before you sell it or give it away", "Antes de venderlo o regalarlo");
     if (r.kind === "recall" && r.recall) {
       const c = r.recall;
       const sure = r.level === "likely";
+      const p = productName(c.product);
       if (c.warning) {
         return {
           heading,
-          action: sure ? "Don't sell it or give it away. CPSC has told people to stop using this product." : "Check the brand before you sell it or give it away.",
+          action: sure ? tr("Don't sell it or give it away. CPSC has told people to stop using this product.", "No lo venda ni lo regale. La CPSC pidi\xF3 dejar de usar este producto.") : tr("Check the brand before you sell it or give it away.", "Revise la marca antes de venderlo o regalarlo."),
           lines: [
-            sure ? "Its seller did not recall it, so there is no refund to claim. CPSC warned the public itself." : `CPSC warned people to stop using the ${productName(c.product)}. If yours is that brand, don't pass it on.`,
-            c.remedy ? `CPSC says: ${c.remedy}` : ""
+            sure ? tr("Its seller did not recall it, so there is no refund to claim. CPSC warned the public itself.", "Quien lo vend\xEDa no lo retir\xF3 del mercado, as\xED que no hay reembolso que reclamar. La CPSC advirti\xF3 al p\xFAblico directamente.") : tr(`CPSC warned people to stop using the ${p}. If yours is that brand, don't pass it on.`, `La CPSC pidi\xF3 dejar de usar \xAB${p}\xBB. Si el suyo es de esa marca, no se lo pase a nadie.`),
+            c.remedy ? tr(`CPSC says: ${c.remedy}`, `La CPSC dice: ${c.remedy}`) : ""
           ].filter(Boolean)
         };
       }
       if (!sure || r.lookedUp) {
         return {
           heading,
-          action: r.lookedUp ? "Check the brand and the label before you sell it or give it away: it looks like a recalled product." : "Check its label before you sell it or give it away.",
+          action: r.lookedUp ? tr("Check the brand and the label before you sell it or give it away: it looks like a recalled product.", "Revise la marca y la etiqueta antes de venderlo o regalarlo: parece un producto retirado del mercado.") : tr("Check its label before you sell it or give it away.", "Revise su etiqueta antes de venderlo o regalarlo."),
           lines: [
-            c.all ? `Every unit of the ${productName(c.product)} is recalled. If that is what you have, don't pass it on.` : c.tell ? `Which units are recalled: ${c.tell}` : `Some ${productName(c.product)} are recalled. The notice says which.`,
-            "CPSC says it is illegal to sell any recalled product.",
-            c.remedy ? `If yours is recalled, the recall's remedy: ${c.remedy} The notice says how to claim it.` : ""
+            c.all ? tr(`Every unit of the ${p} is recalled. If that is what you have, don't pass it on.`, `Todas las unidades de \xAB${p}\xBB fueron retiradas del mercado. Si es lo que tiene, no se lo pase a nadie.`) : c.tell ? tr(`Which units are recalled: ${c.tell}`, `Qu\xE9 unidades fueron retiradas: ${c.tell}`) : tr(`Some ${p} are recalled. The notice says which.`, `Algunas unidades de \xAB${p}\xBB fueron retiradas. El aviso dice cu\xE1les.`),
+            tr("CPSC says it is illegal to sell any recalled product.", "La CPSC dice que es ilegal vender cualquier producto retirado del mercado."),
+            c.remedy ? tr(`If yours is recalled, the recall's remedy: ${c.remedy} The notice says how to claim it.`, `Si el suyo fue retirado, lo que ofrece el retiro: ${c.remedy} El aviso dice c\xF3mo reclamarlo.`) : ""
           ].filter(Boolean)
         };
       }
       return {
         heading,
-        action: "Don't sell it or give it away: it looks like a recalled product.",
+        action: tr("Don't sell it or give it away: it looks like a recalled product.", "No lo venda ni lo regale: parece un producto retirado del mercado."),
         lines: [
-          "Stop using it unless the recall's fix has already been done. CPSC says it is illegal to sell any recalled product.",
-          c.remedy ? `The recall's remedy: ${c.remedy} The notice says how to claim it.` : "The notice says what the maker offers and how to claim it.",
-          c.all ? "" : c.tell ? `Which units are recalled: ${c.tell}` : ""
+          tr("Stop using it unless the recall's fix has already been done. CPSC says it is illegal to sell any recalled product.", "Deje de usarlo, a menos que ya se haya hecho la reparaci\xF3n del retiro. La CPSC dice que es ilegal vender cualquier producto retirado del mercado."),
+          c.remedy ? tr(`The recall's remedy: ${c.remedy} The notice says how to claim it.`, `Lo que ofrece el retiro: ${c.remedy} El aviso dice c\xF3mo reclamarlo.`) : tr("The notice says what the maker offers and how to claim it.", "El aviso dice qu\xE9 ofrece el fabricante y c\xF3mo reclamarlo."),
+          c.all ? "" : c.tell ? tr(`Which units are recalled: ${c.tell}`, `Qu\xE9 unidades fueron retiradas: ${c.tell}`) : ""
         ].filter(Boolean)
       };
     }
     if (r.kind === "banned" && r.banned) {
       const rule = OWNER_TYPE[r.banned.key] || "";
-      return r.level === "likely" ? { heading, action: "Don't sell it or give it away.", lines: [rule, r.also ? `It also looks like the ${productName(r.also.product)} (${r.also.warning ? "CPSC warning" : "recall"} ${r.also.number}): the notice says what its maker offers.` : ""].filter(Boolean) } : { heading, action: "Check what it is before you sell it or give it away.", lines: [OWNER_ADVICE[r.banned.key] || r.banned.advice, rule].filter(Boolean) };
+      return r.level === "likely" ? { heading, action: tr("Don't sell it or give it away.", "No lo venda ni lo regale."), lines: [rule, r.also ? tr(`It also looks like the ${productName(r.also.product)} (${r.also.warning ? "CPSC warning" : "recall"} ${r.also.number}): the notice says what its maker offers.`, `Tambi\xE9n parece ser \xAB${productName(r.also.product)}\xBB (${r.also.warning ? "advertencia de la CPSC" : "retiro"} ${r.also.number}): el aviso dice qu\xE9 ofrece su fabricante.`) : ""].filter(Boolean) } : { heading, action: tr("Check what it is before you sell it or give it away.", "Revise qu\xE9 es antes de venderlo o regalarlo."), lines: [OWNER_ADVICE[r.banned.key] || r.banned.advice, rule].filter(Boolean) };
     }
     return {
       heading,
-      action: "No recall found for what we could read. That doesn't mean it's safe to pass on.",
-      lines: ["Many recalls cover only some models. Find the model number and date on its label and search them at SaferProducts.gov before you sell it or give it away."]
+      action: tr("No recall found for what we could read. That doesn't mean it's safe to pass on.", "No encontramos un retiro del mercado para lo que pudimos leer. Eso no quiere decir que sea seguro pas\xE1rselo a alguien."),
+      lines: [tr("Many recalls cover only some models. Find the model number and date on its label and search them at SaferProducts.gov before you sell it or give it away.", "Muchos retiros cubren solo algunos modelos. Busque el n\xFAmero de modelo y la fecha en la etiqueta y b\xFAsquelos en SaferProducts.gov antes de venderlo o regalarlo.")]
     };
   }
   var SALE_RULE = {
@@ -902,7 +1026,7 @@ ${LOOKUP_SYSTEM}`;
   function cpscReport(r, seen = /* @__PURE__ */ new Date()) {
     if (!reportable(r)) return "";
     const day = seen.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-    const what = r.kind === "recall" ? `It appears to be the ${productName(r.recall.product)}, recalled ${monthYear(r.recall.date)} (CPSC recall ${r.recall.id}). The listing does not say the recall remedy has been applied.` : `It appears to be ${/^[aeiou]/i.test(r.banned.name) ? "an" : "a"} ${r.banned.name.toLowerCase()}. ${SALE_RULE[r.banned.key]}`;
+    const what = r.kind === "recall" ? `It appears to be the ${productName(r.recall.product)}, recalled ${monthYear(r.recall.date)} (CPSC recall ${r.recall.id}). The listing does not say the recall remedy has been applied.` : `It appears to be ${/^[aeiou]/i.test(TYPE_COPY_EN[r.banned.key].name) ? "an" : "a"} ${TYPE_COPY_EN[r.banned.key].name.toLowerCase()}. ${SALE_RULE[r.banned.key]}`;
     const head = r.kind === "recall" ? "A recalled product listed for sale online." : "An infant sleep product listed for sale online.";
     const facts = [
       listingLink(r) ? `Listing: ${listingLink(r)}` : "Listing: see the attached screenshot.",
@@ -930,16 +1054,22 @@ ${LOOKUP_SYSTEM}`;
   }
   function monthYear(isoDate) {
     const [y, m] = String(isoDate || "").split("-").map(Number);
-    if (!y || !m) return "by CPSC";
-    return `${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][m - 1]} ${y}`;
+    if (!y || !m) return tr("by CPSC", "por la CPSC");
+    return monthYearOf(isoDate);
   }
   function present(listing, decision, how = {}) {
     const via = decision.alsoRecall || decision.lookedUp && decision.card || null;
     const asked = via ? (how.lookups || []).find((l) => l.found.includes(via.id)) : null;
     const askedFor = asked ? clip([asked.asked.brand, asked.asked.product].filter(Boolean).join(" "), 70) : "";
     const seenIt = via && !asked && how.seen && how.seen.id === via.id ? how.seen : null;
-    const ledBy = seenIt ? `${how.device ? "Gemini Nano, on this device," : "Gemini"} read \u201C${clip(seenIt.brand, 40)}\u201D in the photo and asked the recall field guide on this device, which had it.` : `Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`;
-    const viaNumber = via ? `${via.warning ? "warning" : "recall"} ${via.id.replace(/^W/, "")}` : "";
+    const ledBy = seenIt ? tr(
+      `${how.device ? "Gemini Nano, on this device," : "Gemini"} read \u201C${clip(seenIt.brand, 40)}\u201D in the photo and asked the recall field guide on this device, which had it.`,
+      `${how.device ? "Gemini Nano, en este dispositivo," : "Gemini"} ley\xF3 \u201C${clip(seenIt.brand, 40)}\u201D en la foto y consult\xF3 la gu\xEDa de retiros de este dispositivo, que lo ten\xEDa.`
+    ) : tr(
+      `Gemini in the cloud named the product (${askedFor}) and asked the recall field guide on this device, which had it.`,
+      `Gemini en la nube identific\xF3 el producto (${askedFor}) y consult\xF3 la gu\xEDa de retiros de este dispositivo, que lo ten\xEDa.`
+    );
+    const viaNumber = via ? `${via.warning ? tr("warning", "advertencia") : tr("recall", "retiro")} ${via.id.replace(/^W/, "")}` : "";
     const base2 = {
       id: listing.id,
       listing: { title: listing.title, price: listing.price || "", image: listing.image || "", url: listing.url || "" },
@@ -973,7 +1103,10 @@ ${LOOKUP_SYSTEM}`;
       // Said on the card when the listing's own words did not lead to the recall.
       // Hedged on purpose: other makers sell look-alikes (a Kids2 rocking sleeper was once named as a Rock 'n Play), so
       // the line sends the reader to the brand on the label.
-      foundBy: !(asked || seenIt) ? "" : decision.alsoRecall ? `${decision.kind === "recall" ? "It may also be" : "It may be"} the ${productName(via.product)}, ${via.warning ? "which CPSC warned about in" : "recalled"} ${monthYear(via.date)} (${viaNumber}). Other makers sell look-alikes, so check the brand on its label. The listing's words didn't name it: ${ledBy}` : `The listing's words didn't lead to this recall. ${ledBy}`,
+      foundBy: !(asked || seenIt) ? "" : decision.alsoRecall ? tr(
+        `${decision.kind === "recall" ? "It may also be" : "It may be"} the ${productName(via.product)}, ${via.warning ? "which CPSC warned about in" : "recalled"} ${monthYear(via.date)} (${viaNumber}). Other makers sell look-alikes, so check the brand on its label. The listing's words didn't name it: ${ledBy}`,
+        `${decision.kind === "recall" ? "Tambi\xE9n puede ser" : "Puede ser"} \xAB${productName(via.product)}\xBB, ${via.warning ? "sobre el que advirti\xF3 la CPSC en" : "retirado del mercado en"} ${monthYear(via.date)} (${viaNumber}). Otros fabricantes venden productos parecidos, as\xED que revise la marca en la etiqueta. Las palabras del anuncio no lo nombraban: ${ledBy}`
+      ) : tr(`The listing's words didn't lead to this recall. ${ledBy}`, `Las palabras del anuncio no llevaron a este retiro. ${ledBy}`),
       // A recall shown because the cloud named the product, not because the listing's words did.
       lookedUp: !!(decision.lookedUp && decision.card && decision.level !== "none"),
       // On a type flag that stands on its own: the recall the cloud and the device's field guide pointed to as well.
@@ -1152,63 +1285,87 @@ ${LOOKUP_SYSTEM}`;
     if (yearOut) return { ...base2, state: "year_out", model: read[0] || "" };
     return { ...base2, state: read.length ? "no_models" : "unreadable", model: read[0] || "" };
   }
-  var years = (v) => v.from && v.to ? v.from === v.to ? `in ${v.from}` : `from ${v.from} to ${v.to}` : "";
-  var some = (list) => list.length > 6 ? `${list.slice(0, 6).join(", ")} and ${list.length - 6} more` : list.join(", ");
+  var years = (v) => v.from && v.to ? v.from === v.to ? tr(`in ${v.from}`, `en ${v.from}`) : tr(`from ${v.from} to ${v.to}`, `de ${v.from} a ${v.to}`) : "";
+  var some = (list) => list.length > 6 ? tr(`${list.slice(0, 6).join(", ")} and ${list.length - 6} more`, `${list.slice(0, 6).join(", ")} y ${list.length - 6} m\xE1s`) : list.join(", ");
   function labelCopy(v, { owner = false } = {}) {
     switch (v.state) {
       case "recalled":
         return {
           tone: "likely",
-          title: "The label matches the recall",
-          text: `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ""}. ${owner ? "Don't sell it or give it away unless the recall's fix was done." : "Don't buy it unless the seller shows the recall's fix was done."}`
+          title: tr("The label matches the recall", "La etiqueta coincide con el retiro"),
+          text: tr(
+            `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ""}. ${owner ? "Don't sell it or give it away unless the recall's fix was done." : "Don't buy it unless the seller shows the recall's fix was done."}`,
+            `El modelo ${v.model} es uno de los modelos del aviso${v.yearOut ? `, aunque el a\xF1o de la etiqueta (${v.year}) est\xE1 fuera de los a\xF1os que da el aviso` : ""}. ${owner ? "No lo venda ni lo regale a menos que ya se haya hecho la reparaci\xF3n del retiro." : "No lo compre a menos que el vendedor muestre que ya se hizo la reparaci\xF3n del retiro."}`
+          )
         };
       case "near":
         return {
           tone: "possible",
-          title: "One character from a recalled model",
-          text: `The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: ${owner ? "look at the label yourself before you pass it on." : "look at the label yourself, or ask for a sharper photo, before you buy."}`
+          title: tr("One character from a recalled model", "A un car\xE1cter de un modelo retirado"),
+          text: tr(
+            `The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: ${owner ? "look at the label yourself before you pass it on." : "look at the label yourself, or ask for a sharper photo, before you buy."}`,
+            `La etiqueta dice ${v.model}; el aviso retira el ${v.twin}. Las etiquetas se leen mal con facilidad, tanto las personas como los modelos: ${owner ? "revise la etiqueta usted mismo antes de pas\xE1rsela a alguien." : "revise la etiqueta usted mismo, o pida una foto m\xE1s n\xEDtida, antes de comprar."}`
+          )
         };
       case "disagree":
         return {
           tone: "possible",
-          title: "The label is hard to read",
-          text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. ${owner ? "Take" : "Ask for"} a closer, sharper photo of the label.`
+          title: tr("The label is hard to read", "La etiqueta es dif\xEDcil de leer"),
+          text: tr(
+            `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. ${owner ? "Take" : "Ask for"} a closer, sharper photo of the label.`,
+            `Dos lecturas de la etiqueta no coinciden (${v.other} y ${v.model}), as\xED que esto no descarta el retiro. ${owner ? "Tome" : "Pida"} una foto m\xE1s cercana y n\xEDtida de la etiqueta.`
+          )
         };
       case "read_once":
         return {
           tone: "possible",
-          title: "Read once, on this device: not ruled out",
-          text: `${v.was === "year_out" ? `The label is dated ${v.year}; the notice covers units sold ${years(v)}.` : `The label reads ${v.model}; the notice lists ${some(v.listed)}.`} That would point away from this recall, but the label was read only once, by the model on this device, and it can misread a label. Compare the label with the notice yourself before you rely on it.`
+          title: tr("Read once, on this device: not ruled out", "Le\xEDda una vez, en este dispositivo: no descartado"),
+          text: tr(
+            `${v.was === "year_out" ? `The label is dated ${v.year}; the notice covers units sold ${years(v)}.` : `The label reads ${v.model}; the notice lists ${some(v.listed)}.`} That would point away from this recall, but the label was read only once, by the model on this device, and it can misread a label. Compare the label with the notice yourself before you rely on it.`,
+            `${v.was === "year_out" ? `La etiqueta tiene fecha de ${v.year}; el aviso cubre unidades vendidas ${years(v)}.` : `La etiqueta dice ${v.model}; el aviso enumera ${some(v.listed)}.`} Eso apuntar\xEDa a que no es de este retiro, pero la etiqueta se ley\xF3 una sola vez, con el modelo de este dispositivo, que puede leer mal. Compare usted mismo la etiqueta con el aviso antes de fiarse.`
+          )
         };
       case "list_cut":
         return {
           tone: "possible",
-          title: "Check this model against the notice",
-          text: `The label reads ${v.model}. This notice lists many model numbers, more than are kept here (${some(v.listed)}, and others), so look for ${v.model} in the notice itself before you rely on this.`
+          title: tr("Check this model against the notice", "Compare este modelo con el aviso"),
+          text: tr(
+            `The label reads ${v.model}. This notice lists many model numbers, more than are kept here (${some(v.listed)}, and others), so look for ${v.model} in the notice itself before you rely on this.`,
+            `La etiqueta dice ${v.model}. Este aviso enumera muchos n\xFAmeros de modelo, m\xE1s de los que se guardan aqu\xED (${some(v.listed)}, y otros), as\xED que busque ${v.model} en el aviso mismo antes de fiarse.`
+          )
         };
       case "not_listed":
         return {
           tone: "plain",
-          title: "Model not listed in this recall",
-          text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ""} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.`
+          title: tr("Model not listed in this recall", "Modelo que no aparece en este retiro"),
+          text: tr(
+            `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ""} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.`,
+            `La etiqueta dice ${v.model}. El aviso enumera ${some(v.listed)}.${v.year && v.from ? ` Cubre unidades vendidas ${years(v)}; esta tiene fecha de ${v.year}.` : ""} Algunos avisos retiran tambi\xE9n por fecha o n\xFAmero de serie, y puede haber otros retiros: revise el aviso antes de fiarse.`
+          )
         };
       case "year_out":
         return {
           tone: "plain",
-          title: "Dated outside this recall",
-          text: `The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.`
+          title: tr("Dated outside this recall", "Fecha fuera de este retiro"),
+          text: tr(
+            `The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.`,
+            `La etiqueta tiene fecha de ${v.year}. El aviso cubre unidades vendidas ${years(v)}. No se pudo leer un n\xFAmero de modelo para comparar.`
+          )
         };
       case "no_models":
         return {
           tone: "possible",
-          title: "The notice lists no model numbers",
-          text: `The label reads ${v.model}${v.year ? `, dated ${v.year}` : ""}, but this notice doesn't recall by model number. Read "which units" in the notice.`
+          title: tr("The notice lists no model numbers", "El aviso no enumera n\xFAmeros de modelo"),
+          text: tr(
+            `The label reads ${v.model}${v.year ? `, dated ${v.year}` : ""}, but this notice doesn't recall by model number. Read "which units" in the notice.`,
+            `La etiqueta dice ${v.model}${v.year ? `, con fecha de ${v.year}` : ""}, pero este aviso no retira por n\xFAmero de modelo. Lea en el aviso qu\xE9 unidades se retiran.`
+          )
         };
       default:
         return {
           tone: "possible",
-          title: "Couldn't read the label",
-          text: "No model number or date could be read. Try a closer, sharper photo of the label or tag."
+          title: tr("Couldn't read the label", "No se pudo leer la etiqueta"),
+          text: tr("No model number or date could be read. Try a closer, sharper photo of the label or tag.", "No se pudo leer ning\xFAn n\xFAmero de modelo ni fecha. Pruebe con una foto m\xE1s cercana y n\xEDtida de la etiqueta.")
         };
     }
   }
@@ -1342,6 +1499,11 @@ ${LOOKUP_SYSTEM}`;
   var index = () => idx || (idx = buildIndex([...live, ...base]));
   var PHOTO = { listing: "\0LISTING_PHOTO", recall: "\0RECALL_PHOTO" };
   globalThis.SR = {
+    /** The phone's language for what the shopper reads (shared/i18n.mjs): 'es' on a Spanish phone, else English. */
+    setLanguage(l) {
+      setLang(l);
+      return out(l === "es" ? "es" : "en");
+    },
     /** Cards arrive in chunks (the sandbox caps one evaluation's size). */
     addCards(cards) {
       base.push(...cards);

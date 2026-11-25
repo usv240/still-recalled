@@ -17,6 +17,7 @@ import { liveCardsFromCpsc } from '../../shared/cards.mjs';
 import { SPOTTER_SYSTEM, SPOTTER_SCHEMA, noticeText } from '../../shared/spotter.mjs';
 import { fitsNotice, entryId } from '../../shared/fieldguide.mjs';
 import { LIVE_SYSTEM, LIVE_TOOL, LIVE_OPENING, liveLookup } from '../../shared/live.mjs';
+import { setLang } from '../../shared/i18n.mjs';
 
 const out = v => JSON.stringify(v === undefined ? null : v);
 let base = [];
@@ -27,6 +28,8 @@ const index = () => (idx ||= buildIndex([...live, ...base]));
 const PHOTO = { listing: '\u0000LISTING_PHOTO', recall: '\u0000RECALL_PHOTO' };
 
 globalThis.SR = {
+  /** The phone's language for what the shopper reads (shared/i18n.mjs): 'es' on a Spanish phone, else English. */
+  setLanguage(l) { setLang(l); return out(l === 'es' ? 'es' : 'en'); },
   /** Cards arrive in chunks (the sandbox caps one evaluation's size). */
   addCards(cards) { base.push(...cards); idx = null; return out(base.length); },
   setLive(cards) { live = cards || []; idx = null; return out(live.length); },

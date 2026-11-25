@@ -6,6 +6,7 @@
 // numbers match is decided here, in code, for the same reason the brand check is in code: the model is not trusted to
 // compare. The answer never says "safe": a model the notice doesn't list is "not among the listed models".
 
+import { tr } from './i18n.mjs';
 export const LABEL_SYSTEM = [
   'You read the label, tag or sticker in a photo of a product. Copy what is printed; do not guess.',
   'model_numbers: every model, item, style or product number printed on the label, exactly as printed. An empty list if none can be read.',
@@ -114,41 +115,49 @@ export function judgeLabel(reading, card) {
   return { ...base, state: read.length ? 'no_models' : 'unreadable', model: read[0] || '' };
 }
 
-const years = v => (v.from && v.to ? (v.from === v.to ? `in ${v.from}` : `from ${v.from} to ${v.to}`) : '');
-const some = list => (list.length > 6 ? `${list.slice(0, 6).join(', ')} and ${list.length - 6} more` : list.join(', '));
+const years = v => (v.from && v.to ? (v.from === v.to ? tr(`in ${v.from}`, `en ${v.from}`) : tr(`from ${v.from} to ${v.to}`, `de ${v.from} a ${v.to}`)) : '');
+const some = list => (list.length > 6 ? tr(`${list.slice(0, 6).join(', ')} and ${list.length - 6} more`, `${list.slice(0, 6).join(', ')} y ${list.length - 6} más`) : list.join(', '));
 
 /**
  * What the shopper reads: { tone: "likely" | "possible" | "plain", title, text }. Never "safe".
- * `owner`: said to the person who owns the item, not to a buyer.
+ * `owner`: said to the person who owns the item, not to a buyer. English or Spanish (shared/i18n.mjs).
  */
 export function labelCopy(v, { owner = false } = {}) {
   switch (v.state) {
     case 'recalled':
-      return { tone: 'likely', title: 'The label matches the recall',
-        text: `Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ''}. ${owner ? "Don't sell it or give it away unless the recall's fix was done." : "Don't buy it unless the seller shows the recall's fix was done."}` };
+      return { tone: 'likely', title: tr('The label matches the recall', 'La etiqueta coincide con el retiro'),
+        text: tr(`Model ${v.model} is one of the models in the notice${v.yearOut ? `, though the label's year (${v.year}) is outside the years the notice gives` : ''}. ${owner ? "Don't sell it or give it away unless the recall's fix was done." : "Don't buy it unless the seller shows the recall's fix was done."}`,
+          `El modelo ${v.model} es uno de los modelos del aviso${v.yearOut ? `, aunque el año de la etiqueta (${v.year}) está fuera de los años que da el aviso` : ''}. ${owner ? 'No lo venda ni lo regale a menos que ya se haya hecho la reparación del retiro.' : 'No lo compre a menos que el vendedor muestre que ya se hizo la reparación del retiro.'}`) };
     case 'near':
-      return { tone: 'possible', title: 'One character from a recalled model',
-        text: `The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: ${owner ? 'look at the label yourself before you pass it on.' : 'look at the label yourself, or ask for a sharper photo, before you buy.'}` };
+      return { tone: 'possible', title: tr('One character from a recalled model', 'A un carácter de un modelo retirado'),
+        text: tr(`The label reads ${v.model}; the notice recalls ${v.twin}. Labels are easy to misread, by people and by models: ${owner ? 'look at the label yourself before you pass it on.' : 'look at the label yourself, or ask for a sharper photo, before you buy.'}`,
+          `La etiqueta dice ${v.model}; el aviso retira el ${v.twin}. Las etiquetas se leen mal con facilidad, tanto las personas como los modelos: ${owner ? 'revise la etiqueta usted mismo antes de pasársela a alguien.' : 'revise la etiqueta usted mismo, o pida una foto más nítida, antes de comprar.'}`) };
     case 'disagree':
-      return { tone: 'possible', title: 'The label is hard to read',
-        text: `Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. ${owner ? 'Take' : 'Ask for'} a closer, sharper photo of the label.` };
+      return { tone: 'possible', title: tr('The label is hard to read', 'La etiqueta es difícil de leer'),
+        text: tr(`Two readings of the label disagree (${v.other} and ${v.model}), so this can't rule the recall out. ${owner ? 'Take' : 'Ask for'} a closer, sharper photo of the label.`,
+          `Dos lecturas de la etiqueta no coinciden (${v.other} y ${v.model}), así que esto no descarta el retiro. ${owner ? 'Tome' : 'Pida'} una foto más cercana y nítida de la etiqueta.`) };
     case 'read_once':
-      return { tone: 'possible', title: 'Read once, on this device: not ruled out',
-        text: `${v.was === 'year_out' ? `The label is dated ${v.year}; the notice covers units sold ${years(v)}.` : `The label reads ${v.model}; the notice lists ${some(v.listed)}.`} That would point away from this recall, but the label was read only once, by the model on this device, and it can misread a label. Compare the label with the notice yourself before you rely on it.` };
+      return { tone: 'possible', title: tr('Read once, on this device: not ruled out', 'Leída una vez, en este dispositivo: no descartado'),
+        text: tr(`${v.was === 'year_out' ? `The label is dated ${v.year}; the notice covers units sold ${years(v)}.` : `The label reads ${v.model}; the notice lists ${some(v.listed)}.`} That would point away from this recall, but the label was read only once, by the model on this device, and it can misread a label. Compare the label with the notice yourself before you rely on it.`,
+          `${v.was === 'year_out' ? `La etiqueta tiene fecha de ${v.year}; el aviso cubre unidades vendidas ${years(v)}.` : `La etiqueta dice ${v.model}; el aviso enumera ${some(v.listed)}.`} Eso apuntaría a que no es de este retiro, pero la etiqueta se leyó una sola vez, con el modelo de este dispositivo, que puede leer mal. Compare usted mismo la etiqueta con el aviso antes de fiarse.`) };
     case 'list_cut':
-      return { tone: 'possible', title: 'Check this model against the notice',
-        text: `The label reads ${v.model}. This notice lists many model numbers, more than are kept here (${some(v.listed)}, and others), so look for ${v.model} in the notice itself before you rely on this.` };
+      return { tone: 'possible', title: tr('Check this model against the notice', 'Compare este modelo con el aviso'),
+        text: tr(`The label reads ${v.model}. This notice lists many model numbers, more than are kept here (${some(v.listed)}, and others), so look for ${v.model} in the notice itself before you rely on this.`,
+          `La etiqueta dice ${v.model}. Este aviso enumera muchos números de modelo, más de los que se guardan aquí (${some(v.listed)}, y otros), así que busque ${v.model} en el aviso mismo antes de fiarse.`) };
     case 'not_listed':
-      return { tone: 'plain', title: 'Model not listed in this recall',
-        text: `The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.` };
+      return { tone: 'plain', title: tr('Model not listed in this recall', 'Modelo que no aparece en este retiro'),
+        text: tr(`The label reads ${v.model}. The notice lists ${some(v.listed)}.${v.year && v.from ? ` It covers units sold ${years(v)}; this one is dated ${v.year}.` : ''} Some notices recall by date or serial number too, and other recalls may still apply: check the notice before you rely on this.`,
+          `La etiqueta dice ${v.model}. El aviso enumera ${some(v.listed)}.${v.year && v.from ? ` Cubre unidades vendidas ${years(v)}; esta tiene fecha de ${v.year}.` : ''} Algunos avisos retiran también por fecha o número de serie, y puede haber otros retiros: revise el aviso antes de fiarse.`) };
     case 'year_out':
-      return { tone: 'plain', title: 'Dated outside this recall',
-        text: `The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.` };
+      return { tone: 'plain', title: tr('Dated outside this recall', 'Fecha fuera de este retiro'),
+        text: tr(`The label is dated ${v.year}. The notice covers units sold ${years(v)}. No model number could be read to compare.`,
+          `La etiqueta tiene fecha de ${v.year}. El aviso cubre unidades vendidas ${years(v)}. No se pudo leer un número de modelo para comparar.`) };
     case 'no_models':
-      return { tone: 'possible', title: 'The notice lists no model numbers',
-        text: `The label reads ${v.model}${v.year ? `, dated ${v.year}` : ''}, but this notice doesn't recall by model number. Read "which units" in the notice.` };
+      return { tone: 'possible', title: tr('The notice lists no model numbers', 'El aviso no enumera números de modelo'),
+        text: tr(`The label reads ${v.model}${v.year ? `, dated ${v.year}` : ''}, but this notice doesn't recall by model number. Read "which units" in the notice.`,
+          `La etiqueta dice ${v.model}${v.year ? `, con fecha de ${v.year}` : ''}, pero este aviso no retira por número de modelo. Lea en el aviso qué unidades se retiran.`) };
     default:
-      return { tone: 'possible', title: 'Couldn\'t read the label',
-        text: 'No model number or date could be read. Try a closer, sharper photo of the label or tag.' };
+      return { tone: 'possible', title: tr('Couldn\'t read the label', 'No se pudo leer la etiqueta'),
+        text: tr('No model number or date could be read. Try a closer, sharper photo of the label or tag.', 'No se pudo leer ningún número de modelo ni fecha. Pruebe con una foto más cercana y nítida de la etiqueta.') };
   }
 }

@@ -147,3 +147,32 @@ h1, h2, h3, p { margin: 0; }
 .seg-btn[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
 .seg-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .seg-btn { transition: none; } }
+
+/* Your checks (web/src/log.js): saved on this device, reopened when the seller's label photo arrives; a shop's log. */
+button.row { width: 100%; border: 0; background: none; font: inherit; text-align: left; cursor: pointer; }
+.thumb-typed { display: grid; place-items: center; color: var(--muted); }
+.pill.pill-sm { font-size: 12px; line-height: 18px; padding: 0 8px; }
+.mychecks > .link { justify-self: start; }
+.log-card { display: grid; gap: 12px; }
+.log-card h2 { font: 600 17px/24px var(--font); }
+.log-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.log { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 20px; }
+.log th { text-align: left; font-weight: 600; color: var(--muted); font-size: 13px; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--border); }
+.log td { vertical-align: top; padding: 8px 8px 8px 0; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; }
+.log td .link { text-align: left; }
+.print-only { display: none; }
+.result-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+#lang-link { font-weight: 500; }
+@media (max-width: 560px) {
+  .log thead { display: none; }
+  .log tr { display: grid; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .log td { border: 0; padding: 0; }
+}
+@media print {
+  body.printing-log .bar, body.printing-log .tool, body.printing-log .extension, body.printing-log .foot,
+  body.printing-log .log-actions, body.printing-log #batch, body.printing-log label[for="batch"] { display: none !important; }
+  body.printing-log .page { display: block; }
+  body.printing-log .card { box-shadow: none; padding: 0; }
+  body.printing-log .print-only { display: block; }
+  body.printing-log .log { font-size: 11px; }
+}

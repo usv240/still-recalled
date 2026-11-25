@@ -25,8 +25,8 @@ android {
         applicationId = "app.web.stillrecalled"
         minSdk = 26
         targetSdk = 36
-        versionCode = 12
-        versionName = "0.15.0"
+        versionCode = 13
+        versionName = "0.16.0"
         buildConfigField("String", "BRIDGE_URL", "\"https://still-recalled.web.app/appcheck-bridge.html?android=1\"")
     }
 

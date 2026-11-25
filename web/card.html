@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Never buy these secondhand: Still Recalled card</title>
+<meta name="description" content="A one-page card for WIC offices, crib programs, clinics and grandparents: the baby sleep products never to buy secondhand, safe sleep, and a QR code to a free recall check.">
+<meta property="og:title" content="Never buy these secondhand">
+<meta property="og:description" content="A printable card: the baby sleep products never to buy secondhand, safe sleep, and a free recall check.">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="stylesheet" href="build/style.css">
+<style>
+  /* One US Letter page when printed; a readable card on screen. Black on white, no tints that waste toner. */
+  .sheet { max-width: 8.5in; margin: 24px auto; padding: 0.55in 0.6in; background: #fff; color: #111; box-shadow: 0 0 0 1px #ddd; display: grid; gap: 18px; font: 400 14px/20px var(--font); }
+  .sheet h1 { font: 700 32px/36px var(--font); letter-spacing: -0.02em; }
+  .sheet .sub { font-size: 16px; line-height: 22px; color: #333; margin-top: 6px; }
+  .never { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 0; padding: 0; list-style: none; }
+  .never li { border: 2px solid #111; border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; }
+  .never h2 { font: 700 17px/22px var(--font); }
+  .never .why { font-weight: 600; color: #8a1c1f; }
+  .never .look { color: #333; }
+  .abc { border-radius: 10px; background: #111; color: #fff; padding: 14px 16px; display: grid; gap: 4px; }
+  .abc h2 { font: 700 18px/24px var(--font); }
+  .abc p { font-size: 15px; line-height: 21px; }
+  .check { display: grid; grid-template-columns: 1.35in 1fr; gap: 16px; align-items: center; border-top: 2px solid #111; padding-top: 16px; }
+  .check img { width: 1.35in; height: 1.35in; display: block; }
+  .check h2 { font: 700 18px/24px var(--font); }
+  .check .url { font: 600 16px/22px var(--font); margin-top: 4px; }
+  .small { font-size: 11px; line-height: 15px; color: #444; }
+  .screen-only { max-width: 8.5in; margin: 24px auto 0; padding: 0 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  [data-lang="es"] .en, [data-lang="en"] .es { display: none; }
+  @media (max-width: 640px) { .sheet { margin: 12px 16px; padding: 20px; } .never { grid-template-columns: 1fr; } .sheet h1 { font-size: 26px; line-height: 30px; } }
+  @media print {
+    @page { size: letter; margin: 0; }
+    html, body { background: #fff; }
+    .screen-only { display: none; }
+    .sheet { box-shadow: none; margin: 0; max-width: none; height: 11in; overflow: hidden; box-sizing: border-box; gap: 14px; }
+    body { margin: 0; }
+  }
+</style>
+</head>
+<body data-lang="en">
+<div class="screen-only">
+  <button class="btn btn-primary" type="button" id="print"><span class="en">Print the card</span><span class="es">Imprimir la tarjeta</span></button>
+  <a class="link" href="card.html?lang=es" id="other"><span class="en">Tarjeta en español</span><span class="es">Card in English</span></a>
+  <a class="link" href="./"><span class="en">Back to the check</span><span class="es">Volver a la revisión</span></a>
+</div>
+
+<main class="sheet">
+  <header>
+    <h1><span class="en">Buying used baby gear? Never buy these secondhand.</span><span class="es">¿Compra cosas de bebé usadas? Nunca compre estas de segunda mano.</span></h1>
+    <p class="sub"><span class="en">Four kinds of baby sleep products linked to deaths. For everything else, there is a free check below.</span><span class="es">Cuatro tipos de productos para dormir relacionados con muertes de bebés. Para todo lo demás, abajo hay una revisión gratis.</span></p>
+  </header>
+
+  <ul class="never">
+    <li>
+      <h2><span class="en">Inclined sleepers</span><span class="es">Dormidores inclinados</span></h2>
+      <p class="why"><span class="en">Illegal to sell since November 2022. Babies have died in them.</span><span class="es">Es ilegal venderlos desde noviembre de 2022. Han muerto bebés en ellos.</span></p>
+      <p class="look"><span class="en">A fabric seat on a frame where the baby lies on a slope, like the Fisher-Price Rock 'n Play. Babies sleep flat.</span><span class="es">Un asiento de tela sobre un armazón donde el bebé queda inclinado, como el Rock 'n Play de Fisher-Price. Los bebés duermen planos.</span></p>
+    </li>
+    <li>
+      <h2><span class="en">Padded crib bumpers</span><span class="es">Protectores acolchados para cuna</span></h2>
+      <p class="why"><span class="en">Illegal to sell since November 2022. They can suffocate a baby.</span><span class="es">Es ilegal venderlos desde noviembre de 2022. Pueden asfixiar a un bebé.</span></p>
+      <p class="look"><span class="en">Padded panels, or a braided rope, tied around the inside of the crib. Often in crib bedding sets. A crib needs only a fitted sheet.</span><span class="es">Paneles acolchados, o un cordón trenzado, atados por dentro de la cuna. Suelen venir en los juegos de cuna. Una cuna solo necesita una sábana ajustable.</span></p>
+    </li>
+    <li>
+      <h2><span class="en">Infant loungers and nests</span><span class="es">Nidos y cojines para bebé</span></h2>
+      <p class="why"><span class="en">Never for sleep. Babies fall asleep in them, and some have died.</span><span class="es">Nunca son para dormir. Los bebés se duermen en ellos, y algunos han muerto.</span></p>
+      <p class="look"><span class="en">A soft cushion with a raised, padded rim all around, sold as a lounger, nest, pod or "baby pillow". Many are also recalled.</span><span class="es">Un cojín blando con un borde acolchado alrededor, vendido como nido, cojín o “almohada para bebé”. Muchos también han sido retirados del mercado.</span></p>
+    </li>
+    <li>
+      <h2><span class="en">Old and drop-side cribs</span><span class="es">Cunas viejas y de baranda corrediza</span></h2>
+      <p class="why"><span class="en">Cribs made before June 28, 2011 very likely don't meet today's safety standard.</span><span class="es">Las cunas fabricadas antes del 28 de junio de 2011 muy probablemente no cumplen la norma de seguridad actual.</span></p>
+      <p class="look"><span class="en">Check the date on the label. A side that slides down is a drop-side crib. Missing parts or loose screws: don't use it.</span><span class="es">Revise la fecha en la etiqueta. Si un lado se desliza hacia abajo, es de baranda corrediza. Si le faltan piezas o tiene tornillos flojos, no la use.</span></p>
+    </li>
+  </ul>
+
+  <section class="abc">
+    <h2><span class="en">Every sleep, every nap</span><span class="es">Cada sueño, cada siesta</span></h2>
+    <p><span class="en"><b>Alone. On the back. In a crib, bassinet or play yard</b> with only a fitted sheet. Not in a swing, car seat, bouncer, lounger or adult bed.</span><span class="es"><b>Solo. Boca arriba. En una cuna, moisés o corral</b> con solo una sábana ajustable. No en un columpio, asiento de auto, mecedora, nido ni cama de adulto.</span></p>
+  </section>
+
+  <section class="check">
+    <img class="en" src="card/qr-en.svg" alt="QR code to still-recalled.web.app">
+    <img class="es" src="card/qr-es.svg" alt="Código QR a still-recalled.web.app en español">
+    <div>
+      <h2><span class="en">Check anything else, free</span><span class="es">Revise todo lo demás, gratis</span></h2>
+      <p><span class="en">Scan the code. Add a screenshot of the listing, or a photo of the item or its label. It is compared with every CPSC recall since 1973 and tells you what to do. No account, no app needed.</span><span class="es">Escanee el código. Agregue una captura de pantalla del anuncio, o una foto del artículo o de su etiqueta. Se compara con cada retiro de la CPSC desde 1973 y le dice qué hacer. Sin cuenta y sin descargar nada.</span></p>
+      <p class="url">still-recalled.web.app</p>
+      <p><span class="en"><b>Car seats:</b> recalls are kept by NHTSA. Check the seat's model and date at nhtsa.gov/recalls.</span><span class="es"><b>Asientos de auto:</b> los retiros los lleva la NHTSA. Revise el modelo y la fecha del asiento en nhtsa.gov/recalls.</span></p>
+    </div>
+  </section>
+
+  <p class="small"><span class="en">Sources: U.S. Consumer Product Safety Commission (cpsc.gov/SafeSleep; Safe Sleep for Babies Act of 2021; crib standard, June 28, 2011) and the American Academy of Pediatrics safe sleep recommendations (2022). Still Recalled is free and open source, and not affiliated with CPSC. It never says a product is safe: no match means no recall was found.</span><span class="es">Fuentes: Comisión para la Seguridad de los Productos de Consumo de EE. UU. (cpsc.gov/SafeSleep; Ley de Sueño Seguro para Bebés de 2021; norma de cunas del 28 de junio de 2011) y las recomendaciones de sueño seguro de la Academia Americana de Pediatría (2022). Still Recalled es gratis y de código abierto, y no está afiliado con la CPSC. Nunca dice que un producto sea seguro. Traducción hecha con IA (Claude), todavía sin revisar por un hablante nativo.</span></p>
+</main>
+<script type="module" src="build/card.js"></script>
+</body>
+</html>

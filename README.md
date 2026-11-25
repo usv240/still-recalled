@@ -240,6 +240,12 @@ words in place of the camera: the session opened 1.2 s after App Check, the phon
 (two Rock 'n Play recalls and the banned inclined-sleeper type), and Gemini spoke at 6.9 s. The web page has no
 yard-sale mode: Firebase's web SDK sends no App Check token on a Live connection, so App Check refuses it.
 
+**For families, clinics and shops (0.16.0).** A printable one-page card for WIC offices, crib programs and
+grandparents, in English and Spanish, with a QR code to the check ([web/card.html](web/card.html)). Results, the web
+page and the card read in Spanish (an AI translation, labelled as one). The web page saves every check on the device:
+reopen it when the seller's label photo arrives, or keep it as a resale shop's intake log, with several photos at
+once, a batch name, CSV and print.
+
 **Every service has a backup.** Three cloud models in turn, three Live locations, a daily mirror of CPSC's recall API
 on two CDNs, the shared field guide falling back to the device's own entry, Remote Config falling back to built-in
 values, and under all of it the field guide on the device. The table is in [docs/backups.md](docs/backups.md).

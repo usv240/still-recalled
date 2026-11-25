@@ -1,0 +1,68 @@
+{
+ "at": "2026-11-25T05:48:28.694Z",
+ "url": "http://localhost:8766/web/index.html",
+ "passed": 12,
+ "failed": 0,
+ "steps": [
+  {
+   "name": "English: a result says it is saved on this device",
+   "ok": true,
+   "detail": "You checked Boppy newborn lounger Recalled product Looks like the Boppy Original Newborn Loungers, Boppy Preferred Newborn Loungers and Pottery Barn Kids B…, re"
+  },
+  {
+   "name": "English: the lounger card carries the safe-sleep line",
+   "ok": true,
+   "detail": "Not for sleep, recalled or not."
+  },
+  {
+   "name": "English: \"Your checks\" lists the check on the start page",
+   "ok": true,
+   "detail": "Your checks Saved on this device only. Waiting on a seller's label photo? Open the check and add it. Boppy newborn lounger Recalled product today, 12:47 AM All "
+  },
+  {
+   "name": "English: the saved check opens again, with its result",
+   "ok": true,
+   "detail": "Checked today, 12:47 AM Boppy newborn lounger Recalled product Looks like the Boppy Original Newborn Loungers, Boppy Preferred Newborn Loungers and Pottery Barn"
+  },
+  {
+   "name": "English: the log shows the check in a table",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "English: the CSV downloads with a header and the check",
+   "ok": true,
+   "detail": "2026-11-25,00:47,,buyer,Boppy newborn lounger,Recalled product,recall 21198,https://www.cpsc.gov/Recalls/2021/The-Boppy-Company-Recalls-Over-3-Million-Original-Newborn-Loungers-Boppy-Preferred-Newborn-Loungers-and-Pottery-Barn-Kids-Boppy-Ne"
+  },
+  {
+   "name": "Spanish: ?lang=es turns the page to Spanish",
+   "ok": true,
+   "detail": "Revise un anuncio de segunda mano antes de comprar"
+  },
+  {
+   "name": "Spanish: the switch offers English",
+   "ok": true,
+   "detail": "English"
+  },
+  {
+   "name": "Spanish: a braided crib bumper in Spanish is flagged, in Spanish",
+   "ok": true,
+   "detail": "Usted revisó Protector para cuna trenzado Protector acolchado para cuna Parece ser un protector acolchado para cuna. No lo compre. El consejo de la CPSC: nada en la cuna más que una sábana ajustable. "
+  },
+  {
+   "name": "Spanish: its card carries the safe-sleep line in Spanish",
+   "ok": true,
+   "detail": "Para cada sueño: el bebé solo, boca arriba, en una cuna, moisés o corral con solo una sábana ajustable."
+  },
+  {
+   "name": "Spanish: a no-match result in Spanish, with the 2011 crib line",
+   "ok": true,
+   "detail": "Usted revisó Cuna de madera usada Sin coincidencias No encontramos un retiro del mercado para lo que pudimos leer. Eso no quiere decir que sea seguro. Buscamos en 10,490 avisos de retiro desde enero d"
+  },
+  {
+   "name": "Spanish: never \"es seguro\" as reassurance",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

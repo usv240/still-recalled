@@ -130,7 +130,7 @@ sixth test, 180 new listings aimed at exactly those, run once: 6 of 7 caught, 1 
 sent to the cloud. Two of the 7 are one Craigslist post listed twice; counted once, 5 of 6. The rule sent 35 listings
 to the cloud and flagged the 3 that should be flagged, and none of the 28 that should not. Without it, 3 of 7.
 
-Tests on the shipped builds: 113 unit tests; the packed extension, 18 of 18 end-to-end steps on the live practice
+Tests on the shipped builds: 116 unit tests; the web page's saved checks, log and Spanish, 12 of 12 steps; the packed extension, 18 of 18 end-to-end steps on the live practice
 page (version 0.13.0); the Android app, 10 of 10 checks on an emulator, plus a result that survives Android closing
 the app, and 17 of 17 steps on a real Pixel with Gemini Nano reading each listing on the phone. Accessibility, checked by tools rather than by eye: axe-core with the WCAG 2.2 AA rules on 40 views of the
 web page and the extension, 0 violations; on Android, every tappable element at normal and 200 percent text, 48 dp or
@@ -142,7 +142,9 @@ the real screens: a first-time parent on an iPhone, a grandfather at yard sales 
 owner, a father of twins whose family speaks Spanish at home, and a hospital safe-sleep nurse educator. What they found
 became 0.15.0: the safe-sleep basics (alone, on the back, in a crib) on every sleep-related result, a lounger result
 that says "skip this one", Spanish titles checked, car seats pointed to NHTSA, and yard-sale mode firm about a
-Rock 'n Play. Details in `docs/accuracy.md`, section 27.
+Rock 'n Play. Then what they asked for next (0.16.0): a printable card with a QR code for WIC offices and crib
+programs, Spanish, saved checks for when the seller's label photo arrives, and an intake log for resale shops. Details
+in `docs/accuracy.md`, sections 27 and 28.
 
 ### Limits, as measured
 - **No person has checked the test labels, and no parent has used it yet.** The labels are by AI reviewers (Claude)
