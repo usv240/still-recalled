@@ -1531,9 +1531,7 @@ resale shops. It sums up what CPSC's reseller guide and the laws behind it say a
 gives a short intake routine. Its button opens the intake log directly (`?log=1`).
 
 **Feedback in public.** A feedback form on GitHub (`.github/ISSUE_TEMPLATE/feedback.yml`) is linked from the web page
-and the shops page, so what real users say can be read and checked by anyone. An outreach kit (`docs/outreach.md`)
-holds short messages for consignment sales, safe-sleep and home-visiting programs, a parent forum and reporters. None
-has been sent.
+and the shops page, so what real users say can be read and checked by anyone.
 
 **A person can check every AI label in one place.** `tools/label-review.html` (served by `node tools/collector.mjs`)
 now also holds the sixth test and both censuses (392 eBay and 80 Craigslist listings the word rules flagged), with the
