@@ -77,7 +77,8 @@ export async function refreshRecalls({ cloud = true, shared = cloud, fetchImpl =
     if (!res.ok) throw new Error(`recall API ${res.status}`);
     records = (await res.json()).filter(r => r && r.RecallNumber && !ids.has(String(r.RecallNumber).trim()));
   } catch (e) {
-    // CPSC can't be reached: the same records from the recall mirror (shared/mirror.mjs), at most a day old.
+    // CPSC can't be reached: the same records from the recall mirror (shared/mirror.mjs), copied daily (jsDelivr may
+    // serve a copy up to 12 hours older).
     try {
       records = (await mirrorRecalls(daysBefore(newest, 7), { fetchImpl })).filter(r => !ids.has(String(r.RecallNumber).trim()));
       mirrorUsed = true;
