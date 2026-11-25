@@ -22,3 +22,6 @@ tools/scratch/
 web/fonts/
 tools/android-a11y-out/*.png
 firestore-debug.log
+
+# Release files copied onto the site as a second download host (the same files as the GitHub release)
+web/download/

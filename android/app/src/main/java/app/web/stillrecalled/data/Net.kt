@@ -12,6 +12,29 @@ import java.time.LocalDate
 /** The two things the app fetches itself: CPSC's public recall API and photos (recall notices, listing images). */
 object Net {
     private const val CPSC_API = "https://www.saferproducts.gov/RestWebServices/Recall"
+    /** The recall mirror (shared/mirror.mjs, .github/workflows/recall-mirror.yml): CPSC's last 180 days, unchanged,
+     *  through two CDNs that are not CPSC's. Read only when CPSC can't be reached. */
+    private val MIRROR_URLS = listOf(
+        "https://cdn.jsdelivr.net/gh/usv240/still-recalled@recall-mirror/recalls.json",
+        "https://raw.githubusercontent.com/usv240/still-recalled/recall-mirror/recalls.json",
+    )
+
+    /** CPSC records dated `from` or later, from the first mirror that answers. */
+    private suspend fun mirror(from: String): JSONArray {
+        var last: Throwable? = null
+        for (url in MIRROR_URLS) {
+            try {
+                val all = JSONArray(String(get(url)))
+                val out = JSONArray()
+                for (i in 0 until all.length()) {
+                    val r = all.optJSONObject(i) ?: continue
+                    if (r.optString("RecallNumber").isNotEmpty() && r.optString("RecallDate").take(10) >= from) out.put(r)
+                }
+                return out
+            } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) { last = e }
+        }
+        throw last ?: IllegalStateException("no mirror")
+    }
 
     private suspend fun get(url: String, timeoutMs: Int = 30_000): ByteArray = withContext(Dispatchers.IO) {
         val c = URL(url).openConnection() as HttpURLConnection
@@ -42,7 +65,12 @@ object Net {
     /** One recall notice by number, as the raw CPSC record, or null. */
     suspend fun notice(id: String): org.json.JSONObject? {
         if (id.startsWith("W")) return warning(id)
-        val list = JSONArray(String(get("$CPSC_API?format=json&RecallNumber=$id")))
+        val list = try {
+            JSONArray(String(get("$CPSC_API?format=json&RecallNumber=$id")))
+        } catch (e: Exception) {
+            // CPSC can't be reached: the mirror has the last 180 days; an older notice fails as before.
+            try { mirror("1973-01-01") } catch (_: Exception) { throw e }
+        }
         for (i in 0 until list.length()) if (list.getJSONObject(i).optString("RecallNumber") == id) return list.getJSONObject(i)
         return null
     }
@@ -54,7 +82,12 @@ object Net {
     suspend fun recallsSince(since: String): JSONArray {
         val from = LocalDate.parse(since).minusDays(7)
         val to = LocalDate.now().plusDays(2)
-        return JSONArray(String(get("$CPSC_API?format=json&RecallDateStart=$from&RecallDateEnd=$to&_=${System.currentTimeMillis()}")))
+        return try {
+            JSONArray(String(get("$CPSC_API?format=json&RecallDateStart=$from&RecallDateEnd=$to&_=${System.currentTimeMillis()}")))
+        } catch (e: Exception) {
+            android.util.Log.w("StillRecalled", "recall API: ${e.message?.take(120)}; reading the recall mirror")
+            try { mirror(from.toString()) } catch (_: Exception) { throw e }
+        }
     }
 
     /** A photo, scaled so its long side is at most `maxSide`. */

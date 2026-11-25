@@ -119,9 +119,26 @@ object Ai {
     /**
      * A Gemini Live session for yard-sale mode (Firebase AI Logic's Live API): the camera's frames and the microphone
      * in, speech and its transcript out, and `tool` as a function the phone answers. The Agent Platform's Live models
-     * are regional, so this backend is in `location`. App Check goes with the connection as it does with every call.
+     * are regional, so the backend is in one of `locations`, tried in order: when one refuses or does not answer in
+     * 15 s, the next. App Check goes with the connection as it does with every call. Returns the session and where.
      */
-    suspend fun liveSession(model: String, location: String, system: String, tool: JSONObject): com.google.firebase.ai.type.LiveSession {
+    suspend fun liveSession(model: String, locations: List<String>, system: String, tool: JSONObject): Pair<com.google.firebase.ai.type.LiveSession, String> {
+        var last: Throwable? = null
+        for (location in locations) {
+            try {
+                return liveSessionAt(model, location, system, tool) to location
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                if (e is kotlinx.coroutines.TimeoutCancellationException) { last = e; continue }
+                throw e
+            } catch (e: Exception) {
+                android.util.Log.w("StillRecalled", "yard sale: Live refused at $location: ${e.javaClass.simpleName}: ${e.message?.take(120)}")
+                last = e
+            }
+        }
+        throw last ?: IllegalStateException("no Live location")
+    }
+
+    private suspend fun liveSessionAt(model: String, location: String, system: String, tool: JSONObject): com.google.firebase.ai.type.LiveSession {
         val params = tool.getJSONObject("parameters")
         val props = params.getJSONObject("properties")
         val required = params.optJSONArray("required") ?: JSONArray()
@@ -139,7 +156,7 @@ object Ai {
             tools = listOf(Tool.functionDeclarations(listOf(FunctionDeclaration(tool.getString("name"), tool.getString("description"), map, map.keys.filter { it !in req })))),
             systemInstruction = content { text(system) },
         )
-        return withTimeout(30_000) { live.connect() }
+        return withTimeout(15_000) { live.connect() }
     }
 
     /**

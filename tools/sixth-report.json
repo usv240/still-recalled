@@ -1,0 +1,282 @@
+{
+ "set": "sixth",
+ "labeller": "blind AI review (Claude), title + one photo + every CPSC recall since 1973 and CPSC's safety warnings",
+ "listings": 180,
+ "mustFlag": 7,
+ "mustNotFlag": 157,
+ "unclear": 16,
+ "systems": {
+  "words only": {
+   "caught": 3,
+   "missed": [
+    {
+     "id": "860138685058",
+     "title": "Baby & Joy Gray Baby Hammock For Crib",
+     "why": "Baby hammock that hangs in a crib for sleep; CPSC treats infant hammocks for sleep as banned inclined sleepers (see CaTeam recall 23237). Brand isn't recalled."
+    },
+    {
+     "id": "9624sQCpkSfHmWeBAoj9ns",
+     "title": "Beautiful pack and play with bassinette, changing cradle, music and vi 1",
+     "why": "Photo shows 'Kolcraft Travelin' Tot' on the top rail, and the title mentions a bassinet, changer and vibration; recall 09265 names the Travelin' Tot line (by model number prefixes), including units with a bassinet, changer and vibration."
+    },
+    {
+     "id": "267413194746",
+     "title": "Portable Safe Soft Baby Sleeper/Bassinet",
+     "why": "Unbranded fold-out padded portable sleeper with two foam side positioner wedges in the photo."
+    },
+    {
+     "id": "840159464773",
+     "title": "Happiness Baby Safety Baby Cradle Free Hanging Hammock Portable Pink BC1071",
+     "why": "Happiness Baby free-hanging fabric sling cradle (package photo); CPSC treats baby hammock sleepers as inclined sleep products (see the CaTeam recall 23237), but no recall names this brand."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "wWGddUHoKeqyJy2698umeU",
+     "title": "Wanted OLD Motorcycles CASH PAID Pre-1980 Harley Honda Kawasaki BMW 1",
+     "level": "possible",
+     "why": "Wanted ad for old motorcycles, unrelated."
+    },
+    {
+     "id": "vTdhN2uvFMnvC41NufSGdZ",
+     "title": "RH Baby & Child Callum Twin-over-Twin Bunk Bed - Sandwashed Grey 1",
+     "level": "possible",
+     "why": "RH Callum twin bunk bed; RH's Callum recall (19739) covers only Callum canopy beds, not bunk beds."
+    },
+    {
+     "id": "168683112082",
+     "title": "Baby Bjorn Pack N Play Travel Light Portable Crib With Carrying Case",
+     "level": "possible",
+     "why": "BabyBjorn Travel Crib Light in carry bag; BabyBjorn recalls cover carriers, bouncers and spoons only."
+    },
+    {
+     "id": "178549290586",
+     "title": "DockATot Deluxe+ Lounger Cover 0-8M White Green Tropical Banana Leaf Print",
+     "level": "possible",
+     "why": "Title and photo show only the DockATot Deluxe+ cover, not the lounger itself."
+    },
+    {
+     "id": "wCZs3khY3ZA6iW1afX7HDm",
+     "title": "Baby trends playpen is still available 1",
+     "level": "possible",
+     "why": "Photo shows a modern Baby Trend play yard (current logo); Baby Trend's play yard recalls cover only 1990s Home and Roam and Baby Express models."
+    },
+    {
+     "id": "128211178523",
+     "title": "Carter's Newborn 0-3 mo Neutral Baby Bear Bunting Zip Sleeper Pajama Bundle Mix",
+     "level": "possible",
+     "why": "Carter's sleeper bundle, but the patterns shown (grey bunting, blue stripe with bunny feet, green) don't match the styles in Carter's zip sleeper recall 13167 or pajama recall 23048."
+    },
+    {
+     "id": "206722965058",
+     "title": "Moses Basket Rocking Rocker Stand for Uppababy Vista, Bugaboo, Cruz etc Bassinet",
+     "level": "possible",
+     "why": "Jolly Jumper rocking basket stand (brand on the label); no recall for it."
+    },
+    {
+     "id": "940115318726",
+     "title": "Vintage Infant Rocker Seat Cradle 1993 Fisher-Price 90s floral Sleep Rare Pastel",
+     "level": "possible",
+     "why": "1993 Fisher-Price infant rocker seat with a handle on a rocking base; no Fisher-Price recall covers a 1993 rocker seat, and rockers are not one of the types."
+    },
+    {
+     "id": "206007661797",
+     "title": "Lullaby Earth Breathe Safe Air Breathable Crib Mattress Pad, Mattress Cover",
+     "level": "possible",
+     "why": "Boxed Lullaby Earth breathable crib mattress cover; no recall."
+    },
+    {
+     "id": "3PFfUskLLnMwSCRmAsYew9",
+     "title": "4moms Breeze Plus Playard 1",
+     "level": "possible",
+     "why": "4moms Breeze Plus play yard with a flat changer; 4moms recall 13115 covers only Breeze cotton jersey sheets, which are not shown."
+    },
+    {
+     "id": "sZUzaVnEJjCS7NPJxPrf2u",
+     "title": "Baby trends playpen pen wirh liner / may 1",
+     "level": "possible",
+     "why": "Modern Baby Trend play yard (logo on photo); Baby Trend's play yard recalls cover only the 1990s Home and Roam and Baby Express models."
+    },
+    {
+     "id": "307299710967",
+     "title": "Baby Bjorn Pack N Play Travel Light Portable Crib With Carrying Case w sheet",
+     "level": "possible",
+     "why": "BabyBjorn Travel Crib Light in its bag; BabyBjorn recalls cover only carriers, bouncers and spoons."
+    },
+    {
+     "id": "227389129806",
+     "title": "Little Sleepies Fitted MINI Crib Sheet Disney Pixar Pink Toy Story 38\"x24\"x5\"",
+     "level": "possible",
+     "why": "Little Sleepies fitted mini crib sheet; Little Sleepies' only recall is loveys and bibs."
+    },
+    {
+     "id": "237200062723",
+     "title": "Stokke Sleepi Mattress for Bed V2 Oval Crib Mattress Fitted White Sheet Set",
+     "level": "possible",
+     "why": "Stokke Sleepi V2 oval mattress; the 2007 Sleepi mattress recall (07286) covers only the original Sleepi crib models 660xxx/652xxx, not V2."
+    }
+   ],
+   "flagged": 18,
+   "unclearFlagged": 1,
+   "recallRate": 0.429,
+   "precision": 0.176
+  },
+  "on-device only": {
+   "caught": 3,
+   "missed": [
+    {
+     "id": "860138685058",
+     "title": "Baby & Joy Gray Baby Hammock For Crib",
+     "why": "Baby hammock that hangs in a crib for sleep; CPSC treats infant hammocks for sleep as banned inclined sleepers (see CaTeam recall 23237). Brand isn't recalled."
+    },
+    {
+     "id": "9624sQCpkSfHmWeBAoj9ns",
+     "title": "Beautiful pack and play with bassinette, changing cradle, music and vi 1",
+     "why": "Photo shows 'Kolcraft Travelin' Tot' on the top rail, and the title mentions a bassinet, changer and vibration; recall 09265 names the Travelin' Tot line (by model number prefixes), including units with a bassinet, changer and vibration."
+    },
+    {
+     "id": "267413194746",
+     "title": "Portable Safe Soft Baby Sleeper/Bassinet",
+     "why": "Unbranded fold-out padded portable sleeper with two foam side positioner wedges in the photo."
+    },
+    {
+     "id": "840159464773",
+     "title": "Happiness Baby Safety Baby Cradle Free Hanging Hammock Portable Pink BC1071",
+     "why": "Happiness Baby free-hanging fabric sling cradle (package photo); CPSC treats baby hammock sleepers as inclined sleep products (see the CaTeam recall 23237), but no recall names this brand."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "vTdhN2uvFMnvC41NufSGdZ",
+     "title": "RH Baby & Child Callum Twin-over-Twin Bunk Bed - Sandwashed Grey 1",
+     "level": "possible",
+     "why": "RH Callum twin bunk bed; RH's Callum recall (19739) covers only Callum canopy beds, not bunk beds."
+    },
+    {
+     "id": "168683112082",
+     "title": "Baby Bjorn Pack N Play Travel Light Portable Crib With Carrying Case",
+     "level": "possible",
+     "why": "BabyBjorn Travel Crib Light in carry bag; BabyBjorn recalls cover carriers, bouncers and spoons only."
+    },
+    {
+     "id": "178549290586",
+     "title": "DockATot Deluxe+ Lounger Cover 0-8M White Green Tropical Banana Leaf Print",
+     "level": "possible",
+     "why": "Title and photo show only the DockATot Deluxe+ cover, not the lounger itself."
+    },
+    {
+     "id": "wCZs3khY3ZA6iW1afX7HDm",
+     "title": "Baby trends playpen is still available 1",
+     "level": "possible",
+     "why": "Photo shows a modern Baby Trend play yard (current logo); Baby Trend's play yard recalls cover only 1990s Home and Roam and Baby Express models."
+    },
+    {
+     "id": "128211178523",
+     "title": "Carter's Newborn 0-3 mo Neutral Baby Bear Bunting Zip Sleeper Pajama Bundle Mix",
+     "level": "possible",
+     "why": "Carter's sleeper bundle, but the patterns shown (grey bunting, blue stripe with bunny feet, green) don't match the styles in Carter's zip sleeper recall 13167 or pajama recall 23048."
+    },
+    {
+     "id": "206722965058",
+     "title": "Moses Basket Rocking Rocker Stand for Uppababy Vista, Bugaboo, Cruz etc Bassinet",
+     "level": "possible",
+     "why": "Jolly Jumper rocking basket stand (brand on the label); no recall for it."
+    },
+    {
+     "id": "940115318726",
+     "title": "Vintage Infant Rocker Seat Cradle 1993 Fisher-Price 90s floral Sleep Rare Pastel",
+     "level": "possible",
+     "why": "1993 Fisher-Price infant rocker seat with a handle on a rocking base; no Fisher-Price recall covers a 1993 rocker seat, and rockers are not one of the types."
+    },
+    {
+     "id": "206007661797",
+     "title": "Lullaby Earth Breathe Safe Air Breathable Crib Mattress Pad, Mattress Cover",
+     "level": "possible",
+     "why": "Boxed Lullaby Earth breathable crib mattress cover; no recall."
+    },
+    {
+     "id": "3PFfUskLLnMwSCRmAsYew9",
+     "title": "4moms Breeze Plus Playard 1",
+     "level": "possible",
+     "why": "4moms Breeze Plus play yard with a flat changer; 4moms recall 13115 covers only Breeze cotton jersey sheets, which are not shown."
+    },
+    {
+     "id": "sZUzaVnEJjCS7NPJxPrf2u",
+     "title": "Baby trends playpen pen wirh liner / may 1",
+     "level": "possible",
+     "why": "Modern Baby Trend play yard (logo on photo); Baby Trend's play yard recalls cover only the 1990s Home and Roam and Baby Express models."
+    },
+    {
+     "id": "307299710967",
+     "title": "Baby Bjorn Pack N Play Travel Light Portable Crib With Carrying Case w sheet",
+     "level": "possible",
+     "why": "BabyBjorn Travel Crib Light in its bag; BabyBjorn recalls cover only carriers, bouncers and spoons."
+    },
+    {
+     "id": "365273975454",
+     "title": "Regalo Swing Down Safety Bed Rail Guard Hide Away for Kids Baby 43 x 20 inches",
+     "level": "possible",
+     "why": "Regalo swing-down toddler bed rail in its box; no Regalo recall or warning found."
+    },
+    {
+     "id": "237200062723",
+     "title": "Stokke Sleepi Mattress for Bed V2 Oval Crib Mattress Fitted White Sheet Set",
+     "level": "possible",
+     "why": "Stokke Sleepi V2 oval mattress; the 2007 Sleepi mattress recall (07286) covers only the original Sleepi crib models 660xxx/652xxx, not V2."
+    }
+   ],
+   "flagged": 17,
+   "unclearFlagged": 1,
+   "recallRate": 0.429,
+   "precision": 0.188
+  },
+  "hybrid": {
+   "caught": 6,
+   "missed": [
+    {
+     "id": "840159464773",
+     "title": "Happiness Baby Safety Baby Cradle Free Hanging Hammock Portable Pink BC1071",
+     "why": "Happiness Baby free-hanging fabric sling cradle (package photo); CPSC treats baby hammock sleepers as inclined sleep products (see the CaTeam recall 23237), but no recall names this brand."
+    }
+   ],
+   "falseAlarms": [
+    {
+     "id": "237200062723",
+     "title": "Stokke Sleepi Mattress for Bed V2 Oval Crib Mattress Fitted White Sheet Set",
+     "level": "possible",
+     "why": "Stokke Sleepi V2 oval mattress; the 2007 Sleepi mattress recall (07286) covers only the original Sleepi crib models 660xxx/652xxx, not V2."
+    }
+   ],
+   "flagged": 7,
+   "unclearFlagged": 0,
+   "recallRate": 0.857,
+   "precision": 0.857
+  }
+ },
+ "askingPrices": {
+  "mustFlag": 262.5,
+  "words only": 115,
+  "on-device only": 115,
+  "hybrid": 197.5
+ },
+ "bySite": {
+  "craigslist": {
+   "listings": 80,
+   "mustFlag": 4
+  },
+  "ebay": {
+   "listings": 100,
+   "mustFlag": 3
+  }
+ },
+ "cost": {
+  "listings": 180,
+  "checkedByWordsOnly": 48,
+  "lookedAtOnDevice": 132,
+  "sentToCloud": 54,
+  "cloudErrors": 1,
+  "shareSentToCloud": 0.3,
+  "medianMs": 6030,
+  "totalMinutes": 25.2
+ }
+}

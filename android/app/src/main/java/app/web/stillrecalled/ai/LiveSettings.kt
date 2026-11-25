@@ -16,18 +16,20 @@ import kotlinx.coroutines.withTimeoutOrNull
  *   field_guide_template  the server prompt template that writes field-guide entries (prompts/field-guide-v1.prompt);
  *                  empty: the prompt built into the app writes them
  *   yard_sale, yard_sale_model, yard_sale_location, yard_sale_minutes   yard-sale mode (Gemini Live): on or off, the
- *                  Live model and its location, and how many minutes a session may last
+ *                  Live model, its locations in order (the next is tried when one refuses), and how many minutes a
+ *                  session may last
  */
 object LiveSettings {
     data class Values(val models: List<String>, val cloudCheck: Boolean, val liveRecalls: Boolean, val fieldGuideTemplate: String,
-        val yardSale: Boolean, val yardSaleModel: String, val yardSaleLocation: String, val yardSaleMinutes: Int, val from: String)
+        val yardSale: Boolean, val yardSaleModel: String, val yardSaleLocations: List<String>, val yardSaleMinutes: Int, val from: String)
 
-    val DEFAULT_MODELS = listOf("gemini-4-hydrogen", "gemini-3.5-flash-lite")
+    val DEFAULT_MODELS = listOf("gemini-4-hydrogen", "gemini-3.5-flash-lite", "gemini-3.5-flash")
     /** The model that wrote the field guide's other 10,089 entries (scripts/build-spotter.mjs). */
     const val FIELD_GUIDE_MODEL = "gemini-3.5-flash-lite"
     /** Gemini Live on the Agent Platform: its Live models are regional (not in "global"). */
     const val LIVE_MODEL = "gemini-live-2.5-flash-native-audio"
-    const val LIVE_LOCATION = "us-central1"
+    /** Where the Live model answered (tested 2026-11-24): us-central1, us-east4, us-east5, europe-west4. US first. */
+    const val LIVE_LOCATION = "us-central1,us-east4,us-east5"
 
     private val lock = Mutex()
     private var cached: Values? = null
@@ -64,7 +66,8 @@ object LiveSettings {
             fieldGuideTemplate = rc.getString("field_guide_template").takeIf { Regex("^[a-z0-9-]{1,63}$").matches(it) } ?: "",
             yardSale = rc.getBoolean("yard_sale"),
             yardSaleModel = rc.getString("yard_sale_model").takeIf { Regex("^gemini-[a-z0-9.-]+$").matches(it) } ?: LIVE_MODEL,
-            yardSaleLocation = rc.getString("yard_sale_location").takeIf { Regex("^[a-z0-9-]{2,30}$").matches(it) } ?: LIVE_LOCATION,
+            yardSaleLocations = rc.getString("yard_sale_location").split(',').map { it.trim() }.filter { Regex("^[a-z0-9-]{2,30}$").matches(it) }
+                .ifEmpty { LIVE_LOCATION.split(',') },
             yardSaleMinutes = rc.getLong("yard_sale_minutes").toInt().coerceIn(1, 5),
             from = if (from == "cached" && rc.info.lastFetchStatus != com.google.firebase.remoteconfig.FirebaseRemoteConfig.LAST_FETCH_STATUS_SUCCESS) "defaults" else from,
         ).also { cached = it; cachedAt = System.currentTimeMillis() }

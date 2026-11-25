@@ -156,6 +156,27 @@
 
   // shared/triage.mjs
   var INFANT = /\b(babys?|babies|infants?|newborns?|toddlers?|cribs?|cots?|bassinets?|cradles?|sleepers?|nests?|loungers?|swings?|bouncers?|rockers?|bumpers?|play\s*yards?|playards?|pack\s*'?n\s*'?play|nursery|co-?sleep\w*)\b/i;
+  var SLEEPISH = /\b(rockers?|sleepers?|nappers?|loungers?|nests?|pods?|pillows?|cushions?|positioners?|bassinets?|cradles?|swings?|bouncers?|hammocks?|docks?)\b/i;
+  var brandSets = /* @__PURE__ */ new WeakMap();
+  function brands(idx2) {
+    let b = brandSets.get(idx2);
+    if (!b) {
+      b = { one: /* @__PURE__ */ new Set(), many: [] };
+      for (const c of idx2.cards) for (const br of c.brands || []) {
+        if (br.length === 1) b.one.add(br[0]);
+        else b.many.push(br);
+      }
+      brandSets.set(idx2, b);
+    }
+    return b;
+  }
+  function namesKnownBrand(idx2, title) {
+    const toks = uniqueTokens(title);
+    const { one, many } = brands(idx2);
+    if (toks.some((t) => one.has(t))) return true;
+    const have = new Set(toks);
+    return many.some((br) => br.every((t) => have.has(t)));
+  }
   function triage(idx2, listing) {
     const text = `${listing.title} ${listing.description || ""}`;
     const partOrToy = notTheProduct(listing.title);
@@ -163,7 +184,8 @@
     const hints = partOrToy ? [] : bannedHints(text);
     const maybe = partOrToy ? [] : mayContain(listing.title);
     const needsEyes = !partOrToy && (!!candidate || hints.length > 0 || maybe.length > 0 || INFANT.test(listing.title));
-    return { partOrToy, candidate, hints, maybe, needsEyes };
+    const unnamedSleep = needsEyes && !candidate && !hints.length && !maybe.length && SLEEPISH.test(listing.title) && !namesKnownBrand(idx2, listing.title);
+    return { partOrToy, candidate, hints, maybe, needsEyes, unnamedSleep };
   }
   function wordsOnlyAnswer(candidate) {
     return { what_is_for_sale: "the_product", product_kind: "", same_kind_as_recalled: !!candidate, banned_type: "none" };
@@ -227,14 +249,14 @@
     codes.length = Math.min(codes.length, 14);
     const productTokens = uniqueTokens(product || title);
     const whole = (b) => String(b || "").replace(/['’]s\b/gi, "s").split(/[^A-Za-z0-9]+/).filter(Boolean).every((w) => w.length >= 2);
-    let brands = spot ? phrases((spot.brands || []).filter(whole), 3).map((b) => b.filter((t) => !COMPANY_FORM.has(t))).filter((b) => b.length && !b.every((t) => NOT_BRAND.has(t) || EVERYDAY.has(t) || t.length < 3)) : [];
-    if (!brands.length) {
+    let brands2 = spot ? phrases((spot.brands || []).filter(whole), 3).map((b) => b.filter((t) => !COMPANY_FORM.has(t))).filter((b) => b.length && !b.every((t) => NOT_BRAND.has(t) || EVERYDAY.has(t) || t.length < 3)) : [];
+    if (!brands2.length) {
       const b = brandTokens(r, productTokens).filter((t) => !EVERYDAY.has(t));
-      if (b.length) brands = [b];
+      if (b.length) brands2 = [b];
     }
     const kinds = spot ? phrases([spot.kind, ...spot.other_names || []], 5) : [];
     const kindWords = new Set(kinds.flat());
-    const brandWords = new Set(brands.flat());
+    const brandWords = new Set(brands2.flat());
     const lines = spot ? phrases(spot.lines, 4).map((l) => l.filter((t) => !brandWords.has(t))).filter((l) => l.length && !l.every((t) => kindWords.has(t))) : [];
     return {
       id,
@@ -246,7 +268,7 @@
       url: r.URL,
       image: first(r.Images, "URL"),
       codes,
-      brands,
+      brands: brands2,
       lines,
       // sorted into `lines` (distinctive) and `linesWithBrand` in cardsFromCpsc
       linesWithBrand: [],
@@ -897,7 +919,9 @@ ${LOOKUP_SYSTEM}`;
         // What the cloud asked the device's field guide, and the recalls the device returned.
         lookups: (how.lookups || []).slice(0, 3),
         // The device's own question to its field guide: the brand read in the photo, and the recall it found.
-        seen: how.seen ? { brand: clip(how.seen.brand, 40), id: how.seen.id } : null
+        seen: how.seen ? { brand: clip(how.seen.brand, 40), id: how.seen.id } : null,
+        // Sent to the cloud by the unnamed-sleep rule (shared/triage.mjs), whatever the built-in model said.
+        unnamedSleep: !!how.unnamedSleep
       },
       // Said on the card when the listing's own words did not lead to the recall.
       // Hedged on purpose: other makers sell look-alikes (a Kids2 rocking sleeper was once named as a Rock 'n Play), so

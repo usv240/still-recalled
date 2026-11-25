@@ -1,0 +1,42 @@
+# A second source for new CPSC recalls. Once a day this copies the last 180 days of CPSC's recall API, unchanged, to
+# the recall-mirror branch (tools/recall-mirror.mjs). When www.saferproducts.gov can't be reached, the extension, the
+# web page and the Android app read the same records from that branch through jsDelivr, then through
+# raw.githubusercontent.com: two CDNs that are not CPSC's. The branch holds one commit, replaced each day, so main's
+# history stays clean.
+name: recall mirror
+
+on:
+  schedule:
+    - cron: '23 10 * * *'   # daily, 10:23 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: recall-mirror
+  cancel-in-progress: true
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools/recall-mirror.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch and check CPSC's records
+        run: node tools/recall-mirror.mjs "$RUNNER_TEMP/out"
+      - name: Publish to the recall-mirror branch
+        working-directory: ${{ runner.temp }}/out
+        run: |
+          git init -q -b recall-mirror
+          git config user.name "recall-mirror"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add recalls.json meta.json README.md
+          git commit -q -m "CPSC recalls, $(jq -r .fetched meta.json)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" recall-mirror

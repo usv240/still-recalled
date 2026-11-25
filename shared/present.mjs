@@ -397,6 +397,8 @@ export function present(listing, decision, how = {}) {
       lookups: (how.lookups || []).slice(0, 3),
       // The device's own question to its field guide: the brand read in the photo, and the recall it found.
       seen: how.seen ? { brand: clip(how.seen.brand, 40), id: how.seen.id } : null,
+      // Sent to the cloud by the unnamed-sleep rule (shared/triage.mjs), whatever the built-in model said.
+      unnamedSleep: !!how.unnamedSleep,
     },
     // Said on the card when the listing's own words did not lead to the recall.
     // Hedged on purpose: other makers sell look-alikes (a Kids2 rocking sleeper was once named as a Rock 'n Play), so

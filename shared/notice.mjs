@@ -2,6 +2,7 @@
 // Recall cards (cards.mjs) keep only what matching needs; the notice carries the details that settle a match:
 // which models and dates are affected, where the label is, and the recall's own photos.
 import { clip } from './text.mjs';
+import { mirrorRecalls } from './mirror.mjs';
 
 const API = 'https://www.saferproducts.gov/RestWebServices/Recall';
 const names = list => (Array.isArray(list) ? list.map(x => x && x.Name).filter(Boolean).join('; ') : '');
@@ -59,10 +60,18 @@ export function noticeFromCard(c) {
 export async function fetchNotice(id, fetchImpl = fetch) {
   // A recall API that stops answering must not hold a listing at "checking": give up after 15 s, and the flag
   // stands unconfirmed.
-  const res = await fetchImpl(`${API}?format=json&RecallNumber=${encodeURIComponent(id)}`, { signal: AbortSignal.timeout(15000) });
-  if (!res.ok) throw new Error(`recall API ${res.status}`);
-  const list = await res.json();
-  const r = Array.isArray(list) && list.find(x => String(x.RecallNumber) === String(id));
+  let r;
+  try {
+    const res = await fetchImpl(`${API}?format=json&RecallNumber=${encodeURIComponent(id)}`, { signal: AbortSignal.timeout(15000) });
+    if (!res.ok) throw new Error(`recall API ${res.status}`);
+    const list = await res.json();
+    r = Array.isArray(list) && list.find(x => String(x.RecallNumber) === String(id));
+  } catch (e) {
+    // CPSC can't be reached: the recall mirror has the last 180 days, unchanged (shared/mirror.mjs). Older notices
+    // fall to the caller's stand-in from the card.
+    r = await mirrorRecalls('1973-01-01', { fetchImpl }).then(all => all.find(x => String(x.RecallNumber) === String(id)), () => null);
+    if (!r) throw e;
+  }
   if (!r) throw new Error(`recall ${id} not found`);
   return noticeFromCpsc(r);
 }

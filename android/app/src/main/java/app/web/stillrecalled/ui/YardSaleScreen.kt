@@ -56,6 +56,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
@@ -136,30 +137,37 @@ fun YardSaleScreen(m: AppModel) {
                 provider.bindToLifecycle(lifecycle, CameraSelector.DEFAULT_BACK_CAMERA, pv, analysis)
 
                 status = "Connecting to Gemini…"
-                val live = Ai.liveSession(settings.yardSaleModel, settings.yardSaleLocation, spec.getString("system"), spec.getJSONObject("tool"))
-                session = live
-                android.util.Log.i("StillRecalled", "yard sale: Live session open (${settings.yardSaleModel}, ${settings.yardSaleLocation})")
                 var line = -1
-                live.startAudioConversation(liveAudioConversationConfig {
-                    // Gemini's lookup_recalls, answered on this phone from the field guide.
-                    functionCallHandler = { call ->
-                        val args = JSONObject()
-                        for ((k, v) in call.args) args.put(k, (v as? JsonPrimitive)?.content ?: v.toString())
-                        val out = runBlocking(Dispatchers.Default) { Rules.obj("liveLookup", args) }
-                        scope.launch(Dispatchers.Main) { found.add(0, out) }
-                        android.util.Log.i("StillRecalled", "yard sale: lookup answered on this phone (${out.getJSONObject("shown").getJSONArray("recalls").length()} recalls)")
-                        FunctionResponsePart(name = call.name, response = Json.parseToJsonElement(out.getJSONObject("response").toString()).jsonObject, id = call.id)
-                    }
-                    transcriptHandler = { _, output ->
-                        val t = output?.text
-                        if (!t.isNullOrEmpty()) scope.launch(Dispatchers.Main) {
-                            if (line < 0 || line >= said.size) { said.add(""); line = said.size - 1; while (said.size > 4) { said.removeAt(0); line-- } }
-                            said[line] = said[line] + t
+                // The server says when a session is about to end (goAway); the next session then opens at once, with
+                // the camera still on and the same time cap.
+                val renew = java.util.concurrent.atomic.AtomicBoolean(false)
+                suspend fun open(): LiveSession {
+                    val (live, where) = Ai.liveSession(settings.yardSaleModel, settings.yardSaleLocations, spec.getString("system"), spec.getJSONObject("tool"))
+                    session = live
+                    android.util.Log.i("StillRecalled", "yard sale: Live session open (${settings.yardSaleModel}, $where)")
+                    live.startAudioConversation(liveAudioConversationConfig {
+                        // Gemini's lookup_recalls, answered on this phone from the field guide.
+                        functionCallHandler = { call ->
+                            val args = JSONObject()
+                            for ((k, v) in call.args) args.put(k, (v as? JsonPrimitive)?.content ?: v.toString())
+                            val out = runBlocking(Dispatchers.Default) { Rules.obj("liveLookup", args) }
+                            scope.launch(Dispatchers.Main) { found.add(0, out) }
+                            android.util.Log.i("StillRecalled", "yard sale: lookup answered on this phone (${out.getJSONObject("shown").getJSONArray("recalls").length()} recalls)")
+                            FunctionResponsePart(name = call.name, response = Json.parseToJsonElement(out.getJSONObject("response").toString()).jsonObject, id = call.id)
                         }
-                    }
-                    enableInterruptions = true
-                })
-                live.send(spec.getString("opening"), true)
+                        transcriptHandler = { _, output ->
+                            val t = output?.text
+                            if (!t.isNullOrEmpty()) scope.launch(Dispatchers.Main) {
+                                if (line < 0 || line >= said.size) { said.add(""); line = said.size - 1; while (said.size > 4) { said.removeAt(0); line-- } }
+                                said[line] = said[line] + t
+                            }
+                        }
+                        goAwayHandler = { renew.set(true) }
+                        enableInterruptions = true
+                    })
+                    return live
+                }
+                open().send(spec.getString("opening"), true)
                 status = "Listening and watching. Ask about anything, or just point."
 
                 // The cap.
@@ -168,6 +176,14 @@ fun YardSaleScreen(m: AppModel) {
                     val s = ((until - System.currentTimeMillis()) / 1000).coerceAtLeast(0)
                     left = "${s / 60}:${(s % 60).toString().padStart(2, '0')} left"
                     if (s == 0L) { stop("Stopped after ${settings.yardSaleMinutes} minutes. Start again for more."); break }
+                    if (renew.getAndSet(false)) {
+                        val old = session
+                        android.util.Log.i("StillRecalled", "yard sale: the server is ending this session; opening the next")
+                        try { open() } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
+                            stop("Gemini Live ended the session. Start again, or choose a screenshot."); break
+                        }
+                        if (old != null) scope.launch(Dispatchers.IO) { try { old.stopAudioConversation(); old.close() } catch (_: Throwable) {} }
+                    }
                     delay(1000)
                     // A new Gemini turn after a pause starts a new line.
                     line = if (said.isNotEmpty() && line == said.size - 1) line else -1
@@ -191,12 +207,13 @@ fun YardSaleScreen(m: AppModel) {
             try {
                 val settings = LiveSettings.get()
                 val spec = Rules.obj("liveSpec")
-                val live = Ai.liveSession(settings.yardSaleModel, settings.yardSaleLocation, spec.getString("system"), spec.getJSONObject("tool"))
+                val (live, where) = Ai.liveSession(settings.yardSaleModel, settings.yardSaleLocations, spec.getString("system"), spec.getJSONObject("tool"))
                 session = live
                 val t0 = System.currentTimeMillis()
-                android.util.Log.i("StillRecalled", "yard sale (test, words only): Live session open (${settings.yardSaleModel}, ${settings.yardSaleLocation})")
+                android.util.Log.i("StillRecalled", "yard sale (test, words only): Live session open (${settings.yardSaleModel}, $where)")
                 status = "Test: words in place of the camera."
-                val reader = launch {
+                // A session the server ends must end the test, not leave it showing "running" (seen on the phone).
+                val reader = launch { try {
                     var line = -1
                     live.receive().collect { msg ->
                         when (msg) {
@@ -215,16 +232,19 @@ fun YardSaleScreen(m: AppModel) {
                                 val t = msg.outputTranscription?.text
                                 if (!t.isNullOrEmpty()) { if (line < 0) { said.add(""); line = said.size - 1 }; said[line] = said[line] + t }
                                 if (msg.turnComplete) {
-                                    if (line >= 0) android.util.Log.i("StillRecalled", "yard sale: Gemini said ${said[line].length} characters after ${System.currentTimeMillis() - t0} ms")
+                                    if (line >= 0) android.util.Log.i("StillRecalled", "yard sale: Gemini said after ${System.currentTimeMillis() - t0} ms: ${said[line].take(400)}")
                                     line = -1
                                 }
                             }
+                            is com.google.firebase.ai.type.LiveServerGoAway -> android.util.Log.i("StillRecalled", "yard sale (test): the server is ending the session")
                             else -> {}
                         }
                     }
-                }
+                } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) {
+                    android.util.Log.w("StillRecalled", "yard sale (test): session ended: ${e.javaClass.simpleName}: ${e.message?.take(160)}")
+                } }
                 live.send(text, true)
-                delay(45_000)
+                withTimeoutOrNull(45_000) { reader.join() }
                 reader.cancel()
                 stop("Test finished.")
             } catch (e: kotlinx.coroutines.CancellationException) {

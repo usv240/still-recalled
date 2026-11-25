@@ -57,6 +57,8 @@ window.__eval = async ({ mode = 'hybrid', set = 'eval', limit = 9999, only = '',
       lookups: (r.how && r.how.lookups) || [], lookedUp: !!r.lookedUp, also: r.also ? r.also.id : null,
       // The device's own question to its field guide: the brand the built-in model read in the photo, and the recall.
       seen: (r.how && r.how.seen) || null,
+      // Sent to the cloud by the unnamed-sleep rule (shared/triage.mjs); `device` is then the built-in model's own answer.
+      unnamedSleep: !!(r.how && r.how.unnamedSleep),
       why: r.why || '', evidence: r.evidence || '', ms: Math.round(performance.now() - start), error: r.error || '',
     };
     rows.push(row);

@@ -17,6 +17,9 @@ the device's model gives a brand for an unnamed product, the device looks it up 
 (unzip, open `chrome://extensions`, turn on Developer mode, Load unpacked, choose the `still-recalled-extension` folder) ·
 [Android app](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk) (allow the
 install, then share any listing's screenshot to it) · [web page](https://still-recalled.web.app) (no install).
+The same two files are also on the site, in case GitHub is down:
+[extension](https://still-recalled.web.app/download/still-recalled-extension.zip) ·
+[Android app](https://still-recalled.web.app/download/still-recalled-android.apk).
 
 **What it found on real listings.** In five blind tests on 775 used baby-gear listings from eBay, Mercari and
 Craigslist, 83 were recalled products, padded crib bumpers, infant loungers or inclined sleepers, asking $6,063 in
@@ -223,6 +226,20 @@ sharing, every phone and extension would pay for the same entry again.
 - **Labels are read cloud first** (`PREFER_IN_CLOUD`). A photo of a label goes to Gemini in the cloud first, because
   small model numbers are what Gemini Nano was measured to misread. With no signal, the SDK hands it to Gemini Nano on
   the device; that reading can warn but never reassure.
+
+**Yard-sale mode: Gemini Live, with the phone answering (Android).** At a yard sale or a thrift store, the shopper
+points the camera at the table. Gemini Live (Firebase AI Logic's Live API) watches and listens. For each baby product
+it can name, it calls `lookup_recalls`, and the phone answers from its own field guide and the banned-type rules
+([shared/live.mjs](shared/live.mjs), [YardSaleScreen.kt](android/app/src/main/java/app/web/stillrecalled/ui/YardSaleScreen.kt)).
+So the phone, not the model, decides which recalls exist, and the screen shows only what the lookup returned. A
+session lasts at most a few minutes (Remote Config), and it never says a product is safe. Run on a Pixel with typed
+words in place of the camera: the session opened 1.2 s after App Check, the phone answered the lookup 1.8 s later
+(two Rock 'n Play recalls and the banned inclined-sleeper type), and Gemini spoke at 6.9 s. The web page has no
+yard-sale mode: Firebase's web SDK sends no App Check token on a Live connection, so App Check refuses it.
+
+**Every service has a backup.** Three cloud models in turn, three Live locations, a daily mirror of CPSC's recall API
+on two CDNs, the shared field guide falling back to the device's own entry, Remote Config falling back to built-in
+values, and under all of it the field guide on the device. The table is in [docs/backups.md](docs/backups.md).
 
 ## How well it works
 

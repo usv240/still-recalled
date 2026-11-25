@@ -189,7 +189,8 @@ export function decideFinal(device, cloud, hints, lookedUp = []) {
   }
   if (cloudBanned && device.secondOpinion) {
     // The web page asks the cloud about every baby product it is given, one at a time; the cloud alone can raise a
-    // soft flag there. The extension never sets this (dozens of listings a page, so the cloud only confirms).
+    // soft flag there. The extension sets it only for a sleep-type product with no brand and no telling word
+    // (triage's unnamedSleep); for the rest of a page's dozens of listings the cloud only confirms.
     return { ...base, level: 'possible', kind: 'banned', banned: cloudBanned, why: 'the photo looks like a product type that may no longer be sold' };
   }
   return { ...base, level: 'none', why: 'the cloud check did not confirm the flag' };

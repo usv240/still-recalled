@@ -9,6 +9,7 @@ import { deviceStatus, deviceModel, imagePart, cloudJson, hybridJson, hasCloudAc
 import { LABEL_SYSTEM, LABEL_SCHEMA, judgeLabel, settleReadings, readOnce } from '../../shared/label.mjs';
 import { buildIndex, shortlist } from '../../shared/shortlist.mjs';
 import { triage, wordsOnlyAnswer } from '../../shared/triage.mjs';
+import { mirrorRecalls } from '../../shared/mirror.mjs';
 import { SYSTEM, SCHEMA, promptText, decide } from '../../shared/judge.mjs';
 import { fetchNotice, noticeFromCpsc, noticeFromCard } from '../../shared/notice.mjs';
 import { CONFIRM_SYSTEM_LOOKUP, CONFIRM_SCHEMA_LOOKUP, confirmParts, decideFinal, capForStandIn } from '../../shared/confirm.mjs';
@@ -70,12 +71,18 @@ export async function refreshRecalls({ cloud = true, shared = cloud, fetchImpl =
   const end = new Date(Date.now() + 2 * 864e5).toISOString().slice(0, 10);
   const ids = new Set(known.map(c => c.id));
   // The recall API and the warnings file are two sources: one failing must not stop the other.
-  let records = [], recallError = null;
+  let records = [], recallError = null, mirrorUsed = false;
   try {
     const res = await fetchImpl(`${CPSC_API}?format=json&RecallDateStart=${daysBefore(newest, 7)}&RecallDateEnd=${end}&_=${Date.now()}`, { signal: AbortSignal.timeout(30000), cache: 'no-store' });
     if (!res.ok) throw new Error(`recall API ${res.status}`);
     records = (await res.json()).filter(r => r && r.RecallNumber && !ids.has(String(r.RecallNumber).trim()));
-  } catch (e) { recallError = e; }
+  } catch (e) {
+    // CPSC can't be reached: the same records from the recall mirror (shared/mirror.mjs), at most a day old.
+    try {
+      records = (await mirrorRecalls(daysBefore(newest, 7), { fetchImpl })).filter(r => !ids.has(String(r.RecallNumber).trim()));
+      mirrorUsed = true;
+    } catch { recallError = e; }
+  }
   const settings = await liveSettings();
   const cloudOn = cloud && hasCloudAccess && settings.cloudCheck && settings.liveRecalls;
   // `shared`: read the shared field guide even when this device writes no entries (the web page): entries other
@@ -91,7 +98,7 @@ export async function refreshRecalls({ cloud = true, shared = cloud, fetchImpl =
   liveCards = [...cards, ...warned.cards, ...liveCards];
   indexPromise = null;
   return { cards: [...cards, ...warned.cards], found: records.length + warned.found, written: (spots.written || 0) + warned.written, shared: (spots.shared || 0) + (warned.shared || 0), warnings: warned.cards.length, newest: cards[0] ? cards[0].date : newest,
-    ...(recallError ? { recallError: String(recallError).slice(0, 160) } : {}), ...(warningsError ? { warningsError } : {}) };
+    ...(mirrorUsed ? { fromMirror: true } : {}), ...(recallError ? { recallError: String(recallError).slice(0, 160) } : {}), ...(warningsError ? { warningsError } : {}) };
 }
 
 /**
@@ -254,9 +261,12 @@ export async function lookOnDevice(listing, { modelReady, cloud, imageUrl = u =>
     device = decide(wordsOnlyAnswer(t.candidate), t.candidate, t.hints, t.maybe);
   }
 
-  if (secondOpinion && !/part or a toy/.test(device.why || '')) device = { ...device, secondOpinion: true };
+  // The extension's queue: a sleep-type product with no brand and no telling word gets the cloud's look too, whatever
+  // the built-in model said (shared/triage.mjs). The model's own answer is kept in `how.deviceLevel`.
+  const unnamedSleep = wordsFirst && cloudOn && t.unnamedSleep && device.level === 'none' && !device.askCloud && !/part or a toy/.test(device.why || '') && (await liveSettings()).unnamedSleepCloud !== false;
+  if ((secondOpinion || unnamedSleep) && !/part or a toy/.test(device.why || '')) device = { ...device, secondOpinion: true };
   const deviceLevel = device.level === 'none' && device.askCloud ? 'ask' : device.level;
-  const how = { device: usedDevice, deviceLevel, deviceUnit, candidate: t.candidate ? `${t.candidate.card.id} ${t.candidate.strength}` : '', judgedInCloud: lookedInCloud || (modelReady && !skipLook && !usedDevice && !deviceError), deviceError, ...(seen ? { seen } : {}) };
+  const how = { device: usedDevice, deviceLevel, deviceUnit, candidate: t.candidate ? `${t.candidate.card.id} ${t.candidate.strength}` : '', judgedInCloud: lookedInCloud || (modelReady && !skipLook && !usedDevice && !deviceError), deviceError, ...(seen ? { seen } : {}), ...(unnamedSleep ? { unnamedSleep: true } : {}) };
   const stage = { listing, hints: t.hints, device, photo, how, result: null, skippedLook: skipLook };
   if ((device.level === 'none' && !device.askCloud && !device.secondOpinion) || !cloudOn) {
     stage.result = present(listing, device.level === 'none' ? device : decideFinal(device, null, t.hints), how);

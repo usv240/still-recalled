@@ -8,6 +8,7 @@
 //   third  the third test: 176 eBay, Mercari and Craigslist listings, collected after the fixes the second test led to
 //   fourth the fourth test: 160 eBay and Craigslist listings, collected after every recall since 1973 was added
 //   fifth  the fifth test: 178 eBay and Craigslist listings, collected for release 0.12.0 and run once on its engine
+//   sixth  the sixth test: 180 eBay and Craigslist listings, collected 2026-11-24 for the unnamed-sleep rule (0.14.0)
 // Where a person has reviewed a label (tools/label-review.html -> tools/<set>-review.json), their answer is used.
 //
 // Three ways of running the same engine on the same held-out listings:
@@ -27,6 +28,7 @@ const labelFiles = {
   third: ['./third-labels-a.json', './third-labels-b.json', './third-labels-c.json'],
   fourth: ['./fourth-labels-a.json', './fourth-labels-b.json', './fourth-labels-c.json'],
   fifth: ['./fifth-labels-a.json', './fifth-labels-b.json', './fifth-labels-c.json'],
+  sixth: ['./sixth-labels-a.json', './sixth-labels-b.json', './sixth-labels-c.json'],
 }[set].filter(has);
 const labelSets = labelFiles.map(read);
 const labels = Object.assign({}, ...labelSets.map(x => x.labels));

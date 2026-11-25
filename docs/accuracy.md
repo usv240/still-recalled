@@ -1208,7 +1208,7 @@ products (bike racks, pet playpens); they stay in, as false-alarm tests. Three A
 60 listings each (`tools/sixth-label-brief.txt`, `tools/sixth-labels-a.json`, `-b.json`, `-c.json`): **7 must be
 flagged, 16 can't be settled from the listing alone, 157 must not be flagged.** Of the 7, five are unbranded loungers,
 nests or hammocks, the kind the planned rule is for. The run that would score the "no-brand sleep product goes to the
-cloud" rule on it (about 80 Gemini calls, and Gemini Nano on the PC) waits for the builder's go-ahead.
+cloud" rule on it is in section 25.
 
 **Yard-sale mode (Android; Gemini Live with function calling).** At a yard sale or a thrift store, the parent points
 the phone's camera at the baby gear. Gemini Live (Firebase AI Logic's Live API, `gemini-live-2.5-flash-native-audio`
@@ -1228,9 +1228,68 @@ Config `yard_sale_minutes`), and Remote Config can switch the mode off or change
   anything is said about it.
 - **The web page has no yard-sale mode.** Firebase AI Logic's web SDK sends no App Check token on the Live
   connection, so App Check refuses it (tested: "Firebase App Check token is invalid"). The Android SDK sends it.
-- **Not yet run on a phone:** the phone dropped off wireless debugging before the test. 5 unit tests cover the lookup
-  (`tests/yardsale.test.mjs`). Only a development build has the words-only test switch (`dev_yard_text`), which sends no
-  picture or sound.
+- **On a real phone (Pixel, Android 17, 2026-11-24),** a development build with typed words in place of the camera
+  (`dev_yard_text`, which sends no picture or sound): App Check's token arrived, the Live session opened 1.2 s later
+  (us-central1), the phone answered `lookup_recalls` 1.8 s after that (2 recalls, 1 banned type: the Rock 'n Play and
+  the inclined-sleeper type), and Gemini spoke at 6.9 s. Gemini asked one lookup for the two products in the sentence;
+  the bumper set got no lookup of its own in that run (the PC probe asked one each). 5 unit tests cover the lookup
+  (`tests/yardsale.test.mjs`).
+- **Two things the phone run found.** The test never reached "Test finished": two minutes later the screen still
+  said it was running. The likely cause, not proven, is the end of the session cancelling the test's timer. The test
+  now catches that, ends either way, and logs what Gemini said.
+  And a session ending on the server's side had no follow-up: the app now listens for the server's "going away"
+  message and opens the next session with the camera still on. The Live location is now a list (us-central1, us-east4,
+  us-east5), tried in order; all three, and europe-west4, accepted a session on 2026-11-24.
+
+## 25. The unnamed-sleep rule, scored on the sixth blind test, and every service backed up (2026-11-24)
+
+**The rule** (`shared/triage.mjs`, `unnamedSleep`; in the extension's queue only, `extension/src/engine.js`). A
+listing with no recall candidate, no risky word, no brand any recall or warning card names, and a sleep-type kind in
+its title (rocker, sleeper, lounger, nest, pod, pillow, positioner, bassinet, cradle, swing, bouncer, hammock, dock)
+gets the cloud's look even when Gemini Nano sees nothing, and the cloud may raise a soft flag on its own. It was
+written from the fifth test's two misses, before the sixth set was labelled, and was not changed after the run.
+Remote Config `unnamed_sleep_cloud` turns it off for every copy.
+
+**The sixth test, run once** on the sixth set (section 24: 180 listings, labelled blind by three AI reviewers, Claude),
+with Gemini Nano on this PC and the cloud (`node tools/eval-run.mjs --set=sixth`, `tools/sixth-results-hybrid.json`,
+`tools/sixth-results-words.json`; scored by `node tools/eval-score.mjs --set=sixth`). The run stopped once at 60
+listings when the session running it restarted, and went on from there with `--resume` on the same build.
+
+| Same engine, run as | Caught (of 7) | False alarms (of 157) |
+|---|---|---|
+| Words only | 3 | 14 |
+| Built-in model only | 3 | 13 |
+| **Hybrid, with the rule** | **6** | **1** |
+
+- **What the rule did.** 37 listings fit it; Gemini Nano cleared 35 of them, so the rule sent those 35 to the cloud
+  (one timed out; of the 34 answered, labels: 3 must be flagged, 3 can't tell, 28 must not). The cloud flagged 3, all 3 of the ones that must be: a
+  "Baby & Joy" crib hammock, a "Portable Safe Soft Baby Sleeper/Bassinet" and a pack and play with a bassinet (recall
+  09265, through `lookup_recalls`). It flagged none of the 28. Without the rule, Nano's "nothing here" would have
+  stood for all 34: the same run would have caught 3 of 7.
+- **The miss.** "Happiness Baby Safety Baby Cradle Free Hanging Hammock": one recall card lists "Happiness" as a brand,
+  so the rule took the title as branded and left it to Gemini Nano, which saw nothing. Not changed here: tuning the
+  brand list on this set would spoil its number.
+- **The false alarm** is a soft flag: a Stokke Sleepi crib mattress shown as a possible match for an older Stokke
+  recall (07286). It did not come from the rule.
+- **Cost and speed.** The cloud saw 54 of 180 listings (30%; 20 without the rule's 34); one cloud check timed out (a jet ski
+  cradle the rule had sent, which then stayed unflagged). Gemini Nano looked at 132 (median 6.6 s each, including the cloud check where there was
+  one). About 60 billed Gemini calls in all.
+- **A bookkeeping bug.** The results file's `unnamedSleep` column came out false on every row: `present()` dropped the
+  field. The numbers above come from the triage code and the device's answer instead
+  (`tools/scratch/sixth-rule.mjs`). Fixed for later runs.
+- **What weakens it.** Seven listings that must be flagged is few; each is 14 points. The labels are AI labels, not a
+  parent's. The searches were aimed at the rule's own kind of listing (section 24), so the share of listings it fires
+  on is higher here than on a page a shopper would browse.
+
+**Every service has a backup** ([backups.md](backups.md)). New in 0.14.0:
+- A third cloud model, `gemini-3.5-flash`. Probed first: the two newest models answer only at `global`, and older
+  stable models were not offered at any location tried.
+- A daily mirror of CPSC's recall API (`tools/recall-mirror.mjs`, `.github/workflows/recall-mirror.yml`), read through
+  jsDelivr, then `raw.githubusercontent.com`, only when CPSC can't be reached. The extension, the web page and the
+  Android app all use it, for new recalls and for one notice's text. 3 unit tests (`tests/mirror.test.mjs`).
+- Gemini Live in three locations in turn (us-central1, us-east4, us-east5), and a new session when the server says
+  the current one is ending.
+- Git bundles of both repositories and a copy of the Android release key on a second local drive.
 
 ## Reproduce
 
@@ -1245,6 +1304,8 @@ node tools/eval-run.mjs --set=fourth --mode=words && node tools/eval-run.mjs --s
 node tools/eval-score.mjs                   # or --set=fresh, --set=third, --set=fourth, --set=fifth
 bash tools/collect-fifth.sh                 # how the fifth set was collected (eBay and Craigslist, new searches)
 node tools/single-run.mjs --for=fifth       # the fifth set checked one listing at a time, as the web page does
+node tools/eval-run.mjs --set=sixth --mode=hybrid && node tools/eval-score.mjs --set=sixth   # the unnamed-sleep rule's test
+node tools/recall-mirror.mjs <folder>       # the recall mirror, as the daily job makes it
 node tools/masked-build.mjs && node tools/lookup-generic.mjs --masked   # real listings with the brand stripped from the title
 node tools/lookup-generic.mjs               # the ten made-up generic-title listings, one at a time
 bash tools/rerun-all.sh -r5 && node tools/run-compare.mjs --a=-rerun --b=-r5   # the earlier sets again, and two runs compared

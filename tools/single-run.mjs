@@ -15,7 +15,7 @@ const opt = (k, d = '') => (process.argv.find(a => a.startsWith(`--${k}=`)) || '
 // "--for", not "--set": tools/lookup-run.mjs, imported above, runs its own test when it sees "--set".
 const set = opt('for', 'fifth');
 const read = f => JSON.parse(readFileSync(`tools/${f}`, 'utf8'));
-const LABELS = { eval: ['eval-labels.json'], fresh: ['fresh-labels-ebay.json', 'fresh-labels-craigslist.json'], third: ['third-labels-a.json', 'third-labels-b.json', 'third-labels-c.json'], fourth: ['fourth-labels-a.json', 'fourth-labels-b.json', 'fourth-labels-c.json'], fifth: ['fifth-labels-a.json', 'fifth-labels-b.json', 'fifth-labels-c.json'] }[set];
+const LABELS = { eval: ['eval-labels.json'], fresh: ['fresh-labels-ebay.json', 'fresh-labels-craigslist.json'], third: ['third-labels-a.json', 'third-labels-b.json', 'third-labels-c.json'], fourth: ['fourth-labels-a.json', 'fourth-labels-b.json', 'fourth-labels-c.json'], fifth: ['fifth-labels-a.json', 'fifth-labels-b.json', 'fifth-labels-c.json'], sixth: ['sixth-labels-a.json', 'sixth-labels-b.json', 'sixth-labels-c.json'] }[set];
 const labels = Object.assign({}, ...LABELS.filter(f => existsSync(`tools/${f}`)).map(f => read(f).labels));
 const { cards } = JSON.parse(readFileSync('extension/data/cards.json', 'utf8'));
 const index = buildIndex(cards);

@@ -10,7 +10,7 @@ import { firebaseConfig, recaptchaSiteKey, appCheckBridgeUrl } from './firebase-
 
 // Cloud models used to confirm or clear what the on-device model flagged, in order of preference.
 // The next one is tried when a model is overloaded or out of quota.
-export const CLOUD_MODELS = ['gemini-4-hydrogen', 'gemini-3.5-flash-lite'];
+export const CLOUD_MODELS = ['gemini-4-hydrogen', 'gemini-3.5-flash-lite', 'gemini-3.5-flash'];
 export const CLOUD_MODEL = CLOUD_MODELS[0];
 // One cloud check in 58 timed out at 25 s in the third test, on both models; a check runs in the background.
 const CLOUD_TIMEOUT_MS = 40000;
@@ -101,7 +101,7 @@ export async function shareEntry(id, spot, model) {
  * the fallback when Remote Config cannot be reached.
  * Resolves to { models, cloudCheck, cloudAtOnce, liveRecalls, from: 'remote' | 'cached' | 'defaults' }.
  */
-const DEFAULTS = { cloud_models: CLOUD_MODELS.join(','), cloud_check: true, cloud_at_once: 8, live_recalls: true, field_guide_template: 'field-guide-v1' };
+const DEFAULTS = { cloud_models: CLOUD_MODELS.join(','), cloud_check: true, cloud_at_once: 8, live_recalls: true, field_guide_template: 'field-guide-v1', unnamed_sleep_cloud: true };
 let live = null;
 let liveAt = 0;
 // The hidden page can stay open for days, so the values are read again every 10 minutes. Remote Config itself goes to
@@ -124,6 +124,9 @@ export function liveSettings() {
         // The server prompt template that writes field-guide entries (prompts/field-guide-v1.prompt); empty: the
         // prompt built into this build writes them.
         fieldGuideTemplate: ((rc ? getValue(rc, 'field_guide_template').asString() : DEFAULTS.field_guide_template).match(/^[a-z0-9-]{1,63}$/) || [''])[0],
+        // A sleep-type product with no brand and no telling word gets the cloud's look even when the built-in model
+        // sees nothing (shared/triage.mjs, unnamedSleep). Off: the built-in model's answer stands, as before 0.14.0.
+        unnamedSleepCloud: rc ? getValue(rc, 'unnamed_sleep_cloud').asBoolean() : true,
         from,
       };
     };
