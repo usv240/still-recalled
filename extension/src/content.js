@@ -169,8 +169,14 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 
 if (site) {
-  let timer = 0;
-  const later = () => { clearTimeout(timer); timer = setTimeout(scan, 600); };
+  // Scan once the page has been quiet for 0.6 s, and at least every 2 s while it keeps changing: Facebook's pages
+  // change many times a second, and a scan that waits for quiet would never run there.
+  let timer = 0, first = 0;
+  const later = () => {
+    clearTimeout(timer);
+    first ||= Date.now();
+    timer = setTimeout(() => { first = 0; scan(); }, Math.max(0, Math.min(600, 2000 - (Date.now() - first))));
+  };
   // A lazy photo arriving changes an attribute, not the tree; scrolling brings waiting listings near the screen.
   new MutationObserver(later).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['src', 'srcset'] });
   addEventListener('scroll', later, { passive: true, capture: true });

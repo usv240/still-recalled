@@ -18,7 +18,7 @@ Everything the store's listing form asks for. Publishing needs a Chrome Web Stor
 **Name:** Still Recalled
 
 **Summary (132 characters at most):**
-Flags secondhand listings on eBay, Mercari and Craigslist that look like a recalled product or a risky baby sleep product.
+Flags secondhand listings on Facebook Marketplace, eBay, Mercari and Craigslist that look like a recalled product or a risky baby sleep product.
 
 **Category:** Shopping
 
@@ -28,7 +28,7 @@ Still Recalled puts a warning on secondhand listings that look like a recalled p
 may no longer be sold, such as padded crib bumpers, inclined sleepers and infant loungers.
 
 How it works
-- On eBay, Mercari and Craigslist search pages, a badge appears on each listing that needs a look.
+- On Facebook Marketplace, eBay, Mercari and Craigslist search pages, a badge appears on each listing that needs a look.
 - Click the badge for the seller's photo beside the photo from the government recall notice, what to check, a question
   to ask the seller, and for listings the law rules out, a ready report for the U.S. Consumer Product Safety Commission.
 - The side panel lists every flag on the page.
@@ -50,7 +50,7 @@ Open source: https://github.com/usv240/still-recalled
 
 | Permission | Why |
 |---|---|
-| Host access to eBay, Mercari, Craigslist and the project's practice listings (still-recalled.web.app/try) | Read the listings on search pages and place the warning badges beside them. |
+| Host access to Facebook (Marketplace pages only: the extension reads nothing outside facebook.com/marketplace) and its photo host fbcdn.net, eBay, Mercari, Craigslist and the project's practice listings (still-recalled.web.app/try) | Read the listings on search pages and place the warning badges beside them. |
 | Host access to ebayimg.com and mercdn.net | Load a flagged listing's photo so the built-in model and the cloud check can look at it. |
 | Host access to saferproducts.gov and cpsc.gov | Load the full recall notice and its photo for the cloud check, and fetch recalls CPSC publishes after the build. |
 | `offscreen` | Run the checking engine, including Chrome's built-in model, in a hidden extension page, so listings are checked with the side panel closed. |

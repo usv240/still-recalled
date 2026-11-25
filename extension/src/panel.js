@@ -3,13 +3,13 @@
 import { h } from './ui/dom.js';
 import { icon, mark } from './ui/icons.js';
 import { detailView } from './ui/detail.js';
-import { siteFor } from './extract.js';
+import { siteOfUrl } from './extract.js';
 import { byConcern } from '../../shared/present.mjs';
 import { clip } from '../../shared/text.mjs';
 import { safeUrl } from './ui/dom.js';
 import { deviceModel, deviceStatus, hasCloudAccess } from './ai.js';
 
-const SITE_NAMES = { ebay: 'eBay', mercari: 'Mercari', craigslist: 'Craigslist', practice: 'Practice listings' };
+const SITE_NAMES = { ebay: 'eBay', mercari: 'Mercari', craigslist: 'Craigslist', facebook: 'Facebook Marketplace', practice: 'Practice listings' };
 const DEFAULTS = { cloud: true, badges: true, thorough: false };
 
 const $view = document.getElementById('view');
@@ -78,7 +78,7 @@ function render() {
   let node;
   if (view.name === 'settings') node = settingsView();
   else if (view.name === 'watch') node = watchView();
-  else if (!state) node = tab && siteFor(hostOf(tab.url)) ? loadingView() : unsupportedView();
+  else if (!state) node = tab && siteOfUrl(tab.url) ? loadingView() : unsupportedView();
   else if (view.name === 'detail' && state.results[view.id]) node = detailPage(state.results[view.id]);
   else { view = { name: 'list' }; node = listView(); }
 
@@ -97,7 +97,6 @@ function go(next) {
   scrollTo({ top: 0 });
 }
 
-const hostOf = url => { try { return new URL(url).hostname; } catch { return ''; } };
 const flaggedOf = s => Object.values(s.results).filter(r => r.level === 'likely' || r.level === 'possible').sort(byConcern);
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
@@ -293,7 +292,7 @@ function skeletonRows(n) {
 
 function loadingView() {
   return h('section', { class: 'view' },
-    h('div', { class: 'head' }, h('h1', {}, 'Reading this page'), h('p', { class: 'where' }, SITE_NAMES[siteFor(hostOf(tab.url)).site])),
+    h('div', { class: 'head' }, h('h1', {}, 'Reading this page'), h('p', { class: 'where' }, SITE_NAMES[siteOfUrl(tab.url).site])),
     h('p', { class: 'note' }, 'If nothing appears, reload the page once: it was open before Still Recalled was installed.'),
     skeletonRows(3));
 }
@@ -305,7 +304,8 @@ function unsupportedView() {
     h('ul', { class: 'sites' },
       h('li', {}, h('span', {}, 'eBay'), h('span', {}, 'Search and listings')),
       h('li', {}, h('span', {}, 'Mercari'), h('span', {}, 'Search and listings')),
-      h('li', {}, h('span', {}, 'Craigslist'), h('span', {}, 'Search and listings'))),
+      h('li', {}, h('span', {}, 'Craigslist'), h('span', {}, 'Search and listings')),
+      h('li', {}, h('span', {}, 'Facebook Marketplace'), h('span', {}, 'Search and listings'))),
     h('a', { class: 'link', href: 'https://still-recalled.web.app/try/', target: '_blank', rel: 'noopener' }, 'Try the practice listings', icon('external', { size: 14 })),
     h('p', { class: 'note' }, 'Listings are checked on this computer. The ones it flags, and sets or parts it can\'t settle from the words, are double-checked in the cloud.'));
 }

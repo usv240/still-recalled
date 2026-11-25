@@ -19,6 +19,11 @@ They are kept outside the repo, in `E:/still-recalled-video/`:
 With these clips, scene 18 can use its Gemini Nano wording ("looked at on this phone"), because the screen shows it.
 They show a shared text listing, not a Facebook Marketplace screenshot.
 
+**Facebook Marketplace in the extension (0.17.0), a 4-second insert after scene 0:13.** Picture: a real Marketplace
+search for "baby lounger" scrolling, with a badge on each lounger. Crop out Facebook's header and logo, and show no
+seller names (the search grid shows none; an opened listing does). Words: "And on Facebook Marketplace, where so much
+used baby gear changes hands." Take a second off scenes 0:47, 1:02, 1:41 and 2:21 to keep the length.
+
 Pace: 389 words in 176 seconds, a little over two words a second. No scene asks for more than 2.7.
 
 | Time | Seconds | Picture | Words |

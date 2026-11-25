@@ -525,6 +525,8 @@ async function start() {
   staticText();
   $('mark').replaceWith(mark(20));
   $('input').replaceChildren(inputView());
+  // ?log opens the intake log at once (the shops page links here).
+  if (new URLSearchParams(location.search).has('log')) showLog();
   recentView().then(v => { if (!running && !$('side').firstChild) $('side').replaceChildren(v); });
   $('how').replaceChildren(...howList());
   meta = await fetch('data/meta.json').then(r => r.json()).catch(() => meta);

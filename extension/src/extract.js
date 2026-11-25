@@ -6,6 +6,10 @@ const SITES = [
   { site: 'mercari', host: /(^|\.)mercari\.com$/, item: /\/item\/(m\d+)/ },
   // Craigslist moved from /d/<slug>/<digits>.html to /view/d/<slug>/<code> in 2026; both are matched.
   { site: 'craigslist', host: /(^|\.)craigslist\.org$/, item: /\/(?:view\/)?d\/[^/]+\/([A-Za-z0-9]{8,})(?:\.html)?(?:[?#]|$)/ },
+  // Facebook Marketplace (0.17.0): the largest U.S. market for used baby gear. Only Marketplace pages are read: the
+  // extension runs on facebook.com because Marketplace is reached inside the site without a page load, but outside
+  // /marketplace it reads nothing (no feed, no messages, no profiles).
+  { site: 'facebook', host: /(^|\.)facebook\.com$/, path: /^\/marketplace(\/|$)/, item: /\/marketplace\/item\/(\d{6,})/ },
   // The practice listings on the project's own site (web/try/), for trying the extension without a live marketplace.
   { site: 'practice', host: /^(still-recalled\.web\.app|still-recalled\.firebaseapp\.com|localhost)$/, item: /\/try\/item\/([a-z0-9-]+)\.html/ },
 ];
@@ -13,6 +17,36 @@ const SITES = [
 export function siteFor(hostname) {
   return SITES.find(s => s.host.test(hostname)) || null;
 }
+
+/** The site, when this page is one the extension reads (on Facebook, Marketplace pages only). */
+export function readable(loc) {
+  const site = siteFor(loc.hostname);
+  return site && (!site.path || site.path.test(loc.pathname)) ? site : null;
+}
+/** The same, for a page address ("https://www.facebook.com/marketplace/..."); null for any other address. */
+export function siteOfUrl(url) {
+  try { return readable(new URL(url)); } catch { return null; }
+}
+
+// Facebook's card link is named "Baby lounger, $5, Charlotte, NC, listing 1100087906213990"; its photo is named
+// "Baby lounger in Charlotte, NC"; its text is the price, the title and the place on three lines (November 2026).
+const FB_PRICE = /^(?:\$[\d,]+(?:\.\d{2})?|free)+$/i;
+const FB_PLACE = /^[^,]{2,40}, [A-Z]{2}$|\b\d+(?:\.\d+)?\s*(?:mi|km|miles)\b/;
+export function facebookTitle(link) {
+  const named = String(link.getAttribute('aria-label') || '').replace(/,\s*listing \d+\s*$/i, '');
+  const cut = named.search(/,\s*(?:\$[\d,]+(?:\.\d{2})?|free)\b/i);
+  if (cut > 2) return clean(named.slice(0, cut));
+  const lines = String(link.innerText || link.textContent || '').split('\n').map(clean).filter(t => t && !FB_PRICE.test(t) && !FB_PLACE.test(t));
+  if (lines.length) return lines.sort((a, b) => b.length - a.length)[0];
+  const img = link.querySelector('img');
+  return img ? clean(img.alt).replace(/\s+in [^,]{2,40}, [A-Z]{2}$/, '') : '';
+}
+
+// Facebook puts its own general notice on every item page ("Be aware of product recalls. Check the manufacturer's
+// website..."). It is about recalls in general, not this item, and its words must not count as the seller's.
+const SITE_NOTICES = /Be aware of product recalls\.[^\n]*(\n|$)/gi;
+// On a Facebook item page the seller's own words end where the seller's profile and the suggestions begin.
+const FB_END = /\n(?:Seller information|Seller details|Today's picks|Related searches|Sponsored)\n/;
 
 // eBay appends screen-reader text to link names; it is not part of the title.
 // It also labels the photo carousel inside the title link ("… Image 1 of 4").
@@ -42,11 +76,27 @@ function bestImage(root) {
 
 const PRICE = /\$\s?[\d,]+(?:\.\d{2})?/;
 /** The price nearest the listing: climb from its card until a price shows, but never into a neighbour's card. */
+// A price is its own piece of text ("$45"). Reading it out of the card's whole text took one from a title ("paid more
+// than $100") run together with the photo count after it: "$10011" (Craigslist census, 2026-11-25).
+const WHOLE_PRICE = /^\$\s?[\d,]+(?:\.\d{2})?$/;
+function ownPrice(el) {
+  const walk = el.ownerDocument.createTreeWalker(el, 4);
+  for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+    const t = n.nodeValue.trim();
+    if (WHOLE_PRICE.test(t)) return t.replace(/\s/g, '');
+  }
+  return '';
+}
 function priceFor(card, site, id) {
-  let el = card;
-  for (let i = 0; i < 6 && el; i++, el = el.parentElement) {
+  const levels = [];
+  for (let el = card, i = 0; i < 6 && el; i++, el = el.parentElement) {
     const neighbour = [...el.querySelectorAll('a[href]')].some(a => { const m = site.item.exec(a.href); return m && m[1] !== id; });
-    if (neighbour) return '';
+    if (neighbour) break;
+    levels.push(el);
+    const own = ownPrice(el);
+    if (own) return own;
+  }
+  for (const el of levels) {
     const m = clean(el.textContent).match(PRICE);
     if (m) return m[0].replace(/\s/g, '');
   }
@@ -63,9 +113,12 @@ function cardFor(link) {
   return link;
 }
 
-function titleFor(link, card) {
-  // Craigslist puts the clean title on the result's own element; its link text adds a photo counter ("… Cradle 1").
+function titleFor(link, card, site) {
+  if (site.site === 'facebook') return facebookTitle(link);
+  // Craigslist puts the clean title on the result's own element; its link text and photo name add a photo counter
+  // ("… Cradle 1"), and its photo link has no text at all. On Craigslist the element's title is the title.
   const named = link.closest('[title]');
+  if (site.site === 'craigslist' && named && clean(named.getAttribute('title')).length > 3) return clean(named.getAttribute('title'));
   const own = named && cleanTitle(named.getAttribute('title'));
   if (own && own.length > 3 && cleanTitle(link.textContent).startsWith(own)) return own;
   const heading = card.querySelector('h1, h2, h3, [role=heading]');
@@ -79,7 +132,7 @@ function titleFor(link, card) {
 
 /** Listings shown on a search or browse page. */
 export function listingsOnPage(doc = document, loc = location) {
-  const site = siteFor(loc.hostname);
+  const site = readable(loc);
   if (!site) return { site: null, listings: [] };
   const byId = new Map();
   for (const link of doc.querySelectorAll('a[href]')) {
@@ -87,7 +140,7 @@ export function listingsOnPage(doc = document, loc = location) {
     if (!m) continue;
     const id = m[1];
     const card = cardFor(link);
-    const title = titleFor(link, card);
+    const title = titleFor(link, card, site);
     // A listing usually has two links (photo and title). Keep the one with the longer title, and take the price or
     // photo from the other when it has them.
     const found = { id, site: site.site, url: link.href.split('#')[0], title, price: priceFor(card, site, id), image: bestImage(card), el: card };
@@ -100,15 +153,27 @@ export function listingsOnPage(doc = document, loc = location) {
 
 /** The single listing on an item page, with its description. Null on other pages. */
 export function listingDetail(doc = document, loc = location) {
-  const site = siteFor(loc.hostname);
+  const site = readable(loc);
   if (!site) return null;
   const m = site.item.exec(loc.href);
   if (!m) return null;
-  const main = doc.querySelector('main, #mainContent, [role=main]') || doc.body;
-  const title = clean((doc.querySelector('h1') || {}).textContent) || clean(doc.title);
+  // Facebook opens an item from a search in a dialog over the search page; the item is the dialog then.
+  const dialog = site.site === 'facebook' ? [...doc.querySelectorAll('[role=dialog]')].reverse().find(d => d.querySelector('h1')) : null;
+  const main = dialog || doc.querySelector('main, #mainContent, [role=main]') || doc.body;
+  const heading = [...main.querySelectorAll('h1')].map(h => clean(h.textContent)).find(t => t && !/^(marketplace|search results|notifications)$/i.test(t));
+  const title = heading || clean(doc.title);
+  let text = String(main.innerText || main.textContent || '').replace(SITE_NOTICES, '');
+  if (site.site === 'facebook') {
+    const from = title ? text.indexOf(title) : -1;
+    if (from > -1) text = text.slice(from + title.length);
+    const end = text.search(FB_END);
+    if (end > -1) text = text.slice(0, end);
+    // The page's buttons, not the seller's words.
+    text = text.replace(/^(?:Message|Save|Share|Details|Send seller a message|Send)$/gm, '');
+  }
   return {
     id: m[1], site: site.site, url: loc.href.split('#')[0], title,
-    description: clean(main.innerText || main.textContent).slice(0, 1500),
+    description: clean(text).slice(0, 1500),
     image: bestImage(main),
   };
 }

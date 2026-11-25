@@ -1,12 +1,12 @@
 {
-  "at": "2026-11-24T14:17:38.762Z",
-  "version": "0.13.0",
+  "at": "2026-11-25T14:43:01.657Z",
+  "version": "0.16.1",
   "ext": "extension",
   "builtInModelProfile": false,
-  "url": "https://still-recalled.web.app/try/",
+  "url": "https://www.facebook.com/marketplace/charlotte/search?query=baby%20nest",
   "query": "baby lounger",
-  "passed": 18,
-  "failed": 0,
+  "passed": 14,
+  "failed": 2,
   "steps": [
     {
       "name": "extension installs",
@@ -21,22 +21,17 @@
     {
       "name": "recall list catches up with CPSC",
       "ok": true,
-      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 9 with field-guide entries from the cloud, 11 s"
+      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 0 with field-guide entries from the cloud, 3 s"
     },
     {
       "name": "search page loads",
       "ok": true,
-      "detail": "Practice listings: Still Recalled (34 item links)"
+      "detail": "Facebook (15 item links)"
     },
     {
       "name": "engine checks the listings",
       "ok": true,
-      "detail": "17 of 17 checked in 24 s"
-    },
-    {
-      "name": "a recall published after the build is flagged",
-      "ok": true,
-      "detail": "Kidsview baby bouncer with toy bar, khaki: possible / recall 27092 (2026-11-19)"
+      "detail": "15 of 15 checked in 72 s"
     },
     {
       "name": "no engine errors",
@@ -45,8 +40,8 @@
     },
     {
       "name": "cloud double-check runs",
-      "ok": true,
-      "detail": "8 confirmed in the cloud, 0 cloud errors "
+      "ok": false,
+      "detail": "13 confirmed in the cloud, 2 cloud errors AbortError: Timeout has expired."
     },
     {
       "name": "settings come from Remote Config",
@@ -54,19 +49,14 @@
       "detail": "remote: gemini-4-hydrogen, gemini-3.5-flash-lite; cloud on; 8 at once"
     },
     {
-      "name": "the cloud asks the device for a product the title does not name",
-      "ok": true,
-      "detail": "asked the field guide for \"Fisher-Price Rock 'n Play sleeper\"; the device returned 23088, 19105; shown as Inclined infant sleeper, with recall 23088 named on the card"
-    },
-    {
       "name": "badges appear on flagged listings",
       "ok": true,
-      "detail": "8 badges for 8 flagged"
+      "detail": "15 badges for 15 flagged"
     },
     {
       "name": "toolbar count matches",
       "ok": true,
-      "detail": "toolbar \"8\", flagged 8"
+      "detail": "toolbar \"15\", flagged 15"
     },
     {
       "name": "badge click stays on the page",
@@ -76,17 +66,17 @@
     {
       "name": "card offers the next step",
       "ok": true,
-      "detail": "Ask the seller: yes; Report to CPSC: yes"
+      "detail": "Ask the seller: yes; Report to CPSC: no (only on likely flags the law rules out)"
     },
     {
       "name": "thorough setting: turned on, the open page's baby products get the cloud's look",
-      "ok": true,
-      "detail": "8 listings had been to the cloud, 10 after; 9 checked again; 8 flagged (8 before)"
+      "ok": false,
+      "detail": "13 listings had been to the cloud, 13 after; 0 checked again; 15 flagged (15 before)"
     },
     {
       "name": "new recalls arrive from CPSC",
       "ok": true,
-      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 20 field-guide entries written in the cloud, 72 s"
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 40 s"
     },
     {
       "name": "new CPSC safety warnings arrive too",
@@ -101,183 +91,255 @@
   ],
   "catchUp": {
     "added": 9,
-    "written": 9,
+    "written": 0,
+    "shared": 9,
     "total": 9,
-    "checkedAt": "2026-11-24T14:15:39.619Z",
+    "checkedAt": "2026-11-25T14:40:53.431Z",
     "hits": 0,
     "cards": [
       {
         "id": "27099",
         "date": "2026-11-19",
         "product": "Xentrawave XT016 and XT026 Adult Portable Bed Rails",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27091",
         "date": "2026-11-19",
         "product": "Model Year 2024-2026 Vanderhall Brawley GTS electric recreational off highway vehicles",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27094",
         "date": "2026-11-19",
         "product": "Qpancy Children’s Pajama Sets",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27097",
         "date": "2026-11-19",
         "product": "Ororo PD10K-Pro Rechargeable Lithium-Ion Battery Packs",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27092",
         "date": "2026-11-19",
         "product": "Kidsview Infant Bouncer",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27090",
         "date": "2026-11-19",
         "product": "Custom Leather Craft (CLC) Lighted Portfolio, Johnson Level & Tool (Johnson Level) Digital Angle Locator, Digital Calip…",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27093",
         "date": "2026-11-19",
         "product": "Fidlock Hermetic Dry Bags",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27098",
         "date": "2026-11-19",
         "product": "Cipton Bike Helmets",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27096",
         "date": "2026-11-19",
         "product": "CHE-US Magnetic Robot Toys",
-        "guide": true
+        "guide": false
       }
     ],
-    "ms": 11149
+    "ms": 2754
   },
-  "cloudChecked": 8,
-  "cloudErrors": [],
+  "cloudChecked": 13,
+  "cloudErrors": [
+    "AbortError: Timeout has expired.",
+    "AbortError: Timeout has expired."
+  ],
   "flagged": [
     {
-      "level": "likely",
-      "badge": "Inclined infant sleeper",
-      "title": "Inclined baby sleeper, pink, folds flat",
+      "level": "possible",
+      "badge": "Possible lounger",
+      "title": "Breathable Baby Lounger Nest",
       "recall": "",
-      "also": "23088",
-      "cloud": "gemini-4-hydrogen",
+      "also": "",
+      "cloud": "",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "LOEVIN Baby Nest Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Nest Sleeper /Docking Station - Tropical Leaf Print",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Delight Snuggle Nest",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
       "device": false,
       "lookups": [
         {
           "asked": {
-            "brand": "Fisher-Price",
+            "brand": "Baby Delight",
             "model_number": "",
-            "product": "Rock 'n Play sleeper"
+            "product": "Snuggle Nest"
           },
-          "found": [
-            "23088",
-            "19105"
-          ]
+          "found": []
         }
       ]
     },
     {
-      "level": "likely",
-      "badge": "Recalled product",
-      "title": "Boppy newborn lounger, floral cover, washed",
-      "recall": "21198",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "likely",
-      "badge": "Padded crib bumper",
-      "title": "Braided crib bumper, mint, fits a standard crib",
+      "level": "possible",
+      "badge": "Possible lounger",
+      "title": "Snuggle nest infant bassinet",
       "recall": "",
       "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "possible",
-      "badge": "Possible recall",
-      "title": "Graco baby swing, wind-up, still swings",
-      "recall": "00098",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
+      "cloud": "gemini-3.5-flash-lite",
       "device": false,
       "lookups": []
     },
     {
       "level": "likely",
-      "badge": "Recalled product",
-      "title": "Bright Starts rocking sleeper, vibrates, pink",
-      "recall": "19112",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Delight Snuggle Nest Portable Infant Sleeper",
+      "recall": "",
       "also": "",
-      "cloud": "gemini-4-hydrogen",
+      "cloud": "gemini-3.5-flash-lite",
       "device": false,
       "lookups": []
     },
     {
       "level": "likely",
-      "badge": "Recalled product",
-      "title": "AirClub bedside bassinet QX-831, gray mesh, with pad",
-      "recall": "26342",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle nest foldable infant bed",
+      "recall": "",
       "also": "",
-      "cloud": "gemini-4-hydrogen",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby nest lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
       "device": false,
       "lookups": []
     },
     {
       "level": "possible",
-      "badge": "Possible recall",
-      "title": "Baby Trend Tango Mini compact stroller, gray",
-      "recall": "20052",
+      "badge": "Possible lounger",
+      "title": "Newbabywish Portable Baby Nest Bed",
+      "recall": "",
       "also": "",
-      "cloud": "gemini-4-hydrogen",
+      "cloud": "",
       "device": false,
       "lookups": []
     },
     {
-      "level": "possible",
-      "badge": "Possible recall",
-      "title": "Kidsview baby bouncer with toy bar, khaki",
-      "recall": "27092",
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Two Brand-new unopened portable baby nest",
+      "recall": "",
       "also": "",
-      "cloud": "gemini-4-hydrogen",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Nest Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Nest",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Delight Snuggle Nest Portable Infant Sleeper",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Delight Organic Snuggle Nest Travel Bassinet",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby nest bed",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
       "device": false,
       "lookups": []
     }
   ],
   "thorough": {
-    "cloudBefore": 8,
-    "cloudAfter": 10,
-    "recheckedListings": 9,
-    "flaggedBefore": 8,
-    "flaggedAfter": 8,
+    "cloudBefore": 13,
+    "cloudAfter": 13,
+    "recheckedListings": 0,
+    "flaggedBefore": 15,
+    "flaggedAfter": 15,
     "newlyFlagged": []
   },
   "live": {
     "out": {
       "added": 20,
-      "written": 20,
+      "written": 0,
+      "shared": 20,
       "total": 20,
-      "checkedAt": "2026-11-24T14:17:31.085Z",
+      "checkedAt": "2026-11-25T14:42:21.976Z",
       "hits": 1
     },
-    "ms": 72029,
+    "ms": 40129,
     "alert": {
-      "at": "2026-11-24T14:17:37.951Z",
+      "at": "2026-11-25T14:43:01.129Z",
       "badge": "Recalled product",
       "confirmed": true,
       "level": "likely",
@@ -297,7 +359,7 @@
         "number": "27086",
         "product": "Buzz Bicycles Cerana T2 E-Trike",
         "remedy": "Consumers should stop using the recalled tricycles immediately and contact Huffy for free replacement rear axle assemblies. The rear wheel axle assemblies will be sent directly to consumers or to a third-party who will repair the tricycle. Huffy Corporation will reimburse consumers up to $100 for charges incurred by the third-party repair.",
-        "tell": "You can tell a recalled unit by checking the model number E4004 printed on a label near the pedals on the bottom side of the frame's downtube.",
+        "tell": "",
         "title": "Huffy Recalls Buzz Bicycles Cerana T2 E-Trikes Due to Risk of Serious Injury from Fall Hazard",
         "to": 2026,
         "url": "https://www.cpsc.gov/Recalls/2027/Huffy-Recalls-Buzz-Bicycles-Cerana-T2-E-Trikes-Due-to-Risk-of-Serious-Injury-from-Fall-Hazard",
@@ -328,6 +390,6 @@
       "W27-080",
       "W27-081"
     ],
-    "guide": 20
+    "guide": 0
   }
 }

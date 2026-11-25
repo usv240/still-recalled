@@ -1462,6 +1462,77 @@ The seventh AI review (Claude, not a person) scored 0.16.0 at 4.5, 4.0, 3.5 and 
   (a "Rock & Play Piano") still reach the device's look and the cloud, which clear them; they are never shown on words
   alone.
 
+## 31. Facebook Marketplace, a Craigslist census, a page for shops, and release 0.17.0 (2026-11-25)
+
+**Facebook Marketplace in the extension.** The extension now reads Facebook Marketplace search pages, item pages, and
+an item opened in a dialog over a search (`extension/src/extract.js`). On facebook.com it reads Marketplace pages
+only: the feed, messages, profiles and groups are never read (unit test `tests/extract.test.mjs`). The card's title
+comes from the link's name ("Baby lounger, $5, Charlotte, NC, listing 1100…"), cut at the price. On an item page,
+Facebook's own general recall notice and the seller's profile are left out of the description, so they never count as
+the seller's words. Facebook changes its page many times a second, so the content script now scans at least every
+2 s while the page keeps changing instead of waiting for it to settle.
+
+Tested on public Marketplace pages, logged out, in a throwaway Chrome profile. No Facebook account was used.
+- `node tools/facebook-check.mjs` (the reader): 13 of 13 checks in Charlotte, Houston and Atlanta, among them search
+  pages (15 listings each, every one with title, price and photo), an item opened from a search, the item page itself,
+  and nothing read outside Marketplace.
+- `node tools/e2e.mjs --headful --ext=dist/still-recalled-extension --url=<Marketplace search>` (the packed 0.17.0
+  release): **16 of 16** on a Charlotte "baby lounger" search: 15 of 15 listings checked in 54 s, 14 confirmed in the
+  cloud with no errors, 14 badges, toolbar count 14, badge click stays on the page, the card offers "Ask the seller".
+  The same release on eBay: 16 of 16 (60 listings, 44 flagged).
+- Development-build runs before that: one where Facebook's logged-out sign-in box covered the card (the test now closes
+  it; a signed-in shopper never sees it), and one with 2 cloud calls over the 40 s limit, which also left the
+  "thorough setting" step with nothing new to send. Those are cloud slowness on that run, not reader faults.
+
+**The card points to the marketplace's own rules** (`sitePolicy` in `extension/src/ui/detail.js`). For a likely flag,
+it says the site's rules don't allow the item and that it can be reported to the site from the listing page: recalled
+products on all four sites, and the infant sleep types on Facebook Marketplace and eBay, whose policies name them
+(sources.md, section 7). A lounger that no law rules out still breaks those two sites' rules, so the shopper can have
+it taken down there.
+
+**A Craigslist reader fix.** The census below found two faults in the Craigslist reader:
+- the title kept the photo counter ("… lounger 1");
+- the price was read from the card's whole text, so a title's "$100" ran into the counter and read as "$10011".
+
+Now the title comes from the result's own title attribute, and a price must be its own piece of text. The census was
+run again with the fix; the first run's numbers are not used. eBay was rechecked: 126 of 126 listings with a price.
+
+**A census of Craigslist** (`node tools/census.mjs`, `tools/census-craigslist.json`). On 2026-11-25 the same four
+searches were run on the 30 largest U.S. metro areas with their own Craigslist site: "rock n play", "crib bumper",
+"baby lounger" and "baby nest", 120 searches in all, every listing on each results page. That gave 1,261 listings. The
+word rules flagged 80 (`node tools/census-score.mjs tools/census-craigslist.json`). An AI reviewer (Claude, a separate
+agent) then labelled each one from its title and looked at 42 photos; 21 of those photos changed the title's answer,
+mostly generic "baby lounger" titles that the photo settled either way (`tools/census-craigslist-labels.json`).
+
+| What was for sale | Listings | Asking, in all |
+|---|---|---|
+| Infant loungers and nests a baby lies in | 49 | $2,079 |
+| Padded crib bumpers | 2 | $70 |
+| OXO Tot Nest booster seats, named in a 2015 recall (model and date not checked) | 2 | $50 |
+| **Together** | **53** | **$2,199** |
+
+- Three listings that looked like one ad posted twice are counted once (56 labelled "yes" before that).
+- Brands: 13 DockATot, 12 Snuggle Me, 1 La-La-Me, no Boppy; the rest are named with generic words.
+- The word rules' precision on these searches was 56 of 80. What they get wrong is "lounger" on bouncer and rocker
+  seats, and recall lines on toys, a vehicle harness and video games. That is why nothing here is counted on words
+  alone, and why the extension sends such listings to the device's model and the cloud.
+- Unlike eBay, Craigslist doesn't ban loungers by name, and private sellers' listings are mostly used items. Selling a
+  recalled product or a padded crib bumper is unlawful on any site (sources.md, section 2).
+- **eBay and Craigslist together, one day:** 253 listings, $14,351 asked. It is a floor: the first page of each
+  search, labelled by AI reviewers, not yet by a person.
+- No listing was reported or contacted.
+
+**A page for resale shops** (`web/shops.html`, English and Spanish), for consignment sales, thrift stores and kids'
+resale shops. It sums up what CPSC's reseller guide and the laws behind it say a shop can't sell, with sources, and
+gives a short intake routine. Its button opens the intake log directly (`?log=1`).
+
+**Feedback in public.** A feedback form on GitHub (`.github/ISSUE_TEMPLATE/feedback.yml`) is linked from the web page
+and the shops page, so what real users say can be read and checked by anyone. An outreach kit (`docs/outreach.md`)
+holds short messages for consignment sales, safe-sleep and home-visiting programs, a parent forum and reporters. None
+has been sent.
+
+Unit tests: 121.
+
 ## Reproduce
 
 ```

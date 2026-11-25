@@ -51,7 +51,7 @@ await build({ ...common, outdir: 'tools', format: 'esm', entryPoints: {
 } });
 
 // The web page (web/, served as-is by Firebase Hosting). It reuses the extension's engine, prompts and detail view.
-await build({ ...common, outdir: 'web/build', format: 'esm', entryPoints: { app: 'web/src/app.js', bridge: 'web/src/bridge.js', 'try-preview': 'web/src/try-preview.js', card: 'web/src/card.js' } });
+await build({ ...common, outdir: 'web/build', format: 'esm', entryPoints: { app: 'web/src/app.js', bridge: 'web/src/bridge.js', 'try-preview': 'web/src/try-preview.js', card: 'web/src/card.js', shops: 'web/src/shops.js' } });
 await build({ outdir: 'web/build', bundle: true, logLevel: 'info', entryPoints: { style: 'web/src/app.css', try: 'web/src/try.css' },
   loader: { '.woff2': 'file' }, assetNames: 'fonts/[name]-[hash]' });
 await mkdir('web/data', { recursive: true });

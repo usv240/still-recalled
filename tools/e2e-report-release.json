@@ -1,11 +1,11 @@
 {
-  "at": "2026-11-20T20:40:33.438Z",
-  "version": "0.12.1",
+  "at": "2026-11-25T15:22:53.745Z",
+  "version": "0.17.0",
   "ext": "dist/still-recalled-extension",
   "builtInModelProfile": false,
-  "url": "https://still-recalled.web.app/try/",
+  "url": null,
   "query": "baby lounger",
-  "passed": 18,
+  "passed": 16,
   "failed": 0,
   "steps": [
     {
@@ -21,22 +21,17 @@
     {
       "name": "recall list catches up with CPSC",
       "ok": true,
-      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 9 with field-guide entries from the cloud, 12 s"
+      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 0 with field-guide entries from the cloud, 4 s"
     },
     {
       "name": "search page loads",
       "ok": true,
-      "detail": "Practice listings: Still Recalled (34 item links)"
+      "detail": "Baby Lounger for sale | eBay (125 item links)"
     },
     {
       "name": "engine checks the listings",
       "ok": true,
-      "detail": "17 of 17 checked in 45 s"
-    },
-    {
-      "name": "a recall published after the build is flagged",
-      "ok": true,
-      "detail": "Kidsview baby bouncer with toy bar, khaki: possible / recall 27092 (2026-11-19)"
+      "detail": "60 of 60 checked in 166 s"
     },
     {
       "name": "no engine errors",
@@ -46,7 +41,7 @@
     {
       "name": "cloud double-check runs",
       "ok": true,
-      "detail": "8 confirmed in the cloud, 0 cloud errors "
+      "detail": "58 confirmed in the cloud, 0 cloud errors "
     },
     {
       "name": "settings come from Remote Config",
@@ -54,19 +49,14 @@
       "detail": "remote: gemini-4-hydrogen, gemini-3.5-flash-lite; cloud on; 8 at once"
     },
     {
-      "name": "the cloud asks the device for a product the title does not name",
-      "ok": true,
-      "detail": "asked the field guide for \"Fisher-Price Rock 'n Play sleeper\"; the device returned 23088, 19105; shown as Inclined infant sleeper, with recall 23088 named on the card"
-    },
-    {
       "name": "badges appear on flagged listings",
       "ok": true,
-      "detail": "8 badges for 8 flagged"
+      "detail": "44 badges for 44 flagged"
     },
     {
       "name": "toolbar count matches",
       "ok": true,
-      "detail": "toolbar \"8\", flagged 8"
+      "detail": "toolbar \"44\", flagged 44"
     },
     {
       "name": "badge click stays on the page",
@@ -76,17 +66,17 @@
     {
       "name": "card offers the next step",
       "ok": true,
-      "detail": "Ask the seller: yes; Report to CPSC: yes"
+      "detail": "Ask the seller: yes; Report to CPSC: no (only on likely flags the law rules out)"
     },
     {
       "name": "thorough setting: turned on, the open page's baby products get the cloud's look",
       "ok": true,
-      "detail": "8 listings had been to the cloud, 10 after; 9 checked again; 8 flagged (8 before)"
+      "detail": "58 listings had been to the cloud, 59 after; 16 checked again; 44 flagged (44 before)"
     },
     {
       "name": "new recalls arrive from CPSC",
       "ok": true,
-      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 20 field-guide entries written in the cloud, 14 s"
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 7 s"
     },
     {
       "name": "new CPSC safety warnings arrive too",
@@ -101,76 +91,77 @@
   ],
   "catchUp": {
     "added": 9,
-    "written": 9,
+    "written": 0,
+    "shared": 9,
     "total": 9,
-    "checkedAt": "2026-11-20T20:39:13.910Z",
+    "checkedAt": "2026-11-25T15:19:15.197Z",
     "hits": 0,
     "cards": [
       {
         "id": "27099",
         "date": "2026-11-19",
         "product": "Xentrawave XT016 and XT026 Adult Portable Bed Rails",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27091",
         "date": "2026-11-19",
         "product": "Model Year 2024-2026 Vanderhall Brawley GTS electric recreational off highway vehicles",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27094",
         "date": "2026-11-19",
         "product": "Qpancy Children’s Pajama Sets",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27097",
         "date": "2026-11-19",
         "product": "Ororo PD10K-Pro Rechargeable Lithium-Ion Battery Packs",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27092",
         "date": "2026-11-19",
         "product": "Kidsview Infant Bouncer",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27090",
         "date": "2026-11-19",
         "product": "Custom Leather Craft (CLC) Lighted Portfolio, Johnson Level & Tool (Johnson Level) Digital Angle Locator, Digital Calip…",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27093",
         "date": "2026-11-19",
         "product": "Fidlock Hermetic Dry Bags",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27098",
         "date": "2026-11-19",
         "product": "Cipton Bike Helmets",
-        "guide": true
+        "guide": false
       },
       {
         "id": "27096",
         "date": "2026-11-19",
         "product": "CHE-US Magnetic Robot Toys",
-        "guide": true
+        "guide": false
       }
     ],
-    "ms": 11698
+    "ms": 4372
   },
-  "cloudChecked": 8,
+  "cloudChecked": 58,
   "cloudErrors": [],
   "flagged": [
     {
       "level": "likely",
-      "badge": "Recalled product",
-      "title": "AirClub bedside bassinet QX-831, gray mesh, with pad",
-      "recall": "26342",
+      "badge": "Infant lounger or nest",
+      "title": "Dockatot Deluxe+ Baby Lounger Leopard Print Arch Toy Bar & 2 Replacement Covers",
+      "recall": "",
       "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
@@ -178,8 +169,8 @@
     },
     {
       "level": "likely",
-      "badge": "Padded crib bumper",
-      "title": "Braided crib bumper, mint, fits a standard crib",
+      "badge": "Infant lounger or nest",
+      "title": "Dock A Tot Deluxe Plus Dock Baby Lounger 0-8 Months Teal",
       "recall": "",
       "also": "",
       "cloud": "gemini-3.5-flash-lite",
@@ -188,9 +179,19 @@
     },
     {
       "level": "possible",
-      "badge": "Possible recall",
-      "title": "Baby Trend Tango Mini compact stroller, gray",
-      "recall": "20052",
+      "badge": "Possible lounger",
+      "title": "Babocush Infant Comfort Cushion Lounger Pillow with Vibration Music Gray White",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Dock Portable Baby Lounger, White/Green Deluxe+",
+      "recall": "",
       "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
@@ -198,31 +199,286 @@
     },
     {
       "level": "likely",
-      "badge": "Inclined infant sleeper",
-      "title": "Inclined baby sleeper, pink, folds flat",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle Me Organic Cotton Pink Baby Pillow Oval Lounger Cushion, Unisex",
       "recall": "",
-      "also": "23088",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Dock Infant Baby Lounger, Portable Lightweight, Ginger Chambray",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Lounger Pink Deer Forest Mushroom Sweet Soft Baby Girl",
+      "recall": "",
+      "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": [
         {
           "asked": {
-            "brand": "Fisher-Price",
+            "brand": "EIH",
             "model_number": "",
-            "product": "Rock 'n Play sleeper"
+            "product": "baby lounger"
           },
-          "found": [
-            "23088",
-            "19105"
-          ]
+          "found": []
+        }
+      ]
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle Me Organic Natural Lounger 30x18x4",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "possible",
+      "badge": "Possible lounger",
+      "title": "My Little Essentials Baby Lounger- Elephant Design for Babies",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "SnuggleMe Organic Infant Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "LulyBoo Toddler Baby Lounger Portable Plush Foldable Elephant Backpack EUC",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle Me Organic Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Lounger for 0-12 Months",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Dock A Tot Deluxe + Plus Baby Lounger 0-8 Mos La Vie en Rose Floral",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle Me Infant Lounger - Gumdrop",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Portable Infant Baby Lounger Cover Set White/Gray Marble",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Baby Lounger Chevron Taupe White Mint Trim Supervised Lounging",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe Baby Lounger Tan Mint Chevron Infant 0-8 Months Scandi Nursery",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Dock Infant Lounger, Portable lavender",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Baby Lounger Mrs. Mighetto Cover Limited Edition Pre-Owned",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Original Snuggle Me Infant Lounger with Sheet & 3 Removable Covers 5-Piece Set",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Lounger for 0-12 Months",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "WENDIWAY",
+            "model_number": "",
+            "product": "Infant Support Pillow Baby Lounger"
+          },
+          "found": []
+        }
+      ]
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle Me Organic Infant Sensory Lounger Sage Green Cover with Storage Bag",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle Me Organic Infant Lounger, Green, Organic Cotton, Polyester Fiber Fill",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Comfy BabyNest Outer Space Exploration Portable Oval Baby Lounger, Pink/Blue",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Lounger 0-8M Charcoal Buffalo Check Gingham Plaid Print cotton",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DOCK A TOT Deluxe + Baby 0-8 Months Lounger Black & White Mod Pod",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Recalled product",
+      "title": "Mamibaby Ultra-Soft Breathable Reversible Cotton Newborn Baby Nest Lounger B",
+      "recall": "24340",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "baby lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "Snuggle Me",
+            "model_number": "",
+            "product": "infant lounger"
+          },
+          "found": []
         }
       ]
     },
     {
       "level": "possible",
-      "badge": "Possible recall",
-      "title": "Kidsview baby bouncer with toy bar, khaki",
-      "recall": "27092",
+      "badge": "Possible lounger",
+      "title": "Baby Lounger for Newborn Cover,Baby Nest Cover",
+      "recall": "",
       "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
@@ -230,9 +486,9 @@
     },
     {
       "level": "likely",
-      "badge": "Recalled product",
-      "title": "Boppy newborn lounger, floral cover, washed",
-      "recall": "21198",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Plus Baby Lounger 0-8 Months Pink White Tie Dye Print Case",
+      "recall": "",
       "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
@@ -240,44 +496,155 @@
     },
     {
       "level": "likely",
-      "badge": "Recalled product",
-      "title": "Bright Starts rocking sleeper, vibrates, pink",
-      "recall": "19112",
+      "badge": "Infant lounger or nest",
+      "title": "newborn baby lounger nest",
+      "recall": "",
       "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     },
     {
-      "level": "possible",
-      "badge": "Possible recall",
-      "title": "Graco baby swing, wind-up, still swings",
-      "recall": "00098",
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Snuggle Me Organic Cotton Newborn Infant Lounger Curve - Birch 0-6 M, Retail",
+      "recall": "",
       "also": "",
       "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Lounger Pillow Sage Green Padded Nest With Ties Removable Pad Used",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Caterpillar Playmat Foldable Oval Tummy Time Mat Baby Lounger",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Dock A Tot Deluxe Plus Dock Baby Lounger 0-8 Months",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe Baby Lounger Tan Mint Chevron Infant 0-8 Months Scandi Nursery",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Portable Oval Baby Lounger Pod, Pink/White (DockATot Model)",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Portable Oval Bassinet Baby Lounger, White/Gray Marble *READ*",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "DockATot Deluxe+ Baby Lounger Cushion Pad, Gray & White Chevron, Unisex",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Dock A Tot Deluxe+ Dock Baby Lounger 0-8M Brer Rabbit Design",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-3.5-flash-lite",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Dock A Tot Deluxe + Plus Baby Lounger for 0-8 Months White W/ Gold Cover",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Baby Lounger - 100% Cotton Breathable Infant Lounger for Newborn, Portable Baby",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": []
+    },
+    {
+      "level": "likely",
+      "badge": "Infant lounger or nest",
+      "title": "Dock A Tot Deluxe + Plus Baby Lounger 0-8 Mos Light Blue + Travel Case",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": []
     }
   ],
   "thorough": {
-    "cloudBefore": 8,
-    "cloudAfter": 10,
-    "recheckedListings": 9,
-    "flaggedBefore": 8,
-    "flaggedAfter": 8,
+    "cloudBefore": 58,
+    "cloudAfter": 59,
+    "recheckedListings": 16,
+    "flaggedBefore": 44,
+    "flaggedAfter": 44,
     "newlyFlagged": []
   },
   "live": {
     "out": {
       "added": 20,
-      "written": 20,
+      "written": 0,
+      "shared": 20,
       "total": 20,
-      "checkedAt": "2026-11-20T20:40:25.938Z",
+      "checkedAt": "2026-11-25T15:22:46.230Z",
       "hits": 1
     },
-    "ms": 14094,
+    "ms": 7416,
     "alert": {
-      "at": "2026-11-20T20:40:32.739Z",
+      "at": "2026-11-25T15:22:52.568Z",
       "badge": "Recalled product",
       "confirmed": true,
       "level": "likely",
@@ -297,7 +664,7 @@
         "number": "27086",
         "product": "Buzz Bicycles Cerana T2 E-Trike",
         "remedy": "Consumers should stop using the recalled tricycles immediately and contact Huffy for free replacement rear axle assemblies. The rear wheel axle assemblies will be sent directly to consumers or to a third-party who will repair the tricycle. Huffy Corporation will reimburse consumers up to $100 for charges incurred by the third-party repair.",
-        "tell": "You can identify recalled units by checking the model number E4004 printed on a label near the pedals on the bottom side of the frame's downtube.",
+        "tell": "",
         "title": "Huffy Recalls Buzz Bicycles Cerana T2 E-Trikes Due to Risk of Serious Injury from Fall Hazard",
         "to": 2026,
         "url": "https://www.cpsc.gov/Recalls/2027/Huffy-Recalls-Buzz-Bicycles-Cerana-T2-E-Trikes-Due-to-Risk-of-Serious-Injury-from-Fall-Hazard",
@@ -328,6 +695,6 @@
       "W27-080",
       "W27-081"
     ],
-    "guide": 20
+    "guide": 0
   }
 }

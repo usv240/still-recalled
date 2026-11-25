@@ -1,0 +1,618 @@
+{
+ "labeller": "AI reviewer (Claude), 2026-11-25, titles for all, photos for a sample",
+ "labels": {
+  "3DXuxckV2tF4RRxiazJM3z": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "DockATot Deluxe+ lounger; photo shows the dock"
+  },
+  "6Xri4kXaVk9xLyTLbtgsvG": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger with covers"
+  },
+  "fyzwNPksKnAtaonCkf87z8": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe+ dock"
+  },
+  "wyec1vFXDGYkg7YDuDV245": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a bedside bassinet on legs; title reads as one multi-use bassinet, no separate lounger shown"
+  },
+  "kmEcggVwiij2LoPmS2SRRv": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "generic \"baby lounger\"; photo did not load, cannot tell nest from seat"
+  },
+  "twf1xSKT7oNrGjYZnJRyPx": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger with covers"
+  },
+  "sDLYEYb8Yk1gVPATqkbjXF": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "nrKYjC2d82XanhdCJTaDgo": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe dock"
+  },
+  "5nNH8doKMVmF5DYz7K5iYV": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "DockATot Deluxe, like new"
+  },
+  "9nv87X1UaENrqc8amg82ni": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a BabyBjorn-style bouncer seat"
+  },
+  "38oVhfSfFEP58ZaWszRXqz": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot lounger plus spare cover"
+  },
+  "tGMrmc6MQgag3vxvF2WM3z": {
+   "type": "recall:24064",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "LEMO chair, not a HEAO high chair"
+  },
+  "5rTycXBxwjhi2xpML2sFiv": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Baby Delight Snuggle Nest portable in-bed sleeper; photo confirms"
+  },
+  "cwWXe2CF88tR1aE3qg3inQ": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "La-La-Me lounger / infant nest; photo shows lounger and cover"
+  },
+  "bRf6fH8a5APGSG1dYcpHCY": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "La-La-Me lounger / infant nest"
+  },
+  "7HPfYbLAKB94bTFV9PAmPv": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger, like new; photo did not load"
+  },
+  "qNkP7sKVskNSZPatC2C6pA": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "muslin covers only; photo confirms no lounger"
+  },
+  "jyhn94L4du9DZnnVe4yb7b": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "cotton baby lounger nest"
+  },
+  "m6R3pS8vGn9WkB2ZEFrXa3": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "new DockATot Deluxe; photo did not load"
+  },
+  "nSSi6xp4QmbX1EhDKUzGeA": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe with spare cover"
+  },
+  "j9Xrkyf5xA9y2YugKTjA5J": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me Organic lounger"
+  },
+  "mBK4CPDPmCgSpktyKYkWp4": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "new baby nest; photo shows a nest-style lounger"
+  },
+  "3QsxrpnbkwhLoXdzkrFawL": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "new baby nest (same ad as another listing)"
+  },
+  "ejdNJCJs5zpGEhsqZem4kz": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a Snuggle Me-style lounger, not a flat pad"
+  },
+  "fudZKAaLikcMic5geS5hSH": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "CubbyCove nest lounger with canopy; photo confirms"
+  },
+  "cj7HRZ25GxshCCM4UUjbiz": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe+ lounger"
+  },
+  "gWPnUXNzFbuH876qnu9ion": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me Organic with covers"
+  },
+  "nVu9WJTCeo73bt52mt7DS7": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a baby nest with padded sides"
+  },
+  "b8UFgTySYBK3gLkSNjDzDx": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a bouncer seat with toy bar"
+  },
+  "kdnvbmWcv9maVxfqBecjkN": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a padded nest with canopy"
+  },
+  "sMSs9knz5P8c9cuNcNAudX": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "bath tub seat, not a sleeper"
+  },
+  "bZerwPKt7Ri6nNkCne3gon": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "baby nest lounger; photo confirms"
+  },
+  "hsREcWHGkpLXc4GR69VACy": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a flat oval pad with a strap (changing or insert pad), no raised sides"
+  },
+  "xtw9z7EwsW2pdUnGaXWVg9": {
+   "type": "recall:15145",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "OXO Tot Nest Booster Seat; model and date not checked"
+  },
+  "1zd2tVjiAxa4kKaW37Qavw": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "photo shows a flat contoured cushion pad, not a sided lounger; cannot confirm"
+  },
+  "mYCH8t2ufyHn4ZZ4MBpjbw": {
+   "type": "in_bed_sleeper",
+   "is_it": "unclear",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "photo shows a flat contoured cushion pad, not a sided lounger; cannot confirm"
+  },
+  "86bduMou5Ks6WCif3sCXLx": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "photo shows an oval lounger with a raised padded rim"
+  },
+  "ruqX5kHuQ7A2YCayZmfKK8": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "DockATot Grand Dock; photo shows it in packaging"
+  },
+  "gnDh9wPAdC4QRpnEpHUNGs": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a nest-style lounger"
+  },
+  "jHeadbnjNAxZasM2nDTtwC": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Baby Delight Snuggle Nest Dream portable in-bed sleeper"
+  },
+  "7KyF9M4VJ5i1CXGwadUVkp": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a full Snuggle Me lounger"
+  },
+  "tEoDHbsUsFKEL9SAiKWkx4": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "baby lounger nest"
+  },
+  "q2AaKRpZEAr4nAtoYjAR79": {
+   "type": "recall:15145",
+   "is_it": "unclear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "title says cushion only but photo shows a full Nest booster; model and date not checked"
+  },
+  "rjaF5M9MiWaqoqN9FRWkwk": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe lounger"
+  },
+  "vgoAPSAev6Skh7RAw2wuw5": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me Organic lounger"
+  },
+  "bSTeptbCgHCV3RAg1Ar3FC": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "photo shows a flat foldable travel changing pad"
+  },
+  "r8MUPUUzQTDXPqK9ngX5vx": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe+ docking station"
+  },
+  "uHkQZCce9EKbmijBmQhtrs": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Bloom Coco is a rocker seat on a frame; photo confirms"
+  },
+  "gxP8rso2f42K1Fci4rNnJR": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": true,
+   "why": "photo shows a padded baby nest"
+  },
+  "acqccxRDxgWwnhYR3LaBTF": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": true,
+   "why": "photo shows a Snuggle Me-style curved lounger"
+  },
+  "1B3DZM1EG11bAeL9A7sKY5": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "DockATot Deluxe lounger with spare cover"
+  },
+  "iNMiPxures5dMTPsSdZZB2": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me Organic lounger"
+  },
+  "ujdURUENhjt53s2SURQvJs": {
+   "type": "recall:15145",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "OXO Tot Nest Booster Seat; model and date not checked"
+  },
+  "fh8dh6HvD4tf8wXe3p1GYN": {
+   "type": "recall:25030",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Fisher-Price soother, not the Dreamgro mermaid soother"
+  },
+  "kvGRQG1kYiaXMRqGjcFPeS": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "baby nest with pillow; photo confirms"
+  },
+  "2FVDkNm77V725QsNDpE6pg": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "padded braided crib bumper; photo shows it in a crib"
+  },
+  "g4wkMoaaeCdTEUfhuZjEpd": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "crib bedding set with a cushioned bumper pad; photo shows the padded set in its bag"
+  },
+  "ojWo1xB83cP9CWKPfoR75M": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows an oval nest with a padded raised rim"
+  },
+  "wzz3axvump8gLmeo4rDtQZ": {
+   "type": "in_bed_sleeper",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "toddler foldable sofa chair"
+  },
+  "8RfQQzAMAyyU5huCtWdvT5": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "4JU8hZo96gBtyQBzmNp39u": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "pZB58nigiHJFc9tpprd722": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me Organic lounger with covers"
+  },
+  "iwjGxkyvi4TUkuMcLHoMof": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a lounger with padded sides"
+  },
+  "x4SJUyGL48CcszTNypcxPR": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "title names a lounger plus covers; photo mostly shows the covers"
+  },
+  "wmaivvEMPwDf3bCFznGxNq": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a Babymoov-style positioning lounger with a raised U"
+  },
+  "ayB8ffLQC1s9ddiNNATtJX": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Snuggle Me infant lounger"
+  },
+  "asLp4n3fV3M4D858GrLJvU": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows a nest-style baby lounger with its manual"
+  },
+  "bDjfkdJ1734zuTQ49LL5V4": {
+   "type": "recall:03111",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows loose figures and a well, not the Animal Sounds Farm"
+  },
+  "onCQqz1JAsXy1jkywaMt3b": {
+   "type": "recall:10313",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "1970s Sesame Street playset, not the Campsite"
+  },
+  "bA3b2BXCBeGT9XrCycoCZe": {
+   "type": "recall:10313",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows the Fun Sounds Farm, not the Campsite"
+  },
+  "6eRn1NhxBH4XvuxqXuqPr7": {
+   "type": "recall:03111",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows loose figures and a well, not the Animal Sounds Farm"
+  },
+  "9uytZNudJQqR4U5fu5yjgs": {
+   "type": "recall:03111",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "photo shows loose figures and a well, not the Animal Sounds Farm"
+  },
+  "f67JEcmiUjeXbYX6nuD1u6": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "used",
+   "photo_checked": false,
+   "why": "DockATot Deluxe+, like new"
+  },
+  "7WGPh8VSoiQmbjN621j8g9": {
+   "type": "recall:85037",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "CD player toy, not Honkers plush"
+  },
+  "8dmwYFVKeK64Sft2rQBrrj": {
+   "type": "recall:20174",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "UTV fan wiring harness, not an IMMI seat harness"
+  },
+  "aw81wCNyP1aqa46gFzwe9t": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Snuggle Nest Harmony portable in-bed sleeper; photo confirms"
+  },
+  "iiSRdmMNXs5b3v4JuNXDad": {
+   "type": "recall:07286",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Sleepi crib with a Naturepedic mattress, not the recalled Stokke foam mattress"
+  },
+  "5VS7NrHWh3XBZKAkP7N8fX": {
+   "type": "recall:07061",
+   "is_it": "no",
+   "condition": "unknown",
+   "photo_checked": false,
+   "why": "Wii games, not the controller wrist straps"
+  },
+  "pq1FJxxrFDw3VHKyG4UJRR": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "unknown",
+   "photo_checked": true,
+   "why": "Babymoov Cosydream positioning lounger; photo confirms"
+  },
+  "jKYbWYDx3gDH4wJF9KmX1s": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "condition": "new",
+   "photo_checked": false,
+   "why": "Baby Delight Snuggle Nest portable in-bed sleeper"
+  }
+ },
+ "photo_sample": {
+  "checked": 42,
+  "changed": 21,
+  "title_yes_checked": {
+   "checked": 21,
+   "changed": 3
+  },
+  "ids": [
+   "3DXuxckV2tF4RRxiazJM3z",
+   "wyec1vFXDGYkg7YDuDV245",
+   "9nv87X1UaENrqc8amg82ni",
+   "5rTycXBxwjhi2xpML2sFiv",
+   "cwWXe2CF88tR1aE3qg3inQ",
+   "qNkP7sKVskNSZPatC2C6pA",
+   "mBK4CPDPmCgSpktyKYkWp4",
+   "ejdNJCJs5zpGEhsqZem4kz",
+   "fudZKAaLikcMic5geS5hSH",
+   "nVu9WJTCeo73bt52mt7DS7",
+   "b8UFgTySYBK3gLkSNjDzDx",
+   "kdnvbmWcv9maVxfqBecjkN",
+   "bZerwPKt7Ri6nNkCne3gon",
+   "hsREcWHGkpLXc4GR69VACy",
+   "xtw9z7EwsW2pdUnGaXWVg9",
+   "1zd2tVjiAxa4kKaW37Qavw",
+   "mYCH8t2ufyHn4ZZ4MBpjbw",
+   "86bduMou5Ks6WCif3sCXLx",
+   "ruqX5kHuQ7A2YCayZmfKK8",
+   "gnDh9wPAdC4QRpnEpHUNGs",
+   "7KyF9M4VJ5i1CXGwadUVkp",
+   "q2AaKRpZEAr4nAtoYjAR79",
+   "bSTeptbCgHCV3RAg1Ar3FC",
+   "uHkQZCce9EKbmijBmQhtrs",
+   "gxP8rso2f42K1Fci4rNnJR",
+   "acqccxRDxgWwnhYR3LaBTF",
+   "ujdURUENhjt53s2SURQvJs",
+   "kvGRQG1kYiaXMRqGjcFPeS",
+   "2FVDkNm77V725QsNDpE6pg",
+   "g4wkMoaaeCdTEUfhuZjEpd",
+   "ojWo1xB83cP9CWKPfoR75M",
+   "iwjGxkyvi4TUkuMcLHoMof",
+   "x4SJUyGL48CcszTNypcxPR",
+   "wmaivvEMPwDf3bCFznGxNq",
+   "asLp4n3fV3M4D858GrLJvU",
+   "bDjfkdJ1734zuTQ49LL5V4",
+   "bA3b2BXCBeGT9XrCycoCZe",
+   "6eRn1NhxBH4XvuxqXuqPr7",
+   "9uytZNudJQqR4U5fu5yjgs",
+   "aw81wCNyP1aqa46gFzwe9t",
+   "iiSRdmMNXs5b3v4JuNXDad",
+   "pq1FJxxrFDw3VHKyG4UJRR"
+  ],
+  "note": "every title-unclear listing whose photo loaded, a sample of title-yes listings, and several no and recall listings were checked by photo; 3 photos did not load"
+ }
+}

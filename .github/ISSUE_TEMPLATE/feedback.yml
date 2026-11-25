@@ -1,0 +1,53 @@
+name: Feedback from using Still Recalled
+description: You tried it on a real listing, at a shop, or with families. Tell us what happened.
+title: "Feedback: "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for trying Still Recalled. This page is public, so please leave out names, addresses and links to
+        a person's listing. A few words are plenty.
+  - type: dropdown
+    id: who
+    attributes:
+      label: Who are you, roughly?
+      options:
+        - A parent or grandparent buying used baby gear
+        - Someone selling used baby gear
+        - A resale shop or consignment sale
+        - A nurse, home visitor, WIC or safe-sleep educator
+        - Something else
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: What did you use?
+      multiple: true
+      options:
+        - The web page (still-recalled.web.app)
+        - The Chrome extension
+        - The Android app
+        - The printed card
+        - The intake log for shops
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you check, and did the result help? Did it flag something you would have bought or sold?
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: Anything wrong or confusing?
+      description: A false alarm, a miss, a word you didn't understand, a step that didn't work.
+  - type: dropdown
+    id: again
+    attributes:
+      label: Would you use it again?
+      options:
+        - "Yes"
+        - Maybe
+        - "No"

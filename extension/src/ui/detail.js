@@ -5,6 +5,7 @@ import { icon } from './icons.js';
 import { CPSC_REPORT_URL, isPractice, ownerView } from '../../../shared/present.mjs';
 import { judgeLabel, labelCopy } from '../../../shared/label.mjs';
 import { tr, shortDateOf } from '../../../shared/i18n.mjs';
+import { siteOfUrl } from '../extract.js';
 
 const DEFAULT_CHECK = {
   get recall() { return tr('Ask for a photo of the label. The model number and manufacture date decide whether this unit is one of the recalled ones.', 'Pida una foto de la etiqueta. El número de modelo y la fecha de fabricación deciden si esta unidad es una de las retiradas.'); },
@@ -131,6 +132,18 @@ function labelSection(r, onLabel, owner = false) {
   return root;
 }
 
+const SITE_NAME = { facebook: 'Facebook Marketplace', ebay: 'eBay', mercari: 'Mercari', craigslist: 'Craigslist' };
+/** The marketplace's own rule against this listing, for a likely flag on a site whose policy names it; else null. */
+export function sitePolicy(r) {
+  const found = siteOfUrl((r && r.listing && r.listing.url) || ''), site = found && found.site, name = SITE_NAME[site];
+  if (!name || r.level !== 'likely') return null;
+  if (r.kind === 'recall') return tr(`${name}'s rules don't allow recalled products either. You can also report the listing to ${name} from the listing's page.`,
+    `Las reglas de ${name} tampoco permiten productos retirados del mercado. También puede reportar el anuncio a ${name} desde la página del anuncio.`);
+  if (r.kind === 'banned' && (site === 'facebook' || site === 'ebay')) return tr(`${name}'s rules don't allow this kind of infant sleep product. You can report the listing to ${name} from the listing's page, and it can be taken down.`,
+    `Las reglas de ${name} no permiten este tipo de producto para dormir de bebé. Puede reportar el anuncio a ${name} desde la página del anuncio, y lo pueden quitar.`);
+  return null;
+}
+
 function howLine(r) {
   const device = r.how && r.how.device;
   const cloud = r.how && r.how.cloudModel;
@@ -222,6 +235,11 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
 
   // The last step: a report to CPSC, which asks shoppers to report recalled products for sale online at
   // SaferProducts.gov with the listing's link. Offered only for likely flags whose sale the law rules out.
+  // The marketplace's own rules: all four bar recalled products, and Facebook Marketplace and eBay also bar inclined
+  // sleepers, crib bumpers, loungers and nests by name (docs/research/sources.md, section 7). A lounger that no law
+  // rules out still breaks those two sites' rules, so the shopper can still have it taken down there.
+  const policy = sitePolicy(r);
+  if (policy && !owner && !r.report) root.append(h('section', { class: 'report' }, h('h2', {}, tr('Report the listing', 'Reportar el anuncio')), h('p', {}, policy)));
   if (r.report && !owner) {
     const repLabel = h('span', {}, tr('Report to CPSC', 'Reportar a la CPSC'));
     const repBtn = h('button', { class: 'btn btn-secondary', type: 'button' }, icon('flag'), repLabel);
@@ -235,6 +253,7 @@ export function detailView(r, { compact = false, onOpenPanel = null, onLabel = n
       h('p', {}, r.kind === 'recall'
         ? tr('CPSC asks shoppers who find a recalled product for sale online to report it at SaferProducts.gov, with the listing\'s link and a screenshot. Its e-commerce team has such listings taken down.', 'La CPSC pide a quien encuentre a la venta en internet un producto retirado del mercado que lo reporte en SaferProducts.gov, con el enlace del anuncio y una captura de pantalla. Su equipo de comercio electrónico hace que quiten esos anuncios.')
         : tr('CPSC\'s e-commerce team looks for recalled and banned products listed for sale and has the listings taken down. You can report this one at SaferProducts.gov, with its link and a screenshot.', 'El equipo de comercio electrónico de la CPSC busca productos retirados o prohibidos que estén a la venta y hace que quiten los anuncios. Puede reportar este en SaferProducts.gov, con su enlace y una captura de pantalla.')),
+      policy ? h('p', {}, policy) : null,
       compact ? null : h('details', { class: 'report-text' }, h('summary', {}, tr('The report text', 'El texto del reporte (en inglés)')), h('pre', {}, r.report)),
       repBtn,
       h('p', { class: 'hint' }, isPractice(r) ? tr('Practice listing: the report is copied so you can see it, and the CPSC form is not opened.', 'Anuncio de práctica: el reporte se copia para que lo vea, y no se abre el formulario de la CPSC.')

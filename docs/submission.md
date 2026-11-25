@@ -20,8 +20,9 @@ no keyword filter catches it.
 
 **Still Recalled puts the warning on the listing.** It badges that set **Padded crib bumper**, outlines the bumper in
 the seller's photo, and says what to do: **Skip this one. CPSC's advice: nothing in a crib but a fitted sheet.** It
-works in Chrome on eBay, Mercari and Craigslist search pages, on Android for a listing or screenshot shared from any
-app (which is how it reaches Facebook Marketplace and OfferUp), and on a web page for a screenshot.
+works in Chrome on Facebook Marketplace, eBay, Mercari and Craigslist search pages, on Android for a listing or
+screenshot shared from any app (OfferUp and Facebook's own app included), and on a web page for a screenshot. Resale
+shops get an intake log and a page on what federal law says they can't sell.
 
 **On 775 real listings it had never seen, sellers were asking $6,063 for baby gear that should have been flagged.
 Still Recalled flagged $5,022 of it,** and raised 12 false alarms among 630 ordinary listings. Keyword rules alone
@@ -143,6 +144,12 @@ labelled every flagged listing and checked 70 photos. eBay's filters caught the 
 Boppy lounger was there, only covers); about 90 of the 200 had no brand word in the title. A generic lounger under a generic title is
 exactly what Still Recalled's photo check is built to catch. Method in `docs/accuracy.md`, section 29.
 
+The same day, four searches for the same products on Craigslist in the 30 largest U.S. metro areas (120 searches, 1,261
+listings) found 53 more: 49 infant loungers and nests, 2 padded crib bumpers and 2 booster seats named in a 2015
+recall, asking $2,199 (an AI reviewer labelled all 80 the word rules flagged and checked 42 photos; section 31).
+Together: **253 listings on two sites in one day, asking $14,351.** It is a floor, and a person checking the labels is
+next.
+
 ### Five AI persona walkthroughs (not real users)
 No parent has used it yet. As a clearly labelled stand-in, five AI agents (Claude) each played a U.S. user and walked
 the real screens: a first-time parent on an iPhone, a grandfather at yard sales with large text, a consignment shop
@@ -210,8 +217,8 @@ NBC News, "Grieving parents demand online listings for Rock 'n Plays be removed 
   on the start screen to see the seller's side.
 - **Extension:** download `still-recalled-extension.zip` from https://github.com/usv240/still-recalled/releases/latest
   and unzip it. Open `chrome://extensions`, turn on Developer mode, click Load unpacked and choose the
-  `still-recalled-extension` folder. It also works on eBay, Mercari and Craigslist: search "crib bumper" or "baby
-  lounger", condition Used.
+  `still-recalled-extension` folder. It also works on Facebook Marketplace, eBay, Mercari and Craigslist: search "crib
+  bumper" or "baby lounger".
 - The on-device step needs Chrome 139 or later on a computer that can run Chrome's built-in model. Without it, the word
   rules and the cloud check still flag the practice page's eight.
 - **Code:** https://github.com/usv240/still-recalled (Apache 2.0). Firebase AI Logic is called in `extension/src/ai.js`

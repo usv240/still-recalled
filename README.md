@@ -4,9 +4,10 @@ A parent scrolling eBay sees a used elephant crib bedding set for $75. In the ph
 padded bumper panels with ties. Selling those has been against federal law since 2022, because bumpers can suffocate
 a baby. The title never says "bumper", so no keyword filter catches it, and nothing on the page warns the parent.
 
-**Still Recalled puts the warning on the listing.** It is a Chrome extension for eBay, Mercari and Craigslist search
-pages, an Android app that checks a listing or screenshot shared to it from any app (which is how it reaches Facebook Marketplace and OfferUp), and a web page
-that checks a screenshot. **The cloud teaches the device once, the device screens every listing, and only what it
+**Still Recalled puts the warning on the listing.** It is a Chrome extension for Facebook Marketplace, eBay, Mercari
+and Craigslist search pages, an Android app that checks a listing or screenshot shared to it from any app (OfferUp and
+Facebook's own app included), and a web page that checks a screenshot, with an intake log and
+[a page for resale shops](https://still-recalled.web.app/shops.html). **The cloud teaches the device once, the device screens every listing, and only what it
 flags goes to the cloud:** Gemini in the cloud wrote a spotter card for every CPSC recall since 1973, the word rules and Gemini Nano
 check each listing on your own computer or phone, and only what they flag, or can't settle from the words, goes to
 Gemini in the cloud, through Firebase AI Logic hybrid inference. **And each can ask the other:** when the cloud
@@ -33,7 +34,10 @@ a product), and fetches each new recall and warning from CPSC twice a day.
 **The problem, counted.** On November 25, 2026, the first results page of 12 eBay searches held 200 infant loungers,
 nests and padded crib bumpers for sale, asking $12,152, though eBay's policy bans them (an AI reviewer's count of
 1,077 listings, with photos checked for 70; `docs/accuracy.md`, section 29). The recalled, named product was filtered
-out; about 90 of the 200 had no brand word in the title. Those are what the photo check is for.
+out; about 90 of the 200 had no brand word in the title. Those are what the photo check is for. The same day,
+four searches for the same products on Craigslist in the 30 largest U.S. metro areas (1,261 listings) found 53 more: 49
+loungers and nests, 2 padded bumpers and 2 booster seats named in a recall, asking $2,199 (section 31). **253 listings
+on two sites in one day, $14,351 asked**, counted by AI reviewers; a person checking them is next.
 
 **And it keeps watching what you bought.** Recall notices reach the first owner, not the next one: Kids In Danger found
 that only 22% of the children's products recalled in 2022 that it could analyze were ever returned, replaced or
@@ -66,7 +70,7 @@ Every figure is sourced in [docs/research/sources.md](docs/research/sources.md).
 
 ## What it does
 
-**On a search page** (eBay, Mercari, Craigslist), a badge appears on each listing that needs a look:
+**On a search page** (Facebook Marketplace, eBay, Mercari, Craigslist), a badge appears on each listing that needs a look:
 - red **Recalled product**, or the product type, such as **Infant lounger or nest**, when it's likely;
 - amber **Possible recall** when it's worth checking.
 

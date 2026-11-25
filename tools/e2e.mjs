@@ -167,6 +167,11 @@ try {
   step('toolbar count matches', String(flagged.length || '') === String(text || ''), `toolbar "${text}", flagged ${flagged.length}`);
 
   if (badges.length) {
+    // Logged out, Facebook covers the page with a sign-in box after a scroll; a signed-in shopper never sees it.
+    if (host === 'facebook.com') {
+      await page.evaluate(() => { for (const b of document.querySelectorAll('[role=dialog] [aria-label="Close"]')) b.click(); }).catch(() => {});
+      await new Promise(r => setTimeout(r, 600));
+    }
     const before = page.url();
     await page.evaluate(y => scrollTo(0, Math.max(0, y - 200)), badges[0].y);
     await new Promise(r => setTimeout(r, 400));
