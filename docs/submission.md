@@ -4,7 +4,16 @@
 Still Recalled
 
 ## Tagline (elevator pitch, 200 characters max)
-Flags recalled baby gear on secondhand listings. The device screens every listing, the cloud confirms its flags, and each can ask the other which recall an unnamed product is.
+Flags recalled and banned baby gear on secondhand listings: Gemini Nano screens on your device, Gemini in the cloud confirms.
+
+## Platforms (form field)
+Select both **Web (Chrome)** and **Android**. The rules prefer multi-platform entries, and a submission is associated
+with the platforms selected (the "Best of" prizes are per platform). Lead with Web (Chrome): the extension is the fullest use of hybrid
+inference, Gemini Nano on the device and Gemini in the cloud in one flow.
+
+## Built With tags (form field, 10)
+firebase-ai-logic, gemini, gemini-nano, gemini-live, firebase, chrome-extension, android, kotlin, jetpack-compose,
+claude-code
 
 ---
 
