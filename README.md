@@ -55,7 +55,12 @@ rocking-sleeper recall (Rock 'n Play on 7). On 20 other results of that search i
 swings with a real 2022 recall, and 5 are rockers the reviewers called ordinary (the cloud read 4 of them as a
 rocking sleeper; no person has settled those). On searches like these nearly every listing goes to the cloud (98 of
 the 100 census listings, 29 of these 34): the 77% that never leave the computer is the figure for mixed shopping
-pages. A person checking the labels is next (section 34).
+pages.
+
+**A person has now checked those 34 photos blind** (the builder, not a specialist; section 37) and gave the same
+answer as the AI reviewers on 19 of 34. The person saw more inclined sleepers, 21 against 14. Ten are inclined sleepers
+to the person and to both AI reviewers, and Still Recalled flagged 9 of those 10. From a listing photo alone these
+products are hard to tell apart, for people and for models, which is why the flag is an amber "check the label".
 
 **And it keeps watching what you bought.** Recall notices reach the first owner, not the next one: Kids In Danger found
 that only 22% of the children's products recalled in 2022 that it could analyze were ever returned, replaced or

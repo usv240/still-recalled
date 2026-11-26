@@ -1845,6 +1845,52 @@ record. No photo on these pages was reviewed, so this adds nothing to the counts
 Only Marketplace search and item pages were read; nothing was saved, messaged or reported. The numbers are in
 `tools/facebook-signed-in.json`, with no place names and no listing links.
 
+## 37. A person looks at the 34 Facebook photos: 19 of 34 the same (2026-11-26)
+
+Until now every label in this project was an AI's. For the 34 photos of section 34 (the 14 the AI reviewers called
+inclined sleepers and 20 other results of the same search), **one person has now answered the same question blind.**
+The person is the project's builder, with no training in product safety.
+
+**How.** `tools/label-review.html`, set "the inclined sleepers and 20 others": the photo, the seller's title and the
+price, in shuffled order, with the AI's answer hidden. One question, "is this an inclined sleeper?", with the law's
+definition at the top of the page (a bed made for a baby's sleep at a tilt of more than 10 degrees; a bouncer, swing
+or rocker seat also tilts but is a seat for a baby who is awake). On a first look, before the page gave any
+definition, the person said all 34 looked inclined; that look was not recorded as answers.
+
+| | Person: inclined sleeper | Person: not one |
+|---|---|---|
+| **AI reviewers: inclined sleeper (14)** | 10 | 4 |
+| **AI reviewers: not one (20)** | 11 | 9 |
+
+- **The same answer on 19 of 34 (56%, kappa 0.15).** That is low agreement. The two AI reviewers agreed with each
+  other on 34 of 34, so their agreement measured how alike two AI readings are, not how right they are.
+- **The person saw more inclined sleepers, not fewer: 21, against the AI's 14.** The 11 extra are swings, bouncers
+  and rocker seats by the AI's reading. The 4 the person turned down include two sold with "sleeper" in the
+  product's own name (one on its box).
+- **10 are inclined sleepers to the person and to both AI reviewers** (9 of them confident AI calls). This is the
+  firmest count the project has: 10 inclined sleepers under plain titles, in one search, in 30 metro areas.
+  Still Recalled flagged **9 of those 10**, all amber.
+- **9 are not, to all three.** Still Recalled flagged 2 of those 9.
+
+**The hybrid, scored against each answer key:**
+
+| Answer key | Inclined sleepers flagged | Others flagged |
+|---|---|---|
+| AI reviewers (section 34) | 12 of 14 | 8 of 20 |
+| The person | 15 of 21 | 5 of 13 |
+| Where both agree | 9 of 10 | 2 of 9 |
+
+**What this changes.** "14 inclined sleepers" in section 34 stays an AI count; a person agrees on 10 of them. The
+"8 flags on ordinary rockers" is less settled than section 34 said: the person calls 6 of those 8 inclined sleepers.
+And the plainest finding is the disagreement itself: from one listing photo, a careful adult given the legal
+definition and two AI reviewers split on 15 of 34 of these products. That is the case for an amber "check the label"
+over a red verdict, and for pointing the shopper to the model number.
+
+**Limits.** One person, not a specialist, 34 photos, one sitting. No one has yet checked a model label on any of
+these products, which is what would settle them. The census totals (589, $15,790) have no person's check yet; the
+717 flagged listings are a set on the same page. Reproduce: `node tools/census-fb-person.mjs`; answers in
+`tools/census-fb-sleepers-review.json`.
+
 ## Reproduce
 
 ```
@@ -1864,6 +1910,7 @@ node tools/web-log.mjs                      # saved checks, the intake log and S
 node tools/census.mjs --site=ebay --out=tools/census-ebay.json && node tools/census-score.mjs tools/census-ebay.json   # the census
 node tools/census.mjs --site=facebook --out=tools/census-facebook.json && node tools/census-score.mjs tools/census-facebook.json  # Facebook Marketplace census (section 34)
 node tools/census-fb-score.mjs                              # every number of section 34, from the saved census, labels and hybrid runs
+node tools/census-fb-person.mjs                             # section 37: a person's blind check of the 34 photos, beside the AI labels
 node scripts/make-card.mjs                  # the printable card's QR codes (web/card.html)
 node tools/masked-build.mjs && node tools/lookup-generic.mjs --masked   # real listings with the brand stripped from the title
 node tools/lookup-generic.mjs               # the ten made-up generic-title listings, one at a time
