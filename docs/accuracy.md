@@ -1814,6 +1814,37 @@ this computer, since Marketplace photo addresses stop working after a while; the
 reading nothing outside Marketplace; a signed-in Facebook run; the Firestore rule that lets any signed-in anonymous
 caller write a recall's field-guide card first.
 
+## 36. Signed in on Facebook Marketplace: the blank searches hold (2026-11-26)
+
+Every Facebook search in section 34 was signed out. This is a small check on **one signed-in personal account**, in
+its owner's everyday Chrome, in that account's home metro area (Facebook's default 40-mile radius). Six searches,
+the first screen of results only, no scrolling. It is a check, not a census.
+
+| Search | Signed in |
+|---|---|
+| "rock n play" | "No listings found for "rock n play" within 40 miles" |
+| "crib bumper" | No listings found |
+| "boppy lounger" | No listings found |
+| "baby bumper pads" | 54 listings |
+| "baby lounger" | 40 listings |
+| "baby rocker sleeper" | 39 listings |
+
+- **The blank named searches are the same signed in: 3 of 3.** Signed out it was 90 of 90. The product's name
+  returns nothing, and the plain words beside it return a full page.
+- **The extension's page reader works on the signed-in page.** The reader (`extension/src/extract.js`, the same
+  code the census uses, run in the page) read **39 of 39** listings on the "baby rocker sleeper" search, each with
+  a title, a price and a photo.
+- **An item opened over the search reads correctly.** For "Baby sleeper, $25" the reader took the title, the photo
+  and the seller's own description, and found the heading inside the item's dialog, which is where 0.17.2 puts the
+  badge (section 35).
+
+**Limits.** One account, one metro area, one day, first screen only. The reader was run on the page by itself; the
+installed extension was not in that Chrome, so badges and the card on a signed-in page are the next thing to
+record. No photo on these pages was reviewed, so this adds nothing to the counts of section 34.
+
+Only Marketplace search and item pages were read; nothing was saved, messaged or reported. The numbers are in
+`tools/facebook-signed-in.json`, with no place names and no listing links.
+
 ## Reproduce
 
 ```
