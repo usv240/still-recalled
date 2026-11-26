@@ -2,13 +2,62 @@
  "at": "2026-11-26",
  "how": "One signed-in personal account in its owner's everyday Chrome, the account's home metro area, Facebook's default 40-mile radius. First screen of results, no scrolling. Read by hand-run page script; reader = extension/src/extract.js run in the page. No place names or listing links kept.",
  "searches": [
-  { "query": "rock n play", "listings": 0, "said": "No listings found for \"rock n play\" within 40 miles" },
-  { "query": "crib bumper", "listings": 0, "said": "No listings found for \"crib bumper\" within 40 miles" },
-  { "query": "boppy lounger", "listings": 0, "said": "No listings found for \"boppy lounger\" within 40 miles" },
-  { "query": "baby bumper pads", "listings": 54 },
-  { "query": "baby lounger", "listings": 40 },
-  { "query": "baby rocker sleeper", "listings": 39, "reader": { "read": 39, "withPrice": 39, "withPhoto": 39 } }
+  {
+   "query": "rock n play",
+   "listings": 0,
+   "said": "No listings found for \"rock n play\" within 40 miles"
+  },
+  {
+   "query": "crib bumper",
+   "listings": 0,
+   "said": "No listings found for \"crib bumper\" within 40 miles"
+  },
+  {
+   "query": "boppy lounger",
+   "listings": 0,
+   "said": "No listings found for \"boppy lounger\" within 40 miles"
+  },
+  {
+   "query": "baby bumper pads",
+   "listings": 54
+  },
+  {
+   "query": "baby lounger",
+   "listings": 40
+  },
+  {
+   "query": "baby rocker sleeper",
+   "listings": 39,
+   "reader": {
+    "read": 39,
+    "withPrice": 39,
+    "withPhoto": 39
+   }
+  }
  ],
- "item": { "openedOver": "baby rocker sleeper", "title": "Baby sleeper", "price": "$25", "titleRead": true, "photoRead": true, "descriptionChars": 178, "headingInsideDialog": true },
- "extensionInstalled": false
+ "item": {
+  "openedOver": "baby rocker sleeper",
+  "title": "Baby sleeper",
+  "price": "$25",
+  "titleRead": true,
+  "photoRead": true,
+  "descriptionChars": 178,
+  "headingInsideDialog": true
+ },
+ "extension": {
+  "version": "0.17.2 (packed release, loaded unpacked)",
+  "search": "baby rocker sleeper",
+  "listings": 39,
+  "withBadgeOrPillWhileChecking": 14,
+  "withBadgeWhenSettled": 9,
+  "badgesSeen": [
+   "Possible recall",
+   "Possible inclined sleeper",
+   "Possible lounger"
+  ],
+  "cardOpensOnPage": true,
+  "stayedOnSearch": true,
+  "itemBadgeBesideDialogHeading": true,
+  "how": "watched by hand in the signed-in Chrome"
+ }
 }

@@ -1811,7 +1811,7 @@ this computer, since Marketplace photo addresses stop working after a while; the
 
 **Not fixed, next:** the device's title rules have no "rocking" or "bed", the miss on "Baby rocking bed" in section 34
 (adding them now would be tuning on that test); the content script's page observer runs on all of facebook.com,
-reading nothing outside Marketplace; a signed-in Facebook run; the Firestore rule that lets any signed-in anonymous
+reading nothing outside Marketplace; a signed-in Facebook run (done the next day, section 36); the Firestore rule that lets any signed-in anonymous
 caller write a recall's field-guide card first.
 
 ## 36. Signed in on Facebook Marketplace: the blank searches hold (2026-11-26)
@@ -1838,9 +1838,20 @@ the first screen of results only, no scrolling. It is a check, not a census.
   and the seller's own description, and found the heading inside the item's dialog, which is where 0.17.2 puts the
   badge (section 35).
 
-**Limits.** One account, one metro area, one day, first screen only. The reader was run on the page by itself; the
-installed extension was not in that Chrome, so badges and the card on a signed-in page are the next thing to
-record. No photo on these pages was reviewed, so this adds nothing to the counts of section 34.
+**Then the installed extension, in the same signed-in Chrome** (the packed 0.17.2 release, loaded by its owner, with
+Gemini Nano on that computer):
+- **Badges appear on the signed-in search.** On the "baby rocker sleeper" page, "Looking on this computer" and
+  "Checking in the cloud" pills came and went on up to 14 listings, and when the checks settled **9 of the 39
+  listings carried a badge**: "Possible recall", "Possible inclined sleeper" and "Possible lounger", all amber.
+- **The card opens without leaving the page.** Clicking "Possible inclined sleeper" opened the card over the search
+  ("This may be or include an inclined infant sleeper. Ask the seller what it is before you buy."), and the address
+  stayed on the search.
+- **An opened item carries its badge beside its own heading.** Opening the first flagged listing ("Baby rocker, $10")
+  showed "Possible recall" above the item's title inside the dialog, the placement 0.17.2 fixed (section 35).
+
+**Limits.** One account, one metro area, one day, first screen only. This was watched by hand, not run through the
+end-to-end test, which signs in to nothing. No photo on these pages was reviewed, so this adds nothing to the counts
+of section 34, and nobody has checked whether those 9 flags are right.
 
 Only Marketplace search and item pages were read; nothing was saved, messaged or reported. The numbers are in
 `tools/facebook-signed-in.json`, with no place names and no listing links.
