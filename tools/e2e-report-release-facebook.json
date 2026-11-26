@@ -1,9 +1,9 @@
 {
-  "at": "2026-11-25T15:36:18.210Z",
-  "version": "0.17.0",
+  "at": "2026-11-26T01:58:11.190Z",
+  "version": "0.17.1",
   "ext": "dist/still-recalled-extension",
   "builtInModelProfile": false,
-  "url": "https://www.facebook.com/marketplace/charlotte/search?query=baby%20lounger",
+  "url": "https://www.facebook.com/marketplace/chicago/search?query=baby%20rocker%20sleeper",
   "query": "baby lounger",
   "passed": 16,
   "failed": 0,
@@ -21,7 +21,7 @@
     {
       "name": "recall list catches up with CPSC",
       "ok": true,
-      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 0 with field-guide entries from the cloud, 5 s"
+      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 0 with field-guide entries from the cloud, 4 s"
     },
     {
       "name": "search page loads",
@@ -31,7 +31,7 @@
     {
       "name": "engine checks the listings",
       "ok": true,
-      "detail": "15 of 15 checked in 48 s"
+      "detail": "15 of 15 checked in 60 s"
     },
     {
       "name": "no engine errors",
@@ -51,12 +51,12 @@
     {
       "name": "badges appear on flagged listings",
       "ok": true,
-      "detail": "14 badges for 14 flagged"
+      "detail": "6 badges for 6 flagged"
     },
     {
       "name": "toolbar count matches",
       "ok": true,
-      "detail": "toolbar \"14\", flagged 14"
+      "detail": "toolbar \"6\", flagged 6"
     },
     {
       "name": "badge click stays on the page",
@@ -71,12 +71,12 @@
     {
       "name": "thorough setting: turned on, the open page's baby products get the cloud's look",
       "ok": true,
-      "detail": "14 listings had been to the cloud, 15 after; 1 checked again; 15 flagged (14 before)"
+      "detail": "14 listings had been to the cloud, 15 after; 9 checked again; 6 flagged (6 before)"
     },
     {
       "name": "new recalls arrive from CPSC",
       "ok": true,
-      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 6 s"
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 8 s"
     },
     {
       "name": "new CPSC safety warnings arrive too",
@@ -94,7 +94,7 @@
     "written": 0,
     "shared": 9,
     "total": 9,
-    "checkedAt": "2026-11-25T15:34:50.236Z",
+    "checkedAt": "2026-11-26T01:56:08.565Z",
     "hits": 0,
     "cards": [
       {
@@ -152,15 +152,37 @@
         "guide": false
       }
     ],
-    "ms": 5370
+    "ms": 4254
   },
   "cloudChecked": 14,
   "cloudErrors": [],
   "flagged": [
     {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Breathable Baby Lounger Nest",
+      "level": "possible",
+      "badge": "Possible recall",
+      "title": "Baby Rocker",
+      "recall": "23088",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "Fisher-Price",
+            "model_number": "",
+            "product": "Rock 'n Play sleeper"
+          },
+          "found": [
+            "23088",
+            "19105"
+          ]
+        }
+      ]
+    },
+    {
+      "level": "possible",
+      "badge": "Possible inclined sleeper",
+      "title": "baby rocker",
       "recall": "",
       "also": "",
       "cloud": "gemini-4-hydrogen",
@@ -168,9 +190,51 @@
       "lookups": []
     },
     {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "LOEVIN Baby Nest Lounger",
+      "level": "possible",
+      "badge": "Possible inclined sleeper",
+      "title": "Baby rocker",
+      "recall": "",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "Summer Infant",
+            "model_number": "",
+            "product": "rocker sleeper"
+          },
+          "found": [
+            "W20-055"
+          ]
+        }
+      ]
+    },
+    {
+      "level": "possible",
+      "badge": "Possible recall",
+      "title": "Baby swing/Rocker",
+      "recall": "25009",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "Fisher-Price",
+            "model_number": "",
+            "product": "Snuga Swing"
+          },
+          "found": [
+            "25009"
+          ]
+        }
+      ]
+    },
+    {
+      "level": "possible",
+      "badge": "Possible inclined sleeper",
+      "title": "Baby Rocker-sleeper",
       "recall": "",
       "also": "",
       "cloud": "gemini-4-hydrogen",
@@ -180,171 +244,33 @@
     {
       "level": "possible",
       "badge": "Possible recall",
-      "title": "Baby lounger",
-      "recall": "21198",
+      "title": "Baby rocker",
+      "recall": "23088",
       "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": [
         {
           "asked": {
-            "brand": "Boppy",
+            "brand": "Fisher-Price",
             "model_number": "",
-            "product": "Newborn Lounger"
+            "product": "Rock 'n Play sleeper"
           },
           "found": [
-            "21198"
+            "23088",
+            "19105"
           ]
         }
       ]
-    },
-    {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Freejoy Baby Lounger",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Baby Nest Sleeper /Docking Station - Tropical Leaf Print",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Snuggle Me Organic Newborn Baby Infant Lounger & Travel Bag - Natural",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": [
-        {
-          "asked": {
-            "brand": "Snuggle Me",
-            "model_number": "",
-            "product": "Lounger Curve"
-          },
-          "found": []
-        }
-      ]
-    },
-    {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Baby lounger",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Sleepyhead Deluxe Plus Infant Lounger",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": [
-        {
-          "asked": {
-            "brand": "DockATot",
-            "model_number": "",
-            "product": "Deluxe+ lounger"
-          },
-          "found": []
-        }
-      ]
-    },
-    {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Just listed, Infant Loungers",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "possible",
-      "badge": "Possible lounger",
-      "title": "Bedside Bassinet and Infant Lounger",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "possible",
-      "badge": "Possible lounger",
-      "title": "Docatot lounger dupe",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Baby nest lounger",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "possible",
-      "badge": "Possible lounger",
-      "title": "Baby Loungers, Baby Bassinets for newborn",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": [
-        {
-          "asked": {
-            "brand": "biliboo",
-            "model_number": "",
-            "product": "baby lounger"
-          },
-          "found": []
-        }
-      ]
-    },
-    {
-      "level": "likely",
-      "badge": "Infant lounger or nest",
-      "title": "Infant lounger",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
     }
   ],
   "thorough": {
     "cloudBefore": 14,
     "cloudAfter": 15,
-    "recheckedListings": 1,
-    "flaggedBefore": 14,
-    "flaggedAfter": 15,
-    "newlyFlagged": [
-      "Possible lounger: Baby items"
-    ]
+    "recheckedListings": 9,
+    "flaggedBefore": 6,
+    "flaggedAfter": 6,
+    "newlyFlagged": []
   },
   "live": {
     "out": {
@@ -352,12 +278,12 @@
       "written": 0,
       "shared": 20,
       "total": 20,
-      "checkedAt": "2026-11-25T15:36:12.180Z",
+      "checkedAt": "2026-11-26T01:58:04.138Z",
       "hits": 1
     },
-    "ms": 6362,
+    "ms": 7802,
     "alert": {
-      "at": "2026-11-25T15:36:17.529Z",
+      "at": "2026-11-26T01:58:10.539Z",
       "badge": "Recalled product",
       "confirmed": true,
       "level": "likely",

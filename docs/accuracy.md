@@ -1480,7 +1480,7 @@ Tested on public Marketplace pages, logged out, in a throwaway Chrome profile. N
   release): **16 of 16** on a Charlotte "baby lounger" search: 15 of 15 listings checked in 54 s, 14 confirmed in the
   cloud with no errors, 14 badges, toolbar count 14, badge click stays on the page, the card offers "Ask the seller".
   The same release on eBay: 16 of 16 (60 listings, 44 flagged); on the practice listings at /try: 18 of 18. Each run
-  is kept: `tools/e2e-report-release-facebook.json`, `tools/e2e-report-release.json` (eBay),
+  is kept: `tools/e2e-report-release-facebook-0170.json`, `tools/e2e-report-release.json` (eBay),
   `tools/e2e-report-release-try.json`.
 - Development-build runs before that: one where Facebook's logged-out sign-in box covered the card (the test now closes
   it; signed in, Facebook does not show that box, but no signed-in run has been made), and one with 2 cloud calls over the 40 s limit, which also left the
@@ -1638,6 +1638,123 @@ the printable card and the intake log: 56 page views (light and dark, 390 and 12
 page had no main landmark and the card's buttons sat outside any landmark; both fixed, and the run is now 56 views,
 0 violations (`tools/a11y-report.json`).
 
+## 34. A census of Facebook Marketplace, and the sleepers sold without their name (2026-11-25)
+
+The ninth review pointed out that the census of eBay and Craigslist found no Rock 'n Play, the product the opening
+story is about. Facebook Marketplace is where CPSC sent most of its takedown requests for it (sources.md, section 6),
+so the same census was run there.
+
+**Method.** `node tools/census.mjs --site=facebook` (`tools/census-facebook.json`): logged out, in a throwaway Chrome
+profile, with the extension's own page reader. Seven searches in each of 30 large U.S. metro areas, 210 searches, the
+results Facebook shows a logged-out visitor (about 15 a search): 1,528 listings, every one with a photo. No Facebook
+account was used. No listing was opened, contacted or reported.
+
+**Facebook answers the product's name with nothing.**
+
+| Search words | What Facebook showed |
+|---|---|
+| "rock n play", "crib bumper", "boppy lounger" | "No listings found" in 90 of 90 searches (30 metros each) |
+| "rock and play", "fisher price rock n play", "boppy newborn lounger", "crib bumpers" | "No listings found" in 12 of 12 (3 metros each, `tools/census-facebook-terms.json`) |
+| "baby lounger", "baby nest", "baby rocker sleeper", "baby bumper pads" | 445 to 448 listings each, in 30 of 30 metros |
+| "rocking sleeper", "boppy", "bumper", "dockatot", "snuggle me", "nursing pillow" | 42 to 45 listings each, in 3 of 3 metros |
+
+We read this as Facebook filtering those search words; that is our reading of the page, seen logged out, and a
+signed-in search has not been run. A filter on search words keeps a parent from finding the product by its name. It does
+not take the listing down, and it does not touch a seller who writes "baby rocker".
+
+**What was for sale.** The word rules flagged 717 of the 1,528 by their titles (`node tools/census-score.mjs
+tools/census-facebook.json`). Then every flagged listing, and every one of the 566 listings from the three baby
+searches that the word rules left open, was labelled from its title and its photo together by AI reviewers (Claude,
+four separate agents) on numbered photo sheets (`tools/census-sheets.mjs`), with 216 photos opened at full size:
+1,283 listings in all, 515 ruled out, 20 left unclear. This is the first census here where a photo was looked at for
+every listing counted. The first column counts only labels the reviewer marked as confident.
+
+| What was for sale | Confident | Asking | With best readings | Asking |
+|---|---|---|---|---|
+| Infant loungers and nests a baby lies in | 557 | $15,178 | 672 | $17,898 |
+| Padded crib bumpers (banned from sale since 2022) | 21 | $387 | 37 | $839 |
+| Inclined infant sleepers (banned from sale since 2022) | 11 | $225 | 14 | $280 |
+| **Together** | **589** | **$15,790** | **723** | **$19,017** |
+
+- **Every metro area had them:** 14 to 26 confident listings in each of the 30.
+- **Most carry no brand:** 348 of the 589 show no brand in the title or the photo. 326 ask $20 or less.
+- **Found only by the photo:** 110 of the loungers and all of the inclined sleepers sat under titles the word rules
+  leave open.
+- **The word rules alone:** 605 of the 717 they flagged were the type (489 confident). 108 were ruled out, among them
+  mesh liners and bed rails titled "bumper", and bassinets on legs and bouncers titled "lounger".
+- **A judgement call in the count:** in-bed sleepers with stiff mesh walls and no legs (Baby Delight Snuggle Nest and
+  the like) are counted as loungers: about 75 of the 672, 45 of them among the confident 589.
+- **What the rules say:** Facebook's own Recalled Products policy names inclined sleepers, crib bumpers and "Baby
+  nests and loungers" (sources.md, section 7). Inclined sleepers and padded crib bumpers are banned from sale by law
+  whatever their date; a lounger made before May 2025 is not, and CPSC says it is never for sleep (sources.md,
+  section 2).
+- An ad sharing its title, price and metro area with another is counted once. One pair of ads in two metro areas
+  shared a photo and is counted twice.
+
+**The inclined sleepers.** 14 listings (11 confident) in 11 metro areas, asking $5 to $60. Their titles: "Baby
+rocker/sleeper", "Baby Rocker-sleeper", "Baby sleeper" (twice), "Rocker sleeper", "Rocker/sleeper", "Infant rocker",
+"Baby rocking bed", "Baby lounge rocker", "Baby rocker", "Baby cradle - automatic rocker", "Soothing rocker for Baby",
+"Baby/Infant Rocker Sleeper Gently Used", "Urbini Baby Rocker Sleeper". None says Rock 'n Play, inclined, or a model.
+In the photos the reviewers saw the Fisher-Price design on three, Ingenuity on three (one a box that reads "Moonlight
+Rocking Sleeper"), Urbini on one, and no brand on seven.
+
+A second AI reviewer was then shown the 14 mixed with a random 20 of the other "baby rocker sleeper" results, photos
+only, no titles, in shuffled order (`tools/census-fb-blind-labels.json`). It made the same call on 34 of 34. Both
+reviewers are Claude, so this shows the call is steady, not that a person agrees; a person's check is next
+(`tools/label-review.html`).
+
+**The hybrid on them.** The same 34 listings went through the extension's own pipeline in Chrome with Gemini Nano
+(`node tools/eval-run.mjs --set=census-fb-inclined --mode=hybrid`, then `--set=census-fb-rockers`; a development
+build of 0.17.1's engine; scored by `node tools/census-fb-score.mjs`).
+
+| | The 14 inclined sleepers | 20 other results of the same search |
+|---|---|---|
+| Flagged by the word rules alone | 0 | 0 |
+| Flagged by the hybrid | **12**, all amber | 8, all amber |
+| ... with a recall named | 10 | 7 |
+| ... as the banned type, no recall named | 2 | 1 |
+| Cleared | 2 | 12 |
+| Gemini Nano looked at the photo | 14 | 20 |
+| Sent on to the cloud by the unnamed-sleep rule after the device cleared it | 10 | 14 |
+| The cloud was asked | 13 | 16 |
+
+- **How the 12 were found.** Gemini Nano cleared 11 of the 14 on the device and asked about 3. The unnamed-sleep rule
+  (0.14.0) sent 10 of the cleared ones to the cloud anyway. Gemini in the cloud named the product from the photo and
+  asked the device's field guide (`lookup_recalls`), which returned a recall for 10: Rock 'n Play sleepers (recall
+  23088) on 7, Kids II or Kids2 rocking sleepers (19112, 23089) on 3. Two more were flagged as an inclined sleeper
+  with no recall named.
+- **Is the named recall right?** Where the reviewer could see the brand, yes on 6 of 6: the three Fisher-Price ones
+  were named Rock 'n Play, and the three Ingenuity ones were named Kids II rocking sleepers (Ingenuity is a Kids2
+  brand). The other four, with no brand in the photo, were all named Rock 'n Play: the type is right, and the brand
+  can't be checked from the photo.
+- **Why amber and never red.** The listing itself never names the product, so the card says to check the label. That
+  is the rule: a photo alone can raise an alarm, and never a red one.
+- **The 2 misses.** "Baby rocking bed" was cleared by the device and its title has no sleep word, so the cloud was
+  never asked. One "Baby sleeper" went to the cloud, which did not confirm it.
+- **The 8 flags among the other 20.** Three are 4moms swings and rockers, and the card names the 2022 MamaRoo and
+  RockaRoo recall and asks for the version; the reviewers were not looking for those, and by the builder agent's
+  reading of the photos the brand is right (one photo shows the 4moms logo). The other five are look-alikes: toddler
+  rocker seats, a bouncer and a rocker napper, four of them named Rock 'n Play or Kids II. So about one ordinary "baby
+  rocker" listing in four gets an amber "check the label" it did not need. Bringing that down is next.
+
+**How to read it.**
+- It is a floor and a snapshot: one day, seven searches, and only what Facebook shows logged out.
+- The labels are AI reviewers', from photos about 526 pixels wide. No person has checked one yet.
+- The hybrid numbers are small (14 and 20) and come from a development build with the same engine as the release.
+- With eBay (200) and Craigslist (53), the three sites held 842 such listings that day, $30,141 asked, counting
+  Facebook's confident labels only. The methods differ a little: on Facebook every counted listing had its photo
+  looked at, and listings the word rules left open were looked at too.
+- No listing was reported or contacted. Reporting them is the builder's decision.
+
+**A reader fix, and release 0.17.1.** The census showed that Facebook starts a new listing's name with its own "Just
+listed, " (43 of the 1,528), and the extension read it as part of the seller's title. It is now left out (unit test
+in `tests/extract.test.mjs`; 121 of 121 pass). The packed 0.17.1 release then passed the end-to-end test on a live
+Facebook Marketplace search for "baby rocker sleeper" in Chicago, **16 of 16**: 15 of 15 listings checked in 60 s, 14
+confirmed in the cloud with no errors, 6 badges for 6 flagged
+(`tools/e2e-report-release-facebook.json`; the 0.17.0 run on the lounger search is kept as
+`tools/e2e-report-release-facebook-0170.json`). The eBay and practice-listing reports are 0.17.0's; the only change
+since is this Facebook title fix.
+
 ## Reproduce
 
 ```
@@ -1655,6 +1772,8 @@ node tools/eval-run.mjs --set=sixth --mode=hybrid && node tools/eval-score.mjs -
 node tools/recall-mirror.mjs <folder>       # the recall mirror, as the daily job makes it
 node tools/web-log.mjs                      # saved checks, the intake log and Spanish on the web page
 node tools/census.mjs --site=ebay --out=tools/census-ebay.json && node tools/census-score.mjs tools/census-ebay.json   # the census
+node tools/census.mjs --site=facebook --out=tools/census-facebook.json && node tools/census-score.mjs tools/census-facebook.json  # Facebook Marketplace census (section 34)
+node tools/census-fb-score.mjs                              # every number of section 34, from the saved census, labels and hybrid runs
 node scripts/make-card.mjs                  # the printable card's QR codes (web/card.html)
 node tools/masked-build.mjs && node tools/lookup-generic.mjs --masked   # real listings with the brand stripped from the title
 node tools/lookup-generic.mjs               # the ten made-up generic-title listings, one at a time

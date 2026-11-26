@@ -1,0 +1,5666 @@
+{
+ "labeller": "AI reviewer (Claude, separate agents), 2026-11-25, title and photo for every listing",
+ "what": "listings from the searches \"baby lounger\", \"baby nest\" and \"baby rocker sleeper\" that the word rules left open",
+ "labels": {
+  "1071992811882340": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised sides"
+  },
+  "1147937901514946": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Boppy",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Boppy Newborn Lounger with its tag"
+  },
+  "2435322067001109": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Momcozy",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed Momcozy baby lounger"
+  },
+  "1583960070072283": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "1427035589561439": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Me lounger in retail packaging"
+  },
+  "1907989456845101": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "27587623670864730": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with side bolsters and wrap"
+  },
+  "1462937271704675": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "handmade fabric baby nest"
+  },
+  "1846277093483397": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with side bolsters and wrap"
+  },
+  "1906399636994301": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker seat"
+  },
+  "1077184244968820": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "sling in padded rim on powered base; glider or sleeper"
+  },
+  "1961485954563579": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1375661767706930": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "babyeap",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing rocker seat"
+  },
+  "1584787860314895": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Disney Baby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "play yard with bassinet"
+  },
+  "1159083423345176": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric bedside bassinet"
+  },
+  "1172314759069260": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat with harness"
+  },
+  "1807218120318044": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer rocker seat, store screenshot"
+  },
+  "1671305171167359": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "walker, swing and rocker lot"
+  },
+  "1593559792571397": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HARPPA",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet, store screenshot"
+  },
+  "1445541560968819": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Smart Steps",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat with net canopy"
+  },
+  "1132103042885882": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with toy bar"
+  },
+  "1190482889979006": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "moses basket on rocking stand"
+  },
+  "1102816582761090": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bassinet on stand with mobile"
+  },
+  "2447028815794691": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "cradle swing"
+  },
+  "1723100428803185": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "1007993378301987": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "1874174120434721": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1794913221500787": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCooBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger with bolster sides"
+  },
+  "1049281384533543": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat with harness, toy bar and canopy"
+  },
+  "1353427630338249": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Summer",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bouncer rocker seat with flat pad"
+  },
+  "1569396287784955": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swing seat and swing base"
+  },
+  "1809358933688596": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "29256049827351552": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Sleepytroll",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "2002448937096762": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1487699483281070": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1515036770446546": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Angelbliss",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "3893295367500989": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocking bassinet, flat floor, mesh sides"
+  },
+  "27160310673623730": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing with canopy"
+  },
+  "4102911343337822": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat on rocking frame"
+  },
+  "1793711875199310": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "close-up only; matches gray-mint rocker seat design"
+  },
+  "1585118663632896": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep sling between rails, hard headrest, auto-rock unit on leg"
+  },
+  "966581306386163": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed baby swing"
+  },
+  "2379034166199809": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bouncer with flat seat pad and toy bar"
+  },
+  "1079739821495222": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "baby nest with bolster sides"
+  },
+  "2868019396896452": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "round play nest with toy arches"
+  },
+  "1901516590828216": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ready Rocker",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking back support for adult"
+  },
+  "1662050192208575": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "2892322707817328": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep mesh-sided seat on legs; lounger seat or swing rocker"
+  },
+  "2128576154448117": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1695795078327256": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "cradle swing"
+  },
+  "1467371545219051": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swing or bouncer seat with toy bar"
+  },
+  "1347590373589225": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "round seat on rocking base"
+  },
+  "2537364106676397": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep sling between side rails, rigid head end, tube legs"
+  },
+  "906152985859497": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1740114931110333": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Summer",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer rocker with toy bar"
+  },
+  "1056495730147983": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Tiny Love",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker napper"
+  },
+  "4505483653112087": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "close-up padded seat with head pillow; frame not visible"
+  },
+  "1144104611704815": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Einstein",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "two rocker seats"
+  },
+  "29540849335508665": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Joie",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1681249623332296": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "2215408512653238": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded baby bed, raised sides, net canopy"
+  },
+  "1154844140320234": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folding saucer chair"
+  },
+  "4632914143700240": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "folded in-bed sleeper; only quilted cover visible"
+  },
+  "1631337161766423": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with wooden rails"
+  },
+  "1754754682876214": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2095867011048703": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "glider swing"
+  },
+  "1666237178506812": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wire-frame bouncer"
+  },
+  "1634297290928154": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "cradle swing"
+  },
+  "1487675143271248": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1833729487780122": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat on rocking legs"
+  },
+  "4381621322092058": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with head support"
+  },
+  "871706165661300": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden rocking cradle"
+  },
+  "1760197455217240": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swing or rocker seat, base not visible"
+  },
+  "1506204571371339": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer rocker seat"
+  },
+  "1352177333135910": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing seat with motor arm"
+  },
+  "1524690529343572": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing with rocker seat"
+  },
+  "3208006359392321": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep sling between rails, hard headrest, puppy insert"
+  },
+  "2056167585012904": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker or bouncer seat, frame barely visible"
+  },
+  "40026290206985633": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Lulyboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed portable baby lounger"
+  },
+  "1477082157771181": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger plus freezer trays"
+  },
+  "3953765514763111": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1644278897274031": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest, stock photo"
+  },
+  "1070629599324254": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Trend",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed bouncer"
+  },
+  "2095264005208387": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "1778110036571578": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "25926143327062391": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "in-bed sleeper with mesh walls"
+  },
+  "1101330946140762": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "BabyBliss",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with bolsters and wrap"
+  },
+  "2615902842268122": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Totahaa",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged baby dock nest"
+  },
+  "1804835120517109": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "in-bed sleeper with mesh walls"
+  },
+  "1858237781838085": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1297904075837542": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plush rocking animals"
+  },
+  "1155707126930014": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with head support"
+  },
+  "1834397511229797": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swing or bouncer seat, lamb insert, shoulder harness"
+  },
+  "1464548229218915": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with wooden rails"
+  },
+  "1050165194735974": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Tiny Love",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker napper used as storage"
+  },
+  "2008046249863634": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat on rocking legs"
+  },
+  "1844593966716716": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1440781058251755": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "sling seat on rocker hoop with toy bar; sleeper or seat"
+  },
+  "1384268503669188": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "portable swing"
+  },
+  "1116805221118438": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "1135624966045381": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "1184383660582745": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing seat"
+  },
+  "1034250763028920": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "4moms",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mamaRoo swing"
+  },
+  "2550177198820143": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat"
+  },
+  "2364109391049272": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "lounger, store screenshot"
+  },
+  "1649685506505599": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "lounger, stock photo"
+  },
+  "1545301437247516": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster sides"
+  },
+  "1463419312562126": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "29344543401806361": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Totahaa",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby dock nest with packaging"
+  },
+  "1465167449124702": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed mesh bather"
+  },
+  "1322481746352066": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep cradle with canopy and harness; frame not visible"
+  },
+  "1471897171736072": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bath support"
+  },
+  "1109103841772093": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Sleepytroll",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "1639785164471463": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with wooden rails"
+  },
+  "1127012469705773": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "electric swing seat with toy bar"
+  },
+  "1858210095318644": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing, rocker and bassinet set"
+  },
+  "1721112536104407": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden cradle"
+  },
+  "1438476453822535": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed Snuggle Nest in-bed sleeper"
+  },
+  "2229615641018036": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat"
+  },
+  "1828993258129031": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing with canopy"
+  },
+  "1441879094711084": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Angelbliss",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed bouncer rocker"
+  },
+  "1825056802170431": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden rocker seat"
+  },
+  "1143128524980986": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing seat with net"
+  },
+  "1556542876232192": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "several baby swings"
+  },
+  "1879790492994915": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "toddler seat with tray"
+  },
+  "4534745676842098": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "2298420557366434": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "curved padded lounger"
+  },
+  "1048288477529463": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "play gym with arches"
+  },
+  "28586121847734087": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "lounger, store screenshot"
+  },
+  "2788406244892827": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Cozy Nest lounger, product itself not visible"
+  },
+  "1690313999370938": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1493629842625215": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1122401693853416": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Trend",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1865838398188383": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wicker rocking bassinet"
+  },
+  "28905162832507771": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bouncer seat, flat fabric"
+  },
+  "1588742212471037": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1556720772757718": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing with rocker seat"
+  },
+  "2437085110100888": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat on round base"
+  },
+  "3855271561277798": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCoo Baby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged classic lounger"
+  },
+  "1638701714486572": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1138256715380202": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "packaged baby nest, label shows it"
+  },
+  "1781997646403822": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster sides"
+  },
+  "865451106616014": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer seat on stand"
+  },
+  "28611843031781722": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1136815358839887": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "pod with bolster sides"
+  },
+  "1175336654846313": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Halo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swivel bassinet"
+  },
+  "2284208755677354": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster sides"
+  },
+  "1363537421851428": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo prop nest and wool"
+  },
+  "1187350963786492": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plush rocking toy"
+  },
+  "1102895099043469": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden rocker chair"
+  },
+  "1616360106151461": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bassinet, swing and rocker"
+  },
+  "28690648500587839": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Trend",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "30461223746810824": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat in plastic shell"
+  },
+  "2039571660245920": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1031450833311096": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden cradle"
+  },
+  "2236879960229826": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Maydolly",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "1972005086768504": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "gliding swing bassinet"
+  },
+  "1670598864689042": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1576571487139090": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing with rocker seat"
+  },
+  "1799979811263156": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1311897954035692": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing with rocker seat"
+  },
+  "1075749195450003": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Joy",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "3055067178175344": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Caveen",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing, store screenshot"
+  },
+  "1133469372878195": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "kids couch"
+  },
+  "1650000936683130": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster sides"
+  },
+  "1750268682676062": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster sides"
+  },
+  "2168624073740548": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pop-up baby dome with nursing pillow"
+  },
+  "1098378859656650": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Red Castle",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Cocoonababy foam nest pod"
+  },
+  "2908251642843955": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bather"
+  },
+  "1110154798497524": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1792954088386165": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Sleepytroll",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking device and bed feet"
+  },
+  "2575829326195384": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with harness"
+  },
+  "1011332885354773": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "2274897919954594": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat, folded"
+  },
+  "1521765443107556": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat"
+  },
+  "4488709624687196": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "box reads Moonlight Rocking Sleeper, pictures baby in sleeper"
+  },
+  "1175654644713964": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "portable swing, stock photo"
+  },
+  "1706663058033883": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "adult glider chair"
+  },
+  "4729836540670637": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing seat"
+  },
+  "2569474400191174": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bouncer seat on stand"
+  },
+  "1729817955174478": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "two folding bassinets with canopies"
+  },
+  "1449969530628358": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing seat"
+  },
+  "1453357420082917": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wire-frame bouncer"
+  },
+  "2173101373418182": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "glider bassinet swing"
+  },
+  "1799723841311755": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest in-bed sleeper, screenshot"
+  },
+  "2038131883771500": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "close-up; in-bed sleeper end with mesh rim"
+  },
+  "1157287883292682": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with toy bar"
+  },
+  "27924108623949298": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer rocker, stock photo"
+  },
+  "1130456333173463": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1437234299470078": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ready Rocker",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking back support for adult"
+  },
+  "1280589834252518": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Trend",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "1088671507502060": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing with rocker seat"
+  },
+  "1773191643646551": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "portable swing"
+  },
+  "1064609159841738": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "LAREX",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing seat"
+  },
+  "3030285787162233": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Rockit",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "2158610215067963": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Delta Children",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "1005787439014912": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep sling between rails on rocker hoop; toy bar"
+  },
+  "2057091592345520": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1679087727348247": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Simmons Kids",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1746092676458755": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "adult glider chair"
+  },
+  "1571902684744518": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with raised sides"
+  },
+  "1143987841887375": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged baby lounger"
+  },
+  "1027128057023879": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plush animal floor seat"
+  },
+  "1609615151203841": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster sides"
+  },
+  "1830204028124046": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster ring"
+  },
+  "1174020198530720": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with wooden rails"
+  },
+  "1173547755623740": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden cradle"
+  },
+  "1053383144382699": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker bassinet napper"
+  },
+  "3309399642783600": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with head support"
+  },
+  "1035817832875622": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Frida Baby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "hands-free rocking device"
+  },
+  "1889646145414418": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing seat"
+  },
+  "895020880267738": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "914700091711354": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric rocker seat"
+  },
+  "1096853282889461": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "4moms",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mamaRoo swing"
+  },
+  "922859817111351": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat, wooden-look frame"
+  },
+  "1463123332617566": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "glider swing"
+  },
+  "2027856614398141": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wire-frame bouncer"
+  },
+  "1625917958741849": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "glider swing"
+  },
+  "2014419782555914": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded lounger with raised sides"
+  },
+  "2034695503844043": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker or swing seat pad"
+  },
+  "1912935946730589": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1976621346364834": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Lulyboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rolled bolster lounger in carry bag"
+  },
+  "990046083692080": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer, stock photo"
+  },
+  "29112664951729593": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat, stock photo"
+  },
+  "27607007902293869": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1154024830335593": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "4moms",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mamaRoo swing"
+  },
+  "1098686476425368": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Charlie Crane",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden rocker seat"
+  },
+  "1341638108166440": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "1611494567321558": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocking bassinet with mesh sides"
+  },
+  "874787618682290": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with toy bar"
+  },
+  "27987113264249613": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat in plastic shell"
+  },
+  "2529953614161471": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1846236579846852": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Dream On Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer rocker"
+  },
+  "1092912913370021": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker swing"
+  },
+  "1119080977592400": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1501505541721836": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Tiny Love",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker napper"
+  },
+  "2631438363950522": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "kids floor pillow lounger"
+  },
+  "2160619908223872": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with bolster sides"
+  },
+  "1802045784269148": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "in-bed sleeper with walls and canopy"
+  },
+  "2203655990209751": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby DeeDee",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wearable sleep sack"
+  },
+  "4049503858514504": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Halo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swivel bassinet"
+  },
+  "1909872290375020": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing with canopy"
+  },
+  "1103770372664161": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bedside bassinet"
+  },
+  "1712509170204761": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "936981962425612": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "electric swing seat under net"
+  },
+  "1467068762225489": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing seat"
+  },
+  "2826161497785411": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat pad on plastic frame"
+  },
+  "1681739453550105": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing with rocker seat"
+  },
+  "1092970889887267": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "2635221266938932": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2706794319715650": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1139053589117165": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pop-up baby dome"
+  },
+  "1688349052894201": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat"
+  },
+  "1412004357692791": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat"
+  },
+  "1109698611678086": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plush swan rocker"
+  },
+  "961431407051302": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot pod with bolster sides"
+  },
+  "2317290392451225": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1472129515028579": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat on rocking base"
+  },
+  "1173107735249122": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "two padded loungers with covers"
+  },
+  "1435402655206629": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "BabyBliss",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with bolsters and wrap"
+  },
+  "1048637021476794": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest, stock photo"
+  },
+  "2360359454504258": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Boppy",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "head support, potty seat, bath tub lot"
+  },
+  "1496467345914028": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bather"
+  },
+  "1084718730621136": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "inflatable play ring"
+  },
+  "2089260338384762": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer rocker with toy bar"
+  },
+  "1459602226236645": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing seat"
+  },
+  "2107359586552332": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1531803328784752": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soother with rocker seat"
+  },
+  "1433907282246070": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden rocker seat"
+  },
+  "2137647067120503": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "activity seat with tray"
+  },
+  "1710905704063221": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swing or rocker seat with insert"
+  },
+  "1157937840150863": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1486881799831078": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat with handle"
+  },
+  "1794630124910292": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Joie",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1470199151747383": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1696421491459228": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "3498634890303054": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer with toy bar"
+  },
+  "1129123682870185": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Trend",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "twin folding bassinets"
+  },
+  "1345552764198307": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing, store screenshot"
+  },
+  "1468944701764222": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Nature's Lounger",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "inflatable couch in bag"
+  },
+  "1163701873261920": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with pillow"
+  },
+  "1821975642445063": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with bolsters and wrap"
+  },
+  "4634015306744134": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "baby nest under matching quilt"
+  },
+  "1763490528248799": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Halo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swivel bassinet"
+  },
+  "900440253097333": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Pamo Babe",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mechanical rocker seat"
+  },
+  "1174997201767460": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep sling between rails, folding rocker legs, vibration unit"
+  },
+  "2654234021673387": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2939611863070739": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing seat"
+  },
+  "1862643301540182": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep harnessed cradle with canopy on folding legs"
+  },
+  "1676994220269717": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1002763716212978": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1024536419947688": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed rocker seat"
+  },
+  "2197636314295834": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1807063230558349": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Frida Baby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "1372927114309435": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1046661481382101": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2132156170735710": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "glider swing"
+  },
+  "1680266670216974": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1071893385240953": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "27500562902933556": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft baby nest with raised padded sides"
+  },
+  "1145727014505357": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "plastic daycare cot"
+  },
+  "2505939546499104": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Bliss",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "soft bolster nest with straps, close-up"
+  },
+  "1450712589901002": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "1617535623210372": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat with toy bar"
+  },
+  "3620814891415247": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Monamii",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing seat"
+  },
+  "2184586245471393": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing with net"
+  },
+  "933016913146595": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1810335309873491": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric baby swing"
+  },
+  "998850622608213": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1007478379082672": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing with rocker seat"
+  },
+  "1681308473576076": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1087740244260601": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "portable swing"
+  },
+  "1459681753036959": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "gliding swing"
+  },
+  "1478257597703342": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1646073136975763": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "4moms",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mamaRoo swing"
+  },
+  "1475027041240029": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "round pad with ruffled bolster ring, no frame"
+  },
+  "1681785046640045": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1627715062702633": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Sleepytroll",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "1858414055580508": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Trend",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "2205138450274970": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "fabric bouncer"
+  },
+  "2466866550432498": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "899389329383038": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing rocker"
+  },
+  "2556041191525769": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swing or rocker seat"
+  },
+  "1150544714060239": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1401518931561981": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "electric swing seat"
+  },
+  "1856234138865912": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Dream On Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat, wood frame"
+  },
+  "4546561772338446": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "electric bassinet rocker"
+  },
+  "1346930860791475": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Summer",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bouncer rocker seat"
+  },
+  "1690183492280554": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1668103204991378": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest with padded sides"
+  },
+  "1067838742923824": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1465493958505250": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "contoured lounger pad"
+  },
+  "902279709595097": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "infant rocker seat"
+  },
+  "1883084449360465": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "baby nest opened flat; may be doll size"
+  },
+  "1705968093947815": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Lulyboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft-sided travel lounge with canopy"
+  },
+  "1445915320407214": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pregnancy pillow"
+  },
+  "1414911647092104": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1124432416866802": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Frida Baby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "1171354811987089": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Delta Children",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "1352501796808768": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "4674406539503566": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "29270383719293051": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "adult glider chair"
+  },
+  "933955779444638": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Frida",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "1548710953717718": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "flat bassinet on legs"
+  },
+  "1554507359697725": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1054101457070720": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1469801771147971": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Tiny Love",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker napper bassinet"
+  },
+  "1423590649954251": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Tiny Love",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker napper seat"
+  },
+  "909860925427498": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "SwaddleMe",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "in-bed sleeper folded in its case"
+  },
+  "1128269656657195": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "in-bed sleeper with mesh sides"
+  },
+  "953432393857527": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside co-sleeper bassinet"
+  },
+  "1476845457877607": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded bolster lounger in package"
+  },
+  "3368078063364439": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded infant lounger"
+  },
+  "1796816181539517": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1541493581051838": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "2051244012242733": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1136131279268608": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1669683591344753": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1096784526518967": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1661693262261438": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing with canopy"
+  },
+  "1756414675424145": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "kids foam chair"
+  },
+  "1591344116343062": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded bolster nest"
+  },
+  "1644134759895674": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HALO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed swivel bassinet"
+  },
+  "1504554881542915": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed in-bed sleeper nest"
+  },
+  "1766681711227441": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HALO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bassinet on legs"
+  },
+  "1475200714310216": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant bather"
+  },
+  "2111601186063815": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HALO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swivel bassinet"
+  },
+  "2066595714049624": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1457399336495156": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2381625759279174": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2095383428021150": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wire-frame bouncer"
+  },
+  "1825677581789935": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ready Rocker",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "adult rocking cushion"
+  },
+  "1650550173522501": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden cradle"
+  },
+  "1016954474654934": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "2259591431640951": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "wooden rocker seat"
+  },
+  "1453785869549731": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1439241288114093": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Maxi-Cosi",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "Kori rocker seat"
+  },
+  "4471193946486941": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bouncer seat close-up"
+  },
+  "2088863931767748": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep sling seat, mesh sides; sleeper or bouncer"
+  },
+  "1463510462498630": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "Graco seat with handles; lounger or swing seat"
+  },
+  "2169620680615762": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "3920185751468881": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Lulyboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed travel lounge nest"
+  },
+  "3109988342702005": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HALO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swivel bassinet"
+  },
+  "1147860568244178": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Amke",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing rocker"
+  },
+  "1155944373825537": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2002133246972618": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "babyeap",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1805109677211795": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bassinet with net"
+  },
+  "2079124179670247": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Bright Starts",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed rocker seat"
+  },
+  "1603302858044641": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "flat-floor rocking bassinet"
+  },
+  "2066307820665546": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1348111227506293": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "harnessed deep cradle on rocker legs"
+  },
+  "1634514524790141": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Joie",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "2932102460507685": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1162158089636974": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "boxed cradle rocker"
+  },
+  "1827543442008539": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded bolster nest"
+  },
+  "4544344295841764": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded pad with raised sides"
+  },
+  "1158493460082588": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1772099064923381": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat, side view"
+  },
+  "1103677588873851": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1031818066132245": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat, side view"
+  },
+  "1030749129687999": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "984234331072949": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "27518001787897701": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1485563432885066": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "harnessed sleeper cradle on low rocker frame"
+  },
+  "2322571908479045": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "netted cradle rocker"
+  },
+  "1921328172363904": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2221049775117108": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "2163342757879468": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "3022208511445188": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Joie",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1753661772717630": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1551212840161488": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bolster pod lounger with handle"
+  },
+  "928842599576269": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo is ad text only, no product"
+  },
+  "1035517092406367": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "1643222050634383": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "playard napper with canopy; incline not visible"
+  },
+  "4131797233623222": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swing bouncer seat"
+  },
+  "1114059347892124": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocking bassinets with canopies"
+  },
+  "1667777398401933": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swing or rocker seat"
+  },
+  "1174903715205289": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "2243190196227007": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1747539329664071": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Dream On Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker chair"
+  },
+  "1836202221033897": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wire-frame bouncer"
+  },
+  "1506226388087946": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker seat, wood frame"
+  },
+  "2165362904353957": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "2520619451752019": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden rocker seat"
+  },
+  "2166831210890653": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "glider swing seat"
+  },
+  "1122561167146201": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest, stock photo"
+  },
+  "1468550998563396": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bassinet with mobile"
+  },
+  "1816336923011751": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "napper on rocking stand; incline not visible"
+  },
+  "1792526252008265": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1853023822565667": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with cover"
+  },
+  "1156976490400284": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "2102318533991132": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "contoured lounger pad"
+  },
+  "1694288812364268": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HALO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swivel bassinet"
+  },
+  "1066435132658994": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "soft padded pod, no frame"
+  },
+  "1502607641904328": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing seat"
+  },
+  "4324781787836955": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep mesh-sided cradle on folding rocker legs"
+  },
+  "4606973732867079": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Tiny Love",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker napper bassinet"
+  },
+  "1470480801713747": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "892718500129348": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Urbini",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep harnessed cradle with canopy; titled sleeper"
+  },
+  "1444799477774312": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "mesh-sided plush cradle with harness and power cord"
+  },
+  "1444888280813349": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wire-frame bouncer"
+  },
+  "2580285662446863": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Delta Children",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "1103587676006033": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Charlie Crane",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat"
+  },
+  "2241300399785903": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Maxi-Cosi",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "Kori rocker seat"
+  },
+  "1734671348666335": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "wooden rocker seat"
+  },
+  "1320076920875383": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "fabric bouncer"
+  },
+  "1058067043937469": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "cloud rocking toy"
+  },
+  "1033613819493358": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer seat"
+  },
+  "1696010608784481": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "newborn lounger pillow with center recess"
+  },
+  "1052609864366655": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded nest lounger"
+  },
+  "4292374537692429": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "4585293391800379": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged lounger"
+  },
+  "1691836479244999": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded infant lounger"
+  },
+  "2557874747983076": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "2269723553432218": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Blessed Nest",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nursing pillow"
+  },
+  "1688434242810497": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HALO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bassinet parts in box"
+  },
+  "1589990216228890": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "1608661734200741": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Sunveno",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "soft portable nest"
+  },
+  "1155609503639773": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "2274327119860145": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1157338854005449": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "904202046096273": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "3542530642596331": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1454966063237555": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "harnessed sleeper cradle on low rocker feet"
+  },
+  "984444780945358": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2215993619291960": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "994628143726761": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "908167148507846": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Bright Starts",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer rocker seat"
+  },
+  "1329631245263724": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "997768039951355": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Mamibaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "1878044893606732": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "in-bed sleeper with soft sides"
+  },
+  "1729199688330875": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "wedge lounger with bolster ring"
+  },
+  "1697373408006078": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Lulyboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged baby lounge"
+  },
+  "1139669525696422": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HALO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swivel bassinet"
+  },
+  "1654729273119585": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "HALO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swivel bassinet"
+  },
+  "2318205935385854": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded pod with raised sides"
+  },
+  "1623577712812388": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper nest"
+  },
+  "2881409418897444": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper nest"
+  },
+  "29202642756058419": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "27336049069399096": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "electric swing seat"
+  },
+  "1591682572482824": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bouncer seat close-up"
+  },
+  "1904271327676164": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Rockermama",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "adult rocking cushion"
+  },
+  "1116479634586455": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "2262658087641038": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "2274500646698119": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "screenshot of bedside bassinets"
+  },
+  "1982415236056673": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1947919849238148": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "863568970059374": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Happle",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "963239843330906": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1863889128371238": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1633999788408034": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1185389247124322": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest plus changing pad"
+  },
+  "1479680817409633": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "gliding swing"
+  },
+  "1789686958751121": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1409765291253830": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows play dome; title says rocker sleeper"
+  },
+  "4580038645590306": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "flat bassinet on legs"
+  },
+  "1575176064650475": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1036117105689353": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1673005360433431": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1359158903057105": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "2174163206497841": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "playard napper seat with canopy; incline unclear"
+  },
+  "26494043006905414": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "playard napper with canopy; incline not visible"
+  },
+  "1824427858971307": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1022209174033970": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep cradle, harness insert, projector arm, rocker legs"
+  },
+  "2272274267029097": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1214412830831004": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Lulyboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft-sided travel lounge"
+  },
+  "1549340020317993": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1098241765986394": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "1711412940329059": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "inflatable play nest"
+  },
+  "1075535908560774": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "baby deedee",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "sleep sack"
+  },
+  "1866305957679506": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing and bouncer"
+  },
+  "1744518840000639": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "2313104015894929": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plush rocking toy"
+  },
+  "1101202365955124": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1739284413831245": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "electric bouncer seat"
+  },
+  "1561072202188675": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "30482966784637106": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep mesh-sided cradle on rocker frame, logo hub"
+  },
+  "983760364329022": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1641864690745226": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1568828054996187": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Nuna",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Leaf rocker seat"
+  },
+  "1817693175860342": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer rocker seat"
+  },
+  "1465112015372085": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "plastic slatted frame with fabric; type unclear"
+  },
+  "2572961603180761": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "kids sofa"
+  },
+  "1047930818124174": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with pillow"
+  },
+  "1550423760446618": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1444121218785476": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1369545731875871": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "1448969790022585": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "in-bed sleeper folded shut"
+  },
+  "1134582195834446": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Oxford Baby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "crib"
+  },
+  "1668021271476731": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Oball",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "toy bundle"
+  },
+  "1140933295002687": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "1821908305735832": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Munchkin",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing seat"
+  },
+  "1036963985652355": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing"
+  },
+  "1689653885856670": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "mesh-sided cradle on wood rockers; incline unclear"
+  },
+  "4552380765081886": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plush rocking toys"
+  },
+  "1997390847598284": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bouncer seat"
+  },
+  "3123667667839198": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "deep mesh-sided harness seat; frame not shown"
+  },
+  "1753239322526926": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing or rocker seat"
+  },
+  "1532655528700015": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Maxi-Cosi",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed Kori rocker"
+  },
+  "1449746423208946": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1061075806384338": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Rockit",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stroller rocking device"
+  },
+  "1767479887592809": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "fabric bouncer"
+  },
+  "1423047579933671": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded rocker seat"
+  },
+  "1659893015312098": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1485908676598527": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet"
+  },
+  "1679339657040309": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "2137151750489367": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "velvet-covered padded lounger shape"
+  },
+  "1397262033472775": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "toddler canvas swing"
+  },
+  "1722514212882980": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bunny bolster lounger pillow"
+  },
+  "2378624925878747": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "covered lounger-shaped pad"
+  },
+  "3627159147436749": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest"
+  },
+  "1077310988474493": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with pillow"
+  },
+  "4071614489811672": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "BabyBliss",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "screenshot of bolster reflux nest"
+  },
+  "2365138964338512": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant car seat"
+  },
+  "1629762729165152": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric swing ad"
+  },
+  "1427712422345980": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "wooden rocker seat"
+  },
+  "2303991690424847": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Tiny Love",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker napper bassinet"
+  },
+  "1351402000285178": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Graco",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  },
+  "1029129312933607": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby swing"
+  },
+  "1801063044246965": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "infant rocker seat"
+  },
+  "1168799952344898": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "swing seat"
+  },
+  "1585033069683237": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "3356137261251820": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "electric rocker seat"
+  },
+  "1148580157831243": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant rocker seat"
+  },
+  "1777023413381284": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Delta Children",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocking bassinet"
+  },
+  "2271123893461742": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant-to-toddler rocker"
+  }
+ }
+}

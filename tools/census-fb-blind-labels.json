@@ -1,0 +1,211 @@
+{
+ "labeller": "second AI reviewer (Claude, a separate agent), 2026-11-25, photos only, no titles, shuffled order",
+ "order": [
+  "1585118663632896",
+  "3208006359392321",
+  "1348111227506293",
+  "1174997201767460",
+  "1096853282889461",
+  "1148580157831243",
+  "1669683591344753",
+  "1050165194735974",
+  "1022209174033970",
+  "1712509170204761",
+  "2826161497785411",
+  "2095867011048703",
+  "1556542876232192",
+  "1454966063237555",
+  "4324781787836955",
+  "2939611863070739",
+  "3309399642783600",
+  "1997390847598284",
+  "4488709624687196",
+  "1463123332617566",
+  "1143128524980986",
+  "2437085110100888",
+  "892718500129348",
+  "1444799477774312",
+  "30482966784637106",
+  "4471193946486941",
+  "1679087727348247",
+  "1593559792571397",
+  "2537364106676397",
+  "1862643301540182",
+  "4552380765081886",
+  "1071893385240953",
+  "1485563432885066",
+  "1532655528700015"
+ ],
+ "labels": {
+  "1": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "deep fabric sling between rails, powered rocking hub, harness"
+  },
+  "2": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "deep sling between plush rails, animal insert, side control unit"
+  },
+  "3": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "oval-rim deep cradle, mesh side, harness, rocker legs"
+  },
+  "4": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "pink fabric sling between rails on folding rocker legs"
+  },
+  "5": {
+   "kind": "not",
+   "sure": true,
+   "what": "motorized pod swing on floor base, 4moms logo"
+  },
+  "6": {
+   "kind": "not",
+   "sure": true,
+   "what": "wide padded rocker seat on low frame"
+  },
+  "7": {
+   "kind": "not",
+   "sure": true,
+   "what": "upright infant-to-toddler rocker with toy bar"
+  },
+  "8": {
+   "kind": "not",
+   "sure": false,
+   "what": "tub-shaped rocker napper on wire legs, full of diapers"
+  },
+  "9": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "oval-rim deep cradle sleeper, light projector arm, rocker legs"
+  },
+  "10": {
+   "kind": "not",
+   "sure": true,
+   "what": "motorized swing with overhead mobile, Graco"
+  },
+  "11": {
+   "kind": "not",
+   "sure": false,
+   "what": "hourglass seat pad top-down, likely rocker seat, frame hidden"
+  },
+  "12": {
+   "kind": "not",
+   "sure": true,
+   "what": "Graco gliding swing on tall frame"
+  },
+  "13": {
+   "kind": "not",
+   "sure": true,
+   "what": "three motorized swings side by side"
+  },
+  "14": {
+   "kind": "inclined",
+   "sure": false,
+   "what": "low oval cradle sleeper, harness, vibration unit, rocker feet"
+  },
+  "15": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "fabric sling with mesh sides on folding rocker legs"
+  },
+  "16": {
+   "kind": "not",
+   "sure": true,
+   "what": "swing seat with canopy, five-point harness, power cord"
+  },
+  "17": {
+   "kind": "not",
+   "sure": false,
+   "what": "flat padded seat with head pillow, frame not visible"
+  },
+  "18": {
+   "kind": "not",
+   "sure": true,
+   "what": "wire-frame bouncer with toy bar"
+  },
+  "19": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "retail box for Moonlight rocking sleeper, baby in cradle"
+  },
+  "20": {
+   "kind": "not",
+   "sure": true,
+   "what": "swing/rocker seat with toy bar on motor base"
+  },
+  "21": {
+   "kind": "not",
+   "sure": true,
+   "what": "swing seat with net canopy, detached arm"
+  },
+  "22": {
+   "kind": "not",
+   "sure": true,
+   "what": "padded seat on round swing base"
+  },
+  "23": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "deep oval cradle with harness, canopy toys, rocker legs"
+  },
+  "24": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "deep sling between plush rails, lamb insert, power cord"
+  },
+  "25": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "oval-rim deep cradle sleeper with mobile arm, rocker legs"
+  },
+  "26": {
+   "kind": "not",
+   "sure": true,
+   "what": "wide rounded bouncer seat pad, wire frame edge"
+  },
+  "27": {
+   "kind": "not",
+   "sure": true,
+   "what": "flat-floor bedside bassinet on wheeled stand"
+  },
+  "28": {
+   "kind": "not",
+   "sure": true,
+   "what": "store screenshot of mesh bedside bassinet"
+  },
+  "29": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "deep sling between white rails, mesh sides, harness"
+  },
+  "30": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "deep cradle with harness, canopy, folding hub legs"
+  },
+  "31": {
+   "kind": "not",
+   "sure": true,
+   "what": "plush wooden rocking animal toys"
+  },
+  "32": {
+   "kind": "not",
+   "sure": true,
+   "what": "portable A-frame motorized swing, Ingenuity"
+  },
+  "33": {
+   "kind": "inclined",
+   "sure": true,
+   "what": "low oval cradle, harness, captioned rocker sleeper"
+  },
+  "34": {
+   "kind": "not",
+   "sure": true,
+   "what": "retail box for Maxi-Cosi Kori 2-in-1 rocker"
+  }
+ }
+}

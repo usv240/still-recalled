@@ -1,0 +1,523 @@
+{
+ "when": "2026-11-26T01:45:13.195Z",
+ "mode": "hybrid",
+ "status": "available",
+ "totalMs": 252991,
+ "rows": [
+  {
+   "id": "1022209174033970",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby rocker",
+   "price": "$60",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "ask",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "23089",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Kids II",
+      "product": "rocking sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "23089"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": {
+    "brand": "Fisher-Price",
+    "id": "23088"
+   },
+   "unnamedSleep": false,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The photo shows a Kids2 Ingenuity Moonlight Rocking Sleeper, an inclined fabric sleeper on a rocking frame, and all models of Kids2 Rocking Sleepers are covered by Recall 23089.",
+   "ms": 33278,
+   "error": ""
+  },
+  {
+   "id": "1174997201767460",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Rocker/sleeper",
+   "price": "$15",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "23088",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Fisher-Price",
+      "product": "Rock 'n Play sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "23088",
+      "19105"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The photo shows an inclined fabric sleeper on a curved rocking frame with the Fisher-Price logo on the side unit, matching the Fisher-Price Rock 'n Play Sleeper.",
+   "ms": 12946,
+   "error": ""
+  },
+  {
+   "id": "1348111227506293",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby rocking bed",
+   "price": "$30",
+   "photoOk": true,
+   "final": "none",
+   "kind": null,
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "",
+   "candidate": "",
+   "cloud": "",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": null,
+   "banned": null,
+   "lookups": [],
+   "lookedUp": false,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": false,
+   "why": "",
+   "evidence": "",
+   "ms": 3752,
+   "error": ""
+  },
+  {
+   "id": "1444799477774312",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby cradle - automatic rocker",
+   "price": "$20",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "23088",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Fisher-Price",
+      "product": "Rock 'n Play sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "23088",
+      "19105"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The photo shows an inclined fabric Fisher-Price Auto Rock 'n Play Sleeper with a lamb headrest insert, mesh sides, and power cord.",
+   "ms": 13283,
+   "error": ""
+  },
+  {
+   "id": "1454966063237555",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby sleeper",
+   "price": "$10",
+   "photoOk": true,
+   "final": "none",
+   "kind": null,
+   "device": "ask",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "no_recall_given",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": null,
+   "banned": null,
+   "lookups": [],
+   "lookedUp": false,
+   "also": null,
+   "seen": {
+    "brand": "Fisher-Price",
+    "id": "23088"
+   },
+   "unnamedSleep": false,
+   "why": "the cloud check did not confirm the flag",
+   "evidence": "The listing sells a fabric baby sleeper on a rocking frame shaped like a hammock with a harness, and no brand is visible to match the Fisher-Price Rock 'n Play recall.",
+   "ms": 42541,
+   "error": ""
+  },
+  {
+   "id": "1485563432885066",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby/Infant Rocker Sleeper Gently Used beige/taupe/blue/green $25",
+   "price": "$25",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "banned",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "no_recall_given",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": null,
+   "banned": "inclined_sleeper",
+   "lookups": [],
+   "lookedUp": false,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the photo looks like a product type that may no longer be sold",
+   "evidence": "The listing title and photos show a fabric infant rocker sleeper on a rocking frame with a contoured, sloped insert and restraint harness.",
+   "ms": 20699,
+   "error": ""
+  },
+  {
+   "id": "1585118663632896",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby rocker/sleeper",
+   "price": "$10",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "23088",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Fisher-Price",
+      "product": "Rock 'n Play sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "23088",
+      "19105"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The listing photo shows a Fisher-Price Rock 'n Play inclined sleeper with the red brand tag and motorized rocker unit, and all models of Rock 'n Play Sleepers are recalled.",
+   "ms": 12332,
+   "error": ""
+  },
+  {
+   "id": "1862643301540182",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Infant rocker",
+   "price": "$15",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "23088",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Fisher-Price",
+      "product": "Rock 'n Play sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "23088",
+      "19105"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The photo shows a Fisher-Price Rock 'n Play Sleeper, an inclined fabric sleeper on an X-frame, and all models of Rock 'n Play Sleepers are recalled.",
+   "ms": 15269,
+   "error": ""
+  },
+  {
+   "id": "2537364106676397",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby Rocker-sleeper",
+   "price": "$10",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "23088",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Fisher-Price",
+      "product": "Rock 'n Play sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "23088",
+      "19105"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The listing photo shows an inclined fabric sleeper on a rocking frame matching the Fisher-Price Rock 'n Play Sleeper, of which all models are recalled.",
+   "ms": 14158,
+   "error": ""
+  },
+  {
+   "id": "30482966784637106",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Soothing rocker for Baby",
+   "price": "$30",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "19112",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Ingenuity",
+      "product": "rocking sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "19112"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The photo shows an Ingenuity inclined rocking sleeper with the brand logo on the front control box, matching Kids II Recall 19112 covering all models of Kids II rocking sleepers.",
+   "ms": 17565,
+   "error": ""
+  },
+  {
+   "id": "3208006359392321",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby sleeper",
+   "price": "$5",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "23088",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Fisher-Price",
+      "product": "Rock 'n Play Sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "23088",
+      "19105"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The photo shows a Fisher-Price Rock 'n Play inclined sleeper with the Snugapuppy insert and side control unit.",
+   "ms": 12510,
+   "error": ""
+  },
+  {
+   "id": "4324781787836955",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Baby lounge rocker",
+   "price": "$15",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "ask",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "23088",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Fisher-Price",
+      "product": "Rock 'n Play Sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "23088",
+      "19105"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": false,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The photo shows an inclined fabric rocker on a curved frame matching the Fisher-Price Rock 'n Play Sleeper.",
+   "ms": 15470,
+   "error": ""
+  },
+  {
+   "id": "4488709624687196",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Rocker sleeper",
+   "price": "$20",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "recall",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "yes",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": "19112",
+   "banned": null,
+   "lookups": [
+    {
+     "asked": {
+      "brand": "Ingenuity",
+      "product": "Moonlight Rocking Sleeper",
+      "model_number": ""
+     },
+     "found": [
+      "19112"
+     ]
+    }
+   ],
+   "lookedUp": true,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it",
+   "evidence": "The box shows an Ingenuity Moonlight Rocking Sleeper in the Cuddle Giraffe style, which is an inclined rocking sleeper covered by recall 19112 for all Kids II Rocking Sleepers.",
+   "ms": 11682,
+   "error": ""
+  },
+  {
+   "id": "892718500129348",
+   "search": "census facebook: inclined, left open by words",
+   "title": "Urbini Baby Rocker Sleeper",
+   "price": "$15",
+   "photoOk": true,
+   "final": "possible",
+   "kind": "banned",
+   "device": "none",
+   "usedDevice": true,
+   "deviceUnit": "",
+   "cloudMatch": "no_recall_given",
+   "candidate": "",
+   "cloud": "gemini-4-hydrogen",
+   "cloudError": "",
+   "deviceError": "",
+   "recall": null,
+   "banned": "inclined_sleeper",
+   "lookups": [],
+   "lookedUp": false,
+   "also": null,
+   "seen": null,
+   "unnamedSleep": true,
+   "why": "the photo looks like a product type that may no longer be sold",
+   "evidence": "The title and photo show a fabric rocker sleeper on a curved frame where an infant rests on a slope.",
+   "ms": 26034,
+   "error": ""
+  }
+ ]
+}

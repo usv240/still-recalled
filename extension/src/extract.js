@@ -33,7 +33,8 @@ export function siteOfUrl(url) {
 const FB_PRICE = /^(?:\$[\d,]+(?:\.\d{2})?|free)+$/i;
 const FB_PLACE = /^[^,]{2,40}, [A-Z]{2}$|\b\d+(?:\.\d+)?\s*(?:mi|km|miles)\b/;
 export function facebookTitle(link) {
-  const named = String(link.getAttribute('aria-label') || '').replace(/,\s*listing \d+\s*$/i, '');
+  // A new listing's name starts with Facebook's own "Just listed, " (found by the census, 43 of 1,528); not the seller's words.
+  const named = String(link.getAttribute('aria-label') || '').replace(/,\s*listing \d+\s*$/i, '').replace(/^Just listed,\s*/i, '');
   const cut = named.search(/,\s*(?:\$[\d,]+(?:\.\d{2})?|free)\b/i);
   if (cut > 2) return clean(named.slice(0, cut));
   const lines = String(link.innerText || link.textContent || '').split('\n').map(clean).filter(t => t && !FB_PRICE.test(t) && !FB_PLACE.test(t));

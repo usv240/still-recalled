@@ -1,0 +1,7175 @@
+{
+ "labeller": "AI reviewer (Claude, separate agents), 2026-11-25, title and photo for every listing",
+ "labels": {
+  "2166963498029875": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1553431846825427": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed Snuggle Me Wave lounger"
+  },
+  "881015698334306": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Rahoo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Rahoo Learn & Lounge infant lounger"
+  },
+  "1155848350161589": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "4091370434497039": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1865077557833106": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Me Lounger Curve product graphic"
+  },
+  "1680009223582592": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1293269256154248": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1691831659024513": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger, brand in title"
+  },
+  "2214933942750172": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1459892295633238": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1757839082296080": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "title baby nest; only zip bag with fabric shown"
+  },
+  "1494712882501341": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2595024370962224": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "4335732513356590": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Skip Hop",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest; Playful Retreat is Skip Hop model"
+  },
+  "1536032765240470": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "title bassinet model; mesh-wall sleeper, legs not visible"
+  },
+  "2533515917165686": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1075243444855020": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged; assembly sheet shows baby nest"
+  },
+  "1102035199144844": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "framed mesh bassinet with legs"
+  },
+  "2866291197040247": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest box; in-bed sleeper, borderline lounger"
+  },
+  "1074368031879184": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam bed-rail bumper for a kids bed"
+  },
+  "1705938190634655": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "fireplace hearth guard padding"
+  },
+  "2173015123639937": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows mesh liner despite bumper label"
+  },
+  "982709368243500": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows packaged baby nest kit, not bumper"
+  },
+  "1447388080847673": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "BreathableBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows mesh crib liner package, not bumper"
+  },
+  "4056023884531172": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows bed rail guard"
+  },
+  "1517868822895055": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "quilted foam bed-rail bumpers, not crib pads"
+  },
+  "4598605250409087": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1581975353685125": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "3319488311587204": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCooBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger, brand in title"
+  },
+  "1556539529481373": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "863301030149125": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1829085108029547": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "3052853988440297": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger, brand in title"
+  },
+  "985304490574097": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1582758686461052": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1062430372923995": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1437000151370462": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1140834338500764": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1357841399873903": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Newbabywish",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail screenshot of baby nest lounger"
+  },
+  "1116949374540637": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "3006851776345920": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows anti-roll lounger pillow, not bumper"
+  },
+  "4605075936392609": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1101719959435728": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Skip Hop",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with raised sides, brand in title"
+  },
+  "3459245780911707": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2915421605499900": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1419733576582032": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1738955083950829": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged; assembly sheet shows baby nest"
+  },
+  "1149726260717771": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Skip Hop",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with raised sides, brand in title"
+  },
+  "1133921072951112": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Carter's",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed bedding set; bumper per title, not visible"
+  },
+  "1126428920005731": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "crib listing; bumper per title, barely visible"
+  },
+  "3182687741921728": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "1860715415084000": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "BabyBjorn",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows bouncer seat with toy bar"
+  },
+  "1155441667044397": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "boxed bolster ends with buckle; shape hidden"
+  },
+  "989903000137940": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1033889019284765": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1923191915330309": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "2702775980180877": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bath support sling"
+  },
+  "1452032106987116": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of padded infant lounger"
+  },
+  "1873061847767783": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "two padded loungers, one round Boppy-style"
+  },
+  "2363087770763094": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1902206494246220": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows baby swing, not lounger"
+  },
+  "1104264132402362": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "covered lounger pad seen from underside"
+  },
+  "995482719920671": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed travel nest with canopy; box drawing only"
+  },
+  "2013037582680123": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Nestle Nook foam lounger with harness"
+  },
+  "1830268068006192": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1288962016631824": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "973328758834676": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2206075987010842": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Doomoo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Doomoo baby nest"
+  },
+  "1442619404676179": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of bear-shaped nest lounger"
+  },
+  "2539019939899859": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2331408157434597": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "2207619583489833": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Pillani",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged; assembly sheet shows baby nest"
+  },
+  "1014647630830990": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Skip Hop",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest; Playful Retreat is Skip Hop model"
+  },
+  "1586503529913513": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded bunting sleeping bag, not a lounger"
+  },
+  "885473014613033": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "4692416847659594": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Suihuooo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet on stand"
+  },
+  "1840071930337330": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded bumper panel in bag"
+  },
+  "2066165554000191": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Biloban",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Ultra Soft Bumper Pad"
+  },
+  "2230964107486144": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows mesh liner, not padded bumper"
+  },
+  "3533065386850335": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "mesh liner with ties, not padded bumper"
+  },
+  "1848860202800288": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded blue bumper with ties"
+  },
+  "1659145459013944": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ruffled bumper, box labelled crib bumper"
+  },
+  "1705063174590953": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged padded bumper, monkey print"
+  },
+  "1484983870101329": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of padded bumper set"
+  },
+  "2221518505392369": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "two flat wrapped white pads; type not visible"
+  },
+  "958535300412940": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "minky bed bumper with fall-protection box"
+  },
+  "2611186512725719": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box labelled Baby Lounger with drawing"
+  },
+  "1860144838321741": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "covered pink cushion; lounger shape not visible"
+  },
+  "2661732827596327": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1371366065129179": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1817190469480305": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1682004296880323": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "4382180415367324": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "round tufted cushion with warning tag, Boppy-style"
+  },
+  "1066253699332976": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger, brand in title"
+  },
+  "1981175972585157": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1717183626765199": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "2043024276402363": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1135291705987711": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows bassinet on stand, not nest"
+  },
+  "2262089791241704": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "3184644941735263": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1863080765139524": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Medi Partners",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged; assembly sheet shows baby nest"
+  },
+  "3423759457819594": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "809801791540417": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "Snuggle Nest incline box; rigid-shell in-bed sleeper with wedge"
+  },
+  "2890206884692012": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1039465085370157": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "The First Years",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "folded quilted travel sleeper; shape not visible"
+  },
+  "1749840342718963": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1358031306421156": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1084287967624647": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest box; in-bed sleeper, borderline lounger"
+  },
+  "1550206420049904": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round ruffled nest with pillows"
+  },
+  "1213465650983074": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "title says bumper pads; only quilted pad shown"
+  },
+  "1930707751644233": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged padded bumper, fish print"
+  },
+  "1048193084957085": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "cradle lined with ruffled padded bumper"
+  },
+  "3047456955586296": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged padded bumper, Paris print"
+  },
+  "1636519444612405": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1431244765658386": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "28750322787997366": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "888360800593733": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2240657756668242": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "1179983184475496": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "2864182003921540": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1735401204176349": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1792076288746774": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2261237441114080": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box shows anti-roll nest pillow with bolster"
+  },
+  "2046222806087135": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "soft padded nest with handles, pad lifted"
+  },
+  "1975637853101752": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1741989156944231": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "contoured cocoon nest with tummy band"
+  },
+  "1625427902376083": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "framed mesh bassinet with legs"
+  },
+  "1854904765520387": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1039048832335174": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft nest with mosquito net canopy"
+  },
+  "1435012125229163": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "965105243190817": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Evoceler",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "swaddle nest pad plus mesh-wall in-bed sleeper"
+  },
+  "1174926791883226": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rocker seat on base"
+  },
+  "1046929217886398": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bendy bolster support pillow, not crib-lining pads"
+  },
+  "900207416393127": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded bumper panels with ties under pillow"
+  },
+  "41212657474999807": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "vintage crib parts; bumper per title, yellow pad shown"
+  },
+  "1926642664984171": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "red vehicle part, not a baby product"
+  },
+  "4494081354176654": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "29858145703769397": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "2286495942273686": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "2358085711611586": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "941441611968246": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger in storage bag"
+  },
+  "1108348544886183": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1836539804174990": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo looks like plush pet bed"
+  },
+  "1514465323888412": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Bearsky",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with handles, brand in title"
+  },
+  "1426501746107931": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "2940616362966545": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "1750740116255011": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1718705113220628": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2571112823356425": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CKALAX",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged baby nest, label visible"
+  },
+  "2741030009658027": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1839468630590546": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged white padded nest; shape partly visible"
+  },
+  "1827446851577718": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Cam Cam Copenhagen",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest, brand in title"
+  },
+  "1059652993669739": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Momloby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest, brand in title"
+  },
+  "979057978145153": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1768284591130065": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "boxed nest lounger shown on package"
+  },
+  "2431193047373480": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1552201063069635": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Skip Hop",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with raised sides, brand in title"
+  },
+  "1073800035265145": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1485740336805679": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1099338302904572": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "retail screenshot shows baby nest loungers"
+  },
+  "1722877942779567": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded Cars-print bumper panels with ties"
+  },
+  "1407828575738328": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1649297200155330": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1120166893691655": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with raised rim"
+  },
+  "2016791695651122": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCooBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger, brand in title"
+  },
+  "2473686229830486": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1382591464068227": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of padded infant lounger"
+  },
+  "1757374829396285": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2265663300823796": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1584704767011191": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "28293840433611086": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1104382545780332": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1172564405429820": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "zip-up padded sleeping bag carry nest"
+  },
+  "1413708530811012": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "flattened nest with bolster arms; maybe cover only"
+  },
+  "2922121844815851": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Lulando",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged baby nest"
+  },
+  "1633160178539502": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "framed mesh bassinet"
+  },
+  "2175930283023585": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1405746874840975": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1476827517813680": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1493481499488936": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1780277549905346": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1396432754927775": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Hiccapop",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam toddler bed bumpers"
+  },
+  "1134377795742689": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of contoured cocoon lounger"
+  },
+  "1616943213267897": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round newborn lounger with recessed centre"
+  },
+  "1442285850815959": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "contoured foam lounger pad with warning tag"
+  },
+  "1096626416381243": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1369947775312382": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1525622962957597": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Snuggle Me lounger"
+  },
+  "1101434638933553": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "2174814223438790": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Ainiuke",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded lounger with loose cover"
+  },
+  "964888820005503": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Biliboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail screenshot; folding travel nest with canopy"
+  },
+  "2313444386271040": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1306025894848961": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1637173764531091": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bassinet on stand"
+  },
+  "1795407298143052": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "framed mesh bassinet with legs"
+  },
+  "1318118560308274": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Red Castle",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Cocoonababy contoured nest"
+  },
+  "1374429854579205": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1292532413521829": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Krisme",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged baby nest"
+  },
+  "2331078230584757": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "title bassinet model; only carry bag shown"
+  },
+  "1080259331303652": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "framed mesh bassinet with legs"
+  },
+  "1135172395742486": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded bumper with ties in bedding set"
+  },
+  "1146246974659544": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam toddler bed-rail bumpers, not crib pads"
+  },
+  "1419668416979711": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger beside nursing pillow"
+  },
+  "1912887103029927": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1030807956043685": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail screenshot of baby nest"
+  },
+  "2586384898467753": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1678811723894376": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2159527247963797": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1387818456455018": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1345188360565236": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2413618666121383": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plain covered lounger pad; shape only partly visible"
+  },
+  "1056895893332543": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "title lounger; only zip bag with fabric shown"
+  },
+  "2383066282234618": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "2140023683567208": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "lace bedding in stroller bassinet"
+  },
+  "1438110138373854": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "LaLaMe",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest in LaLaMe bag"
+  },
+  "2302069967196017": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image; folding travel sleeper with canopy"
+  },
+  "27118616744480571": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "2479754172520681": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1403959271080556": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "879547395035300": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Teruybed",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft folding nest with bolster sides"
+  },
+  "1181050028137838": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest box; in-bed sleeper, borderline lounger"
+  },
+  "1992671208078153": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folding travel nest with canopy and bag"
+  },
+  "2272557946847471": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round padded nest with toy arch"
+  },
+  "1097590849534587": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1102003232651871": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam toddler bed-rail bumpers, not crib pads"
+  },
+  "1751279646187357": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Roving Cove",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam edge and corner guards"
+  },
+  "1965699940755789": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bed rail"
+  },
+  "4090654821071332": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "title says crib bumpers; blue padded panel, tight crop"
+  },
+  "2032329681071364": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plush head-protector backpack"
+  },
+  "1182942110976624": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows baby nest lounger"
+  },
+  "2248492262758327": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1376340887942809": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1123145560077750": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1417898170215894": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Rahoo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Rahoo foam lounger pieces"
+  },
+  "947447461357873": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1431632978604842": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Ingenuity",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows bath support, not lounger"
+  },
+  "1862949598213012": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "round cushion with handle, Boppy-style lounger"
+  },
+  "1022078237255892": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged; assembly sheet shows baby nest"
+  },
+  "1347753373540343": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger, brand in title"
+  },
+  "1073702901808107": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "2254303912167146": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "1639381544213048": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1562728242209725": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plain covered lounger pad; shape only partly visible"
+  },
+  "1124720580013757": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1359905272706291": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Meindeavm",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged pad; insert shows baby lying on it"
+  },
+  "2496274954231813": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with toy arch in bag"
+  },
+  "4472311863022974": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Doomoo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "cocoon nest with bolster"
+  },
+  "1528296148615295": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "2344289683058958": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "2186651702285930": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "zip-up padded sleeping bag carry nest"
+  },
+  "4196457080614874": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1082463520915201": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1825016178917385": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "mesh sleeper on metal frame with legs"
+  },
+  "1039069535548660": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of baby nest"
+  },
+  "1111299495196113": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "2075334066442372": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedside bassinet on stand"
+  },
+  "1040336385308158": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "package says bed rail bumper, not crib pads"
+  },
+  "2256752614907234": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded safari bumper panels with ties"
+  },
+  "1872949247030481": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows C-section dressing boxes"
+  },
+  "1103469795679203": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1102611942317112": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "pop-up travel pod package, Baby Lounge to-go"
+  },
+  "2121932948359488": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1537082847925389": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "918569877601562": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered lounger, brand in title"
+  },
+  "1650350503222499": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1043996378542792": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "4360227564293208": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1752744842448298": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with toy bar and net"
+  },
+  "2126816274863137": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plain covered lounger pad; shape only partly visible"
+  },
+  "1132422849654956": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1833009348060308": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "2943802529298800": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1842663843424769": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "title bassinet model; tall mesh walls close-up"
+  },
+  "1144862534905588": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest box; in-bed sleeper, borderline lounger"
+  },
+  "1592173199019868": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1652802396627243": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest box; in-bed sleeper, borderline lounger"
+  },
+  "1652786689855160": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1435161738487796": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1428059346086108": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded lounger with raised rim"
+  },
+  "1459061732840530": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "handmade padded nest with ruffles"
+  },
+  "1814851347316501": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box shows bassinet with legs"
+  },
+  "4447847738809641": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "28539335575689500": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows framed mesh bassinet with legs"
+  },
+  "1652766026289735": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows padded lounger; DockATot brand doubtful"
+  },
+  "1135512492737586": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam toddler bed-rail bumpers, not crib pads"
+  },
+  "1096873366010748": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Biloban",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Ultra Soft Bumper Pad"
+  },
+  "1729644704808796": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam toddler bed-rail bumpers, not crib pads"
+  },
+  "830875396333727": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1234148128929547": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Talecogear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged; assembly sheet shows baby nest"
+  },
+  "1167825392292747": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of contoured pod lounger"
+  },
+  "994975609804836": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of baby nest lounger"
+  },
+  "1375466161182467": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1085001847925491": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "939920689057412": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1017104624250630": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1153404670513348": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1457506199577644": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "26978849601793482": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1177605871257770": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "lounger underside with warning tag"
+  },
+  "3474395706100812": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round newborn lounger with warning label"
+  },
+  "1430732559224472": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folding travel sleeper with mesh ends"
+  },
+  "1469280734768363": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Shiada",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of nest lounger"
+  },
+  "1125488073513282": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1641573497706457": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1128918526286815": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "instruction sheet shows baby nest"
+  },
+  "4666158190377921": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1427231746097599": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2202134953847000": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "27134182186256656": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1647446469734529": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box shows bassinet with legs"
+  },
+  "1741552960618420": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Purflo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with mesh base"
+  },
+  "1390988989604918": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "zip-up padded sleeping bag carry nest"
+  },
+  "1062722070052863": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest box; in-bed sleeper, borderline lounger"
+  },
+  "2102519713712174": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "narrow padded strips with ties; maybe rail covers"
+  },
+  "998755089907610": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail screenshot of foam bed bumpers"
+  },
+  "1580650413814526": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2194374154851049": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2328471887985300": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2291915201646745": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "948473454668205": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1156430310676241": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Mamibaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest, brand in title"
+  },
+  "991690276894308": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "38978975318367960": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows framed mesh bassinet with legs"
+  },
+  "1297177042360036": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2190893228165715": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCooBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "lounger underside, brand in title"
+  },
+  "1541732280635196": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1389093053092753": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1836933324130102": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Biliboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image; pod with canopy and toy bar"
+  },
+  "1503483714971988": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1071973472487959": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1864038578111555": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "2295283387882679": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "892848739853990": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1787410859149232": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1295274322460272": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "4456549034675084": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "KidsLine",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded bumper with matching sheet set"
+  },
+  "1528210149118533": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded star bumper panels on crib"
+  },
+  "2240737036786104": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "folded quilted pieces; bumper per title only"
+  },
+  "2576824466140357": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Lounger Curve"
+  },
+  "1603297090975309": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows bedside bassinet only"
+  },
+  "1480461665141652": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image of padded infant lounger"
+  },
+  "27787925987540611": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plain covered lounger pad; shape only partly visible"
+  },
+  "1905060400183651": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1726619079032890": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "2063753874253191": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged; assembly sheet shows baby nest"
+  },
+  "1154704703660542": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "babybliss",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam positioner pad, no frame or sling"
+  },
+  "2255863175268628": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1693038979081312": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger, brand in title"
+  },
+  "2257303621723647": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "4541101252830915": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Babymoov",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "retail image; small positioner pad on mat"
+  },
+  "3659999577498913": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Mamilbaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest, brand in title"
+  },
+  "1093514456645302": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1086528330377643": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "1653431103051391": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper, mesh walls, no legs; borderline lounger"
+  },
+  "1121850740176724": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "title bassinet model; mesh-wall sleeper, legs not visible"
+  },
+  "25460429433654371": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Bebear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby sleeping bag"
+  },
+  "1564204478448219": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "retail screenshot; padded nest with toy arch"
+  },
+  "1683335643407717": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows baby nest lounger, not bumper"
+  },
+  "1612003126967027": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "toy and bedding pile; bumper per title"
+  },
+  "1803706487538409": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "minky-covered foam rolls, bed bumpers"
+  },
+  "1927114558699588": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Babymoov",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "positioner pad with U bolster, no frame"
+  },
+  "1620580406220188": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "3768791176605291": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded in-bed sleeper, mesh sides; shape not visible"
+  },
+  "1792344375314799": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plain covered lounger pad; shape only partly visible"
+  },
+  "2564942023942133": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Lounger Curve, label visible"
+  },
+  "987506944436758": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Angelcare",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bath support"
+  },
+  "1099925182609697": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded baby nest with raised bolster sides"
+  },
+  "4592288607713125": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded nest with bolster ring, title says lounger nest"
+  },
+  "1795515111711372": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1007651405641231": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1554815240148915": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "lounger with spare covers, brand in title"
+  },
+  "1043067641526411": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger with cover, brand in title"
+  },
+  "1384360281431464": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "white contoured lounger pad, title says lounger"
+  },
+  "29526907140280802": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1177421101910773": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bassinet on metal legs"
+  },
+  "896676779784382": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "box reads Portable Infant Lounger, soft-walled sleeper pictured"
+  },
+  "2615777952274828": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "URMYWO",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest assembly sheet, title says nest"
+  },
+  "2330515284152051": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "in-bed sleeper with mesh walls, no legs"
+  },
+  "1134295705990330": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1115525591274214": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows mesh bassinet on legs despite lounger title"
+  },
+  "1786087482535951": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1088637743518558": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "2149319142653125": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Banbooloo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rolled foam toddler bed rail bumper, not crib bumper"
+  },
+  "1135138529378659": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded crib bumper panels with ties"
+  },
+  "28597496563216269": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "crib sold with bumper pads per title, pads partly visible"
+  },
+  "2598260357340187": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "white padded lounger, title says lounger"
+  },
+  "1652318706370423": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger with bolster ring"
+  },
+  "4519594994959133": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger in zip bag"
+  },
+  "1906682650736698": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest pad with bolster ring and ties"
+  },
+  "995562153110533": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest lounger with head pillow"
+  },
+  "1567731991230846": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger in bag, brand in title"
+  },
+  "958378933426380": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bolster ring lounger with toy arch"
+  },
+  "1676587930682843": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1508596541078810": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged baby loungers, label and assembly sheet visible"
+  },
+  "948812774950034": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot Grand dock with bolster ring"
+  },
+  "4367402956804939": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft padded lounger in retail bag, shape partly hidden"
+  },
+  "29608254072106074": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered lounger pad, brand in title"
+  },
+  "1628235588312900": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger in bag, brand in title"
+  },
+  "1644005730779212": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "2223661951839390": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "round nest with ruffled bolster ring plus toy arch"
+  },
+  "1025022073684773": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pink nest with bolster ring"
+  },
+  "1631148441727541": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "zip-up padded sleeping pod nest, soft sides"
+  },
+  "1269634559559316": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger with bolster ring"
+  },
+  "1780320256432808": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bassinet on legs"
+  },
+  "1561623845602035": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box reads Portable Infant Bassinet, framed mesh model"
+  },
+  "28869886885995114": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1568321061518276": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of baby nest lounger"
+  },
+  "1701128131343715": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded Snuggle Nest in-bed sleeper"
+  },
+  "1157605523320757": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered contoured lounger pad"
+  },
+  "4572424593004684": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1645544263635605": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "ruffled nest with bolster ring"
+  },
+  "2456272031566666": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster, pillow and liner"
+  },
+  "3062893254049915": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered lounger pad, brand in title"
+  },
+  "1622555266338327": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot Deluxe+ dock with bolster ring"
+  },
+  "2389626408512155": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Me Infant Lounger retail bag"
+  },
+  "1561786885212802": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows bouncer seat with harness, not a lounger"
+  },
+  "844488038308236": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest assembly sheet in package"
+  },
+  "2490952144728326": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest pad with bolster ring"
+  },
+  "1536397087885610": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of padded infant lounger"
+  },
+  "1709994200509305": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "floral nest pad with bolster ring"
+  },
+  "1005112979230014": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged padded item, title says infant lounger"
+  },
+  "2582004632319294": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1367358758827652": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "flat padded carry nest with raised border"
+  },
+  "1096041779687218": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "white padded ring lounger with centre pad"
+  },
+  "2033660623990002": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Taleco Gear",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaging insert only, title says baby nest"
+  },
+  "1143690384725629": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCooBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1828837841602550": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "cloud print nest with bolster ring"
+  },
+  "26307056532300817": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged nest with assembly sheet"
+  },
+  "1056958657219170": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "underside of padded nest with handle"
+  },
+  "1067986178927742": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1864915994467699": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foldable in-bed sleeper with mesh walls, no legs"
+  },
+  "1084387370585980": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "safari print nest lounger close-up"
+  },
+  "1711213493769176": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "4582826648659479": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "The Eleven Home",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring and head pillow"
+  },
+  "2037577673552737": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged baby nest in zip bag"
+  },
+  "2170190107163502": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Hiccapop",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "inflatable toddler bed rail bumpers, not crib bumper"
+  },
+  "2444027592798576": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "crib shown with padded bumper along lower sides"
+  },
+  "1062493849958711": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "28479116815122922": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest pad with bolster ring and ties"
+  },
+  "1755289582453135": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "grey minky folded item, shape not visible"
+  },
+  "1811005430020673": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of Snuggle Nest in-bed sleeper"
+  },
+  "1763200941608864": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "infant bath support on frame"
+  },
+  "1453141626145064": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1504444910889486": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "floral padded lounger close-up"
+  },
+  "1649136220018442": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows plush unicorn sit-up support seat"
+  },
+  "1498364345533943": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1596427978795820": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foldable in-bed sleeper with mesh walls, no legs"
+  },
+  "1088112374070930": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock travel nest with net canopy, soft sides"
+  },
+  "2537429873415518": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1094505800003035": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box of Snuggle Nest Adventure portable infant sleeper"
+  },
+  "2271550386918954": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box of Snuggle Nest Harmony in-bed sleeper"
+  },
+  "1824280585481797": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest pod with bolster sides"
+  },
+  "2092849688108678": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Cam Cam Copenhagen",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1560185895842429": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Mexxi",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "baby nest cover sold alone"
+  },
+  "2409500109541593": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "hooded zip-up padded carry nest, soft sides"
+  },
+  "1691185608830098": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "mesh-walled framed model, leg hinge visible"
+  },
+  "2514703006006100": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Najell",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of soft carry nest with handles"
+  },
+  "1501225965164061": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "865145242807797": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows changing pads, no crib bumper visible"
+  },
+  "1073553399036037": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Carter's",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "long padded bumper panels with ties"
+  },
+  "1822867392138515": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "title lists bumper pad; photo shows only tricycle"
+  },
+  "1622708192885499": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows nest pad with U bolster, not bumper"
+  },
+  "1134051556012829": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Pottery Barn Kids",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded padded crib bumper with applique"
+  },
+  "2200698933809796": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "zebra bolster bumper pillow, not flat pads"
+  },
+  "1664439021850271": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "ruffled padded floral piece, title says bumper"
+  },
+  "2260224998209403": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Lounger Curve Lite in retail bag"
+  },
+  "1644037124174881": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "white padded ring lounger"
+  },
+  "1131479796486276": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "HoMedics",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger with vibration unit"
+  },
+  "1474175208254266": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "3176433226077953": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "title lists Snuggle Me lounger; photo shows nursing pillow"
+  },
+  "4554428924827126": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "dock-style nest with bolster ring"
+  },
+  "4658752307689919": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "green padded ring lounger"
+  },
+  "953550644504917": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot Deluxe+ in carry case"
+  },
+  "998149463239577": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Me Infant Lounger retail bag"
+  },
+  "1676254150605316": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CuddleNest",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "lounger in branded bag"
+  },
+  "1884207519204078": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "packaged round lounger, label reads Lounger"
+  },
+  "1506310231295454": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "soft-walled Snuggle Nest sleeper, no legs"
+  },
+  "2098267064189491": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bassinet on folding leg stand"
+  },
+  "1084593531070367": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Skip Hop",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Skip Hop baby nest"
+  },
+  "1412533357630624": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "framed mesh travel bassinet, legs not visible"
+  },
+  "1357967632883757": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "owl print nest with bolster ring"
+  },
+  "1131846073181436": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bassinet on legs"
+  },
+  "1159383536686996": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "close-up of covered pad, shape not visible"
+  },
+  "1161715026316444": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft positioner lounger with bolster, no frame"
+  },
+  "1483293240417192": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "covered contoured lounger pad"
+  },
+  "1833684804342675": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of flat Curve-style lounger"
+  },
+  "1573982507595681": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded lounger, brand in title"
+  },
+  "1678703567219881": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft reflux positioner lounger, no frame"
+  },
+  "1020874967731196": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger with spare cover"
+  },
+  "2250874755689949": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "two striped nests with bolster sides"
+  },
+  "1051657910680468": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pink padded lounger with centre pad"
+  },
+  "1114253621415777": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft reflux positioner lounger, no frame"
+  },
+  "922456604063956": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered pad on couch, shape partly visible"
+  },
+  "3330374737154296": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "1482640243679197": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1057561374034838": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded Snuggle Nest in-bed sleeper"
+  },
+  "1101865039337840": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded Snuggle Nest Surround co-sleeper"
+  },
+  "1066135366102844": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "zip-up padded nest pod, title says nest lounger"
+  },
+  "1599308584723676": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "oval mesh nest with toy bar, no legs"
+  },
+  "1145392861270239": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Babybliss",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft positioner lounger with bolster, no frame"
+  },
+  "1301304871802695": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Red Castle Cocoonababy",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged shaped foam nest, no frame"
+  },
+  "1919682395657969": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "1444390834218827": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bedding set; title lists bumper pads, photo shows comforter"
+  },
+  "1070225802033066": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows thin mesh liner panels, not padded"
+  },
+  "2405558830219881": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Shinnwa",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam bed rail bumpers, not crib bumper"
+  },
+  "2313826366136417": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "zip nest with padded sides"
+  },
+  "1335394885281995": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft positioner lounger with head support, no frame"
+  },
+  "1052283187863045": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "close-up of covered pad, shape not visible"
+  },
+  "1513114680409491": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "tan nest with raised padded sides"
+  },
+  "1142086021798388": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot Deluxe+ dock, logo visible"
+  },
+  "1629248242067069": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "cloud print nest with bolster ring"
+  },
+  "1001901522955378": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "1297522072383793": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "grey nest with bolster ring"
+  },
+  "980428438100572": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "star print nest with bolster sides"
+  },
+  "2076813399845814": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Nuby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered support pod lounger, brand in title"
+  },
+  "2212307673037824": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "873440135643586": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered contoured lounger pad"
+  },
+  "2682487158840559": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "ruffled nest with raised sides"
+  },
+  "1182906267581435": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "mesh-walled framed model seen from above"
+  },
+  "2727179451047496": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round nest with ruffled bolster ring"
+  },
+  "1122922710116966": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Butoa",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1188117090863784": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft-walled in-bed sleeper, no legs"
+  },
+  "995979946305070": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "grey nest with bolster ring"
+  },
+  "1701057865149413": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows mesh bassinet on legs despite lounger title"
+  },
+  "3324773471046501": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "2746256075789579": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered contoured lounger pad"
+  },
+  "1100087906213990": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round newborn lounger cushion with recessed centre"
+  },
+  "1101504872871462": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Freejoy",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "close-up of muslin pad, shape not visible"
+  },
+  "1485676856794482": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Lounger Curve in retail bag"
+  },
+  "1571546934730183": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Sleepyhead",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "dock with bolster ring, logo visible"
+  },
+  "1008717928322036": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged nest with assembly sheet"
+  },
+  "2096393437944344": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "2555689814786268": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "biliboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "sealed biliboo bags, product not visible"
+  },
+  "1513799220586079": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "1629655088895998": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "green muslin padded lounger"
+  },
+  "1788915648833688": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows framed bedside bassinet on legs only"
+  },
+  "1813053596547880": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot Deluxe+ dock, logo visible"
+  },
+  "1019106310572434": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "LOEVIN",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged nest with assembly sheet"
+  },
+  "29598040729813549": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "dinosaur print nest with bolster ring"
+  },
+  "2164885780861123": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "sealed padded nest, title says portable baby nest"
+  },
+  "1139866891827422": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "leaf print nest with bolster sides"
+  },
+  "887124300488175": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "green padded ring lounger"
+  },
+  "1563105072030851": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box shows framed bassinet on legs"
+  },
+  "1775854083712117": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft-walled foldable in-bed sleeper, no legs"
+  },
+  "29405207752405884": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "EIH",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1699281358579962": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "padded mesh pad; lounger or liner not settled"
+  },
+  "4628299034093002": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of mesh bassinet on legs"
+  },
+  "4582944678653953": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1334392702194530": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of mesh bassinet on legs"
+  },
+  "2133981167225917": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Newbabywish",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft positioner lounger with bolster, no frame"
+  },
+  "1924925592214046": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Fisher-Price",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "flat bassinet on stand, not inclined"
+  },
+  "1865440984639699": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rolled foam bed rail bumpers, not crib bumper"
+  },
+  "1109751528627894": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bundle; grey padded crib bumper with ties visible"
+  },
+  "1117978834475646": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows head protector cushion, not crib bumper"
+  },
+  "1089637373422018": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "star print nest with bolster, close-up"
+  },
+  "1620866865829092": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mint nest with bolster ring"
+  },
+  "1568462964831952": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Beeezy Buddies",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged Comfy Baby Nest"
+  },
+  "1736219030826531": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged, label reads Baby Nest"
+  },
+  "897676933223309": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Kiddos Collection",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged lounger, insert shows nest"
+  },
+  "1862601551742782": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "2098350750807227": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "star print nest with bolster ring"
+  },
+  "2029179064353679": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pink padded ring lounger"
+  },
+  "1097654869456983": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of padded ring lounger"
+  },
+  "29340091855630300": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Beisurznga",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "title says cover only; lounger bag shown"
+  },
+  "1623133225860650": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Me Infant Lounger retail bag"
+  },
+  "29058304767106346": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "SICHER",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1543474864287805": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pink padded ring lounger"
+  },
+  "28917630557830878": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered contoured lounger pad"
+  },
+  "1653842366294864": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "brown nest with bolster ring"
+  },
+  "1536450078231831": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "screenshot of nest with bolster ring"
+  },
+  "4488174707994977": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "quilted folded sleeper close-up, title says portable nest"
+  },
+  "981641607989393": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "braided ring nest in plastic"
+  },
+  "2932024150496505": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "1764585581207763": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "ruffled nest with bolster ring, sold with bedding"
+  },
+  "4571353843118214": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Pottery Barn Kids",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "title lists bumper; photo shows bed skirt package"
+  },
+  "1858291158523921": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "dock with bolster ring and toy arch"
+  },
+  "1766952031196865": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded Snuggle Nest Harmony in-bed sleeper"
+  },
+  "1831839514727294": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft reflux positioner lounger, no frame"
+  },
+  "1880607442938566": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "29819731364300098": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1706521450783174": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "star print nest with bolster ring"
+  },
+  "1161288646267957": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Sleepyhead",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Sleepyhead Grand retail packaging"
+  },
+  "1059076477298636": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged nest with assembly sheet"
+  },
+  "1384079227121590": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "2059566784919212": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1124908517030315": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1695088465132653": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded quilted in-bed sleeper, Snuggle Nest style"
+  },
+  "1099876499303455": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "1483315800285593": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Paz Rodriguez",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "stock photo shows bunting sack, not a lounger"
+  },
+  "1607767400598931": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Red Castle Cocoonababy",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "shaped foam nest, no frame"
+  },
+  "3040520092981563": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bassinet on legs"
+  },
+  "1664433824814902": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "tractor print nest with bolster ring"
+  },
+  "1439301071464030": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pink ruffled nest with bolster ring"
+  },
+  "28724477000581855": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box shows framed bassinet on legs"
+  },
+  "1615715299862762": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows bouncer seat on stand, not a lounger"
+  },
+  "1056674120490243": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "side view of covered pad, shape partly visible"
+  },
+  "2360462071433178": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Butoa",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1047225205045803": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "2424885718258755": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered lounger pad, brand in title"
+  },
+  "4148632212102310": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Dora Momoko",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged lounger in branded bag"
+  },
+  "2209381426276180": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows mesh bassinet on legs despite lounger title"
+  },
+  "1737431757467137": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows sit-up support ring, not a lounger"
+  },
+  "2544378256037233": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1039674018731054": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pink nest with bolster ring"
+  },
+  "1356715407517801": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "mesh-walled framed model seen from above"
+  },
+  "2289507555151271": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1057233633938912": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft-walled Snuggle Nest sleeper, no legs"
+  },
+  "2169859844415035": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock close-up of mesh bassinet wall"
+  },
+  "3722790144556507": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster sides"
+  },
+  "1639616521135838": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "bear print nest with bolster ring"
+  },
+  "1215840550572547": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring and pillow"
+  },
+  "988776497630487": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "screenshot shows bassinet on legs"
+  },
+  "2495026540921182": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box of Snuggle Nest portable in-bed sleeper"
+  },
+  "1522634199236642": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "title lists bumper pads; photo shows comforter"
+  },
+  "1014722691569049": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows nest with U bolster, not bumper"
+  },
+  "1682772106760978": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam bed rail bumpers for twin bed"
+  },
+  "1555251939953726": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam bed rail bumper rolls"
+  },
+  "1410977540874920": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered contoured lounger pad"
+  },
+  "1361905945909617": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot Deluxe+ logo visible on dock"
+  },
+  "2648090889004517": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "oval pad, raised sides not visible"
+  },
+  "1801792280953352": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCooBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1009591791684425": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "folded in zip carry bag, product not visible"
+  },
+  "2523211201423594": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "two covered contoured lounger pads"
+  },
+  "1487803843251861": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "4705936356397803": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rainbow print nest with bolster ring"
+  },
+  "2196265137902656": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "teal padded ring lounger"
+  },
+  "1494218772452535": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "travel nest with net canopy, soft sides"
+  },
+  "2130734724516493": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot Deluxe+ in bag with leaflet"
+  },
+  "25811857618501233": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded Snuggle Nest in-bed sleeper"
+  },
+  "2982849872113603": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1062678673429970": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot logo visible on dock"
+  },
+  "28806126609038309": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "white mesh padded lounger with raised sides"
+  },
+  "1540361997783470": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "leaf print nest with bolster and pillow"
+  },
+  "1690755875755435": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "two padded loungers with covers"
+  },
+  "2212930822972319": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1330484078999502": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Happle",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of padded lounger"
+  },
+  "1277628507822082": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "HoMedics",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest lounger with vibration unit"
+  },
+  "2037236984203255": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "DockATot",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "DockATot dock, logo visible"
+  },
+  "2836214556816758": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "4632776233625781": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1010492098731604": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Nuby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged round nest positioning pillow"
+  },
+  "994700693282534": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round nest with braided bolster ring"
+  },
+  "1749279276490555": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round nest with braided bolster ring"
+  },
+  "1311644711136824": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bassinet on legs"
+  },
+  "1736534057765460": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows legless in-bed sleeper"
+  },
+  "981580114887610": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bassinet on legs"
+  },
+  "1124570233299323": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of mesh bassinet on legs"
+  },
+  "1104422315555801": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCooBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1559969182539626": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "box of Snuggle Nest Traveler XL portable sleeper"
+  },
+  "1389864649949010": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pink nest with bolster ring"
+  },
+  "672600772350292": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Red Castle Cocoonababy",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "stock photo of shaped foam nest, no frame"
+  },
+  "1682097552999724": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bassinet, frame pole visible"
+  },
+  "1578966630430640": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "mesh-walled framed model seen from above"
+  },
+  "1100956046071224": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Dream On Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "rocker bouncer seat on frame, not a sleeper"
+  },
+  "1895912298437323": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows plush sit-up support seat"
+  },
+  "1461713112818416": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "4624499551159413": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "flat contoured Curve-style pad with warning label"
+  },
+  "1127820586358667": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft-walled in-bed sleeper, no legs"
+  },
+  "4606607866295231": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest soft walls close-up"
+  },
+  "1148266160982565": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "white padded ring lounger"
+  },
+  "1638196757722480": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "tree print nest with bolster ring"
+  },
+  "29586872394335519": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "deer print nest with bolster sides"
+  },
+  "1751958992547069": {
+   "type": "unclear",
+   "is_it": "unclear",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "plush giraffe mat; raised sides not visible"
+  },
+  "1184546167579543": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1146001511269744": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered contoured lounger pad"
+  },
+  "842239348709210": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "folded mesh travel nest wedge, no frame or sling"
+  },
+  "2379013422910615": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded Snuggle Nest in-bed sleeper"
+  },
+  "2551927798616651": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest Dream in-bed sleeper, no legs"
+  },
+  "2063520500941810": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "star print nest with bolster ring"
+  },
+  "1311331624151200": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "1563311345010625": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "video monitor camera"
+  },
+  "1619264203263690": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "purple nest with bolster ring"
+  },
+  "1704237307964290": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "rainbow print nest with bolster ring"
+  },
+  "1483989520324420": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "biliboo",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "structured oval nest with net canopy, no legs"
+  },
+  "1834633807703716": {
+   "type": "crib_bumper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "title lists bumper pad; photo shows cloth pile"
+  },
+  "2968033560246008": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "CooCooBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1672224767880353": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster sides"
+  },
+  "1693281205274638": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "animal print nest with bolster ring"
+  },
+  "1970048137017296": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "dock-style nest with bolster ring"
+  },
+  "1085038150940036": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Babymoov",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft positioner lounger with bolster, no frame"
+  },
+  "1755580198823356": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "strawberry print nest with bolster ring"
+  },
+  "1011444981951274": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Angelcare",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "plastic bath support seat"
+  },
+  "1138617881826057": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "covered contoured lounger pad with spare cover"
+  },
+  "2458442681353293": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Me box with covers"
+  },
+  "1472003911556677": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "pink nest with bolster ring"
+  },
+  "1821230758912704": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "photo shows legless soft in-bed sleeper"
+  },
+  "1490645369475002": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "screenshot shows bassinet on legs"
+  },
+  "2294498757999889": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Happy Time",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "soft nest with net canopy"
+  },
+  "2920051535019702": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "mesh bassinet, leg visible"
+  },
+  "2808388656184806": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "screenshot of oval nest with padded sides"
+  },
+  "1653498525913830": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "orange nest pad with raised border"
+  },
+  "1217689897251641": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "floral nest with bolster ring"
+  },
+  "1969235487571534": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "4791874917801415": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "grey padded ring lounger"
+  },
+  "1114085087906293": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows packaged mesh liner, not padded"
+  },
+  "2584486325413378": {
+   "type": "other",
+   "is_it": "no",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "photo shows mesh liner-style bumper with ties"
+  },
+  "1905342407508412": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "foam toddler bed rail bumper rolls"
+  },
+  "2219348578718222": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Rootling",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "two soft positioner loungers, no frame"
+  },
+  "1174241105262924": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring"
+  },
+  "2454329568332207": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "sealed quilted item in box, shape not visible"
+  },
+  "917383160704842": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Snuggle Me",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "padded ring lounger, brand in title"
+  },
+  "1588240569746024": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "sheep print nest with bolster sides"
+  },
+  "1020166087438722": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "grey padded ring lounger"
+  },
+  "1084876161161356": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "folded quilted in-bed sleeper"
+  },
+  "3890902114397666": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "round newborn lounger cushion with minky cover"
+  },
+  "1736510140879387": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Mamibaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring, brand in title"
+  },
+  "1035131282250767": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "brown nest with bolster ring"
+  },
+  "1843976196944919": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "classic Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1937237463655507": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "EIH",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged nest with assembly sheet"
+  },
+  "1000958592986688": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "Flybyfly",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "nest with bolster ring plus play gym arch"
+  },
+  "2374467393363936": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "linen nest with bolster ring"
+  },
+  "1404786474515380": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "grey plush nest with bolster ring"
+  },
+  "2593697511110516": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": false,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": true,
+   "why": "bundle; title lists baby nest, braided ring visible"
+  },
+  "1747747736440333": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "Baby Delight",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "Snuggle Nest in-bed sleeper, no legs"
+  },
+  "1084205484542072": {
+   "type": "in_bed_sleeper",
+   "is_it": "yes",
+   "sure": true,
+   "brand": "",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaged, label reads Baby Nest"
+  },
+  "1050605227314204": {
+   "type": "other",
+   "is_it": "no",
+   "sure": true,
+   "brand": "BreathableBaby",
+   "condition": "unknown",
+   "photo_checked": true,
+   "full_photo": false,
+   "why": "packaging reads breathable mesh liner"
+  }
+ }
+}

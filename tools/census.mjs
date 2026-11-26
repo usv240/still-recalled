@@ -14,13 +14,17 @@ const args = process.argv.slice(2);
 const opt = (name, dflt) => (args.find(a => a.startsWith(`--${name}=`)) || `--${name}=${dflt}`).split('=').slice(1).join('=');
 const outFile = path.resolve(opt('out', 'tools/census-listings.json'));
 // The 30 largest U.S. metro areas with their own Craigslist site.
-const CITIES = opt('cities', 'newyork,losangeles,chicago,dallas,houston,washingtondc,philadelphia,miami,atlanta,boston,phoenix,sfbay,inlandempire,detroit,seattle,minneapolis,sandiego,tampa,denver,baltimore,stlouis,orlando,charlotte,sanantonio,portland,sacramento,pittsburgh,austin,lasvegas,cincinnati').split(',');
+const CITIES = opt('cities', 'newyork,losangeles,chicago,dallas,houston,washingtondc,philadelphia,miami,atlanta,boston,phoenix,sfbay,inlandempire,detroit,seattle,minneapolis,sandiego,tampa,denver,baltimore,stlouis,orlando,charlotte,sanantonio,portland,sac,pittsburgh,austin,lasvegas,cincinnati').split(',');
 // What a parent might search, and what the four types are sold as. Plain words, no hazard terms a parent would not type.
 const QUERIES = opt('queries', 'rock n play,crib bumper,baby lounger,baby nest').split(',');
 // --site=ebay: one national search per query (eBay is one market), each in its own browser with a pause between, since
 // eBay answers an automated browser with an error page after a search or two in the same one.
 const SITE = opt('site', 'craigslist');
-const PLAN = SITE === 'ebay'
+// --site=facebook: Facebook Marketplace, logged out, by the metro names Facebook uses in its own addresses.
+const FB_CITIES = opt('cities', 'nyc,la,chicago,dallas,houston,dc,philly,miami,atlanta,boston,phoenix,sanfrancisco,detroit,seattle,minneapolis,sandiego,tampa,denver,baltimore,stlouis,orlando,charlotte,sanantonio,portland,sac,pittsburgh,austin,vegas,cincinnati,kansascity').split(',');
+const PLAN = SITE === 'facebook'
+  ? FB_CITIES.flatMap(city => QUERIES.map(q => ({ key: `${city}: ${q}`, city, url: `https://www.facebook.com/marketplace/${city}/search?query=${encodeURIComponent(q)}` })))
+  : SITE === 'ebay'
   ? QUERIES.map(q => ({ key: `ebay: ${q}`, city: 'us', url: `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(q)}&_ipg=120` }))
   : CITIES.flatMap(city => QUERIES.map(q => ({ key: `${city}: ${q}`, city, url: `https://${city}.craigslist.org/search/sss?query=${encodeURIComponent(q)}` })));
 
@@ -41,15 +45,18 @@ for (const { key, city, url } of PLAN) {
     if (out.searches[key]) continue;
     if (SITE === 'ebay') { await close(b); b = await launch(); }
     const page = b.page;
-    let listings = [];
+    let listings = [], said = '';
     for (let attempt = 0; attempt < 2 && !listings.length; attempt++) {
       try {
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 45000 });
         for (let i = 0; i < 10; i++) { await page.evaluate(() => scrollBy(0, 900)); await new Promise(r => setTimeout(r, 300)); }
-        await new Promise(r => setTimeout(r, 1200));
+        await new Promise(r => setTimeout(r, SITE === 'facebook' ? 4000 : 1200));
+        if (SITE === 'facebook' && !page.url().includes(`/marketplace/${city}/search`)) { console.log(`  ${key}: sent to ${page.url().slice(0, 70)}`); break; }
         listings = await page.evaluate(`(() => { ${reader}; return __srExtract.listingsOnPage().listings.map(({ el, ...l }) => l); })()`);
         if (!listings.length) {
-          const none = await page.evaluate(() => /no results|nothing found/i.test(document.body.innerText));
+          // What the page says when it shows nothing (kept, so a search the site answers with no listings is on record).
+          said = await page.evaluate(() => ((document.querySelector('[role=main]') || document.body).innerText || '').replace(/\s+/g, ' ').trim().slice(0, 300));
+          const none = /no results|nothing found|no listings found|didn't find|did not find/i.test(said);
           if (none) break;
           await new Promise(r => setTimeout(r, 5000));
         }
@@ -58,13 +65,13 @@ for (const { key, city, url } of PLAN) {
     let fresh = 0;
     for (const l of listings) {
       if (out.listings[l.id]) { out.listings[l.id].searches.push(key); continue; }
-      out.listings[l.id] = { ...l, url: l.site === 'ebay' ? `https://www.ebay.com/itm/${l.id}` : String(l.url || '').split('?')[0], city, searches: [key] };
+      out.listings[l.id] = { ...l, url: l.site === 'ebay' ? `https://www.ebay.com/itm/${l.id}` : l.site === 'facebook' ? `https://www.facebook.com/marketplace/item/${l.id}/` : String(l.url || '').split('?')[0], city, searches: [key] };
       fresh++;
     }
-    out.searches[key] = { results: listings.length, fresh, at: new Date().toISOString() };
+    out.searches[key] = { results: listings.length, fresh, at: new Date().toISOString(), ...(listings.length || !said ? {} : { said }) };
     console.log(`${key}: ${listings.length} on page, ${fresh} new (total ${Object.keys(out.listings).length})`);
     writeFileSync(outFile, JSON.stringify(out, null, 1));
-    await new Promise(r => setTimeout(r, SITE === 'ebay' ? 40000 : 4000));
+    await new Promise(r => setTimeout(r, SITE === 'ebay' ? 40000 : SITE === 'facebook' ? 6000 : 4000));
   }
 }
 await close(b);

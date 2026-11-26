@@ -38,6 +38,8 @@ test('Facebook Marketplace card titles: no price, place or listing number', () =
   assert.equal(facebookTitle(link('Baby lounger, $5, Charlotte, NC, listing 1100087906213990', '$5\nBaby lounger\nCharlotte, NC')), 'Baby lounger');
   assert.equal(facebookTitle(link('Baby Loungers, Baby Bassinets for newborn, $60, Matthews, NC, listing 2555689814786268', '')), 'Baby Loungers, Baby Bassinets for newborn');
   assert.equal(facebookTitle(link('Crib bumper set, Free, Austin, TX, listing 123456789', '')), 'Crib bumper set');
+  // Facebook marks a new listing "Just listed" in the link's name; that is not part of the seller's title.
+  assert.equal(facebookTitle(link('Just listed, Infant lounger, $5, Houston, TX, listing 987654321', '')), 'Infant lounger');
   // A price cut shows two prices; with no name on the link, the lines are read.
   assert.equal(facebookTitle(link('', '$15$25\nRock n Play sleeper\nTampa, FL\n12 mi')), 'Rock n Play sleeper');
   assert.equal(facebookTitle(link('', '', 'Infant lounger in Pineville, NC')), 'Infant lounger');
