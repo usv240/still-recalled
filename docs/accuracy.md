@@ -1838,11 +1838,11 @@ the first screen of results only, no scrolling. It is a check, not a census.
   and the seller's own description, and found the heading inside the item's dialog, which is where 0.17.2 puts the
   badge (section 35).
 
-**Then the installed extension, in the same signed-in Chrome** (the packed 0.17.2 release, loaded by its owner, with
-Gemini Nano on that computer):
-- **Badges appear on the signed-in search.** On the "baby rocker sleeper" page, "Looking on this computer" and
-  "Checking in the cloud" pills came and went on up to 14 listings, and when the checks settled **9 of the 39
-  listings carried a badge**: "Possible recall", "Possible inclined sleeper" and "Possible lounger", all amber.
+**Then the installed extension, in the same signed-in Chrome** (the packed 0.17.2 release, loaded by its owner; which
+model looked at each listing was not recorded):
+- **Badges appear on the signed-in search.** On the "baby rocker sleeper" page, between 10 and 14 listings carried
+  a badge or a "checking" pill while the checks ran, and when they settled **9 of the 39 listings carried a
+  badge**. The ones on screen read "Possible recall", "Possible inclined sleeper" and "Possible lounger", all amber.
 - **The card opens without leaving the page.** Clicking "Possible inclined sleeper" opened the card over the search
   ("This may be or include an inclined infant sleeper. Ask the seller what it is before you buy."), and the address
   stayed on the search.
