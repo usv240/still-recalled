@@ -2,10 +2,19 @@
 // Refuses to deploy if the App Check debug token appears in any file under web/. Restores the development build after.
 // Usage: node scripts/deploy-web.mjs   (needs firebase login, or Application Default Credentials for the project)
 import { execFileSync } from 'node:child_process';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, mkdir, copyFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const run = (cmd, args, env = {}) => execFileSync(cmd, args, { stdio: 'inherit', shell: cmd === 'npx' && process.platform === 'win32', env: { ...process.env, ...env } });
+
+// The site offers the packed extension for download. Deploy the one packed for this version, never an older copy
+// (0.17.1 first went out with 0.17.0's zip still in web/download).
+const version = async f => JSON.parse(await readFile(f, 'utf8')).version;
+const want = await version('extension/manifest.json');
+const packed = await version('dist/still-recalled-extension/manifest.json').catch(() => '');
+if (packed !== want) throw new Error(`dist holds extension ${packed || 'nothing'}, the source is ${want}: run node scripts/pack-extension.mjs first`);
+await mkdir('web/download', { recursive: true });
+await copyFile('dist/still-recalled-extension.zip', 'web/download/still-recalled-extension.zip');
 
 run(process.execPath, ['build.mjs'], { RELEASE: '1' });
 let token = '';
