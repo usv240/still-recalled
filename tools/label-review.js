@@ -19,6 +19,9 @@ const CHOICES = [
   ['no', 'Should not be flagged'],
   ['maybe', "Can't tell from this"],
 ];
+// The 34 Facebook photos (section 34) are checked blind: the AI's answer is not shown, the order is the shuffled one
+// the second AI reviewer saw, and the person answers the question itself.
+const BLIND = { 'census-fb-sleepers': [['yes', 'Inclined sleeper'], ['no', 'Not one'], ['maybe', "Can't tell from this"]] };
 const proxied = u => (u ? `/img?u=${encodeURIComponent(u)}` : '');
 
 const SETS = ['eval', 'fresh', 'third', 'fourth', 'fifth', 'sixth'];
@@ -44,7 +47,7 @@ async function loadCensus(set) {
   return flagged.flagged.filter(f => labelled.labels[f.id]).map(f => {
     const a = labelled.labels[f.id];
     return { ...f, search: f.city || '', set, review, lab: { should_warn: warn[a.is_it] || 'maybe', type: a.type, item: '', note: a.why + (a.photo_checked ? ' (photo checked)' : '') } };
-  }).sort((x, y) => order[x.lab.should_warn] - order[y.lab.should_warn]);
+  }).sort((x, y) => (BLIND[set] ? 0 : order[x.lab.should_warn] - order[y.lab.should_warn]));
 }
 
 async function loadQuick() {
@@ -88,6 +91,10 @@ async function render() {
     : await load(set).then(({ all, labels, review }) => all.map(l => ({ ...l, set, lab: labels[l.id], review })));
   const list = $('#list');
   list.replaceChildren();
+  const choices = BLIND[set] || CHOICES;
+  list.choices = choices;
+  $('#how').hidden = !!BLIND[set];
+  $('#how-blind').hidden = !BLIND[set];
   const progress = () => {
     const n = items.filter(l => l.review.answers[l.id]).length;
     $('#progress').textContent = `${n} of ${items.length} reviewed`;
@@ -104,7 +111,7 @@ async function render() {
       await save(l);
     };
     row.answer = answer;
-    const buttons = CHOICES.map(([value, text], i) => {
+    const buttons = choices.map(([value, text], i) => {
       const b = el('button', { type: 'button', 'data-value': value, 'aria-pressed': String(l.review.answers[l.id] === value) }, `${i + 1} · ${text}`);
       b.addEventListener('click', () => answer(value));
       return b;
@@ -114,7 +121,7 @@ async function render() {
       el('div', {},
         el('div', { class: 'title' }, l.title),
         el('div', { class: 'meta' }, [l.price, l.search].filter(Boolean).join(' · '), ' · ', el('a', { href: l.url, target: '_blank', rel: 'noopener' }, 'listing')),
-        el('div', { class: 'label' },
+        BLIND[set] ? null : el('div', { class: 'label' },
           el('span', { class: `chip ${lab.should_warn}` }, lab.should_warn === 'yes' ? 'Must flag' : lab.should_warn === 'maybe' ? 'Unclear' : 'Must not flag'),
           [lab.item, lab.type, (lab.recall_ids || []).length ? `recall ${lab.recall_ids.join(', ')}` : null].filter(Boolean).join(' · '),
           el('div', {}, lab.note)),
@@ -134,10 +141,11 @@ function focusNext() {
 }
 document.addEventListener('click', e => { const r = e.target.closest('.row'); if (r) current = r; });
 document.addEventListener('keydown', async e => {
+  const choices = $('#list').choices || CHOICES;
   const i = ['1', '2', '3', '4'].indexOf(e.key);
-  if (i < 0 || !current || e.target.closest('select')) return;
+  if (i < 0 || i >= choices.length || !current || e.target.closest('select')) return;
   e.preventDefault();
-  await current.answer(CHOICES[i][0]);
+  await current.answer(choices[i][0]);
   focusNext();
 });
 $('#set').addEventListener('change', render);

@@ -33,7 +33,11 @@
   <h1>Label review</h1>
   <label>Set <select id="set"><option value="quick">Quick review: the labels that decide the numbers</option><option value="eval">First test (136)</option><option value="fresh">Second test (125)</option><option value="third">Third test (176)</option><option value="fourth">Fourth test (160)</option><option value="fifth">Fifth test (178)</option><option value="sixth">Sixth test (180)</option><option value="census-ebay">Census: eBay, flagged by words (392)</option><option value="census-craigslist">Census: Craigslist, flagged by words (80)</option><option value="census-fb-sleepers">Census: Facebook Marketplace, the inclined sleepers and 20 others (34)</option><option value="census-facebook">Census: Facebook Marketplace, flagged by words (717)</option></select></label>
   <p id="progress"></p>
-  <p>For each listing: is the AI's label right, judging only from the title and photo? Keys 1 to 4 answer and move on. Answers save as you go.</p>
+  <p id="how">For each listing: is the AI's label right, judging only from the title and photo? Keys 1 to 4 answer and move on. Answers save as you go.</p>
+  <div id="how-blind" hidden>
+    <p><strong>For each photo: is this an inclined sleeper?</strong> The AI's answer is hidden. Keys 1 to 3 answer and move on. Answers save as you go.</p>
+    <p>An <strong>inclined sleeper</strong> is made for a baby to sleep in, lying back at a tilt of more than 10 degrees (the law's definition). It is a bed: usually a deep fabric cradle slung in a folding or rocking frame, sold as a "sleeper", "napper" or "rock and play". A <strong>bouncer, swing or rocker seat</strong> also tilts, but it is a seat for a baby who is awake, usually with a harness between the legs and often a toy bar. Tilted is not enough: answer "Inclined sleeper" only for a bed made for sleep.</p>
+  </div>
 </header>
 <main id="list"></main>
 <script type="module" src="label-review.js"></script>
