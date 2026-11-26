@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-25T15:37:23.998Z",
-  "version": "0.17.0",
+  "at": "2026-11-26T02:26:13.802Z",
+  "version": "0.17.2",
   "ext": "dist/still-recalled-extension",
   "builtInModelProfile": false,
   "url": "https://still-recalled.web.app/try/",
@@ -31,7 +31,7 @@
     {
       "name": "engine checks the listings",
       "ok": true,
-      "detail": "17 of 17 checked in 33 s"
+      "detail": "17 of 17 checked in 30 s"
     },
     {
       "name": "a recall published after the build is flagged",
@@ -86,7 +86,7 @@
     {
       "name": "new recalls arrive from CPSC",
       "ok": true,
-      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 5 s"
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 7 s"
     },
     {
       "name": "new CPSC safety warnings arrive too",
@@ -104,7 +104,7 @@
     "written": 0,
     "shared": 9,
     "total": 9,
-    "checkedAt": "2026-11-25T15:36:23.018Z",
+    "checkedAt": "2026-11-26T02:25:20.008Z",
     "hits": 0,
     "cards": [
       {
@@ -162,7 +162,7 @@
         "guide": false
       }
     ],
-    "ms": 3516
+    "ms": 3883
   },
   "cloudChecked": 8,
   "cloudErrors": [],
@@ -274,12 +274,12 @@
       "written": 0,
       "shared": 20,
       "total": 20,
-      "checkedAt": "2026-11-25T15:37:19.063Z",
+      "checkedAt": "2026-11-26T02:26:07.412Z",
       "hits": 1
     },
-    "ms": 5046,
+    "ms": 7011,
     "alert": {
-      "at": "2026-11-25T15:37:23.241Z",
+      "at": "2026-11-26T02:26:13.247Z",
       "badge": "Recalled product",
       "confirmed": true,
       "level": "likely",

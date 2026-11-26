@@ -12,8 +12,8 @@
   header p { margin: 0; font-size: 13px; color: var(--muted); }
   select, button { font: inherit; font-size: 13px; }
   main { max-width: 980px; margin: 0 auto; padding: 8px 16px 64px; }
-  .row { display: grid; grid-template-columns: 168px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
-  .row img { width: 168px; height: 168px; object-fit: contain; background: var(--ground); border-radius: 6px; }
+  .row { display: grid; grid-template-columns: 240px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+  .row img { width: 240px; height: 240px; object-fit: contain; background: var(--ground); border-radius: 6px; }
   .title { font-weight: 600; font-size: 15px; line-height: 1.35; }
   .meta { font-size: 13px; color: var(--muted); margin: 4px 0 8px; }
   .label { font-size: 13px; line-height: 1.5; }
@@ -31,7 +31,7 @@
 <body>
 <header>
   <h1>Label review</h1>
-  <label>Set <select id="set"><option value="quick">Quick review: the labels that decide the numbers</option><option value="eval">First test (136)</option><option value="fresh">Second test (125)</option><option value="third">Third test (176)</option><option value="fourth">Fourth test (160)</option><option value="fifth">Fifth test (178)</option><option value="sixth">Sixth test (180)</option><option value="census-ebay">Census: eBay, flagged by words (392)</option><option value="census-craigslist">Census: Craigslist, flagged by words (80)</option></select></label>
+  <label>Set <select id="set"><option value="quick">Quick review: the labels that decide the numbers</option><option value="eval">First test (136)</option><option value="fresh">Second test (125)</option><option value="third">Third test (176)</option><option value="fourth">Fourth test (160)</option><option value="fifth">Fifth test (178)</option><option value="sixth">Sixth test (180)</option><option value="census-ebay">Census: eBay, flagged by words (392)</option><option value="census-craigslist">Census: Craigslist, flagged by words (80)</option><option value="census-fb-sleepers">Census: Facebook Marketplace, the inclined sleepers and 20 others (34)</option><option value="census-facebook">Census: Facebook Marketplace, flagged by words (717)</option></select></label>
   <p id="progress"></p>
   <p>For each listing: is the AI's label right, judging only from the title and photo? Keys 1 to 4 answer and move on. Answers save as you go.</p>
 </header>

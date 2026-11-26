@@ -22,9 +22,16 @@ const CHOICES = [
 const proxied = u => (u ? `/img?u=${encodeURIComponent(u)}` : '');
 
 const SETS = ['eval', 'fresh', 'third', 'fourth', 'fifth', 'sixth'];
+// A Facebook photo is shown from the copy the census saved (its address stops working after a while), else fetched.
+const photo = l => {
+  const img = el('img', { src: l.site === 'facebook' ? `/photo?id=${l.id}` : proxied(l.image), alt: '', loading: 'lazy' });
+  if (l.site === 'facebook') img.addEventListener('error', () => { img.src = proxied(l.image); }, { once: true });
+  return img;
+};
 
-// The census sets (docs/accuracy.md, sections 29 and 31): every listing the word rules flagged, with the AI reviewer's
-// yes / no / unclear. A person's answers save to tools/census-<site>-review.json.
+// The census sets (docs/accuracy.md, sections 29, 31 and 34): every listing the word rules flagged, with the AI
+// reviewer's yes / no / unclear. A person's answers save to tools/census-<site>-review.json. "census-fb-sleepers" is
+// the 34 photos of section 34: the 14 inclined sleepers the reviewers found under plain titles, and 20 other results.
 async function loadCensus(set) {
   const site = set.replace('census-', '');
   const [flagged, labelled, review] = await Promise.all([
@@ -103,7 +110,7 @@ async function render() {
       return b;
     });
     row.append(
-      el('img', { src: proxied(l.image), alt: '', loading: 'lazy' }),
+      photo(l),
       el('div', {},
         el('div', { class: 'title' }, l.title),
         el('div', { class: 'meta' }, [l.price, l.search].filter(Boolean).join(' · '), ' · ', el('a', { href: l.url, target: '_blank', rel: 'noopener' }, 'listing')),

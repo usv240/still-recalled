@@ -1684,10 +1684,12 @@ every listing counted. The first column counts only labels the reviewer marked a
   mesh liners and bed rails titled "bumper", and bassinets on legs and bouncers titled "lounger".
 - **A judgement call in the count:** in-bed sleepers with stiff mesh walls and no legs (Baby Delight Snuggle Nest and
   the like) are counted as loungers: about 75 of the 672, 45 of them among the confident 589.
-- **What the rules say:** Facebook's own Recalled Products policy names inclined sleepers, crib bumpers and "Baby
-  nests and loungers" (sources.md, section 7). Inclined sleepers and padded crib bumpers are banned from sale by law
-  whatever their date; a lounger made before May 2025 is not, and CPSC says it is never for sleep (sources.md,
-  section 2).
+- **Banned by law, or against the site's rules.** 32 of the 589 (21 padded bumpers, 11 inclined sleepers; 51 of the
+  723) are banned from sale by law whatever their date. The 557 loungers are not, unless made after May 2025, and no
+  listing's date or condition is known here; CPSC says a lounger is never for sleep (sources.md, section 2). All three
+  kinds are named in Facebook's own Recalled Products policy: inclined sleepers, crib bumpers and "Baby nests and
+  loungers" (sources.md, section 7). So the count is of listings Facebook's rules don't allow, most of them lawful
+  to sell.
 - An ad sharing its title, price and metro area with another is counted once. One pair of ads in two metro areas
   shared a photo and is counted twice.
 
@@ -1725,17 +1727,22 @@ build of 0.17.1's engine; scored by `node tools/census-fb-score.mjs`).
   with no recall named.
 - **Is the named recall right?** Where the reviewer could see the brand, yes on 6 of 6: the three Fisher-Price ones
   were named Rock 'n Play, and the three Ingenuity ones were named Kids II rocking sleepers (Ingenuity is a Kids2
-  brand). The other four, with no brand in the photo, were all named Rock 'n Play: the type is right, and the brand
-  can't be checked from the photo.
+  brand). The other four, with no brand in the photo, were all named Rock 'n Play: the type agrees with the AI
+  reviewers' labels (one of them a less sure one), and the brand can't be checked from the photo.
 - **Why amber and never red.** The listing itself never names the product, so the card says to check the label. That
   is the rule: a photo alone can raise an alarm, and never a red one.
 - **The 2 misses.** "Baby rocking bed" was cleared by the device and its title has no sleep word, so the cloud was
   never asked. One "Baby sleeper" went to the cloud, which did not confirm it.
 - **The 8 flags among the other 20.** Three are 4moms swings and rockers, and the card names the 2022 MamaRoo and
   RockaRoo recall and asks for the version; the reviewers were not looking for those, and by the builder agent's
-  reading of the photos the brand is right (one photo shows the 4moms logo). The other five are look-alikes: toddler
-  rocker seats, a bouncer and a rocker napper, four of them named Rock 'n Play or Kids II. So about one ordinary "baby
-  rocker" listing in four gets an amber "check the label" it did not need. Bringing that down is next.
+  reading of the photos the brand is right (one photo shows the 4moms logo). On the other five the models disagree:
+  both AI reviewers called them ordinary rocker seats, a bouncer and a rocker napper, while Gemini in the cloud read
+  three as a Rock 'n Play and one as a Kids II sleeper, and flagged the fifth by type. No person has settled those
+  five. If the reviewers are right, about one ordinary "baby rocker" listing in four gets an amber "check the label"
+  it did not need. Bringing that down is next.
+- **Where the work ran.** On searches like these nearly every listing goes to the cloud: 29 of these 34, and 98 of
+  the 100 in section 32. Gemini Nano's part here is the first look and the field guide's answers; the 77% that never
+  leave the computer (sections 1 to 22) is the figure for mixed shopping pages.
 
 **How to read it.**
 - It is a floor and a snapshot: one day, seven searches, and only what Facebook shows logged out.
@@ -1751,9 +1758,61 @@ listed, " (43 of the 1,528), and the extension read it as part of the seller's t
 in `tests/extract.test.mjs`; 121 of 121 pass). The packed 0.17.1 release then passed the end-to-end test on a live
 Facebook Marketplace search for "baby rocker sleeper" in Chicago, **16 of 16**: 15 of 15 listings checked in 60 s, 14
 confirmed in the cloud with no errors, 6 badges for 6 flagged
-(`tools/e2e-report-release-facebook.json`; the 0.17.0 run on the lounger search is kept as
+(kept as `tools/e2e-report-release-facebook-0171.json`; the 0.17.0 run on the lounger search is
 `tools/e2e-report-release-facebook-0170.json`). The eBay and practice-listing reports are 0.17.0's; the only change
 since is this Facebook title fix.
+
+## 35. A tenth review, of 0.17.1, and release 0.17.2 (2026-11-25)
+
+**A tenth AI review (Claude, not a person)** read the whole entry after section 34 and scored it 4.0, 4.0, 3.5, 4.5
+(Technological Implementation, Design, Potential Impact, Quality of the Idea). It recomputed sections 32, 33 and 34
+from the saved files with the scoring scripts and by its own count: all matched. Stage One: every requirement met
+except the video.
+
+- **Technology went from 4.5 to 4.0, for a release mistake.** The 0.17.1 release on GitHub carried an old Android app
+  (0.13.1, from `dist/`), not the 0.16.1 app the site offers. Fixed the same hour: the release now holds the 0.16.1
+  app, checked byte for byte against the site's, and `scripts/deploy-web.mjs` now copies both downloads from one
+  place and refuses to deploy an extension that was not packed for the current version. The review also noted that
+  Gemini Nano adds little on hazard searches, where nearly every listing goes to the cloud (now said in section 34).
+- **Impact stayed at 3.5.** The review credits the three censuses and the 12 of 14, and holds against them that every
+  answer key is an AI's, no person has used the product, and the samples are 14 and 20. Its route to 4.0 is a
+  person's check of the 34 Facebook photos and the 100 census samples, and the video.
+
+**Claims corrected** (README and section 34):
+- "Among them were 14 inclined sleepers": 11 are in the confident 589; 14 is the count with best readings.
+- The five extra flags on ordinary rockers were called look-alikes; the cloud read four of them as a rocking sleeper
+  and both AI reviewers did not, so it is unsettled.
+- Counts now say how many listings are banned by law (32 of 589) and how many break only the site's rules (557).
+- "Results are kept for 7 days": they were ignored after 7 days and never deleted. Now they are deleted (below).
+- For the write-up, when it is cut: the tagline's "Gemini Nano screens" (listings whose words name a type skip Nano),
+  the 40 accessibility views (now 56), and the Facebook census are not in `docs/submission.md` yet.
+
+**Fixed in 0.17.2:**
+- **A badge on the right heading.** On Facebook an item opened over a search is a dialog; the badge was placed beside
+  the page's first heading, and now goes beside the dialog's (`detailHeading` in `extension/src/extract.js`, unit
+  test).
+- **Work no longer paid for twice.** Opening an item on Facebook changes the address while the search is still being
+  checked; results that arrived after that were dropped without being kept. They are now kept for the week.
+- **Old results are deleted.** Twice a day, results older than 7 days are removed from the browser's storage.
+- **The thorough setting sends less.** With "check every baby product in the cloud" on, a cleared listing the cloud
+  had already looked at was sent again. Now it is not.
+- **A red type flag says who saw it.** When the listing's words name a banned type and the cloud sees it, and Gemini
+  Nano raised nothing or was not asked, the reason no longer says "both models" (`shared/confirm.mjs`, unit test).
+
+**Tested on the packed 0.17.2 release:** Facebook Marketplace ("baby rocker sleeper", Dallas) **16 of 16**; the
+practice listings at /try **18 of 18** (17 listings checked in 30 s). Unit tests: 123. The eBay report is 0.17.0's.
+A first Facebook run of 0.17.2 scored 15 of 16: every listing on that page had already been to the cloud, so the
+thorough step found nothing new to send, and that is how the repeat sending above was found. The step now passes
+when there is nothing left to send (`tools/e2e.mjs`).
+
+**For a person's check.** `tools/label-review.html` now has the 34 Facebook photos as their own set ("the inclined
+sleepers and 20 others") and the 717 flagged Facebook listings. Photos are shown from the copies the census saved on
+this computer, since Marketplace photo addresses stop working after a while; the photos are not in the repository.
+
+**Not fixed, next:** the device's title rules have no "rocking" or "bed", the miss on "Baby rocking bed" in section 34
+(adding them now would be tuning on that test); the content script's page observer runs on all of facebook.com,
+reading nothing outside Marketplace; a signed-in Facebook run; the Firestore rule that lets any signed-in anonymous
+caller write a recall's field-guide card first.
 
 ## Reproduce
 

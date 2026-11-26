@@ -630,7 +630,7 @@ ${LOOKUP_SYSTEM}`;
     const cloudBanned = BANNED_TYPES.find((t) => t.key === cloud.banned_type) || null;
     const deviceBanned = device.kind === "banned" ? device.banned : null;
     if (cloudBanned && (hints.length || deviceBanned)) {
-      return { ...base2, level: "likely", kind: "banned", banned: hints[0] || cloudBanned, why: "both models see a product type that may no longer be sold", ...found ? { alsoRecall: found } : {} };
+      return { ...base2, level: "likely", kind: "banned", banned: hints[0] || cloudBanned, why: deviceBanned ? "both models see a product type that may no longer be sold" : "the listing's words name a product type that may no longer be sold, and the cloud sees it in the photo", ...found ? { alsoRecall: found } : {} };
     }
     if (found) {
       return { ...base2, level: "possible", kind: "recall", card: found, lookedUp: true, why: device.seen && found.id === device.seen.id ? "a brand was read in the photo on the device; its field guide had a recall for that brand and kind of product; the cloud saw the same product; the listing's words do not name it" : "the cloud named the product from the photo or the description; the field guide on the device had a recall for it; the listing itself does not name it" };

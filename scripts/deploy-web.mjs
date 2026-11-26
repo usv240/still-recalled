@@ -15,6 +15,9 @@ const packed = await version('dist/still-recalled-extension/manifest.json').catc
 if (packed !== want) throw new Error(`dist holds extension ${packed || 'nothing'}, the source is ${want}: run node scripts/pack-extension.mjs first`);
 await mkdir('web/download', { recursive: true });
 await copyFile('dist/still-recalled-extension.zip', 'web/download/still-recalled-extension.zip');
+// The Android app offered on the site is the one a GitHub release must carry too: keep dist's copy the same file
+// (0.17.1's release first went out with an older app from dist).
+await copyFile('web/download/still-recalled-android.apk', 'dist/still-recalled-android.apk');
 
 run(process.execPath, ['build.mjs'], { RELEASE: '1' });
 let token = '';

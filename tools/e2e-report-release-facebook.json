@@ -1,9 +1,9 @@
 {
-  "at": "2026-11-26T01:58:11.190Z",
-  "version": "0.17.1",
+  "at": "2026-11-26T02:25:00.622Z",
+  "version": "0.17.2",
   "ext": "dist/still-recalled-extension",
   "builtInModelProfile": false,
-  "url": "https://www.facebook.com/marketplace/chicago/search?query=baby%20rocker%20sleeper",
+  "url": "https://www.facebook.com/marketplace/dallas/search?query=baby%20rocker%20sleeper",
   "query": "baby lounger",
   "passed": 16,
   "failed": 0,
@@ -31,7 +31,7 @@
     {
       "name": "engine checks the listings",
       "ok": true,
-      "detail": "15 of 15 checked in 60 s"
+      "detail": "15 of 15 checked in 72 s"
     },
     {
       "name": "no engine errors",
@@ -41,7 +41,7 @@
     {
       "name": "cloud double-check runs",
       "ok": true,
-      "detail": "14 confirmed in the cloud, 0 cloud errors "
+      "detail": "15 confirmed in the cloud, 0 cloud errors "
     },
     {
       "name": "settings come from Remote Config",
@@ -71,12 +71,12 @@
     {
       "name": "thorough setting: turned on, the open page's baby products get the cloud's look",
       "ok": true,
-      "detail": "14 listings had been to the cloud, 15 after; 9 checked again; 6 flagged (6 before)"
+      "detail": "15 listings had been to the cloud, 43 after; 12 checked again; 10 flagged (6 before)"
     },
     {
       "name": "new recalls arrive from CPSC",
       "ok": true,
-      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 8 s"
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 7 s"
     },
     {
       "name": "new CPSC safety warnings arrive too",
@@ -94,7 +94,7 @@
     "written": 0,
     "shared": 9,
     "total": 9,
-    "checkedAt": "2026-11-26T01:56:08.565Z",
+    "checkedAt": "2026-11-26T02:22:04.275Z",
     "hits": 0,
     "cards": [
       {
@@ -152,60 +152,40 @@
         "guide": false
       }
     ],
-    "ms": 4254
+    "ms": 4419
   },
-  "cloudChecked": 14,
+  "cloudChecked": 15,
   "cloudErrors": [],
   "flagged": [
     {
       "level": "possible",
-      "badge": "Possible recall",
-      "title": "Baby Rocker",
-      "recall": "23088",
+      "badge": "Possible inclined sleeper",
+      "title": "Baby rocker",
+      "recall": "",
       "also": "",
-      "cloud": "gemini-4-hydrogen",
+      "cloud": "gemini-3.5-flash-lite",
       "device": false,
       "lookups": [
         {
           "asked": {
             "brand": "Fisher-Price",
             "model_number": "",
-            "product": "Rock 'n Play sleeper"
+            "product": "Infant-to-Toddler Rocker"
           },
           "found": [
             "23088",
             "19105"
           ]
-        }
-      ]
-    },
-    {
-      "level": "possible",
-      "badge": "Possible inclined sleeper",
-      "title": "baby rocker",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": []
-    },
-    {
-      "level": "possible",
-      "badge": "Possible inclined sleeper",
-      "title": "Baby rocker",
-      "recall": "",
-      "also": "",
-      "cloud": "gemini-4-hydrogen",
-      "device": false,
-      "lookups": [
+        },
         {
           "asked": {
-            "brand": "Summer Infant",
+            "brand": "Fisher-Price",
             "model_number": "",
             "product": "rocker sleeper"
           },
           "found": [
-            "W20-055"
+            "23088",
+            "19105"
           ]
         }
       ]
@@ -213,8 +193,50 @@
     {
       "level": "possible",
       "badge": "Possible recall",
-      "title": "Baby swing/Rocker",
-      "recall": "25009",
+      "title": "baby rocker",
+      "recall": "22200",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "4moms",
+            "model_number": "",
+            "product": "MamaRoo"
+          },
+          "found": [
+            "22200"
+          ]
+        }
+      ]
+    },
+    {
+      "level": "possible",
+      "badge": "Possible recall",
+      "title": "Baby rocker",
+      "recall": "19112",
+      "also": "",
+      "cloud": "gemini-4-hydrogen",
+      "device": false,
+      "lookups": [
+        {
+          "asked": {
+            "brand": "Kids II",
+            "model_number": "",
+            "product": "Ingenuity rocking sleeper"
+          },
+          "found": [
+            "19112"
+          ]
+        }
+      ]
+    },
+    {
+      "level": "possible",
+      "badge": "Possible recall",
+      "title": "Rocker",
+      "recall": "23088",
       "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
@@ -223,10 +245,11 @@
           "asked": {
             "brand": "Fisher-Price",
             "model_number": "",
-            "product": "Snuga Swing"
+            "product": "Rock 'n Play Sleeper"
           },
           "found": [
-            "25009"
+            "23088",
+            "19105"
           ]
         }
       ]
@@ -234,7 +257,7 @@
     {
       "level": "possible",
       "badge": "Possible inclined sleeper",
-      "title": "Baby Rocker-sleeper",
+      "title": "Baby rocker",
       "recall": "",
       "also": "",
       "cloud": "gemini-4-hydrogen",
@@ -245,32 +268,36 @@
       "level": "possible",
       "badge": "Possible recall",
       "title": "Baby rocker",
-      "recall": "23088",
+      "recall": "19112",
       "also": "",
       "cloud": "gemini-4-hydrogen",
       "device": false,
       "lookups": [
         {
           "asked": {
-            "brand": "Fisher-Price",
+            "brand": "Ingenuity",
             "model_number": "",
-            "product": "Rock 'n Play sleeper"
+            "product": "rocking sleeper"
           },
           "found": [
-            "23088",
-            "19105"
+            "19112"
           ]
         }
       ]
     }
   ],
   "thorough": {
-    "cloudBefore": 14,
-    "cloudAfter": 15,
-    "recheckedListings": 9,
+    "cloudBefore": 15,
+    "cloudAfter": 43,
+    "recheckedListings": 12,
     "flaggedBefore": 6,
-    "flaggedAfter": 6,
-    "newlyFlagged": []
+    "flaggedAfter": 10,
+    "newlyFlagged": [
+      "Possible lounger: Rocking baby crib",
+      "Possible inclined sleeper: Baby bouncer",
+      "Possible lounger: Baby items",
+      "Possible recall: Baby sleeper"
+    ]
   },
   "live": {
     "out": {
@@ -278,12 +305,12 @@
       "written": 0,
       "shared": 20,
       "total": 20,
-      "checkedAt": "2026-11-26T01:58:04.138Z",
+      "checkedAt": "2026-11-26T02:24:54.087Z",
       "hits": 1
     },
-    "ms": 7802,
+    "ms": 6811,
     "alert": {
-      "at": "2026-11-26T01:58:10.539Z",
+      "at": "2026-11-26T02:24:59.852Z",
       "badge": "Recalled product",
       "confirmed": true,
       "level": "likely",

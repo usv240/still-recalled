@@ -152,6 +152,15 @@ export function listingsOnPage(doc = document, loc = location) {
   return { site: site.site, listings: [...byId.values()].filter(l => l.title) };
 }
 
+/** The heading a badge goes beside on an item page: the item's own, which on Facebook is the open dialog's. */
+export function detailHeading(doc = document, loc = location) {
+  const site = readable(loc);
+  if (!site || !site.item.test(loc.href)) return null;
+  const dialog = site.site === 'facebook' ? [...doc.querySelectorAll('[role=dialog]')].reverse().find(d => d.querySelector('h1')) : null;
+  const main = dialog || doc.querySelector('main, #mainContent, [role=main]') || doc.body;
+  return [...main.querySelectorAll('h1')].find(h => { const t = clean(h.textContent); return t && !/^(marketplace|search results|notifications)$/i.test(t); }) || null;
+}
+
 /** The single listing on an item page, with its description. Null on other pages. */
 export function listingDetail(doc = document, loc = location) {
   const site = readable(loc);

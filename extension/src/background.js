@@ -45,6 +45,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 // seen before is checked again, since it may be one of them.
 let liveStamp = 0;
 const liveStampReady = chrome.storage.local.get('live').then(({ live }) => { liveStamp = (live && live.cards.length) || 0; });
+const unseenByCloud = r => r.level === 'none' && !r.thorough && !(r.how && r.how.cloudModel);
 const cacheKey = (site, id) => `r:${PIPELINE}.${liveStamp}:${site}:${id}`;
 
 async function getTab(tabId) {
@@ -86,13 +87,14 @@ async function onPage(tabId, page) {
     const now = Date.now();
     for (const l of page.listings) {
       // With "check every baby product in the cloud" on, a listing that was cleared without the cloud's look is
-      // checked again; one that got it, or was flagged, is not.
+      // checked again; one that got it (under this setting, or because the device or the unnamed-sleep rule sent it),
+      // or was flagged, is not.
       const had = state.results[l.id];
-      if (state.pending[l.id] || (had && !(thorough && had.level === 'none' && !had.thorough))) continue;
+      if (state.pending[l.id] || (had && !(thorough && unseenByCloud(had)))) continue;
       if (had) delete state.results[l.id];
       const order = state.order++;
       const cached = (await chrome.storage.local.get(cacheKey(page.site, l.id)))[cacheKey(page.site, l.id)];
-      const redo = thorough && cached && cached.level === 'none' && !cached.thorough;
+      const redo = thorough && cached && unseenByCloud(cached);
       if (cached && !redo && now - Date.parse(cached.checkedAt) < CACHE_DAYS * 864e5) {
         state.results[l.id] = { ...cached, order, cached: true };
       } else {
@@ -112,6 +114,13 @@ async function onPage(tabId, page) {
 }
 
 async function onResult(tabId, pageKey, result) {
+  // A result whose model call failed (the cloud, or the built-in model timing out) is shown but not kept for the
+  // week: the next visit checks the listing again. A good result is kept even when the tab has moved on (opening an
+  // item on Facebook changes the address while its search is still being checked), so that work is not paid for twice.
+  if (result.level !== 'error' && !(result.how && (result.how.cloudError || result.how.deviceError))) {
+    const { order, ...stored } = result;
+    chrome.storage.local.set({ [cacheKey(pageKey.slice(0, pageKey.indexOf(':')), result.id)]: stored }).catch(() => {});
+  }
   const state = await withTab(tabId, async state => {
     if (!state || state.pageKey !== pageKey) return null;
     delete state.pending[result.id];
@@ -119,12 +128,6 @@ async function onResult(tabId, pageKey, result) {
     return state;
   });
   if (!state) return;
-  // A result whose model call failed (the cloud, or the built-in model timing out) is shown but not kept for the
-  // week: the next visit checks the listing again.
-  if (result.level !== 'error' && !(result.how && (result.how.cloudError || result.how.deviceError))) {
-    const { order, ...stored } = result;
-    chrome.storage.local.set({ [cacheKey(state.site, result.id)]: stored }).catch(() => {});
-  }
   if (result.level === 'likely' || result.level === 'possible') sendToTab(tabId, [result]);
   // Nothing to show: take the "still checking" pill off the listing.
   else chrome.tabs.sendMessage(tabId, { type: 'sr:stage', id: result.id, stage: 'done' }).catch(() => {});
@@ -221,7 +224,15 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
   refreshRecalls().catch(() => {});
 });
 chrome.runtime.onStartup.addListener(ensureAlarm);
-chrome.alarms.onAlarm.addListener(a => { if (a.name === REFRESH) refreshRecalls().catch(() => {}); });
+chrome.alarms.onAlarm.addListener(a => { if (a.name === REFRESH) { refreshRecalls().catch(() => {}); forgetOldResults().catch(() => {}); } });
+
+// Results are kept for CACHE_DAYS and then deleted, not only ignored (twice a day, with the recall refresh).
+async function forgetOldResults(now = Date.now()) {
+  const all = await chrome.storage.local.get(null);
+  const old = Object.keys(all).filter(k => k.startsWith('r:') && !(now - Date.parse(all[k] && all[k].checkedAt) < CACHE_DAYS * 864e5));
+  if (old.length) await chrome.storage.local.remove(old);
+  return old.length;
+}
 
 let refreshing = null;
 function refreshRecalls() {

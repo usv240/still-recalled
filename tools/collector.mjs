@@ -4,6 +4,7 @@
 //   POST /live-results      results of the live pipeline test          -> tools/live-results.json
 //   POST /save-as?name=N    any test run's results                     -> tools/N.json
 //   GET  /img?u=URL         fetches a listing photo so a local test page can read its pixels
+//   GET  /photo?id=ID       a census photo saved on this computer (PHOTOS folder, default E:/sr-census-fb/img)
 //   GET  /anything-else     static files from the project folder
 // Usage: node tools/collector.mjs
 import http from 'node:http';
@@ -48,6 +49,14 @@ http.createServer(async (req, res) => {
       all[url.searchParams.get('q') || 'unnamed'] = JSON.parse(await body(req));
       await writeFile(file, JSON.stringify(all, null, 1));
       res.writeHead(200).end('saved ' + Object.keys(all).length); return;
+    }
+    if (req.method === 'GET' && url.pathname === '/photo') {
+      // Marketplace photo addresses stop working after a while; the census saved a copy of each (not in the repo).
+      const id = url.searchParams.get('id') || '';
+      if (!/^[A-Za-z0-9_-]{1,40}$/.test(id)) { res.writeHead(400).end('bad id'); return; }
+      const data = await readFile(path.join(process.env.PHOTOS || 'E:/sr-census-fb/img', `${id}.jpg`)).catch(() => null);
+      if (!data) { res.writeHead(404).end(); return; }
+      res.writeHead(200, { 'Content-Type': 'image/jpeg' }).end(data); return;
     }
     if (req.method === 'GET' && url.pathname === '/img') {
       const target = new URL(url.searchParams.get('u'));

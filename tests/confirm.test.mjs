@@ -137,3 +137,11 @@ test('the cloud asks the device: a recall it names counts only when the device r
   const none = decideFinal(device, cloud, [{ key: 'inclined_sleeper' }]);
   assert.equal(none.kind, 'banned');
 });
+
+test('a red banned-type flag says who saw it: both models, or the words and the cloud when the device did not', () => {
+  assert.match(decideFinal(bannedFlag, cloud({ banned_type: 'in_bed_sleeper' }), [lounger]).why, /^both models see/);
+  // The device raised nothing (or was never asked); the listing's words name the type and the cloud sees it.
+  const wordsAndCloud = decideFinal({ level: 'none', kind: null, card: null, banned: null, why: '' }, cloud({ banned_type: 'in_bed_sleeper' }), [lounger]);
+  assert.equal(wordsAndCloud.level, 'likely');
+  assert.match(wordsAndCloud.why, /^the listing's words name/);
+});

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { siteFor, siteOfUrl, facebookTitle, largerPhoto } from '../extension/src/extract.js';
+import { siteFor, siteOfUrl, facebookTitle, detailHeading, largerPhoto } from '../extension/src/extract.js';
 
 test('search-page thumbnails: eBay photos are asked for at 500 px, other hosts left alone', () => {
   assert.equal(largerPhoto('https://i.ebayimg.com/images/g/okwAAeSwI8Nq-gCd/s-l140.webp'), 'https://i.ebayimg.com/images/g/okwAAeSwI8Nq-gCd/s-l500.webp');
@@ -43,4 +43,16 @@ test('Facebook Marketplace card titles: no price, place or listing number', () =
   // A price cut shows two prices; with no name on the link, the lines are read.
   assert.equal(facebookTitle(link('', '$15$25\nRock n Play sleeper\nTampa, FL\n12 mi')), 'Rock n Play sleeper');
   assert.equal(facebookTitle(link('', '', 'Infant lounger in Pineville, NC')), 'Infant lounger');
+});
+
+test('Facebook item opened over a search: the badge goes beside the dialog heading, not the page heading', () => {
+  const h = text => ({ textContent: text });
+  const box = hs => ({ querySelector: () => hs[0] || null, querySelectorAll: () => hs });
+  const pageH1 = h('Marketplace'), itemH1 = h('Baby rocker/sleeper');
+  const doc = { querySelectorAll: sel => (sel === '[role=dialog]' ? [box([]), box([itemH1])] : []), querySelector: () => box([pageH1]), body: box([pageH1]) };
+  assert.equal(detailHeading(doc, new URL('https://www.facebook.com/marketplace/item/1585118663632896/')), itemH1);
+  // An item page of its own: the first heading that is not Facebook's own.
+  const own = { querySelectorAll: () => [], querySelector: () => box([pageH1, itemH1]), body: box([]) };
+  assert.equal(detailHeading(own, new URL('https://www.facebook.com/marketplace/item/1585118663632896/')), itemH1);
+  assert.equal(detailHeading(doc, new URL('https://www.facebook.com/marketplace/chicago/search?query=x')), null);
 });

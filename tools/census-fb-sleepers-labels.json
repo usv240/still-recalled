@@ -1,0 +1,209 @@
+{
+ "labeller": "AI reviewers (Claude), 2026-11-25: title and photo, then a second reviewer on photos only",
+ "labels": {
+  "1585118663632896": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep sling between rails, hard headrest, auto-rock unit on leg"
+  },
+  "3208006359392321": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep sling between rails, hard headrest, puppy insert"
+  },
+  "1348111227506293": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "harnessed deep cradle on rocker legs"
+  },
+  "1174997201767460": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep sling between rails, folding rocker legs, vibration unit"
+  },
+  "1096853282889461": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "mamaRoo swing"
+  },
+  "1148580157831243": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "infant rocker seat"
+  },
+  "1669683591344753": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "infant-to-toddler rocker"
+  },
+  "1050165194735974": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "rocker napper used as storage"
+  },
+  "1022209174033970": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep cradle, harness insert, projector arm, rocker legs"
+  },
+  "1712509170204761": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "baby swing"
+  },
+  "2826161497785411": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "rocker seat pad on plastic frame"
+  },
+  "2095867011048703": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "glider swing"
+  },
+  "1556542876232192": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "several baby swings"
+  },
+  "1454966063237555": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "harnessed sleeper cradle on low rocker feet"
+  },
+  "4324781787836955": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep mesh-sided cradle on folding rocker legs"
+  },
+  "2939611863070739": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "electric swing seat"
+  },
+  "3309399642783600": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "rocker seat with head support"
+  },
+  "1997390847598284": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "bouncer seat"
+  },
+  "4488709624687196": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "box reads Moonlight Rocking Sleeper, pictures baby in sleeper"
+  },
+  "1463123332617566": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "glider swing"
+  },
+  "1143128524980986": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "swing seat with net"
+  },
+  "2437085110100888": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "rocker seat on round base"
+  },
+  "892718500129348": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep harnessed cradle with canopy; titled sleeper"
+  },
+  "1444799477774312": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "mesh-sided plush cradle with harness and power cord"
+  },
+  "30482966784637106": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep mesh-sided cradle on rocker frame, logo hub"
+  },
+  "4471193946486941": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "bouncer seat close-up"
+  },
+  "1679087727348247": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "bedside bassinet"
+  },
+  "1593559792571397": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "bedside bassinet, store screenshot"
+  },
+  "2537364106676397": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep sling between side rails, rigid head end, tube legs"
+  },
+  "1862643301540182": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "deep harnessed cradle with canopy on folding legs"
+  },
+  "4552380765081886": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "plush rocking toys"
+  },
+  "1071893385240953": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "baby swing"
+  },
+  "1485563432885066": {
+   "type": "inclined_sleeper",
+   "is_it": "yes",
+   "photo_checked": true,
+   "why": "harnessed sleeper cradle on low rocker frame"
+  },
+  "1532655528700015": {
+   "type": "other",
+   "is_it": "no",
+   "photo_checked": true,
+   "why": "boxed Kori rocker"
+  }
+ }
+}

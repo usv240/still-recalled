@@ -203,8 +203,11 @@ try {
     const after = viaCloud(st);
     const stamped = st ? Object.values(st.results).filter(r => r.thorough).length : 0;
     const flaggedNow = st ? Object.values(st.results).filter(r => r.level === 'possible' || r.level === 'likely').length : 0;
-    step('thorough setting: turned on, the open page\'s baby products get the cloud\'s look', after > before && stamped > 0 && flaggedNow >= flagged.length,
-      `${before} listings had been to the cloud, ${after} after; ${stamped} checked again; ${flaggedNow} flagged (${flagged.length} before)`);
+    // On a page where the cloud has already looked at every listing there is nothing left to send, and nothing is.
+    const total = st ? Object.keys(st.results).length : 0;
+    const nothingLeft = before >= total && stamped === 0;
+    step('thorough setting: turned on, the open page\'s baby products get the cloud\'s look', flaggedNow >= flagged.length && (nothingLeft || (after > before && stamped > 0)),
+      `${before} listings had been to the cloud, ${after} after; ${stamped} checked again${nothingLeft ? ' (every listing already had the cloud\'s look)' : ''}; ${flaggedNow} flagged (${flagged.length} before)`);
     results.thorough = { cloudBefore: before, cloudAfter: after, recheckedListings: stamped, flaggedBefore: flagged.length, flaggedAfter: flaggedNow,
       newlyFlagged: st ? Object.values(st.results).filter(r => (r.level === 'possible' || r.level === 'likely') && !flagged.some(f => f.id === r.id)).map(r => `${r.badge}: ${r.listing.title}`) : [] };
     await setThorough(false);

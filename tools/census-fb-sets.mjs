@@ -14,4 +14,12 @@ const others = shuffle(ids.filter(id => labels[id].is_it === 'no' && census.list
 writeFileSync('tools/census-fb-inclined-listings.json', JSON.stringify({ 'census facebook: inclined, left open by words': inclined.map(id => row(id, 'census facebook: inclined, left open by words')) }, null, 1));
 writeFileSync('tools/census-fb-rockers-listings.json', JSON.stringify({ 'census facebook: other rockers': others.map(id => row(id, 'census facebook: other rockers')) }, null, 1));
 writeFileSync('tools/census-fb-blind.json', JSON.stringify({ order: shuffle([...inclined, ...others]) }, null, 1));
+// The same 34 as a set for a person's check in tools/label-review.html (set "census-fb-sleepers").
+const blind = read('tools/census-fb-blind.json').order;
+const asFlagged = id => { const l = census.listings[id]; return { id, site: 'facebook', city: l.city, title: l.title.replace(/^Just listed,\s*/i, ''), price: l.price || '', url: l.url, image: l.image }; };
+writeFileSync('tools/census-fb-sleepers-flagged.json', JSON.stringify({ at: census.at, flagged: blind.map(asFlagged) }, null, 1));
+writeFileSync('tools/census-fb-sleepers-labels.json', JSON.stringify({
+  labeller: 'AI reviewers (Claude), 2026-11-25: title and photo, then a second reviewer on photos only',
+  labels: Object.fromEntries(blind.map(id => [id, { type: labels[id].type === 'inclined_sleeper' ? 'inclined_sleeper' : 'other', is_it: labels[id].type === 'inclined_sleeper' ? 'yes' : 'no', photo_checked: true, why: labels[id].why }])),
+}, null, 1));
 console.log(`${inclined.length} inclined, ${others.length} others`);

@@ -184,7 +184,7 @@ function decideWithCloud(device, cloud, hints, lookedUp) {
   const deviceBanned = device.kind === 'banned' ? device.banned : null;
   if (cloudBanned && (hints.length || deviceBanned)) {
     // Trust the listing's words for which type when there are any; models confuse look-alike types.
-    return { ...base, level: 'likely', kind: 'banned', banned: hints[0] || cloudBanned, why: 'both models see a product type that may no longer be sold', ...(found ? { alsoRecall: found } : {}) };
+    return { ...base, level: 'likely', kind: 'banned', banned: hints[0] || cloudBanned, why: deviceBanned ? 'both models see a product type that may no longer be sold' : "the listing's words name a product type that may no longer be sold, and the cloud sees it in the photo", ...(found ? { alsoRecall: found } : {}) };
   }
   if (found) {
     return { ...base, level: 'possible', kind: 'recall', card: found, lookedUp: true, why: device.seen && found.id === device.seen.id

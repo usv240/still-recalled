@@ -1,6 +1,6 @@
 // Runs on marketplace pages: reads the listings, sends them to be checked, and puts a badge on each flagged one.
 // The badge and its popover live in a closed shadow root, so the page's styles and scripts cannot reach them.
-import { listingsOnPage, listingDetail, siteFor } from './extract.js';
+import { listingsOnPage, listingDetail, detailHeading, siteFor } from './extract.js';
 import { addFonts, buildBadge, buildPending, attachBadge } from './ui/badge.js';
 
 const site = siteFor(location.hostname);
@@ -68,7 +68,7 @@ function scan() {
   const fresh = [];
   const detail = listingDetail();
   if (detail) {
-    const heading = document.querySelector('h1');
+    const heading = detailHeading() || document.querySelector('h1');
     if (heading) cards.set(detail.id, { el: heading, inline: true });
     if (!sent.has(detail.id)) { sent.add(detail.id); fresh.push(detail); }
   }

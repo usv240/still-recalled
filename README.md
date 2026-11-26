@@ -46,11 +46,16 @@ it cleared 24 (section 32).
 areas: searches for "rock n play", "crib bumper" and "boppy lounger" all answered "No listings found", 90 of 90. Under
 other words ("baby lounger", "baby nest", "baby rocker sleeper", "baby bumper pads") the first results held **589
 loungers, padded bumpers and inclined sleepers, asking $15,790**, in every one of the 30 areas, by AI reviewers who
-looked at each photo (723 with their less sure calls). Among them were 14 inclined sleepers, the type the Rock 'n Play
-is, under titles like "Baby rocker/sleeper, $10"; a second AI reviewer, shown photos only, agreed on all of them.
-Word rules flag none of the 14. Still Recalled flagged 12, all as an amber "check the label", and on 10 its card names
-a rocking-sleeper recall (Rock 'n Play on 7). On 20 other results of that search it flagged 8, also amber: 3 are 4moms
-swings with a real 2022 recall, 5 are look-alike rockers. A person checking the labels is next (section 34).
+looked at each photo (723 with their less sure calls). 32 of the 589 are banned from sale by law whatever their age
+(21 padded bumpers, 11 inclined sleepers); the 557 loungers break Facebook's own policy, and CPSC says they are never
+for sleep. The reviewers found 14 inclined sleepers in all, the type the Rock 'n Play is (11 of them confident calls),
+under titles like "Baby rocker/sleeper, $10"; a second AI reviewer, shown photos only, agreed on all of them. Word
+rules flag none of the 14. Still Recalled flagged 12, all as an amber "check the label", and on 10 its card names a
+rocking-sleeper recall (Rock 'n Play on 7). On 20 other results of that search it flagged 8, also amber: 3 are 4moms
+swings with a real 2022 recall, and 5 are rockers the reviewers called ordinary (the cloud read 4 of them as a
+rocking sleeper; no person has settled those). On searches like these nearly every listing goes to the cloud (98 of
+the 100 census listings, 29 of these 34): the 77% that never leave the computer is the figure for mixed shopping
+pages. A person checking the labels is next (section 34).
 
 **And it keeps watching what you bought.** Recall notices reach the first owner, not the next one: Kids In Danger found
 that only 22% of the children's products recalled in 2022 that it could analyze were ever returned, replaced or
@@ -425,7 +430,7 @@ What protects the project's model quota:
 - A flagged listing's title, description, price and photo are sent to Gemini through Firebase AI Logic, with the recall
   notice, for the double check. You can turn the cloud check off in the side panel's settings. A second setting, off
   by default, sends every baby product on a page for the cloud's look.
-- No accounts and no tracking. Results are kept in the browser for 7 days.
+- No accounts and no tracking. Results are kept in the browser for 7 days, then deleted.
 - The full policy: [still-recalled.web.app/privacy.html](https://still-recalled.web.app/privacy.html).
 
 ## Data and credits
