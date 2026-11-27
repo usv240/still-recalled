@@ -111,12 +111,14 @@ Everything is in `scripts/demo/`. The recordings and the finished video are kept
   recalled January 2023 (recall 23088)" and ends "asked the recall field guide on this device, which had it."
 - **Added in the edit:** a panel headed "How an unnamed listing gets its recall", with three steps that light up as
   they are spoken, using the real call from the release test report:
-  1. **Risk detected** · on the laptop · the word rules read the title: a banned product type. No brand, no model.
+  1. **Risk detected** · on the laptop · the word rules read the title: a banned type. No brand, no model.
   2. **Product recognised** · in the cloud · Gemini sees the product in the photo.
   3. **Recall retrieved** · the cloud asks the laptop · the laptop's field guide of 10,089 notices answers.
-  Under them, as the largest thing on screen: "Firebase AI Logic function calling",
-  `lookup_recalls("Fisher-Price", "Rock 'n Play sleeper")`, "→ recall 23088". Last line: "Our code shows only
-  recalls the guide returned."
+  Under them, a black box headed "Firebase AI Logic function calling", with the call's two legs: "Cloud → laptop",
+  `lookup_recalls("Fisher-Price", "Rock 'n Play sleeper")`, then "Laptop → cloud" and the answer, **23088**, as the
+  largest thing on screen, arriving as it is spoken: "recall retrieved from the laptop's field guide". The
+  arguments and the answer are read from the recording's own check. Last line: "Our code shows only recalls the
+  guide returned."
 - **Smart use of each part:** this title names the product type, so the word rules settle that at once and no model
   call is spent on it. Gemini Nano does its part in scenes 2, 5 and 6.
 - **Say:** **"This title has no brand and no model: nothing to look a recall up by. The laptop's word rules see
@@ -132,8 +134,9 @@ Everything is in `scripts/demo/`. The recordings and the finished video are kept
 - **Recorded (take `label`):** the page of "Baby Trend Tango Mini compact stroller, gray" with its amber badge
   "Possible recall". The pointer clicks the badge, then **Add label photo** under "Settle it with the label", and
   the practice label photo is added. The answer arrives: "The label matches the recall".
-- **Added in the edit:** a panel of three facts beside the card, "Read from the label: Model ST31D11A", "CPSC
-  recall 20052: four model numbers" and "Compared in code: the label matches the recall". The answer is held for
+- **Added in the edit:** a panel of four facts beside the card, arriving in order: "Read from the label: Model
+  ST31D11A", "CPSC recall 20052, four model numbers: ST31D11A is one of them", "Compared in code: the label matches
+  the recall" and "What the card says: don't buy it unless the fix was done". The answer is held for more than
   three seconds after the words end, and a chip gives the real time the label took to read.
 - **Say:** **"The card says what to do next: ask the seller, or report the listing. And when a photo can't settle
   it, like this stroller recalled for four model numbers only, add the label. Gemini reads the model number, code
@@ -160,8 +163,10 @@ Everything is in `scripts/demo/`. The recordings and the finished video are kept
   card follows.
 - **Recorded (take `page-cloud`):** the same page and the same click in a new Chrome profile with no built-in
   model. The step line reads "Read in the cloud", and the same result follows.
-- **Added in the edit:** the heading "One Firebase AI Logic call" with `PREFER_ON_DEVICE`, both step lines
-  outlined, each pane's real time under it, and, once both results are up, "Same code. Same photo. Same answer."
+- **Added in the edit:** the heading "One Firebase AI Logic call" with `PREFER_ON_DEVICE`; both step lines
+  outlined; and under each pane, in large type, the page's own words for where the read ran, "Read on this device"
+  and "Read in the cloud", with the real seconds. Both stay up beside the results, which hold for more than three
+  seconds with "Same code. Same photo. Same answer."
 - **Why this is the real fallback:** it is one page making one `PREFER_ON_DEVICE` call, and each line prints the
   source Firebase AI Logic reported. The same two outcomes were checked by hand on the live site on November 26,
   2026 (`docs/accuracy.md`, section 38).
@@ -175,10 +180,11 @@ Everything is in `scripts/demo/`. The recordings and the finished video are kept
   then **baby rocker sleeper**, with Still Recalled's "Possible recall" badges on the photos. Each search is named
   in a chip at the top left.
 - **Recorded (take `market`):** signed out, in a new profile with the extension installed. The recorder waits until
-  the badges have settled, then frames them. No listing is opened.
+  the badges have settled, then frames them. No listing is opened. On the "no listings" page the edit covers the
+  site's own drawing and button, so the picture keeps the site's words only.
 - **Added in the edit:** an outline on each badge, then the number **842**: "listings identified as banned or
   prohibited products. Three marketplaces. One day. Identified by AI reviewers from each listing's title and photo.
-  Method: docs/accuracy.md".
+  Method: docs/accuracy.md", in type large enough to read at a glance.
 - **Screen, second half:** one card headed "Why hybrid works better". It stays up for the whole second half and holds three
   seconds after the last word:
   - **775** real listings tested
@@ -187,8 +193,8 @@ Everything is in `scripts/demo/`. The recordings and the finished video are kept
   - two small charts: "False alarms · lower is better, among 630 listings that were fine" (word rules 109,
     built-in model only 64, hybrid 12) and "Caught · higher is better, of 83 listings that should be flagged"
     (47, 51, 65)
-  - under them: "Five blind tests on real listings. Answer keys by AI reviewers; scored on the 713 listings they
-    settled. Method and every result: docs/accuracy.md"
+  - under them, in bold: "Five blind tests on real listings. Answer keys by AI reviewers." Then: "Scored on the
+    713 listings they settled. Method and every result: docs/accuracy.md"
 - **Say:** **"Is the need real? On a real marketplace today, the recalled sleeper's name returns nothing, but
   "baby rocker sleeper" returns these. In one day, AI reviewers identified 842 banned or prohibited listings on
   three sites. And across 775 real listings, AI-labelled, the hybrid cut false alarms by 89 percent against word

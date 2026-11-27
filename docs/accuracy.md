@@ -1950,7 +1950,8 @@ from the recording it sits on:
   on the live site turns away an automated Chrome, as it is meant to, so the recorder uses the local build with App
   Check's debug provider. The same two outcomes on the live site, checked by hand, are in section 38.
 - **The marketplace recording** hides the site's header and side column and blurs the sellers' photos and town
-  names before the first frame is saved. No listing is opened and no link is kept.
+  names before the first frame is saved. The edit covers the site's own drawing and button on its "no listings"
+  page. No listing is opened and no link is kept.
 - **The recordings with Gemini Nano** (the web page reading on the device, and the extension's "Looking on this
   computer" step) are made by `bash scripts/demo/nano-takes.sh`, which waits until the computer has the memory the
   model needs and no other Chrome is running it.

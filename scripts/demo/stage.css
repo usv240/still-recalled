@@ -60,7 +60,10 @@ p, h2, h3 { margin: 0; }
 .fb-head code { display: inline-block; margin-top: 30px; font: 600 30px/1 Consolas, ui-monospace, monospace; background: #252528; border-radius: 10px; padding: 14px 16px; }
 .fb-head .sub { font: 400 32px/1.3 Geist; color: #a8a8ad; margin-top: 30px; }
 .pane-tag { position: absolute; font: 600 34px/1.15 Geist; }
-.pane-took { position: absolute; font: 400 34px/1.15 Geist; color: #a8a8ad; }
+.pane-ran { position: absolute; font: 600 44px/1 Geist; letter-spacing: -0.01em; padding: 15px 22px 17px; border-radius: 14px; white-space: nowrap; }
+.pane-ran.is-device { background: #ededed; color: #0e0e0f; }
+.pane-ran.is-cloud { background: var(--cloud-bg); color: var(--cloud-ink); }
+.pane-took { position: absolute; font: 400 30px/1.15 Geist; color: #a8a8ad; }
 .pane-took b { color: #ededed; font-weight: 600; }
 .pane-missing { position: absolute; border: 2px dashed #46464b; border-radius: 26px; display: grid; place-items: center; text-align: center; padding: 40px; font: 500 32px/1.3 Geist; color: #a8a8ad; }
 .ring.is-light { box-shadow: 0 0 0 4px #ededed, 0 0 0 8px rgba(14, 14, 15, 0.9); }
@@ -70,22 +73,23 @@ p, h2, h3 { margin: 0; }
 .bignum { position: absolute; left: 150px; top: 200px; width: 1500px; }
 .bignum .n { font: 600 330px/0.9 Geist; letter-spacing: -0.045em; color: var(--likely); font-variant-numeric: tabular-nums; }
 .bignum .l { font: 600 62px/1.1 Geist; letter-spacing: -0.02em; margin-top: 26px; max-width: 1300px; text-wrap: balance; }
-.bignum .s { font: 400 30px/1.3 Geist; color: var(--muted); margin-top: 26px; }
+.bignum .s { font: 500 36px/1.3 Geist; color: var(--text); margin-top: 28px; max-width: 1300px; }
+.cover { position: absolute; background: rgb(243, 244, 248); }
 .proofcard { position: absolute; inset: 0; padding: 56px 120px 0; }
 .proofcard .eyebrow { font-size: 40px; color: var(--text); }
 .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 26px; }
 .tile .n { font: 600 196px/0.92 Geist; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
 .tile .l { font: 500 38px/1.18 Geist; color: var(--muted); margin-top: 12px; max-width: 500px; }
-.charts { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 46px; }
-.chart h3 { font: 500 32px/1.2 Geist; color: var(--muted); margin-bottom: 14px; }
-.chart .row { display: grid; grid-template-columns: 320px 1fr; align-items: center; column-gap: 16px; height: 62px; }
-.chart .lab { font: 400 34px/1 Geist; }
-.chart .track { display: flex; align-items: center; gap: 16px; height: 34px; }
-.chart .bar { display: block; height: 34px; width: 0; border-radius: 0 4px 4px 0; background: var(--quiet); }
+.charts { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 34px; }
+.chart h3 { font: 500 34px/1.2 Geist; color: var(--muted); margin-bottom: 12px; }
+.chart .row { display: grid; grid-template-columns: 350px 1fr; align-items: center; column-gap: 16px; height: 70px; }
+.chart .lab { font: 400 38px/1 Geist; }
+.chart .track { display: flex; align-items: center; gap: 18px; height: 40px; }
+.chart .bar { display: block; height: 40px; width: 0; border-radius: 0 4px 4px 0; background: var(--quiet); }
 .chart .bar.is-h { background: var(--primary); }
-.chart .val { font: 600 40px/1 Geist; font-variant-numeric: tabular-nums; }
-.fine { font: 400 32px/1.35 Geist; color: var(--muted); margin-top: 34px; }
-.fine b { color: var(--text); font-weight: 500; }
+.chart .val { font: 600 46px/1 Geist; font-variant-numeric: tabular-nums; }
+.fine { font: 400 36px/1.32 Geist; color: var(--muted); margin-top: 26px; }
+.fine b { color: var(--text); font-weight: 600; }
 
 /* Scene 9: the close */
 .closing { position: absolute; inset: 0; background: var(--ground); display: flex; flex-direction: column; justify-content: center; padding: 0 190px 110px; }
@@ -103,18 +107,21 @@ p, h2, h3 { margin: 0; }
 /* Scene 3: three steps and the function call */
 .panel.is-three { padding: 26px 34px 22px; }
 .panel.is-three .eyebrow { margin-bottom: 6px; }
-.b3 { padding: 13px 0 14px; border-top: 1px solid var(--rule); }
+.b3 { padding: 10px 0 11px; border-top: 1px solid var(--rule); }
 .b3 .no { display: inline-block; font: 600 22px/1 Geist; padding: 8px 11px 9px; border-radius: 8px; }
 .b3 .no.is-device { background: var(--primary); color: #fff; }
 .b3 .no.is-cloud { background: var(--cloud-bg); color: var(--cloud-ink); }
 .b3 .no.is-both { box-shadow: inset 0 0 0 2px var(--primary); }
-.b3 h3 { font: 600 44px/1.1 Geist; letter-spacing: -0.02em; margin-top: 9px; }
-.b3 p { font: 400 27px/1.3 Geist; color: var(--muted); margin-top: 4px; }
-.call { margin-top: 6px; background: var(--primary); color: #fff; border-radius: 14px; padding: 18px 22px 20px; }
-.call .lab { font: 600 23px/1 Geist; color: #c9c9c9; }
-.call code { display: block; margin-top: 12px; font: 500 26px/1.2 Consolas, ui-monospace, monospace; }
-.call .ans { font: 600 56px/1 Geist; letter-spacing: -0.02em; margin-top: 12px; }
-.call .ans b { color: #ff8f8a; font-variant-numeric: tabular-nums; }
+.b3 h3 { font: 600 40px/1.1 Geist; letter-spacing: -0.02em; margin-top: 8px; }
+.b3 p { font: 400 25px/1.3 Geist; color: var(--muted); margin-top: 3px; white-space: nowrap; }
+.call { margin-top: 6px; background: var(--primary); color: #fff; border-radius: 14px; padding: 18px 22px 16px; }
+.call .lab { font: 600 24px/1 Geist; color: #fff; }
+.call .leg { margin-top: 14px; }
+.call .dir { display: block; font: 600 21px/1 Geist; color: #b9b9b9; }
+.call code { display: block; margin-top: 7px; font: 500 24px/1.2 Consolas, ui-monospace, monospace; white-space: nowrap; }
+.call .ans { display: flex; align-items: center; gap: 22px; margin-top: 2px; }
+.call .ans b { font: 600 124px/0.94 Geist; letter-spacing: -0.04em; color: #ff8f8a; font-variant-numeric: tabular-nums; }
+.call .ans span { font: 500 28px/1.22 Geist; color: #e4e4e4; white-space: nowrap; }
 .panel.is-three .foot { border-top: 0; padding-top: 12px; font: 500 26px/1.3 Geist; color: var(--text); }
 
 /* Scene 4: the label check, in three facts */
@@ -123,6 +130,7 @@ p, h2, h3 { margin: 0; }
 .fact span { display: block; font: 500 26px/1.2 Geist; color: var(--muted); }
 .fact b { display: block; font: 600 46px/1.12 Geist; letter-spacing: -0.02em; margin-top: 5px; }
 .fact.is-result b { color: var(--likely); }
+.fact.is-advice b { border-left: 6px solid var(--likely); padding-left: 16px; margin-top: 9px; }
 
 /* Scene 6: the last line */
 .fb-head .same { font: 600 46px/1.14 Geist; letter-spacing: -0.02em; margin-top: 46px; }

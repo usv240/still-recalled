@@ -239,15 +239,19 @@ const scenes = [
     const asked = [lk.asked.brand, lk.asked.product].filter(Boolean).map(x => `"${x}"`).join(', ');
     const panel = el(`<div class="panel is-three" style="left:1040px;top:56px;width:830px">
       <p class="eyebrow">How an unnamed listing gets its recall</p>
-      <div class="b3" data-k="1"><span class="no is-device">01 · On the laptop</span><h3>Risk detected</h3><p>Word rules read the title: a banned product type. No brand, no model.</p></div>
+      <div class="b3" data-k="1"><span class="no is-device">01 · On the laptop</span><h3>Risk detected</h3><p>Word rules read the title: a banned type. No brand, no model.</p></div>
       <div class="b3" data-k="2"><span class="no is-cloud">02 · In the cloud</span><h3>Product recognised</h3><p>Gemini sees the product in the photo.</p></div>
       <div class="b3" data-k="3"><span class="no is-both">03 · Cloud asks laptop</span><h3>Recall retrieved</h3><p>The laptop’s field guide of 10,089 notices answers.</p></div>
-      <div class="call"><p class="lab">Firebase AI Logic function calling</p><code>lookup_recalls(${esc(asked)})</code><p class="ans">→ recall <b>23088</b></p></div>
+      <div class="call">
+        <p class="lab">Firebase AI Logic function calling</p>
+        <div class="leg"><span class="dir">Cloud → laptop</span><code>lookup_recalls(${esc(asked)})</code></div>
+        <div class="leg is-ans"><span class="dir">Laptop → cloud</span><p class="ans"><b>${esc((lk.found || ['23088'])[0])}</b><span>recall retrieved from<br>the laptop’s field guide</span></p></div>
+      </div>
       <p class="foot">Our code shows only recalls the guide returned.</p>
     </div>`);
     root.append(panel);
     const steps = [...panel.querySelectorAll('.b3')], at = [t2, t3, t4];
-    const call = panel.querySelector('.call'), ans = panel.querySelector('.ans'), foot = panel.querySelector('.foot');
+    const call = panel.querySelector('.call'), ans = panel.querySelector('.leg.is-ans'), foot = panel.querySelector('.foot');
     const rT = ring(root), rP = ring(root, 'is-red');
     return t => {
       s.show(remap(segs, t), camAt(keys, t));
@@ -257,7 +261,9 @@ const scenes = [
         st.style.opacity = (t < at[k] - 0.01 ? 0.26 : 0.26 + 0.74 * on - 0.22 * next).toFixed(3);
       });
       call.style.opacity = (0.26 + 0.74 * outCubic((t - t4) / 0.4)).toFixed(3);
-      ans.style.opacity = outCubic((t - tNum + 0.15) / 0.4).toFixed(3);
+      // The answer leg waits, dim, until the laptop answers; the number arrives as it is spoken.
+      ans.style.opacity = (0.3 * outCubic((t - t4) / 0.4) + 0.7 * outCubic((t - tNum + 0.15) / 0.4)).toFixed(3);
+      ans.querySelector('.ans').style.opacity = outCubic((t - tNum + 0.15) / 0.4).toFixed(3);
       foot.style.opacity = (0.26 + 0.74 * outCubic((t - t6) / 0.4)).toFixed(3);
       placeRing(rT, s, L.title, 6);
       rT.style.opacity = (clamp((t - 0.5) / 0.3) * (1 - clamp((t - t2 + 0.5) / 0.25))).toFixed(3);
@@ -266,7 +272,7 @@ const scenes = [
   } },
 
   // 4. From a warning to something you can do.
-  { id: 'do', lead: 0.4, tail: 3.2, build(root, i) {
+  { id: 'do', lead: 0.4, tail: 3.6, build(root, i) {
     const a = new Shot(root, 'flow'), b = new Shot(root, 'label');
     const t2 = cue(i, "And when a photo"), tAdd = cue(i, 'add the label'), t3 = cue(i, 'Gemini reads'), tMatch = cue(i, 'and it matches'), end = SC[i].dur;
     const ask = M('flow', 'ask'), rep = has('flow', 'report') ? M('flow', 'report') : ask, cardBox = M('flow', 'card').box;
@@ -283,13 +289,15 @@ const scenes = [
     ];
     const stroller = (T('flow').notes.flagged || []).find(f => /Tango Mini/.test(f.title)) || {};
     const model = (/Model (\S+) is one/.exec(res.text || '') || [])[1] || '';
-    const proof = el(`<div class="panel is-facts" style="left:80px;top:250px;width:800px">
+    const proof = el(`<div class="panel is-facts" style="left:60px;top:236px;width:880px">
       <p class="eyebrow">The label check</p>
       <div class="fact"><span>Read from the label</span><b>${esc(model ? `Model ${model}` : 'The model number')}</b></div>
-      <div class="fact"><span>CPSC recall ${esc(stroller.recall || '20052')}</span><b>Four model numbers</b></div>
+      <div class="fact"><span>CPSC recall ${esc(stroller.recall || '20052')} · four model numbers</span><b>${esc(model || 'This model')} is one of them</b></div>
       <div class="fact is-result"><span>Compared in code</span><b>The label matches the recall</b></div>
+      <div class="fact is-advice"><span>What the card says</span><b>Don’t buy it unless the fix was done</b></div>
     </div>`);
     root.append(proof);
+    const facts = [...proof.querySelectorAll('.fact')];
     const camA = [[0, ...aim({ x: cardBox.x, y: ask.box.y - 250 }, 1.6, { left: 70, top: 0 })]];
     const box = res.whole || res.box || ls.button;
     const camB = [[tCut, 640, 330, 1.15], [tCut + 1.2, 640, 330, 1.15], [tCut + 2.2, lc.x + lc.w / 2 + 150, lc.y + 250, 1.45], [tAdd - 0.8, lc.x + lc.w / 2 + 150, lc.y + 250, 1.45], [tAdd, ls.button.x + ls.button.w / 2 + 100, ls.button.y - 60, 1.8], [tMatch - 0.9, ls.button.x + ls.button.w / 2 + 100, ls.button.y - 60, 1.8], [tMatch - 0.2, ...aim({ x: lc.x, y: box.y - 150 }, 1.75, { left: 960, top: 60 })]];
@@ -312,7 +320,9 @@ const scenes = [
       rR.style.opacity = cut ? clamp((t - tMatch) / 0.3).toFixed(3) : '0';
       vis(c, t, sp && t >= t3 - 0.2 && t < tMatch - 0.5 ? 0 : 1e9, 1e9, { dy: 0, din: 0.01 });
       vis(c2, t, tMatch - 0.3, end - 0.3, { dy: 10 });
-      vis(proof, t, tMatch + 0.5, 1e9);
+      vis(proof, t, tMatch + 0.45, 1e9);
+      // The facts arrive one after another, so the eye reads them in order: the label, the notice, the match, the advice.
+      facts.forEach((f, k) => { f.style.opacity = outCubic((t - tMatch - 0.55 - 0.32 * k) / 0.4).toFixed(3); });
     };
   } },
 
@@ -353,19 +363,22 @@ const scenes = [
     // After the words: both panes go on to their result, the same one.
     const tRes = SC[i].lead + voiceEnd(i) + 0.25;
     root.classList.add('is-dark');
-    const PW = 560, PH = 740, PY = 120;
+    const PW = 560, PH = 668, PY = 112;
     const mk = (name, x, label, tShow, tRead) => {
-      const tag = el(`<div class="pane-tag" style="left:${x}px;top:${PY - 78}px;width:${PW}px">${label}</div>`);
+      const tag = el(`<div class="pane-tag" style="left:${x}px;top:${PY - 70}px;width:${PW}px">${label}</div>`);
       root.append(tag);
       if (!has(name, 'read')) { root.append(el(`<div class="pane-missing" style="left:${x}px;top:${PY}px;width:${PW}px;height:${PH}px">This side is recorded with Gemini Nano running</div>`)); return t => { vis(tag, t, tShow, 1e9, { dy: 0 }); }; }
       const s = new Shot(root, name, { x, y: PY, w: PW, h: PH, radius: 26 });
       const c = M(name, 'click'), r = M(name, 'read'), res = M(name, 'result'), tk = T(name);
       const shown = has(name, 'result shown') ? M(name, 'result shown') : { t: res.t + 1.2, cy: 258 };
       const real = r.realSeconds || Math.round(r.t - c.t), realRes = res.realSeconds || Math.round(res.t - c.t);
-      const took = el(`<div class="pane-took" style="left:${x}px;top:${PY + PH + 22}px;width:${PW}px"><b>${esc((r.text.split(':')[0] || '').trim())}</b> · ${real} s in real time</div>`);
-      const took2 = el(`<div class="pane-took" style="left:${x}px;top:${PY + PH + 22}px;width:${PW}px"><b>Recalled product found</b> · ${realRes} s</div>`);
+      // The page's own line, in the page's own words, large: where this read ran. It stays up beside the result.
+      const where = (/Read (on this device|in the cloud)/.exec(r.text) || [r.text.split(':')[0].trim()])[0];
+      const ran = el(`<div class="pane-ran ${/device/.test(where) ? 'is-device' : 'is-cloud'}" style="left:${x}px;top:${PY + PH + 20}px">${esc(where)}</div>`);
+      const took = el(`<div class="pane-took" style="left:${x}px;top:${PY + PH + 104}px;width:${PW}px">The page’s own line · <b>${real} s</b> in real time</div>`);
+      const took2 = el(`<div class="pane-took" style="left:${x}px;top:${PY + PH + 104}px;width:${PW}px"><b>Recalled product found</b> · ${realRes} s</div>`);
       const rg = ring(root, 'is-light');
-      root.append(took, took2);
+      root.append(ran, took, took2);
       // The waits are shortened to fit the words; the real seconds are printed under each pane.
       const segs = [[0, tCall, c.t - Math.min(1.4, tCall), null], [tCall, tRead - 0.45, c.t + 0.3, r.t - 0.45], [tRead - 0.45, tRes, r.t - 0.45, r.t + 2.2, 'hold'], [tRes, end, shown.t, shown.t + 0.1, 'hold']];
       const cam = { cx: tk.width / 2, cy: r.box.y + 120, z: 1 }, camRes = { cx: tk.width / 2, cy: shown.cy || 258, z: 1 };
@@ -375,11 +388,12 @@ const scenes = [
         vis(tag, t, tShow, 1e9, { dy: 0 });
         placeRing(rg, s, r.box, 5);
         rg.style.opacity = t >= tRes ? '0' : (clamp((t - tRead + 0.1) / 0.3)).toFixed(3);
-        vis(took, t, tRead + 0.15, tRes - 0.2, { dy: 10 });
+        vis(ran, t, tRead + 0.1, 1e9, { dy: 10 });
+        vis(took, t, tRead + 0.3, tRes - 0.2, { dy: 10 });
         vis(took2, t, tRes + 0.25, 1e9, { dy: 10 });
       };
     };
-    const head = el(`<div class="fb-head"><p class="eyebrow">Still Recalled on the web · the same page, the same photo</p><h2>One Firebase AI Logic call</h2><code>mode: PREFER_ON_DEVICE</code><p class="sub">The page prints the source Firebase AI Logic reports back.</p><p class="same">Same code. Same photo.<br>Same answer.</p></div>`);
+    const head = el(`<div class="fb-head"><p class="eyebrow">Still Recalled on the web · the same page, the same photo</p><h2>One Firebase AI Logic call</h2><code>mode: PREFER_ON_DEVICE</code><p class="sub">The page prints the source Firebase AI Logic reports back.</p><p class="same">Same code.<br>Same photo.<br>Same answer.</p></div>`);
     root.append(head);
     const same = head.querySelector('.same');
     const A = mk('page-device', 660, 'Chrome with Gemini Nano', 0, tDev), B = mk(has('page-cloud', 'read') ? 'page-cloud' : 'cloud-earlier', 1270, 'Chrome with no built-in model', tCloud - 0.3, tRuns);
@@ -398,9 +412,13 @@ const scenes = [
       const rings = bd ? bd.boxes.map(() => ring(root, 'is-amber')) : [];
       const bcam = bd ? (() => { const [cx, cy, z] = aim(bd.boxes[0], 1.25, { left: 330, top: 230 }); return { cx, cy, z }; })() : null;
       const q1 = chip(root, `Marketplace search: <b>${esc(bl.query || 'rock n play')}</b>`, 'is-search'), q2 = chip(root, `Marketplace search: <b>${esc(rs.query || 'baby rocker sleeper')}</b>`, 'is-search');
-      const mcam = { cx: 820, cy: 380, z: 1.42 };
+      // The site's own drawing and button on its "no listings" page are covered: the picture keeps the site's words only.
+      const covers = [{ x: 730, y: 205, w: 180, h: 142 }, { x: 715, y: 472, w: 210, h: 66 }].map(box => { const m = el('<div class="cover"></div>'); root.insertBefore(m, q1); return { m, box }; });
+      const mcam = { cx: 820, cy: 400, z: 1.7 };
       market = t => {
-        s.show(remap(segs, t), bd && t >= tBut - 0.15 ? bcam : mcam);
+        const blank = t < tBut - 0.15;
+        s.show(remap(segs, t), bd && !blank ? bcam : mcam);
+        covers.forEach(({ m, box }) => { placeRing(m, s, box, 0); m.style.visibility = blank ? 'visible' : 'hidden'; });
         vis(q1, t, 0.15, tBut - 0.2, { dy: 0 }); vis(q2, t, tBut - 0.1, tCard, { dy: 0 });
         rings.forEach((r, k) => { placeRing(r, s, bd.boxes[k], 5); r.style.opacity = (t >= tBut - 0.15 ? clamp((t - tBut - 0.2 - 0.25 * k) / 0.3) * (1 - clamp((t - t842 + 0.3) / 0.2)) : 0).toFixed(3); });
       };
@@ -419,14 +437,14 @@ const scenes = [
         ${bars('<b>False alarms · lower is better</b><br>among 630 listings that were fine', [['Word rules', 109], ['Built-in model only', 64], ['Hybrid', 12, 1]], 109 / 0.82)}
         ${bars('<b>Caught · higher is better</b><br>of 83 listings that should be flagged', [['Word rules', 47], ['Built-in model only', 51], ['Hybrid', 65, 1]], 83 / 0.82)}
       </div>
-      <p class="fine">Five blind tests on real listings. Answer keys by AI reviewers; scored on the 713 listings they settled. Method and every result: <b>docs/accuracy.md</b></p>
+      <p class="fine"><b>Five blind tests on real listings. Answer keys by AI reviewers.</b><br>Scored on the 713 listings they settled. Method and every result: <b>docs/accuracy.md</b></p>
     </div>`);
     root.append(veil, big, card);
     const tile = k => card.querySelector(`.tile[data-k="${k}"]`), charts = [...card.querySelectorAll('.chart')];
     const grow = (chart, t, t0) => { vis(chart, t, t0, 1e9, { dy: 10 }); chart.querySelectorAll('.row').forEach((r, k) => { const g = outCubic((t - t0 - 0.12 * k) / 0.7); r.querySelector('.bar').style.width = `${(+r.querySelector('.bar').dataset.w * g).toFixed(2)}%`; r.querySelector('.val').style.opacity = clamp((t - t0 - 0.12 * k - 0.25) / 0.3).toFixed(3); }); };
     return t => {
       if (market) market(t);
-      veil.style.opacity = (0.9 * clamp((t - t842 + 0.25) / 0.4) + 0.1 * clamp((t - tCard) / 0.3)).toFixed(3);
+      veil.style.opacity = (0.95 * clamp((t - t842 + 0.25) / 0.4) + 0.05 * clamp((t - tCard) / 0.3)).toFixed(3);
       vis(big, t, t842 - 0.05, tCard - 0.05);
       vis(card, t, tCard + 0.15, 1e9, { dy: 0 });
       vis(tile('a'), t, t775 - 0.15); vis(tile('b'), t, t89 - 0.15); vis(tile('c'), t, t77 - 0.15);
