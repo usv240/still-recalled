@@ -86,8 +86,8 @@ The four judging criteria count equally. Technological Implementation breaks a t
      "Inclined infant sleeper" on that listing. Hold three seconds.
 - **Added in the edit:** a slow zoom on the title and price, the cut from 1a to 1b on "Still Recalled does", and one
   caption: "About 100 infant deaths were reported in one recalled sleeper (CPSC, 2023)".
-- **Say:** **"This looks like an ordinary secondhand baby sleeper. Products like it were recalled after infant
-  deaths, and nothing on the listing warns the buyer. Still Recalled does."**
+- **Say:** **"This looks like an ordinary secondhand baby sleeper. This type of product has been linked to infant
+  deaths, and nothing on the listing warns the parent. Still Recalled does."**
 - **Next:** reload the page in your normal window for scene 2.
 
 ### Scene 2 · It works, and where it runs · 0:12 to 0:31
@@ -177,6 +177,7 @@ The four judging criteria count equally. Technological Implementation breaks a t
   - **775** real listings tested
   - **89%** fewer false alarms than word rules (12 against 109)
   - **77%** never left the computer
+  - Under them, three bars of false alarms: word rules 109, built-in model only 64, hybrid 12.
   - Small print on the card: "Five blind tests, each on the engine of its day. Answer keys by AI reviewers. Caught
     65 of 83; the 18 misses are listed in docs/accuracy.md. 62 listings the reviewers could not settle are left out."
 - **Say:** **"Is the need real? On a real marketplace today, the recalled sleeper's name returns nothing, but
@@ -209,10 +210,10 @@ The four judging criteria count equally. Technological Implementation breaks a t
 - **Say:** **"No match never means safe. But buying secondhand should save families money, not put their children
   at risk. Still Recalled puts the warning on the listing, before they buy."**
 
-## The words alone (392 words in 174 seconds, about 2.3 a second)
+## The words alone (394 words in 174 seconds, about 2.3 a second)
 
-1. This looks like an ordinary secondhand baby sleeper. Products like it were recalled after infant deaths, and
-   nothing on the listing warns the buyer. Still Recalled does.
+1. This looks like an ordinary secondhand baby sleeper. This type of product has been linked to infant deaths, and
+   nothing on the listing warns the parent. Still Recalled does.
 2. It checks every listing as you scroll, on your computer first. Only what it can't settle goes to the cloud. Of
    these seventeen practice listings, the eight recalled or banned products get a badge, and the ordinary ones get
    none.
@@ -241,7 +242,7 @@ The four judging criteria count equally. Technological Implementation breaks a t
 
 | Said | Source |
 |---|---|
-| Products like it were recalled after infant deaths | About 100 deaths reported in the Rock 'n Play sleeper (CPSC, 2023; README, "The problem") |
+| This type of product has been linked to infant deaths | About 100 deaths reported in the Rock 'n Play sleeper (CPSC, 2023; README, "The problem") |
 | On your computer first; only what it can't settle goes to the cloud | The pipeline (README, "How the hybrid AI works"); the pills on the page |
 | Seventeen practice listings, eight flagged | Packed 0.17.3 release, 18 of 18 checks (`tools/e2e-report-release-try.json`) |
 | The cloud asked the laptop; recall 23088 | Same report, the function-call step; the card's own text |
