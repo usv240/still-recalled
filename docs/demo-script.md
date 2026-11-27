@@ -52,9 +52,10 @@ The four judging criteria count equally. Technological Implementation breaks a t
 
 ## Before you record (15 minutes)
 
-1. **Restart Chrome first.** Close every Chrome window and open it again. On November 26 the built-in model in this
-   Chrome had stopped after crashing, and only a restart brings it back. Scene 2 needs it: the grey pill
-   "Looking on this computer" is Gemini Nano at work.
+1. **Give Gemini Nano the computer to itself, then restart Chrome.** This computer's graphics card holds one copy of
+   the model. On November 26 a test in another project was running Gemini Nano in its own Chrome, and the model in
+   your Chrome could not start. Make sure no other test is running, then close every Chrome window and open it
+   again. Scene 2 needs it: the grey pill "Looking on this computer" is Gemini Nano at work.
 2. **Chrome:** the Still Recalled extension is loaded. In `chrome://extensions`, click the reload arrow on its card
    so it runs 0.17.3. Hide the bookmarks bar (Ctrl+Shift+B). Close other tabs.
 3. **Window:** one Chrome window, full screen (F11), zoom 100%.
