@@ -204,6 +204,7 @@ async function run({ file, text, example = null }) {
       const { answer, source } = await hybridJson({ system: READ_SYSTEM, schema: READ_SCHEMA, parts: readParts })
         .catch(async e => {
           if (/app ?check|attestation|40[13]|permission/i.test(String(e))) throw e;
+          console.warn('Still Recalled: the first read failed, reading in the cloud instead.', String(e));
           return { ...(await cloudJson({ system: READ_SYSTEM, schema: READ_SCHEMA, parts: readParts })), source: 'in_cloud' };
         });
       readSource = source;
