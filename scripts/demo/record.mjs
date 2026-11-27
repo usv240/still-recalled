@@ -482,7 +482,8 @@ async function bouncer(page) {
     await sleep(900);
     await click(page);
     for (let i = 0; i < 40; i++) { if ((await findText(page, /Watching for recalls/)).length) break; await sleep(200); }
-    take.mark('watching');
+    const w2 = await watch().catch(() => null);
+    take.mark('watching', w2 ? { box: { x: w2.x, y: w2.y, w: w2.w, h: w2.h } } : {});
     await moveTo(page, w.x + w.w + 30, w.y + w.h + 26, 600);
   } else take.mark('watch missing');
   await sleep(3200);

@@ -1,9 +1,9 @@
-# Demo script: Still Recalled (2:55)
+# Demo script: Still Recalled (2:54)
 
-A take you record yourself, scene by scene. Each scene says what is on screen, where to point and click, where to
-go next, and the words to say in **bold**. Record each scene as its own clip; the clips are cut, cropped, captioned
-and joined afterwards. The limit is 3:00, and only the first three minutes are judged. This replaces the scene table
-in `docs/video.md`.
+The video is recorded and edited by scripts in this repo (`scripts/demo/`). A recorder drives Chrome through each
+scene on the real product, a neural voice reads the words below, and the edit is drawn frame by frame from those
+recordings. Each scene here says what is on screen, what the recorder does, what the edit adds, and the words in
+**bold**. The limit is 3:00, and only the first three minutes are judged.
 
 ## The one idea the video carries
 
@@ -13,19 +13,20 @@ Every scene shows one part of that sentence working, on a product a parent would
 The order: the danger, the product working, the technical moment, a next step, the phone, the fallback, the proof,
 the scale, the close.
 
-| # | Starts | Scene | Who records it |
+| # | Starts | Scene | Footage |
 |---|---|---|---|
-| 1 | 0:00 | The hidden danger | You record two short clips |
-| 2 | 0:11 | It works, and where it runs | You record |
-| 3 | 0:30 | The cloud asks the device | You record |
-| 4 | 1:01 | From a warning to something you can do | You record |
-| 5 | 1:21 | Native Android, with Gemini Nano | Already recorded |
-| 6 | 1:36 | One call, either model | You record one short clip |
-| 7 | 1:54 | The need, and the proof | You record the first half |
-| 8 | 2:22 | Why it keeps up, and scales | You record |
-| 9 | 2:42 | The close | Made in the edit |
+| 1 | 0:00 | The hidden danger | Takes `off` and `flow` |
+| 2 | 0:10 | It works, and where it runs | Take `flow` |
+| 3 | 0:26 | The cloud asks the device | Take `flow` |
+| 4 | 0:54 | From a warning to something you can do | Takes `flow` and `label` |
+| 5 | 1:14 | Native Android, with Gemini Nano | The clip from the builder's Pixel |
+| 6 | 1:28 | One call, either model | Takes `page-device` and `page-cloud`, side by side |
+| 7 | 1:47 | The need, and the proof | Take `market`, then a card of the test results |
+| 8 | 2:22 | Why it keeps up, and scales | Take `bouncer` |
+| 9 | 2:40 | The close | Take `flow`, then the closing card |
 
-You record five scenes (1, 2, 3, 4, 8), one short clip for scene 6 and half of scene 7. Scenes 5 and 9 need your voice only.
+The starts come from the narration: each scene lasts as long as its words, plus a hold where the screen needs
+reading.
 
 ## What each scene is for
 
@@ -33,196 +34,184 @@ The four judging criteria count equally. Technological Implementation breaks a t
 
 | Criterion (Rules.md) | What the judge must see | Scenes |
 |---|---|---|
-| Technological Implementation: "how effectively does it use Firebase AI Logic hybrid inference" | Device first, cloud second (2); the cloud's function call answered by the device (3); Gemini Nano on a phone (5); the same call falling back to the cloud (6); Firestore, App Check and new recalls (8) | 2, 3, 5, 6, 8 |
+| Technological Implementation: "how effectively does it use Firebase AI Logic hybrid inference" | Device first, cloud second (2); the cloud's function call answered by the device (3); Gemini Nano on a phone (5); the same call on the device and in the cloud, both to the same answer (6); Firestore, App Check and new recalls (8) | 2, 3, 5, 6, 8 |
 | Design: "a complete, coherent product experience" | Badge, card, next step, label check, phone, watch list: one product with no dead ends | 2, 3, 4, 5, 8 |
 | Potential Impact: "a credible, specific case ... a real problem for a real audience" | The danger in one listing; a real search with our badges on it; the counts, with how they were measured on screen | 1, 7, 9 |
 | Quality of the Idea: "creative, non-obvious use" | A listing with no brand, named anyway, by a question that runs from the cloud to the device, which holds the facts | 3, 8 |
 
 ## Rules check (Rules.md, the video)
 
-| Rule | How this take meets it |
+| Rule | How this video meets it |
 |---|---|
-| Not longer than 3 minutes | 2:55 of words and pictures; checked again after the cut |
-| Shows the project working on the platforms it was built for | Chrome extension (scenes 1 to 4, 7, 8), Android (5, 6) and the web page (6) |
-| In English, or with English subtitles | Spoken in English, with English captions |
-| Public on YouTube, link on the form | Your last step |
-| No third-party advertising, slogan, logo or trademark | Practice listings carry no logos; the real search is cropped to its grid; say "marketplace", never a company. Recalled products' names appear on the cards, as they do on the CPSC notices |
+| Not longer than 3 minutes | 2:54; `scripts/demo/build.mjs` prints the length of every build |
+| Shows the project working on the platforms it was built for | Chrome extension (scenes 1 to 4, 7, 8), Android (5) and the web page (6) |
+| In English, or with English subtitles | Spoken in English, with English captions burned in; the same captions are saved as `still-recalled-demo.srt` |
+| Public on YouTube, link on the form | The builder's last step |
+| No third-party advertising, slogan, logo or trademark | Practice listings carry no logos; the real search has its header and side column hidden; the words say "marketplace", never a company. Recalled products' names appear on the cards, as they do on the CPSC notices |
 | Nothing that violates a third party's privacy, publicity or IP rights | No seller names; strangers' photos and towns blurred; practice photos are CPSC's or public domain |
-| The project must work as shown | Every scene is the released build or a recording of it; a sped-up wait is marked on screen; nothing is simulated |
+| The project must work as shown | Every scene is a recording of the product at work: the packed 0.17.3 extension, the web page and the Android app. A sped-up wait carries its speed and its real time on screen. The overlays are drawn from the same recordings and test reports |
 
-## Before you record (15 minutes)
+## How it is made
 
-1. **Give Gemini Nano the computer to itself.** This computer runs one copy of the model at a time, so keep other
-   Gemini Nano tests closed while you record, in this project and any other. If one has been running, close every
-   Chrome window and open Chrome again. Scenes 2 and 6 show the model at work: the grey pill "Looking on this
-   computer" and the line "Read on this device".
-2. **Chrome:** the Still Recalled extension is loaded. In `chrome://extensions`, click the reload arrow on its card
-   so it runs 0.17.3. Hide the bookmarks bar (Ctrl+Shift+B). Close other tabs.
-3. **Window:** one Chrome window, full screen (F11), zoom 100%.
-4. **Quiet:** turn on Do Not Disturb in Windows so no notification pops up.
-5. **Save the label photo.** Open https://still-recalled.web.app/try/item/compact-stroller.html, click **Save it**
-   under the sticker photo, and save it to the Desktop. Scene 4 uses it.
-6. **Warm-up run.** Open https://still-recalled.web.app/try/ once, scroll down to the listings, and wait until the
-   red line near the top reads "8 of the 8". This loads Gemini Nano: you should see "Looking on this computer" pills
-   on some photos while it checks. If you see none, say so before recording. Then go through scenes 2, 3, 4 and 8 once
-   without recording. If you clicked **Watch for recalls** in the warm-up, click it again to turn it off.
-7. **Recorder:** Windows key + Alt + R starts and stops a recording of the window (saved in Videos\Captures).
-   Record your voice at the same time, or record the voice afterwards over the finished cut; both work. The
-   recorder may leave out the "choose a file" box in scene 4; that is fine, the card's answer is what matters.
-8. **Save clips** as `scene-1a.mp4`, `scene-1b.mp4`, `scene-2.mp4` and so on (the scene 6 clip as `scene-6.mp4`), in `E:\still-recalled-video\takes\`.
+Everything is in `scripts/demo/`. The recordings and the finished video are kept outside the repo, in
+`E:/still-recalled-video/`.
 
-**Three rules while recording**
-- **Move slowly.** Rest the pointer on the thing you are talking about for a full second before you click.
-- **No logos.** The practice listings carry none. Scene 7 is a real marketplace page: do not open a listing there
-  (an open listing shows the seller's name).
-- **Say what the screen shows.** If a card says something different from this script, read the card.
+| Step | Command | What it does |
+|---|---|---|
+| The voice | `python scripts/demo/voice.py --rate=-8%` | Reads the nine lines under "The words alone" with a neural voice (edge-tts, `en-US-AndrewNeural`) and saves the time of every word. Captions and every overlay are timed from those words, so picture and voice stay together |
+| The recordings | `node scripts/demo/record.mjs off`, `ext`, `page-cloud`, `market` | Puppeteer drives a real Chrome window through each scene. Each take is saved as screen frames with their own clock, plus a mark for every moment the edit needs ("first badge", "card open", "result") |
+| The recordings that use Gemini Nano | `bash scripts/demo/nano-takes.sh` | Records the web page reading on the device (`page-device`) and the extension with the built-in model, in the Chrome profile that holds Gemini Nano. Gemini Nano needs the computer's model slot to itself and about 7 GB of free memory, so the script waits for both |
+| The edit | `bash scripts/demo/render-all.sh` | `stage.js` draws every frame at 1920 x 1080 as a function of time: the footage, the camera moves, the callouts and the captions. `build.mjs` captures the frames, encodes each scene, joins them and lays the narration under |
+
+**How the takes are set up**
+- **The extension** is the packed release build (`dist/still-recalled-extension`, 0.17.3), installed fresh for the
+  take, on the practice listings at https://still-recalled.web.app/try/.
+- **The pointer** is drawn by the recorder and moves the way a hand does: it rests on a thing for a second before
+  it clicks.
+- **The web page** in scene 6 is this repo's own build of the page, served by `node tools/collector.mjs`: the same
+  page code as https://still-recalled.web.app. App Check on the live site turns away an automated Chrome, as it is
+  meant to, so the recorder uses the local build with App Check's debug provider.
+- **The marketplace search** in scene 7 is signed out, in a new Chrome profile. The recorder hides the site's
+  header and side column and blurs the sellers' photos and town names before the first frame is saved.
 
 ## The scenes
 
-### Scene 1 · The hidden danger · 0:00 to 0:11
+### Scene 1 · The hidden danger · 0:00 to 0:10
 
 - **Screen:** the first practice listing, "Inclined baby sleeper, pink, folds flat, $25", once without a badge and
   once with it.
-- **Do:**
-  1. Clip 1a: open an Incognito window (Ctrl+Shift+N), where the extension is off. Go to
-     https://still-recalled.web.app/try/ and scroll until "baby gear · Seattle area" is at the top. Rest the pointer
-     on the first listing's title, then its price. Hold four seconds. Close the Incognito window.
-  2. Clip 1b: the same page in your normal window, scrolled to the same place, with the red badge
-     "Inclined infant sleeper" on that listing. Hold three seconds.
-- **Added in the edit:** a slow zoom on the title and price, the cut from 1a to 1b at about second eight, just before
-  "Still Recalled does", and one
-  caption: "About 100 infant deaths were reported in one recalled sleeper (CPSC, 2023)".
+- **Recorded:** take `off` is the practice page in a Chrome with no extension: the pointer rests on the listing's
+  title, then its price. Take `flow` is the same page with the extension installed and the red badge "Inclined
+  infant sleeper" on that listing.
+- **Added in the edit:** a slow zoom on the title and price; the cut to the badged page just before "Still Recalled
+  does", with a small push-in as the badge appears; and one caption: "About 100 infant deaths were reported in one
+  recalled sleeper. CPSC, 2023".
 - **Say:** **"This ordinary baby sleeper looks harmless. But this type has been linked to infant deaths. The
   listing doesn't warn the parent. Still Recalled does."**
-- **Next:** reload the page in your normal window for scene 2.
 
-### Scene 2 · It works, and where it runs · 0:11 to 0:30
+### Scene 2 · It works, and where it runs · 0:10 to 0:26
 
-- **Screen:** https://still-recalled.web.app/try/ in your normal window, just reloaded, top of the page.
-- **Do:**
-  1. Point at the red line "Extension on".
-  2. Scroll down to the listings. Small grey pills appear on the photos: "Looking on this computer", then
-     "Checking in the cloud". Rest the pointer beside one of each as you say those words.
-  3. When the badges have settled, move the pointer along the top row: badge, none on the xylophone, badge, none
-     on the toys.
-- **Note:** the first check takes about 30 seconds. Keep recording; the wait is sped up in the edit and marked "2x".
+- **Screen:** https://still-recalled.web.app/try/, just loaded, from the top of the page.
+- **Recorded:** the pointer shows the red line "Extension on", then the page scrolls to the listings. Small grey
+  pills appear on the photos while each listing is checked: "Looking on this computer", then "Checking in the
+  cloud". When the badges have settled the pointer moves along the top row: badge, none on the xylophone, badge,
+  none on the toys.
+- **Added in the edit:** a two-line legend, "On your computer: every listing is screened here first" and "In the
+  cloud: only flagged or uncertain listings". The wait is sped up and marked with its speed, and a second chip
+  gives the real time for the page.
 - **Say:** **"It checks every listing as you scroll, on your computer first. Only flagged or uncertain listings go
   to the cloud for a closer look. Of these seventeen practice listings, the eight recalled or banned products get
   a badge, and the ordinary ones get none."**
-- **Next:** stay here.
 
-### Scene 3 · The cloud asks the device · 0:30 to 1:01 · the scene that wins
+### Scene 3 · The cloud asks the device · 0:26 to 0:54 · the scene that wins
 
 - **Screen:** the first listing and its red badge "Inclined infant sleeper".
-- **Do:**
-  1. Point at the listing's **title** under the photo. Hold two seconds.
-  2. Click the red badge. The card opens over the page.
-  3. Point at the third paragraph of the card. It begins "It may be the Rock 'n Play Sleepers, recalled January
-     2023 (recall 23088)" and ends "asked the recall field guide on this device, which had it." Run the pointer
-     slowly along that last sentence, and hold.
-- **Added in the edit:** three small steps that light up beside the card as you speak, using the real call from the
-  release test report:
-  1. On the laptop · word rules: "inclined sleeper", a banned type. No brand.
-  2. In the cloud · Gemini sees a Fisher-Price Rock 'n Play in the photo.
-  3. Cloud asks laptop · `lookup_recalls("Fisher-Price", "Rock 'n Play sleeper")` → the field guide answers 23088.
+- **Recorded:** the pointer rests on the listing's **title**, clicks the red badge, and the card opens over the
+  page. The pointer then runs along the card's third paragraph, which begins "It may be the Rock 'n Play Sleepers,
+  recalled January 2023 (recall 23088)" and ends "asked the recall field guide on this device, which had it."
+- **Added in the edit:** a panel headed "How an unnamed listing gets its recall", with three steps that light up as
+  they are spoken, using the real call from the release test report:
+  1. **Risk detected** · on the laptop · the word rules read the title: a banned product type. No brand, no model.
+  2. **Product recognised** · in the cloud · Gemini sees the product in the photo.
+  3. **Recall retrieved** · the cloud asks the laptop · the laptop's field guide of 10,089 notices answers.
+  Under them, as the largest thing on screen: "Firebase AI Logic function calling",
+  `lookup_recalls("Fisher-Price", "Rock 'n Play sleeper")`, "→ recall 23088". Last line: "Our code shows only
+  recalls the guide returned."
 - **Smart use of each part:** this title names the product type, so the word rules settle that at once and no model
   call is spent on it. Gemini Nano does its part in scenes 2, 5 and 6.
 - **Say:** **"This title has no brand and no model: nothing to look a recall up by. The laptop's word rules see
   only a risky type. Gemini in the cloud recognises the product in the photo. Then, through Firebase AI Logic
   function calling, it asks the laptop which recall this is. The laptop answers from its own field guide of ten
   thousand notices: recall 23088. And our code accepts only recalls that guide returned."**
-- **Next:** stay in the card.
 
-### Scene 4 · From a warning to something you can do · 1:01 to 1:21
+### Scene 4 · From a warning to something you can do · 0:54 to 1:14
 
 - **Screen:** the same card, then the stroller's page.
-- **Do:**
-  1. Scroll down inside the card. Stop on the black **Ask the seller** button, then on **Report to CPSC**.
-  2. Click the X at the top of the card. Scroll to the fourth row and click the title of "Baby Trend Tango Mini
-     compact stroller, gray". Its page opens with an amber badge, "Possible recall", above the title.
-  3. Click the amber badge. In the card, find "Settle it with the label" and click **Add label photo**. Choose the
-     label photo you saved to the Desktop.
-  4. Wait for the answer, "The label matches the recall", and point at it. Hold two seconds.
-- **Note:** the line under the answer says where the label was read. Leave it on screen; the words don't name it.
+- **Recorded (take `flow`):** the card scrolls to the black **Ask the seller** button, then **Report to CPSC**, and
+  closes.
+- **Recorded (take `label`):** the page of "Baby Trend Tango Mini compact stroller, gray" with its amber badge
+  "Possible recall". The pointer clicks the badge, then **Add label photo** under "Settle it with the label", and
+  the practice label photo is added. The answer arrives: "The label matches the recall".
+- **Added in the edit:** a panel of three facts beside the card, "Read from the label: Model ST31D11A", "CPSC
+  recall 20052: four model numbers" and "Compared in code: the label matches the recall". The answer is held for
+  three seconds after the words end, and a chip gives the real time the label took to read.
 - **Say:** **"The card says what to do next: ask the seller, or report the listing. And when a photo can't settle
   it, like this stroller recalled for four model numbers only, add the label. Gemini reads the model number, code
   checks it against the notice, and it matches."**
-- **Next:** nothing to record on screen for scene 5. Open https://still-recalled.web.app for scene 6.
 
-### Scene 5 · Native Android, with Gemini Nano · 1:21 to 1:36
+### Scene 5 · Native Android, with Gemini Nano · 1:14 to 1:28
 
-- **Screen:** the clip from your Pixel, `E:\still-recalled-video\android-nano-shared-clean.mp4`: a listing arrives
-  through the share menu, the result follows 11 seconds later naming recall 23088, and "How it was checked" reads
-  "Looked at on this phone · Gemini Nano".
-- **Do:** nothing on screen. Record the voice only.
-- **Added in the edit:** the 11-second wait is shown whole, with a small timer, so the speed is the real one.
+- **Screen:** the clip from the builder's Pixel, `E:\still-recalled-video\android-nano-shared-clean.mp4`: a listing
+  arrives through the share menu, the result follows 11 seconds later naming recall 23088, and "How it was checked"
+  reads "Looked at on this phone · Gemini Nano".
+- **Added in the edit:** the clip plays at its real speed, under the heading "Android app · recorded on a Pixel,
+  real speed". The phone's own lines "Gemini Nano is ready on this phone" and "Looked at on this phone · Gemini
+  Nano" are outlined as they appear.
 - **Say:** **"Shopping happens on phones too. On Android, share a listing from any app. Gemini Nano looks at it on
   the phone, and the phone's own recall guide names the recall, in eleven seconds."**
 
-### Scene 6 · One call, either model · 1:36 to 1:54
+### Scene 6 · One call, either model · 1:28 to 1:47
 
-- **Screen:** the web page checking the same example photo in two browsers, side by side. One step line reads
-  "Read on this device", the other "Read in the cloud".
-- **Do (your clip, the on-device side):**
-  1. Open https://still-recalled.web.app in your normal Chrome.
-  2. Click **See an example match**.
-  3. Watch the first step, "Reading the screenshot". When it turns into "Read on this device", rest the pointer
-     beside it and hold three seconds. Let the result card appear, then stop.
-- **The other side is already recorded:** the same page in a Chrome with no built-in model, where the line reads
-  "Read in the cloud".
-- **Added in the edit:** the two clips side by side, both step lines enlarged.
+- **Screen:** the web page checking the same example photo in two browsers, side by side, at phone size. One step
+  line reads "Read on this device", the other "Read in the cloud". Both then show the same result: the example
+  listing matched to recall 26591.
+- **Recorded (take `page-device`):** the page in the Chrome profile that holds Gemini Nano. The pointer clicks
+  **See an example match**; the first step, "Reading the screenshot", turns into "Read on this device"; the result
+  card follows.
+- **Recorded (take `page-cloud`):** the same page and the same click in a new Chrome profile with no built-in
+  model. The step line reads "Read in the cloud", and the same result follows.
+- **Added in the edit:** the heading "One Firebase AI Logic call" with `PREFER_ON_DEVICE`, both step lines
+  outlined, each pane's real time under it, and, once both results are up, "Same code. Same photo. Same answer."
 - **Why this is the real fallback:** it is one page making one `PREFER_ON_DEVICE` call, and each line prints the
-  source Firebase AI Logic reported. Checked on November 26, 2026: "Read on this device" in your Chrome, "Read in
-  the cloud" in a Chrome with no model.
-- **Check before you stop:** the line reads "Read on this device". That is Gemini Nano at work in your Chrome.
+  source Firebase AI Logic reported. The same two outcomes were checked by hand on the live site on November 26,
+  2026 (`docs/accuracy.md`, section 38).
 - **Say:** **"Not every device has Gemini Nano. It is one Firebase AI Logic call either way. This browser reads
   the photo on the device. This one has no built-in model, so the same call runs in the cloud, and the page says
   so."**
-- **Next:** open the real marketplace search for scene 7.
 
-### Scene 7 · The need, and the proof · 1:54 to 2:22
+### Scene 7 · The need, and the proof · 1:47 to 2:22
 
-- **Screen, first half (you record, about 12 seconds):** a real marketplace search for **baby rocker sleeper**,
-  signed in, with Still Recalled's badges settled on some of the photos.
-- **Do:** scroll slowly down two rows and back. Rest the pointer on one badged listing, then another. Do not click
-  a listing.
-- **Changed in the edit:** the site's header, logo and your profile picture are cropped off, and the sellers' photos
-  and town names are blurred, so the picture shows titles, prices and our badges. These are strangers' listings.
-- **Screen, second half (made in the edit, about 15 seconds):** one card headed "Why hybrid works better", with three
-  large numbers:
+- **Screen, first half:** a real marketplace search. First the recalled sleeper's name, which returns no listings;
+  then **baby rocker sleeper**, with Still Recalled's "Possible recall" badges on the photos. Each search is named
+  in a chip at the top left.
+- **Recorded (take `market`):** signed out, in a new profile with the extension installed. The recorder waits until
+  the badges have settled, then frames them. No listing is opened.
+- **Added in the edit:** an outline on each badge, then the number **842**: "listings identified as banned or
+  prohibited products. Three marketplaces. One day. Identified by AI reviewers from each listing's title and photo.
+  Method: docs/accuracy.md".
+- **Screen, second half:** one card headed "Why hybrid works better". It stays up for the whole second half and holds three
+  seconds after the last word:
   - **775** real listings tested
-  - **89%** fewer false alarms than word rules (12 against 109)
+  - **89%** fewer false alarms than word rules
   - **77%** never left the computer
-  - Under them, three bars of false alarms: word rules 109, built-in model only 64, hybrid 12.
-  - Under the bars, in text large enough to read at a glance: "Caught 65 of 83. Five blind tests on real listings,
-    with answer keys by AI reviewers. Method and every result: docs/accuracy.md."
+  - two small charts: "False alarms · lower is better, among 630 listings that were fine" (word rules 109,
+    built-in model only 64, hybrid 12) and "Caught · higher is better, of 83 listings that should be flagged"
+    (47, 51, 65)
+  - under them: "Five blind tests on real listings. Answer keys by AI reviewers; scored on the 713 listings they
+    settled. Method and every result: docs/accuracy.md"
 - **Say:** **"Is the need real? On a real marketplace today, the recalled sleeper's name returns nothing, but
   "baby rocker sleeper" returns these. In one day, AI reviewers identified 842 banned or prohibited listings on
   three sites. And across 775 real listings, AI-labelled, the hybrid cut false alarms by 89 percent against word
   rules, caught more, and kept 77 percent on the computer. Every result is in the repo."**
-- **Next:** go back to https://still-recalled.web.app/try/ for scene 8.
 
-### Scene 8 · Why it keeps up, and scales · 2:22 to 2:42
+### Scene 8 · Why it keeps up, and scales · 2:22 to 2:40
 
-- **Screen:** the practice listings, fourth row: "Kidsview baby bouncer with toy bar, khaki", with an amber badge.
-- **Do:**
-  1. Point at the bouncer's amber badge.
-  2. Click the listing's title. On its page, click the amber badge to open the card.
-  3. Point at the recall's date in the card (November 2026), and hold.
-  4. Click **Watch for recalls** in the card. It changes to "Watching for recalls". Hold two seconds.
-- **Added in the edit:** a thin strip under the card as you say "shares it": one field-guide entry, three arrows,
-  "Chrome · Android · Web". In the release test, 9 new recalls' entries were read from the shared guide and none
-  had to be written again.
+- **Screen:** the practice listing "Kidsview baby bouncer with toy bar, khaki", with an amber badge.
+- **Recorded (take `bouncer`):** the pointer shows the bouncer's amber badge, opens its page and its card, rests on
+  the recall's date (November 2026), and clicks **Watch for recalls**, which changes to "Watching for recalls".
+- **Added in the edit:** a panel headed "How a new recall reaches every device": CPSC publishes recall 27092 on November
+  19, 2026, the extension fetches it, Gemini in the cloud writes its field-guide entry once, Firestore shares it with Chrome, Android and
+  the web, and App Check guards both. Then the counts from this recording's own install, in large figures: **9**
+  entries read from the shared guide, **0** written again.
 - **Say:** **"New recalls arrive every week. This bouncer's recall is newer than the list the extension ships
   with. The extension fetched it, Gemini wrote its field-guide entry once, and Firestore shares it with every
   device. App Check guards both. And it keeps watching what you bought."**
-- **Next:** nothing more to record.
 
-### Scene 9 · The close · 2:42 to 2:55
+### Scene 9 · The close · 2:40 to 2:54
 
-- **Screen:** back to the first listing with its red badge (from clip 1b), then a closing card: the logo, "The
-  warning belongs on the listing", "Chrome · Android · Web", "Free and open source", still-recalled.web.app.
-- **Do:** nothing on screen. Record the voice only. Say the last sentence slowly.
+- **Screen:** back to the first listing with its red badge, then a closing card: the logo, "The warning belongs on
+  the listing.", "Chrome extension · Android app · Web", "still-recalled.web.app · free and open source". The card
+  holds for three seconds after the last word.
 - **Say:** **"No match never means safe. But buying secondhand should save families money, not put their children
   at risk. Still Recalled puts the warning on the listing, before they buy."**
 
@@ -280,10 +269,19 @@ The Spanish page, the printable one-page card, the resale-shop page, yard-sale m
 mother who still searches listings by hand. Each is real and is told in the write-up, so the video can spend its time
 on one journey and one idea.
 
-## After recording
+## Build it again
 
-1. Put the clips in `E:\still-recalled-video\takes\`.
-2. They are then cut to the times above. The edit adds the scene 3 steps, the fallback clip, the number card, the
-   Firestore strip, the closing card and English captions, speeds up and marks the scene 2 wait, crops and blurs
-   scene 7, and checks the length is under 3:00.
-3. You watch the result, upload it to YouTube as **Public**, and put the link in the Devpost form.
+```
+python scripts/demo/voice.py --rate=-8%      # the narration and the time of every word
+node tools/collector.mjs                     # the local page server, for the scene 6 takes
+node scripts/demo/record.mjs off             # scene 1, the page with no extension
+node scripts/demo/record.mjs ext             # scenes 1 to 4, 8 and 9: the takes flow, label and bouncer
+node scripts/demo/record.mjs page-cloud --profile=none --page=http://localhost:8766/web/index.html
+node scripts/demo/record.mjs market --profile=none --url1=<the blank search> --url2=<the search with results>
+bash scripts/demo/nano-takes.sh              # the Gemini Nano takes, then the whole video
+bash scripts/demo/render-all.sh              # the video alone, from the takes on disk
+```
+
+The video is `E:/still-recalled-video/still-recalled-demo.mp4`, with its captions beside it as
+`still-recalled-demo.srt`. The builder watches it, uploads it to YouTube as **Public**, and puts the link in the
+Devpost form.

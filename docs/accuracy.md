@@ -1933,6 +1933,28 @@ the model as "available":
 first and say "In the cloud" when that fails. `node tools/fallback-probe.mjs` prints the step lines for a profile
 with or without the model, and the page now writes the reason to the console when its first read fails.
 
+## 39. The demo video: what each recording measured (2026-11-27)
+
+The video is recorded by `scripts/demo/record.mjs`, which drives a real Chrome window, and edited by
+`scripts/demo/stage.js` from those recordings (`docs/demo-script.md`). Every number the video prints on screen comes
+from the recording it sits on:
+
+| Recording | What ran | What it measured |
+|---|---|---|
+| The extension on the practice listings | The packed 0.17.3 build, installed fresh in a new profile | 17 listings checked, 8 flagged, in 24 s. After install it fetched 9 recalls newer than its shipped list: 9 entries read from the shared Firestore guide, 0 written again |
+| The label check | The same install, the practice stroller's label photo | "The label matches the recall", model ST31D11A, read in the cloud in 5 s |
+| The web page with no built-in model | This repo's build of the page (`node tools/collector.mjs`), a new profile, phone size | "Read in the cloud", then the example listing matched to recall 26591, 43 s from the click |
+| A real marketplace search | Signed out, a new profile with the extension | The recalled sleeper's name: no listings. "baby rocker sleeper": 15 listings, 2 badged "Possible recall" |
+
+- **The web page recordings use the repo's own build of the page**, the same page code as the live site. App Check
+  on the live site turns away an automated Chrome, as it is meant to, so the recorder uses the local build with App
+  Check's debug provider. The same two outcomes on the live site, checked by hand, are in section 38.
+- **The marketplace recording** hides the site's header and side column and blurs the sellers' photos and town
+  names before the first frame is saved. No listing is opened and no link is kept.
+- **The recordings with Gemini Nano** (the web page reading on the device, and the extension's "Looking on this
+  computer" step) are made by `bash scripts/demo/nano-takes.sh`, which waits until the computer has the memory the
+  model needs and no other Chrome is running it.
+
 ## Reproduce
 
 ```

@@ -478,7 +478,8 @@ const scenes = [
         st.classList.toggle('is-on', t >= at[k] && (at[k + 1] == null || t < at[k + 1]));
       });
       if (dt) { placeRing(rD, s, dt.box, 6); rD.style.opacity = (clamp((t - t3 + 0.7) / 0.3) * (1 - clamp((t - t5 + 1.0) / 0.2))).toFixed(3); } else rD.style.opacity = '0';
-      if (wt) { placeRing(rW, s, wt.box, 5); rW.style.opacity = clamp((t - t5 - 0.1) / 0.3).toFixed(3); } else rW.style.opacity = '0';
+      // The button grows when it turns into "Watching for recalls": the outline follows it.
+      if (wt) { placeRing(rW, s, wd && remap(segs, t) >= wd.t ? (wd.box || { ...wt.box, w: wt.box.w * 1.11 }) : wt.box, 5); rW.style.opacity = clamp((t - t5 - 0.1) / 0.3).toFixed(3); } else rW.style.opacity = '0';
     };
   } },
 

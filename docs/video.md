@@ -1,9 +1,14 @@
-# Video script (about 2:55)
+# Video notes
 
-`scripts/make-video.mjs` builds a draft from real footage (`scripts/record-demo.mjs`: the extension on the practice
-listings and the label check; `scripts/record-phone.mjs`: the web page at phone size), slides drawn from the test
-reports, a neural voice and burned-in captions. The Android scenes are screen recordings from a phone or the emulator
-(`adb shell screenrecord`). To narrate it yourself, record over the same words.
+**The video follows `docs/demo-script.md`** (nine scenes, 2:54) and is built by `scripts/demo/`: `record.mjs` drives
+Chrome through each scene on the real product, `voice.py` reads the words with a neural voice, and `stage.js` with
+`build.mjs` draws and encodes every frame, with burned-in captions. That file has the scenes, the words, the source
+of every spoken fact and the commands.
+
+This file keeps the notes on the Android clips and the first, twelve-scene plan. Its extra scenes (the bumper card,
+Spanish, the printable card, yard-sale mode) are told in the write-up. `scripts/make-video.mjs`,
+`scripts/record-demo.mjs` and `scripts/record-phone.mjs` built that first plan's draft, with the Android scenes as
+screen recordings from a phone or the emulator (`adb shell screenrecord`).
 
 **Android with Gemini Nano, on a real phone (2026-11-24).** `node tools/android-record.mjs` recorded two clips on the
 builder's Pixel. Both were cropped below the status bar and checked frame by frame: only Still Recalled is on screen.
@@ -23,6 +28,8 @@ They show a shared text listing, not a Facebook Marketplace screenshot.
 search for "baby lounger" scrolling, with a badge on each lounger. Crop out Facebook's header and logo, and show no
 seller names (the search grid shows none; an opened listing does). Words: "And on Facebook Marketplace, where so much
 used baby gear changes hands." Take a second off scenes 0:47, 1:02, 1:41 and 2:21 to keep the length.
+
+## The first plan (twelve scenes)
 
 Pace: 389 words in 176 seconds, a little over two words a second. No scene asks for more than 2.7.
 
