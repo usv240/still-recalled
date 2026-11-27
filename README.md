@@ -18,6 +18,8 @@ the device's model gives a brand for an unnamed product, the device looks it up 
 (unzip, open `chrome://extensions`, turn on Developer mode, Load unpacked, choose the `still-recalled-extension` folder) ·
 [Android app](https://github.com/usv240/still-recalled/releases/latest/download/still-recalled-android.apk) (allow the
 install, then share any listing's screenshot to it) · [web page](https://still-recalled.web.app) (no install).
+The extension was submitted to the Chrome Web Store on November 26, 2026, and is in review; until it is approved,
+install it from the zip.
 The same two files are also on the site, in case GitHub is down:
 [extension](https://still-recalled.web.app/download/still-recalled-extension.zip) ·
 [Android app](https://still-recalled.web.app/download/still-recalled-android.apk).
@@ -352,7 +354,7 @@ app. "Watch for recalls" on a result adds it to the watch list.
 
 **Web page:** https://still-recalled.web.app. On a phone or computer, add a screenshot, or use "Try it with an example photo".
 
-**Chrome extension**
+**Chrome extension** (submitted to the Chrome Web Store on November 26, 2026; in review. Until then:)
 1. Download `still-recalled-extension.zip` from the [latest release](https://github.com/usv240/still-recalled/releases/latest) and unzip it.
 2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and choose the unzipped folder.
 3. Open the practice listings, or search eBay for `baby lounger` (Condition: Used). Badges appear as listings are checked, the ones on screen first. Click one, or click the
