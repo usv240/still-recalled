@@ -96,3 +96,43 @@ p, h2, h3 { margin: 0; }
 .closing .url b { color: var(--text); font-weight: 600; }
 
 .missing { position: absolute; inset: 0; display: grid; place-items: center; font: 500 40px Geist; color: var(--muted); }
+
+/* Scene 2: where each step runs */
+.step.is-first { border-top: 0; padding-top: 4px; }
+
+/* Scene 3: three steps and the function call */
+.panel.is-three { padding: 26px 34px 22px; }
+.panel.is-three .eyebrow { margin-bottom: 6px; }
+.b3 { padding: 13px 0 14px; border-top: 1px solid var(--rule); }
+.b3 .no { display: inline-block; font: 600 22px/1 Geist; padding: 8px 11px 9px; border-radius: 8px; }
+.b3 .no.is-device { background: var(--primary); color: #fff; }
+.b3 .no.is-cloud { background: var(--cloud-bg); color: var(--cloud-ink); }
+.b3 .no.is-both { box-shadow: inset 0 0 0 2px var(--primary); }
+.b3 h3 { font: 600 44px/1.1 Geist; letter-spacing: -0.02em; margin-top: 9px; }
+.b3 p { font: 400 27px/1.3 Geist; color: var(--muted); margin-top: 4px; }
+.call { margin-top: 6px; background: var(--primary); color: #fff; border-radius: 14px; padding: 18px 22px 20px; }
+.call .lab { font: 600 23px/1 Geist; color: #c9c9c9; }
+.call code { display: block; margin-top: 12px; font: 500 26px/1.2 Consolas, ui-monospace, monospace; }
+.call .ans { font: 600 56px/1 Geist; letter-spacing: -0.02em; margin-top: 12px; }
+.call .ans b { color: #ff8f8a; font-variant-numeric: tabular-nums; }
+.panel.is-three .foot { border-top: 0; padding-top: 12px; font: 500 26px/1.3 Geist; color: var(--text); }
+
+/* Scene 4: the label check, in three facts */
+.panel.is-facts .eyebrow { margin-bottom: 10px; }
+.fact { padding: 15px 0 16px; border-top: 1px solid var(--rule); }
+.fact span { display: block; font: 500 26px/1.2 Geist; color: var(--muted); }
+.fact b { display: block; font: 600 46px/1.12 Geist; letter-spacing: -0.02em; margin-top: 5px; }
+.fact.is-result b { color: var(--likely); }
+
+/* Scene 6: the last line */
+.fb-head .same { font: 600 46px/1.14 Geist; letter-spacing: -0.02em; margin-top: 46px; }
+
+/* Scene 7 */
+.bignum .l2 { font: 600 62px/1.1 Geist; letter-spacing: -0.02em; margin-top: 6px; color: var(--muted); }
+.chart h3 b { color: var(--text); font-weight: 600; }
+
+/* Scene 8: the shared guide, measured */
+.reuse { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; border-top: 1px solid var(--rule); padding-top: 14px; }
+.reuse div b { display: block; font: 600 92px/0.95 Geist; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.reuse div span { display: block; font: 500 27px/1.2 Geist; color: var(--muted); margin-top: 6px; }
+.reuse p { grid-column: 1 / -1; font: 400 24px/1.3 Geist; color: var(--muted); margin-top: 10px; }

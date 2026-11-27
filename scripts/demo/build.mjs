@@ -37,7 +37,7 @@ if (!existsSync(path.join(cloudDir, 'take.json')) && existsSync(path.join(DIR, '
   ff(['-i', path.join(DIR, 'fallback/web-cloud.webm'), '-vf', 'fps=12.5', '-q:v', '3', path.join(cloudDir, 'f%06d.jpg')]);
   const frames = readdirSync(cloudDir).filter(f => /^f\d+\.jpg$/.test(f)).sort().map((f, i) => ({ f, t: +(i / 12.5).toFixed(3) }));
   writeFileSync(path.join(cloudDir, 'take.json'), JSON.stringify({ name: 'cloud-earlier', width: 390, height: 844, notes: { from: 'fallback/web-cloud.webm', nano: 'no built-in model in this Chrome' },
-    marks: [{ name: 'click', t: 4.5 }, { name: 'read', t: 54.8, realSeconds: 42, text: 'Read in the cloud', box: { x: 16, y: 322, w: 358, h: 68 } }, { name: 'result', t: 93.2 }, { name: 'end', t: 111.8 }], frames }));
+    marks: [{ name: 'click', t: 4.5 }, { name: 'read', t: 54.8, realSeconds: 42, text: 'Read in the cloud', box: { x: 16, y: 322, w: 358, h: 68 } }, { name: 'result', t: 93.2, realSeconds: 74 }, { name: 'result shown', t: 94.4, cy: 258 },{ name: 'end', t: 111.8 }], frames }));
 }
 const takes = {};
 for (const d of readdirSync(TAKES)) { const f = path.join(TAKES, d, 'take.json'); if (existsSync(f)) takes[d] = JSON.parse(readFileSync(f, 'utf8')); }

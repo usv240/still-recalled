@@ -160,7 +160,8 @@ const scenes = [
       const cam = camAt(keys, t), cut = t >= tCut;
       a.el.style.visibility = cut ? 'hidden' : 'visible';
       b.el.style.visibility = cut ? 'visible' : 'hidden';
-      if (cut) b.show(M('flow', 'badged').t + 0.6 + (t - tCut), { ...cam, cy: cam.cy + (B.y - L.y) });
+      // A small push in as the badge appears, so the eye lands on it.
+      if (cut) b.show(M('flow', 'badged').t + 0.6 + (t - tCut), { ...cam, cy: cam.cy + (B.y - L.y), z: cam.z * (1 + 0.08 * outCubic((t - tCut) / 0.7)) });
       else a.show(remap(segsA, t), cam);
       vis(note, t, tFact, tCut - 0.15);
       placeRing(r, b, badge, 7);
@@ -195,8 +196,17 @@ const scenes = [
     const pillBox = b => ({ x: b.x - 20, y: b.y - 4, w: b.w + 30, h: b.h + 8 });
     const secs = Math.round(done.t - M('flow', 'loaded').t);
     const c1 = chip(root, '', 'is-speed'), c2 = chip(root, `Real time for this page: 17 listings checked in ${secs} seconds`);
+    const legend = el(`<div class="panel" style="left:1090px;top:560px;width:760px">
+      <div class="step is-first" data-k="1"><span class="where is-device">On your computer</span><p><b>Every listing is screened here first.</b> Fast and private.</p></div>
+      <div class="step" data-k="2"><span class="where is-cloud">In the cloud</span><p><b>Only flagged or uncertain listings</b> get a closer look.</p></div>
+    </div>`);
+    root.append(legend);
+    const rows = [...legend.querySelectorAll('.step')];
     return t => {
       s.show(remap(segs, t), camAt(keys, t));
+      vis(legend, t, tDev - 0.3, tAll - 0.45);
+      rows[0].style.opacity = '1';
+      rows[1].style.opacity = (0.26 + 0.74 * outCubic((t - tCloud) / 0.4)).toFixed(3);
       placeRing(r1, s, pillBox(p1.box), 3); placeRing(r2, s, pillBox(p2.box), 3);
       r1.style.opacity = pd ? (clamp((t - tDev + 0.1) / 0.25) * (1 - clamp((t - tCloud - 0.3) / 0.2))).toFixed(3) : '0';
       r2.style.opacity = pc ? (clamp((t - tCloud - 1.0) / 0.25) * (1 - clamp((t - tAll + 0.75) / 0.2))).toFixed(3) : '0';
@@ -227,25 +237,28 @@ const scenes = [
     const look = (T('flow').notes.flagged || []).find(f => /^Inclined baby sleeper/.test(f.title)) || {};
     const lk = (look.lookups || [])[0] || { asked: { brand: 'Fisher-Price', product: "Rock 'n Play sleeper" }, found: ['23088'] };
     const asked = [lk.asked.brand, lk.asked.product].filter(Boolean).map(x => `"${x}"`).join(', ');
-    const panel = el(`<div class="panel" style="left:1060px;top:120px;width:800px">
-      <p class="eyebrow">How this listing got its recall</p>
-      <div class="step" data-k="1"><span class="where is-device">On the laptop</span><p><b>Word rules</b> read the title: an inclined sleeper, a type the law bans. No brand, no model.</p></div>
-      <div class="step" data-k="2"><span class="where is-cloud">In the cloud</span><p><b>Gemini</b> looks at the photo and recognises the product.</p></div>
-      <div class="step" data-k="3"><span class="where is-both">Cloud asks laptop</span><p>Firebase AI Logic function call</p><code>lookup_recalls(${esc(asked)})</code></div>
-      <div class="step" data-k="4"><span class="where is-device">On the laptop</span><p>The field guide of 10,089 notices answers: <b class="num">recall 23088</b></p></div>
-      <div class="step" data-k="5"><span class="where is-code">Our code</span><p>shows only recalls the guide returned.</p></div>
+    const panel = el(`<div class="panel is-three" style="left:1040px;top:56px;width:830px">
+      <p class="eyebrow">How an unnamed listing gets its recall</p>
+      <div class="b3" data-k="1"><span class="no is-device">01 · On the laptop</span><h3>Risk detected</h3><p>Word rules read the title: a banned product type. No brand, no model.</p></div>
+      <div class="b3" data-k="2"><span class="no is-cloud">02 · In the cloud</span><h3>Product recognised</h3><p>Gemini sees the product in the photo.</p></div>
+      <div class="b3" data-k="3"><span class="no is-both">03 · Cloud asks laptop</span><h3>Recall retrieved</h3><p>The laptop’s field guide of 10,089 notices answers.</p></div>
+      <div class="call"><p class="lab">Firebase AI Logic function calling</p><code>lookup_recalls(${esc(asked)})</code><p class="ans">→ recall <b>23088</b></p></div>
+      <p class="foot">Our code shows only recalls the guide returned.</p>
     </div>`);
     root.append(panel);
-    const steps = [...panel.querySelectorAll('.step')], at = [t2, t3, t4, t5, t6];
+    const steps = [...panel.querySelectorAll('.b3')], at = [t2, t3, t4];
+    const call = panel.querySelector('.call'), ans = panel.querySelector('.ans'), foot = panel.querySelector('.foot');
     const rT = ring(root), rP = ring(root, 'is-red');
     return t => {
       s.show(remap(segs, t), camAt(keys, t));
       vis(panel, t, t2 - 0.25);
       steps.forEach((st, k) => {
         const on = outCubic((t - at[k]) / 0.4), next = at[k + 1] != null ? clamp((t - at[k + 1]) / 0.4) : 0;
-        st.style.opacity = (t < at[k] - 0.01 ? 0.26 : 0.26 + 0.74 * on - 0.3 * next).toFixed(3);
-        st.classList.toggle('is-on', t >= at[k] && (at[k + 1] == null || t < at[k + 1]));
+        st.style.opacity = (t < at[k] - 0.01 ? 0.26 : 0.26 + 0.74 * on - 0.22 * next).toFixed(3);
       });
+      call.style.opacity = (0.26 + 0.74 * outCubic((t - t4) / 0.4)).toFixed(3);
+      ans.style.opacity = outCubic((t - tNum + 0.15) / 0.4).toFixed(3);
+      foot.style.opacity = (0.26 + 0.74 * outCubic((t - t6) / 0.4)).toFixed(3);
       placeRing(rT, s, L.title, 6);
       rT.style.opacity = (clamp((t - 0.5) / 0.3) * (1 - clamp((t - t2 + 0.5) / 0.25))).toFixed(3);
       if (pa) { placeRing(rP, s, pa.box, 7); rP.style.opacity = (clamp((t - tNum + 0.2) / 0.3)).toFixed(3); } else rP.style.opacity = '0';
@@ -253,7 +266,7 @@ const scenes = [
   } },
 
   // 4. From a warning to something you can do.
-  { id: 'do', lead: 0.4, tail: 0.5, build(root, i) {
+  { id: 'do', lead: 0.4, tail: 3.2, build(root, i) {
     const a = new Shot(root, 'flow'), b = new Shot(root, 'label');
     const t2 = cue(i, "And when a photo"), tAdd = cue(i, 'add the label'), t3 = cue(i, 'Gemini reads'), tMatch = cue(i, 'and it matches'), end = SC[i].dur;
     const ask = M('flow', 'ask'), rep = has('flow', 'report') ? M('flow', 'report') : ask, cardBox = M('flow', 'card').box;
@@ -266,15 +279,25 @@ const scenes = [
       [tCut + 1.5, tAdd - 0.5, co.t - 0.5, co.t + 1.6],
       [tAdd - 0.5, t3 - 0.2, la.t - 1.5, la.t + 0.3],
       [t3 - 0.2, tMatch - 0.5, la.t + 0.3, Math.max(la.t + 0.3, lr.t - 0.4)],
-      [tMatch - 0.5, end, lr.t - 0.4, res.t + 3.6],
+      [tMatch - 0.5, end, lr.t - 0.4, res.t + 3.6, 'hold'],
     ];
+    const stroller = (T('flow').notes.flagged || []).find(f => /Tango Mini/.test(f.title)) || {};
+    const model = (/Model (\S+) is one/.exec(res.text || '') || [])[1] || '';
+    const proof = el(`<div class="panel is-facts" style="left:80px;top:250px;width:800px">
+      <p class="eyebrow">The label check</p>
+      <div class="fact"><span>Read from the label</span><b>${esc(model ? `Model ${model}` : 'The model number')}</b></div>
+      <div class="fact"><span>CPSC recall ${esc(stroller.recall || '20052')}</span><b>Four model numbers</b></div>
+      <div class="fact is-result"><span>Compared in code</span><b>The label matches the recall</b></div>
+    </div>`);
+    root.append(proof);
     const camA = [[0, ...aim({ x: cardBox.x, y: ask.box.y - 250 }, 1.6, { left: 70, top: 0 })]];
     const box = res.whole || res.box || ls.button;
-    const camB = [[tCut, 640, 330, 1.15], [tCut + 1.2, 640, 330, 1.15], [tCut + 2.2, lc.x + lc.w / 2 + 150, lc.y + 250, 1.45], [tAdd - 0.8, lc.x + lc.w / 2 + 150, lc.y + 250, 1.45], [tAdd, ls.button.x + ls.button.w / 2 + 100, ls.button.y - 60, 1.8], [tMatch - 0.9, ls.button.x + ls.button.w / 2 + 100, ls.button.y - 60, 1.8], [tMatch - 0.2, box.x + box.w / 2 + 60, box.y + box.h / 2 - 30, 2.0]];
+    const camB = [[tCut, 640, 330, 1.15], [tCut + 1.2, 640, 330, 1.15], [tCut + 2.2, lc.x + lc.w / 2 + 150, lc.y + 250, 1.45], [tAdd - 0.8, lc.x + lc.w / 2 + 150, lc.y + 250, 1.45], [tAdd, ls.button.x + ls.button.w / 2 + 100, ls.button.y - 60, 1.8], [tMatch - 0.9, ls.button.x + ls.button.w / 2 + 100, ls.button.y - 60, 1.8], [tMatch - 0.2, ...aim({ x: lc.x, y: box.y - 150 }, 1.75, { left: 960, top: 60 })]];
     const rA = ring(root), rB = ring(root), rR = ring(root, 'is-red');
     const sp = waited > room * 1.2 ? `Sped up ${(waited / room).toFixed(1).replace(/\.0$/, '')}×` : '';
     const c = chip(root, sp, 'is-speed');
     const c2 = chip(root, `Real time: the label was read in ${Math.max(1, Math.round(waited))} seconds`);
+    c2.style.right = 'auto'; c2.style.left = '80px'; c2.style.top = '170px';
     return t => {
       const cut = t >= tCut;
       a.el.style.visibility = cut ? 'hidden' : 'visible'; b.el.style.visibility = cut ? 'visible' : 'hidden';
@@ -289,6 +312,7 @@ const scenes = [
       rR.style.opacity = cut ? clamp((t - tMatch) / 0.3).toFixed(3) : '0';
       vis(c, t, sp && t >= t3 - 0.2 && t < tMatch - 0.5 ? 0 : 1e9, 1e9, { dy: 0, din: 0.01 });
       vis(c2, t, tMatch - 0.3, end - 0.3, { dy: 10 });
+      vis(proof, t, tMatch + 0.5, 1e9);
     };
   } },
 
@@ -307,19 +331,27 @@ const scenes = [
     root.append(head, foot);
     const line = foot.firstChild;
     // What the enlarged window shows of the phone's screen: the steps, then the result, then how it was checked.
-    const win = { home: [336, 760, 1.0], steps: [336, 540, 1.0], res: [336, 470, 1.0], how: [336, P.height - 300, 1.0] };
+    const win = { home: [336, 985, 1.0], steps: [336, 540, 1.0], res: [336, 470, 1.0], how: [336, 1100, 1.0] };
+    // The phone's own Gemini Nano lines, outlined in the enlarged window: "ready on this phone", then "Looked at on this phone".
+    const rReady = ring(root, 'is-light'), rHow = ring(root, 'is-light');
     return t => {
       const src = remap(segs, t);
       phone.show(src);
       const w = t >= tHow ? win.how : t >= tRes ? win.res : t >= share - t0 ? win.steps : win.home;
       zoom.show(src, { cx: w[0], cy: w[1], z: w[2] });
+      placeRing(rReady, zoom, { x: 44, y: 912, w: 462, h: 46 }, 4);
+      rReady.style.opacity = t < share - t0 ? clamp((t - 0.3) / 0.3).toFixed(3) : '0';
+      placeRing(rHow, zoom, { x: 31, y: 1003, w: 434, h: 44 }, 4);
+      rHow.style.opacity = t >= tHow ? clamp((t - tHow - 0.2) / 0.3).toFixed(3) : '0';
       line.textContent = t >= tHow ? 'How it was checked: looked at on this phone, by Gemini Nano.' : t >= tRes ? 'The phone’s own recall guide names it: recall 23088.' : t >= share - t0 ? 'A listing shared from another app. The phone is checking it.' : 'Gemini Nano is ready on this phone.';
     };
   } },
 
   // 6. One call, either model: the web page in two browsers, each pane showing the page's own line.
-  { id: 'fallback', lead: 0.45, tail: 0.5, build(root, i) {
+  { id: 'fallback', lead: 0.45, tail: 4.6, build(root, i) {
     const tCall = cue(i, 'It is one'), tDev = cue(i, 'This browser reads'), tCloud = cue(i, 'This one has'), tRuns = cue(i, 'so the same call'), end = SC[i].dur;
+    // After the words: both panes go on to their result, the same one.
+    const tRes = SC[i].lead + voiceEnd(i) + 0.25;
     root.classList.add('is-dark');
     const PW = 560, PH = 740, PY = 120;
     const mk = (name, x, label, tShow, tRead) => {
@@ -328,42 +360,53 @@ const scenes = [
       if (!has(name, 'read')) { root.append(el(`<div class="pane-missing" style="left:${x}px;top:${PY}px;width:${PW}px;height:${PH}px">This side is recorded with Gemini Nano running</div>`)); return t => { vis(tag, t, tShow, 1e9, { dy: 0 }); }; }
       const s = new Shot(root, name, { x, y: PY, w: PW, h: PH, radius: 26 });
       const c = M(name, 'click'), r = M(name, 'read'), res = M(name, 'result'), tk = T(name);
-      const real = r.realSeconds || Math.round(r.t - c.t);
+      const shown = has(name, 'result shown') ? M(name, 'result shown') : { t: res.t + 1.2, cy: 258 };
+      const real = r.realSeconds || Math.round(r.t - c.t), realRes = res.realSeconds || Math.round(res.t - c.t);
       const took = el(`<div class="pane-took" style="left:${x}px;top:${PY + PH + 22}px;width:${PW}px"><b>${esc((r.text.split(':')[0] || '').trim())}</b> · ${real} s in real time</div>`);
+      const took2 = el(`<div class="pane-took" style="left:${x}px;top:${PY + PH + 22}px;width:${PW}px"><b>Recalled product found</b> · ${realRes} s</div>`);
       const rg = ring(root, 'is-light');
-      root.append(took);
-      // The wait between the click and the page's line is shortened to fit the words; the real seconds are printed.
-      const segs = [[0, tCall, c.t - Math.min(1.4, tCall), null], [tCall, tRead - 0.45, c.t + 0.3, r.t - 0.45], [tRead - 0.45, end, r.t - 0.45, Math.min(res.t + 2, r.t - 0.45 + (end - tRead + 0.45) * 2.2)]];
-      const cam = { cx: tk.width / 2, cy: r.box.y + 120, z: 1 };
+      root.append(took, took2);
+      // The waits are shortened to fit the words; the real seconds are printed under each pane.
+      const segs = [[0, tCall, c.t - Math.min(1.4, tCall), null], [tCall, tRead - 0.45, c.t + 0.3, r.t - 0.45], [tRead - 0.45, tRes, r.t - 0.45, r.t + 2.2, 'hold'], [tRes, end, shown.t, shown.t + 0.1, 'hold']];
+      const cam = { cx: tk.width / 2, cy: r.box.y + 120, z: 1 }, camRes = { cx: tk.width / 2, cy: shown.cy || 258, z: 1 };
       return t => {
-        s.show(remap(segs, t), cam);
-        s.el.style.opacity = clamp((t - tShow + 0.1) / 0.35).toFixed(3);
+        s.show(remap(segs, t), t >= tRes ? camRes : cam);
+        s.el.style.opacity = (clamp((t - tShow + 0.1) / 0.35) * (t >= tRes ? 0.35 + 0.65 * clamp((t - tRes) / 0.3) : 1)).toFixed(3);
         vis(tag, t, tShow, 1e9, { dy: 0 });
         placeRing(rg, s, r.box, 5);
-        rg.style.opacity = (clamp((t - tRead + 0.1) / 0.3)).toFixed(3);
-        vis(took, t, tRead + 0.15, 1e9, { dy: 10 });
+        rg.style.opacity = t >= tRes ? '0' : (clamp((t - tRead + 0.1) / 0.3)).toFixed(3);
+        vis(took, t, tRead + 0.15, tRes - 0.2, { dy: 10 });
+        vis(took2, t, tRes + 0.25, 1e9, { dy: 10 });
       };
     };
-    const head = el(`<div class="fb-head"><p class="eyebrow">Still Recalled on the web · the same page, the same photo</p><h2>One Firebase AI Logic call</h2><code>mode: PREFER_ON_DEVICE</code><p class="sub">The page prints the source Firebase AI Logic reports back.</p></div>`);
+    const head = el(`<div class="fb-head"><p class="eyebrow">Still Recalled on the web · the same page, the same photo</p><h2>One Firebase AI Logic call</h2><code>mode: PREFER_ON_DEVICE</code><p class="sub">The page prints the source Firebase AI Logic reports back.</p><p class="same">Same code. Same photo.<br>Same answer.</p></div>`);
     root.append(head);
+    const same = head.querySelector('.same');
     const A = mk('page-device', 660, 'Chrome with Gemini Nano', 0, tDev), B = mk(has('page-cloud', 'read') ? 'page-cloud' : 'cloud-earlier', 1270, 'Chrome with no built-in model', tCloud - 0.3, tRuns);
-    return t => { A(t); B(t); vis(head, t, 0.1, 1e9, { dy: 0 }); };
+    return t => { A(t); B(t); vis(head, t, 0.1, 1e9, { dy: 0 }); vis(same, t, tRes + 0.6, 1e9, { dy: 12 }); };
   } },
 
   // 7. The need, and the proof.
-  { id: 'proof', lead: 0.45, tail: 0.6, build(root, i) {
+  { id: 'proof', lead: 0.45, tail: 3.4, build(root, i) {
     const tReal = cue(i, 'On a real'), tBut = cue(i, 'but baby rocker'), t842 = cue(i, 'In one day'), tCard = cue(i, 'And across') - 0.35, t775 = cue(i, '775'), tCut = cue(i, 'the hybrid cut'), t89 = cue(i, '89 percent'), tCaught = cue(i, 'caught more'), t77 = cue(i, '77 percent'), tRepo = cue(i, 'Every result'), end = SC[i].dur;
     let market = null;
     if (has('market', 'results')) {
       const s = new Shot(root, 'market');
       const bl = M('market', 'blank'), rs = M('market', 'results'), en = M('market', 'end');
-      const segs = [[0, tBut - 0.15, bl.t + 0.2, bl.t + 3.6, 'hold'], [tBut - 0.15, tCard + 0.4, rs.t + 0.2, Math.min(en.t - 0.2, rs.t + 0.2 + (tCard + 0.4 - tBut + 0.15) * 1.0)]];
+      const bd = has('market', 'badges') ? M('market', 'badges') : null;
+      const segs = [[0, tBut - 0.15, bl.t + 0.2, bl.t + 3.6, 'hold'], bd ? [tBut - 0.15, tCard + 0.4, bd.t + 0.1, en.t - 0.2, 'hold'] : [tBut - 0.15, tCard + 0.4, rs.t + 0.2, Math.min(en.t - 0.2, rs.t + 0.2 + (tCard + 0.4 - tBut + 0.15) * 1.0)]];
+      const rings = bd ? bd.boxes.map(() => ring(root, 'is-amber')) : [];
+      const bcam = bd ? (() => { const [cx, cy, z] = aim(bd.boxes[0], 1.25, { left: 330, top: 230 }); return { cx, cy, z }; })() : null;
       const q1 = chip(root, `Marketplace search: <b>${esc(bl.query || 'rock n play')}</b>`, 'is-search'), q2 = chip(root, `Marketplace search: <b>${esc(rs.query || 'baby rocker sleeper')}</b>`, 'is-search');
       const mcam = { cx: 820, cy: 380, z: 1.42 };
-      market = t => { s.show(remap(segs, t), mcam); vis(q1, t, 0.15, tBut - 0.2, { dy: 0 }); vis(q2, t, tBut - 0.1, tCard, { dy: 0 }); };
+      market = t => {
+        s.show(remap(segs, t), bd && t >= tBut - 0.15 ? bcam : mcam);
+        vis(q1, t, 0.15, tBut - 0.2, { dy: 0 }); vis(q2, t, tBut - 0.1, tCard, { dy: 0 });
+        rings.forEach((r, k) => { placeRing(r, s, bd.boxes[k], 5); r.style.opacity = (t >= tBut - 0.15 ? clamp((t - tBut - 0.2 - 0.25 * k) / 0.3) * (1 - clamp((t - t842 + 0.3) / 0.2)) : 0).toFixed(3); });
+      };
     } else root.append(el('<div class="missing">Scene 7 footage: the marketplace take</div>'));
     const veil = el('<div class="veil"></div>');
-    const big = el(`<div class="bignum"><p class="n">842</p><p class="l">banned or prohibited listings on three marketplaces, in one day</p><p class="s">Identified by AI reviewers from each listing’s title and photo · docs/accuracy.md</p></div>`);
+    const big = el(`<div class="bignum"><p class="n">842</p><p class="l">listings identified as banned or prohibited products</p><p class="l2">Three marketplaces. One day.</p><p class="s">Identified by AI reviewers from each listing’s title and photo. Method: docs/accuracy.md</p></div>`);
     const bars = (title, rows, max) => `<div class="chart"><h3>${title}</h3>${rows.map(([lab, v, hy]) => `<div class="row"><span class="lab">${lab}</span><span class="track"><span class="bar${hy ? ' is-h' : ''}" data-w="${(v / max) * 100}"></span><span class="val">${v}</span></span></div>`).join('')}</div>`;
     const card = el(`<div class="proofcard">
       <p class="eyebrow">Why hybrid works better</p>
@@ -373,10 +416,10 @@ const scenes = [
         <div class="tile" data-k="c"><p class="n">77%</p><p class="l">never left the computer</p></div>
       </div>
       <div class="charts">
-        ${bars('False alarms, among 630 listings that were fine', [['Word rules', 109], ['Built-in model only', 64], ['Hybrid', 12, 1]], 109 / 0.82)}
-        ${bars('Caught, of 83 listings that should be flagged', [['Word rules', 47], ['Built-in model only', 51], ['Hybrid', 65, 1]], 83 / 0.82)}
+        ${bars('<b>False alarms · lower is better</b><br>among 630 listings that were fine', [['Word rules', 109], ['Built-in model only', 64], ['Hybrid', 12, 1]], 109 / 0.82)}
+        ${bars('<b>Caught · higher is better</b><br>of 83 listings that should be flagged', [['Word rules', 47], ['Built-in model only', 51], ['Hybrid', 65, 1]], 83 / 0.82)}
       </div>
-      <p class="fine">Five blind tests on real listings, with answer keys by AI reviewers. Method and every result: <b>docs/accuracy.md</b></p>
+      <p class="fine">Five blind tests on real listings. Answer keys by AI reviewers; scored on the 713 listings they settled. Method and every result: <b>docs/accuracy.md</b></p>
     </div>`);
     root.append(veil, big, card);
     const tile = k => card.querySelector(`.tile[data-k="${k}"]`), charts = [...card.querySelectorAll('.chart')];
@@ -407,26 +450,28 @@ const scenes = [
       ...(wt ? [[t5 - 0.9, end, wt.t - 0.9, null]] : []),
     ];
     const gridCam = [it.card.x + it.card.w / 2 + 40, it.card.y - y0 + it.card.h / 2 - 10, 1.9];
-    const cardCam = aim(cardBox, 1.5, { left: 70, top: 28 });
-    const dateCam = dt ? aim({ x: cardBox.x, y: dt.box.y - 96 }, 1.7, { left: 70, top: 60 }) : cardCam;
-    const watchCam = wt ? aim({ x: cardBox.x, y: wt.box.y - 190 }, 1.7, { left: 70, top: 60 }) : cardCam;
+    const cardCam = aim(cardBox, 1.5, { left: 990, top: 28 });
+    const dateCam = dt ? aim({ x: cardBox.x, y: dt.box.y - 96 }, 1.7, { left: 990, top: 60 }) : cardCam;
+    const watchCam = wt ? aim({ x: cardBox.x, y: wt.box.y - 190 }, 1.7, { left: 990, top: 60 }) : cardCam;
     const keys = [[0, ...gridCam], [t2 - 0.3, ...gridCam], [t2, 640, 330, 1.15], [t2 + 1.2, 640, 330, 1.15], [t2 + 2.0, ...cardCam], [t3 - 1.6, ...cardCam], [t3 - 0.9, ...dateCam], [t5 - 1.0, ...dateCam], [t5 - 0.3, ...watchCam]];
     const fresh = T('flow').notes.caught || {};
-    const panel = el(`<div class="panel" style="left:1060px;top:120px;width:800px">
+    const panel = el(`<div class="panel" style="left:70px;top:70px;width:860px">
       <p class="eyebrow">How a new recall reaches every device</p>
       <div class="step" data-k="1"><span class="where is-code">CPSC</span><p>publishes <b>recall 27092</b> on November 19, 2026, after this version’s list was built.</p></div>
       <div class="step" data-k="2"><span class="where is-device">Extension</span><p>fetches the new notice from CPSC.</p></div>
       <div class="step" data-k="3"><span class="where is-cloud">In the cloud</span><p><b>Gemini</b> writes its field-guide entry, once.</p></div>
       <div class="step" data-k="4"><span class="where is-both">Firestore</span><p>shares that entry with <b>Chrome · Android · Web</b>.</p></div>
       <div class="step" data-k="5"><span class="where is-code">App Check</span><p>guards Firebase AI Logic and Firestore.</p></div>
-      ${fresh.shared != null ? `<p class="foot">In this recording: ${fresh.added} new recalls, ${fresh.shared} entries read from the shared guide, ${fresh.written} written again.</p>` : ''}
+      ${fresh.shared != null ? `<div class="reuse"><div><b>${fresh.shared}</b><span>entries read from the shared guide</span></div><div><b>${fresh.written}</b><span>written again</span></div><p>This recording’s own install: ${fresh.added} new recalls fetched.</p></div>` : ''}
     </div>`);
     root.append(panel);
     const steps = [...panel.querySelectorAll('.step')], at = [t2, t3, tGem, tFs, t4];
+    const reuse = panel.querySelector('.reuse');
     const rD = ring(root, 'is-amber'), rW = ring(root);
     return t => {
       s.show(remap(segs, t), camAt(keys, t));
       vis(panel, t, t2 + 1.9, t5 - 0.5);
+      if (reuse) reuse.style.opacity = (0.2 + 0.8 * outCubic((t - tFs - 0.3) / 0.4)).toFixed(3);
       steps.forEach((st, k) => {
         const on = outCubic((t - at[k]) / 0.4), next = at[k + 1] != null ? clamp((t - at[k + 1]) / 0.4) : 0;
         st.style.opacity = (t < at[k] - 0.01 ? 0.26 : 0.26 + 0.74 * on - 0.3 * next).toFixed(3);
@@ -438,7 +483,7 @@ const scenes = [
   } },
 
   // 9. The close.
-  { id: 'close', lead: 0.5, tail: 1.6, build(root, i) {
+  { id: 'close', lead: 0.5, tail: 3.3, build(root, i) {
     const s = new Shot(root, 'flow'), B = firstListing('flow');
     const tLast = cue(i, 'Still Recalled puts'), end = SC[i].dur;
     const keys = [[0, ...aim(B, 1.7, { left: 110, top: 44 })], [tLast, ...aim(B, 2.0, { left: 110, top: 44 })]];

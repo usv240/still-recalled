@@ -11,7 +11,7 @@
 //   market       scene 7: a real marketplace search, signed out (--url1=<blank search> --url2=<search with listings>)
 // The profile with Gemini Nano needs the computer's memory to itself: about 6 GB of free commit to load the model.
 import puppeteer from 'puppeteer-core';
-import { mkdirSync, writeFileSync, rmSync, mkdtempSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, rmSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { builtInModelArgs, freshServiceWorkers } from '../../tools/chrome-args.mjs';
@@ -31,7 +31,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
 async function launch({ profile = '', width = 1280, height = 720 } = {}) {
-  if (profile) freshServiceWorkers(profile);
+  if (profile) {
+    freshServiceWorkers(profile);
+    try { const ls = JSON.parse(readFileSync(`${profile}/Local State`, 'utf8')); if (ls.optimization_guide && ls.optimization_guide.on_device) { ls.optimization_guide.on_device.model_crash_count = 0; writeFileSync(`${profile}/Local State`, JSON.stringify(ls)); } } catch { /* a new profile has none */ }
+  }
   const dir = profile || mkdtempSync(path.join(tmpdir(), 'sr-take-'));
   const size = [`--window-size=${width + 20},${height + 140}`, '--no-default-browser-check', '--no-first-run', '--hide-scrollbars'];
   // With a kept profile: Chrome's built-in model stays on (tools/chrome-args.mjs). Without one: Puppeteer's usual
@@ -229,6 +232,13 @@ async function installed(browser) {
   await worker.evaluate(() => chrome.alarms.clearAll());
   // Start with nothing remembered, so the recording shows the real check.
   await worker.evaluate(() => Promise.all([chrome.storage.local.clear(), chrome.storage.session.clear()]));
+  // A kept profile can hold an App Check token the backend no longer accepts (tools/e2e.mjs, --fresh): drop the
+  // site's stored data so the bridge page asks for a new one.
+  {
+    const cdp = await browser.target().createCDPSession();
+    for (const origin of ['https://still-recalled.web.app', 'https://still-recalled.firebaseapp.com']) await cdp.send('Storage.clearDataForOrigin', { origin, storageTypes: 'indexeddb,local_storage,service_workers,cache_storage' }).catch(() => {});
+    await cdp.detach().catch(() => {});
+  }
   // New recalls: the install fetches the notices published since the build. Do it now, before the page is checked.
   const p = await browser.newPage();
   await p.goto(`chrome-extension://${id}/panel.html`, { waitUntil: 'domcontentloaded' }).catch(() => {});
@@ -482,9 +492,14 @@ async function bouncer(page) {
 /** Scene 6: the web page's one PREFER_ON_DEVICE call, with the page's own line saying where it ran. */
 async function webPage(browser, name) {
   const page = await newPage(browser, { width: 390, height: 844, scheme: 'dark' });
-  await page.goto(`${SITE}/`, { waitUntil: 'networkidle2' });
+  // --page=<url>: the project's local build of the same page (http://localhost:8766/web/index.html, served by
+  // tools/collector.mjs). An automated Chrome does not pass the live site's reCAPTCHA check; the local build takes its
+  // App Check token from the debug provider instead. The page code is the same.
+  const url = opt('page', `${SITE}/`);
+  await page.goto(url, { waitUntil: 'networkidle2' });
   await sleep(6000);   // the page checks for the model first
   const take = new Take(page, name);
+  take.notes.page = url;
   take.notes.nano = await nanoCheck(page);
   await take.start();
   await sleep(700);
@@ -511,7 +526,14 @@ async function webPage(browser, name) {
   take.mark('read', { box: { x: read.x, y: read.y, w: read.w, h: read.h }, text: read.text });
   await moveTo(page, Math.min(360, read.x + 250), read.y + read.h + 14, 700);
   await page.waitForSelector('#side .result, #side .error', { timeout: 600000 });
-  take.mark('result', { steps: await steps(), scrollY: await scrollY(page) });
+  const ok = !!(await page.$('#side .result'));
+  take.mark('result', { ok, steps: await steps(), scrollY: await scrollY(page), text: (await page.$eval('#side', e => e.innerText)).replace(/\s+/g, ' ').slice(0, 300) });
+  await sleep(1200);
+  // Bring the result to the top of the screen.
+  const top = await page.$eval('#side', e => Math.round(e.getBoundingClientRect().top + window.scrollY - 10));
+  await scrollToY(page, top, 1100);
+  await sleep(400);
+  take.mark('result shown', { cy: 258 });
   await sleep(3500);
   await take.stop();
   log(name, take.notes.nano, '|', read.text);
@@ -527,7 +549,7 @@ function privacyScript() {
   const tidy = () => {
     for (const e of document.querySelectorAll('[role=banner], [role=navigation], [role=complementary]')) e.style.visibility = 'hidden';
     for (const e of document.querySelectorAll('[role=dialog]')) { const x = e.querySelector('[aria-label="Close"]'); if (x && !e.__closed) { e.__closed = true; x.click(); } e.style.display = 'none'; }
-    for (const img of document.querySelectorAll('a[href*="/marketplace/item/"] img')) if (!img.__blur) { img.__blur = true; img.style.filter = 'blur(13px)'; img.style.transform = 'scale(1.12)'; if (img.parentElement) img.parentElement.style.overflow = 'hidden'; }
+    for (const img of document.querySelectorAll('a[href*="/marketplace/item/"] img')) if (!img.__blur) { img.__blur = true; img.style.filter = 'blur(8px)'; img.style.transform = 'scale(1.12)'; if (img.parentElement) img.parentElement.style.overflow = 'hidden'; }
     for (const sp of document.querySelectorAll('a[href*="/marketplace/item/"] span')) if (!sp.__seen && !sp.children.length) { sp.__seen = true; if (/^[A-Za-z .'-]+, [A-Z]{2}$/.test(sp.textContent.trim())) sp.style.filter = 'blur(6px)'; }
     // The sign-in bar fixed to the bottom of a signed-out page.
     for (const e of document.querySelectorAll('div')) if (!e.__fx && e.childElementCount && e.offsetHeight > 40 && e.offsetHeight < 220) { const cs = getComputedStyle(e); if (cs.position === 'fixed' && parseFloat(cs.bottom) < 10 && /log in|sign up/i.test(e.textContent)) { e.__fx = true; e.style.display = 'none'; } }
@@ -552,30 +574,30 @@ async function market(browser, ext) {
   await page.goto(url2, { waitUntil: 'networkidle2', timeout: 60000 });
   await sleep(1500);
   take.mark('loaded', { query: q(url2), listings: await page.$$eval('a[href*="/marketplace/item/"]', a => a.length) });
-  // Let the extension work through the first screens, moving the page gently as a shopper would.
+  // Let the extension work through the first screens, moving the page gently as a shopper would, until every
+  // listing it has read is checked and no "checking" pill has shown for six seconds.
   const t0 = Date.now();
-  let n = 0;
-  for (let i = 0; Date.now() - t0 < 150000; i++) {
+  let quiet = 0;
+  for (let i = 0; Date.now() - t0 < 300000; i++) {
     await scrollToY(page, i % 2 ? 0 : 260, 2200);
-    await sleep(1200);
-    const s = await ext.state('facebook.com');
-    n = (await badges(page)).length;
+    await sleep(1000);
+    const st = await ext.state('facebook.com');
     const left = (await pills(page)).length;
-    if (s && s.total && Object.keys(s.results || {}).length >= s.total && !left && i % 2) break;
-    if (Date.now() - t0 > 60000 && n >= 3 && !left && i % 2) break;
+    const done = st && st.total && Object.keys(st.results || {}).length >= st.total && !left;
+    if (!done) quiet = 0; else if (!quiet) quiet = Date.now();
+    if (quiet && Date.now() - quiet > 6000 && i % 2) break;
   }
-  await sleep(800);
-  const bs = await badges(page);
-  take.mark('results', { query: q(url2), badges: bs.length, texts: bs.map(b => b.text) });
-  await sleep(1200);
-  await scrollToY(page, 330, 4200);
-  const vis = (await badges(page)).filter(b => b.y > 60 && b.y < 560);
-  if (vis[0]) { await moveTo(page, vis[0].x + vis[0].w + 18, vis[0].y + vis[0].h / 2 + 10, 900); take.mark('at badge', { box: { x: vis[0].x, y: vis[0].y, w: vis[0].w, h: vis[0].h }, text: vis[0].text }); }
+  const all = (await badges(page)).sort((p, q) => p.y - q.y || p.x - q.x);
+  take.mark('results', { query: q(url2), badges: all.length, texts: all.map(b => b.text) });
+  if (!all.length) throw new Error('no badges on this search');
+  // Bring the first badge near the top of the screen, and rest the pointer beside it, then beside the next one.
+  await scrollToY(page, Math.max(0, Math.round((await scrollY(page)) + all[0].y - 150)), 2200);
+  await sleep(700);
+  const seen = (await badges(page)).filter(b => b.y > 40 && b.y < 620).sort((p, q) => p.y - q.y || p.x - q.x);
+  take.mark('badges', { boxes: seen.map(b => ({ x: b.x, y: b.y, w: b.w, h: b.h })), texts: seen.map(b => b.text) });
+  await sleep(900);
+  for (const b of seen.slice(0, 3)) { await moveTo(page, b.x + b.w + 16, b.y + b.h + 14, 900); await sleep(1300); }
   await sleep(1500);
-  if (vis[1]) { await moveTo(page, vis[1].x + vis[1].w + 18, vis[1].y + vis[1].h / 2 + 10, 900); take.mark('at badge 2', { box: { x: vis[1].x, y: vis[1].y, w: vis[1].w, h: vis[1].h }, text: vis[1].text }); }
-  await sleep(1500);
-  await scrollToY(page, 0, 4200);
-  await sleep(1200);
   await take.stop();
 }
 
