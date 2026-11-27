@@ -1,0 +1,98 @@
+/* The demo video's stage: 1920 x 1080. Colours and type are the product's own (extension/src/ui/ui.css). */
+:root { --ground: #f8f8f8; --surface: #fff; --text: #0a0a0a; --muted: #5e5e5e; --border: #e6e6e6; --rule: #f0f0f0; --primary: #141414;
+  --likely: #c4242a; --possible: #b45309; --cloud-bg: #e3eaf5; --cloud-ink: #1b3a6b; --quiet: #c9c9c9; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); color: var(--text);
+  font-family: Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+p, h2, h3 { margin: 0; }
+#stage, .scene { position: absolute; inset: 0; overflow: hidden; background: var(--ground); }
+.shot { position: absolute; overflow: hidden; background: var(--ground); }
+.shot img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; }
+
+/* Captions */
+#cap { position: absolute; left: 0; right: 0; bottom: 44px; display: flex; justify-content: center; }
+#cap span { max-width: 1320px; background: rgba(16, 16, 16, 0.88); color: #fff; font: 500 40px/1.26 Geist; padding: 13px 26px 15px;
+  border-radius: 14px; text-align: center; text-wrap: balance; }
+
+/* Callouts on the footage */
+.ring { position: absolute; border-radius: 10px; opacity: 0; box-shadow: 0 0 0 4px var(--primary), 0 0 0 8px rgba(255, 255, 255, 0.9), 0 10px 30px 8px rgba(0, 0, 0, 0.16); }
+.ring.is-red { box-shadow: 0 0 0 4px var(--likely), 0 0 0 8px rgba(255, 255, 255, 0.9), 0 10px 30px 8px rgba(0, 0, 0, 0.16); }
+.ring.is-amber { box-shadow: 0 0 0 4px var(--possible), 0 0 0 8px rgba(255, 255, 255, 0.9), 0 10px 30px 8px rgba(0, 0, 0, 0.16); }
+.chip { position: absolute; right: 40px; top: 36px; background: rgba(16, 16, 16, 0.88); color: #fff; font: 500 27px/1 Geist; padding: 14px 20px 15px;
+  border-radius: 10px; opacity: 0; white-space: nowrap; }
+.chip.is-search { left: 40px; right: auto; background: var(--surface); color: var(--text); border: 1px solid var(--border); font-size: 32px;
+  font-weight: 400; padding: 18px 26px; box-shadow: 0 12px 34px rgba(0, 0, 0, 0.14); }
+.chip.is-search b { font-weight: 600; }
+
+.note, .panel { position: absolute; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 20px 56px rgba(0, 0, 0, 0.16); }
+.note { padding: 36px 40px 34px; }
+.note .big { font: 600 52px/1.13 Geist; letter-spacing: -0.02em; text-wrap: balance; }
+.note .src { font: 500 26px/1.3 Geist; color: var(--muted); margin-top: 18px; }
+
+.eyebrow { font: 600 28px/1.2 Geist; color: var(--muted); }
+.panel { padding: 30px 34px 26px; }
+.panel .eyebrow { margin-bottom: 14px; }
+.step { display: grid; grid-template-columns: 214px 1fr; column-gap: 20px; align-items: start; padding: 16px 0 17px; border-top: 1px solid var(--rule); }
+.step p { font: 400 32px/1.28 Geist; }
+.step b { font-weight: 600; }
+.step code { grid-column: 2; justify-self: start; margin-top: 9px; font: 500 25px/1.3 Consolas, ui-monospace, monospace; background: #f3f3f3; border-radius: 8px; padding: 8px 12px; }
+.step .num { color: var(--likely); }
+.where { justify-self: start; margin-top: 3px; font: 600 23px/1 Geist; padding: 9px 12px 10px; border-radius: 8px; white-space: nowrap; }
+.where.is-device { background: var(--primary); color: #fff; }
+.where.is-cloud { background: var(--cloud-bg); color: var(--cloud-ink); }
+.where.is-both { background: var(--surface); color: var(--text); box-shadow: inset 0 0 0 2px var(--primary); }
+.where.is-code { background: #ededed; color: var(--text); }
+.panel .foot { font: 400 25px/1.36 Geist; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 14px; }
+
+/* Scene 5: the phone */
+.phone { position: absolute; background: #111; border-radius: 44px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22); }
+.side { position: absolute; }
+.side h2 { font: 600 62px/1.06 Geist; letter-spacing: -0.025em; margin-top: 14px; text-wrap: balance; }
+.side .line { font: 500 38px/1.25 Geist; }
+.scene[data-id="android"] .shot { box-shadow: 0 16px 44px rgba(0, 0, 0, 0.16); }
+
+/* Scene 6: two browsers */
+.scene.is-dark { background: #0e0e0f; color: #ededed; }
+.scene.is-dark .shot { background: #0e0e0f; box-shadow: 0 0 0 1px #2e2e32, 0 24px 60px rgba(0, 0, 0, 0.5); }
+.scene.is-dark .eyebrow { color: #a8a8ad; }
+.fb-head { position: absolute; left: 90px; top: 250px; width: 500px; }
+.fb-head h2 { font: 600 68px/1.04 Geist; letter-spacing: -0.025em; margin-top: 18px; text-wrap: balance; }
+.fb-head code { display: inline-block; margin-top: 30px; font: 600 30px/1 Consolas, ui-monospace, monospace; background: #252528; border-radius: 10px; padding: 14px 16px; }
+.fb-head .sub { font: 400 32px/1.3 Geist; color: #a8a8ad; margin-top: 30px; }
+.pane-tag { position: absolute; font: 600 34px/1.15 Geist; }
+.pane-took { position: absolute; font: 400 34px/1.15 Geist; color: #a8a8ad; }
+.pane-took b { color: #ededed; font-weight: 600; }
+.pane-missing { position: absolute; border: 2px dashed #46464b; border-radius: 26px; display: grid; place-items: center; text-align: center; padding: 40px; font: 500 32px/1.3 Geist; color: #a8a8ad; }
+.ring.is-light { box-shadow: 0 0 0 4px #ededed, 0 0 0 8px rgba(14, 14, 15, 0.9); }
+
+/* Scene 7: the numbers */
+.veil { position: absolute; inset: 0; background: var(--ground); opacity: 0; }
+.bignum { position: absolute; left: 150px; top: 200px; width: 1500px; }
+.bignum .n { font: 600 330px/0.9 Geist; letter-spacing: -0.045em; color: var(--likely); font-variant-numeric: tabular-nums; }
+.bignum .l { font: 600 62px/1.1 Geist; letter-spacing: -0.02em; margin-top: 26px; max-width: 1300px; text-wrap: balance; }
+.bignum .s { font: 400 30px/1.3 Geist; color: var(--muted); margin-top: 26px; }
+.proofcard { position: absolute; inset: 0; padding: 56px 120px 0; }
+.proofcard .eyebrow { font-size: 40px; color: var(--text); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 26px; }
+.tile .n { font: 600 196px/0.92 Geist; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
+.tile .l { font: 500 38px/1.18 Geist; color: var(--muted); margin-top: 12px; max-width: 500px; }
+.charts { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 46px; }
+.chart h3 { font: 500 32px/1.2 Geist; color: var(--muted); margin-bottom: 14px; }
+.chart .row { display: grid; grid-template-columns: 320px 1fr; align-items: center; column-gap: 16px; height: 62px; }
+.chart .lab { font: 400 34px/1 Geist; }
+.chart .track { display: flex; align-items: center; gap: 16px; height: 34px; }
+.chart .bar { display: block; height: 34px; width: 0; border-radius: 0 4px 4px 0; background: var(--quiet); }
+.chart .bar.is-h { background: var(--primary); }
+.chart .val { font: 600 40px/1 Geist; font-variant-numeric: tabular-nums; }
+.fine { font: 400 32px/1.35 Geist; color: var(--muted); margin-top: 34px; }
+.fine b { color: var(--text); font-weight: 500; }
+
+/* Scene 9: the close */
+.closing { position: absolute; inset: 0; background: var(--ground); display: flex; flex-direction: column; justify-content: center; padding: 0 190px 110px; }
+.brand { display: flex; align-items: center; gap: 30px; font: 600 136px/1 Geist; letter-spacing: -0.035em; }
+.closing .tag { font: 600 72px/1.1 Geist; letter-spacing: -0.02em; margin-top: 48px; }
+.closing .where3 { font: 500 44px/1.2 Geist; color: var(--muted); margin-top: 44px; }
+.closing .url { font: 400 44px/1.2 Geist; color: var(--muted); margin-top: 14px; }
+.closing .url b { color: var(--text); font-weight: 600; }
+
+.missing { position: absolute; inset: 0; display: grid; place-items: center; font: 500 40px Geist; color: var(--muted); }
