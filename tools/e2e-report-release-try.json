@@ -1,6 +1,6 @@
 {
-  "at": "2026-11-26T02:26:13.802Z",
-  "version": "0.17.2",
+  "at": "2026-11-27T00:39:26.005Z",
+  "version": "0.17.3",
   "ext": "dist/still-recalled-extension",
   "builtInModelProfile": false,
   "url": "https://still-recalled.web.app/try/",
@@ -21,7 +21,7 @@
     {
       "name": "recall list catches up with CPSC",
       "ok": true,
-      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 0 with field-guide entries from the cloud, 4 s"
+      "detail": "9 recalls published since the build (27099 2026-11-19, 27091 2026-11-19, 27094 2026-11-19, 27097 2026-11-19, 27092 2026-11-19, 27090 2026-11-19, 27093 2026-11-19, 27098 2026-11-19, 27096 2026-11-19), 0 with field-guide entries from the cloud, 5 s"
     },
     {
       "name": "search page loads",
@@ -31,7 +31,7 @@
     {
       "name": "engine checks the listings",
       "ok": true,
-      "detail": "17 of 17 checked in 30 s"
+      "detail": "17 of 17 checked in 18 s"
     },
     {
       "name": "a recall published after the build is flagged",
@@ -86,7 +86,7 @@
     {
       "name": "new recalls arrive from CPSC",
       "ok": true,
-      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 7 s"
+      "detail": "20 added (27099, 27091, 27094, 27097, 27092, 27090, 27093, 27098, 27096, 27083, 27084, 27085, 27086, 27087, 27088, 27082, W27-079, W27-089, W27-080, W27-081), 0 field-guide entries written in the cloud, 8 s"
     },
     {
       "name": "new CPSC safety warnings arrive too",
@@ -104,7 +104,7 @@
     "written": 0,
     "shared": 9,
     "total": 9,
-    "checkedAt": "2026-11-26T02:25:20.008Z",
+    "checkedAt": "2026-11-27T00:38:35.729Z",
     "hits": 0,
     "cards": [
       {
@@ -162,7 +162,7 @@
         "guide": false
       }
     ],
-    "ms": 3883
+    "ms": 5385
   },
   "cloudChecked": 8,
   "cloudErrors": [],
@@ -274,12 +274,12 @@
       "written": 0,
       "shared": 20,
       "total": 20,
-      "checkedAt": "2026-11-26T02:26:07.412Z",
+      "checkedAt": "2026-11-27T00:39:17.662Z",
       "hits": 1
     },
-    "ms": 7011,
+    "ms": 8448,
     "alert": {
-      "at": "2026-11-26T02:26:13.247Z",
+      "at": "2026-11-27T00:39:25.197Z",
       "badge": "Recalled product",
       "confirmed": true,
       "level": "likely",

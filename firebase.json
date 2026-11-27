@@ -12,7 +12,7 @@
         "headers": [
           {
             "key": "Content-Security-Policy",
-            "value": "frame-ancestors chrome-extension://hpjnflbbhaokhgcoikhndmjapdiilkaa"
+            "value": "frame-ancestors chrome-extension://hpjnflbbhaokhgcoikhndmjapdiilkaa chrome-extension://dkjchdlmlagjpogknpgpiiedcopgaobm"
           }
         ]
       },

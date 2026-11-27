@@ -19,6 +19,6 @@ export const hasRealConfig = firebaseConfig.projectId !== 'replace-me';
 //               (firebase.json headers): the unpacked release, whose ID the "key" in manifest.json fixes, and the
 //               Chrome Web Store copy once it has an ID (the store assigns its own and rejects a "key").
 export const recaptchaSiteKey = '6LfJ5CEuAAAAAI2GbDONzKXnpcjFJcTlAHGH5Vp6';
-export const extensionIds = ['hpjnflbbhaokhgcoikhndmjapdiilkaa'];
+export const extensionIds = ['hpjnflbbhaokhgcoikhndmjapdiilkaa', 'dkjchdlmlagjpogknpgpiiedcopgaobm'];
 export const extensionId = extensionIds[0];
 export const appCheckBridgeUrl = 'https://still-recalled.web.app/appcheck-bridge.html';
