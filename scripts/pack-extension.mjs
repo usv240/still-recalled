@@ -52,9 +52,10 @@ await walk(out);
 for (const f of files) if (token && (await readFile(f, 'latin1')).includes(token)) throw new Error(`debug token found in ${f}`);
 console.log(`${files.length} files packed; debug token ${token ? 'checked: absent' : 'not configured'}`);
 
-// Windows ships bsdtar, which writes .zip with -a; elsewhere use zip.
+// Windows ships bsdtar, which writes .zip with -a; elsewhere use zip. The top-level names are listed one by one:
+// packing "." stores every file as "./manifest.json", and the Chrome Web Store then finds no manifest at the root.
 if (process.platform === 'win32') {
-  execFileSync(path.join(process.env.SystemRoot || 'C:\\Windows', 'System32', 'tar.exe'), ['-a', '-c', '-f', zip, '-C', out, '.'], { stdio: 'inherit' });
+  execFileSync(path.join(process.env.SystemRoot || 'C:\\Windows', 'System32', 'tar.exe'), ['-a', '-c', '-f', zip, '-C', out, ...await readdir(out)], { stdio: 'inherit' });
 } else {
   execFileSync('zip', ['-r', '-q', zip, '.'], { cwd: out, stdio: 'inherit' });
 }
