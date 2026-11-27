@@ -1,4 +1,4 @@
-# Demo script: Still Recalled (2:55)
+# Demo script: Still Recalled (2:56)
 
 A take you record yourself, scene by scene. Each scene says what is on screen, where to point and click, where to
 go next, and the words to say in **bold**. Record each scene as its own clip; the clips are cut, cropped and joined
@@ -37,18 +37,31 @@ The four judging criteria count equally, so every scene earns its place on one o
   header is cropped out afterwards, so do not open a listing there (an open listing shows the seller's name).
 - **Say what the screen shows.** If a card says something different from this script, read the card.
 
+## Rules check (Rules.md, the video)
+
+| Rule | How this take meets it |
+|---|---|
+| Not longer than 3 minutes | 2:56 of words and pictures; checked again after the cut |
+| Shows the project working on the platforms it was built for | Chrome extension (scenes 2 to 5, 7) and Android (scene 8) |
+| In English, or with English subtitles | Spoken in English, with English captions |
+| Public on YouTube, link on the form | Your last step |
+| No third-party advertising, slogan, logo or trademark | Practice listings carry no logos; the real search is cropped to its grid; slides are cropped where they name a site; say "marketplace", never a company. Recalled products' names appear on the cards, as they do on the CPSC notices; the narration names none |
+| Nothing that violates a third party's privacy, publicity or IP rights | No seller names; strangers' photos and towns blurred; the mother in scene 1 is not named; practice photos are CPSC's or public domain |
+| The project must work as shown | Every scene is the released build; a sped-up wait is marked on screen |
+
 ## The scenes
 
-### Scene 1 · The problem · 0:00 to 0:17
+### Scene 1 · The problem · 0:00 to 0:18
 
 - **Screen:** the practice listings with no badges. Open an Incognito window (Ctrl+Shift+N), where the extension is
   off, go to https://still-recalled.web.app/try/ and scroll down until "baby gear · Seattle area" is at the top.
 - **Do:** scroll slowly down the listings and back up. Stop with the pointer on the first listing, the pink sleeper.
-- **Say:** **"About a hundred babies died in one inclined sleeper. Selling it is against federal law. It is still
-  sold secondhand, under other names. One mother who lost her son still searches for it by hand, every week."**
+- **Say:** **"About a hundred infant deaths were reported in one inclined sleeper. Selling it is against federal
+  law. It is still sold secondhand, under other names. One mother who lost her son told reporters she searches for
+  it by hand, every week."**
 - **Next:** close the Incognito window.
 
-### Scene 2 · It works · 0:17 to 0:34
+### Scene 2 · It works · 0:18 to 0:35
 
 - **Screen:** your normal Chrome window, https://still-recalled.web.app/try/, top of the page.
 - **Do:** point at the red line "Extension on". Scroll down to the listings. Badges appear one after another; let
@@ -59,7 +72,7 @@ The four judging criteria count equally, so every scene earns its place on one o
 - **Note:** the first check takes about 30 seconds. Keep recording; the wait is sped up afterwards and marked "2x".
 - **Next:** stay here.
 
-### Scene 3 · The cloud asks the device · 0:34 to 0:58 · the scene that wins
+### Scene 3 · The cloud asks the device · 0:35 to 0:59 · the scene that wins
 
 - **Screen:** the first listing, "Inclined baby sleeper, pink, folds flat", with its red badge "Inclined infant sleeper".
 - **Do:**
@@ -74,7 +87,7 @@ The four judging criteria count equally, so every scene earns its place on one o
   device."**
 - **Next:** stay in the card.
 
-### Scene 4 · What to do next · 0:58 to 1:07
+### Scene 4 · What to do next · 0:59 to 1:08
 
 - **Screen:** the same card.
 - **Do:** scroll down inside the card. Point at "Skip this one" near the top as you pass, then stop on the black
@@ -84,7 +97,7 @@ The four judging criteria count equally, so every scene earns its place on one o
 - **Next:** click the X at the top of the card. Scroll down to the fourth row and click the title of
   "Baby Trend Tango Mini compact stroller, gray" (first listing in that row). Its page opens.
 
-### Scene 5 · Settle it with the label · 1:07 to 1:25
+### Scene 5 · Settle it with the label · 1:08 to 1:26
 
 - **Screen:** the stroller's page. An amber badge, "Possible recall", sits above the title, and the seller's photo
   of the sticker is on the right.
@@ -99,7 +112,7 @@ The four judging criteria count equally, so every scene earns its place on one o
   screen for a second; do not say which unless you read it off the card.
 - **Next:** open `docs/gallery/5-hybrid.png` full screen.
 
-### Scene 6 · The whole design in one picture · 1:25 to 1:47
+### Scene 6 · The whole design in one picture · 1:26 to 1:48
 
 - **Screen:** the slide `docs/gallery/5-hybrid.png`, headed "Every listing is checked on your laptop. Only what it
   flags, or can't settle, goes to the cloud."
@@ -111,7 +124,7 @@ The four judging criteria count equally, so every scene earns its place on one o
   the cloud. Three listings in four never left the computer."**
 - **Next:** open a real marketplace search for **baby rocker sleeper**, signed in.
 
-### Scene 7 · A real search, today · 1:47 to 2:06
+### Scene 7 · A real search, today · 1:48 to 2:07
 
 - **Screen:** the real search results for "baby rocker sleeper", with Still Recalled's badges on some of the photos.
   Wait until the badges have settled before you start.
@@ -120,10 +133,12 @@ The four judging criteria count equally, so every scene earns its place on one o
 - **Say:** **"This is a real marketplace search, today. Type the recalled sleeper's name: no results. Type "baby
   rocker sleeper", and here they are, with our badges on them. In one day, AI reviewers counted 842 products like
   these on three sites, thirty thousand dollars' worth."**
-- **Afterwards:** the site's header, logo and your profile picture are cropped off, leaving the results grid.
+- **Afterwards:** the site's header, logo and your profile picture are cropped off, and the sellers' photos and
+  town names are blurred, so the picture shows the titles, the prices and our badges. These are strangers'
+  listings; the rules bar content that touches a third party's privacy or rights.
 - **Next:** nothing to record on screen for scene 8.
 
-### Scene 8 · On the phone · 2:06 to 2:22
+### Scene 8 · On the phone · 2:07 to 2:23
 
 - **Screen:** the clip already recorded on your Pixel, `E:\still-recalled-video\android-nano-shared-clean.mp4`:
   a listing shared to the app, the result 11 seconds later naming recall 23088, and the line
@@ -133,7 +148,7 @@ The four judging criteria count equally, so every scene earns its place on one o
   recall in eleven seconds. Same rules, same field guide, through Firebase AI Logic for Android."**
 - **Next:** open `docs/gallery/6-results.png` full screen.
 
-### Scene 9 · Does it work? · 2:22 to 2:38
+### Scene 9 · Does it work? · 2:23 to 2:39
 
 - **Screen:** the slide `docs/gallery/6-results.png`. Only its top half is used: the two sets of bars.
 - **Do:** point at "Word rules only 109", then "Hybrid 12", then "Hybrid 65".
@@ -142,20 +157,23 @@ The four judging criteria count equally, so every scene earns its place on one o
 - **Next:** open https://still-recalled.web.app/?lang=es in one tab and https://still-recalled.web.app/card.html
   in another.
 
-### Scene 10 · More, and the close · 2:38 to 2:55
+### Scene 10 · More, and the close · 2:39 to 2:56
 
 - **Screen:** three quick shots, about three seconds each, then the home page.
   1. The stroller card from scene 5: point at **Watch for recalls**.
-  2. The web page in Spanish.
-  3. The printable one-page card.
-  4. https://still-recalled.web.app, top of the page, and hold.
+  2. The web page in Spanish: the heading and the "add a screenshot" box only. Stop above the line about the
+     Android app, which names a marketplace.
+  3. The printable one-page card: its top half.
+  4. Nothing to record: a closing card (the logo, still-recalled.web.app, "free and open source") is added
+     afterwards.
 - **Say:** **"It also watches what you bought for new recalls, speaks Spanish, and prints a one-page card. It
   never says a product is safe. Still Recalled: free and open source, in Chrome, on Android and on the web."**
 
-## The words alone (387 words in 175 seconds, about 2.2 a second)
+## The words alone (391 words in 176 seconds, about 2.2 a second)
 
-1. About a hundred babies died in one inclined sleeper. Selling it is against federal law. It is still sold
-   secondhand, under other names. One mother who lost her son still searches for it by hand, every week.
+1. About a hundred infant deaths were reported in one inclined sleeper. Selling it is against federal law. It is
+   still sold secondhand, under other names. One mother who lost her son told reporters she searches for it by
+   hand, every week.
 2. Still Recalled puts the warning on the listing. These are seventeen practice listings. Eight are recalled or
    banned products, written the way sellers write them. All eight get a badge. The toys and the bottle get
    nothing.
@@ -182,8 +200,8 @@ The four judging criteria count equally, so every scene earns its place on one o
 
 | Said | Source |
 |---|---|
-| About a hundred deaths in one inclined sleeper | CPSC, 2023 (README, "The problem") |
-| The mother who searches by hand every week | NBC News, April 21, 2023 (`docs/submission.md`) |
+| About a hundred infant deaths reported in one inclined sleeper | CPSC, 2023 (README, "The problem") |
+| A mother told reporters she searches by hand every week | NBC News, April 21, 2023 (`docs/submission.md`) |
 | Selling it is against federal law | Banned from sale since November 2022 (README, "The problem") |
 | Seventeen practice listings, eight flagged | Packed 0.17.2 release, 18 of 18 checks (`tools/e2e-report-release-try.json`) |
 | The cloud asked the device; recall 23088 | Same report, the function-call step; the card's own text |
