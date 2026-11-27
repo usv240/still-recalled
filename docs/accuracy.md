@@ -1902,6 +1902,37 @@ these products, which is what would settle them. The census totals (589, $15,790
 717 flagged listings are a set on the same page. Reproduce: `node tools/census-fb-person.mjs`; answers in
 `tools/census-fb-sleepers-review.json`.
 
+## 38. The web page's fallback, checked: one call, read on the device or in the cloud (2026-11-26)
+
+The web page reads a screenshot with one Firebase AI Logic call in `PREFER_ON_DEVICE` mode and prints the source the
+SDK reports back (`inferenceSource`). Until today no run on record showed both outcomes. The page's own example
+photo, the live site, the same click:
+
+| Where | Built-in model | The page's step line | Time to the result |
+|---|---|---|---|
+| The builder's everyday Chrome 158 | Gemini Nano, working | "Read on this device" | 23 s |
+| A new Chrome profile, phone size | none | "Read in the cloud" | 74 s |
+
+Both then go on to the same result: the example listing matched to recall 26591.
+
+**What went wrong first, and what it showed.** The first attempts read in the cloud even in a Chrome that reported
+the model as "available":
+- **Cause:** another project's test was running Gemini Nano in its own Chrome on the same computer. This laptop's
+  graphics card has 4 GB, and a second Chrome could not start the model: `LanguageModel.create()` failed with "The
+  device is unable to create a session to run the model" and "The model process crashed too many times for this
+  version", while `LanguageModel.availability()` still answered "available". Closing that test fixed it, with no
+  further restart of Chrome.
+- **What the page did:** it announced "On this device", the read failed, Gemini in the cloud read the photo
+  instead, and the line then said "Read in the cloud". The check finished and the page said truthfully which model
+  ran. Here the cloud read came from the page's own retry after the error. The SDK (firebase 13.3.0) falls back by
+  itself when the model reports that it is not available, which is the second row of the table.
+- **For the extension:** its on-device step is `ONLY_ON_DEVICE`, so while the model cannot start, listings are
+  decided by the word rules and the cloud, as on a computer with no built-in model.
+
+**Next:** the page still says "On this device" before it knows the read will succeed; it should ask for a session
+first and say "In the cloud" when that fails. `node tools/fallback-probe.mjs` prints the step lines for a profile
+with or without the model, and the page now writes the reason to the console when its first read fails.
+
 ## Reproduce
 
 ```
@@ -1922,6 +1953,7 @@ node tools/census.mjs --site=ebay --out=tools/census-ebay.json && node tools/cen
 node tools/census.mjs --site=facebook --out=tools/census-facebook.json && node tools/census-score.mjs tools/census-facebook.json  # Facebook Marketplace census (section 34)
 node tools/census-fb-score.mjs                              # every number of section 34, from the saved census, labels and hybrid runs
 node tools/census-fb-person.mjs                             # section 37: a person's blind check of the 34 photos, beside the AI labels
+node tools/fallback-probe.mjs                               # section 38: which model the web page's one call ran on (add --profile=<one with the built-in model>)
 node scripts/make-card.mjs                  # the printable card's QR codes (web/card.html)
 node tools/masked-build.mjs && node tools/lookup-generic.mjs --masked   # real listings with the brand stripped from the title
 node tools/lookup-generic.mjs               # the ten made-up generic-title listings, one at a time

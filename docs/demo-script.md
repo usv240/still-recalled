@@ -20,12 +20,12 @@ the scale, the close.
 | 3 | 0:31 | The cloud asks the device | You record |
 | 4 | 1:01 | From a warning to something you can do | You record |
 | 5 | 1:22 | Native Android, with Gemini Nano | Already recorded |
-| 6 | 1:37 | One call, either model | Made in the edit |
+| 6 | 1:37 | One call, either model | You record one short clip |
 | 7 | 1:55 | The need, and the proof | You record the first half |
 | 8 | 2:22 | Why it keeps up, and scales | You record |
 | 9 | 2:41 | The close | Made in the edit |
 
-You record five scenes (1, 2, 3, 4, 8) and half of scene 7. Scenes 5, 6 and 9 need your voice only.
+You record five scenes (1, 2, 3, 4, 8), one short clip for scene 6 and half of scene 7. Scenes 5 and 9 need your voice only.
 
 ## What each scene is for
 
@@ -52,10 +52,11 @@ The four judging criteria count equally. Technological Implementation breaks a t
 
 ## Before you record (15 minutes)
 
-1. **Give Gemini Nano the computer to itself, then restart Chrome.** This computer's graphics card holds one copy of
-   the model. On November 26 a test in another project was running Gemini Nano in its own Chrome, and the model in
-   your Chrome could not start. Make sure no other test is running, then close every Chrome window and open it
-   again. Scene 2 needs it: the grey pill "Looking on this computer" is Gemini Nano at work.
+1. **Give Gemini Nano the computer to itself.** This computer runs one copy of the model at a time. On November 26 a
+   test in another project was running Gemini Nano in its own Chrome, and the model in your Chrome could not start
+   until that test was closed. So while you record: no other test running, in this project or any other. If Chrome
+   has been open through such a test, close every Chrome window and open it again. Scenes 2 and 6 need the model:
+   the grey pill "Looking on this computer" and the line "Read on this device" are Gemini Nano at work.
 2. **Chrome:** the Still Recalled extension is loaded. In `chrome://extensions`, click the reload arrow on its card
    so it runs 0.17.3. Hide the bookmarks bar (Ctrl+Shift+B). Close other tabs.
 3. **Window:** one Chrome window, full screen (F11), zoom 100%.
@@ -69,7 +70,7 @@ The four judging criteria count equally. Technological Implementation breaks a t
 7. **Recorder:** Windows key + Alt + R starts and stops a recording of the window (saved in Videos\Captures).
    Record your voice at the same time, or record the voice afterwards over the finished cut; both work. The
    recorder may leave out the "choose a file" box in scene 4; that is fine, the card's answer is what matters.
-8. **Save clips** as `scene-1a.mp4`, `scene-1b.mp4`, `scene-2.mp4` and so on, in `E:\still-recalled-video\takes\`.
+8. **Save clips** as `scene-1a.mp4`, `scene-1b.mp4`, `scene-2.mp4` and so on (the scene 6 clip as `scene-6.mp4`), in `E:\still-recalled-video\takes\`.
 
 **Three rules while recording**
 - **Move slowly.** Rest the pointer on the thing you are talking about for a full second before you click.
@@ -146,7 +147,7 @@ The four judging criteria count equally. Technological Implementation breaks a t
 - **Say:** **"The card says what to do next: ask the seller, or report the listing. And when a photo can't settle
   it, like this stroller recalled for four model numbers only, add the label. Gemini reads the model number, code
   checks it against the notice, and it matches."**
-- **Next:** nothing to record for scenes 5 and 6.
+- **Next:** nothing to record on screen for scene 5. Open https://still-recalled.web.app for scene 6.
 
 ### Scene 5 · Native Android, with Gemini Nano · 1:22 to 1:37
 
@@ -160,21 +161,25 @@ The four judging criteria count equally. Technological Implementation breaks a t
 
 ### Scene 6 · One call, either model · 1:37 to 1:55
 
-- **Screen:** two real recordings of the same app checking the same example photo, side by side, each with its
-  step line enlarged: "Read on this device" on one, "Read in the cloud" on the other.
-- **Do:** nothing on screen. Record the voice only.
-- **Which two recordings.** It has to be one app and one call on both sides, or it does not show the fallback:
-  - **First choice: the web page**, in Chrome with Gemini Nano and in a Chrome with none. The page makes one
-    `PREFER_ON_DEVICE` call and prints what Firebase AI Logic reports back. The side with no model is recorded
-    ("Read in the cloud"). The side with Gemini Nano is **not confirmed yet**: on November 26 the built-in model in
-    this computer's Chrome had stopped ("the model process crashed too many times"), so that read also went to the
-    cloud. It is checked again after Chrome is restarted (`node tools/fallback-probe.mjs`).
-  - **Second choice: the Android app**, on your Pixel ("Read on this phone by Gemini Nano", already recorded) and on
-    an emulator with no Gemini Nano ("Read in the cloud").
-- **Rule for this scene:** only what was recorded goes in. If neither pair can be shown, the scene is cut and its
-  18 seconds go to scenes 3 and 7.
-- **Say:** **"Not every device has Gemini Nano. It is one Firebase AI Logic call either way. This device reads the
-  photo itself. This one has no built-in model, so the same call runs in the cloud, and the screen says so."**
+- **Screen:** the web page checking the same example photo in two browsers, side by side. One step line reads
+  "Read on this device", the other "Read in the cloud".
+- **Do (your clip, the on-device side):**
+  1. Open https://still-recalled.web.app in your normal Chrome.
+  2. Click **See an example match**.
+  3. Watch the first step, "Reading the screenshot". When it turns into "Read on this device", rest the pointer
+     beside it and hold three seconds. Let the result card appear, then stop.
+- **The other side is already recorded:** the same page in a Chrome with no built-in model, where the line reads
+  "Read in the cloud".
+- **Added in the edit:** the two clips side by side, both step lines enlarged.
+- **Why this is the real fallback:** it is one page making one `PREFER_ON_DEVICE` call, and each line prints the
+  source Firebase AI Logic reported. Checked on November 26, 2026: "Read on this device" in your Chrome, "Read in
+  the cloud" in a Chrome with no model.
+- **If your line says "Read in the cloud":** Gemini Nano is not running in your Chrome. Stop, and see step 1 of
+  "Before you record".
+- **Say:** **"Not every device has Gemini Nano. It is one Firebase AI Logic call either way. This browser reads
+  the photo on the device. This one has no built-in model, so the same call runs in the cloud, and the page says
+  so."**
+- **Next:** open the real marketplace search for scene 7.
 
 ### Scene 7 · The need, and the proof · 1:55 to 2:22
 
@@ -223,7 +228,7 @@ The four judging criteria count equally. Technological Implementation breaks a t
 - **Say:** **"No match never means safe. But buying secondhand should save families money, not put their children
   at risk. Still Recalled puts the warning on the listing, before they buy."**
 
-## The words alone (394 words in 174 seconds, about 2.3 a second)
+## The words alone (396 words in 174 seconds, about 2.3 a second)
 
 1. This looks like an ordinary secondhand baby sleeper. This type of product has been linked to infant deaths, and
    nothing on the listing warns the parent. Still Recalled does.
@@ -239,8 +244,8 @@ The four judging criteria count equally. Technological Implementation breaks a t
    it against the notice, and it matches.
 5. Shopping happens on phones too. On Android, share a listing from any app. Gemini Nano looks at it on the phone,
    and the phone's own recall guide names the recall, in eleven seconds.
-6. Not every device has Gemini Nano. It is one Firebase AI Logic call either way. This device reads the photo
-   itself. This one has no built-in model, so the same call runs in the cloud, and the screen says so.
+6. Not every device has Gemini Nano. It is one Firebase AI Logic call either way. This browser reads the photo on
+   the device. This one has no built-in model, so the same call runs in the cloud, and the page says so.
 7. Is the need real? On a real marketplace today, the recalled sleeper's name returns nothing, but "baby rocker
    sleeper" returns these. In one day, AI reviewers counted 842 such listings on three sites. And across 775 real
    listings, AI-labelled, the hybrid cut false alarms by 89 percent against word rules, caught more, and kept 77
@@ -263,7 +268,7 @@ The four judging criteria count equally. Technological Implementation breaks a t
 | The cloud can't invent a recall | A recall the cloud names counts only when the device returned it (`shared/lookup.mjs`) |
 | Four model numbers; the label matches | The practice stroller, recall 20052; label model ST31D11A |
 | Gemini Nano on the phone, eleven seconds | The recorded Pixel clip (`docs/video.md`) |
-| One call, either model | `PREFER_ON_DEVICE` in the web page and the Android app; each prints the source Firebase AI Logic reports. Shown only as recorded (scene 6) |
+| One call, either model | The web page's one `PREFER_ON_DEVICE` call: "Read on this device" with Gemini Nano, "Read in the cloud" without (`docs/accuracy.md`, section 38) |
 | The recalled name returns nothing | 90 of 90 searches signed out, 3 of 3 signed in (`docs/accuracy.md`, sections 34 and 36) |
 | 842 listings, three sites, one day | AI reviewers' count (section 34) |
 | 775 listings; 89% fewer false alarms; caught more; 77% | 109 to 12 false alarms; 65 against 47 caught; five blind tests, AI-labelled (README) |
