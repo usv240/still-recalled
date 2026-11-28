@@ -1784,8 +1784,6 @@ except the video.
   and both AI reviewers did not, so it is unsettled.
 - Counts now say how many listings are banned by law (32 of 589) and how many break only the site's rules (557).
 - "Results are kept for 7 days": they were ignored after 7 days and never deleted. Now they are deleted (below).
-- For the write-up, when it is cut: the tagline's "Gemini Nano screens" (listings whose words name a type skip Nano),
-  the 40 accessibility views (now 56), and the Facebook census are not in `docs/submission.md` yet.
 
 **Fixed in 0.17.2:**
 - **A badge on the right heading.** On Facebook an item opened over a search is a dialog; the badge was placed beside
@@ -1935,9 +1933,8 @@ with or without the model, and the page now writes the reason to the console whe
 
 ## 39. The demo video: what each recording measured (2026-11-27)
 
-The video is recorded by `scripts/demo/record.mjs`, which drives a real Chrome window, and edited by
-`scripts/demo/stage.js` from those recordings (`docs/demo-script.md`). Every number the video prints on screen comes
-from the recording it sits on:
+The video is recorded by a script that drives a real Chrome window through each scene, and edited from those
+recordings. Every number the video prints on screen comes from the recording it sits on:
 
 | Recording | What ran | What it measured |
 |---|---|---|
@@ -1954,8 +1951,7 @@ from the recording it sits on:
   names before the first frame is saved. The edit covers the site's own drawing and button on its "no listings"
   page. No listing is opened and no link is kept.
 - **The recordings with Gemini Nano** (the web page reading on the device, and the extension's "Looking on this
-  computer" step) are made by `bash scripts/demo/nano-takes.sh`, which waits until the computer has the memory the
-  model needs and no other Chrome is running it. With the model the practice page takes 82 s, against 24 s in a
+  computer" step) are made once the computer has the memory the model needs and no other Chrome is running it. With the model the practice page takes 82 s, against 24 s in a
   profile with none: every listing gets its look on the computer first.
 - **The page is loaded once the model is.** The page asks for the model as it loads and waits 2.5 s for the answer.
   A Chrome that has just started needs longer than that to load Gemini Nano, so the recorder loads the model, then
