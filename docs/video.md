@@ -1,6 +1,6 @@
 # Video notes
 
-**The video follows `docs/demo-script.md`** (nine scenes, 2:54) and is built by `scripts/demo/`: `record.mjs` drives
+**The video follows `docs/demo-script.md`** (nine scenes, 2:55) and is built by `scripts/demo/`: `record.mjs` drives
 Chrome through each scene on the real product, `voice.py` reads the words with a neural voice, and `stage.js` with
 `build.mjs` draws and encodes every frame, with burned-in captions. That file has the scenes, the words, the source
 of every spoken fact and the commands.

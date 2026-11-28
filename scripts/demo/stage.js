@@ -272,7 +272,7 @@ const scenes = [
   } },
 
   // 4. From a warning to something you can do.
-  { id: 'do', lead: 0.4, tail: 3.6, build(root, i) {
+  { id: 'do', lead: 0.4, tail: 4.3, build(root, i) {
     const a = new Shot(root, 'flow'), b = new Shot(root, 'label');
     const t2 = cue(i, "And when a photo"), tAdd = cue(i, 'add the label'), t3 = cue(i, 'Gemini reads'), tMatch = cue(i, 'and it matches'), end = SC[i].dur;
     const ask = M('flow', 'ask'), rep = has('flow', 'report') ? M('flow', 'report') : ask, cardBox = M('flow', 'card').box;
@@ -424,7 +424,7 @@ const scenes = [
       };
     } else root.append(el('<div class="missing">Scene 7 footage: the marketplace take</div>'));
     const veil = el('<div class="veil"></div>');
-    const big = el(`<div class="bignum"><p class="n">842</p><p class="l">listings identified as banned or prohibited products</p><p class="l2">Three marketplaces. One day.</p><p class="s">Identified by AI reviewers from each listing’s title and photo. Method: docs/accuracy.md</p></div>`);
+    const big = el(`<div class="bignum"><p class="n">842</p><p class="l">listings AI reviewers identified as banned or prohibited products</p><p class="l2">Three marketplaces. One day.</p><p class="s">Judged from each listing’s title and photo. Method: docs/accuracy.md</p></div>`);
     const bars = (title, rows, max) => `<div class="chart"><h3>${title}</h3>${rows.map(([lab, v, hy]) => `<div class="row"><span class="lab">${lab}</span><span class="track"><span class="bar${hy ? ' is-h' : ''}" data-w="${(v / max) * 100}"></span><span class="val">${v}</span></span></div>`).join('')}</div>`;
     const card = el(`<div class="proofcard">
       <p class="eyebrow">Why hybrid works better</p>
@@ -437,7 +437,7 @@ const scenes = [
         ${bars('<b>False alarms · lower is better</b><br>among 630 listings that were fine', [['Word rules', 109], ['Built-in model only', 64], ['Hybrid', 12, 1]], 109 / 0.82)}
         ${bars('<b>Caught · higher is better</b><br>of 83 listings that should be flagged', [['Word rules', 47], ['Built-in model only', 51], ['Hybrid', 65, 1]], 83 / 0.82)}
       </div>
-      <p class="fine"><b>Five blind tests on real listings. Answer keys by AI reviewers.</b><br>Scored on the 713 listings they settled. Method and every result: <b>docs/accuracy.md</b></p>
+      <p class="fine"><b>Five blind tests on real listings, each on the build of its day. Answer keys by AI reviewers.</b><br>Scored on the 713 listings they settled. Method and every result: <b>docs/accuracy.md</b></p>
     </div>`);
     root.append(veil, big, card);
     const tile = k => card.querySelector(`.tile[data-k="${k}"]`), charts = [...card.querySelectorAll('.chart')];
