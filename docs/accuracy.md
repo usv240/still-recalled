@@ -1941,8 +1941,9 @@ from the recording it sits on:
 
 | Recording | What ran | What it measured |
 |---|---|---|
-| The extension on the practice listings | The packed 0.17.3 build, installed fresh in a new profile | 17 listings checked, 8 flagged, in 24 s. After install it fetched 9 recalls newer than its shipped list: 9 entries read from the shared Firestore guide, 0 written again |
-| The label check | The same install, the practice stroller's label photo | "The label matches the recall", model ST31D11A, read in the cloud in 5 s |
+| The extension on the practice listings | The packed 0.17.3 build, installed fresh in the Chrome profile that holds Gemini Nano | 17 listings checked, 8 flagged, in 82 s, with the pills "Looking on this computer" and "Checking in the cloud" on screen. Six of the eight were looked at by Gemini Nano first. After install it fetched 9 recalls newer than its shipped list: 9 entries read from the shared Firestore guide, 0 written again |
+| The label check | The same install, the practice stroller's label photo | "The label matches the recall", model ST31D11A, read in the cloud in 6 s |
+| The web page with Gemini Nano | This repo's build of the page (`node tools/collector.mjs`), the profile that holds Gemini Nano, phone size | "On this device" while it reads, then "Read on this device" 12 s after the click, and the example listing matched to recall 26591 at 26 s |
 | The web page with no built-in model | This repo's build of the page (`node tools/collector.mjs`), a new profile, phone size | "Read in the cloud", then the example listing matched to recall 26591, 43 s from the click |
 | A real marketplace search | Signed out, a new profile with the extension | The recalled sleeper's name: no listings. "baby rocker sleeper": 15 listings, 2 badged "Possible recall" |
 
@@ -1954,7 +1955,12 @@ from the recording it sits on:
   page. No listing is opened and no link is kept.
 - **The recordings with Gemini Nano** (the web page reading on the device, and the extension's "Looking on this
   computer" step) are made by `bash scripts/demo/nano-takes.sh`, which waits until the computer has the memory the
-  model needs and no other Chrome is running it.
+  model needs and no other Chrome is running it. With the model the practice page takes 82 s, against 24 s in a
+  profile with none: every listing gets its look on the computer first.
+- **The page is loaded once the model is.** The page asks for the model as it loads and waits 2.5 s for the answer.
+  A Chrome that has just started needs longer than that to load Gemini Nano, so the recorder loads the model, then
+  loads the page, as it is in a Chrome a person has been using. **Next:** the page waits for the model's answer
+  before it prints its first line, so a just-started Chrome reads the same.
 
 ## Reproduce
 

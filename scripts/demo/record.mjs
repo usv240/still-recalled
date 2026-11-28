@@ -502,6 +502,11 @@ async function webPage(browser, name) {
   const take = new Take(page, name);
   take.notes.page = url;
   take.notes.nano = await nanoCheck(page);
+  // The page asks once, as it loads, whether the model is there, and waits 2.5 s for the answer. In a Chrome that
+  // has only just started, the model takes longer than that to load, so the page's first line would say "In the
+  // cloud" and then read on the device. A person's Chrome already has the model loaded. Now that it is loaded here
+  // too, load the page again so it starts as it does for them.
+  if (/session ok/.test(take.notes.nano)) { await page.reload({ waitUntil: 'networkidle2' }); await sleep(5000); take.notes.reloaded = 'after the model had loaded'; }
   await take.start();
   await sleep(700);
   const [example] = await page.$$('xpath/.//button[contains(., "example")]');
