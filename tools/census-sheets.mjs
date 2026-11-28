@@ -1,7 +1,7 @@
 // Builds numbered photo sheets from a census (tools/census.mjs) for the photo review: 16 listings a sheet, each with
 // its number, title and price. Two groups: "flagged" (listings the word rules flagged) and "open" (listings from the
 // baby searches that the word rules left open). Photos must be saved first (they are short-lived addresses).
-// Usage: node tools/census-sheets.mjs tools/census-facebook.json E:/sr-census-fb
+// Usage: node tools/census-sheets.mjs tools/census-facebook.json ../sr-census-fb
 import puppeteer from 'puppeteer-core';
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import path from 'node:path';

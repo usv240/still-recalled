@@ -3,7 +3,7 @@
 // prints the tables of docs/accuracy.md, section 34.
 // Reads <dir>/index.json and <dir>/labels-flagged-*.json, labels-open-*.json (keyed by sheet number).
 // Writes tools/<census>-labels.json (same shape as the other censuses) and tools/<census>-open-labels.json.
-// Usage: node tools/census-photo-labels.mjs tools/census-facebook.json E:/sr-census-fb
+// Usage: node tools/census-photo-labels.mjs tools/census-facebook.json ../sr-census-fb
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 

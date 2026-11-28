@@ -1,7 +1,7 @@
 // Builds the two listing sets of docs/accuracy.md, section 34, from the Facebook Marketplace census: every listing the
 // photo review called an inclined sleeper among those the word rules left open (census-fb-inclined), and a fixed random
 // 20 of the "baby rocker sleeper" results it called something else (census-fb-rockers). Also a blind sheet of both,
-// shuffled, for a second reviewer. Usage: node tools/census-fb-sets.mjs [E:/sr-census-fb]
+// shuffled, for a second reviewer. Usage: node tools/census-fb-sets.mjs [../sr-census-fb]
 import { readFileSync, writeFileSync } from 'node:fs';
 const read = f => JSON.parse(readFileSync(f, 'utf8'));
 const census = read('tools/census-facebook.json'), { labels } = read('tools/census-facebook-open-labels.json');
